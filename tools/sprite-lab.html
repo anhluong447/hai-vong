@@ -1,0 +1,14 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hồi Âm · Sprite Lab</title><link rel="stylesheet" href="../styles/fonts.css"><link rel="stylesheet" href="sprite-lab.css"></head>
+<body><main><header><div><p class="eyebrow">HỒI ÂM / ART PILOT V2</p><h1>Khuê & Vân · Sprite Lab</h1><p>Cùng lưới 32×48, cùng pivot chân. Xem loop và từng khung trước khi mở rộng cả đội.</p></div><a href="../pixel.html">Vào map →</a></header>
+<section class="controls" aria-label="Điều khiển preview">
+<label>Animation<select id="clip"><option value="idle">Đứng · thở / chớp mắt</option><option value="walk">Đi bộ · 8 khung</option><option value="talk">Nói chuyện · 4 khung</option></select></label>
+<label>Hướng<select id="direction"><option value="down">Nhìn xuống</option><option value="left">Nhìn trái</option><option value="right">Nhìn phải</option><option value="up">Nhìn lên</option></select></label>
+<label>Phóng pixel<select id="zoom"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>6</option></select></label>
+<label>Nền<select id="background"><option value="grass">Sân trường</option><option value="floor">Sàn CLB</option><option value="night">Ban đêm</option></select></label>
+<label>Tốc độ <output id="speed-label">1×</output><input id="speed" type="range" min="0.25" max="2" step="0.25" value="1"></label>
+<label class="check"><input id="onion" type="checkbox">Onion-skin</label><label class="check"><input id="pivot" type="checkbox" checked>Pivot chân</label>
+<button id="pause">Tạm dừng</button><button id="previous">← Khung</button><button id="next">Khung →</button>
+</section><p id="status" role="status">Đang tải hai bộ sprite…</p><section class="roster">
+<article><h2>Diệp Khuê</h2><p class="description">39px ở tư thế đứng · bảng màu 32 màu</p><div class="preview-frame"><canvas id="khue-preview" aria-label="Animation Khuê"></canvas></div><p class="frame-info" id="khue-info"></p><div class="strip"><canvas id="khue-strip" aria-label="Các khung của Khuê"></canvas></div></article>
+<article><h2>Lục Thanh Vân</h2><p class="description">39px ở tư thế đứng · bảng màu 32 màu</p><div class="preview-frame"><canvas id="van-preview" aria-label="Animation Vân"></canvas></div><p class="frame-info" id="van-info"></p><div class="strip"><canvas id="van-strip" aria-label="Các khung của Vân"></canvas></div></article>
+</section><p class="note">Idle, walk và talk đã chạy trong map. Các loop là bản thử; ghi chép/biên tập và roster còn lại sẽ được bổ sung sau khi đánh giá hai mẫu này.</p></main><script type="module" src="sprite-lab.js"></script></body></html>

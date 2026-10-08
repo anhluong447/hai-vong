@@ -1,0 +1,11 @@
+# Local browser test and preview output
+/tools/*.log
+/tools/edge-test-profile/
+/tools/preview-profile/
+
+# Python bytecode cache
+__pycache__/
+*.py[cod]
+
+# Local Node dependencies
+node_modules/

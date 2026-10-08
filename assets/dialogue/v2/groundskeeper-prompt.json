@@ -1,0 +1,18 @@
+{
+    "id":  "groundskeeper",
+    "designPivot":  "assets/pixel/characters-anime-source.png",
+    "sourceRow":  7,
+    "design":  "School security guard age60. Source row7 identity: KHAKI CAP, beige short-sleeve work shirt with chest pockets, olive green trousers. Warm tan weathered rounded face, drooping friendly eyebrows, laugh lines, gray hair under cap, sturdy stocky build. Adult not student.",
+    "poseAndCamera":  "Three-quarter facing viewer\u0027s left, welcoming hand extended at mid chest height with palm slightly up, other hand rests on belt. Kind tired eyes, visible gentle smile. Slightly bowed head, grounded older man\u0027s stance.",
+    "expressionLabels":  [
+                             "Điềm đạm"
+                         ],
+    "masterPrompt":  "ORIGINAL ANIME VISUAL NOVEL CHARACTER SPRITE, one person only, for Vietnamese school journalism game Hoi Am. PRIMARY DESIGN PIVOT: assets/pixel/characters-anime-source.png (image1); image2 is an UNMODIFIED crop of the target row, showing the first three poses. Read ONLY the targeted character, ignore all other rows. Source establishes hair silhouette/color, identifying accessories, costume shapes and colors. Convert to normal teen/adult anime anatomy, NEVER chibi or pixel art.\nCHARACTER-SPECIFIC DESIGN: School security guard age60. Source row7 identity: KHAKI CAP, beige short-sleeve work shirt with chest pockets, olive green trousers. Warm tan weathered rounded face, drooping friendly eyebrows, laugh lines, gray hair under cap, sturdy stocky build. Adult not student.\nUNIQUE POSE AND CAMERA: Three-quarter facing viewer\u0027s left, welcoming hand extended at mid chest height with palm slightly up, other hand rests on belt. Kind tired eyes, visible gentle smile. Slightly bowed head, grounded older man\u0027s stance.\nART DIRECTION: crisp clean anime ink contours, bold readable cel shading, attractive expressive face, character-specific face geometry and anatomy. Flat character illustration for a VN, NOT photographic lighting or cinematic portrait, no generic repeated handsome face. Expression must be readable at 300px display size, not a tiny change of mouth. Preserve defining source accessories exactly.\nCOMPOSITION: ONE 2:3 vertical 1024x1536 transparent PNG cutout from complete hair to hips/upper thighs. Include complete posed hands and all props, no cropped elbows. Leave a visible 6% margin around all hair/hands. Center the overall posed silhouette, balance within canvas. Real transparent alpha background: only person and carried props, absolutely no background, scenery, glow, fog, ambient shadow, text, border, labels or collage. Draw the full unique pose in one illustration. DO NOT use any previous dialogue portrait as reference.",
+    "references":  [
+                       "assets/pixel/characters-anime-source.png",
+                       "assets/dialogue/v2/design-refs/source.png"
+                   ],
+    "expressionPrompts":  [
+
+                          ]
+}

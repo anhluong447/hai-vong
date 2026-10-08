@@ -1,0 +1,613 @@
+/* ==========================================================================
+   Câu Lạc Bộ Hỏi — Atlus (Persona 3 Reload, Persona 5, SMT V) Aesthetic UI
+   ========================================================================== */
+:root {
+  --ink: #f8f6f0;
+  --ink-soft: #d5d0c3;
+  --ink-muted: #8e887b;
+  --bg-deep: #07090e;
+  --panel: rgba(14, 17, 26, 0.94);
+  --panel-edge: rgba(246, 195, 68, 0.5);
+  --gold: #f6c344;
+  --gold-strong: #ffe285;
+  --gold-glow: rgba(246, 195, 68, 0.35);
+  --teal: #4eedd2;
+  --teal-glow: rgba(78, 237, 210, 0.4);
+  --danger: #ff3b4e;
+  --stance-avoid: #7ea4c9;
+  --stance-sincere: #ff6e3a;
+  --stance-wry: #c084fc;
+  --slant: -10deg;
+  --unslant: 10deg;
+  --font: 'Be Vietnam Pro', system-ui, sans-serif;
+  --font-title: 'Playfair Display', Georgia, serif;
+  --gutter: clamp(14px, 3.2vw, 32px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: var(--bg-deep); color: var(--ink); font-family: var(--font);
+}
+button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; }
+button:disabled { cursor: default; opacity: 0.35; }
+.hidden { display: none !important; }
+.muted { color: var(--ink-muted); }
+
+#app { position: fixed; inset: 0; }
+#world { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+#ui { position: absolute; inset: 0; pointer-events: none; user-select: none; }
+#ui > * { pointer-events: auto; }
+#boot {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  color: var(--gold-strong); background: var(--bg-deep); z-index: 100;
+  font: 700 18px var(--font-title); letter-spacing: 0.2em; text-transform: uppercase;
+}
+#boot.failed { color: var(--danger); padding: 24px; text-align: center; }
+
+.shake { animation: personaShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+@keyframes personaShake {
+  10%, 90% { transform: translate3d(-3px, 0, 0); }
+  20%, 80% { transform: translate3d(5px, -2px, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 3px, 0); }
+  40%, 60% { transform: translate3d(6px, -3px, 0); }
+}
+
+/* ==========================================================================
+   1. DIALOGUE SYSTEM (Persona Breakout Bust & Angled Banner)
+   ========================================================================== */
+.dialogue {
+  position: absolute; left: 50%; bottom: var(--gutter); transform: translateX(-50%);
+  width: min(1140px, calc(100% - 2 * var(--gutter))); min-height: 160px;
+  display: flex; align-items: stretch; padding: 24px 30px 24px;
+  background: linear-gradient(135deg, rgba(14, 17, 26, 0.97) 0%, rgba(8, 10, 15, 0.99) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 3px solid var(--speaker, var(--gold));
+  border-left: 6px solid var(--speaker, var(--gold));
+  border-radius: 4px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  cursor: pointer; backdrop-filter: blur(12px);
+  overflow: visible; z-index: 2;
+}
+
+/* Halftone dotted texture overlay on dialogue box */
+.dialogue::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.12;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 0);
+  background-size: 8px 8px; border-radius: 4px;
+}
+
+/* Character bust that breaks out and rises high above dialogue box */
+.dlg-portrait {
+  position: absolute; bottom: -4px; left: 18px;
+  width: clamp(240px, 26vw, 360px);
+  height: clamp(320px, 36vw, 460px);
+  pointer-events: none; z-index: 10;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+
+.dlg-portrait.bust-pop {
+  animation: personaBustIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes personaBustIn {
+  0% { opacity: 0; transform: translateY(32px) scale(0.94); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Persona-style dynamic comic cut-in slash backdrop behind character */
+.dlg-portrait-backing {
+  position: absolute; bottom: 0; left: 8%; width: 84%; height: 86%;
+  background: linear-gradient(170deg, rgba(22, 26, 40, 0.88) 0%, rgba(10, 12, 18, 0.97) 100%);
+  transform: skewX(-8deg);
+  border-left: 4px solid var(--speaker, var(--gold));
+  box-shadow: -8px 0 25px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(0, 0, 0, 0.6);
+  clip-path: polygon(0 0, 100% 12%, 92% 100%, 0 100%);
+  z-index: 1;
+}
+
+/* Full character bust image */
+.dlg-portrait-img {
+  position: relative; z-index: 2; width: 100%; height: 100%;
+  object-fit: contain; object-position: center bottom;
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 14px rgba(0, 0, 0, 0.6));
+  display: none;
+}
+
+/* Fallback emblem for characters without custom PNG art */
+.dlg-portrait-initial {
+  position: relative; z-index: 2; font: 800 52px var(--font-title);
+  color: var(--speaker, var(--gold)); margin-bottom: 70px;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
+}
+
+/* Text body layout */
+.dlg-body {
+  flex: 1; min-width: 0; display: flex; flex-direction: column;
+  transition: margin-left 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative; z-index: 3;
+}
+
+.dialogue.has-portrait .dlg-body {
+  margin-left: clamp(250px, 27vw, 370px);
+}
+
+.dlg-header {
+  display: flex; align-items: center; gap: 14px;
+  min-height: 28px; margin-bottom: 10px;
+}
+
+/* Persona-style dynamic floating name badge */
+.dlg-name {
+  position: absolute; top: -18px; left: clamp(250px, 27vw, 370px);
+  background: var(--speaker, var(--gold-strong)); color: #080a0f;
+  padding: 5px 22px 5px 16px; transform: skewX(-12deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7); border-radius: 2px;
+}
+.dialogue:not(.has-portrait) .dlg-name { left: 30px; }
+
+.dlg-name-text {
+  display: inline-block; transform: skewX(12deg);
+  font-weight: 800; font-size: 15.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-family: var(--font-title);
+}
+
+.dlg-manner {
+  font-size: 13.5px; font-style: italic; color: var(--ink-muted); margin-top: -2px;
+}
+
+.dlg-text {
+  font-size: clamp(16.5px, 1.6vw, 19.5px); line-height: 1.7;
+  white-space: pre-wrap; color: #fbf9f4;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Atlus pulsing diamond advance prompt */
+.dlg-next {
+  position: absolute; right: 24px; bottom: 16px;
+  font-size: 16px; color: var(--gold); opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.dlg-next.visible {
+  opacity: 1; animation: personaDiamondPulse 1.2s ease-in-out infinite;
+}
+@keyframes personaDiamondPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+  50% { transform: scale(1.3) rotate(45deg); opacity: 1; filter: drop-shadow(0 0 8px var(--gold)); }
+}
+
+.dialogue[data-kind='narration'] .dlg-header { display: none; }
+.dialogue[data-kind='thought'] .dlg-text { font-style: italic; color: var(--ink-soft); }
+.dialogue[data-kind='thought'] .dlg-text::before { content: '( '; color: var(--gold); font-weight: 700; }
+.dialogue[data-kind='thought'] .dlg-text::after { content: ' )'; color: var(--gold); font-weight: 700; }
+.dialogue[data-kind='thought'] .dlg-header { display: none; }
+.dialogue[data-kind='direction'] .dlg-header { display: none; }
+.dialogue[data-kind='direction'] .dlg-text { font-size: 15px; font-style: italic; color: var(--teal); letter-spacing: 0.04em; }
+
+/* ==========================================================================
+   2. CHOICES SYSTEM (Persona 5 Dynamic Slanted Blades)
+   ========================================================================== */
+.choices {
+  position: absolute; left: 50%; bottom: calc(var(--gutter) + 185px); transform: translateX(-50%);
+  width: min(860px, calc(100% - 2 * var(--gutter)));
+  display: flex; flex-direction: column; gap: 12px; z-index: 25;
+}
+
+.choice {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 24px;
+  background: linear-gradient(90deg, rgba(16, 20, 30, 0.96) 0%, rgba(22, 27, 40, 0.92) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 6px solid var(--stance, var(--gold));
+  transform: skewX(-9deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  animation: choiceSlideIn 0.32s cubic-bezier(0.18, 0.89, 0.32, 1.25) both;
+  animation-delay: calc(var(--i, 0) * 0.06s);
+  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+@keyframes choiceSlideIn {
+  from { opacity: 0; transform: translateX(-40px) skewX(-9deg); }
+  to { opacity: 1; transform: translateX(0) skewX(-9deg); }
+}
+
+.choice:hover, .choice:focus-visible {
+  transform: translateX(18px) skewX(-9deg);
+  background: linear-gradient(90deg, rgba(35, 42, 64, 0.98) 0%, rgba(20, 24, 38, 0.95) 100%);
+  border-color: var(--stance, var(--gold));
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), -6px 0 20px var(--stance, var(--gold));
+  outline: none;
+}
+
+.choice[data-stance='avoid'] { --stance: var(--stance-avoid); }
+.choice[data-stance='sincere'] { --stance: var(--stance-sincere); }
+.choice[data-stance='wry'] { --stance: var(--stance-wry); }
+
+/* Unskew internal choice elements */
+.choice-key, .choice-tag, .choice-text, .choice-arrow {
+  transform: skewX(9deg);
+}
+
+.choice-key {
+  flex: none; width: 28px; height: 28px; display: grid; place-items: center;
+  font: 800 13px var(--font); background: var(--stance, var(--gold)); color: #07090e;
+  border-radius: 2px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.choice-tag {
+  flex: none; font-size: 11.5px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--stance, var(--gold));
+  padding: 2px 8px; border: 1px solid var(--stance, var(--gold)); border-radius: 2px;
+}
+
+.choice-text {
+  flex: 1; font-size: 16px; font-weight: 500; line-height: 1.5; color: #f4f0e6;
+}
+
+.choice-arrow {
+  flex: none; font-size: 12px; color: var(--stance, var(--gold)); opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.choice:hover .choice-arrow {
+  opacity: 1; transform: skewX(9deg) translateX(4px);
+}
+
+/* ==========================================================================
+   3. HUD & TACTICAL NAVIGATION (SMT V / Persona 3 Reload)
+   ========================================================================== */
+.hud { position: absolute; inset: 0; pointer-events: none; }
+.hud > * { pointer-events: auto; }
+
+/* Tactical Mission Header (Top-Left) */
+.hud-location {
+  position: absolute; top: var(--gutter); left: var(--gutter);
+  background: linear-gradient(135deg, rgba(9, 12, 18, 0.94), rgba(16, 21, 32, 0.88));
+  border-left: 5px solid var(--teal); border-top: 1px solid rgba(78, 237, 210, 0.35);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 22px 12px; transform: skewX(-9deg);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+.hud-location > * { transform: skewX(9deg); }
+
+.hud-place { display: flex; align-items: baseline; gap: 8px; }
+.hud-tag {
+  font: 800 11px var(--font); color: var(--teal);
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
+.hud-place-text {
+  font: 700 22px var(--font-title); color: var(--gold-strong);
+  letter-spacing: 0.02em; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hud-when {
+  display: flex; align-items: center; gap: 6px; margin-top: 3px;
+  font-size: 12px; color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.hud-when .hud-tag { color: var(--gold); }
+
+.hud-objective {
+  margin-top: 8px; font-size: 13.5px; padding: 6px 12px;
+  border-left: 3px solid var(--teal); background: rgba(78, 237, 210, 0.08);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.hud-obj-icon { color: var(--teal); font-size: 10px; animation: pulseGlow 1.5s infinite; }
+@keyframes pulseGlow { 50% { opacity: 0.4; } }
+
+/* Tactical Quick Action Buttons (Top-Right) */
+.hud-buttons {
+  position: absolute; top: var(--gutter); right: var(--gutter);
+  display: flex; gap: 10px;
+}
+
+.hud-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 6px 14px; min-width: 58px; height: 44px;
+  background: linear-gradient(135deg, rgba(12, 15, 24, 0.9), rgba(18, 24, 36, 0.85));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.18);
+  transform: skewX(-9deg); border-radius: 2px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  transition: transform 0.12s, border-color 0.12s, background 0.12s;
+}
+.hud-btn > * { transform: skewX(9deg); }
+
+.hud-btn-label {
+  font: 800 11px var(--font); color: var(--ink);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.hud-btn-key {
+  font: 600 9.5px var(--font); color: var(--teal);
+  letter-spacing: 0.05em; opacity: 0.85;
+}
+
+.hud-btn:hover {
+  transform: translateY(-2px) skewX(-9deg);
+  border-color: var(--gold); border-bottom-color: var(--gold);
+  background: rgba(30, 36, 54, 0.95);
+}
+.hud-btn:hover .hud-btn-label { color: var(--gold-strong); }
+.hud-btn.on {
+  background: var(--gold); border-color: var(--gold-strong);
+}
+.hud-btn.on .hud-btn-label, .hud-btn.on .hud-btn-key { color: #080a0f; }
+
+/* Persona Floating Tactical Interaction Prompt */
+.hud-prompt {
+  position: absolute; left: 50%; bottom: calc(var(--gutter) + 24px); transform: translateX(-50%) skewX(-8deg);
+  padding: 10px 22px; background: linear-gradient(90deg, rgba(14, 18, 28, 0.96), rgba(24, 30, 48, 0.94));
+  border: 1px solid var(--gold); border-left: 5px solid var(--gold);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 15px var(--gold-glow);
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  animation: promptBob 1.6s ease-in-out infinite;
+}
+.hud-prompt > * { transform: skewX(8deg); }
+@keyframes promptBob {
+  0%, 100% { transform: translateX(-50%) skewX(-8deg) translateY(0); }
+  50% { transform: translateX(-50%) skewX(-8deg) translateY(-5px); }
+}
+
+.hud-prompt-icon { color: var(--gold); font-size: 14px; }
+kbd {
+  font: 800 12px var(--font); padding: 3px 9px;
+  background: var(--gold); color: #090b10; border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.hud-prompt-text {
+  font-weight: 700; font-size: 14.5px; letter-spacing: 0.05em; color: #fff;
+}
+
+/* ==========================================================================
+   4. FULLSCREEN OVERLAYS & CHAPTER SPLASH CARDS (Persona Screen Cut)
+   ========================================================================== */
+.fade {
+  position: absolute; inset: 0; background: #000; opacity: 0;
+  transition: opacity 600ms ease; pointer-events: none !important;
+}
+.fade.on { opacity: 1; }
+
+.card {
+  position: absolute; inset: 0; display: grid; place-content: center;
+  background: rgba(5, 7, 10, 0.92); opacity: 0; transition: opacity 0.35s ease;
+  cursor: pointer; z-index: 30;
+}
+.card.shown { opacity: 1; }
+
+.card-banner {
+  background: linear-gradient(135deg, rgba(16, 20, 32, 0.98), rgba(9, 11, 18, 0.99));
+  border-top: 5px solid var(--gold); border-bottom: 5px solid var(--gold);
+  padding: 40px clamp(40px, 8vw, 120px); transform: skewY(-4deg);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.9), 0 0 40px var(--gold-glow);
+  text-align: center;
+}
+.card-banner > * { transform: skewY(4deg); }
+
+.card-title {
+  font: 800 clamp(32px, 6vw, 64px) var(--font-title); color: var(--gold-strong);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+.card-sub {
+  font-size: clamp(16px, 2vw, 22px); color: var(--teal);
+  font-style: italic; margin-top: 10px; letter-spacing: 0.04em;
+}
+
+.toasts {
+  position: absolute; right: var(--gutter); bottom: calc(var(--gutter) + 180px);
+  display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+  pointer-events: none !important; z-index: 40;
+}
+.toast {
+  padding: 10px 18px; background: rgba(14, 18, 28, 0.95);
+  border: 1px solid var(--gold); border-left: 4px solid var(--gold);
+  transform: skewX(-8deg); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  font-size: 14px; font-weight: 600; color: #fff;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.toast.out { opacity: 0; transform: translateX(30px) skewX(-8deg); }
+
+.error { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0, 0, 0, 0.75); z-index: 50; }
+.error-panel {
+  width: min(760px, calc(100% - 32px)); max-height: 80vh; overflow: auto; padding: 26px;
+  background: #140d10; border: 2px solid var(--danger); border-left: 6px solid var(--danger);
+  transform: skewX(-4deg); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+}
+.error-panel > * { transform: skewX(4deg); }
+.error-panel h2 { color: var(--danger); margin-bottom: 12px; font-size: 20px; font-weight: 800; }
+.error-panel pre { white-space: pre-wrap; font-size: 13px; line-height: 1.5; margin-bottom: 16px; color: var(--ink-soft); }
+
+/* ==========================================================================
+   5. TITLE SCREEN (Persona 3 Reload / SMT V Style)
+   ========================================================================== */
+.title-screen {
+  position: absolute; inset: 0; display: grid; place-items: center; z-index: 10;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(20, 36, 60, 0.65) 0%, rgba(5, 7, 12, 0.98) 75%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.015) 0, rgba(255, 255, 255, 0.015) 2px, transparent 0, transparent 16px),
+    #05070a;
+}
+
+.title-inner { text-align: center; padding: 24px; max-width: 680px; position: relative; z-index: 2; }
+.title-kicker {
+  font: 800 12.5px var(--font); letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 16px;
+}
+.title-name {
+  font: 800 clamp(44px, 8.5vw, 84px) var(--font-title);
+  background: linear-gradient(180deg, #fff 0%, var(--gold-strong) 60%, #c4942d 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1.05; filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.9));
+}
+.title-tagline {
+  margin: 18px auto 40px; color: var(--ink-soft); font-style: italic;
+  line-height: 1.6; max-width: 480px; font-size: 16px;
+}
+
+.title-menu { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.title-btn {
+  position: relative; width: 260px; padding: 13px 20px;
+  background: linear-gradient(90deg, rgba(16, 20, 30, 0.92) 0%, rgba(24, 30, 46, 0.85) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16); border-left: 5px solid var(--gold);
+  transform: skewX(-12deg);
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.title-btn > * { transform: skewX(12deg); }
+
+.title-btn-text {
+  font-weight: 700; font-size: 14.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #f4f0e6;
+}
+.title-btn-slash { font-weight: 800; font-size: 12px; color: var(--teal); opacity: 0.7; }
+
+.title-btn:not(:disabled):hover {
+  transform: translateX(14px) skewX(-12deg);
+  background: linear-gradient(90deg, rgba(40, 50, 78, 0.98), rgba(20, 26, 42, 0.95));
+  border-color: var(--gold); border-left-color: var(--gold-strong);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), -4px 0 16px var(--gold-glow);
+}
+.title-btn:not(:disabled):hover .title-btn-text { color: var(--gold-strong); }
+.title-btn.primary {
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-strong) 100%);
+  border-color: var(--gold-strong);
+}
+.title-btn.primary .title-btn-text { color: #07090e; font-weight: 800; }
+.title-btn.primary .title-btn-slash { color: #07090e; }
+
+/* ==========================================================================
+   6. MODALS & DOSSIERS (SMT V / Persona Menu Systems)
+   ========================================================================== */
+.btn {
+  padding: 10px 22px; border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05); transform: skewX(-8deg);
+  font-weight: 600; font-size: 13.5px; letter-spacing: 0.05em;
+  transition: all 0.14s ease;
+}
+.btn > * { transform: skewX(8deg); }
+.btn:hover { border-color: var(--gold); color: var(--gold-strong); background: rgba(246, 195, 68, 0.12); }
+.btn.primary { background: var(--gold); color: #080a0f; border-color: var(--gold-strong); font-weight: 800; }
+.row { display: flex; gap: 12px; justify-content: center; }
+
+.modal {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background: rgba(5, 7, 12, 0.75); backdrop-filter: blur(8px); z-index: 20;
+}
+.modal-panel {
+  width: min(680px, calc(100% - 32px)); max-height: min(86vh, 900px);
+  display: flex; flex-direction: column;
+  background: linear-gradient(135deg, rgba(14, 18, 28, 0.98), rgba(8, 10, 16, 0.99));
+  border: 1px solid rgba(255, 255, 255, 0.15); border-left: 6px solid var(--teal);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85); border-radius: 4px;
+}
+.modal-panel.small { width: min(400px, calc(100% - 32px)); }
+.modal-panel.wide { width: min(940px, calc(100% - 32px)); }
+
+.modal-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 18px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.modal-head h2 {
+  font: 700 22px var(--font-title); color: var(--gold-strong);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.modal-close {
+  width: 32px; height: 32px; font-size: 16px; color: var(--ink-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 2px;
+}
+.modal-close:hover { color: var(--gold); border-color: var(--gold); background: rgba(246, 195, 68, 0.1); }
+
+.modal-body { padding: 20px 24px 26px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+
+.menu-item {
+  text-align: left; padding: 13px 18px; transform: skewX(-8deg);
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 600; font-size: 15px; letter-spacing: 0.04em;
+  transition: all 0.14s ease;
+}
+.menu-item > * { transform: skewX(8deg); }
+.menu-item:hover {
+  transform: translateX(10px) skewX(-8deg); background: rgba(246, 195, 68, 0.15);
+  border-color: var(--gold); color: var(--gold-strong);
+}
+
+/* Save Slots (Persona Memory Card Style) */
+.slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.slot {
+  text-align: left; padding: 16px; min-height: 125px;
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--teal); border-radius: 3px;
+  display: flex; flex-direction: column; gap: 6px;
+  transition: all 0.14s ease;
+}
+.slot:not(:disabled):hover {
+  transform: translateY(-2px); border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.06); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.slot-name { font: 800 12px var(--font); letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; }
+.slot-empty { color: var(--ink-muted); font-style: italic; margin-top: auto; }
+.slot-title { font-weight: 700; font-size: 14.5px; color: #fff; }
+.slot-place, .slot-date { font-size: 12px; color: var(--ink-muted); }
+.slot-preview {
+  font-size: 13px; color: var(--ink-soft); font-style: italic;
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+
+.slider { display: grid; grid-template-columns: 1fr 1.4fr 48px; align-items: center; gap: 14px; padding: 8px 0; font-size: 14px; }
+.slider input { accent-color: var(--gold); }
+.slider-value { text-align: right; color: var(--gold); font-variant-numeric: tabular-nums; font-weight: 700; }
+
+.log-line { line-height: 1.65; padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.log-thought, .log-direction { color: var(--teal); font-style: italic; }
+.log-choice { color: var(--gold); padding: 4px 0 8px; font-weight: 600; }
+
+/* Philosophical Notebook Dossier */
+.modal-panel.book {
+  background: #f4ecdc; color: #201a12; border-color: #7b592c;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9);
+}
+.modal-panel.book .modal-head { border-bottom-color: rgba(123, 89, 44, 0.25); }
+.modal-panel.book .modal-head h2 { color: #5c3c16; }
+.book h3 { font: 700 17px var(--font-title); color: #5c3c16; margin-top: 8px; }
+.book ol { padding-left: 36px; line-height: 1.75; font-size: 14.5px; }
+.book li.locked { color: #9c8b70; letter-spacing: 0.25em; }
+.book .muted { color: #6e5e45; }
+.tag {
+  display: inline-block; margin-left: 8px; font-size: 11px; padding: 2px 8px;
+  border-radius: 2px; background: #e0d0b0; color: #4e3919; font-weight: 700;
+}
+.tag.good { background: #b8d9a4; color: #223f14; }
+
+/* Debug Panel */
+.debug {
+  position: absolute; top: 70px; right: var(--gutter); width: 320px; max-height: 60vh;
+  overflow: auto; z-index: 30; background: rgba(5, 7, 10, 0.88);
+  border: 1px solid #3a5; border-radius: 4px; font: 11px/1.4 ui-monospace, Consolas, monospace; color: #9f9;
+}
+.debug-head { padding: 6px 10px; border-bottom: 1px solid #253; color: #6c6; font-weight: 700; }
+.debug pre { padding: 8px 10px; white-space: pre-wrap; }
+
+/* ==========================================================================
+   7. RESPONSIVE BREAKPOINTS (Mobile & Small Screens)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .dialogue { padding: 18px 16px 22px; min-height: 140px; }
+  .dlg-portrait { width: 140px; height: 200px; left: -10px; bottom: -2px; }
+  .dialogue.has-portrait .dlg-body { margin-left: 120px; }
+  .dlg-name { left: 125px; top: -14px; font-size: 13px; padding: 3px 14px; }
+  .dialogue:not(.has-portrait) .dlg-name { left: 16px; }
+  .dlg-text { font-size: 15px; line-height: 1.55; }
+  .choices { bottom: calc(var(--gutter) + 165px); gap: 8px; }
+  .choice { padding: 10px 14px; }
+  .hud-location { padding: 6px 14px; }
+  .hud-place-text { font-size: 17px; }
+  .hud-btn { min-width: 44px; height: 38px; padding: 4px 8px; }
+  .hud-btn-key { display: none; }
+}
+
+/* Layering */
+.hud { z-index: 0; }
+.fade { z-index: 1; }
+.dialogue, .choices { z-index: 2; }
+.card { z-index: 3; }
+.toasts { z-index: 4; }

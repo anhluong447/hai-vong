@@ -1,0 +1,53 @@
+{
+  "id": "ngoc",
+  "designPivot": "assets/pixel/characters-anime-source.png",
+  "sourceRow": 5,
+  "design": "Tạ Như Ngọc, Vietnamese schoolgirl18: long warm brown hair tied in lively high/side ponytail with conspicuous CORAL RED RIBBON, coral red/pink CARDIGAN over white blouse, teal pleated skirt, dark CAMERA on neck strap. Broader lively face with upturned bright brown eyes, playful brows, freckles lightly across nose if tasteful. Different face from Vân.",
+  "poseAndCamera": "Energetic photographer. Strong THREE-QUARTER angle facing viewer's left, eye-level slightly wide perspective; upper body leaning diagonally as if catching a shot. One hand holds camera at chest height ready to shoot, other hand planted at hip, elbow opens silhouette. Open-mouth playful interested grin, lifted expressive eyebrows. Ponytail sweeps opposite body lean. Spirited dynamic silhouette.",
+  "expressionLabels": [
+    "Hào hứng",
+    "Nháy mắt",
+    "Bất bình"
+  ],
+  "masterPrompt": "ORIGINAL ANIME VISUAL NOVEL CHARACTER SPRITE, one person only, for Vietnamese school journalism game Hoi Am. PRIMARY DESIGN PIVOT: assets/pixel/characters-anime-source.png (image1); image2 is an UNMODIFIED crop of the target row, showing the first three poses. Read ONLY the targeted character, ignore all other rows. Source establishes hair silhouette/color, identifying accessories, costume shapes and colors. Convert to normal teen/adult anime anatomy, NEVER chibi or pixel art.\nCHARACTER-SPECIFIC DESIGN: Tạ Như Ngọc, Vietnamese schoolgirl18: long warm brown hair tied in lively high/side ponytail with conspicuous CORAL RED RIBBON, coral red/pink CARDIGAN over white blouse, teal pleated skirt, dark CAMERA on neck strap. Broader lively face with upturned bright brown eyes, playful brows, freckles lightly across nose if tasteful. Different face from Vân.\nUNIQUE POSE AND CAMERA: Energetic photographer. Strong THREE-QUARTER angle facing viewer's left, eye-level slightly wide perspective; upper body leaning diagonally as if catching a shot. One hand holds camera at chest height ready to shoot, other hand planted at hip, elbow opens silhouette. Open-mouth playful interested grin, lifted expressive eyebrows. Ponytail sweeps opposite body lean. Spirited dynamic silhouette.\nART DIRECTION: crisp clean anime ink contours, bold readable cel shading, attractive expressive face, character-specific face geometry and anatomy. Flat character illustration for a VN, NOT photographic lighting or cinematic portrait, no generic repeated handsome face. Expression must be readable at 300px display size, not a tiny change of mouth. Preserve defining source accessories exactly.\nCOMPOSITION: ONE 2:3 vertical 1024x1536 transparent PNG cutout from complete hair to hips/upper thighs. Include complete posed hands and all props, no cropped elbows. Leave a visible 6% margin around all hair/hands. Center the overall posed silhouette, balance within canvas. Real transparent alpha background: only person and carried props, absolutely no background, scenery, glow, fog, ambient shadow, text, border, labels or collage. Draw the full unique pose in one illustration. DO NOT use any previous dialogue portrait as reference.",
+  "references": [
+    "assets/pixel/characters-anime-source.png",
+    "assets/dialogue/v2/design-refs/ngoc.png"
+  ],
+  "expressionPrompts": [
+    {
+      "key": "ngoc-happy",
+      "prompt": "EXPRESSION EDIT of image1, the ngoc dialogue master. Image2 is the original characters-anime-source.png design pivot; image3 is its exact ngoc row crop. Keep their identity cues, glasses, hairstyle, clothes and accessories. Playful confident WINK: one eye completely closed in a wink, other eye bright and wide, one eyebrow raised, big toothy open playful smile. Energetic and cheeky, clearly different from normal enthusiastic grin. Change brows, eyelids, cheeks and mouth BOLDLY enough to read instantly at300px character display. Preserve recognizable SAME INDIVIDUAL face structure/nose and exact head angle, camera, body pose, hands, props, torso, silhouette registration, clothing folds and canvas dimensions. Expression can alter jaw/mouth locally; no whole-body redraw, no new pose or recoloring. Preserve real transparent alpha background. Single isolated cutout, no text, no scene/glow/backdrop. Glasses must stay, do not obscure eyes with reflections.",
+      "source": "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-559c1fa7-4679-4870-a83e-c5446ccb4bb7.png",
+      "references": [
+        "assets/dialogue/v2/ngoc-neutral.png",
+        "assets/pixel/characters-anime-source.png",
+        "assets/dialogue/v2/design-refs/ngoc.png"
+      ]
+    },
+    {
+      "key": "ngoc-serious",
+      "prompt": "EXPRESSION EDIT of image1, the ngoc dialogue master. Image2 is the original characters-anime-source.png design pivot; image3 is its exact ngoc row crop. Keep their identity cues, glasses, hairstyle, clothes and accessories. Clearly indignant DISAPPROVAL: drawn-in strongly lowered brows, narrowed displeased eyes, lips open in a firm angry objection. Remove the cheerful grin entirely, retain her lively expressive face. Change brows, eyelids, cheeks and mouth BOLDLY enough to read instantly at300px character display. Preserve recognizable SAME INDIVIDUAL face structure/nose and exact head angle, camera, body pose, hands, props, torso, silhouette registration, clothing folds and canvas dimensions. Expression can alter jaw/mouth locally; no whole-body redraw, no new pose or recoloring. Preserve real transparent alpha background. Single isolated cutout, no text, no scene/glow/backdrop. Glasses must stay, do not obscure eyes with reflections.",
+      "source": "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-47dd1e23-b5f8-4401-9b9d-caa2c2cd871d.png",
+      "references": [
+        "assets/dialogue/v2/ngoc-neutral.png",
+        "assets/pixel/characters-anime-source.png",
+        "assets/dialogue/v2/design-refs/ngoc.png"
+      ]
+    }
+  ],
+  "accessoryConstraints": "Bare face: NO eyeglasses. Only Nhi and An wear glasses among the six club members.",
+  "expressionReferencePolicy": "Use this character's own pose master only for expression edits. Do not reference the full multi-character sheet for facial edits.",
+  "revisionPrompts": [
+    {
+      "key": "ngoc-happy-v2",
+      "prompt": "Precise object removal edit. Image 1 is the edit target: Ngoc winking dialogue portrait. Image 2 is the same character's correct bare face identity reference. Remove ALL eyeglasses from image 1 including both rims, bridge, lenses and temples; reconstruct clean bare cheeks, nose and eyes, keeping her one eye closed wink and other eye open, playful smile. Ngoc has NO glasses. Keep absolutely the same pose, camera, red ribbon ponytail, coral cardigan, skirt, hands, body outline, shading and exact placement. Change only face where glasses were. Output single 1024x1536 transparent PNG, no text, no background.",
+      "source": "C:\\Users\\anhlh52\\.codex\\generated_images\\01a10a03-549c-7db3-b022-5e15fe7a905b\\exec-229e2c80-ad64-45af-9811-c05b4b3dbb22.png",
+      "references": [
+        "assets/dialogue/v2/ngoc-happy.png",
+        "assets/dialogue/v2/ngoc-neutral.png"
+      ]
+    }
+  ],
+  "historicalPromptWarning": "Original expressionPrompts mistakenly required glasses. Retained verbatim as generation history; do NOT reuse that eyewear instruction. Use revisionPrompts and accessoryConstraints."
+}

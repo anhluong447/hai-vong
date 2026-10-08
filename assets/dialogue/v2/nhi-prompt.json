@@ -1,0 +1,39 @@
+{
+    "id":  "nhi",
+    "designPivot":  "assets/pixel/characters-anime-source.png",
+    "sourceRow":  4,
+    "design":  "Hạ Tuyết Nhi, Vietnamese schoolgirl18: neat chin-length dark NAVY BLUE BOB with straight soft bangs, unmistakable ROUND DARK-FRAME GLASSES, light BLUE CARDIGAN over white blouse with small dark navy bow, navy skirt. Petite rounded face, small chin, large timid brown eyes behind glasses, softer curved eyebrows. Not Khuê\u0027s face with a wig.",
+    "poseAndCamera":  "Clearly shy and embarrassed. Slight HIGH-ANGLE camera, body turned to viewer\u0027s right and head angled shyly back left and down; shoulders drawn inward, elbows tucked. BOTH HANDS HUG A CLOSED BOOK tightly against chest. Glancing sideways rather than confronting viewer, visibly pink flushed cheeks, raised inner eyebrows, small nervous hesitant mouth. Delicate timid silhouette, no confident sexy posture.",
+    "expressionLabels":  [
+                             "Ngại ngùng",
+                             "Vui bẽn lẽn",
+                             "Hoảng hốt"
+                         ],
+    "masterPrompt":  "ORIGINAL ANIME VISUAL NOVEL CHARACTER SPRITE, one person only, for Vietnamese school journalism game Hoi Am. PRIMARY DESIGN PIVOT: assets/pixel/characters-anime-source.png (image1); image2 is an UNMODIFIED crop of the target row, showing the first three poses. Read ONLY the targeted character, ignore all other rows. Source establishes hair silhouette/color, identifying accessories, costume shapes and colors. Convert to normal teen/adult anime anatomy, NEVER chibi or pixel art.\nCHARACTER-SPECIFIC DESIGN: Hạ Tuyết Nhi, Vietnamese schoolgirl18: neat chin-length dark NAVY BLUE BOB with straight soft bangs, unmistakable ROUND DARK-FRAME GLASSES, light BLUE CARDIGAN over white blouse with small dark navy bow, navy skirt. Petite rounded face, small chin, large timid brown eyes behind glasses, softer curved eyebrows. Not Khuê\u0027s face with a wig.\nUNIQUE POSE AND CAMERA: Clearly shy and embarrassed. Slight HIGH-ANGLE camera, body turned to viewer\u0027s right and head angled shyly back left and down; shoulders drawn inward, elbows tucked. BOTH HANDS HUG A CLOSED BOOK tightly against chest. Glancing sideways rather than confronting viewer, visibly pink flushed cheeks, raised inner eyebrows, small nervous hesitant mouth. Delicate timid silhouette, no confident sexy posture.\nART DIRECTION: crisp clean anime ink contours, bold readable cel shading, attractive expressive face, character-specific face geometry and anatomy. Flat character illustration for a VN, NOT photographic lighting or cinematic portrait, no generic repeated handsome face. Expression must be readable at 300px display size, not a tiny change of mouth. Preserve defining source accessories exactly.\nCOMPOSITION: ONE 2:3 vertical 1024x1536 transparent PNG cutout from complete hair to hips/upper thighs. Include complete posed hands and all props, no cropped elbows. Leave a visible 6% margin around all hair/hands. Center the overall posed silhouette, balance within canvas. Real transparent alpha background: only person and carried props, absolutely no background, scenery, glow, fog, ambient shadow, text, border, labels or collage. Draw the full unique pose in one illustration. DO NOT use any previous dialogue portrait as reference.",
+    "references":  [
+                       "assets/pixel/characters-anime-source.png",
+                       "assets/dialogue/v2/design-refs/nhi.png"
+                   ],
+    "expressionPrompts":  [
+                              {
+                                  "key":  "nhi-happy",
+                                  "prompt":  "EXPRESSION EDIT of image1, the nhi dialogue master. Image2 is the original characters-anime-source.png design pivot; image3 is its exact nhi row crop. Keep their identity cues, glasses, hairstyle, clothes and accessories. Clearly bashful JOY: eyes closed in shy happy crescents behind her ROUND GLASSES, bright pink flushed cheeks, an unmistakable open delighted smile. Sweet embarrassed happiness, not a confident smirk. Change brows, eyelids, cheeks and mouth BOLDLY enough to read instantly at300px character display. Preserve recognizable SAME INDIVIDUAL face structure/nose and exact head angle, camera, body pose, hands, props, torso, silhouette registration, clothing folds and canvas dimensions. Expression can alter jaw/mouth locally; no whole-body redraw, no new pose or recoloring. Preserve real transparent alpha background. Single isolated cutout, no text, no scene/glow/backdrop. Glasses must stay, do not obscure eyes with reflections.",
+                                  "source":  "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-967387d6-0f95-42d0-87f8-7b696c0aad96.png",
+                                  "references":  [
+                                                     "assets/dialogue/v2/nhi-neutral.png",
+                                                     "assets/pixel/characters-anime-source.png",
+                                                     "assets/dialogue/v2/design-refs/nhi.png"
+                                                 ]
+                              },
+                              {
+                                  "key":  "nhi-serious",
+                                  "prompt":  "EXPRESSION EDIT of image1, the nhi dialogue master. Image2 is the original characters-anime-source.png design pivot; image3 is its exact nhi row crop. Keep their identity cues, glasses, hairstyle, clothes and accessories. Clearly STARTLED and anxious: very wide trembling eyes behind her ROUND GLASSES, brows raised high and drawn inward, tiny rounded open mouth gasping, strongly blushing cheeks and one small anime sweat bead near temple. Shy girl panicking, visibly different from her normal shy face. Change brows, eyelids, cheeks and mouth BOLDLY enough to read instantly at300px character display. Preserve recognizable SAME INDIVIDUAL face structure/nose and exact head angle, camera, body pose, hands, props, torso, silhouette registration, clothing folds and canvas dimensions. Expression can alter jaw/mouth locally; no whole-body redraw, no new pose or recoloring. Preserve real transparent alpha background. Single isolated cutout, no text, no scene/glow/backdrop. Glasses must stay, do not obscure eyes with reflections.",
+                                  "source":  "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-4eecf1ef-13e3-48b6-b695-12c413aab136.png",
+                                  "references":  [
+                                                     "assets/dialogue/v2/nhi-neutral.png",
+                                                     "assets/pixel/characters-anime-source.png",
+                                                     "assets/dialogue/v2/design-refs/nhi.png"
+                                                 ]
+                              }
+                          ]
+}

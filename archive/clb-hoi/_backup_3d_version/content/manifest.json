@@ -1,0 +1,12 @@
+{
+  "title": "Câu Lạc Bộ Hỏi",
+  "start": "c01",
+  "chapters": {
+    "c01": {
+      "file": "chapters/common/c01.vns",
+      "title": "Chap 1: Người mới ở cổng trường",
+      "route": "common",
+      "season": "autumn"
+    }
+  }
+}

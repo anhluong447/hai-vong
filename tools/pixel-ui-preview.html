@@ -1,0 +1,14 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>Pixel dialogue preview</title>
+<style>html,body{margin:0;background:#0a101c;height:100%}iframe{border:0;display:block;width:100%;height:100%}body.mobile iframe{width:390px;height:844px;margin:auto}</style>
+<iframe src="../pixel.html" title="Pixel sandbox preview"></iframe>
+<script type="module">
+const mobile=new URLSearchParams(location.search).has('mobile');if(mobile)document.body.className='mobile';
+const frame=document.querySelector('iframe');
+const wait=fn=>new Promise((resolve,reject)=>{const start=Date.now();const poll=()=>fn()?resolve():Date.now()-start>10000?reject(new Error('Preview timed out')):setTimeout(poll,25);poll();});
+await wait(()=>frame.contentWindow.pressPixel?.ready);
+const w=frame.contentWindow,d=w.document;
+function point(x,y){const canvas=d.querySelector('canvas'),rect=canvas.getBoundingClientRect(),p=w.pressPixel.screenPosition(x,y);canvas.dispatchEvent(new w.PointerEvent('pointerdown',{bubbles:true,clientX:rect.left+p.x,clientY:rect.top+p.y}));}
+for(const [x,y]of[[23,11],[26,12],[29,12],[30,12]]){point(x,y);await wait(()=>!w.pressPixel.moving&&w.pressPixel.world.x===x&&w.pressPixel.world.y===y);}
+point(31,12);await wait(()=>d.querySelector('[role=dialog]'));await d.fonts.ready;
+document.title=`${d.fonts.check('18px "Be Vietnam Pro"')?'Font loaded':'Font missing'} / ${d.documentElement.scrollWidth<=w.innerWidth?'No overflow':'Overflow'}`;
+</script></html>

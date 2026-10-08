@@ -1,0 +1,39 @@
+{
+    "id":  "an",
+    "designPivot":  "assets/pixel/characters-anime-source.png",
+    "sourceRow":  6,
+    "design":  "Ngô Thiên Ân, Vietnamese schoolboy18: tidy short dark brown hair with side part, clear RECTANGULAR DARK GLASSES, OLIVE GREEN OPEN JACKET over cream/white shirt, dark brown trousers. NO sweater vest, no teal tie. Tall slim elongated face with longer straight nose, narrow intelligent brown eyes behind spectacles, restrained thin mouth. Individual intellectual facial geometry.",
+    "poseAndCamera":  "Analytical reserved thinker. Near-profile THREE-QUARTER SIDE VIEW toward viewer\u0027s right, camera at eye-level. One hand touches the glasses\u0027 temple with two fingers, other arm holds a slim folder low at waist. Straight upright posture, composed slightly knitted brows, pursed thoughtful lips, gaze off to the side rather than into camera. Vertical angular silhouette distinct from all other cast.",
+    "expressionLabels":  [
+                             "Trầm tư",
+                             "Hài lòng",
+                             "Nghi hoặc"
+                         ],
+    "masterPrompt":  "ORIGINAL ANIME VISUAL NOVEL CHARACTER SPRITE, one person only, for Vietnamese school journalism game Hoi Am. PRIMARY DESIGN PIVOT: assets/pixel/characters-anime-source.png (image1); image2 is an UNMODIFIED crop of the target row, showing the first three poses. Read ONLY the targeted character, ignore all other rows. Source establishes hair silhouette/color, identifying accessories, costume shapes and colors. Convert to normal teen/adult anime anatomy, NEVER chibi or pixel art.\nCHARACTER-SPECIFIC DESIGN: Ngô Thiên Ân, Vietnamese schoolboy18: tidy short dark brown hair with side part, clear RECTANGULAR DARK GLASSES, OLIVE GREEN OPEN JACKET over cream/white shirt, dark brown trousers. NO sweater vest, no teal tie. Tall slim elongated face with longer straight nose, narrow intelligent brown eyes behind spectacles, restrained thin mouth. Individual intellectual facial geometry.\nUNIQUE POSE AND CAMERA: Analytical reserved thinker. Near-profile THREE-QUARTER SIDE VIEW toward viewer\u0027s right, camera at eye-level. One hand touches the glasses\u0027 temple with two fingers, other arm holds a slim folder low at waist. Straight upright posture, composed slightly knitted brows, pursed thoughtful lips, gaze off to the side rather than into camera. Vertical angular silhouette distinct from all other cast.\nART DIRECTION: crisp clean anime ink contours, bold readable cel shading, attractive expressive face, character-specific face geometry and anatomy. Flat character illustration for a VN, NOT photographic lighting or cinematic portrait, no generic repeated handsome face. Expression must be readable at 300px display size, not a tiny change of mouth. Preserve defining source accessories exactly.\nCOMPOSITION: ONE 2:3 vertical 1024x1536 transparent PNG cutout from complete hair to hips/upper thighs. Include complete posed hands and all props, no cropped elbows. Leave a visible 6% margin around all hair/hands. Center the overall posed silhouette, balance within canvas. Real transparent alpha background: only person and carried props, absolutely no background, scenery, glow, fog, ambient shadow, text, border, labels or collage. Draw the full unique pose in one illustration. DO NOT use any previous dialogue portrait as reference.",
+    "references":  [
+                       "assets/pixel/characters-anime-source.png",
+                       "assets/dialogue/v2/design-refs/an.png"
+                   ],
+    "expressionPrompts":  [
+                              {
+                                  "key":  "an-happy",
+                                  "prompt":  "EXPRESSION EDIT of image1, the an dialogue master. Image2 is the original characters-anime-source.png design pivot; image3 is its exact an row crop. Keep their identity cues, glasses, hairstyle, clothes and accessories. Visible quiet SATISFACTION: brows relaxed and slightly raised, eyes partly closed with a clear smile behind RECTANGULAR GLASSES, mouth a broad curved closed smile with lifted cheeks. Not an invisible neutral lip change; expression must be recognizable at thumbnail size. Change brows, eyelids, cheeks and mouth BOLDLY enough to read instantly at300px character display. Preserve recognizable SAME INDIVIDUAL face structure/nose and exact head angle, camera, body pose, hands, props, torso, silhouette registration, clothing folds and canvas dimensions. Expression can alter jaw/mouth locally; no whole-body redraw, no new pose or recoloring. Preserve real transparent alpha background. Single isolated cutout, no text, no scene/glow/backdrop. Glasses must stay, do not obscure eyes with reflections.",
+                                  "source":  "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-dcad888d-899d-473d-a19b-ea3be9fcb8eb.png",
+                                  "references":  [
+                                                     "assets/dialogue/v2/an-neutral.png",
+                                                     "assets/pixel/characters-anime-source.png",
+                                                     "assets/dialogue/v2/design-refs/an.png"
+                                                 ]
+                              },
+                              {
+                                  "key":  "an-serious",
+                                  "prompt":  "EXPRESSION EDIT of image1, the an dialogue master. Image2 is the original characters-anime-source.png design pivot; image3 is its exact an row crop. Keep their identity cues, glasses, hairstyle, clothes and accessories. Strong skeptical SUSPICION: one eyebrow distinctly raised high, other lowered, eyes visibly narrowed behind RECTANGULAR GLASSES, mouth open questioning asymmetrically with a doubtful tense expression. Analytical doubt, very different from his neutral thoughtfulness. Change brows, eyelids, cheeks and mouth BOLDLY enough to read instantly at300px character display. Preserve recognizable SAME INDIVIDUAL face structure/nose and exact head angle, camera, body pose, hands, props, torso, silhouette registration, clothing folds and canvas dimensions. Expression can alter jaw/mouth locally; no whole-body redraw, no new pose or recoloring. Preserve real transparent alpha background. Single isolated cutout, no text, no scene/glow/backdrop. Glasses must stay, do not obscure eyes with reflections.",
+                                  "source":  "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-8582b970-2266-4636-b260-bbd341cbca81.png",
+                                  "references":  [
+                                                     "assets/dialogue/v2/an-neutral.png",
+                                                     "assets/pixel/characters-anime-source.png",
+                                                     "assets/dialogue/v2/design-refs/an.png"
+                                                 ]
+                              }
+                          ]
+}

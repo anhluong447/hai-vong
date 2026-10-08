@@ -1,0 +1,62 @@
+[
+  {
+    "id": "khue",
+    "file": "v1/khue-happy.png",
+    "bodySilhouetteOverlap": 0.9925805439032046
+  },
+  {
+    "id": "khue",
+    "file": "v1/khue-serious.png",
+    "bodySilhouetteOverlap": 0.9919299646401277
+  },
+  {
+    "id": "van",
+    "file": "v1/van-happy.png",
+    "bodySilhouetteOverlap": 0.9961103682995016
+  },
+  {
+    "id": "van",
+    "file": "v1/van-serious.png",
+    "bodySilhouetteOverlap": 0.996595537722658
+  },
+  {
+    "id": "long",
+    "file": "v1/long-happy.png",
+    "bodySilhouetteOverlap": 0.9964921605102312
+  },
+  {
+    "id": "long",
+    "file": "v1/long-serious.png",
+    "bodySilhouetteOverlap": 0.9968911917098445
+  },
+  {
+    "id": "nhi",
+    "file": "v1/nhi-happy.png",
+    "bodySilhouetteOverlap": 0.9971009129040217
+  },
+  {
+    "id": "nhi",
+    "file": "v1/nhi-serious.png",
+    "bodySilhouetteOverlap": 0.998425002316173
+  },
+  {
+    "id": "ngoc",
+    "file": "v1/ngoc-happy.png",
+    "bodySilhouetteOverlap": 0.9909693292699975
+  },
+  {
+    "id": "ngoc",
+    "file": "v1/ngoc-serious.png",
+    "bodySilhouetteOverlap": 0.9924978305293508
+  },
+  {
+    "id": "an",
+    "file": "v1/an-happy.png",
+    "bodySilhouetteOverlap": 0.9915699782451052
+  },
+  {
+    "id": "an",
+    "file": "v1/an-serious.png",
+    "bodySilhouetteOverlap": 0.9933105306171868
+  }
+]

@@ -1,0 +1,70 @@
+<!doctype html><meta charset="utf-8"><title>Real game smoke test</title>
+<div id="out">Running real game…</div><iframe id="game" style="width:100%;height:700px;border:0" src="../index.html?chapter=c01&amp;label=room0_enter"></iframe>
+<script type="module">
+import { test, assert, runAll } from './harness.js';
+const iframe = document.querySelector('#game');
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const until = async (fn, timeout = 15000) => {
+  const start = performance.now();
+  while (!fn()) { if (performance.now() - start > timeout) throw new Error('Timed out waiting for real game'); await sleep(50); }
+};
+test('real game: dialogue, choice, exploration, save/load, chapter-end and return to title', async () => {
+  await until(() => iframe.contentWindow.game);
+  const win = iframe.contentWindow, doc = iframe.contentDocument;
+  const { session, world, bus } = win.game;
+  let ended = false, error;
+  bus.on('story:end', () => ended = true); bus.on('story:error', value => error = value);
+  await until(() => doc.querySelector('.dialogue:not(.hidden)'));
+  // Opening the actual menu must not let Auto consume a line behind it.
+  win.game.profile.settings.autoDelayMs = 5;
+  doc.querySelector('.dialogue').click();
+  doc.querySelector('.hud-btn').click();
+  doc.querySelectorAll('.hud-btn')[3].click();
+  const pausedAt = session.state.pc;
+  const autoWait = 5 + doc.querySelector('.dlg-text').textContent.length * 25 + 100;
+  await sleep(autoWait); assert.equal(session.state.pc, pausedAt);
+  doc.querySelector('.menu-item').click();
+  doc.querySelector('.hud-btn').click(); // return to manual dialogue
+  let saved = false;
+  const deadline = performance.now() + 16000;
+  while (!ended) {
+    if (error) throw error;
+    if (performance.now() > deadline) throw new Error('Real playthrough did not finish: ' + JSON.stringify({ pc: session.state.pc, instruction: session.runner.program.instructions[session.state.pc], objective: doc.querySelector('.hud-objective').className, prompt: doc.querySelector('.hud-prompt').className, snapshot: world.snapshot() }));
+    const choices = doc.querySelectorAll('.choices:not(.hidden) .choice');
+    if (choices.length) choices[1].click();
+    else if (doc.querySelector('.dialogue:not(.hidden)')) doc.querySelector('.dialogue').click();
+    else if (doc.querySelector('.hud-objective:not(.hidden)')) {
+      if (!saved) {
+        const snapshot = world.snapshot(); snapshot.player = { x: -2, z: 3, dir: 2 };
+        world.restoreSnapshot(snapshot);
+        assert.ok(session.quicksave());
+        world.restoreSnapshot({ ...snapshot, player: { x: 0, z: -3.6, dir: 1 } });
+        assert.ok(await session.load('quick'));
+        assert.deepEqual(world.snapshot().player, snapshot.player);
+        saved = true;
+      }
+      const snapshot = world.snapshot(); snapshot.player = { x: 0, z: -4, dir: 0 };
+      world.restoreSnapshot(snapshot);
+      await sleep(350); world.requestInteract();
+    }
+    await sleep(60);
+  }
+  assert.ok(saved, 'save/load path was not exercised');
+  assert.equal(session.state.flags.vanKnowsGrandpa, true);
+  assert.equal(session.state.bonds.van, 2);
+  assert.ok(doc.querySelector('.chapter-end:not(.hidden)'), 'end-of-chapter screen should remain usable');
+  assert.ok(!doc.querySelector('.error:not(.hidden)'), 'unexpected error panel');
+  doc.querySelector('.chapter-end .primary').click();
+  await until(() => doc.querySelector('.title-screen:not(.hidden)'));
+  assert.equal(session.active, false);
+});
+const results = await runAll();
+const out = document.querySelector('#out'); out.textContent = '';
+for (const r of results) {
+  const p=document.createElement('p');p.textContent=(r.ok?'PASS: ':'FAIL: ')+r.name;out.append(p);
+  if(!r.ok){const pre=document.createElement('pre');pre.textContent=r.error.stack;out.append(pre);}
+}
+const passed=results.filter(r=>r.ok).length;
+const summary=document.createElement('p');summary.className=passed===results.length?'ok':'bad';
+summary.textContent=`${passed}/${results.length} passed`;out.append(summary);
+</script>

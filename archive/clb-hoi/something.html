@@ -1,0 +1,3777 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tĩnh Để Tâm Sáng - 3D Visual Novel RPG</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Three.js Library (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Google Fonts: Be Vietnam Pro & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #030712;
+      color: #f3f4f6;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    #webglCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      z-index: 1;
+      touch-action: none;
+    }
+
+    /* Dialogue box retro panel */
+    .rpg-dialogue-panel {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(9, 14, 26, 0.99) 100%);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.88), inset 0 1px 2px rgba(212, 175, 55, 0.35);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      backdrop-filter: blur(14px);
+    }
+
+    /* Prompt pulsing */
+    #interactPrompt {
+      position: absolute;
+      bottom: 120px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: fit-content;
+      animation: bobUpDown 1.2s infinite ease-in-out;
+    }
+
+    @keyframes bobUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Screen shake */
+    @keyframes screenShake {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-5px, 5px); }
+      40% { transform: translate(5px, -4px); }
+      60% { transform: translate(-4px, 3px); }
+      80% { transform: translate(4px, -2px); }
+      100% { transform: translate(0, 0); }
+    }
+    .shake-active {
+      animation: screenShake 0.35s ease-out;
+    }
+
+    /* Scene transition fade overlay */
+    #sceneFadeOverlay {
+      transition: opacity 0.45s ease-in-out;
+      pointer-events: none;
+    }
+
+    /* Cinema letterbox bars */
+    .cinema-bar {
+      transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Touch Controls Visibility */
+    #mobileControls {
+      display: none;
+      touch-action: manipulation;
+    }
+    @media (pointer: coarse) {
+      #mobileControls {
+        display: flex;
+      }
+    }
+
+    /* Shimmer loading effect */
+    @keyframes shimmerMove {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+    .animate-shimmer {
+      animation: shimmerMove 1.6s infinite ease-in-out;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(212, 175, 55, 0.4);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="relative bg-black w-screen h-screen overflow-hidden">
+
+  <!-- 3D Three.js WebGL Canvas -->
+  <canvas id="webglCanvas"></canvas>
+
+  <!-- SCREEN FADE OVERLAY -->
+  <div id="sceneFadeOverlay" class="fixed inset-0 bg-black opacity-0 z-50"></div>
+
+  <!-- BANANA INITIAL TEXTURE SYNTHESIS LOADING SCREEN -->
+  <div id="bananaLoaderModal" class="fixed inset-0 z-50 bg-[#090d16] flex flex-col items-center justify-center p-6 transition-opacity duration-700">
+    <div class="relative max-w-lg w-full flex flex-col items-center text-center">
+      <!-- Banana Glow Icon -->
+      <div class="relative mb-6">
+        <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-amber-600 via-yellow-500 to-amber-300 p-0.5 shadow-2xl shadow-amber-500/30 animate-pulse">
+          <div class="w-full h-full bg-[#0d1424] rounded-[22px] flex items-center justify-center text-4xl">
+            🍌
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-amber-500/20 blur-xl rounded-full -z-10"></div>
+      </div>
+
+      <h1 class="text-xl md:text-2xl font-bold font-serif text-amber-300 tracking-wider">
+        TĨNH ĐỂ TÂM SÁNG
+      </h1>
+      <p class="text-xs uppercase tracking-widest text-teal-400 font-semibold mt-1 mb-6">
+        Banana Texture Synth Engine • Khởi tạo thế giới 3D
+      </p>
+
+      <!-- Progress Card -->
+      <div class="w-full bg-stone-900/90 border border-amber-500/30 rounded-2xl p-5 shadow-2xl backdrop-blur-md">
+        <div class="flex items-center justify-between text-xs mb-2">
+          <span id="loaderStatusText" class="text-stone-300 font-medium truncate pr-2">
+            Đang khởi động Banana AI Texture Generator...
+          </span>
+          <span id="loaderPercentText" class="text-amber-400 font-mono font-bold">0%</span>
+        </div>
+
+        <!-- Progress bar background -->
+        <div class="w-full h-3 bg-stone-950 rounded-full overflow-hidden p-0.5 border border-stone-800 relative">
+          <div id="loaderProgressBar" class="h-full bg-gradient-to-r from-amber-600 via-yellow-500 to-teal-400 rounded-full transition-all duration-200 relative overflow-hidden" style="width: 0%;">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
+          </div>
+        </div>
+
+        <!-- Itemized Log -->
+        <div id="loaderItemLog" class="mt-4 text-[11px] text-stone-400 text-left font-mono space-y-1 h-20 overflow-hidden border-t border-stone-800/80 pt-2.5">
+          <div class="text-amber-300/80">▸ Chuẩn bị bộ vi xử lý chất liệu đồ họa cao cấp...</div>
+        </div>
+      </div>
+
+      <button id="btnEnterWorld" class="mt-6 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-stone-950 font-bold text-sm shadow-xl shadow-amber-500/25 active:scale-95 transition-all hidden items-center gap-2">
+        <span>Bước Vào Trường Tĩnh Tâm</span>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+
+      <p class="text-[11px] text-stone-500 italic mt-4">
+        100% đối tượng được phủ chất liệu PBR-ready chi tiết trước khi vào game.
+      </p>
+    </div>
+  </div>
+
+  <!-- CINEMATIC BARS -->
+  <div id="cinemaBarTop" class="cinema-bar fixed top-0 left-0 right-0 h-0 bg-black z-30 pointer-events-none"></div>
+  <div id="cinemaBarBottom" class="cinema-bar fixed bottom-0 left-0 right-0 h-0 bg-black z-30 pointer-events-none"></div>
+
+  <!-- Camera drag hint -->
+  <div id="cameraHint" class="absolute top-16 left-1/2 -translate-x-1/2 z-20 bg-black/75 px-4 py-1.5 rounded-full text-xs text-amber-200 border border-amber-500/30 flex items-center gap-2 backdrop-blur-md shadow-lg pointer-events-none transition-opacity duration-1000">
+    <span>🖱️ Kéo chuột / Vuốt để xoay camera quanh Diệp Khuê • Phím W/A/S/D di chuyển</span>
+  </div>
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toastNotice" class="absolute top-16 left-1/2 -translate-x-1/2 z-40 bg-amber-950/90 text-amber-200 border border-amber-500/60 px-5 py-2.5 rounded-2xl text-xs md:text-sm font-medium shadow-2xl backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-2">
+    Thông báo
+  </div>
+
+  <!-- TOP HUD: MAP NAME & STATUS -->
+  <div class="absolute top-3 left-3 right-3 z-20 flex flex-wrap items-center justify-between pointer-events-none gap-2">
+    <!-- Map Name Badge -->
+    <div class="flex items-center space-x-2.5 bg-stone-900/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-amber-600/40 shadow-2xl pointer-events-auto">
+      <div class="w-7 h-7 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-xs">
+        3D
+      </div>
+      <div>
+        <h2 id="hudMapTitle" class="text-xs md:text-sm font-bold text-amber-300 font-serif tracking-wider">CỔNG TRƯỜNG TĨNH TÂM</h2>
+        <p id="hudMapSub" class="text-[10px] md:text-xs text-stone-400">Dốc đồi thông • Hải Vọng • Mùa thu</p>
+      </div>
+    </div>
+
+    <!-- Active Quest Tracker -->
+    <div class="bg-stone-900/90 backdrop-blur-md px-4 py-2 rounded-2xl border border-stone-700/80 shadow-2xl pointer-events-auto max-w-sm flex items-center gap-2.5">
+      <svg class="w-4 h-4 text-teal-400 flex-shrink-0 animate-spin" style="animation-duration: 16s;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+      </svg>
+      <div class="overflow-hidden">
+        <span class="text-[10px] uppercase font-bold tracking-wider text-teal-400 block">Nhiệm Vụ:</span>
+        <p id="hudQuestText" class="text-xs text-stone-200 font-medium truncate">Khám phá cổng trường & tìm gặp Đoàn Bảo Long</p>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center space-x-2 pointer-events-auto">
+      <button id="btnOpenAIArt" class="px-3 py-2 rounded-xl bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-700 hover:from-amber-500 hover:to-yellow-500 border border-yellow-400/80 text-stone-900 text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-amber-900/40 transition-all active:scale-95" title="Xưởng tranh nhân vật & chất liệu Banana AI">
+        <span class="text-sm">🍌</span>
+        <span class="hidden sm:inline text-white font-extrabold tracking-wide drop-shadow">Banana Art Studio</span>
+      </button>
+
+      <button id="btnOpenNotebook" class="px-3 py-2 rounded-xl bg-amber-950/85 hover:bg-amber-900 border border-amber-500/60 text-amber-300 text-xs font-semibold flex items-center gap-1.5 shadow-lg transition-all active:scale-95" title="Mở Sổ Da Của Ông (Phím J)">
+        <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span class="hidden sm:inline">Sổ Da Của Ông</span>
+      </button>
+
+      <button id="btnSoundToggle" class="w-9 h-9 rounded-xl bg-stone-900/80 hover:bg-stone-800 border border-stone-700 text-stone-300 flex items-center justify-center transition active:scale-95" title="Bật/Tắt âm thanh (Phím M)">
+        <svg id="hudSoundIcon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+      </button>
+
+      <button id="btnControlsHelp" class="w-9 h-9 rounded-xl bg-stone-900/80 hover:bg-stone-800 border border-stone-700 text-stone-300 flex items-center justify-center transition active:scale-95" title="Hướng dẫn điều khiển 3D">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="6" width="20" height="12" rx="4"/>
+          <path d="M6 12h4M8 10v4M16 10h.01M18 12h.01"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3D INTERACTION BANNER PROMPT -->
+  <div id="interactPrompt" class="z-20 hidden items-center gap-2 bg-stone-950/95 border border-amber-500/80 text-amber-300 px-4 py-2 rounded-full shadow-2xl backdrop-blur-md pointer-events-none">
+    <span class="px-2 py-0.5 rounded bg-amber-500/20 text-xs font-mono font-bold border border-amber-500/40">E / SPACE</span>
+    <span id="interactPromptText" class="text-xs md:text-sm font-medium text-stone-100">Tương tác</span>
+  </div>
+
+  <!-- RPG DIALOGUE BOX -->
+  <div id="dialogueContainer" class="absolute bottom-4 left-3 right-3 md:left-12 md:right-12 lg:left-24 lg:right-24 z-40 hidden flex-col">
+    <div id="dialogueBoxPanel" class="rpg-dialogue-panel max-h-[88vh] overflow-y-auto rounded-2xl p-4 md:p-5 text-stone-100 relative shadow-2xl cursor-pointer">
+      <!-- Speaker Tag & Audio Cue -->
+      <div class="flex items-center justify-between mb-2 pointer-events-none">
+        <div class="flex items-center space-x-2">
+          <span id="diagSpeaker" class="font-serif font-bold text-base md:text-lg text-amber-400 bg-amber-950/70 border border-amber-600/60 px-3 py-0.5 rounded-lg shadow-inner">
+            Đoàn Bảo Long
+          </span>
+          <span id="diagSub" class="text-xs text-stone-400 italic">Học sinh 12A5</span>
+        </div>
+        <div class="text-[11px] text-stone-400 flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-full border border-stone-800">
+          <svg class="w-3.5 h-3.5 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          </svg>
+          <span id="diagAudioCue">Gió đồi thông lạnh</span>
+        </div>
+      </div>
+
+      <!-- Dialogue Content Area -->
+      <div class="flex items-start gap-4">
+        <div class="relative flex flex-col items-center flex-shrink-0">
+          <div id="diagPortrait" class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-stone-900 border-2 border-amber-500/50 flex-shrink-0 overflow-hidden flex items-center justify-center shadow-2xl relative group">
+          </div>
+          <button id="btnQuickGenPortrait" class="mt-1.5 px-2 py-0.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-[10px] text-amber-300 font-medium flex items-center gap-1 transition active:scale-95" title="Mở Xưởng Vẽ Banana AI">
+            <span>🍌</span>
+            <span>Vẽ AI</span>
+          </button>
+        </div>
+
+        <!-- Dialogue Text Body with Typewriter -->
+        <div class="flex-1 min-h-[68px] text-sm md:text-base leading-relaxed tracking-wide text-stone-100 font-normal">
+          <p id="diagText" class="whitespace-pre-line"></p>
+        </div>
+      </div>
+
+      <!-- Dialogue Bottom Action Tip -->
+      <div id="diagNextHint" class="mt-2 pt-2 border-t border-stone-800/80 flex items-center justify-between text-xs text-stone-400 pointer-events-none">
+        <span class="italic text-[11px]">Nhấn <span class="text-amber-300 font-bold">Space / Enter</span> hoặc nhấp chuột để tiếp tục</span>
+        <svg class="w-4 h-4 text-amber-400 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+
+      <!-- Climax Choices Container (Room 0) -->
+      <div id="diagChoices" class="mt-3 pt-3 border-t border-amber-500/30 hidden flex-col space-y-2 cursor-default">
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 1 SUMMARY MODAL -->
+  <div id="summaryModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-stone-950 border-2 border-amber-500/70 rounded-3xl max-w-xl w-full p-6 md:p-8 text-stone-100 shadow-2xl relative flex flex-col text-center">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-300 text-2xl mb-3 shadow-lg">
+        📜
+      </div>
+      <h3 class="text-xl md:text-2xl font-bold font-serif text-amber-300">HOÀN THÀNH CHAP 1: TĨNH TÂM KHỞI NGUYÊN</h3>
+      <p class="text-xs text-stone-400 italic mt-1 mb-5">Hành trình bước vào thế giới triết lý trường học THPT Tĩnh Tâm</p>
+
+      <div class="bg-stone-900/90 rounded-2xl p-4 text-left border border-stone-800 text-xs md:text-sm space-y-3 mb-6">
+        <div class="flex justify-between items-center pb-2 border-b border-stone-800">
+          <span class="text-stone-400">Lựa chọn của bạn:</span>
+          <span id="summaryBranchBadge" class="font-bold text-amber-400">Nhánh B: Thật Lòng</span>
+        </div>
+        <div class="flex justify-between items-center pb-2 border-b border-stone-800">
+          <span class="text-stone-400">Độ thân thiết Lục Thanh Vân:</span>
+          <span id="summaryAffinityVan" class="font-bold text-rose-400">+10 Điểm</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-stone-400">Trạng thái CLB Hỏi & Phòng Số 0:</span>
+          <span id="summaryRoomStatus" class="font-bold text-teal-400">Đã kế thừa cuốn sổ & Kích hoạt phục hưng CLB Hỏi</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button id="btnContinuePlay" class="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs md:text-sm transition active:scale-95">
+          Tiếp Tục Khám Phá Tự Do
+        </button>
+        <button id="btnRestartStory" class="py-3 px-4 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 font-medium text-xs md:text-sm transition active:scale-95">
+          Chơi Lại Từ Đầu
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE ON-SCREEN CONTROLS -->
+  <div id="mobileControls" class="absolute bottom-5 left-4 right-4 z-20 items-end justify-between pointer-events-none">
+    <!-- Virtual D-Pad -->
+    <div id="dpadContainer" class="grid grid-cols-3 gap-1.5 w-36 h-36 bg-black/60 p-2 rounded-3xl backdrop-blur-md pointer-events-auto border border-stone-700/80 select-none shadow-2xl">
+      <div></div>
+      <button id="btnDpadUp" class="bg-stone-800/90 active:bg-amber-600 text-amber-300 rounded-2xl flex items-center justify-center text-lg active:scale-95 shadow">▲</button>
+      <div></div>
+      <button id="btnDpadLeft" class="bg-stone-800/90 active:bg-amber-600 text-amber-300 rounded-2xl flex items-center justify-center text-lg active:scale-95 shadow">◀</button>
+      <div class="flex items-center justify-center text-stone-500 text-xs font-mono">3D</div>
+      <button id="btnDpadRight" class="bg-stone-800/90 active:bg-amber-600 text-amber-300 rounded-2xl flex items-center justify-center text-lg active:scale-95 shadow">▶</button>
+      <div></div>
+      <button id="btnDpadDown" class="bg-stone-800/90 active:bg-amber-600 text-amber-300 rounded-2xl flex items-center justify-center text-lg active:scale-95 shadow">▼</button>
+      <div></div>
+    </div>
+
+    <!-- Mobile Action Button -->
+    <button id="btnMobileAction" class="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-700 via-amber-600 to-amber-500 border-2 border-amber-300 text-white font-bold text-xs shadow-2xl flex flex-col items-center justify-center pointer-events-auto active:scale-90 transition select-none">
+      <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+      </svg>
+      <span>TƯƠNG TÁC</span>
+    </button>
+  </div>
+
+  <!-- MODAL: SỔ TAY DA CỦA ÔNG NỘI DIỆP TRI CHỈ -->
+  <div id="notebookModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#f5efe0] text-stone-900 border-4 border-amber-950 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 md:p-8 font-serif shadow-2xl relative">
+      <button id="btnCloseNotebook" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-amber-950/10 hover:bg-amber-950/20 text-amber-950 flex items-center justify-center text-lg font-bold" title="Đóng (Esc)">
+        ✕
+      </button>
+
+      <div class="border-b-2 border-amber-950/30 pb-3 mb-4">
+        <h3 class="text-xl md:text-2xl font-bold text-amber-950 flex items-center gap-2">
+          📖 Cuốn Sổ Bìa Da Sờn Góc Của Ông
+        </h3>
+        <p class="text-xs text-amber-900/80 italic mt-0.5">Di vật của ông nội Diệp Tri Chỉ – Cựu giáo viên Văn & Triết học trường Tĩnh Tâm</p>
+      </div>
+
+      <div id="notebookContent" class="space-y-4 font-sans text-xs md:text-sm leading-relaxed text-stone-800">
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: HƯỚNG DẪN ĐIỀU KHIỂN 3D -->
+  <div id="helpModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-stone-900 border border-amber-500/40 rounded-3xl max-w-md w-full p-6 text-stone-200 shadow-2xl relative">
+      <div class="flex justify-between items-center pb-3 border-b border-stone-800 mb-4">
+        <h3 class="text-base font-bold text-amber-400 flex items-center gap-2">
+          🎮 Hướng Dẫn Điều Khiển 3D Góc Nhìn Thứ 3
+        </h3>
+        <button id="btnCloseHelp" class="text-stone-400 hover:text-white" title="Đóng (Esc)">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs md:text-sm">
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Tiến lên (hướng camera):</span>
+          <span class="font-mono font-bold text-amber-300">W / Phím Mũi Tên Lên</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Lùi lại (về phía camera):</span>
+          <span class="font-mono font-bold text-amber-300">S / Phím Mũi Tên Xuống</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Sang trái / Sang phải:</span>
+          <span class="font-mono font-bold text-amber-300">A / D / Phím Trái/Phải</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Xoay Camera 3D:</span>
+          <span class="font-mono font-bold text-amber-300">Giữ chuột trái & Kéo / Vuốt</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Thu phóng (Zoom):</span>
+          <span class="font-mono font-bold text-amber-300">Cuộn chuột (Scroll)</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Tương tác / Tiếp tục thoại:</span>
+          <span class="font-mono font-bold text-amber-300">Phím E / Space / Enter</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Chọn phương án thoại A / B / C:</span>
+          <span class="font-mono font-bold text-amber-300">Phím 1, 2, 3 hoặc Click</span>
+        </div>
+        <div class="flex items-center justify-between p-2 rounded-xl bg-stone-800/80">
+          <span class="text-stone-300">Mở Sổ Da / Tắt tiếng:</span>
+          <span class="font-mono font-bold text-amber-300">Phím J / Phím M</span>
+        </div>
+      </div>
+      <p class="mt-4 text-[11px] text-stone-400 italic text-center">Diệp Khuê luôn di chuyển chính xác theo hướng góc nhìn của camera.</p>
+    </div>
+  </div>
+
+  <!-- MODAL: XƯỞNG TRANH BANANA AI STUDIO -->
+  <div id="aiArtModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-3 md:p-6">
+    <div class="bg-stone-950 border border-amber-500/50 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-5 md:p-7 shadow-2xl flex flex-col text-stone-100 relative">
+      <div class="flex items-center justify-between pb-4 border-b border-stone-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-600 to-yellow-400 flex items-center justify-center text-xl shadow-lg shadow-amber-500/30">
+            🍌
+          </div>
+          <div>
+            <h3 class="text-lg md:text-xl font-bold text-amber-300 font-serif">Xưởng Tranh Banana AI Studio</h3>
+            <p class="text-xs text-stone-400">Kết xuất ảnh Anime điện ảnh Makoto Shinkai sắc nét & chất liệu 3D</p>
+          </div>
+        </div>
+        <button id="btnCloseAIArt" class="w-9 h-9 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 flex items-center justify-center text-base font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- API Key & Generator Settings Bar -->
+      <div class="my-4 p-4 rounded-2xl bg-gradient-to-r from-amber-950/60 via-stone-900 to-amber-950/40 border border-amber-500/30 flex flex-col gap-3">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Hệ Thống Đồ Họa:</span>
+              <span class="text-xs font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/40">Banana Synth PBR + Gemini 3.1 Flash Image</span>
+            </div>
+            <p class="text-xs text-stone-300">Tự động kết xuất tranh minh họa Anime và kết cấu bề mặt Three.js chất lượng cao.</p>
+          </div>
+          <button id="btnGenerateAllAI" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-stone-950 font-bold text-xs md:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition">
+            <span class="animate-spin text-sm hidden" id="spinnerGenAll">⚙️</span>
+            <span>⚡ Tái Tạo Tất Cả Tranh & Texture</span>
+          </button>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-2 border-t border-stone-800">
+          <input id="inputGeminiApiKey" type="password" placeholder="Nhập Gemini API Key (tùy chọn để gọi model gemini-3.1-flash-image)" class="flex-1 bg-stone-900 border border-stone-700 text-stone-200 text-xs px-3 py-2 rounded-xl focus:border-amber-400 focus:outline-none placeholder-stone-500" />
+          <button id="btnSaveApiKey" class="px-3 py-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700 text-xs font-medium transition">
+            Lưu Key
+          </button>
+        </div>
+        <div id="aiStatusNotice" class="text-[11px] text-teal-400 italic">
+          ✓ Mặc định sẵn sàng: 100% texture và chân dung nhân vật đã được tạo sẵn qua Banana Synth!
+        </div>
+      </div>
+
+      <!-- Character Portraits Gallery -->
+      <div class="mb-5">
+        <h4 class="text-xs uppercase tracking-widest font-bold text-amber-400 mb-3 flex items-center gap-1.5">
+          <span>👤 Chân Dung Nhân Vật (1:1)</span>
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-stone-900/90 border border-stone-800 rounded-2xl p-3 flex flex-col items-center text-center">
+            <div id="artCardKhue" class="w-32 h-32 md:w-36 md:h-36 rounded-xl bg-stone-950 border border-stone-800 flex items-center justify-center overflow-hidden mb-2 relative shadow-inner">
+            </div>
+            <h5 class="text-xs font-bold text-stone-200">Diệp Khuê</h5>
+            <p class="text-[11px] text-stone-400 mb-2">Học sinh mới 12A5 • Cuốn sổ da</p>
+            <button class="btnGenSingleArt px-3 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-300 border border-amber-500/30 text-xs font-medium transition active:scale-95" data-key="khue">
+              🍌 Vẽ Diệp Khuê
+            </button>
+          </div>
+
+          <div class="bg-stone-900/90 border border-stone-800 rounded-2xl p-3 flex flex-col items-center text-center">
+            <div id="artCardLong" class="w-32 h-32 md:w-36 md:h-36 rounded-xl bg-stone-950 border border-stone-800 flex items-center justify-center overflow-hidden mb-2 relative shadow-inner">
+            </div>
+            <h5 class="text-xs font-bold text-stone-200">Đoàn Bảo Long</h5>
+            <p class="text-[11px] text-stone-400 mb-2">Hộ pháp 12A5 • Bánh bao nóng</p>
+            <button class="btnGenSingleArt px-3 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-300 border border-amber-500/30 text-xs font-medium transition active:scale-95" data-key="long">
+              🍌 Vẽ Bảo Long
+            </button>
+          </div>
+
+          <div class="bg-stone-900/90 border border-stone-800 rounded-2xl p-3 flex flex-col items-center text-center">
+            <div id="artCardVan" class="w-32 h-32 md:w-36 md:h-36 rounded-xl bg-stone-950 border border-stone-800 flex items-center justify-center overflow-hidden mb-2 relative shadow-inner">
+            </div>
+            <h5 class="text-xs font-bold text-stone-200">Lục Thanh Vân</h5>
+            <p class="text-[11px] text-stone-400 mb-2">Top 1 12A1 • Đồng hồ cổ của mẹ</p>
+            <button class="btnGenSingleArt px-3 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-300 border border-amber-500/30 text-xs font-medium transition active:scale-95" data-key="van">
+              🍌 Vẽ Thanh Vân
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenery CG Gallery -->
+      <div>
+        <h4 class="text-xs uppercase tracking-widest font-bold text-teal-400 mb-3 flex items-center gap-1.5">
+          <span>🌄 Tranh Bối Cảnh Điện Ảnh (16:9)</span>
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-stone-900/90 border border-stone-800 rounded-2xl p-3 flex flex-col">
+            <div id="artCardGate" class="w-full aspect-video rounded-xl bg-stone-950 border border-stone-800 flex items-center justify-center overflow-hidden mb-2 relative shadow-inner">
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <h5 class="text-xs font-bold text-stone-200">Cổng Trường Tĩnh Tâm 3D</h5>
+                <p class="text-[11px] text-stone-400">Dốc đồi thông • Sương mù biển Hải Vọng</p>
+              </div>
+              <button class="btnGenSingleArt px-3 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-teal-300 border border-teal-500/30 text-xs font-medium transition active:scale-95" data-key="gate_cg">
+                🍌 Vẽ Cổng Trường
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-stone-900/90 border border-stone-800 rounded-2xl p-3 flex flex-col">
+            <div id="artCardRoom0" class="w-full aspect-video rounded-xl bg-stone-950 border border-stone-800 flex items-center justify-center overflow-hidden mb-2 relative shadow-inner">
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <h5 class="text-xs font-bold text-stone-200">Phòng Số 0 3D (Thiên Văn Học)</h5>
+                <p class="text-[11px] text-stone-400">Vòm kính bán nguyệt • Ấm trà hoa sói</p>
+              </div>
+              <button class="btnGenSingleArt px-3 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-teal-300 border border-teal-500/30 text-xs font-medium transition active:scale-95" data-key="room0_cg">
+                🍌 Vẽ Phòng Số 0
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    class SoundFX {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+        this.clockTimer = null;
+        this.ambientGain = null;
+        this.ambientSource = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) {
+            this.ctx = new AudioCtx();
+            this.startAmbientSeaWind();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      toggleMute() {
+        this.muted = !this.muted;
+        const icon = document.getElementById('hudSoundIcon');
+        if (this.muted) {
+          if (this.ambientGain && this.ctx) this.ambientGain.gain.setValueAtTime(0, this.ctx.currentTime);
+          icon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
+        } else {
+          if (this.ambientGain && this.ctx) this.ambientGain.gain.setValueAtTime(0.025, this.ctx.currentTime);
+          icon.innerHTML = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
+        }
+        return this.muted;
+      }
+
+      setZoneAtmosphere(zoneId) {
+        if (!this.ctx || !this.ambientGain) return;
+        const isIndoors = (zoneId === 'hallway' || zoneId === 'stairs' || zoneId === 'room0');
+        const targetVol = this.muted ? 0 : (isIndoors ? 0.008 : 0.035);
+        this.ambientGain.gain.linearRampToValueAtTime(targetVol, this.ctx.currentTime + 0.5);
+      }
+
+      startAmbientSeaWind() {
+        if (!this.ctx || this.ambientSource) return;
+        try {
+          const bufferSize = 2 * this.ctx.sampleRate;
+          const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+          }
+
+          const whiteNoise = this.ctx.createBufferSource();
+          whiteNoise.buffer = noiseBuffer;
+          whiteNoise.loop = true;
+
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(320, this.ctx.currentTime);
+
+          this.ambientGain = this.ctx.createGain();
+          this.ambientGain.gain.setValueAtTime(this.muted ? 0 : 0.035, this.ctx.currentTime);
+
+          whiteNoise.connect(filter);
+          filter.connect(this.ambientGain);
+          this.ambientGain.connect(this.ctx.destination);
+          whiteNoise.start(0);
+          this.ambientSource = whiteNoise;
+        } catch (e) {}
+      }
+
+      playFootstep(terrain = 'tile') {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          if (terrain === 'wood') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(140 + Math.random() * 30, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+          } else if (terrain === 'dirt') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(85 + Math.random() * 25, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.035, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.06);
+          } else {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(310 + Math.random() * 40, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.025, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+          }
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.06);
+        } catch (e) {}
+      }
+
+      playSlap() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(45, this.ctx.currentTime + 0.22);
+          gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.25);
+        } catch (e) {}
+      }
+
+      playHeels() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(680, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(260, this.ctx.currentTime + 0.045);
+          gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.05);
+        } catch (e) {}
+      }
+
+      playCreak() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(260, this.ctx.currentTime + 0.18);
+          osc.frequency.linearRampToValueAtTime(130, this.ctx.currentTime + 0.38);
+          gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.4);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.4);
+        } catch (e) {}
+      }
+
+      playClockTick(high = false) {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(high ? 1100 : 780, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.045, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.03);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.03);
+        } catch (e) {}
+      }
+
+      playChime() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1046.5, this.ctx.currentTime + 0.6);
+          gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.6);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.6);
+        } catch (e) {}
+      }
+
+      startRoom0Clock() {
+        if (this.clockTimer) return;
+        let alt = false;
+        this.clockTimer = setInterval(() => {
+          this.playClockTick(alt);
+          alt = !alt;
+        }, 1000);
+      }
+
+      stopRoom0Clock() {
+        if (this.clockTimer) {
+          clearInterval(this.clockTimer);
+          this.clockTimer = null;
+        }
+      }
+    }
+
+    const sound = new SoundFX();
+  </script>
+
+  <script>
+    class BananaTextureVault {
+      constructor() {
+        this.textures = {};
+      }
+
+      get(key) {
+        return this.textures[key] || null;
+      }
+
+      set(key, tex) {
+        this.textures[key] = tex;
+      }
+
+      has(texInstance) {
+        return Object.values(this.textures).includes(texInstance);
+      }
+
+      dispose() {
+        Object.values(this.textures).forEach(tex => {
+          if (tex && tex.dispose) tex.dispose();
+        });
+        this.textures = {};
+      }
+    }
+
+    const textureVault = new BananaTextureVault();
+
+    class BananaTextureGenerator {
+      static async ensureFonts() {
+        try {
+          const SAMPLE = 'TĨNH ĐỂ TÂM SÁNG BẢNG VÀNG LỤC THANH VÂN ĐOÀN BẢO LONG 1234567890 "Nếu không ai chấm điểm bạn, bạn còn học không?"';
+          await Promise.all([
+            document.fonts.load('bold 88px "Playfair Display"', SAMPLE),
+            document.fonts.load('italic 700 48px "Playfair Display"', SAMPLE),
+            document.fonts.load('bold 52px "Playfair Display"', SAMPLE),
+            document.fonts.load('bold 44px "Be Vietnam Pro"', SAMPLE),
+            document.fonts.load('400 30px "Be Vietnam Pro"', SAMPLE),
+            document.fonts.load('400 28px "Be Vietnam Pro"', SAMPLE)
+          ]);
+        } catch (e) {}
+      }
+
+      /* 1. School Gate Bronze Plaque */
+      static genPlaqueTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1024;
+        canvas.height = 256;
+        const ctx = canvas.getContext('2d');
+
+        const grad = ctx.createLinearGradient(0, 0, 1024, 256);
+        grad.addColorStop(0, '#a16207');
+        grad.addColorStop(0.25, '#fde047');
+        grad.addColorStop(0.5, '#ca8a04');
+        grad.addColorStop(0.75, '#fef08a');
+        grad.addColorStop(1, '#78350f');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 1024, 256);
+
+        // Brushed metal patina
+        ctx.fillStyle = 'rgba(20, 30, 20, 0.12)';
+        for (let i = 0; i < 90; i++) {
+          ctx.fillRect(Math.random() * 1024, Math.random() * 256, Math.random() * 50, 2);
+        }
+
+        ctx.strokeStyle = '#451a03';
+        ctx.lineWidth = 14;
+        ctx.strokeRect(16, 16, 992, 224);
+        ctx.strokeStyle = '#fffbeb';
+        ctx.lineWidth = 6;
+        ctx.strokeRect(26, 26, 972, 204);
+
+        ctx.fillStyle = '#1c1508';
+        ctx.font = 'bold 88px "Playfair Display", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(254, 240, 138, 0.7)';
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.fillText('TĨNH ĐỂ TÂM SÁNG', 512, 128);
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 2. Weathered Stone Gate Pillars */
+      static genStonePillarTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 1024;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#78716c';
+        ctx.fillRect(0, 0, 512, 1024);
+
+        for (let i = 0; i < 6000; i++) {
+          const col = Math.random() > 0.5 ? 'rgba(41, 37, 36, 0.3)' : 'rgba(231, 229, 228, 0.25)';
+          ctx.fillStyle = col;
+          ctx.fillRect(Math.random() * 512, Math.random() * 1024, Math.random() * 5 + 1, Math.random() * 5 + 1);
+        }
+
+        const mossGrad = ctx.createLinearGradient(0, 1024, 0, 500);
+        mossGrad.addColorStop(0, 'rgba(20, 83, 45, 0.65)');
+        mossGrad.addColorStop(0.6, 'rgba(22, 101, 52, 0.2)');
+        mossGrad.addColorStop(1, 'transparent');
+        ctx.fillStyle = mossGrad;
+        ctx.fillRect(0, 500, 512, 524);
+
+        ctx.strokeStyle = '#44403c';
+        ctx.lineWidth = 4;
+        for (let y = 180; y < 1024; y += 220) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(512, y + (Math.random() * 16 - 8));
+          ctx.stroke();
+        }
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(1, 2);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 3. Asphalt Mountain Road */
+      static genRoadTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 1024;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#1e2329';
+        ctx.fillRect(0, 0, 512, 1024);
+
+        for (let i = 0; i < 7000; i++) {
+          ctx.fillStyle = Math.random() > 0.5 ? 'rgba(15, 23, 42, 0.4)' : 'rgba(71, 85, 105, 0.3)';
+          ctx.fillRect(Math.random() * 512, Math.random() * 1024, 2, 2);
+        }
+
+        const edgeGradL = ctx.createLinearGradient(0, 0, 60, 0);
+        edgeGradL.addColorStop(0, 'rgba(41, 37, 36, 0.8)');
+        edgeGradL.addColorStop(1, 'transparent');
+        ctx.fillStyle = edgeGradL;
+        ctx.fillRect(0, 0, 60, 1024);
+
+        const edgeGradR = ctx.createLinearGradient(512, 0, 452, 0);
+        edgeGradR.addColorStop(0, 'rgba(41, 37, 36, 0.8)');
+        edgeGradR.addColorStop(1, 'transparent');
+        ctx.fillStyle = edgeGradR;
+        ctx.fillRect(452, 0, 60, 1024);
+
+        ctx.fillStyle = '#f8fafc';
+        for (let y = 40; y < 1024; y += 180) {
+          ctx.fillRect(250, y, 12, 100);
+        }
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(1, 8);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 4. Pine Forest Soil */
+      static genPineSoilTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#1c2e22';
+        ctx.fillRect(0, 0, 512, 512);
+
+        for (let i = 0; i < 1500; i++) {
+          ctx.fillStyle = Math.random() > 0.6 ? '#143823' : '#2b2118';
+          ctx.beginPath();
+          ctx.arc(Math.random() * 512, Math.random() * 512, Math.random() * 6 + 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.strokeStyle = '#b45309';
+        ctx.lineWidth = 1.5;
+        for (let i = 0; i < 900; i++) {
+          const x = Math.random() * 512;
+          const y = Math.random() * 512;
+          const len = Math.random() * 12 + 6;
+          const ang = Math.random() * Math.PI;
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(x + Math.cos(ang) * len, y + Math.sin(ang) * len);
+          ctx.stroke();
+        }
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(8, 16);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 5. Indochine Encaustic Tile */
+      static genIndochineTileTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#22150f';
+        ctx.fillRect(0, 0, 512, 512);
+
+        const size = 256;
+        for (let x = 0; x < 512; x += size) {
+          for (let y = 0; y < 512; y += size) {
+            ctx.fillStyle = '#311c12';
+            ctx.fillRect(x + 4, y + 4, size - 8, size - 8);
+
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.45)';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(x + 20, y + 20, size - 40, size - 40);
+
+            ctx.fillStyle = '#78350f';
+            ctx.beginPath();
+            ctx.arc(x + size / 2, y + size / 2, 45, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#f59e0b';
+            ctx.beginPath();
+            ctx.arc(x + size / 2, y + size / 2, 18, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#b45309';
+            [
+              [x + 35, y + 35],
+              [x + size - 35, y + 35],
+              [x + 35, y + size - 35],
+              [x + size - 35, y + size - 35]
+            ].forEach(([cx, cy]) => {
+              ctx.beginPath();
+              ctx.moveTo(cx, cy - 8);
+              ctx.lineTo(cx + 8, cy);
+              ctx.lineTo(cx, cy + 8);
+              ctx.lineTo(cx - 8, cy);
+              ctx.fill();
+            });
+          }
+        }
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(6, 16);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 6. French Colonial Building A Hallway Wall */
+      static genHallwayWallTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1024;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#523d29';
+        ctx.fillRect(0, 0, 1024, 512);
+
+        ctx.fillStyle = '#26160d';
+        ctx.fillRect(0, 360, 1024, 152);
+        ctx.strokeStyle = '#d4af37';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(0, 360, 1024, 4);
+
+        for (let x = 80; x < 1024; x += 320) {
+          ctx.fillStyle = '#1c1917';
+          ctx.fillRect(x, 60, 160, 240);
+
+          ctx.strokeStyle = '#15803d';
+          ctx.lineWidth = 8;
+          ctx.strokeRect(x, 60, 160, 240);
+
+          ctx.strokeStyle = '#166534';
+          ctx.lineWidth = 3;
+          for (let ly = 75; ly < 300; ly += 14) {
+            ctx.beginPath();
+            ctx.moveTo(x + 10, ly);
+            ctx.lineTo(x + 150, ly);
+            ctx.stroke();
+          }
+
+          ctx.fillStyle = 'rgba(254, 240, 138, 0.35)';
+          ctx.fillRect(x + 10, 68, 140, 60);
+        }
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(3, 1);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 7. Honor Board */
+      static genHonorBoardTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1024;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+
+        const bgGrad = ctx.createLinearGradient(0, 0, 0, 512);
+        bgGrad.addColorStop(0, '#880825');
+        bgGrad.addColorStop(1, '#3b030f');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, 1024, 512);
+
+        ctx.strokeStyle = '#f5c542';
+        ctx.lineWidth = 18;
+        ctx.strokeRect(16, 16, 992, 480);
+        ctx.strokeStyle = '#fae498';
+        ctx.lineWidth = 4;
+        ctx.strokeRect(32, 32, 960, 448);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#fce588';
+        ctx.font = 'bold 50px "Playfair Display", serif';
+        ctx.fillText('★ BẢNG VÀNG DANH DỰ THÁNG 9 ★', 512, 90);
+
+        ctx.strokeStyle = '#fce588';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(220, 120);
+        ctx.lineTo(804, 120);
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 42px "Be Vietnam Pro", sans-serif';
+        ctx.fillText('TOP 1: LỤC THANH VÂN – 12A1', 512, 210);
+
+        ctx.fillStyle = '#fde68a';
+        ctx.font = '36px "Be Vietnam Pro", sans-serif';
+        ctx.fillText('ĐIỂM TRUNG BÌNH: 9.6', 512, 275);
+
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = '28px "Be Vietnam Pro", sans-serif';
+        ctx.fillText('Top 2: Phan Gia Huy (Hội Học Sinh) – 9.3', 512, 360);
+        ctx.fillText('Top 3: Trần Minh Triết (12A2) – 9.1', 512, 420);
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 8. Aged Dark Teak Wood Planks for Staircase */
+      static genAtticWoodTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#2b170c';
+        ctx.fillRect(0, 0, 512, 512);
+
+        const plankH = 64;
+        for (let y = 0; y < 512; y += plankH) {
+          ctx.fillStyle = (y / plankH) % 2 === 0 ? '#381e10' : '#311a0e';
+          ctx.fillRect(0, y + 2, 512, plankH - 4);
+
+          ctx.strokeStyle = 'rgba(15, 8, 4, 0.4)';
+          ctx.lineWidth = 1.5;
+          for (let g = 0; g < 6; g++) {
+            ctx.beginPath();
+            ctx.moveTo(0, y + 10 + g * 8);
+            ctx.bezierCurveTo(150, y + 8 + g * 9, 350, y + 12 + g * 7, 512, y + 10 + g * 8);
+            ctx.stroke();
+          }
+
+          ctx.fillStyle = '#0f172a';
+          ctx.beginPath();
+          ctx.arc(24, y + plankH / 2, 3, 0, Math.PI * 2);
+          ctx.arc(488, y + plankH / 2, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(2, 4);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 9. Room 0 Circular Parquet Wood Floor */
+      static genRoom0ParquetTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#1c130b';
+        ctx.fillRect(0, 0, 512, 512);
+
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.25)';
+        ctx.lineWidth = 2;
+        for (let r = 40; r < 256; r += 40) {
+          ctx.beginPath();
+          ctx.arc(256, 256, r, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 8) {
+          ctx.beginPath();
+          ctx.moveTo(256, 256);
+          ctx.lineTo(256 + Math.cos(a) * 256, 256 + Math.sin(a) * 256);
+          ctx.stroke();
+        }
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* 10. Room 0 Slate Chalkboard */
+      static genChalkboardTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1024;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#0b1320';
+        ctx.fillRect(0, 0, 1024, 512);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+        for (let i = 0; i < 200; i++) {
+          ctx.beginPath();
+          ctx.arc(Math.random() * 1024, Math.random() * 512, Math.random() * 40 + 5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '30px "Be Vietnam Pro", sans-serif';
+        ctx.fillText('CÂU HỎI CỦA TUẦN (CLB HỎI):', 512, 130);
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'italic bold 48px "Playfair Display", serif';
+        ctx.fillText('"NẾU KHÔNG AI CHẤM ĐIỂM BẠN,', 512, 240);
+        ctx.fillText('BẠN CÒN HỌC KHÔNG?"', 512, 330);
+
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.encoding = THREE.sRGBEncoding;
+        return tex;
+      }
+
+      /* Boot pipeline: Generates all map textures with visual feedback */
+      static async runBootTexturePipeline(onProgress) {
+        await BananaTextureGenerator.ensureFonts();
+
+        const steps = [
+          { key: 'plaque', name: 'Biển đồng "TĨNH ĐỂ TÂM SÁNG"', fn: () => BananaTextureGenerator.genPlaqueTexture() },
+          { key: 'stonePillar', name: 'Vân đá cổng trường Tĩnh Tâm cổ thụ', fn: () => BananaTextureGenerator.genStonePillarTexture() },
+          { key: 'road', name: 'Nhựa đường dốc đồi thông Hải Vọng', fn: () => BananaTextureGenerator.genRoadTexture() },
+          { key: 'pineSoil', name: 'Mặt đất đồi thông & lá thông rơi', fn: () => BananaTextureGenerator.genPineSoilTexture() },
+          { key: 'indochineTile', name: 'Gạch bông Indochine hành lang Dãy A', fn: () => BananaTextureGenerator.genIndochineTileTexture() },
+          { key: 'hallwayWall', name: 'Tường vôi Pháp cổ & cửa chớp gỗ Dãy A', fn: () => BananaTextureGenerator.genHallwayWallTexture() },
+          { key: 'honorBoard', name: 'Bảng Vàng Danh Dự Tháng 9', fn: () => BananaTextureGenerator.genHonorBoardTexture() },
+          { key: 'atticWood', name: 'Gỗ tếch cổ bậc thang & gác mái tum', fn: () => BananaTextureGenerator.genAtticWoodTexture() },
+          { key: 'room0Parquet', name: 'Sàn gỗ hoa văn phòng thiên văn số 0', fn: () => BananaTextureGenerator.genRoom0ParquetTexture() },
+          { key: 'chalkboard', name: 'Bảng phấn triết học CLB Hỏi', fn: () => BananaTextureGenerator.genChalkboardTexture() }
+        ];
+
+        const total = steps.length;
+        for (let i = 0; i < total; i++) {
+          const item = steps[i];
+          const tex = item.fn();
+          textureVault.set(item.key, tex);
+
+          const percent = Math.round(((i + 1) / total) * 100);
+          if (onProgress) {
+            onProgress(percent, `Đang kết xuất: ${item.name}...`, `✓ Đã sinh texture [${item.key}] (${tex.image?.width || 512}x${tex.image?.height || 512}px)`);
+          }
+          await new Promise(r => setTimeout(r, 40));
+        }
+      }
+    }
+  </script>
+
+  <script>
+    class BananaArtService {
+      constructor() {
+        this.cache = {};
+        this.loading = {};
+        this.artSeed = Math.random();
+
+        try {
+          this.apiKey = localStorage.getItem('gemini_api_key_tinh_tam') || '';
+        } catch (e) {
+          this.apiKey = '';
+        }
+
+        this.initDefaultArt();
+      }
+
+      initDefaultArt() {
+        this.cache['khue'] = this.drawProceduralPortrait('khue');
+        this.cache['long'] = this.drawProceduralPortrait('long');
+        this.cache['van'] = this.drawProceduralPortrait('van');
+        this.cache['gate_cg'] = this.drawProceduralCG('gate');
+        this.cache['room0_cg'] = this.drawProceduralCG('room0');
+      }
+
+      drawProceduralPortrait(character) {
+        const canvas = document.createElement('canvas');
+        canvas.width = 400;
+        canvas.height = 400;
+        const ctx = canvas.getContext('2d');
+        const seedVar = Math.sin(this.artSeed * 99 + character.length) * 0.15;
+
+        if (character === 'khue') {
+          const bg = ctx.createLinearGradient(0, 0, 0, 400);
+          bg.addColorStop(0, '#1e293b');
+          bg.addColorStop(0.6, '#334155');
+          bg.addColorStop(1, '#64748b');
+          ctx.fillStyle = bg;
+          ctx.fillRect(0, 0, 400, 400);
+
+          ctx.fillStyle = 'rgba(253, 224, 71, 0.25)';
+          for (let i = 0; i < 26; i++) {
+            ctx.beginPath();
+            ctx.arc((i * 41 + seedVar * 50) % 400, (i * 59) % 400, (i % 3) + 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.beginPath();
+          ctx.moveTo(90, 400);
+          ctx.lineTo(130, 290);
+          ctx.lineTo(270, 290);
+          ctx.lineTo(310, 400);
+          ctx.fill();
+
+          ctx.fillStyle = '#0f172a';
+          ctx.fillRect(110, 300, 35, 100);
+          ctx.fillStyle = '#78350f';
+          ctx.fillRect(115, 330, 25, 45);
+          ctx.fillStyle = '#f59e0b';
+          ctx.fillRect(135, 345, 6, 8);
+
+          ctx.fillStyle = '#fed7aa';
+          ctx.fillRect(180, 240, 40, 60);
+
+          ctx.beginPath();
+          ctx.arc(200, 210, 65, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#0f172a';
+          ctx.beginPath();
+          ctx.arc(200, 195, 75, Math.PI, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(130, 190);
+          ctx.lineTo(165, 230);
+          ctx.lineTo(185, 200);
+          ctx.lineTo(210, 240);
+          ctx.lineTo(235, 200);
+          ctx.lineTo(260, 235);
+          ctx.lineTo(270, 190);
+          ctx.fill();
+
+          ctx.fillStyle = '#1e1b4b';
+          ctx.beginPath();
+          ctx.ellipse(175, 215, 8, 12, 0, 0, Math.PI * 2);
+          ctx.ellipse(225, 215, 8, 12, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(177, 212, 3, 0, Math.PI * 2);
+          ctx.arc(227, 212, 3, 0, Math.PI * 2);
+          ctx.fill();
+
+        } else if (character === 'long') {
+          const bg = ctx.createLinearGradient(0, 0, 0, 400);
+          bg.addColorStop(0, '#f97316');
+          bg.addColorStop(0.5, '#fbbf24');
+          bg.addColorStop(1, '#0284c7');
+          ctx.fillStyle = bg;
+          ctx.fillRect(0, 0, 400, 400);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.moveTo(60, 400);
+          ctx.lineTo(110, 270);
+          ctx.lineTo(290, 270);
+          ctx.lineTo(340, 400);
+          ctx.fill();
+
+          ctx.fillStyle = '#ea580c';
+          ctx.fillRect(285, 290, 50, 40);
+
+          ctx.fillStyle = '#fef08a';
+          ctx.beginPath();
+          ctx.arc(290, 310, 28, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(285, 275);
+          ctx.bezierCurveTo(280, 260, 295, 250, 290, 235);
+          ctx.stroke();
+
+          ctx.fillStyle = '#fbb77a';
+          ctx.fillRect(175, 230, 50, 60);
+
+          ctx.beginPath();
+          ctx.arc(200, 200, 70, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#262626';
+          for (let a = -1.2; a <= 1.2; a += 0.3) {
+            ctx.beginPath();
+            ctx.moveTo(200 + Math.sin(a) * 60, 170 - Math.cos(a) * 45);
+            ctx.lineTo(200 + Math.sin(a) * 95, 140 - Math.cos(a) * 65);
+            ctx.lineTo(200 + Math.sin(a + 0.2) * 65, 170 - Math.cos(a) * 45);
+            ctx.fill();
+          }
+
+          ctx.fillStyle = '#7c2d12';
+          ctx.beginPath();
+          ctx.arc(200, 225, 24, 0, Math.PI);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(185, 225, 30, 8);
+
+        } else if (character === 'van') {
+          const bg = ctx.createLinearGradient(0, 0, 0, 400);
+          bg.addColorStop(0, '#0f172a');
+          bg.addColorStop(0.5, '#1e293b');
+          bg.addColorStop(1, '#475569');
+          ctx.fillStyle = bg;
+          ctx.fillRect(0, 0, 400, 400);
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.beginPath();
+          ctx.moveTo(90, 400);
+          ctx.lineTo(135, 290);
+          ctx.lineTo(265, 290);
+          ctx.lineTo(310, 400);
+          ctx.fill();
+
+          ctx.fillStyle = '#dc2626';
+          ctx.fillRect(100, 320, 36, 45);
+          ctx.fillStyle = '#fef08a';
+          ctx.font = 'bold 16px sans-serif';
+          ctx.fillText('★', 111, 350);
+
+          ctx.fillStyle = '#78350f';
+          ctx.fillRect(265, 335, 38, 20);
+          ctx.fillStyle = '#f59e0b';
+          ctx.beginPath();
+          ctx.arc(284, 345, 12, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#fce7f3';
+          ctx.fillRect(185, 235, 30, 60);
+
+          ctx.beginPath();
+          ctx.arc(200, 200, 58, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#09090b';
+          ctx.beginPath();
+          ctx.arc(200, 190, 68, Math.PI, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(250, 160);
+          ctx.quadraticCurveTo(340, 150, 320, 270);
+          ctx.quadraticCurveTo(290, 240, 250, 180);
+          ctx.fill();
+
+          ctx.fillStyle = '#172554';
+          ctx.beginPath();
+          ctx.ellipse(180, 205, 7, 10, 0, 0, Math.PI * 2);
+          ctx.ellipse(220, 205, 7, 10, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(182, 202, 2.5, 0, Math.PI * 2);
+          ctx.arc(222, 202, 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        return canvas.toDataURL('image/png');
+      }
+
+      drawProceduralCG(sceneKey) {
+        const canvas = document.createElement('canvas');
+        canvas.width = 640;
+        canvas.height = 360;
+        const ctx = canvas.getContext('2d');
+
+        if (sceneKey === 'gate') {
+          const sky = ctx.createLinearGradient(0, 0, 0, 360);
+          sky.addColorStop(0, '#0284c7');
+          sky.addColorStop(0.5, '#7dd3fc');
+          sky.addColorStop(0.7, '#fef08a');
+          sky.addColorStop(1, '#1e293b');
+          ctx.fillStyle = sky;
+          ctx.fillRect(0, 0, 640, 360);
+
+          ctx.fillStyle = '#0369a1';
+          ctx.fillRect(0, 180, 640, 80);
+
+          ctx.fillStyle = '#14532d';
+          for (let x = 30; x < 640; x += 90) {
+            ctx.beginPath();
+            ctx.moveTo(x, 260);
+            ctx.lineTo(x + 25, 120);
+            ctx.lineTo(x + 50, 260);
+            ctx.fill();
+          }
+
+          ctx.fillStyle = '#334155';
+          ctx.beginPath();
+          ctx.moveTo(180, 360);
+          ctx.lineTo(260, 210);
+          ctx.lineTo(380, 210);
+          ctx.lineTo(460, 360);
+          ctx.fill();
+
+          ctx.fillStyle = '#78716c';
+          ctx.fillRect(230, 150, 30, 90);
+          ctx.fillRect(380, 150, 30, 90);
+
+          ctx.fillStyle = '#ca8a04';
+          ctx.fillRect(245, 135, 150, 26);
+          ctx.fillStyle = '#1c1917';
+          ctx.font = 'bold 12px "Playfair Display", serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('TĨNH ĐỂ TÂM SÁNG', 320, 152);
+
+        } else if (sceneKey === 'room0') {
+          const dome = ctx.createRadialGradient(320, 120, 20, 320, 120, 300);
+          dome.addColorStop(0, '#bae6fd');
+          dome.addColorStop(0.6, '#38bdf8');
+          dome.addColorStop(1, '#0f172a');
+          ctx.fillStyle = dome;
+          ctx.fillRect(0, 0, 640, 360);
+
+          ctx.fillStyle = 'rgba(254, 240, 138, 0.2)';
+          ctx.beginPath();
+          ctx.moveTo(240, 0);
+          ctx.lineTo(400, 0);
+          ctx.lineTo(520, 360);
+          ctx.lineTo(160, 360);
+          ctx.fill();
+
+          ctx.fillStyle = '#1c1917';
+          ctx.fillRect(0, 270, 640, 90);
+
+          ctx.fillStyle = '#451a03';
+          ctx.beginPath();
+          ctx.ellipse(320, 290, 180, 40, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#c2410c';
+          ctx.beginPath();
+          ctx.arc(310, 280, 14, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#0f172a';
+          ctx.fillRect(180, 110, 280, 80);
+          ctx.strokeStyle = '#ca8a04';
+          ctx.lineWidth = 4;
+          ctx.strokeRect(180, 110, 280, 80);
+          ctx.fillStyle = '#f8fafc';
+          ctx.font = 'italic 11px "Playfair Display", serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('"NẾU KHÔNG AI CHẤM ĐIỂM BẠN, BẠN CÒN HỌC KHÔNG?"', 320, 155);
+        }
+
+        return canvas.toDataURL('image/png');
+      }
+
+      async generateImage(key) {
+        this.loading[key] = true;
+        this.updateCardUI(key);
+
+        const notice = document.getElementById('aiStatusNotice');
+
+        if (this.apiKey) {
+          try {
+            if (notice) notice.innerText = `Đang kết nối Gemini 3.1 Flash Image API để tạo ảnh ${key}...`;
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${this.apiKey}`;
+            const prompt = key === 'khue' ? 'Anime character portrait of Diep Khue, Vietnamese 18yo high school boy, visual novel style' :
+                           key === 'long' ? 'Anime character portrait of Doan Bao Long, energetic boy holding steamed bun, visual novel style' :
+                           key === 'van' ? 'Anime portrait of Luc Thanh Van, top student high ponytail vintage watch, visual novel style' :
+                           'Atmospheric visual novel scenery anime illustration high school coastal';
+
+            const payload = {
+              contents: [{ role: 'user', parts: [{ text: prompt }] }],
+              generationConfig: {
+                responseModalities: ['IMAGE'],
+                imageConfig: { aspectRatio: key.endsWith('_cg') ? '16:9' : '1:1' }
+              }
+            };
+
+            const resp = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+
+            if (!resp.ok) {
+              const errBody = await resp.json().catch(() => ({}));
+              throw new Error(errBody.error?.message || `Lỗi HTTP ${resp.status}`);
+            }
+
+            const result = await resp.json();
+            const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+            if (part && part.inlineData?.data) {
+              this.cache[key] = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+              if (notice) notice.innerText = `✓ Tạo ảnh thành công bằng Gemini 3.1 Flash Image cho ${key}!`;
+            } else {
+              throw new Error('API không trả về khối dữ liệu ảnh inlineData');
+            }
+          } catch (err) {
+            this.artSeed = Math.random();
+            if (key.endsWith('_cg')) {
+              this.cache[key] = this.drawProceduralCG(key.replace('_cg', ''));
+            } else {
+              this.cache[key] = this.drawProceduralPortrait(key);
+            }
+            if (notice) notice.innerText = `Thông báo API: ${err.message}. Đã vẽ lại biến thể Vector Anime sắc nét!`;
+          }
+        } else {
+          this.artSeed = Math.random();
+          if (key.endsWith('_cg')) {
+            this.cache[key] = this.drawProceduralCG(key.replace('_cg', ''));
+          } else {
+            this.cache[key] = this.drawProceduralPortrait(key);
+          }
+          if (notice) notice.innerText = `✓ Đã làm mới tranh Anime Vector nghệ thuật cho ${key}!`;
+        }
+
+        await new Promise(r => setTimeout(r, 150));
+        this.loading[key] = false;
+        this.updateCardUI(key);
+
+        if (window.gameInstance) {
+          window.gameInstance.updatePortraitOnly();
+        }
+
+        return this.cache[key];
+      }
+
+      async generateAll() {
+        const spinner = document.getElementById('spinnerGenAll');
+        if (spinner) spinner.classList.remove('hidden');
+
+        for (const k of ['khue', 'long', 'van', 'gate_cg', 'room0_cg']) {
+          await this.generateImage(k);
+        }
+
+        if (spinner) spinner.classList.add('hidden');
+      }
+
+      updateCardUI(key) {
+        const cardMap = {
+          khue: 'artCardKhue',
+          long: 'artCardLong',
+          van: 'artCardVan',
+          gate_cg: 'artCardGate',
+          room0_cg: 'artCardRoom0'
+        };
+
+        const el = document.getElementById(cardMap[key]);
+        if (!el) return;
+
+        if (this.loading[key]) {
+          el.innerHTML = `
+            <div class="flex flex-col items-center justify-center p-2 text-center animate-pulse">
+              <div class="w-7 h-7 border-2 border-amber-400 border-t-transparent rounded-full animate-spin mb-1.5"></div>
+              <span class="text-[10px] text-amber-300 font-medium">Banana đang vẽ...</span>
+            </div>
+          `;
+        } else if (this.cache[key]) {
+          el.innerHTML = `<img src="${this.cache[key]}" alt="${key}" class="w-full h-full object-cover rounded-xl shadow-lg transition-all duration-300 hover:scale-105" />`;
+        }
+      }
+
+      renderAllCards() {
+        for (const k of ['khue', 'long', 'van', 'gate_cg', 'room0_cg']) {
+          this.updateCardUI(k);
+        }
+      }
+    }
+
+    const bananaArt = new BananaArtService();
+  </script>
+
+  <script>
+    class CharacterBuilder {
+      static createKhue() {
+        const root = new THREE.Group();
+
+        const skinMat = new THREE.MeshLambertMaterial({ color: 0xffe4cc });
+        const shirtMat = new THREE.MeshLambertMaterial({ color: 0xf8fafc });
+        const pantsMat = new THREE.MeshLambertMaterial({ color: 0x1e293b });
+        const hairMat = new THREE.MeshLambertMaterial({ color: 0x18181b });
+        const leatherMat = new THREE.MeshLambertMaterial({ color: 0x78350f });
+        const shoeMat = new THREE.MeshLambertMaterial({ color: 0x0f172a });
+        const brassMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.8, roughness: 0.3 });
+
+        // Pelvis at y=0.90 so feet accurately rest at ground y=0
+        const pelvis = new THREE.Group();
+        pelvis.position.y = 0.90;
+        root.add(pelvis);
+
+        const torsoGeo = new THREE.BoxGeometry(0.55, 0.65, 0.28);
+        const torso = new THREE.Mesh(torsoGeo, shirtMat);
+        torso.position.y = 0.35;
+        torso.castShadow = true;
+        pelvis.add(torso);
+
+        const bagGeo = new THREE.BoxGeometry(0.42, 0.52, 0.18);
+        const bag = new THREE.Mesh(bagGeo, new THREE.MeshLambertMaterial({ color: 0x334155 }));
+        bag.position.set(0, 0.32, -0.22);
+        pelvis.add(bag);
+
+        const bookGeo = new THREE.BoxGeometry(0.18, 0.26, 0.08);
+        const book = new THREE.Mesh(bookGeo, leatherMat);
+        book.position.set(0.12, 0.50, -0.24);
+        book.rotation.z = 0.2;
+        pelvis.add(book);
+
+        const buckle = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.04, 0.09), brassMat);
+        buckle.position.set(0.18, 0.56, -0.24);
+        pelvis.add(buckle);
+
+        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.12), skinMat);
+        neck.position.y = 0.73;
+        pelvis.add(neck);
+
+        const headGroup = new THREE.Group();
+        headGroup.position.y = 0.94;
+        pelvis.add(headGroup);
+
+        const headGeo = new THREE.BoxGeometry(0.38, 0.4, 0.36);
+        const head = new THREE.Mesh(headGeo, skinMat);
+        head.castShadow = true;
+        headGroup.add(head);
+
+        const hairTop = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.22, 0.42), hairMat);
+        hairTop.position.set(0, 0.16, -0.02);
+        headGroup.add(hairTop);
+
+        const hairBangs = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.25, 4), hairMat);
+        hairBangs.position.set(-0.08, 0.12, 0.21);
+        hairBangs.rotation.x = 2.8;
+        headGroup.add(hairBangs);
+
+        const legGeo = new THREE.BoxGeometry(0.18, 0.8, 0.2);
+        const shoeGeo = new THREE.BoxGeometry(0.19, 0.1, 0.26);
+
+        const leftLeg = new THREE.Group();
+        leftLeg.position.set(-0.16, 0, 0);
+        const leftLegMesh = new THREE.Mesh(legGeo, pantsMat);
+        leftLegMesh.position.y = -0.4;
+        leftLegMesh.castShadow = true;
+        leftLeg.add(leftLegMesh);
+        const lShoe = new THREE.Mesh(shoeGeo, shoeMat);
+        lShoe.position.set(0, -0.85, 0.03);
+        leftLeg.add(lShoe);
+        pelvis.add(leftLeg);
+
+        const rightLeg = new THREE.Group();
+        rightLeg.position.set(0.16, 0, 0);
+        const rightLegMesh = new THREE.Mesh(legGeo, pantsMat);
+        rightLegMesh.position.y = -0.4;
+        rightLegMesh.castShadow = true;
+        rightLeg.add(rightLegMesh);
+        const rShoe = new THREE.Mesh(shoeGeo, shoeMat);
+        rShoe.position.set(0, -0.85, 0.03);
+        rightLeg.add(rShoe);
+        pelvis.add(rightLeg);
+
+        const armGeo = new THREE.BoxGeometry(0.14, 0.65, 0.16);
+        const leftArm = new THREE.Group();
+        leftArm.position.set(-0.35, 0.58, 0);
+        const leftArmMesh = new THREE.Mesh(armGeo, shirtMat);
+        leftArmMesh.position.y = -0.28;
+        leftArmMesh.castShadow = true;
+        leftArm.add(leftArmMesh);
+        pelvis.add(leftArm);
+
+        const rightArm = new THREE.Group();
+        rightArm.position.set(0.35, 0.58, 0);
+        const rightArmMesh = new THREE.Mesh(armGeo, shirtMat);
+        rightArmMesh.position.y = -0.28;
+        rightArmMesh.castShadow = true;
+        rightArm.add(rightArmMesh);
+        pelvis.add(rightArm);
+
+        root.userData = {
+          leftLeg, rightLeg, leftArm, rightArm, headGroup, pelvis,
+          walkTime: 0
+        };
+
+        return root;
+      }
+
+      static createLong() {
+        const root = new THREE.Group();
+        const skinMat = new THREE.MeshLambertMaterial({ color: 0xedc49a });
+        const shirtMat = new THREE.MeshLambertMaterial({ color: 0xffffff });
+        const pantsMat = new THREE.MeshLambertMaterial({ color: 0x1e293b });
+        const hairMat = new THREE.MeshLambertMaterial({ color: 0x292524 });
+        const shoeMat = new THREE.MeshLambertMaterial({ color: 0x09090b });
+
+        const torso = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.72, 0.36), shirtMat);
+        torso.position.y = 1.35;
+        torso.castShadow = true;
+        root.add(torso);
+
+        const legGeo = new THREE.BoxGeometry(0.24, 0.95, 0.26);
+        const shoeGeo = new THREE.BoxGeometry(0.25, 0.12, 0.34);
+
+        const lLeg = new THREE.Mesh(legGeo, pantsMat);
+        lLeg.position.set(-0.2, 0.5, 0);
+        root.add(lLeg);
+        const lShoe = new THREE.Mesh(shoeGeo, shoeMat);
+        lShoe.position.set(-0.2, 0.06, 0.04);
+        root.add(lShoe);
+
+        const rLeg = new THREE.Mesh(legGeo, pantsMat);
+        rLeg.position.set(0.2, 0.5, 0);
+        root.add(rLeg);
+        const rShoe = new THREE.Mesh(shoeGeo, shoeMat);
+        rShoe.position.set(0.2, 0.06, 0.04);
+        root.add(rShoe);
+
+        const head = new THREE.Mesh(new THREE.BoxGeometry(0.44, 0.44, 0.42), skinMat);
+        head.position.y = 1.95;
+        head.castShadow = true;
+        root.add(head);
+
+        const hair = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.25, 0.48), hairMat);
+        hair.position.set(0, 2.12, 0);
+        root.add(hair);
+
+        const rArm = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.6, 0.18), shirtMat);
+        rArm.position.set(0.46, 1.3, 0.05);
+        rArm.rotation.x = -0.4;
+        root.add(rArm);
+
+        const bunMat = new THREE.MeshLambertMaterial({ color: 0xfef08a });
+        const bun = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), bunMat);
+        bun.position.set(0.46, 1.25, 0.25);
+        root.add(bun);
+
+        const lArm = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.6, 0.18), shirtMat);
+        lArm.position.set(-0.46, 1.3, 0);
+        root.add(lArm);
+
+        return root;
+      }
+
+      static createVan() {
+        const root = new THREE.Group();
+        const skinMat = new THREE.MeshLambertMaterial({ color: 0xfff0f5 });
+        const shirtMat = new THREE.MeshLambertMaterial({ color: 0xffffff });
+        const skirtMat = new THREE.MeshLambertMaterial({ color: 0x0f172a });
+        const hairMat = new THREE.MeshLambertMaterial({ color: 0x090d16 });
+        const redArmbandMat = new THREE.MeshLambertMaterial({ color: 0xdc2626 });
+        const watchMat = new THREE.MeshLambertMaterial({ color: 0x92400e });
+        const shoeMat = new THREE.MeshLambertMaterial({ color: 0x1e1b4b });
+
+        const torso = new THREE.Mesh(new THREE.BoxGeometry(0.48, 0.6, 0.24), shirtMat);
+        torso.position.y = 1.35;
+        torso.castShadow = true;
+        root.add(torso);
+
+        const lArmGroup = new THREE.Group();
+        lArmGroup.position.set(-0.31, 1.35, 0);
+        const lArm = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.58, 0.15), shirtMat);
+        lArm.position.y = -0.25;
+        lArmGroup.add(lArm);
+        const watch = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.08, 0.17), watchMat);
+        watch.position.y = -0.42;
+        lArmGroup.add(watch);
+        root.add(lArmGroup);
+
+        const rArmGroup = new THREE.Group();
+        rArmGroup.position.set(0.31, 1.35, 0);
+        const rArm = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.58, 0.15), shirtMat);
+        rArm.position.y = -0.25;
+        rArmGroup.add(rArm);
+        const armband = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.14, 0.17), redArmbandMat);
+        armband.position.y = -0.15;
+        rArmGroup.add(armband);
+        root.add(rArmGroup);
+
+        const skirt = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.36, 0.35, 16), skirtMat);
+        skirt.position.y = 0.95;
+        root.add(skirt);
+
+        const legGeo = new THREE.BoxGeometry(0.14, 0.75, 0.16);
+        const shoeGeo = new THREE.BoxGeometry(0.15, 0.08, 0.22);
+
+        const lLegGroup = new THREE.Group();
+        lLegGroup.position.set(-0.12, 0.75, 0);
+        const lLeg = new THREE.Mesh(legGeo, skinMat);
+        lLeg.position.y = -0.35;
+        lLegGroup.add(lLeg);
+        const lShoe = new THREE.Mesh(shoeGeo, shoeMat);
+        lShoe.position.set(0, -0.72, 0.02);
+        lLegGroup.add(lShoe);
+        root.add(lLegGroup);
+
+        const rLegGroup = new THREE.Group();
+        rLegGroup.position.set(0.12, 0.75, 0);
+        const rLeg = new THREE.Mesh(legGeo, skinMat);
+        rLeg.position.y = -0.35;
+        rLegGroup.add(rLeg);
+        const rShoe = new THREE.Mesh(shoeGeo, shoeMat);
+        rShoe.position.set(0, -0.72, 0.02);
+        rLegGroup.add(rShoe);
+        root.add(rLegGroup);
+
+        const head = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.36, 0.32), skinMat);
+        head.position.y = 1.85;
+        head.castShadow = true;
+        root.add(head);
+
+        const hair = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.22, 0.36), hairMat);
+        hair.position.set(0, 1.98, -0.02);
+        root.add(hair);
+
+        const ponytail = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.5, 8), hairMat);
+        ponytail.position.set(0, 1.9, -0.32);
+        ponytail.rotation.x = -0.5;
+        root.add(ponytail);
+
+        root.userData = {
+          lLegGroup, rLegGroup, lArmGroup, rArmGroup,
+          walkTime: 0
+        };
+
+        return root;
+      }
+    }
+  </script>
+
+  <script>
+    class World3DBuilder {
+      static getGroundY(x, z, zoneId) {
+        if (zoneId === 'gate') {
+          return 1.98 + z * 0.22;
+        } else if (zoneId === 'stairs') {
+          if (z > 4.9) return 0;
+          if (z <= -13.1) return 4.5;
+          const stepIndex = Math.floor((4.9 - z) / 1.8);
+          return Math.min(4.5, (stepIndex + 1) * 0.45);
+        }
+        return 0;
+      }
+
+      /* Zone 1: Gate & hill slope */
+      static buildGateScene(scene) {
+        const oceanGeo = new THREE.PlaneGeometry(350, 160);
+        const oceanMat = new THREE.MeshLambertMaterial({ color: 0x1b4353 });
+        const ocean = new THREE.Mesh(oceanGeo, oceanMat);
+        ocean.rotation.x = -Math.PI / 2;
+        ocean.position.set(0, -18, -120);
+        scene.add(ocean);
+
+        const slopeAngle = Math.atan(0.22);
+
+        // Hill Slope Base with generated Pine Soil Texture
+        const slopeGeo = new THREE.BoxGeometry(60, 4, 120);
+        const slopeMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('pineSoil') || null,
+          color: textureVault.get('pineSoil') ? 0xffffff : 0x1c3324
+        });
+        const slope = new THREE.Mesh(slopeGeo, slopeMat);
+        slope.rotation.x = -slopeAngle;
+        slope.position.set(0, -0.02, 0);
+        slope.receiveShadow = true;
+        scene.add(slope);
+
+        // Asphalt Road with generated Road Texture
+        const roadGeo = new THREE.PlaneGeometry(12, 120);
+        const roadMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('road') || null,
+          color: textureVault.get('road') ? 0xffffff : 0x272c33
+        });
+        const road = new THREE.Mesh(roadGeo, roadMat);
+        road.rotation.x = -Math.PI / 2 - slopeAngle;
+        road.position.set(0, 1.98, 0);
+        road.receiveShadow = true;
+        scene.add(road);
+
+        // Pine trees positioned on the hill
+        const pineZ = [-35, -20, -5, 10, 25];
+        pineZ.forEach(z => {
+          [-14, 14].forEach(x => {
+            const groundY = World3DBuilder.getGroundY(x, z, 'gate');
+            const pineGroup = new THREE.Group();
+            pineGroup.position.set(x, groundY, z);
+
+            const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.5, 4, 8), new THREE.MeshLambertMaterial({ color: 0x3d2314 }));
+            trunk.position.y = 2;
+            trunk.castShadow = true;
+            pineGroup.add(trunk);
+
+            const c1 = new THREE.Mesh(new THREE.ConeGeometry(3.5, 4.2, 8), new THREE.MeshLambertMaterial({ color: 0x143d26 }));
+            c1.position.y = 4.5;
+            c1.castShadow = true;
+            pineGroup.add(c1);
+
+            const c2 = new THREE.Mesh(new THREE.ConeGeometry(2.8, 3.5, 8), new THREE.MeshLambertMaterial({ color: 0x1c5233 }));
+            c2.position.y = 6.5;
+            c2.castShadow = true;
+            pineGroup.add(c2);
+
+            scene.add(pineGroup);
+          });
+        });
+
+        // Gate at z = 18
+        const gateGroundY = World3DBuilder.getGroundY(0, 18, 'gate');
+
+        // Pillars with Stone Texture
+        const pillarMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('stonePillar') || null,
+          color: textureVault.get('stonePillar') ? 0xffffff : 0x8a816c
+        });
+        const pillarGeo = new THREE.BoxGeometry(1.6, 7, 1.6);
+
+        const leftPillar = new THREE.Mesh(pillarGeo, pillarMat);
+        leftPillar.position.set(-6, gateGroundY + 3.5, 18);
+        leftPillar.castShadow = true;
+        scene.add(leftPillar);
+
+        const rightPillar = new THREE.Mesh(pillarGeo, pillarMat);
+        rightPillar.position.set(6, gateGroundY + 3.5, 18);
+        rightPillar.castShadow = true;
+        scene.add(rightPillar);
+
+        const beamMat = new THREE.MeshLambertMaterial({ color: 0x5a5243 });
+        const beam = new THREE.Mesh(new THREE.BoxGeometry(13.6, 0.8, 0.8), beamMat);
+        beam.position.set(0, gateGroundY + 6.8, 18);
+        scene.add(beam);
+
+        const ironMat = new THREE.MeshLambertMaterial({ color: 0x18181b });
+        for (let gx = -5; gx <= 5; gx += 0.8) {
+          if (Math.abs(gx) < 1.0) continue; // Walkable gate opening
+          const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 5, 8), ironMat);
+          bar.position.set(gx, gateGroundY + 3.2, 18);
+          scene.add(bar);
+        }
+
+        // Bronze Plaque
+        const plaqueMat = new THREE.MeshBasicMaterial({
+          map: textureVault.get('plaque'),
+          side: THREE.FrontSide
+        });
+        const plaque = new THREE.Mesh(new THREE.PlaneGeometry(6, 1.5), plaqueMat);
+        plaque.position.set(0, gateGroundY + 7.8, 17.9);
+        plaque.rotation.y = Math.PI;
+        scene.add(plaque);
+      }
+
+      /* Zone 2: Hallway Building A */
+      static buildHallwayScene(scene) {
+        // Indochine Tile Floor
+        const floorGeo = new THREE.PlaneGeometry(24, 64);
+        const floorMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('indochineTile')
+        });
+        const floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true;
+        scene.add(floor);
+
+        const ceilGeo = new THREE.PlaneGeometry(24, 64);
+        const ceilMat = new THREE.MeshLambertMaterial({ color: 0x1c1917 });
+        const ceil = new THREE.Mesh(ceilGeo, ceilMat);
+        ceil.rotation.x = Math.PI / 2;
+        ceil.position.y = 8;
+        scene.add(ceil);
+
+        // Walls with French Window & Plaster Texture
+        const wallMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('hallwayWall') || null,
+          color: textureVault.get('hallwayWall') ? 0xffffff : 0x3d3024
+        });
+        const leftWall = new THREE.Mesh(new THREE.BoxGeometry(1, 8, 64), wallMat);
+        leftWall.position.set(-12, 4, 0);
+        scene.add(leftWall);
+
+        const rightWall = new THREE.Mesh(new THREE.BoxGeometry(1, 8, 64), wallMat);
+        rightWall.position.set(12, 4, 0);
+        scene.add(rightWall);
+
+        // End walls at z = -32 and z = +32
+        const backWall = new THREE.Mesh(new THREE.BoxGeometry(24, 8, 1), wallMat);
+        backWall.position.set(0, 4, -32);
+        scene.add(backWall);
+
+        const frontWall = new THREE.Mesh(new THREE.BoxGeometry(24, 8, 1), wallMat);
+        frontWall.position.set(0, 4, 32);
+        scene.add(frontWall);
+
+        // Sign & Archway to Stairs at z = 30
+        const archPortal = new THREE.Mesh(new THREE.BoxGeometry(6, 6, 0.5), new THREE.MeshLambertMaterial({ color: 0x22130c }));
+        archPortal.position.set(0, 3, 31.2);
+        scene.add(archPortal);
+
+        const stairsSign = new THREE.Mesh(new THREE.BoxGeometry(4, 0.8, 0.1), new THREE.MeshLambertMaterial({ color: 0xd97706 }));
+        stairsSign.position.set(0, 6.2, 31.0);
+        scene.add(stairsSign);
+
+        // Honor Board
+        const boardMat = new THREE.MeshBasicMaterial({
+          map: textureVault.get('honorBoard')
+        });
+        const board = new THREE.Mesh(new THREE.PlaneGeometry(7, 3.8), boardMat);
+        board.position.set(-11.45, 4.2, 0);
+        board.rotation.y = Math.PI / 2;
+        scene.add(board);
+      }
+
+      /* Zone 3: Attic Staircase */
+      static buildStairsScene(scene) {
+        const woodMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('atticWood') || null,
+          color: textureVault.get('atticWood') ? 0xffffff : 0x271911
+        });
+        const wallMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('hallwayWall') || null,
+          color: 0x4a3422
+        });
+
+        const floor = new THREE.Mesh(new THREE.PlaneGeometry(12, 16), woodMat);
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.set(0, 0, 10);
+        scene.add(floor);
+
+        const upFloor = new THREE.Mesh(new THREE.PlaneGeometry(12, 14), woodMat);
+        upFloor.rotation.x = -Math.PI / 2;
+        upFloor.position.set(0, 4.5, -20);
+        scene.add(upFloor);
+
+        const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.8, 12, 40), wallMat);
+        leftWall.position.set(-5.5, 5, -5);
+        scene.add(leftWall);
+
+        const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.8, 12, 40), wallMat);
+        rightWall.position.set(5.5, 5, -5);
+        scene.add(rightWall);
+
+        const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(12, 40), wallMat);
+        ceiling.rotation.x = Math.PI / 2;
+        ceiling.position.set(0, 10, -5);
+        scene.add(ceiling);
+
+        // 10 Steps
+        for (let i = 0; i < 10; i++) {
+          const stepZ = 4 - i * 1.8;
+          const stepY = (i + 1) * 0.45;
+          const step = new THREE.Mesh(new THREE.BoxGeometry(7, 0.45, 1.8), woodMat);
+          step.position.set(0, stepY - 0.225, stepZ);
+          scene.add(step);
+        }
+
+        const railMat = new THREE.MeshLambertMaterial({ color: 0x221008 });
+        [-3.6, 3.6].forEach(rx => {
+          const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 19), railMat);
+          rail.rotation.x = -Math.atan(0.45 / 1.8);
+          rail.position.set(rx, 2.8, -4.2);
+          scene.add(rail);
+        });
+
+        // Sign mounted flush to left wall
+        const signGeo = new THREE.BoxGeometry(0.1, 1.2, 1.6);
+        const signMat = new THREE.MeshLambertMaterial({ color: 0xb91c1c });
+        const sign = new THREE.Mesh(signGeo, signMat);
+        sign.position.set(-5.05, 3.2, 2);
+        scene.add(sign);
+
+        const doorGeo = new THREE.BoxGeometry(3.2, 5.5, 0.3);
+        const doorMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('atticWood') || null,
+          color: 0x4a2612
+        });
+        const door = new THREE.Mesh(doorGeo, doorMat);
+        door.position.set(0, 7.25, -16);
+        scene.add(door);
+      }
+
+      /* Zone 4: Room 0 Rooftop Observatory */
+      static buildRoom0Scene(scene) {
+        // Circular Parquet Floor
+        const floorGeo = new THREE.CylinderGeometry(16, 16, 0.5, 32);
+        const floorMat = new THREE.MeshLambertMaterial({
+          map: textureVault.get('room0Parquet') || null,
+          color: textureVault.get('room0Parquet') ? 0xffffff : 0x1f1610
+        });
+        const floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.position.y = -0.25;
+        scene.add(floor);
+
+        const domeGeo = new THREE.SphereGeometry(18, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+        const domeMat = new THREE.MeshStandardMaterial({
+          color: 0x7dd3fc,
+          transparent: true,
+          opacity: 0.32,
+          roughness: 0.1,
+          metalness: 0.4,
+          side: THREE.DoubleSide
+        });
+        const dome = new THREE.Mesh(domeGeo, domeMat);
+        scene.add(dome);
+
+        // Chalkboard
+        const boardMat = new THREE.MeshBasicMaterial({
+          map: textureVault.get('chalkboard')
+        });
+        const board = new THREE.Mesh(new THREE.PlaneGeometry(8, 4), boardMat);
+        board.position.set(0, 4.5, -14);
+        scene.add(board);
+
+        // Table
+        const tableGroup = new THREE.Group();
+        const topGeo = new THREE.CylinderGeometry(2.4, 2.4, 0.25, 32);
+        topGeo.scale(1.7, 1, 1);
+        const tableMat = new THREE.MeshStandardMaterial({ color: 0x451a03, roughness: 0.3 });
+        const tableTop = new THREE.Mesh(topGeo, tableMat);
+        tableTop.position.y = 1.2;
+        tableTop.castShadow = true;
+        tableGroup.add(tableTop);
+
+        const legMat = new THREE.MeshLambertMaterial({ color: 0x2b1102 });
+        const legGeo = new THREE.CylinderGeometry(0.12, 0.1, 1.2, 8);
+        [[-2.2, -0.8], [2.2, -0.8], [-2.2, 0.8], [2.2, 0.8]].forEach(([lx, lz]) => {
+          const leg = new THREE.Mesh(legGeo, legMat);
+          leg.position.set(lx, 0.6, lz);
+          tableGroup.add(leg);
+        });
+        scene.add(tableGroup);
+
+        const potMat = new THREE.MeshLambertMaterial({ color: 0xc2410c });
+        const pot = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), potMat);
+        pot.position.set(0.5, 1.48, 0);
+        scene.add(pot);
+
+        const chairGroup = new THREE.Group();
+        chairGroup.position.set(-4.2, 0, 0);
+        chairGroup.rotation.y = Math.PI / 2;
+
+        const seat = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.18, 1.1), new THREE.MeshLambertMaterial({ color: 0x831843 }));
+        seat.position.y = 0.65;
+        chairGroup.add(seat);
+
+        const back = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.1, 0.18), new THREE.MeshLambertMaterial({ color: 0x831843 }));
+        back.position.set(0, 1.25, -0.46);
+        chairGroup.add(back);
+
+        [[-0.45, -0.45], [0.45, -0.45], [-0.45, 0.45], [0.45, 0.45]].forEach(([cx, cz]) => {
+          const cleg = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.05, 0.65, 8), legMat);
+          cleg.position.set(cx, 0.325, cz);
+          chairGroup.add(cleg);
+        });
+        scene.add(chairGroup);
+      }
+    }
+  </script>
+
+  <script>
+    const STORY_DATA = {
+      gate: {
+        longFirst: [
+          {
+            speaker: 'Đoàn Bảo Long',
+            sub: 'Cú đập vai trời giáng!',
+            portrait: 'long',
+            sfx: 'slap',
+            shake: true,
+            audioCue: 'Tiếng sóng xa & Gió đồi thông',
+            text: 'BỐP! "Ê! Học sinh mới đúng không? Nhìn mặt lạ hoắc, lại còn đứng ngắm cổng trường như thi sĩ ngắm trăng thế kia!"'
+          },
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Loạng choạng nửa bước',
+            portrait: 'khue',
+            audioCue: 'Gió đồi thông lạnh',
+            text: 'Tôi xoa xoa bên vai ê ẩm, nhíu mày: "...Cậu vỗ vai người khác hay định đập muỗi thế?"'
+          },
+          {
+            speaker: 'Đoàn Bảo Long',
+            sub: 'Cười toác mang tai, nhai bánh bao',
+            portrait: 'long',
+            audioCue: 'Mùi bánh bao nóng',
+            text: '"Ha ha! Lực tay tôi chuẩn lắm! Tôi tên Long. Đoàn Bảo Long. Lớp 12A5. Cậu vào lớp nào?"'
+          },
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Đáp ngắn gọn',
+            portrait: 'khue',
+            audioCue: 'Tiếng chuông trường xa xa',
+            text: '"12A5."'
+          },
+          {
+            speaker: 'Đoàn Bảo Long',
+            sub: 'Vỗ đùi mừng rỡ',
+            portrait: 'long',
+            audioCue: 'Tiếng cười giòn tan',
+            text: '"Trời đất, bạn cùng lớp! Đi thôi, leo qua con dốc này vào Dãy A kẻo ban sao đỏ ghi tên trừ điểm thi đua là toi cả lũ!"'
+          }
+        ],
+        longRepeat: [
+          {
+            speaker: 'Đoàn Bảo Long',
+            sub: 'Vẫy tay về phía cổng sắt',
+            portrait: 'long',
+            audioCue: 'Gió đồi thông',
+            text: '"Chạy thẳng qua cổng sắt là tới Hành Lang Dãy A đấy Khuê ơi!"'
+          }
+        ],
+        plaque: [
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Ngước nhìn cổng trường',
+            portrait: 'khue',
+            audioCue: 'Tiếng gió rít qua rặng thông',
+            text: 'Tấm biển đồng khắc bốn chữ lớn: "TĨNH ĐỂ TÂM SÁNG". Tôi nghĩ người nghĩ ra khẩu hiệu này chắc chưa từng phải leo con dốc này vào lúc bảy giờ kém mười lăm sáng.'
+          },
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Sờ vào cuốn sổ da sau lưng',
+            portrait: 'khue',
+            audioCue: 'Mùi giấy cũ của ông',
+            text: 'Trong ngăn đáy cặp, cuốn sổ bìa da sờn góc của ông nội cộm lên nằng nặng tì vào thắt lưng: "...Cũng được. Dù sao thì mình chỉ cần yên ổn một năm."'
+          }
+        ]
+      },
+      hallway: {
+        board: [
+          {
+            speaker: 'Bảng Vàng Danh Dự',
+            sub: 'Lồng kính viền nhung đỏ',
+            portrait: 'van',
+            audioCue: 'Tiếng xì xào hành lang',
+            text: 'BẢNG VÀNG THÁNG 9:\n★ TOP 1: LỤC THANH VÂN – 12A1 – Điểm TB: 9.6\n• Top 2: Phan Gia Huy (Hội Học Sinh) – 9.3'
+          },
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Nghi hoặc nhìn bảng điểm',
+            portrait: 'khue',
+            audioCue: 'Không khí ngột ngạt',
+            text: '"9.6? Đề thi ở cái trường ven biển này dễ đến mức đó sao?"'
+          }
+        ],
+        longHallRepeat: [
+          {
+            speaker: 'Đoàn Bảo Long',
+            sub: 'Liếc nhìn quanh hành lang',
+            portrait: 'long',
+            audioCue: 'Tiếng chuông báo hiệu',
+            text: '"Hành lang này đông sao đỏ lắm, cậu xem Bảng Vàng xong thì đi thẳng về cuối hành lang lên tầng tum nhé!"'
+          }
+        ],
+        cutscene: [
+          {
+            speaker: 'Người Kể Chuyện',
+            sub: 'Âm thanh hành lang',
+            portrait: 'van',
+            sfx: 'heels',
+            audioCue: 'Cộc... cộc... cộc...',
+            text: 'Tiếng giày gõ đều đặn, dứt khoát trên nền gạch bông: Cộc... cộc... cộc... Đám đông học sinh đang tụ tập tự giác dạt sang hai bên chừa lại một lối đi ngay ngắn.'
+          },
+          {
+            speaker: 'Lục Thanh Vân',
+            sub: 'Trưởng ban kiểm tra kỷ luật',
+            portrait: 'van',
+            audioCue: 'Đồng hồ tích tắc khẽ',
+            text: '"Bạn học mới, cài lại cúc cổ áo. Đoàn Bảo Long, lau khóe miệng đi, vụn bánh bao dính vào bảng tin là trừ điểm thi đua của A5."'
+          },
+          {
+            speaker: 'Đoàn Bảo Long',
+            sub: 'Quẹt mồm cười hì hì',
+            portrait: 'long',
+            audioCue: 'Gió lùa qua cửa sổ',
+            text: '"Dạ dạ! Trưởng ban đi tuần sớm thế! Chúc bạn Vân tuần mới giữ vững ngôi vương!"'
+          },
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Lẩm bẩm một mình',
+            portrait: 'khue',
+            audioCue: 'Tiếng chuông vào lớp',
+            text: 'Tôi nhìn theo bóng lưng thẳng tắp của cô gái cùng chiếc đồng hồ dây da cổ sờn: "...Sống gò bó và hoàn hảo như vậy không thấy mệt à?"'
+          },
+          {
+            speaker: 'Đoàn Bảo Long',
+            sub: 'Khóe mắt thoáng mệt mỏi',
+            portrait: 'long',
+            audioCue: 'Tiếng thở dài nhẹ',
+            text: '"Mệt chứ. Nhưng ở trường này, không chạy nhanh thì người ta sẽ đạp lên mình mà đi. Cậu muốn lên gác mái dãy A thì đi thẳng cuối hành lang, nhưng cẩn thận kẻo bị ghi sổ!"'
+          }
+        ]
+      },
+      stairs: {
+        door: [
+          {
+            speaker: 'Cánh Cửa Gỗ Bí Mật',
+            sub: 'Biển mica số 0',
+            portrait: 'khue',
+            sfx: 'creak',
+            audioCue: 'Tiếng gỗ cọt kẹt',
+            text: 'PHÒNG SỐ 0. Bên dưới có dòng chữ viết bằng bút dạ dầu đã phai màu: "Mọi câu trả lời đều được phép. Nhưng mọi câu trả lời đều có cái giá."'
+          },
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Mùi hương quen thuộc',
+            portrait: 'khue',
+            audioCue: 'Mùi trà mạn hoa sói',
+            text: 'Mùi trà mạn hoa sói của ông nội quen thuộc xộc vào cánh mũi. Cánh cửa khép hờ như đang đợi sẵn...'
+          }
+        ]
+      },
+      room0: {
+        vanFirst: [
+          {
+            speaker: 'Người Kể Chuyện',
+            sub: 'Khoảnh khắc cánh cửa mở ra',
+            portrait: 'van',
+            audioCue: 'Tiếng gỗ cọt kẹt',
+            text: 'Nghe tiếng kẽo kẹt của cánh cửa, cô gái giật mình quay lại. Viên phấn trên tay suýt rơi xuống sàn.'
+          },
+          {
+            speaker: 'Lục Thanh Vân',
+            sub: 'Tháo băng sao đỏ, xắn tay áo',
+            portrait: 'van',
+            audioCue: 'Tiếng tích tắc đồng hồ cổ',
+            text: '"Cậu... bạn học chuyển trường ban nãy? Sao cậu lên được đây? Chỗ này thuộc khu vực niêm phong của trường."'
+          },
+          {
+            speaker: 'Diệp Khuê',
+            sub: 'Đứng ở ngưỡng cửa',
+            portrait: 'khue',
+            audioCue: 'Mùi trà hoa sói lan tỏa',
+            text: '"Tôi tên là Diệp Khuê. Cửa không khóa, và tôi ngửi thấy mùi trà hoa sói giống hệt mùi trà của ông nội tôi."'
+          },
+          {
+            speaker: 'Lục Thanh Vân',
+            sub: 'Che chắn ấm trà, ánh mắt dao động',
+            portrait: 'van',
+            audioCue: 'Đồng hồ tích tắc gấp gáp',
+            text: 'Chiếc đồng hồ cổ trên tay cô kêu tích tắc... tích tắc... "Hội đồng kỷ luật đang tìm cớ niêm phong căn phòng này. Nói thật đi: Cậu lên đây làm gì? Ai chỉ đường cho cậu?"'
+          }
+        ],
+        vanPostBranchA: [
+          {
+            speaker: 'Lục Thanh Vân',
+            sub: 'Điềm tĩnh nhìn qua vòm kính',
+            portrait: 'van',
+            audioCue: 'Đồng hồ tích tắc đều đặn',
+            text: '"Cậu vẫn chưa rời đi sao? Đi nhanh đi kẻo Phan Gia Huy dắt người lên ghi tên bây giờ."'
+          }
+        ],
+        vanPostBranchB: [
+          {
+            speaker: 'Lục Thanh Vân',
+            sub: 'Ánh mắt ấm áp hơn',
+            portrait: 'van',
+            audioCue: 'Ấm trà hoa sói nghi ngút khói',
+            text: '"Hãy cất kỹ cuốn sổ của thầy Diệp Tri Chỉ. Chiều nay sau giờ tan học, gặp tôi ở đây để bàn việc phục hưng CLB Hỏi."'
+          }
+        ],
+        vanPostBranchC: [
+          {
+            speaker: 'Lục Thanh Vân',
+            sub: 'Khẽ mỉm cười sắc sảo',
+            portrait: 'van',
+            audioCue: 'Gió thu luồn qua kẽ kính',
+            text: '"Tôi vẫn đang chờ xem cậu sẽ làm được gì ở Tĩnh Tâm này, bạn học Diệp Khuê."'
+          }
+        ]
+      }
+    };
+  </script>
+
+  <script>
+    class GameEngine3D {
+      constructor() {
+        this.canvas = document.getElementById('webglCanvas');
+
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true, powerPreference: 'high-performance' });
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        this.currentMapId = 'gate';
+
+        // Camera Yaw: Math.PI means camera looks along +Z (uphill/forward)
+        this.cameraYaw = Math.PI;
+        this.cameraPitch = 0.22;
+        this.cameraDistance = 6.5;
+        this.targetCamDistance = 6.5;
+        this.isDraggingMouse = false;
+        this.lastMousePos = { x: 0, y: 0 };
+        this.activeTouchId = null;
+        this.lastTouchPos = null;
+
+        this.player = CharacterBuilder.createKhue();
+        this.scene.add(this.player);
+        this.playerPos = new THREE.Vector3(0, 0, -20);
+        this.playerRotation = 0;
+        this.targetRotation = 0;
+        this.playerSpeed = 7.5;
+        this.stepCooldown = 0;
+        this.lastToastTime = 0;
+
+        this.flags = {
+          metLongAtGate: false,
+          inspectedBoard: false,
+          vanCutscenePlayed: false,
+          metVanHall: false,
+          reachedRoom0: false,
+          chosenBranch: null
+        };
+
+        this.affinity = { van: 0, long: 5 };
+
+        this.modalOpen = false;
+        this.transitioning = false;
+        this.isDialogueActive = false;
+        this.currentDialogueQueue = [];
+        this.dialogueIndex = 0;
+        this.onDialogueComplete = null;
+        this.typewriterTimer = null;
+        this.isTyping = false;
+        this.fullCurrentText = '';
+
+        this.cutscene = {
+          active: false,
+          phase: 'idle',
+          actor: null,
+          walkTime: 0,
+          lastHeelTime: 0
+        };
+
+        this.keys = {};
+        this.interactables = [];
+        this.nearEntity = null;
+        this.npcs = [];
+
+        this.setupLighting();
+        this.setupEventListeners();
+        this.setupUI();
+
+        this.lastTime = performance.now();
+        requestAnimationFrame((t) => this.gameLoop(t));
+
+        setTimeout(() => {
+          const hint = document.getElementById('cameraHint');
+          if (hint) hint.style.opacity = '0';
+        }, 4500);
+      }
+
+      setupLighting() {
+        this.ambientLight = new THREE.AmbientLight(0xdbeafe, 0.7);
+        this.scene.add(this.ambientLight);
+
+        this.sunLight = new THREE.DirectionalLight(0xfef08a, 1.25);
+        this.sunLight.position.set(25, 40, 20);
+        this.sunLight.castShadow = true;
+        this.sunLight.shadow.mapSize.width = 2048;
+        this.sunLight.shadow.mapSize.height = 2048;
+
+        const d = 26;
+        this.sunLight.shadow.camera.left = -d;
+        this.sunLight.shadow.camera.right = d;
+        this.sunLight.shadow.camera.top = d;
+        this.sunLight.shadow.camera.bottom = -d;
+        this.sunLight.shadow.camera.near = 1;
+        this.sunLight.shadow.camera.far = 120;
+        this.sunLight.shadow.bias = -0.0005;
+        this.scene.add(this.sunLight);
+      }
+
+      showToast(msg) {
+        const now = performance.now();
+        if (now - this.lastToastTime < 1500) return;
+        this.lastToastTime = now;
+
+        const toast = document.getElementById('toastNotice');
+        if (!toast) return;
+        toast.innerText = msg;
+        toast.style.opacity = '1';
+        toast.style.transform = 'translate(-50%, 0)';
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translate(-50%, -8px)';
+        }, 2500);
+      }
+
+      fadeTransition(callback) {
+        const overlay = document.getElementById('sceneFadeOverlay');
+        overlay.style.opacity = '1';
+        this.transitioning = true;
+        setTimeout(() => {
+          callback();
+          setTimeout(() => {
+            overlay.style.opacity = '0';
+            this.transitioning = false;
+          }, 300);
+        }, 400);
+      }
+
+      disposeSceneResources() {
+        sound.stopRoom0Clock();
+        const toRemove = [];
+        this.scene.children.forEach(c => {
+          if (c !== this.player && c !== this.ambientLight && c !== this.sunLight) {
+            toRemove.push(c);
+          }
+        });
+
+        toRemove.forEach(c => {
+          this.scene.remove(c);
+          c.traverse(child => {
+            if (child.isMesh) {
+              if (child.geometry) child.geometry.dispose();
+              if (child.material) {
+                const mats = Array.isArray(child.material) ? child.material : [child.material];
+                mats.forEach(m => {
+                  // Keep textures stored in textureVault safe
+                  if (m.map && !textureVault.has(m.map)) {
+                    m.map.dispose();
+                  }
+                  m.dispose();
+                });
+              }
+            }
+          });
+        });
+
+        this.npcs = [];
+        this.interactables = [];
+      }
+
+      loadZone(mapId) {
+        this.fadeTransition(() => {
+          this.disposeSceneResources();
+          this.currentMapId = mapId;
+          sound.setZoneAtmosphere(mapId);
+
+          if (mapId === 'gate') {
+            this.cameraYaw = Math.PI;
+            const skyCol = 0x1a3344;
+            this.scene.background = new THREE.Color(skyCol);
+            this.scene.fog = new THREE.FogExp2(skyCol, 0.015);
+            this.ambientLight.color.setHex(0xdbeafe);
+            this.ambientLight.intensity = 0.75;
+            this.sunLight.color.setHex(0xfef08a);
+            this.sunLight.intensity = 1.3;
+
+            World3DBuilder.buildGateScene(this.scene);
+
+            this.playerPos.set(0, World3DBuilder.getGroundY(0, -20, 'gate'), -20);
+            this.playerRotation = 0;
+            this.targetRotation = 0;
+
+            const longNPC = CharacterBuilder.createLong();
+            const longY = World3DBuilder.getGroundY(3.5, 10, 'gate');
+            longNPC.position.set(3.5, longY, 10);
+            this.scene.add(longNPC);
+            this.npcs.push({ id: 'long_gate', mesh: longNPC, basePos: new THREE.Vector3(3.5, longY, 10), lookAtPlayer: true });
+
+            this.interactables.push({
+              name: 'Đoàn Bảo Long',
+              icon: 'Nói chuyện',
+              position: new THREE.Vector3(3.5, longY, 10),
+              radius: 3.8,
+              dialogueQueue: () => this.flags.metLongAtGate ? STORY_DATA.gate.longRepeat : STORY_DATA.gate.longFirst,
+              onComplete: () => {
+                this.flags.metLongAtGate = true;
+                this.updateQuest('Bước qua cổng sắt để vào Hành Lang Dãy A.');
+              }
+            });
+
+            const plaqueY = World3DBuilder.getGroundY(0, 18, 'gate');
+            this.interactables.push({
+              name: 'Biển Đồng "TĨNH ĐỂ TÂM SÁNG"',
+              icon: 'Kiểm tra',
+              position: new THREE.Vector3(0, plaqueY, 17.5),
+              radius: 4.2,
+              dialogueQueue: () => STORY_DATA.gate.plaque
+            });
+
+            document.getElementById('hudMapTitle').innerText = 'CỔNG TRƯỜNG TĨNH TÂM (3D)';
+            document.getElementById('hudMapSub').innerText = 'Dốc đồi thông • Hải Vọng • Mùa thu';
+            this.updateQuest('Khám phá cổng trường & tìm gặp Đoàn Bảo Long');
+
+          } else if (mapId === 'hallway') {
+            this.cameraYaw = Math.PI;
+            const hallCol = 0x221810;
+            this.scene.background = new THREE.Color(hallCol);
+            this.scene.fog = new THREE.FogExp2(hallCol, 0.018);
+            this.ambientLight.color.setHex(0xfde68a);
+            this.ambientLight.intensity = 0.55;
+            this.sunLight.color.setHex(0xf59e0b);
+            this.sunLight.intensity = 0.8;
+
+            World3DBuilder.buildHallwayScene(this.scene);
+
+            this.playerPos.set(0, 0, -22);
+            this.playerRotation = 0;
+            this.targetRotation = 0;
+
+            const longNPC = CharacterBuilder.createLong();
+            longNPC.position.set(-6, 0, -2);
+            this.scene.add(longNPC);
+            this.npcs.push({ id: 'long_hall', mesh: longNPC, basePos: new THREE.Vector3(-6, 0, -2), lookAtPlayer: true });
+
+            this.interactables.push({
+              name: 'Đoàn Bảo Long',
+              icon: 'Nói chuyện',
+              position: new THREE.Vector3(-6, 0, -2),
+              radius: 3.5,
+              dialogueQueue: () => STORY_DATA.hallway.longHallRepeat
+            });
+
+            this.interactables.push({
+              name: 'BẢNG VÀNG THÁNG 9',
+              icon: 'Xem Bảng Vàng',
+              position: new THREE.Vector3(-10, 2, 0),
+              radius: 5.0,
+              dialogueQueue: () => STORY_DATA.hallway.board,
+              onComplete: () => {
+                this.flags.inspectedBoard = true;
+                if (!this.flags.vanCutscenePlayed) {
+                  this.triggerHallwayCutscene();
+                }
+              }
+            });
+
+            document.getElementById('hudMapTitle').innerText = 'HÀNH LANG DÃY A - TẦNG 1 (3D)';
+            document.getElementById('hudMapSub').innerText = 'Gạch bông hoa văn cổ • Bảng Vàng Tháng 9';
+            this.updateQuest('Kiểm tra Bảng Vàng Tháng 9 & quan sát hành lang Dãy A');
+
+          } else if (mapId === 'stairs') {
+            this.cameraYaw = 0;
+            const stairsCol = 0x24160c;
+            this.scene.background = new THREE.Color(stairsCol);
+            this.scene.fog = new THREE.FogExp2(stairsCol, 0.022);
+            this.ambientLight.color.setHex(0xfbbf24);
+            this.ambientLight.intensity = 0.45;
+            this.sunLight.color.setHex(0xd97706);
+            this.sunLight.intensity = 0.6;
+
+            World3DBuilder.buildStairsScene(this.scene);
+
+            this.playerPos.set(0, 0, 8);
+            this.playerRotation = Math.PI;
+            this.targetRotation = Math.PI;
+
+            this.interactables.push({
+              name: 'Cửa PHÒNG SỐ 0',
+              icon: 'Đẩy cửa vào',
+              position: new THREE.Vector3(0, 4.5, -15.5),
+              radius: 4.2,
+              dialogueQueue: () => STORY_DATA.stairs.door,
+              onComplete: () => {
+                this.loadZone('room0');
+              }
+            });
+
+            document.getElementById('hudMapTitle').innerText = 'LỐI LÊN GÁC MÁI DÃY A (3D)';
+            document.getElementById('hudMapSub').innerText = 'Cầu thang gỗ kêu răng rắc • Biển cấm tầng tum';
+            this.updateQuest('Men theo cầu thang gỗ cũ lên căn phòng gác mái');
+
+          } else if (mapId === 'room0') {
+            this.cameraYaw = 0;
+            const roomCol = 0x0e1724;
+            this.scene.background = new THREE.Color(roomCol);
+            this.scene.fog = new THREE.FogExp2(roomCol, 0.015);
+            this.ambientLight.color.setHex(0x93c5fd);
+            this.ambientLight.intensity = 0.65;
+            this.sunLight.color.setHex(0xffedd5);
+            this.sunLight.intensity = 1.1;
+
+            World3DBuilder.buildRoom0Scene(this.scene);
+            sound.startRoom0Clock();
+
+            this.playerPos.set(0, 0, 7);
+            this.playerRotation = Math.PI;
+            this.targetRotation = Math.PI;
+
+            const vanNPC = CharacterBuilder.createVan();
+            vanNPC.position.set(0, 0, -4.5);
+            this.scene.add(vanNPC);
+            this.npcs.push({ id: 'van_room0', mesh: vanNPC, basePos: new THREE.Vector3(0, 0, -4.5), lookAtPlayer: true });
+
+            this.interactables.push({
+              name: 'Lục Thanh Vân',
+              icon: 'Đối chất',
+              position: new THREE.Vector3(0, 0, -4.5),
+              radius: 4.8,
+              dialogueQueue: () => {
+                if (!this.flags.chosenBranch) {
+                  return STORY_DATA.room0.vanFirst;
+                } else if (this.flags.chosenBranch === 'A') {
+                  return STORY_DATA.room0.vanPostBranchA;
+                } else if (this.flags.chosenBranch === 'B') {
+                  return STORY_DATA.room0.vanPostBranchB;
+                } else {
+                  return STORY_DATA.room0.vanPostBranchC;
+                }
+              },
+              onComplete: () => {
+                if (!this.flags.chosenBranch) {
+                  this.triggerClimaxChoices();
+                }
+              }
+            });
+
+            document.getElementById('hudMapTitle').innerText = 'PHÒNG SỐ 0 - THIÊN VĂN HỌC CŨ (3D)';
+            document.getElementById('hudMapSub').innerText = 'Trần kính vòm bán nguyệt • Mùi trà hoa sói';
+            this.updateQuest('Khám phá Phòng Số 0 & đối chất với Lục Thanh Vân');
+          }
+        });
+      }
+
+      triggerHallwayCutscene() {
+        this.flags.vanCutscenePlayed = true;
+        this.cutscene.active = true;
+        this.cutscene.phase = 'walking';
+        this.cutscene.walkTime = 0;
+        this.cutscene.lastHeelTime = 0;
+
+        document.getElementById('cinemaBarTop').style.height = '52px';
+        document.getElementById('cinemaBarBottom').style.height = '52px';
+
+        const vanActor = CharacterBuilder.createVan();
+        vanActor.position.set(0, 0, 20);
+        vanActor.rotation.y = Math.PI;
+        this.scene.add(vanActor);
+        this.cutscene.actor = vanActor;
+      }
+
+      triggerClimaxChoices() {
+        this.isDialogueActive = true;
+        const box = document.getElementById('dialogueContainer');
+        box.classList.remove('hidden');
+        box.classList.add('flex');
+
+        document.getElementById('diagSpeaker').innerText = 'Lục Thanh Vân';
+        document.getElementById('diagSub').innerText = 'Chờ đợi câu trả lời của Diệp Khuê';
+        document.getElementById('diagText').innerText = '"Nói thật đi. Cậu lên đây làm gì? Ai chỉ đường cho cậu?"';
+        document.getElementById('diagNextHint').classList.add('hidden');
+        this.updatePortraitOnly('van');
+
+        const choiceContainer = document.getElementById('diagChoices');
+        choiceContainer.innerHTML = `
+          <div class="text-[11px] uppercase tracking-widest text-amber-400 font-bold mb-1">
+            LỰA CHỌN CỦA DIỆP KHUÊ (PHÍM 1, 2, 3 HOẶC CLICK):
+          </div>
+          <button id="choiceBtnA" class="w-full text-left p-3 rounded-xl bg-stone-800/90 hover:bg-stone-700 text-stone-200 border border-stone-600 text-xs transition flex flex-col gap-0.5 shadow">
+            <span class="font-bold text-amber-300">1. [NÉ TRÁNH]</span>
+            <span class="italic">"Đi lạc thôi. Dưới sân ồn quá, tôi thấy cầu thang vắng nên đi lên tìm chỗ ngủ một giấc. Giờ tôi xuống ngay."</span>
+          </button>
+          <button id="choiceBtnB" class="w-full text-left p-3 rounded-xl bg-amber-950/85 hover:bg-amber-900 text-amber-100 border border-amber-600 text-xs transition flex flex-col gap-0.5 shadow-md">
+            <span class="font-bold text-amber-400">2. [THẬT LÒNG]</span>
+            <span class="italic">"Tôi tìm Phòng Số 0. Ông nội tôi—Diệp Tri Chỉ—bảo tôi mang cuốn sổ này về đúng nơi nó thuộc về."</span>
+          </button>
+          <button id="choiceBtnC" class="w-full text-left p-3 rounded-xl bg-stone-800/90 hover:bg-stone-700 text-stone-200 border border-stone-600 text-xs transition flex flex-col gap-0.5 shadow">
+            <span class="font-bold text-amber-300">3. [MỈA MAI]</span>
+            <span class="italic">"Khẩu hiệu dưới cổng bảo 'Tĩnh để Tâm sáng'. Dưới kia chẳng tĩnh tí nào, nên tôi lên đây xem tâm của bạn học Top 1 sáng tới mức nào."</span>
+          </button>
+        `;
+        choiceContainer.classList.remove('hidden');
+        choiceContainer.classList.add('flex');
+
+        const bindChoice = (btnId, key) => {
+          const btn = document.getElementById(btnId);
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.handleBranchSelection(key);
+          });
+        };
+
+        bindChoice('choiceBtnA', 'A');
+        bindChoice('choiceBtnB', 'B');
+        bindChoice('choiceBtnC', 'C');
+      }
+
+      handleBranchSelection(branchKey) {
+        document.getElementById('diagChoices').classList.add('hidden');
+        document.getElementById('diagNextHint').classList.remove('hidden');
+        this.flags.chosenBranch = branchKey;
+
+        if (branchKey === 'A') {
+          this.affinity.van += 0;
+          this.startDialogue([
+            {
+              speaker: 'Lục Thanh Vân',
+              sub: 'Nhìn chằm chằm hoài nghi',
+              portrait: 'van',
+              audioCue: 'Tiếng đồng hồ tích tắc lạnh lùng',
+              text: '"Đi lạc mà mò được qua tấm biển cấm của Ban Kỷ Luật? Cậu nói dối dở tệ. Nhưng nếu cậu muốn yên thân một năm, thì rời khỏi đây trước khi Phan Gia Huy dắt người lên."'
+            },
+            {
+              speaker: 'Diệp Khuê',
+              sub: 'Lùi lại ngưỡng cửa',
+              portrait: 'khue',
+              audioCue: 'Gió thu luồn qua vòm kính',
+              text: 'Tôi quay lưng bước xuống bậc thềm gỗ. Nhưng câu hỏi trên bảng phấn: "Nếu không ai chấm điểm bạn, bạn còn học không?" vẫn hằn sâu như một vết khắc trong tâm trí tôi.'
+            }
+          ], () => {
+            this.showChapterSummary('Nhánh A: Giữ Khoảng Cách An Toàn', 0, 'Giữ khoảng cách • Phòng số 0 tiếp tục bị đe dọa');
+          });
+        } else if (branchKey === 'B') {
+          this.affinity.van += 10;
+          this.startDialogue([
+            {
+              speaker: 'Lục Thanh Vân',
+              sub: 'Chấn động tột cùng',
+              portrait: 'van',
+              audioCue: 'Ấm trà hoa sói sôi lăn tăn',
+              text: '"Thầy... Diệp Tri Chỉ? Cậu là cháu của Người Sáng Lập \'CLB Hỏi\'...? Chiếc đồng hồ cổ này... chính là di vật của mẹ tôi—học trò lớp Văn đầu tiên của thầy Diệp!"'
+            },
+            {
+              speaker: 'Lục Thanh Vân',
+              sub: 'Kéo chiếc ghế đệm sờn về phía tôi',
+              portrait: 'van',
+              audioCue: 'Tiếng chuông cổ ngân vang',
+              text: '"Hội đồng kỷ luật đang tìm mọi cách niêm phong phòng này. Họ gọi những câu hỏi của chúng ta là sự nổi loạn. Ngồi xuống đi, Diệp Khuê... Cuốn sổ của ông nội cậu, chính là chìa khóa duy nhất cứu được nơi này."'
+            },
+            {
+              speaker: 'Diệp Khuê',
+              sub: 'Bước vào thế giới của Phòng Số 0',
+              portrait: 'khue',
+              audioCue: 'Gió thu biển Hải Vọng ấm áp',
+              text: 'Kế hoạch "yên ổn một năm" của tôi chính thức tan thành mây khói. Bánh xe định mệnh tại THPT Tĩnh Tâm đã bắt đầu chuyển động, kéo tôi vào bí mật sâu thẳm nhất của ngôi trường.'
+            }
+          ], () => {
+            this.showChapterSummary('Nhánh B: Thật Lòng & Kế Thừa CLB Hỏi', 10, 'Đã kế thừa cuốn sổ & Kích hoạt phục hưng CLB Hỏi');
+          });
+        } else {
+          this.affinity.van += 5;
+          this.startDialogue([
+            {
+              speaker: 'Lục Thanh Vân',
+              sub: 'Khẽ nhếch môi kiêu hãnh',
+              portrait: 'van',
+              audioCue: 'Tiếng đồng hồ tích tắc sắc gọn',
+              text: '"Một câu đùa sắc bén đấy, bạn học Diệp. Muốn biết tâm tôi sáng thế nào? Hãy trả lời câu hỏi trên bảng trước đi: Nếu không ai chấm điểm, cậu có dám đối diện với cuốn sổ của chính mình không?"'
+            },
+            {
+              speaker: 'Diệp Khuê',
+              sub: 'Ánh mắt chạm nhau',
+              portrait: 'khue',
+              audioCue: 'Nắng thu chiếu qua vòm kính',
+              text: 'Tiếng tích tắc của chiếc đồng hồ cổ ngân vang giữa căn phòng áp mái. Tôi nhận ra cô gái này không phải cái máy học vô hồn, mà là một kẻ giấu lửa cẩn mật nhất dưới bộ đồng phục chỉn chu.'
+            }
+          ], () => {
+            this.showChapterSummary('Nhánh C: Kỳ Phùng Địch Thủ', 5, 'Kỳ phùng địch thủ • Khơi dậy ngọn lửa trong lòng Thanh Vân');
+          });
+        }
+      }
+
+      showChapterSummary(branchName, points, statusText) {
+        sound.playChime();
+        this.updateQuest('Hoàn thành Chap 1: ' + branchName);
+        const modal = document.getElementById('summaryModal');
+        document.getElementById('summaryBranchBadge').innerText = branchName;
+        document.getElementById('summaryAffinityVan').innerText = `+${points} Điểm (${this.affinity.van} Tổng)`;
+        document.getElementById('summaryRoomStatus').innerText = statusText;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        this.modalOpen = true;
+      }
+
+      setupEventListeners() {
+        window.addEventListener('resize', () => {
+          this.camera.aspect = window.innerWidth / window.innerHeight;
+          this.camera.updateProjectionMatrix();
+          this.renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        window.addEventListener('blur', () => {
+          this.keys = {};
+        });
+
+        window.addEventListener('mousedown', (e) => {
+          if (e.target === this.canvas) {
+            this.isDraggingMouse = true;
+            this.lastMousePos = { x: e.clientX, y: e.clientY };
+            sound.init();
+          }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (this.isDraggingMouse) {
+            const dx = e.clientX - this.lastMousePos.x;
+            const dy = e.clientY - this.lastMousePos.y;
+            this.cameraYaw -= dx * 0.0055;
+            this.cameraPitch = Math.max(0.06, Math.min(1.25, this.cameraPitch + dy * 0.004));
+            this.lastMousePos = { x: e.clientX, y: e.clientY };
+          }
+        });
+
+        window.addEventListener('mouseup', () => {
+          this.isDraggingMouse = false;
+        });
+
+        window.addEventListener('touchstart', (e) => {
+          for (let i = 0; i < e.changedTouches.length; i++) {
+            const t = e.changedTouches[i];
+            const elem = document.elementFromPoint(t.clientX, t.clientY);
+            if (elem && (elem.closest('#mobileControls') || elem.closest('.rpg-dialogue-panel') || elem.closest('button') || elem.closest('input'))) {
+              continue;
+            }
+            if (this.activeTouchId === null) {
+              this.activeTouchId = t.identifier;
+              this.lastTouchPos = { x: t.clientX, y: t.clientY };
+              sound.init();
+              break;
+            }
+          }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+          if (this.activeTouchId === null) return;
+          for (let i = 0; i < e.changedTouches.length; i++) {
+            const t = e.changedTouches[i];
+            if (t.identifier === this.activeTouchId) {
+              if (this.lastTouchPos) {
+                const dx = t.clientX - this.lastTouchPos.x;
+                const dy = t.clientY - this.lastTouchPos.y;
+                this.cameraYaw -= dx * 0.0065;
+                this.cameraPitch = Math.max(0.06, Math.min(1.25, this.cameraPitch + dy * 0.0045));
+              }
+              this.lastTouchPos = { x: t.clientX, y: t.clientY };
+              break;
+            }
+          }
+        }, { passive: true });
+
+        const endTouch = (e) => {
+          for (let i = 0; i < e.changedTouches.length; i++) {
+            if (e.changedTouches[i].identifier === this.activeTouchId) {
+              this.activeTouchId = null;
+              this.lastTouchPos = null;
+              break;
+            }
+          }
+        };
+
+        window.addEventListener('touchend', endTouch, { passive: true });
+        window.addEventListener('touchcancel', endTouch, { passive: true });
+
+        window.addEventListener('wheel', (e) => {
+          this.targetCamDistance = Math.max(3.5, Math.min(11.0, this.targetCamDistance + e.deltaY * 0.005));
+        });
+
+        window.addEventListener('keydown', (e) => {
+          sound.init();
+
+          const tag = e.target.tagName;
+          if (tag === 'INPUT' || tag === 'TEXTAREA') {
+            if (e.code === 'Escape') this.closeModals();
+            return;
+          }
+
+          if (e.code === 'Escape') {
+            this.closeModals();
+            return;
+          }
+
+          const choiceBox = document.getElementById('diagChoices');
+          if (choiceBox && !choiceBox.classList.contains('hidden')) {
+            if (e.code === 'Digit1' || e.code === 'Numpad1' || e.code === 'KeyA') {
+              e.preventDefault();
+              this.handleBranchSelection('A');
+              return;
+            }
+            if (e.code === 'Digit2' || e.code === 'Numpad2' || e.code === 'KeyB') {
+              e.preventDefault();
+              this.handleBranchSelection('B');
+              return;
+            }
+            if (e.code === 'Digit3' || e.code === 'Numpad3' || e.code === 'KeyC') {
+              e.preventDefault();
+              this.handleBranchSelection('C');
+              return;
+            }
+          }
+
+          if (e.code === 'KeyJ' && !this.isDialogueActive && !this.transitioning) {
+            e.preventDefault();
+            this.toggleNotebook();
+            return;
+          }
+
+          if (e.code === 'KeyM') {
+            e.preventDefault();
+            sound.toggleMute();
+            return;
+          }
+
+          this.keys[e.code] = true;
+
+          if ((e.code === 'Space' || e.code === 'KeyE' || e.code === 'Enter') && !e.repeat) {
+            if (document.activeElement && document.activeElement.closest('#diagChoices')) {
+              return;
+            }
+            e.preventDefault();
+            if (!this.modalOpen && !this.transitioning) {
+              this.handleInteract();
+            }
+          }
+        });
+
+        window.addEventListener('keyup', (e) => {
+          this.keys[e.code] = false;
+        });
+
+        document.getElementById('dialogueBoxPanel').addEventListener('click', (e) => {
+          if (e.target.closest('button')) return;
+          sound.init();
+          if (document.getElementById('diagChoices').classList.contains('hidden') && this.isDialogueActive) {
+            this.advanceDialogue();
+          }
+        });
+      }
+
+      setupUI() {
+        const bindBtnWithBlur = (id, fn) => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('click', (e) => {
+              fn(e);
+              el.blur();
+            });
+          }
+        };
+
+        bindBtnWithBlur('btnSoundToggle', () => {
+          sound.init();
+          sound.toggleMute();
+        });
+
+        bindBtnWithBlur('btnOpenNotebook', () => {
+          sound.init();
+          this.toggleNotebook();
+        });
+        bindBtnWithBlur('btnCloseNotebook', () => this.closeModals());
+
+        bindBtnWithBlur('btnControlsHelp', () => {
+          sound.init();
+          this.toggleHelp();
+        });
+        bindBtnWithBlur('btnCloseHelp', () => this.closeModals());
+
+        bindBtnWithBlur('btnOpenAIArt', () => {
+          sound.init();
+          this.toggleAIArtModal();
+        });
+        bindBtnWithBlur('btnCloseAIArt', () => this.closeModals());
+
+        bindBtnWithBlur('btnGenerateAllAI', () => {
+          sound.init();
+          bananaArt.generateAll();
+        });
+
+        bindBtnWithBlur('btnSaveApiKey', () => {
+          const keyVal = document.getElementById('inputGeminiApiKey').value.trim();
+          bananaArt.apiKey = keyVal;
+          try {
+            localStorage.setItem('gemini_api_key_tinh_tam', keyVal);
+          } catch (e) {}
+          this.showToast('Đã lưu cấu hình API Key!');
+        });
+
+        document.querySelectorAll('.btnGenSingleArt').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sound.init();
+            const key = btn.getAttribute('data-key');
+            if (key) bananaArt.generateImage(key);
+            btn.blur();
+          });
+        });
+
+        bindBtnWithBlur('btnQuickGenPortrait', (e) => {
+          e.stopPropagation();
+          sound.init();
+          if (this.isDialogueActive && this.currentDialogueQueue[this.dialogueIndex]) {
+            const step = this.currentDialogueQueue[this.dialogueIndex];
+            const pKey = step.portrait;
+            if (pKey && ['khue', 'long', 'van'].includes(pKey)) {
+              bananaArt.generateImage(pKey);
+            } else {
+              this.toggleAIArtModal();
+            }
+          }
+        });
+
+        bindBtnWithBlur('btnContinuePlay', () => {
+          document.getElementById('summaryModal').classList.add('hidden');
+          document.getElementById('summaryModal').classList.remove('flex');
+          this.modalOpen = false;
+        });
+
+        bindBtnWithBlur('btnRestartStory', () => {
+          document.getElementById('summaryModal').classList.add('hidden');
+          document.getElementById('summaryModal').classList.remove('flex');
+          this.modalOpen = false;
+          this.flags = {
+            metLongAtGate: false,
+            inspectedBoard: false,
+            vanCutscenePlayed: false,
+            metVanHall: false,
+            reachedRoom0: false,
+            chosenBranch: null
+          };
+          this.affinity = { van: 0, long: 5 };
+          this.loadZone('gate');
+        });
+
+        // Touch D-Pad Binding
+        const dpadBind = (btnId, keyName) => {
+          const btn = document.getElementById(btnId);
+          const press = (e) => {
+            e.preventDefault();
+            sound.init();
+            this.keys[keyName] = true;
+          };
+          const release = (e) => {
+            e.preventDefault();
+            this.keys[keyName] = false;
+          };
+
+          btn.addEventListener('touchstart', press, { passive: false });
+          btn.addEventListener('touchend', release, { passive: false });
+          btn.addEventListener('touchcancel', release, { passive: false });
+          btn.addEventListener('mousedown', press);
+          btn.addEventListener('mouseup', release);
+          btn.addEventListener('mouseleave', release);
+        };
+
+        dpadBind('btnDpadUp', 'KeyW');
+        dpadBind('btnDpadDown', 'KeyS');
+        dpadBind('btnDpadLeft', 'KeyA');
+        dpadBind('btnDpadRight', 'KeyD');
+
+        document.getElementById('btnMobileAction').addEventListener('click', (e) => {
+          e.preventDefault();
+          sound.init();
+          if (!this.modalOpen && !this.transitioning) {
+            this.handleInteract();
+          }
+          document.getElementById('btnMobileAction').blur();
+        });
+      }
+
+      handleInteract() {
+        if (this.isDialogueActive) {
+          this.advanceDialogue();
+          return;
+        }
+
+        if (this.nearEntity) {
+          const ent = this.nearEntity;
+          const queue = typeof ent.dialogueQueue === 'function' ? ent.dialogueQueue() : ent.dialogueQueue;
+          if (queue && queue.length > 0) {
+            this.startDialogue(queue, ent.onComplete);
+          }
+        }
+      }
+
+      startDialogue(dialogueQueue, onComplete = null) {
+        this.isDialogueActive = true;
+        this.currentDialogueQueue = dialogueQueue;
+        this.dialogueIndex = 0;
+        this.onDialogueComplete = onComplete;
+
+        const box = document.getElementById('dialogueContainer');
+        box.classList.remove('hidden');
+        box.classList.add('flex');
+
+        document.getElementById('interactPrompt').classList.add('hidden');
+        document.getElementById('diagChoices').classList.add('hidden');
+        document.getElementById('diagNextHint').classList.remove('hidden');
+
+        this.renderDialogueStep();
+      }
+
+      updatePortraitOnly(forceKey = null) {
+        const step = this.currentDialogueQueue[this.dialogueIndex];
+        const pKey = forceKey || (step ? step.portrait : 'khue');
+        const pContainer = document.getElementById('diagPortrait');
+        if (!pContainer) return;
+
+        if (bananaArt.loading[pKey]) {
+          pContainer.innerHTML = `
+            <div class="flex flex-col items-center justify-center p-2 text-center animate-pulse">
+              <div class="w-6 h-6 border-2 border-amber-400 border-t-transparent rounded-full animate-spin mb-1"></div>
+              <span class="text-[9px] text-amber-300 font-medium">Banana vẽ...</span>
+            </div>
+          `;
+        } else if (bananaArt.cache[pKey]) {
+          pContainer.innerHTML = `
+            <img src="${bananaArt.cache[pKey]}" alt="${pKey}" class="w-full h-full object-cover object-top transition duration-300 hover:scale-105" />
+          `;
+        } else {
+          pContainer.innerHTML = `<span class="text-2xl">${pKey === 'van' ? '👩‍🎓' : (pKey === 'long' ? '🥟' : '📖')}</span>`;
+        }
+      }
+
+      renderDialogueStep() {
+        const step = this.currentDialogueQueue[this.dialogueIndex];
+        if (!step) return;
+
+        document.getElementById('diagSpeaker').innerText = step.speaker;
+        document.getElementById('diagSub').innerText = step.sub || '';
+        document.getElementById('diagAudioCue').innerText = step.audioCue || 'Không gian 3D Tĩnh Tâm';
+
+        this.updatePortraitOnly(step.portrait);
+
+        if (this.typewriterTimer) clearInterval(this.typewriterTimer);
+        const textEl = document.getElementById('diagText');
+        textEl.textContent = '';
+        this.fullCurrentText = step.text;
+        this.isTyping = true;
+
+        let charIdx = 0;
+        this.typewriterTimer = setInterval(() => {
+          if (charIdx <= this.fullCurrentText.length) {
+            textEl.textContent = this.fullCurrentText.slice(0, charIdx);
+            charIdx++;
+          } else {
+            clearInterval(this.typewriterTimer);
+            this.isTyping = false;
+          }
+        }, 16);
+
+        if (step.sfx === 'slap') sound.playSlap();
+        else if (step.sfx === 'heels') sound.playHeels();
+        else if (step.sfx === 'creak') sound.playCreak();
+
+        if (step.shake) {
+          document.body.classList.add('shake-active');
+          setTimeout(() => document.body.classList.remove('shake-active'), 350);
+        }
+      }
+
+      advanceDialogue() {
+        if (!document.getElementById('diagChoices').classList.contains('hidden')) return;
+
+        if (this.isTyping) {
+          clearInterval(this.typewriterTimer);
+          document.getElementById('diagText').textContent = this.fullCurrentText;
+          this.isTyping = false;
+          return;
+        }
+
+        if (this.dialogueIndex < this.currentDialogueQueue.length - 1) {
+          this.dialogueIndex++;
+          this.renderDialogueStep();
+        } else {
+          this.closeDialogue();
+        }
+      }
+
+      closeDialogue() {
+        if (this.typewriterTimer) clearInterval(this.typewriterTimer);
+        this.isDialogueActive = false;
+        document.getElementById('dialogueContainer').classList.add('hidden');
+        document.getElementById('dialogueContainer').classList.remove('flex');
+
+        if (this.onDialogueComplete) {
+          const cb = this.onDialogueComplete;
+          this.onDialogueComplete = null;
+          cb();
+        }
+      }
+
+      updateQuest(text) {
+        document.getElementById('hudQuestText').innerText = text;
+      }
+
+      renderNotebookContent() {
+        const container = document.getElementById('notebookContent');
+        let html = `
+          <div class="p-4 bg-amber-100/70 rounded-2xl border border-amber-900/20">
+            <h4 class="font-serif font-bold text-amber-950 text-sm mb-1">Trang đầu: Chỉ dẫn đến Phòng Số 0</h4>
+            <p class="italic mb-2 text-amber-900 text-xs">"Hành lang dãy A. Cầu thang cuối góc đông. Đi qua biển cấm tầng tum. Cánh cửa gỗ biển mica số 0."</p>
+            <div class="font-mono text-xs font-semibold text-amber-950 bg-amber-200/80 p-2.5 rounded-xl border border-amber-900/30">
+              Lời răn của thầy Diệp Tri Chỉ: "Mọi câu trả lời đều được phép. Nhưng mọi câu trả lời đều có cái giá."
+            </div>
+          </div>
+        `;
+
+        if (this.flags.metLongAtGate) {
+          html += `
+            <div class="p-4 bg-amber-100/70 rounded-2xl border border-amber-900/20">
+              <h4 class="font-serif font-bold text-amber-950 text-sm mb-1">Đoàn Bảo Long (12A5)</h4>
+              <p>Cậu bạn hộ pháp cùng lớp. Hào sảng, vỗ vai trời giáng, nhai bánh bao nóng bốc khói và sợ sao đỏ trừ điểm thi đua của lớp.</p>
+            </div>
+          `;
+        }
+
+        if (this.flags.metVanHall) {
+          html += `
+            <div class="p-4 bg-amber-100/70 rounded-2xl border border-amber-900/20">
+              <h4 class="font-serif font-bold text-amber-950 text-sm mb-1">Lục Thanh Vân – Trưởng Ban Kiểm Tra Kỷ Luật</h4>
+              <p>Thủ khoa 12A1 (9.6). Nghiêm cẩn tới từng cúc áo, luôn đeo một chiếc đồng hồ dây da cổ sờn chỉ.</p>
+            </div>
+          `;
+        }
+
+        if (this.flags.chosenBranch === 'B') {
+          html += `
+            <div class="p-4 bg-amber-200/90 rounded-2xl border-2 border-amber-700/60 shadow-inner">
+              <h4 class="font-serif font-bold text-amber-950 text-sm mb-1">★ Manh Mối: Chiếc Đồng Hồ Cổ Của Mẹ Thanh Vân</h4>
+              <p>Chiếc đồng hồ cổ hóa ra là di vật của mẹ Thanh Vân—học trò lớp Văn đầu tiên của ông nội Diệp Tri Chỉ. Phòng Số 0 chính là nơi thai nghén CLB Hỏi.</p>
+            </div>
+          `;
+        }
+
+        container.innerHTML = html;
+      }
+
+      toggleNotebook() {
+        const modal = document.getElementById('notebookModal');
+        if (modal.classList.contains('hidden')) {
+          this.modalOpen = true;
+          this.renderNotebookContent();
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        } else {
+          this.closeModals();
+        }
+      }
+
+      toggleHelp() {
+        const modal = document.getElementById('helpModal');
+        if (modal.classList.contains('hidden')) {
+          this.modalOpen = true;
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        } else {
+          this.closeModals();
+        }
+      }
+
+      toggleAIArtModal() {
+        const modal = document.getElementById('aiArtModal');
+        if (modal.classList.contains('hidden')) {
+          this.modalOpen = true;
+          bananaArt.renderAllCards();
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        } else {
+          this.closeModals();
+        }
+      }
+
+      closeModals() {
+        this.modalOpen = false;
+        ['notebookModal', 'helpModal', 'aiArtModal', 'summaryModal'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+          }
+        });
+      }
+
+      isWalkable(x, z) {
+        if (this.currentMapId === 'gate') {
+          if (x < -8.5 || x > 8.5 || z < -24.0 || z > 24.0) return false;
+          // Gate pillars collision
+          if (Math.hypot(x - (-6), z - 18) < 1.2 || Math.hypot(x - 6, z - 18) < 1.2) return false;
+          // Gate opening restriction at z ≈ 18
+          if (z >= 17.4 && z <= 18.6 && Math.abs(x) > 1.0) return false;
+          // Gate barrier before meeting Long
+          if (z > 17.2 && this.playerPos.z <= 17.2 && !this.flags.metLongAtGate) {
+            this.showToast('Bạn hãy nói chuyện với Đoàn Bảo Long trước khi vào trường!');
+            return false;
+          }
+          // Long NPC collision
+          if (Math.hypot(x - 3.5, z - 10) < 0.8) return false;
+        } else if (this.currentMapId === 'hallway') {
+          if (x < -8.0 || x > 8.0 || z < -24.0 || z > 30.0) return false;
+          // Exit barrier to stairs before meeting Van
+          if (z > 26.0 && this.playerPos.z <= 26.0 && !this.flags.metVanHall) {
+            this.showToast('Bạn cần xem Bảng Vàng và gặp Trưởng ban Kỷ luật trước!');
+            return false;
+          }
+          // Long NPC in hallway collision
+          if (Math.hypot(x - (-6), z - (-2)) < 0.8) return false;
+        } else if (this.currentMapId === 'stairs') {
+          if (x < -3.2 || x > 3.2 || z < -16.5 || z > 10.0) return false;
+        } else if (this.currentMapId === 'room0') {
+          if (Math.hypot(x, z) > 13.5) return false;
+          // Accurate elliptical conference table collision
+          if (Math.hypot(x / 4.5, z / 2.8) < 1.0) return false;
+          // Van NPC collision
+          if (Math.hypot(x - 0, z - (-4.5)) < 0.8) return false;
+        }
+        return true;
+      }
+
+      updatePlayer(dt) {
+        if (this.cutscene.active && this.cutscene.actor && !this.modalOpen && !this.transitioning) {
+          const actor = this.cutscene.actor;
+          if (this.cutscene.phase === 'walking') {
+            this.cutscene.walkTime += dt * 9;
+            actor.position.z -= 4.2 * dt;
+
+            const swing = Math.sin(this.cutscene.walkTime) * 0.45;
+            actor.userData.lLegGroup.rotation.x = swing;
+            actor.userData.rLegGroup.rotation.x = -swing;
+
+            if (performance.now() - this.cutscene.lastHeelTime > 340) {
+              sound.playHeels();
+              this.cutscene.lastHeelTime = performance.now();
+            }
+
+            if (actor.position.z <= 4.0) {
+              actor.userData.lLegGroup.rotation.x = 0;
+              actor.userData.rLegGroup.rotation.x = 0;
+              this.cutscene.phase = 'dialogue';
+
+              this.startDialogue(STORY_DATA.hallway.cutscene, () => {
+                this.cutscene.phase = 'walking_away';
+              });
+            }
+          } else if (this.cutscene.phase === 'walking_away') {
+            this.cutscene.walkTime += dt * 9;
+            actor.position.z -= 4.5 * dt;
+
+            const swing = Math.sin(this.cutscene.walkTime) * 0.45;
+            actor.userData.lLegGroup.rotation.x = swing;
+            actor.userData.rLegGroup.rotation.x = -swing;
+
+            if (performance.now() - this.cutscene.lastHeelTime > 340) {
+              sound.playHeels();
+              this.cutscene.lastHeelTime = performance.now();
+            }
+
+            if (actor.position.z <= -10.0) {
+              this.scene.remove(actor);
+              this.cutscene.actor = null;
+              this.cutscene.active = false;
+              this.cutscene.phase = 'idle';
+              document.getElementById('cinemaBarTop').style.height = '0px';
+              document.getElementById('cinemaBarBottom').style.height = '0px';
+              this.flags.metVanHall = true;
+              this.updateQuest('Đi thẳng đến cuối hành lang để tìm cầu thang lên gác mái.');
+            }
+          }
+        }
+
+        if (this.modalOpen || this.transitioning || this.isDialogueActive || this.cutscene.active) return;
+
+        // Camera Forward & Right Vectors in XZ Plane
+        // Forward: (-sin yaw, -cos yaw)
+        // Right: (cos yaw, -sin yaw)
+        const fX = -Math.sin(this.cameraYaw);
+        const fZ = -Math.cos(this.cameraYaw);
+        const rX = Math.cos(this.cameraYaw);
+        const rZ = -Math.sin(this.cameraYaw);
+
+        let dirX = 0;
+        let dirZ = 0;
+
+        if (this.keys['KeyW'] || this.keys['ArrowUp']) { dirX += fX; dirZ += fZ; }
+        if (this.keys['KeyS'] || this.keys['ArrowDown']) { dirX -= fX; dirZ -= fZ; }
+        if (this.keys['KeyD'] || this.keys['ArrowRight']) { dirX += rX; dirZ += rZ; }
+        if (this.keys['KeyA'] || this.keys['ArrowLeft']) { dirX -= rX; dirZ -= rZ; }
+
+        const len = Math.hypot(dirX, dirZ);
+
+        if (len > 0) {
+          dirX /= len;
+          dirZ /= len;
+
+          const speed = this.playerSpeed * dt;
+          const nextX = this.playerPos.x + dirX * speed;
+          const nextZ = this.playerPos.z + dirZ * speed;
+
+          // Sliding collision: test each axis independently
+          if (this.isWalkable(nextX, this.playerPos.z)) {
+            this.playerPos.x = nextX;
+          }
+          if (this.isWalkable(this.playerPos.x, nextZ)) {
+            this.playerPos.z = nextZ;
+          }
+
+          this.targetRotation = Math.atan2(dirX, dirZ);
+          const diff = Math.atan2(Math.sin(this.targetRotation - this.playerRotation), Math.cos(this.targetRotation - this.playerRotation));
+          this.playerRotation += diff * Math.min(1.0, dt * 14);
+
+          const pData = this.player.userData;
+          pData.walkTime += dt * 10;
+          const swing = Math.sin(pData.walkTime) * 0.45;
+
+          pData.leftLeg.rotation.x = swing;
+          pData.rightLeg.rotation.x = -swing;
+          pData.leftArm.rotation.x = -swing * 0.8;
+          pData.rightArm.rotation.x = swing * 0.8;
+
+          this.stepCooldown += dt;
+          if (this.stepCooldown > 0.32) {
+            const terrain = this.currentMapId === 'stairs' ? 'wood' : (this.currentMapId === 'gate' ? 'dirt' : 'tile');
+            sound.playFootstep(terrain);
+            this.stepCooldown = 0;
+          }
+        } else {
+          const pData = this.player.userData;
+          pData.leftLeg.rotation.x = 0;
+          pData.rightLeg.rotation.x = 0;
+          pData.leftArm.rotation.x = 0;
+          pData.rightArm.rotation.x = 0;
+        }
+
+        const targetGroundY = World3DBuilder.getGroundY(this.playerPos.x, this.playerPos.z, this.currentMapId);
+        this.playerPos.y += (targetGroundY - this.playerPos.y) * Math.min(1.0, dt * 16);
+
+        if (this.currentMapId === 'gate' && this.playerPos.z > 22.5 && this.flags.metLongAtGate) {
+          this.loadZone('hallway');
+          return;
+        } else if (this.currentMapId === 'hallway' && this.playerPos.z > 28.5 && this.flags.metVanHall) {
+          this.loadZone('stairs');
+          return;
+        }
+
+        this.player.position.copy(this.playerPos);
+        this.player.rotation.y = this.playerRotation;
+
+        this.sunLight.position.set(this.playerPos.x + 25, this.playerPos.y + 40, this.playerPos.z + 20);
+        this.sunLight.target = this.player;
+
+        this.npcs.forEach(n => {
+          if (n.lookAtPlayer && n.mesh) {
+            const angle = Math.atan2(this.playerPos.x - n.mesh.position.x, this.playerPos.z - n.mesh.position.z);
+            n.mesh.rotation.y = angle;
+          }
+        });
+
+        let closest = null;
+        let minDist = 999;
+
+        for (let ent of this.interactables) {
+          const d = Math.hypot(this.playerPos.x - ent.position.x, this.playerPos.z - ent.position.z);
+          if (d < ent.radius && d < minDist) {
+            closest = ent;
+            minDist = d;
+          }
+        }
+
+        this.nearEntity = closest;
+        const promptEl = document.getElementById('interactPrompt');
+        if (this.nearEntity && !this.isDialogueActive && !this.modalOpen && !this.cutscene.active) {
+          document.getElementById('interactPromptText').innerText = this.nearEntity.icon + ' : ' + this.nearEntity.name;
+          promptEl.classList.remove('hidden');
+          promptEl.classList.add('flex');
+        } else {
+          promptEl.classList.add('hidden');
+          promptEl.classList.remove('flex');
+        }
+      }
+
+      updateCamera(dt) {
+        const zoomSmooth = 1 - Math.exp(-dt * 10);
+        this.cameraDistance += (this.targetCamDistance - this.cameraDistance) * zoomSmooth;
+
+        const targetPos = this.playerPos.clone().add(new THREE.Vector3(0, 1.45, 0));
+
+        const offsetX = Math.sin(this.cameraYaw) * Math.cos(this.cameraPitch) * this.cameraDistance;
+        const offsetY = Math.sin(this.cameraPitch) * this.cameraDistance;
+        const offsetZ = Math.cos(this.cameraYaw) * Math.cos(this.cameraPitch) * this.cameraDistance;
+
+        let desiredCamPos = targetPos.clone().add(new THREE.Vector3(offsetX, offsetY, offsetZ));
+
+        const minCamY = World3DBuilder.getGroundY(desiredCamPos.x, desiredCamPos.z, this.currentMapId) + 0.5;
+        if (desiredCamPos.y < minCamY) desiredCamPos.y = minCamY;
+
+        if (this.currentMapId === 'hallway') {
+          desiredCamPos.x = Math.max(-10.5, Math.min(10.5, desiredCamPos.x));
+          desiredCamPos.z = Math.max(-31.0, Math.min(31.0, desiredCamPos.z));
+          desiredCamPos.y = Math.min(7.2, desiredCamPos.y);
+        } else if (this.currentMapId === 'stairs') {
+          desiredCamPos.x = Math.max(-3.5, Math.min(3.5, desiredCamPos.x));
+          desiredCamPos.y = Math.min(9.2, desiredCamPos.y);
+        } else if (this.currentMapId === 'room0') {
+          const r = Math.hypot(desiredCamPos.x, desiredCamPos.z);
+          if (r > 15.0) {
+            desiredCamPos.x *= 15.0 / r;
+            desiredCamPos.z *= 15.0 / r;
+          }
+        }
+
+        const camSmooth = 1 - Math.exp(-dt * 12);
+        this.camera.position.lerp(desiredCamPos, camSmooth);
+        this.camera.lookAt(targetPos);
+      }
+
+      gameLoop(timestamp) {
+        const dt = Math.min((timestamp - this.lastTime) * 0.001, 0.05);
+        this.lastTime = timestamp;
+
+        this.updatePlayer(dt);
+        this.updateCamera(dt);
+
+        this.renderer.render(this.scene, this.camera);
+
+        requestAnimationFrame((t) => this.gameLoop(t));
+      }
+    }
+  </script>
+
+  <script>
+    window.addEventListener('load', async () => {
+      const progressBar = document.getElementById('loaderProgressBar');
+      const statusText = document.getElementById('loaderStatusText');
+      const percentText = document.getElementById('loaderPercentText');
+      const logContainer = document.getElementById('loaderItemLog');
+      const enterBtn = document.getElementById('btnEnterWorld');
+      const loaderModal = document.getElementById('bananaLoaderModal');
+
+      const appendLog = (msg) => {
+        if (!logContainer) return;
+        const line = document.createElement('div');
+        line.innerText = msg;
+        logContainer.appendChild(line);
+        logContainer.scrollTop = logContainer.scrollHeight;
+      };
+
+      try {
+        // Run procedural texture generator pipeline
+        await BananaTextureGenerator.runBootTexturePipeline((pct, status, logMsg) => {
+          if (progressBar) progressBar.style.width = pct + '%';
+          if (statusText) statusText.innerText = status;
+          if (percentText) percentText.innerText = pct + '%';
+          if (logMsg) appendLog(logMsg);
+        });
+
+        appendLog('✓ Toàn bộ kết cấu 3D đã sẵn sàng. Thế giới Tĩnh Tâm đã được kiến tạo!');
+        if (statusText) statusText.innerText = 'Hoàn tất! Bấm để bước vào trường Tĩnh Tâm.';
+
+        // Initialize Game Engine with newly generated textures
+        window.gameInstance = new GameEngine3D();
+        window.gameInstance.loadZone('gate');
+
+        const enterGame = () => {
+          sound.init();
+          loaderModal.style.opacity = '0';
+          setTimeout(() => {
+            loaderModal.style.display = 'none';
+          }, 700);
+        };
+
+        if (enterBtn) {
+          enterBtn.classList.remove('hidden');
+          enterBtn.classList.add('flex');
+          enterBtn.addEventListener('click', enterGame);
+        }
+      } catch (err) {
+        if (statusText) statusText.innerText = 'Lỗi khởi tạo đồ họa 3D: ' + err.message;
+        appendLog('⚠️ Đã xảy ra lỗi: ' + err.message);
+        if (enterBtn) {
+          enterBtn.classList.remove('hidden');
+          enterBtn.classList.add('flex');
+          enterBtn.innerText = 'Vào game chế độ cơ bản';
+          enterBtn.addEventListener('click', () => {
+            loaderModal.style.display = 'none';
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+﻿[
+    {
+        "phase":  "wide A",
+        "direction":  "down",
+        "frame":  0
+    },
+    {
+        "phase":  "closing A",
+        "direction":  "down",
+        "frame":  1
+    },
+    {
+        "phase":  "passing A",
+        "direction":  "down",
+        "frame":  2
+    },
+    {
+        "phase":  "opening A",
+        "direction":  "down",
+        "frame":  3
+    },
+    {
+        "phase":  "wide B",
+        "direction":  "down",
+        "frame":  4
+    },
+    {
+        "phase":  "closing B",
+        "direction":  "down",
+        "frame":  5
+    },
+    {
+        "phase":  "passing B",
+        "direction":  "down",
+        "frame":  6
+    },
+    {
+        "phase":  "opening B",
+        "direction":  "down",
+        "frame":  7
+    },
+    {
+        "phase":  "wide A",
+        "direction":  "right",
+        "frame":  0
+    },
+    {
+        "phase":  "closing A",
+        "direction":  "right",
+        "frame":  1
+    },
+    {
+        "phase":  "passing A",
+        "direction":  "right",
+        "frame":  2
+    },
+    {
+        "phase":  "opening A",
+        "direction":  "right",
+        "frame":  3
+    },
+    {
+        "phase":  "wide B",
+        "direction":  "right",
+        "frame":  4
+    },
+    {
+        "phase":  "closing B",
+        "direction":  "right",
+        "frame":  5
+    },
+    {
+        "phase":  "passing B",
+        "direction":  "right",
+        "frame":  6
+    },
+    {
+        "phase":  "opening B",
+        "direction":  "right",
+        "frame":  7
+    },
+    {
+        "phase":  "wide A",
+        "direction":  "up",
+        "frame":  0
+    },
+    {
+        "phase":  "closing A",
+        "direction":  "up",
+        "frame":  1
+    },
+    {
+        "phase":  "passing A",
+        "direction":  "up",
+        "frame":  2
+    },
+    {
+        "phase":  "opening A",
+        "direction":  "up",
+        "frame":  3
+    },
+    {
+        "phase":  "wide B",
+        "direction":  "up",
+        "frame":  4
+    },
+    {
+        "phase":  "closing B",
+        "direction":  "up",
+        "frame":  5
+    },
+    {
+        "phase":  "passing B",
+        "direction":  "up",
+        "frame":  6
+    },
+    {
+        "phase":  "opening B",
+        "direction":  "up",
+        "frame":  7
+    }
+]

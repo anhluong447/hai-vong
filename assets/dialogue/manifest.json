@@ -1,0 +1,146 @@
+{
+  "version": 2,
+  "characters": {
+    "khue": {
+      "name": "Diệp Khuê",
+      "color": "#79b5bc",
+      "expressions": {
+        "neutral": "v2/khue-standing-neutral.png",
+        "happy": "v2/khue-standing-happy.png",
+        "serious": "v2/khue-standing-listening.png",
+        "investigate": "v2/khue-neutral.png",
+        "lead_found": "v2/khue-happy.png",
+        "questioning": "v2/khue-serious.png"
+      },
+      "expressionLabels": {
+        "neutral": "Đứng bình thường",
+        "happy": "Cười nhẹ",
+        "serious": "Chăm chú lắng nghe",
+        "investigate": "Điều tra · tập trung",
+        "lead_found": "Điều tra · tìm ra manh mối",
+        "questioning": "Điều tra · chất vấn"
+      },
+      "prompt": "v2/khue-prompt.json",
+      "expressionMasters": {
+        "neutral": "neutral",
+        "happy": "neutral",
+        "serious": "neutral",
+        "investigate": "investigate",
+        "lead_found": "investigate",
+        "questioning": "investigate"
+      }
+    },
+    "van": {
+      "name": "Lục Thanh Vân",
+      "color": "#b8d1b6",
+      "expressions": {
+        "neutral": "v2/van-neutral.png",
+        "happy": "v2/van-happy.png",
+        "serious": "v2/van-serious.png"
+      },
+      "expressionLabels": {
+        "neutral": "Bản lĩnh",
+        "happy": "Cười đắc ý",
+        "serious": "Quyết liệt"
+      },
+      "prompt": "v2/van-prompt.json"
+    },
+    "long": {
+      "name": "Đoàn Bảo Long",
+      "color": "#dfa775",
+      "expressions": {
+        "neutral": "v2/long-neutral.png",
+        "happy": "v2/long-happy-v2.png",
+        "serious": "v2/long-serious.png"
+      },
+      "expressionLabels": {
+        "neutral": "Thân thiện",
+        "happy": "Cười sảng khoái",
+        "serious": "Bực bội"
+      },
+      "prompt": "v2/long-prompt.json"
+    },
+    "nhi": {
+      "name": "Hạ Tuyết Nhi",
+      "color": "#a3b8e6",
+      "expressions": {
+        "neutral": "v2/nhi-neutral.png",
+        "happy": "v2/nhi-happy.png",
+        "serious": "v2/nhi-serious.png"
+      },
+      "expressionLabels": {
+        "neutral": "Ngại ngùng",
+        "happy": "Vui bẽn lẽn",
+        "serious": "Hoảng hốt"
+      },
+      "prompt": "v2/nhi-prompt.json"
+    },
+    "ngoc": {
+      "name": "Tạ Như Ngọc",
+      "color": "#e5a1b0",
+      "expressions": {
+        "neutral": "v2/ngoc-neutral.png",
+        "happy": "v2/ngoc-happy-v2.png",
+        "serious": "v2/ngoc-serious.png"
+      },
+      "expressionLabels": {
+        "neutral": "Hào hứng",
+        "happy": "Nháy mắt",
+        "serious": "Bất bình"
+      },
+      "prompt": "v2/ngoc-prompt.json"
+    },
+    "an": {
+      "name": "Ngô Thiên Ân",
+      "color": "#b2cfa4",
+      "expressions": {
+        "neutral": "v2/an-neutral.png",
+        "happy": "v2/an-happy.png",
+        "serious": "v2/an-serious.png"
+      },
+      "expressionLabels": {
+        "neutral": "Trầm tư",
+        "happy": "Hài lòng",
+        "serious": "Nghi hoặc"
+      },
+      "prompt": "v2/an-prompt.json"
+    },
+    "groundskeeper": {
+      "name": "Bác bảo vệ",
+      "color": "#b3b999",
+      "expressions": {
+        "neutral": "v2/groundskeeper-neutral.png"
+      },
+      "expressionLabels": {
+        "neutral": "Điềm đạm"
+      },
+      "prompt": "v2/groundskeeper-prompt.json"
+    },
+    "teacher": {
+      "name": "Thầy phụ trách",
+      "color": "#bfae97",
+      "expressions": {
+        "neutral": "v2/teacher-neutral.png"
+      },
+      "expressionLabels": {
+        "neutral": "Nghiêm nghị"
+      },
+      "prompt": "v2/teacher-prompt.json"
+    },
+    "harbor-source": {
+      "name": "Người làm cảng",
+      "color": "#9bbcc8",
+      "expressions": {
+        "neutral": "v2/harbor-source-neutral.png"
+      },
+      "expressionLabels": {
+        "neutral": "Trầm lặng"
+      },
+      "prompt": "v2/harbor-source-prompt.json"
+    }
+  },
+  "designPivot": {
+    "source": "assets/pixel/characters-anime-source.png",
+    "sha256": "34E79D2102FB953B88B9F0B594D6CEF1E519A3BE7743129FE5924D7021AFB593"
+  }
+}

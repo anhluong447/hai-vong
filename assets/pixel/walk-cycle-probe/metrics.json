@@ -1,0 +1,73 @@
+﻿{
+    "headRegion":  "y\u003c24 compared against approved idle master",
+    "previewVelocity":  40,
+    "lowerRegion":  "alpha bounds at y\u003e=37, a spread indicator; not anatomical foot identification",
+    "previewStridePixels":  32,
+    "import":  "fixed 32x48 canvas, alpha\u003e=160, nearest approved Khue RGB palette",
+    "frames":  [
+                   {
+                       "lowerRegionPixels":  74,
+                       "frame":  0,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  19,
+                       "headChangedPixels":  21,
+                       "sourceHeight":  1536
+                   },
+                   {
+                       "lowerRegionPixels":  67,
+                       "frame":  1,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  12,
+                       "headChangedPixels":  15,
+                       "sourceHeight":  1536
+                   },
+                   {
+                       "lowerRegionPixels":  44,
+                       "frame":  2,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  8,
+                       "headChangedPixels":  7,
+                       "sourceHeight":  1536
+                   },
+                   {
+                       "lowerRegionPixels":  60,
+                       "frame":  3,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  15,
+                       "headChangedPixels":  94,
+                       "sourceHeight":  1536
+                   },
+                   {
+                       "lowerRegionPixels":  70,
+                       "frame":  4,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  20,
+                       "headChangedPixels":  30,
+                       "sourceHeight":  1536
+                   },
+                   {
+                       "lowerRegionPixels":  63,
+                       "frame":  5,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  16,
+                       "headChangedPixels":  97,
+                       "sourceHeight":  1536
+                   },
+                   {
+                       "lowerRegionPixels":  46,
+                       "frame":  6,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  10,
+                       "headChangedPixels":  150,
+                       "sourceHeight":  1536
+                   },
+                   {
+                       "lowerRegionPixels":  67,
+                       "frame":  7,
+                       "sourceWidth":  1024,
+                       "lowerRegionWidth":  16,
+                       "headChangedPixels":  21,
+                       "sourceHeight":  1536
+                   }
+               ]
+}

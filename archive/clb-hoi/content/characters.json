@@ -1,0 +1,25 @@
+{
+  "protagonist": "khue",
+  "characters": [
+    { "id": "khue", "name": "Diệp Khuê", "short": "Khuê", "role": "protagonist", "color": "#8aa4c8", "hair": "#1b1b22", "height": 1.78 },
+
+    { "id": "van",  "name": "Lục Thanh Vân", "short": "Vân", "aliases": ["Thanh Vân"], "role": "heroine", "route": "van",  "color": "#e8e4dc", "accent": "#b3262e", "hair": "#20160f", "height": 1.64 },
+    { "id": "nhi",  "name": "Hạ Tuyết Nhi", "short": "Nhi", "aliases": ["Tuyết Nhi"], "role": "heroine", "route": "nhi",  "color": "#c9b79c", "accent": "#6d5a43", "hair": "#2a211b", "height": 1.58 },
+    { "id": "mien", "name": "Kiều Mộc Miên", "short": "Miên", "aliases": ["Mộc Miên"], "role": "heroine", "route": "mien", "color": "#d9e3cf", "accent": "#6f8f5a", "hair": "#3b2a20", "height": 1.60 },
+    { "id": "ngoc", "name": "Tạ Như Ngọc", "short": "Ngọc", "aliases": ["Như Ngọc"], "role": "heroine", "route": "ngoc", "color": "#f2d6de", "accent": "#c2477a", "hair": "#4a2c22", "height": 1.63 },
+    { "id": "hy",   "name": "Thẩm Ninh Hy", "short": "Hy", "aliases": ["Ninh Hy"], "role": "heroine", "route": "hy", "hidden": true, "color": "#cfd3e0", "accent": "#4b5577", "hair": "#111318", "height": 1.61 },
+
+    { "id": "long", "name": "Đoàn Bảo Long", "short": "Long", "aliases": ["Bảo Long"], "role": "friend", "color": "#f4f1ea", "accent": "#d9822b", "hair": "#16110d", "height": 1.84, "build": "broad" },
+    { "id": "an",   "name": "Ngô Thiên Ân", "short": "Ân", "aliases": ["Thiên Ân"], "role": "friend", "color": "#e6e9ee", "accent": "#3b7dd8", "hair": "#141414", "height": 1.72 },
+    { "id": "dang", "name": "Vương Hải Đăng", "short": "Đăng", "aliases": ["Hải Đăng"], "role": "friend", "color": "#f0efe9", "accent": "#1f6f5c", "hair": "#0f0f0f", "height": 1.86 },
+    { "id": "huy",  "name": "Phan Gia Huy", "short": "Huy", "aliases": ["Gia Huy"], "role": "rival", "color": "#e9eaec", "accent": "#8c96a8", "hair": "#0c0c10", "height": 1.80 },
+
+    { "id": "thay_van", "name": "Thầy Lê Vấn", "short": "Thầy Vấn", "aliases": ["Thầy Vấn"], "role": "adult", "color": "#8f7f6a", "hair": "#8a8a8a", "height": 1.70 },
+    { "id": "linh", "name": "Cô Hoàng Diệu Linh", "short": "Cô Diệu Linh", "aliases": ["Cô Linh"], "role": "adult", "color": "#b7a3c9", "hair": "#2c1d18", "height": 1.62 },
+    { "id": "bac_tu", "name": "Bác Tư", "role": "adult", "color": "#5f6b5a", "hair": "#bdbdbd", "height": 1.66 },
+    { "id": "ba_sau", "name": "Bà Sáu", "role": "adult", "color": "#c98f5a", "hair": "#6b6b6b", "height": 1.55 },
+    { "id": "mai",  "name": "Diệp Tiểu Mai", "short": "Tiểu Mai", "aliases": ["Mai"], "role": "family", "color": "#f2c6a0", "hair": "#1b1b22", "height": 1.45 },
+    { "id": "me",   "name": "Diệp Thu Hà", "short": "Mẹ", "aliases": ["Mẹ Khuê"], "role": "family", "color": "#6f7f94", "hair": "#1b1b22", "height": 1.60 },
+    { "id": "hu_vo", "name": "Hư Vô", "role": "cat", "color": "#111111", "height": 0.3 }
+  ]
+}

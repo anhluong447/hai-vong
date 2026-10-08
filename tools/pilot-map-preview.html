@@ -1,0 +1,14 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>Khuê/Vân in-map preview</title><style>html,body{margin:0;background:#0a101c;height:100%}iframe{border:0;display:block;width:100%;height:100%}body.mobile iframe{width:390px;height:844px;margin:auto}</style><iframe src="../pixel.html" title="Pilot map preview"></iframe>
+<script type="module">
+import {MAPS,findPath,pathToObject,visibleNPCs} from '../src/pixel/maps.js?v=pixel-1';
+const params=new URLSearchParams(location.search);if(params.has('mobile'))document.body.className='mobile';
+const frame=document.querySelector('iframe');const wait=fn=>new Promise((resolve,reject)=>{const start=Date.now();const tick=()=>fn()?resolve():Date.now()-start>12000?reject(new Error('Preview timed out')):setTimeout(tick,25);tick();});
+await wait(()=>frame.contentWindow.pressPixel?.ready);const w=frame.contentWindow,d=w.document;
+const world=()=>w.pressPixel.world;
+function point(x,y){const canvas=d.querySelector('canvas'),rect=canvas.getBoundingClientRect(),p=w.pressPixel.screenPosition(x,y);canvas.dispatchEvent(new w.PointerEvent('pointerdown',{bubbles:true,clientX:rect.left+p.x,clientY:rect.top+p.y}));}
+async function walk(goal){const mapId=world().mapId;for(let i=0;i<80;i++){const s=world();if(s.mapId!==mapId||s.x===goal.x&&s.y===goal.y&&!w.pressPixel.moving)return;const path=findPath(MAPS[s.mapId],s,goal,visibleNPCs(MAPS[s.mapId],w.pressGameplay.state)),box=d.querySelector('canvas').getBoundingClientRect();const node=path.filter(n=>{const p=w.pressPixel.screenPosition(n.x,n.y);return p.x>8&&p.y>8&&p.x<box.width-8&&p.y<box.height-8;}).at(-1);if(!node)throw new Error('No visible waypoint');point(node.x,node.y);await wait(()=>!w.pressPixel.moving&&(world().mapId!==mapId||world().x===node.x&&world().y===node.y));}}
+const target=params.get('npc')||'van';if(target==='harbor-source')await walk({x:20,y:26});else if(!['groundskeeper','teacher'].includes(target))await walk({x:10,y:10});
+const map=MAPS[world().mapId],npcs=visibleNPCs(map,w.pressGameplay.state),npc=npcs.find(n=>n.id===target),path=pathToObject(map,world(),npc,npcs);await walk(path.at(-1));
+if(!params.has('room')){point(npc.x,npc.y);await wait(()=>d.querySelector('[role=dialog]'));if(d.querySelector('.dialogue-sprite'))await wait(()=>d.querySelector('.dialogue-sprite').dataset.status==='ready');}
+await d.fonts.ready;for(const animation of d.querySelector('.dialogue-stage')?.getAnimations({subtree:true})||[])animation.finish();document.title=`Pilot ready / ${d.documentElement.scrollWidth<=w.innerWidth?'No overflow':'Overflow'}`;
+</script></html>

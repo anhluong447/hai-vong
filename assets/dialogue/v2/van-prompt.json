@@ -1,0 +1,35 @@
+{
+    "id":  "van",
+    "designPivot":  "assets/pixel/characters-anime-source.png",
+    "sourceRow":  2,
+    "design":  "Lục Thanh Vân, Vietnamese schoolgirl18: LONG LOOSE flowing chestnut-brown hair, SMALL YELLOW FLOWER HAIR CLIP at temple, white short-sleeve collared blouse, LARGE DEEP TEAL BOW at neckline, teal pleated skirt. NO ponytail, no red ribbon, no sailor collar. Elongated elegant face, sharp almond-shaped brown eyes, defined confident brows, dignified tall presence.",
+    "poseAndCamera":  "Cool and confident club leader, slightly low-angle camera, near-front face turned only 10 degrees to viewer\u0027s left, chin slightly lifted. Arms crossed firmly across chest, relaxed assertive hip tilt, one shoulder higher, challenging composed gaze straight at viewer and an unmistakable knowing half-smirk. Strong stylish silhouette, not soft/shy.",
+    "expressionLabels":  [
+                             "Bản lĩnh",
+                             "Cười đắc ý",
+                             "Quyết liệt"
+                         ],
+    "masterPrompt":  "ORIGINAL ANIME VISUAL NOVEL CHARACTER SPRITE, one person only, for Vietnamese school journalism game Hoi Am. PRIMARY DESIGN PIVOT: assets/pixel/characters-anime-source.png (image1); image2 is an UNMODIFIED crop of the target row, showing the first three poses. Read ONLY the targeted character, ignore all other rows. Source establishes hair silhouette/color, identifying accessories, costume shapes and colors. Convert to normal teen/adult anime anatomy, NEVER chibi or pixel art.\nCHARACTER-SPECIFIC DESIGN: Lục Thanh Vân, Vietnamese schoolgirl18: LONG LOOSE flowing chestnut-brown hair, SMALL YELLOW FLOWER HAIR CLIP at temple, white short-sleeve collared blouse, LARGE DEEP TEAL BOW at neckline, teal pleated skirt. NO ponytail, no red ribbon, no sailor collar. Elongated elegant face, sharp almond-shaped brown eyes, defined confident brows, dignified tall presence.\nUNIQUE POSE AND CAMERA: Cool and confident club leader, slightly low-angle camera, near-front face turned only 10 degrees to viewer\u0027s left, chin slightly lifted. Arms crossed firmly across chest, relaxed assertive hip tilt, one shoulder higher, challenging composed gaze straight at viewer and an unmistakable knowing half-smirk. Strong stylish silhouette, not soft/shy.\nART DIRECTION: crisp clean anime ink contours, bold readable cel shading, attractive expressive face, character-specific face geometry and anatomy. Flat character illustration for a VN, NOT photographic lighting or cinematic portrait, no generic repeated handsome face. Expression must be readable at 300px display size, not a tiny change of mouth. Preserve defining source accessories exactly.\nCOMPOSITION: ONE 2:3 vertical 1024x1536 transparent PNG cutout from complete hair to hips/upper thighs. Include complete posed hands and all props, no cropped elbows. Leave a visible 6% margin around all hair/hands. Center the overall posed silhouette, balance within canvas. Real transparent alpha background: only person and carried props, absolutely no background, scenery, glow, fog, ambient shadow, text, border, labels or collage. Draw the full unique pose in one illustration. DO NOT use any previous dialogue portrait as reference.",
+    "references":  [
+                       "assets/pixel/characters-anime-source.png",
+                       "assets/dialogue/v2/design-refs/van.png"
+                   ],
+    "expressionPrompts":  [
+                              {
+                                  "key":  "van-serious",
+                                  "prompt":  "Edit the supplied fully clothed anime character portrait, changing ONLY her facial expression to a clearly visible stern decisive objection: lowered brows, narrowed intense eyes, open speaking mouth with a firm serious expression. She is a confident young adult club editor. Keep exactly the same crossed-arms pose, camera angle, individual face identity, long loose brown hair, yellow flower hair clip, teal bow, modest white collared school blouse, skirt, body registration and canvas size. Clothing is opaque and fully covers her torso; retain that ordinary nonsexual outfit. Facial emotion must read clearly at small display size. Preserve original body unchanged; no new pose, outfit, zoom, or scene. Transparent alpha background, only the single character, no lettering.",
+                                  "references":  [
+                                                     "assets/dialogue/v2/van-neutral.png"
+                                                 ],
+                                  "source":  "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-6964d6c4-69ec-4524-8cc3-4995783884b9.png"
+                              },
+                              {
+                                  "key":  "van-happy",
+                                  "prompt":  "Edit this ordinary fully clothed anime portrait ONLY on the face: change the stern expression into pleased confident amusement. Both eyes closed in cheerful smiling crescents; eyebrows lifted and relaxed; a broad CLOSED-MOUTH curved satisfied smile with cheeks clearly lifted. No open mouth. Confident cool smile of a club editor proud of a successful publication. Keep the exact same person, hair, yellow flower hair clip, teal bow, opaque white school blouse, crossed arms, skirt, pose, body, scale and canvas coordinates unchanged. Single character cutout with preserved transparent alpha background. No other scene, lettering, costume or camera changes.",
+                                  "references":  [
+                                                     "assets/dialogue/v2/van-serious.png"
+                                                 ],
+                                  "source":  "C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/exec-14a28b7d-cf8a-466c-bf47-e47e37992732.png"
+                              }
+                          ]
+}
