@@ -1,4 +1,5 @@
 import './core.test.js';
+import './architecture.test.js';
 import {runAll} from './harness.js';
 const results=await runAll();
 for(const r of results) console.log(`${r.ok?'ok':'FAIL'} ${r.name}${r.error?'\n'+r.error:''}`);
