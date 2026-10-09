@@ -14,7 +14,8 @@ powershell -ExecutionPolicy Bypass -File tools/serve.ps1
 - Sandbox vòng chơi theo bible mới: <http://localhost:8080/gameplay.html>
 - Map test 2D pixel: <http://localhost:8080/pixel.html>
 - Coastal UI có chuyển động: <http://localhost:8080/tools/coastal-ui-preview.html>
-- Replica Stage 3 — UI thoại, ánh sáng/bóng riêng từng lớp, nền review và lighting A/B: <http://127.0.0.1:8080/tools/coastal-replica-preview.html>
+- Replica Stage 4 — motion UI theo lớp, pause/slow/replay và reduced motion: <http://127.0.0.1:8080/tools/coastal-replica-preview.html>
+- Replica Stage 3 — UI thoại tĩnh và lighting A/B: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=3>
 - Replica Stage 2 lịch sử: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=2>
 - Replica Stage 1 — pilot được giữ lại: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=1>
 - Thoại 9 nhân vật với component coastal: <http://localhost:8080/interaction.html>
@@ -52,6 +53,7 @@ Xem [hướng dẫn và giới hạn](docs/GAMEPLAY-SANDBOX.md). Map truyện th
 - [Stage 1 — pipeline art/font, mẫu 7 lớp và review sai lệch](docs/ui-reviews/coastal-replica-stage1/README.md)
 - [Stage 2 — UI thoại, evidence lịch sử và backlog G2 theo scope UI](docs/ui-reviews/coastal-replica-stage2/README.md)
 - [Stage 3 — ánh sáng/chiều sâu UI, scoped comparison và backlog G2](docs/ui-reviews/coastal-replica-stage3/README.md)
+- [Stage 4 — motion sheet, clips native, interruption/reduced motion và review G3](docs/ui-reviews/coastal-replica-stage4/README.md)
 - [Quy trình phát triển và quy tắc nội dung](docs/DEVELOPMENT.md)
 - [Nội dung, văn bản và balance](content/README.md)
 - [Kết quả kiểm chứng và baseline](docs/VALIDATION.md)

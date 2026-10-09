@@ -143,7 +143,7 @@ and full-frame MAE keep their original meaning; they cannot certify the revised
 UI gate. Once UI geometry is stable, R15-R17 fix UI light/depth/compositing and
 close static G2 before motion. Keep world/portrait providers interchangeable.
 
-Stage 3 is the default preview, initially on a dark neutral canvas. Edit
+Stage 3 is retained at `?version=3`, initially on a dark neutral canvas. Edit
 `content/ui/coastal-dialogue-ui.json` and `v3/masters/materials.json` for the fixed
 overlay and local lighting. Its builder inherits three UI PNGs byte-for-byte;
 do not regenerate scene/portrait art for a UI gate. Context is a separate slot.
@@ -152,8 +152,8 @@ do not regenerate scene/portrait art for a UI gate. Context is a separate slot.
 python tools/build_dialogue_ui.py --build
 python tools/build_dialogue_ui.py --check
 python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-replica-stage3.html --output-prefix playtest
-python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --variant ui-dark --compare-ui --output docs/ui-reviews/coastal-replica-stage3/ui-dark-v3.png
-python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --variant ui-dark --flat-lighting --output docs/ui-reviews/coastal-replica-stage3/ui-flat-v2.png
+python tools/capture_replica.py --url 'http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=3' --screen dialogue --variant ui-dark --compare-ui --output docs/ui-reviews/coastal-replica-stage3/ui-dark-v3.png
+python tools/capture_replica.py --url 'http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=3' --screen dialogue --variant ui-dark --flat-lighting --output docs/ui-reviews/coastal-replica-stage3/ui-flat-v2.png
 ```
 
 Also capture `ui-light`, `ui-detail`, `stage`, material sheets and optional
@@ -165,7 +165,35 @@ backlog. Capture Chrome sequentially to avoid resource contention on the local
 server. Run main/baselines before focused checks, retain raw logs, update
 [Stage 3 review](ui-reviews/coastal-replica-stage3/README.md) and
 [status](ui-specs/coastal-replica/status.json). R15/R16 and R17 evidence are delivered;
-G2 visual corrections remain before Stage 4 motion.
+G2 visual corrections remain before production acceptance of Stage 4 motion.
+
+Stage 4 is now the default preview. It adds motion authoring under the user's
+continuation request while keeping G2/G3 acceptance open. Reuse the unchanged
+v3 art, edit `content/ui/coastal-dialogue-motion.json`, then compile with
+`tools/build_dialogue_motion.py`. Do not rebuild raster/context for motion.
+Use pause, ×0.25, replay and hide/show controls; OS reduced motion settles all
+effects. Main glyphs/hitboxes stay fixed. Read the
+[motion sheet](ui-specs/coastal-replica/dialogue-motion.md).
+
+```powershell
+python tools/build_dialogue_motion.py --build
+python tools/build_dialogue_motion.py --check
+python tools/verify_dialogue_motion.py
+python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-replica-stage4.html --output-prefix playtest
+python tools/run_browser_tests.py --real-time --reduced-motion --url http://127.0.0.1:8080/tests/coastal-replica-stage4-reduced.html --output-prefix playtest
+python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --variant ui-dark --motion-time-ms 2400 --output docs/ui-reviews/coastal-replica-stage4/ambient-2400-v4.png
+python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --variant ui-dark --record-motion ambient --output docs/ui-reviews/coastal-replica-stage4/loop-review-v3.png
+```
+
+`--record-motion interaction` and `slow` produce native sampled WebM clips with
+encoder/timeline reports. Run each Chrome capture to completion before starting
+another. Device realtime FPS is not inferred from encoding cadence. Default
+capture stays neutral/settled; explicit samples record presentation time/profile
+separately from fixture time. Re-run main/baselines and affected focused suites,
+retain raw logs and compare settled native pixels with Stage 3 to catch lost
+opacity/registration. Update [Stage 4 review](ui-reviews/coastal-replica-stage4/README.md)
+and status with G2/G3 limitations; authoring implementation does not certify art,
+device/GPU performance or production integration.
 
 The earlier component-gallery milestones below describe the v1 prototype.
 Replica work continues with G2 UI corrections after Stage 3, then R18-R45 and

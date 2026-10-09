@@ -1,0 +1,3105 @@
+{
+  "version": 1,
+  "sequence": "ambient",
+  "width": 1672,
+  "height": 941,
+  "fpsRequested": 12,
+  "sampleDurationMs": 16000,
+  "wallDurationSeconds": 35.937000000005355,
+  "frameCount": 193,
+  "mimeType": "video/webm;codecs=vp9",
+  "sha256": "92406290D450C4E534A1E7D33CBD6C0F1E7923235C75E8FB627332CB4F8CA2E6",
+  "renderer": "Native CDP frames; JPEG quality 95; browser Canvas/WebM encoding; no art asset edits",
+  "role": "sampled visual review; browser encoder timing is not realtime UI/device performance certification",
+  "sourceCapture": "loop-review-v1.png",
+  "samples": [
+    {
+      "frame": 0,
+      "presentation": {
+        "timeMs": 0,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 1,
+      "presentation": {
+        "timeMs": 83.33333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 2,
+      "presentation": {
+        "timeMs": 166.66666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 3,
+      "presentation": {
+        "timeMs": 250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 4,
+      "presentation": {
+        "timeMs": 333.3333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 5,
+      "presentation": {
+        "timeMs": 416.6666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 6,
+      "presentation": {
+        "timeMs": 500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 7,
+      "presentation": {
+        "timeMs": 583.3333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 8,
+      "presentation": {
+        "timeMs": 666.6666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 9,
+      "presentation": {
+        "timeMs": 750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 10,
+      "presentation": {
+        "timeMs": 833.3333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 11,
+      "presentation": {
+        "timeMs": 916.6666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 12,
+      "presentation": {
+        "timeMs": 1000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 13,
+      "presentation": {
+        "timeMs": 1083.3333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 14,
+      "presentation": {
+        "timeMs": 1166.6666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 15,
+      "presentation": {
+        "timeMs": 1250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 16,
+      "presentation": {
+        "timeMs": 1333.3333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 17,
+      "presentation": {
+        "timeMs": 1416.6666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 18,
+      "presentation": {
+        "timeMs": 1500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 19,
+      "presentation": {
+        "timeMs": 1583.3333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 20,
+      "presentation": {
+        "timeMs": 1666.6666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 21,
+      "presentation": {
+        "timeMs": 1750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 22,
+      "presentation": {
+        "timeMs": 1833.3333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 23,
+      "presentation": {
+        "timeMs": 1916.6666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 24,
+      "presentation": {
+        "timeMs": 2000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 25,
+      "presentation": {
+        "timeMs": 2083.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 26,
+      "presentation": {
+        "timeMs": 2166.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 27,
+      "presentation": {
+        "timeMs": 2250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 28,
+      "presentation": {
+        "timeMs": 2333.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 29,
+      "presentation": {
+        "timeMs": 2416.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 30,
+      "presentation": {
+        "timeMs": 2500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 31,
+      "presentation": {
+        "timeMs": 2583.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 32,
+      "presentation": {
+        "timeMs": 2666.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 33,
+      "presentation": {
+        "timeMs": 2750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 34,
+      "presentation": {
+        "timeMs": 2833.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 35,
+      "presentation": {
+        "timeMs": 2916.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 36,
+      "presentation": {
+        "timeMs": 3000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 37,
+      "presentation": {
+        "timeMs": 3083.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 38,
+      "presentation": {
+        "timeMs": 3166.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 39,
+      "presentation": {
+        "timeMs": 3250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 40,
+      "presentation": {
+        "timeMs": 3333.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 41,
+      "presentation": {
+        "timeMs": 3416.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 42,
+      "presentation": {
+        "timeMs": 3500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 43,
+      "presentation": {
+        "timeMs": 3583.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 44,
+      "presentation": {
+        "timeMs": 3666.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 45,
+      "presentation": {
+        "timeMs": 3750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 46,
+      "presentation": {
+        "timeMs": 3833.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 47,
+      "presentation": {
+        "timeMs": 3916.6666666666665,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 48,
+      "presentation": {
+        "timeMs": 4000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 49,
+      "presentation": {
+        "timeMs": 4083.3333333333335,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 50,
+      "presentation": {
+        "timeMs": 4166.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 51,
+      "presentation": {
+        "timeMs": 4250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 52,
+      "presentation": {
+        "timeMs": 4333.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 53,
+      "presentation": {
+        "timeMs": 4416.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 54,
+      "presentation": {
+        "timeMs": 4500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 55,
+      "presentation": {
+        "timeMs": 4583.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 56,
+      "presentation": {
+        "timeMs": 4666.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 57,
+      "presentation": {
+        "timeMs": 4750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 58,
+      "presentation": {
+        "timeMs": 4833.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 59,
+      "presentation": {
+        "timeMs": 4916.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 60,
+      "presentation": {
+        "timeMs": 5000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 61,
+      "presentation": {
+        "timeMs": 5083.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 62,
+      "presentation": {
+        "timeMs": 5166.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 63,
+      "presentation": {
+        "timeMs": 5250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 64,
+      "presentation": {
+        "timeMs": 5333.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 65,
+      "presentation": {
+        "timeMs": 5416.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 66,
+      "presentation": {
+        "timeMs": 5500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 67,
+      "presentation": {
+        "timeMs": 5583.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 68,
+      "presentation": {
+        "timeMs": 5666.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 69,
+      "presentation": {
+        "timeMs": 5750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 70,
+      "presentation": {
+        "timeMs": 5833.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 71,
+      "presentation": {
+        "timeMs": 5916.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 72,
+      "presentation": {
+        "timeMs": 6000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 73,
+      "presentation": {
+        "timeMs": 6083.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 74,
+      "presentation": {
+        "timeMs": 6166.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 75,
+      "presentation": {
+        "timeMs": 6250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 76,
+      "presentation": {
+        "timeMs": 6333.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 77,
+      "presentation": {
+        "timeMs": 6416.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 78,
+      "presentation": {
+        "timeMs": 6500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 79,
+      "presentation": {
+        "timeMs": 6583.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 80,
+      "presentation": {
+        "timeMs": 6666.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 81,
+      "presentation": {
+        "timeMs": 6750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 82,
+      "presentation": {
+        "timeMs": 6833.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 83,
+      "presentation": {
+        "timeMs": 6916.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 84,
+      "presentation": {
+        "timeMs": 7000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 85,
+      "presentation": {
+        "timeMs": 7083.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 86,
+      "presentation": {
+        "timeMs": 7166.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 87,
+      "presentation": {
+        "timeMs": 7250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 88,
+      "presentation": {
+        "timeMs": 7333.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 89,
+      "presentation": {
+        "timeMs": 7416.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 90,
+      "presentation": {
+        "timeMs": 7500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 91,
+      "presentation": {
+        "timeMs": 7583.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 92,
+      "presentation": {
+        "timeMs": 7666.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 93,
+      "presentation": {
+        "timeMs": 7750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 94,
+      "presentation": {
+        "timeMs": 7833.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 95,
+      "presentation": {
+        "timeMs": 7916.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 96,
+      "presentation": {
+        "timeMs": 8000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 97,
+      "presentation": {
+        "timeMs": 8083.333333333333,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 98,
+      "presentation": {
+        "timeMs": 8166.666666666667,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 99,
+      "presentation": {
+        "timeMs": 8250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 100,
+      "presentation": {
+        "timeMs": 8333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 101,
+      "presentation": {
+        "timeMs": 8416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 102,
+      "presentation": {
+        "timeMs": 8500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 103,
+      "presentation": {
+        "timeMs": 8583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 104,
+      "presentation": {
+        "timeMs": 8666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 105,
+      "presentation": {
+        "timeMs": 8750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 106,
+      "presentation": {
+        "timeMs": 8833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 107,
+      "presentation": {
+        "timeMs": 8916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 108,
+      "presentation": {
+        "timeMs": 9000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 109,
+      "presentation": {
+        "timeMs": 9083.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 110,
+      "presentation": {
+        "timeMs": 9166.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 111,
+      "presentation": {
+        "timeMs": 9250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 112,
+      "presentation": {
+        "timeMs": 9333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 113,
+      "presentation": {
+        "timeMs": 9416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 114,
+      "presentation": {
+        "timeMs": 9500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 115,
+      "presentation": {
+        "timeMs": 9583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 116,
+      "presentation": {
+        "timeMs": 9666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 117,
+      "presentation": {
+        "timeMs": 9750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 118,
+      "presentation": {
+        "timeMs": 9833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 119,
+      "presentation": {
+        "timeMs": 9916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 120,
+      "presentation": {
+        "timeMs": 10000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 121,
+      "presentation": {
+        "timeMs": 10083.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 122,
+      "presentation": {
+        "timeMs": 10166.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 123,
+      "presentation": {
+        "timeMs": 10250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 124,
+      "presentation": {
+        "timeMs": 10333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 125,
+      "presentation": {
+        "timeMs": 10416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 126,
+      "presentation": {
+        "timeMs": 10500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 127,
+      "presentation": {
+        "timeMs": 10583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 128,
+      "presentation": {
+        "timeMs": 10666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 129,
+      "presentation": {
+        "timeMs": 10750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 130,
+      "presentation": {
+        "timeMs": 10833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 131,
+      "presentation": {
+        "timeMs": 10916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 132,
+      "presentation": {
+        "timeMs": 11000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 133,
+      "presentation": {
+        "timeMs": 11083.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 134,
+      "presentation": {
+        "timeMs": 11166.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 135,
+      "presentation": {
+        "timeMs": 11250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 136,
+      "presentation": {
+        "timeMs": 11333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 137,
+      "presentation": {
+        "timeMs": 11416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 138,
+      "presentation": {
+        "timeMs": 11500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 139,
+      "presentation": {
+        "timeMs": 11583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 140,
+      "presentation": {
+        "timeMs": 11666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 141,
+      "presentation": {
+        "timeMs": 11750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 142,
+      "presentation": {
+        "timeMs": 11833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 143,
+      "presentation": {
+        "timeMs": 11916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 144,
+      "presentation": {
+        "timeMs": 12000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 145,
+      "presentation": {
+        "timeMs": 12083.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 146,
+      "presentation": {
+        "timeMs": 12166.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 147,
+      "presentation": {
+        "timeMs": 12250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 148,
+      "presentation": {
+        "timeMs": 12333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 149,
+      "presentation": {
+        "timeMs": 12416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 150,
+      "presentation": {
+        "timeMs": 12500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 151,
+      "presentation": {
+        "timeMs": 12583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 152,
+      "presentation": {
+        "timeMs": 12666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 153,
+      "presentation": {
+        "timeMs": 12750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 154,
+      "presentation": {
+        "timeMs": 12833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 155,
+      "presentation": {
+        "timeMs": 12916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 156,
+      "presentation": {
+        "timeMs": 13000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 157,
+      "presentation": {
+        "timeMs": 13083.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 158,
+      "presentation": {
+        "timeMs": 13166.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 159,
+      "presentation": {
+        "timeMs": 13250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 160,
+      "presentation": {
+        "timeMs": 13333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 161,
+      "presentation": {
+        "timeMs": 13416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 162,
+      "presentation": {
+        "timeMs": 13500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 163,
+      "presentation": {
+        "timeMs": 13583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 164,
+      "presentation": {
+        "timeMs": 13666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 165,
+      "presentation": {
+        "timeMs": 13750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 166,
+      "presentation": {
+        "timeMs": 13833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 167,
+      "presentation": {
+        "timeMs": 13916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 168,
+      "presentation": {
+        "timeMs": 14000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 169,
+      "presentation": {
+        "timeMs": 14083.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 170,
+      "presentation": {
+        "timeMs": 14166.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 171,
+      "presentation": {
+        "timeMs": 14250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 172,
+      "presentation": {
+        "timeMs": 14333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 173,
+      "presentation": {
+        "timeMs": 14416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 174,
+      "presentation": {
+        "timeMs": 14500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 175,
+      "presentation": {
+        "timeMs": 14583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 176,
+      "presentation": {
+        "timeMs": 14666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 177,
+      "presentation": {
+        "timeMs": 14750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 178,
+      "presentation": {
+        "timeMs": 14833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 179,
+      "presentation": {
+        "timeMs": 14916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 180,
+      "presentation": {
+        "timeMs": 15000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 181,
+      "presentation": {
+        "timeMs": 15083.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 182,
+      "presentation": {
+        "timeMs": 15166.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 183,
+      "presentation": {
+        "timeMs": 15250,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 184,
+      "presentation": {
+        "timeMs": 15333.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 185,
+      "presentation": {
+        "timeMs": 15416.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 186,
+      "presentation": {
+        "timeMs": 15500,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 187,
+      "presentation": {
+        "timeMs": 15583.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 188,
+      "presentation": {
+        "timeMs": 15666.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 189,
+      "presentation": {
+        "timeMs": 15750,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 190,
+      "presentation": {
+        "timeMs": 15833.333333333334,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 191,
+      "presentation": {
+        "timeMs": 15916.666666666666,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    },
+    {
+      "frame": 192,
+      "presentation": {
+        "timeMs": 16000,
+        "rate": 1,
+        "paused": true,
+        "hidden": false,
+        "reduced": false,
+        "frozen": true,
+        "enabled": true,
+        "progress": 1,
+        "visible": true,
+        "frameCount": 0,
+        "pendingFrame": false
+      }
+    }
+  ]
+}

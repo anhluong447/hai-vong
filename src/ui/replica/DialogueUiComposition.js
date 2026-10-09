@@ -25,6 +25,12 @@ export function drawDialogueUi(stage, svg, element) {
   };
   const paperWash=gradient('paper-wash',scene.lighting.paperWash);
   const noteWash=gradient('note-wash',scene.lighting.noteWash);
+  let sheenFill;
+  if(scene.motion) {
+    const id=prefix+'-sheen',node=element('linearGradient',{id,x1:0,x2:1,y1:0,y2:0},defs);
+    for(const [offset,opacity] of [[0,0],[0.5,1],[1,0]])element('stop',{offset,'stop-color':scene.motion.sheen.color,'stop-opacity':opacity},node);
+    sheenFill=`url(#${id})`;
+  }
   const noteMask=prefix+'-notebook-alpha';
   const mask=element('mask',{id:noteMask,maskUnits:'userSpaceOnUse',x:0,y:0,width:1672,height:941,
     style:'mask-type:alpha'},defs);
@@ -47,8 +53,14 @@ export function drawDialogueUi(stage, svg, element) {
     element('rect',{width:1672,height:941,fill},context);
   }
   const overlay=element('g',{'data-ui-component':'dialogue-paper'},plane('paper'));
+  if(scene.motion)plane('paper').setAttribute('data-motion-paper','true');
   if(stage.lightingEnabled) overlay.setAttribute('filter',stage.uiShadows.paper);
   stage.image(plane('wave'),'material.dialogue-wave',scene.paperBounds);
+  if(scene.motion) {
+    plane('wave').setAttribute('data-motion-wave','true');
+    element('path',{'data-motion-flow':'true',fill:'none',stroke:scene.motion.wave.stroke,
+      'stroke-width':scene.motion.wave.strokeWidth,opacity:0,'pointer-events':'none'},plane('wave'));
+  }
   stage.image(overlay,'material.dialogue-paper',scene.paperBounds);
   if(stage.lightingEnabled) {
     const [x,y,width,height]=scene.lighting.paperWash.bounds;
@@ -59,7 +71,8 @@ export function drawDialogueUi(stage, svg, element) {
       opacity:scene.lighting.paperEdge.opacity,'data-ui-light':'paper-edge','pointer-events':'none'},plane('paper'));
   }
   // Apply a single shadow to the notebook union, including its restored edge.
-  const notebook=element('g',{'data-ui-component':'notebook'},plane('foreground'));
+  const notebookRoot=scene.motion?element('g',{'data-motion-notebook':'true','pointer-events':'none'},plane('foreground')):plane('foreground');
+  const notebook=element('g',{'data-ui-component':'notebook'},notebookRoot);
   if(stage.lightingEnabled) notebook.setAttribute('filter',stage.uiShadows.notebook);
   for(const art of scene.art) {
     if(art.optionalLogo&&!stage.logoVisible) continue;
@@ -68,22 +81,35 @@ export function drawDialogueUi(stage, svg, element) {
       opacity:art.opacity,transform:art.transform,'clip-path':art.clip?`url(#${paperClip})`:undefined,
       filter:stage.lightingEnabled&&art.shadow?stage.uiShadows[art.shadow]:undefined},parent);
     stage.image(group,art.asset,art.bounds,art);
+    if(scene.motion&&['paper-harbor','shore-ink'].includes(art.id)) {
+      group.setAttribute('data-motion-paper','true');
+      group.dataset.motionRestTransform=art.transform??'';
+    }
+    if(scene.motion&&art.id==='speaker-mark')group.setAttribute('data-motion-copy','true');
   }
   if(stage.lightingEnabled) element('path',{d:scene.lighting.noteWash.path,fill:noteWash,
     opacity:scene.lighting.noteWash.opacity,mask:`url(#${noteMask})`,
-    'data-ui-light':'notebook-wash','pointer-events':'none'},plane('foreground'));
-  for(const copy of scene.environmentText) stage.keyedText(plane(copy.layer),copy.key,{...copy,'data-region':copy.id});
+    'data-ui-light':'notebook-wash','pointer-events':'none'},notebookRoot);
+  for(const copy of scene.environmentText) stage.keyedText(scene.motion?notebookRoot:plane(copy.layer),copy.key,{...copy,'data-region':copy.id});
+  if(scene.motion) {
+    const clipGroup=element('g',{'clip-path':`url(#${paperClip})`,'pointer-events':'none'},plane('print'));
+    const [x,y,,height]=scene.motion.sheen.bounds;
+    element('rect',{x,y,width:scene.motion.sheen.width,height,fill:sheenFill,opacity:0,'data-motion-sheen':'true'},clipGroup);
+  }
   for(const rule of scene.rules) element('line',{...rule,stroke:rule.stroke??'#126477','stroke-width':rule.width??1.25,
-    'pointer-events':'none'},plane(rule.layer??'print'));
+    'data-motion-copy':scene.motion?'true':undefined,'pointer-events':'none'},plane(rule.layer??'print'));
   const arrow=scene.speakerArrow;
-  element('path',{d:`M${arrow.x1} ${arrow.y1}H${arrow.x2}l-4 -2m4 2l-4 2`,fill:'none',stroke:'#126477','stroke-width':1.25,'pointer-events':'none'},plane('print'));
+  element('path',{d:`M${arrow.x1} ${arrow.y1}H${arrow.x2}l-4 -2m4 2l-4 2`,fill:'none',stroke:'#126477','stroke-width':1.25,
+    'data-motion-copy':scene.motion?'true':undefined,'pointer-events':'none'},plane('print'));
   for(const choice of scene.choices) stage.drawChoice(plane('print'),choice);
   const copyPlane=plane('text');copyPlane.classList.add('reading-copy');
   for(const copy of scene.text) {
     if(copy.optionalLogo&&!stage.logoVisible)continue;
-    stage.keyedText(copyPlane,copy.key,{...copy,'data-region':copy.id});
+    const node=stage.keyedText(copyPlane,copy.key,{...copy,'data-region':copy.id});
+    if(scene.motion&&!['brand','date','phase'].includes(copy.id))node.setAttribute('data-motion-copy','true');
   }
   for(const choice of scene.choices) stage.keyedText(copyPlane,choice.textKey,{x:choice.baseline[0],y:choice.baseline[1],...choice.font,'data-choice-copy':choice.id});
-  stage.icon(copyPlane,'return',scene.returnIcon);
+  const returnIcon=stage.icon(copyPlane,'return',scene.returnIcon);
+  if(scene.motion)returnIcon.setAttribute('data-motion-copy','true');
   stage.drawContinue(plane('print'),element);
 }

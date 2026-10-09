@@ -1,0 +1,8 @@
+<html lang="en"><head><meta charset="utf-8"><title>Stage 4 OS reduced motion tests</title></head>
+<body>
+  <div id="results"><pre class="ok">OS reduced-motion preference is applied automatically with no animation frame</pre><pre class="ok">Replay and exit settle instantly without ambient or sheen motion</pre><pre class="ok">Choice and continue still activate immediately using keyboard</pre><pre class="ok">Re-render, presentation toggles and cleanup never restart motion</pre><p class="ok">4/4 passed</p></div>
+  <iframe id="pilot" src="../tools/coastal-replica-preview.html?version=4" width="1100" height="820" title="Reduced motion under test"></iframe>
+  <script type="module" src="coastal-replica-stage4-reduced.js"></script>
+
+
+</body></html>

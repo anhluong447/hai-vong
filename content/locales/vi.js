@@ -788,5 +788,14 @@ export default {
   "ui.replica.stage3.view.dark": "UI trên nền tối",
   "ui.replica.stage3.view.detail": "UI trên nền nhiều chi tiết",
   "ui.replica.stage3.lighting": "Ánh sáng và bóng UI",
-  "ui.replica.stage3.logo": "Hiện logo"
+  "ui.replica.stage3.logo": "Hiện logo",
+  "ui.replica.stage4.title": "H?i ?m ? Stage 4 ? chuy?n ??ng UI",
+  "ui.replica.stage4.heading": "Coastal UI ? Stage 4",
+  "ui.replica.stage4.note": "S?ng m?c, gi?y, hoa v? notebook chuy?n ??ng theo t?ng l?p. D?ng pause, xem ch?m v? replay ?? ki?m tra ?? ??c v? nh?p chuy?n; reduced motion theo thi?t l?p h? th?ng.",
+  "ui.replica.stage4.motion": "Chuy?n ??ng UI",
+  "ui.replica.stage4.pause": "T?m d?ng",
+  "ui.replica.stage4.slow": "Xem ch?m ?0,25",
+  "ui.replica.stage4.replay": "Ph?t l?i thanh tho?i",
+  "ui.replica.stage4.hide": "?n thanh tho?i",
+  "ui.replica.stage4.show": "Hi?n thanh tho?i"
 };

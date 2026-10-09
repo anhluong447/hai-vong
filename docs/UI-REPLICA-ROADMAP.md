@@ -3,8 +3,9 @@
 Ngày: 2026-10-09 · revision 2, **phạm vi UI được người dùng chốt lại**.
 Stage 0 và Stage 1 đã có dữ liệu/pipeline; Stage 2 đã có bản dựng thoại ở commit
 `c21e732`. Stage 3 đã triển khai **R15/R16 light/depth UI** và evidence R17.
-G2 vẫn mở: tinh chỉnh sai khác UI tĩnh trong
-[review Stage 3](ui-reviews/coastal-replica-stage3/README.md) trước motion R18–R23.
+Stage 4 đã thêm motion authoring **R18–R23** theo yêu cầu tiếp tục của người dùng.
+G2/G3 vẫn mở: sai khác UI tĩnh và motion visual/device review nằm trong
+[review Stage 4](ui-reviews/coastal-replica-stage4/README.md).
 G2 UI chưa được nghiệm thu; background/pose không còn là điều kiện chặn.
 
 ## Mục tiêu và ranh giới
@@ -139,6 +140,12 @@ không dùng filter phủ cả cảnh để thay bóng/ánh sáng từng compone
 sổ, rim light tóc/áo và scene atmosphere không thuộc tiêu chí stage này.
 
 ## P4 — Motion và effect UI (R18–R23)
+
+**Đã triển khai authoring:** motion sheet/data/controller, loop wave/hoa/notebook,
+paper/choice transitions, sheen/highlight, reduced motion/hidden/interruption,
+native samples và WebM review. Stage 4 tiếp tục theo yêu cầu người dùng trên art
+v3; không tự nghiệm thu G2/G3. Production acceptance vẫn cần sửa UI tĩnh và
+review motion/device. [Evidence](ui-reviews/coastal-replica-stage4/README.md).
 
 | ID | Công việc / đầu ra | Phụ thuộc |
 | --- | --- | --- |

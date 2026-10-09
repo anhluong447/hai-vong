@@ -3,9 +3,12 @@
 2026-10-09 · scope revision 2 · R15/R16 triển khai; R17 có evidence review.
 **G2 visual vẫn mở**: các sai khác UI bên dưới cần đóng trước motion Stage 4.
 
-Mở [preview](http://127.0.0.1:8080/tools/coastal-replica-preview.html).
+Mở [preview tĩnh](http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=3).
 Chọn nền sáng/tối/có chi tiết/cảnh hiện có; bật/tắt ánh sáng để đối chiếu và bật
 logo tùy chọn. Stage 1/2 vẫn ở `?version=1` / `?version=2`.
+
+[Stage 4](../coastal-replica-stage4/README.md) bổ sung motion authoring trên art
+v3 theo yêu cầu tiếp tục; backlog G2 bên dưới vẫn áp dụng, chưa tự nghiệm thu.
 
 ![UI thoại trên nền tối](ui-dark-v2.png)
 

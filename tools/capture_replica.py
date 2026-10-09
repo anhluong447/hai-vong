@@ -35,6 +35,8 @@ def main():
     parser.add_argument('--compare-ui', action='store_true', help='Compare only the versioned UI mask exposed by the Stage 3 preview')
     parser.add_argument('--flat-lighting', action='store_true', help='Disable component lighting for an A/B native capture')
     parser.add_argument('--logo', action='store_true', help='Show the optional dialogue logo')
+    parser.add_argument('--motion-time-ms', type=float, help='Sample Stage 4 ambient presentation time; game/fixture clock stays frozen')
+    parser.add_argument('--record-motion', choices=['ambient','interaction','slow'], help='Encode native sampled UI frames as a WebM review, not a performance benchmark')
     parser.add_argument('--browser', default=r'C:\Program Files\Google\Chrome\Application\chrome.exe')
     args = parser.parse_args()
     if args.compare_reference and (args.variant != 'stage' or args.hook != 'replicaCapture'):
@@ -51,7 +53,7 @@ def main():
     fixture = json.loads((SPEC / 'fixtures.json').read_text(encoding='utf-8'))
     supplemental = json.loads((SPEC / 'dialogue-production.json').read_text(encoding='utf-8')) if args.screen == 'dialogue' else {'catalog':{}}
     contract = {'screen': args.screen, 'capture': fixture['capture'], 'fixture': fixture['screens'][args.screen], 'catalog': {**fixture['catalog'],**supplemental['catalog']}, 'variant':args.variant, 'supplementalFixture':supplemental,
-                'lighting':not args.flat_lighting,'logo':args.logo}
+                'lighting':not args.flat_lighting,'logo':args.logo,'motionSampleMs':args.motion_time_ms}
     process, client = None, None
     with tempfile.TemporaryDirectory(prefix='coastal-capture-', ignore_cleanup_errors=True) as profile:
         try:
@@ -165,6 +167,67 @@ def main():
                     evidence_path.write_bytes(base64.b64decode(diagnostics[kind]))
                 output.with_name(output.stem+'-comparison.json').write_text(json.dumps(diagnostics['report'],ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
                 print('Native overlay/difference saved; diagnostic only, G2 remains subject to visual review.')
+            if args.record_motion:
+                if ready['state'].get('kind')!='stage4-ui-motion':
+                    raise ValueError('--record-motion requires the Stage 4 preview')
+                fps=12
+                duration=16000 if args.record_motion=='ambient' else 6000
+                client.evaluate('''(() => {
+                    const surface=document.createElement('canvas');surface.width=1672;surface.height=941;
+                    const stream=surface.captureStream(0);
+                    const type=['video/webm;codecs=vp9','video/webm;codecs=vp8'].find(MediaRecorder.isTypeSupported);
+                    if(!type)throw new Error('WebM encoding unsupported');
+                    const recorder=new MediaRecorder(stream,{mimeType:type,videoBitsPerSecond:10000000});
+                    const chunks=[];recorder.ondataavailable=event=>{if(event.data.size)chunks.push(event.data);};
+                    window.motionRecording={surface,stream,recorder,chunks,type};recorder.start();
+                    const stage=window.replicaPreview.stage;stage.captureLocked=false;stage.motion.setPaused(true);
+                })()''')
+                started=time.monotonic()
+                count=int(duration/1000*fps)
+                samples=[]
+                for index in range(count+1):
+                    sample_ms=index*1000/fps
+                    if args.record_motion=='interaction':
+                        expression='''(() => {
+                            const s=window.replicaPreview.stage,m=s.motion,i=INDEX;
+                            if(i===0){m.setEnabled(true);m.setVisible(true,{replay:true});}
+                            else m.advance(1000/12);
+                            if(i===12)s.svg.querySelector('[data-choice-id="draft"]').dispatchEvent(new PointerEvent('pointerover',{bubbles:true}));
+                            if(i===18)s.choose('draft');
+                            if(i===24){s.svg.querySelector('[data-choice-id="draft"]').dispatchEvent(new PointerEvent('pointerout',{bubbles:true}));m.setVisible(false);}
+                            if(i===25)m.setVisible(true);
+                            if(i===36)m.setVisible(false);
+                            if(i===42)m.setVisible(true,{replay:true});
+                            return m.snapshot();
+                        })()'''.replace('INDEX',str(index))
+                    else:
+                        presentation=sample_ms*(.25 if args.record_motion=='slow' else 1)
+                        expression=f'window.replicaPreview.stage.motion.freeze({presentation}); window.replicaPreview.stage.motion.snapshot()'
+                    state=client.evaluate(expression)
+                    frame=client.call('Page.captureScreenshot',{'format':'jpeg','quality':95,'fromSurface':True,'captureBeyondViewport':False})['data']
+                    client.evaluate('''(async()=>{
+                        const r=window.motionRecording,image=new Image();image.src='data:image/jpeg;base64,'+FRAME;
+                        await image.decode();r.surface.getContext('2d').drawImage(image,0,0);r.stream.getVideoTracks()[0].requestFrame();
+                    })()'''.replace('FRAME',json.dumps(frame)),await_promise=True)
+                    samples.append({'frame':index,'presentation':state})
+                    delay=started+(index+1)/fps-time.monotonic()
+                    if delay>0:time.sleep(delay)
+                video=client.evaluate('''(async()=>{
+                    const r=window.motionRecording;await new Promise(resolve=>{r.recorder.onstop=resolve;r.recorder.stop();});
+                    const blob=new Blob(r.chunks,{type:r.type});r.stream.getTracks().forEach(track=>track.stop());
+                    const data=await new Promise(resolve=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.readAsDataURL(blob);});
+                    return {mimeType:r.type,bytes:blob.size,data:data.split(',')[1]};
+                })()''',await_promise=True)
+                video_bytes=base64.b64decode(video['data'])
+                output.with_suffix('.webm').write_bytes(video_bytes)
+                output.with_name(output.stem+'-motion.json').write_text(json.dumps({
+                    'version':1,'sequence':args.record_motion,'width':1672,'height':941,'fpsRequested':fps,
+                    'sampleDurationMs':duration,'wallDurationSeconds':time.monotonic()-started,
+                    'frameCount':len(samples),'mimeType':video['mimeType'],'sha256':hashlib.sha256(video_bytes).hexdigest().upper(),
+                    'renderer':'Native CDP frames; JPEG quality 95; browser Canvas/WebM encoding; no art asset edits',
+                    'role':'sampled visual review; browser encoder timing is not realtime UI/device performance certification',
+                    'sourceCapture':output.name,'samples':samples},indent=2)+'\n',encoding='utf-8')
+                print(f'Motion review saved: {output.with_suffix(".webm").relative_to(ROOT)}; {len(samples)} native frames.')
             print(f'Native capture: {output.relative_to(ROOT)}; viewport 1672x941 @ DPR 1; {ready["state"]["kind"] if "kind" in ready["state"] else "replica fixture"}')
         finally:
             if client:

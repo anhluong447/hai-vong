@@ -1,8 +1,8 @@
 {
-  "version": 4,
+  "version": 5,
   "date": "2026-10-09",
-  "stage": "P3",
-  "status": "ui-light-depth-implemented; R17-evidence-delivered; G2-visual-review-open",
+  "stage": "P4",
+  "status": "UI-motion-authoring-implemented; G2/G3-visual-review-open",
   "tasks": {
     "R01": {
       "status": "complete",
@@ -161,24 +161,91 @@
         "../../../content/ui/coastal-dialogue-ui.json"
       ],
       "note": "Native context variants, lighting A/B, masked overlay/diff and regression evidence; UI shape/type/decoration corrections remain."
+    },
+    "R18": {
+      "status": "authoring-implemented; motion-review-open",
+      "scope": "presentation-only UI motion; context/actors deferred",
+      "evidence": [
+        "dialogue-motion.md",
+        "../../../content/ui/coastal-dialogue-motion.json",
+        "../../../src/ui/replica/DialogueMotion.js",
+        "../../ui-reviews/coastal-replica-stage4/README.md",
+        "../../ui-reviews/coastal-replica-stage4/validation.json"
+      ]
+    },
+    "R19": {
+      "status": "authoring-implemented; motion-review-open",
+      "scope": "presentation-only UI motion; context/actors deferred",
+      "evidence": [
+        "dialogue-motion.md",
+        "../../../content/ui/coastal-dialogue-motion.json",
+        "../../../src/ui/replica/DialogueMotion.js",
+        "../../ui-reviews/coastal-replica-stage4/README.md",
+        "../../ui-reviews/coastal-replica-stage4/validation.json"
+      ]
+    },
+    "R20": {
+      "status": "authoring-implemented; motion-review-open",
+      "scope": "presentation-only UI motion; context/actors deferred",
+      "evidence": [
+        "dialogue-motion.md",
+        "../../../content/ui/coastal-dialogue-motion.json",
+        "../../../src/ui/replica/DialogueMotion.js",
+        "../../ui-reviews/coastal-replica-stage4/README.md",
+        "../../ui-reviews/coastal-replica-stage4/validation.json"
+      ]
+    },
+    "R21": {
+      "status": "authoring-implemented; motion-review-open",
+      "scope": "presentation-only UI motion; context/actors deferred",
+      "evidence": [
+        "dialogue-motion.md",
+        "../../../content/ui/coastal-dialogue-motion.json",
+        "../../../src/ui/replica/DialogueMotion.js",
+        "../../ui-reviews/coastal-replica-stage4/README.md",
+        "../../ui-reviews/coastal-replica-stage4/validation.json"
+      ]
+    },
+    "R22": {
+      "status": "authoring-implemented; motion-review-open",
+      "scope": "presentation-only UI motion; context/actors deferred",
+      "evidence": [
+        "dialogue-motion.md",
+        "../../../content/ui/coastal-dialogue-motion.json",
+        "../../../src/ui/replica/DialogueMotion.js",
+        "../../ui-reviews/coastal-replica-stage4/README.md",
+        "../../ui-reviews/coastal-replica-stage4/validation.json"
+      ]
+    },
+    "R23": {
+      "status": "software-review-evidence-delivered; device-visual-review-open",
+      "scope": "presentation-only UI motion; context/actors deferred",
+      "evidence": [
+        "dialogue-motion.md",
+        "../../../content/ui/coastal-dialogue-motion.json",
+        "../../../src/ui/replica/DialogueMotion.js",
+        "../../ui-reviews/coastal-replica-stage4/README.md",
+        "../../ui-reviews/coastal-replica-stage4/validation.json"
+      ]
     }
   },
   "gates": {
     "G0": "All locked measurements retained; 169 regions classified; dialogue conservative interior mask delivered, mixed fringe reference alpha unresolved.",
     "G1": "Material sample retained; review UI paper/wave/flower/notebook edges; scene/portrait matching excluded",
     "G2": "not-accepted: Stage 3 scoped evidence delivered; shape/foam/type/icons/decorations need refinement; no context/pose blockers.",
-    "G3": "not-started; UI motion/effects only",
-    "G4": "Stage 1/2/3 preview input/focus/capture/disposal tested; gameplay integration pending.",
+    "G3": "not-accepted: R18-R23 authoring/tests/native clips delivered; static G2 corrections and real-browser/device visual cadence/overlap review remain.",
+    "G4": "Stage 1/2/3/4 isolated input/focus/capture/disposal/reduced-motion tested; gameplay integration pending.",
     "G5": "not-started; UI performance with context cost recorded separately"
   },
   "measurementPrecision": "Native layout retained; conservative dialogue interior mask does not claim recovered alpha or uncertain fringe precision.",
   "runtimeChanges": "isolated SVG preview only; gameplay entries unchanged",
-  "next": "Resolve G2 UI static corrections from Stage 3 review, then R18-R23 UI motion.",
+  "next": "Resolve dialogue G2 visual corrections and G3 live/device review, then menu UI R24-R27.",
   "knownProductionTasks": [
     "ui-scope.json",
     "../../ui-reviews/coastal-replica-stage2/README.md",
     "../../UI-REPLICA-ROADMAP.md",
-    "../../ui-reviews/coastal-replica-stage3/README.md"
+    "../../ui-reviews/coastal-replica-stage3/README.md",
+    "../../ui-reviews/coastal-replica-stage4/README.md"
   ],
   "scopeRevision": 2,
   "scope": "ui-scope.json",
@@ -192,5 +259,6 @@
     "Menu harbor/held-notebook pose formerly R24",
     "Dossier seated portrait matching formerly R28",
     "HUD world art/collision/actors formerly R31-R35"
-  ]
+  ],
+  "stage4Authorization": "User requested next stage; motion authoring proceeds on v3 art, without promoting unresolved G2/G3 to accepted."
 }

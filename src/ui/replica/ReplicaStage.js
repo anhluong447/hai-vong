@@ -1,6 +1,7 @@
 import {t} from '../../shared/text.js';
 import {dialoguePilot, replicaDesign, replicaFonts, replicaLayers} from '../../../content/ui/coastal-replica.js';
 import {drawDialogueUi} from './DialogueUiComposition.js';
+import {DialogueMotion} from './DialogueMotion.js';
 
 const namespace = 'http://www.w3.org/2000/svg';
 const projectRoot = new URL('../../../',import.meta.url);
@@ -27,7 +28,9 @@ export class ReplicaStage {
     this.logoVisible = false;
     this.abort = new AbortController();
     this.assets = new Map();
+    this.rasterUrls=new Set();
     this.deskClipId = `replica-desk-${++nextStageId}`;
+    if(scene.motion)this.motion=new DialogueMotion(this);
   }
 
   async load(manifestURL) {
@@ -48,6 +51,16 @@ export class ReplicaStage {
       if (image.naturalWidth !== asset.size[0] || image.naturalHeight !== asset.size[1]) throw new RangeError(`Replica image size mismatch: ${asset.id}`);
       return [asset.id,{...asset,url,image}];
     }));
+    if(this.scene.motion) await Promise.all(entries.filter(([id])=>this.scene.motion.rasterCache.includes(id)).map(async ([,asset])=>{
+      // Browser-native raster cache for expensive SVG grain; source/master bytes stay untouched.
+      const surface=document.createElement('canvas');surface.width=asset.size[0];surface.height=asset.size[1];
+      surface.getContext('2d').drawImage(asset.image,0,0);
+      const blob=await new Promise(resolve=>surface.toBlob(resolve,'image/png'));
+      if(this.disposed)return;
+      if(!blob)throw new Error(`Replica raster cache failed: ${asset.id}`);
+      const url=URL.createObjectURL(blob);this.rasterUrls.add(url);asset.presentationURL=url;
+      const image=new Image();image.src=url;await image.decode();asset.presentationImage=image;
+    }));
     const probe = t('ui.replica.preview.typeGlyphs');
     const fonts=[...replicaFonts,...(this.scene.environmentText??[]).map(copy=>({family:copy.family??'Source Serif 4',weight:copy.weight??400,size:copy.size}))];
     await Promise.all(fonts.map(async font => {
@@ -64,13 +77,14 @@ export class ReplicaStage {
   image(parent,id,bounds,{visibleRegistration=false,sourceRect,fit='slice'}={}) {
     const asset = this.assets.get(id);
     if (!asset) throw new RangeError(`Unknown replica asset: ${id}`);
+    const url=this.motion?.useRasterCache?(asset.presentationURL??asset.url):asset.url;
     const [x,y,width,height] = bounds;
     if (visibleRegistration || sourceRect) {
       const frame = element('svg',{x,y,width,height,viewBox:(sourceRect??asset.visibleBounds).join(' '),preserveAspectRatio:`xMidYMin ${fit}`,overflow:'hidden','data-asset-id':id},parent);
       const [nativeWidth,nativeHeight] = asset.size;
-      return element('image',{x:0,y:0,width:nativeWidth,height:nativeHeight,href:asset.url},frame);
+      return element('image',{x:0,y:0,width:nativeWidth,height:nativeHeight,href:url},frame);
     }
-    return element('image',{x,y,width,height,href:asset.url,preserveAspectRatio:'none','data-asset-id':id},parent);
+    return element('image',{x,y,width,height,href:url,preserveAspectRatio:'none','data-asset-id':id},parent);
   }
 
   keyedText(parent,key,{x,y,size=24,weight=400,family='Source Serif 4',fill='#092d40',spacing=0,lineHeight,anchor,fontStyle,textCase,id,layer,key:sourceKey,...extra}) {
@@ -92,6 +106,7 @@ export class ReplicaStage {
     const node = element('svg',{x,y,width,height,viewBox:'0 0 32 32','aria-hidden':'true'},parent);
     element('use',{href:this.assets.get('material.icons').url+'#'+id},node);
     return node;
+    return node;
   }
 
   render() {
@@ -106,6 +121,10 @@ export class ReplicaStage {
     else throw new RangeError(`Unknown replica view: ${this.view}`);
     this.host.replaceChildren(svg);
     this.applyLayer();
+    if(this.scene.motion) {
+      if(svg.dataset.uiOnly)this.motion.attach(svg);
+      else {this.motion.stop();this.motion.events?.abort();this.motion.svg=null;}
+    }
   }
 
   drawStage(svg) {
@@ -155,10 +174,13 @@ export class ReplicaStage {
     const selected = this.selectedChoice === choice.id;
     const group = element('g',{class:'choice',role:'button',tabindex:0,'data-choice-id':choice.id,
       'aria-label':t(choice.textKey),'aria-pressed':String(selected),'aria-disabled':String(this.captureLocked)},parent);
-    const surface=this.image(group,selected?'material.choice-gold':'material.choice-plain',choice.bounds);
+    const art=this.scene.motion?element('g',{'data-choice-art':choice.id,'pointer-events':'none'},group):group;
+    const surface=this.image(art,selected?'material.choice-gold':'material.choice-plain',choice.bounds);
     surface.style.filter = this.scene.uiOnly ? (this.lightingEnabled?this.uiShadows.choice:'') : 'drop-shadow(0 2px 2px #07273845)';
-    this.icon(group,choice.icon,[x+29,y+16,28,28]);
-    if (selected) this.icon(group,'chevron',[x+width-40,y+15,25,29]);
+    this.icon(art,choice.icon,[x+29,y+16,28,28]);
+    if (selected) this.icon(art,'chevron',[x+width-40,y+15,25,29]);
+    if(this.scene.motion)element('rect',{x:x+1,y:y+1,width:width-2,height:height-2,rx:4,
+      fill:this.scene.motion.choice.color,opacity:0,'data-choice-light':choice.id,'pointer-events':'none'},art);
     element('rect',{x,y,width,height,fill:'transparent','pointer-events':'all'},group);
     element('rect',{x:x-3,y:y-3,width:width+6,height:height+6,rx:4,fill:'none',stroke:'#f9edbe','stroke-width':3,class:'focus-ring'},group);
     group.addEventListener('click',() => this.choose(choice.id));
@@ -220,9 +242,10 @@ export class ReplicaStage {
   }
 
   choose(id) {
-    if (this.disposed || this.captureLocked) return;
+    if (this.disposed || this.captureLocked || this.motion&&!this.motion.interactive) return;
     if (!this.scene.choices.some(choice => choice.id === id)) throw new RangeError(`Unknown replica choice: ${id}`);
     this.selectedChoice = id;
+    this.motion?.select(id);
     const focused = this.svg.contains(document.activeElement);
     this.render();
     if (focused) this.svg.querySelector(`[data-choice-id="${id}"]`)?.focus();
@@ -235,7 +258,7 @@ export class ReplicaStage {
       'aria-disabled':String(this.captureLocked)},parent);
     make('rect',{x,y,width,height,fill:'transparent','pointer-events':'all'},next);
     make('rect',{x,y,width,height,fill:'none',stroke:'#087185','stroke-width':2,class:'focus-ring','pointer-events':'none'},next);
-    const activate=()=>{if(!this.captureLocked&&!this.disposed)this.onAction({type:'continue'});};
+    const activate=()=>{if(!this.captureLocked&&!this.disposed&&(!this.motion||this.motion.interactive))this.onAction({type:'continue'});};
     next.addEventListener('click',activate);
     next.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
   }
@@ -346,6 +369,9 @@ export class ReplicaStage {
     if (this.disposed) return;
     this.disposed = true;
     this.abort.abort();
+    this.motion?.dispose();
+    for(const url of this.rasterUrls)URL.revokeObjectURL(url);
+    this.rasterUrls.clear();
     this.svg?.remove();
     this.assets.clear();
     this.onAction = ()=>{};

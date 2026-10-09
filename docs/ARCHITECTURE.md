@@ -158,8 +158,8 @@ independent planes, uniform fit/letterboxing, scaled input, keyboard focus and
 resource disposal. It receives content and structured callbacks; it does not
 import domain/session/storage or advance gameplay time. It is mounted only by
 `tools/coastal-replica-preview.html`, separately from the coastal v1 gameplay UI.
-The default preview selects Stage 3 UI; `?version=1` / `?version=2` preserve
-the earlier pilot and full-scene reconstruction.
+The default preview selects Stage 4 UI motion; `?version=1` / `?version=2` /
+`?version=3` preserve the earlier pilot, full-scene reconstruction and static UI.
 
 `content/ui/coastal-replica-pilot.json` owns authored placements, font styles,
 choices and contact-sheet fixtures. `tools/build_replica_assets.py` compiles it
@@ -229,6 +229,30 @@ stores light/dark/detailed/scene, contact and A/B evidence separately from old
 full-frame scores. Read [Stage 3 review](ui-reviews/coastal-replica-stage3/README.md)
 for remaining G2 UI corrections before motion. Passing behavior tests does not
 certify parity.
+
+Stage 4 reuses the v3 art pack. `content/ui/coastal-dialogue-motion.json` compiles
+offline into motion data; its facade combines it with the static UI composition.
+`DialogueMotion.js` is a concrete presentation controller owned by `ReplicaStage`,
+not an engine or a gameplay scheduler. One RAF clock updates wave contour/art,
+decoration transforms, paper/choice transitions and a clipped sheen. Parameters,
+pivots and periods come from content. Native hitboxes and main reading baselines
+remain fixed; existing harbor transforms and opacity are preserved. Notebook
+edge, PNG, wash and handwriting share an outer transform; lettering stays outside
+shadow filters. Renderer replacement aborts old SVG listeners and rebinds the same
+clock; disposal removes frame/media/visibility listeners. Three expensive grain
+SVG materials are rasterized once into native browser caches for motion; source
+files stay intact, static/reduced capture uses original SVG, and temporary blob
+URLs are revoked on disposal. Small cached alpha/color rounding is not art parity.
+
+Reduced motion settles immediately, hidden tabs pause without catch-up, and
+interrupted transitions continue from current progress. Callbacks remain immediate
+and never wait for a transition. Static capture freezes a neutral settled state;
+optional sampled time and WebM review use a separate presentation clock. Native
+recorded frames and browser encoding are diagnostics, not device-performance
+certification. Stage 4 authoring proceeds under the user's continuation request;
+G2 static corrections and G3 visual/device review remain open. See the
+[motion sheet](ui-specs/coastal-replica/dialogue-motion.md) and
+[Stage 4 review](ui-reviews/coastal-replica-stage4/README.md).
 
 ### Coastal UI components (v1)
 

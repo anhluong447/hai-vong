@@ -7,3 +7,4 @@ assets/fonts/coastal-replica/**/*.ttf binary
 content/ui/coastal-replica-pilot.json text eol=lf
 content/ui/coastal-dialogue.json text eol=lf
 content/ui/coastal-dialogue-ui.json text eol=lf
+content/ui/coastal-dialogue-motion.json text eol=lf
