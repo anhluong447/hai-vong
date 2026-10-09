@@ -13,6 +13,8 @@ powershell -ExecutionPolicy Bypass -File tools/serve.ps1
 - Sandbox: <http://localhost:8080/sandbox.html>
 - Sandbox vòng chơi theo bible mới: <http://localhost:8080/gameplay.html>
 - Map test 2D pixel: <http://localhost:8080/pixel.html>
+- Coastal UI có chuyển động: <http://localhost:8080/tools/coastal-ui-preview.html>
+- Thoại 9 nhân vật với component coastal: <http://localhost:8080/interaction.html>
 - Tests: <http://localhost:8080/tests/>
 
 HTML/CSS/JavaScript thuần và Canvas, không cần build hoặc cài dependency.
@@ -41,6 +43,8 @@ Xem [hướng dẫn và giới hạn](docs/GAMEPLAY-SANDBOX.md). Map truyện th
 - [Hướng dẫn sandbox](docs/SANDBOX.md)
 - [Bộ luật và quyết định chuẩn hóa](docs/RULES.md)
 - [Kiến trúc](docs/ARCHITECTURE.md)
+- [Component và chuyển động coastal](docs/UI-COMPONENTS-PLAN.md), [review bản chạy v1](docs/ui-reviews/coastal-v1/README.md)
+- [Roadmap replica visual — 45 bước, chuẩn asset/lighting/motion](docs/UI-REPLICA-ROADMAP.md)
 - [Quy trình phát triển và quy tắc nội dung](docs/DEVELOPMENT.md)
 - [Nội dung, văn bản và balance](content/README.md)
 - [Kết quả kiểm chứng và baseline](docs/VALIDATION.md)

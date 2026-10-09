@@ -54,6 +54,31 @@ reason and playtest evidence recorded separately.
 
 ## Files and artifacts
 
+For coastal UI development, follow [UI-COMPONENTS-PLAN.md](UI-COMPONENTS-PLAN.md).
+
+The active plan is now [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md); the older
+component plan is historical. Complete its R01-R04 measurement/inventory/capture
+work first, then a static dialogue replica before motion or wider integration.
+Use the reference's native 1672x941 frame, identical fixtures and a settled
+animation state for overlays/diffs. Store versioned art/layer/light/motion review
+evidence separately from browser behavior results. Do not certify visual parity
+from passing browser tests or trade the composition for mobile reflow.
+Keep the user-selected reference set in `docs/ui-concepts/coastal-editorial-v1/`
+with its prompt record and SHA-256 inventory. Do not overwrite it with later
+iterations or use its rasterized text/buttons as runtime UI.
+
+Implement in reviewable milestones: component gallery, shared dialogue view,
+persistent shell/HUD, menu/dossier, then visual/performance polish. Runtime
+milestones require the verification above plus focused browser checks for
+focus/input, interrupted transitions and resource disposal. Store new review
+screenshots/video separately and record the device/browser for performance checks.
+
+The v1 component gallery is `tools/coastal-ui-preview.html`; pixel.html and
+interaction.html use the same components. See [v1 review](ui-reviews/coastal-v1/README.md).
+Use `python tools/run_browser_tests.py --reduced-motion` for the browser suite
+with reduced motion enabled. Capture a review without replacing historical images:
+`python tools/run_browser_tests.py --capture --url http://localhost:8080/tools/coastal-ui-preview.html --screenshot-path docs/ui-reviews/coastal-v1/dialogue-desktop.png --width 1366 --height 900 --virtual-time-budget 3500`.
+
 Keep runtime resources in `assets/`, current authoring/playtest tools in `tools/`,
 and durable documentation in `docs/`. Historical review images live in
 `archive/development/reviews/`; completed migration scripts live in

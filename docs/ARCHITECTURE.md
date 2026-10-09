@@ -117,6 +117,42 @@ The prototype does not require a generic ECS, global event queue or engine migra
 
 ## Future work
 
+### Coastal UI components (v1)
+
+The active visual target is now a 1:1 reconstruction of the four original
+concepts, governed by [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md). The v1
+components below remain a technical prototype; their visual implementation has
+not passed the replica gates. Future screen compositions use a 1672x941 design
+stage with uniform scaling, authored art layers/masks and separate dialogue,
+menu, dossier and world/HUD compositions. Production assets, layout/light/motion
+sheets and deterministic captures are planned in the roadmap; those boundaries
+are not yet implemented. Preserve session/text/input/save/lifecycle contracts
+while replacing the presentation. Art, static visual, motion, behavior and
+performance reviews are distinct acceptance gates.
+
+The user-selected art reference and component roadmap are documented in
+[UI-COMPONENTS-PLAN.md](UI-COMPONENTS-PLAN.md). The first runtime version is used
+by pixel.html and interaction.html; the formula/debug entry remains independent.
+Preserve the four reference images, prompts and hashes in
+`docs/ui-concepts/coastal-editorial-v1/`.
+
+Concrete DOM/SVG views live under `src/ui/coastal/`: CoastalShell, DialogueView,
+MenuView, OverlayHost, surfaces and MotionScope. The existing presentation
+controller remains the composition boundary; a separate screen-adapter folder
+is deferred until it has a concrete use. The persistent shell updates HUD and
+overlays without replacing the world Canvas. DialogueView and MenuView reuse
+DialogueSprite registry/loading behavior. Controllers own GameSession commands
+and world input locking; views receive display models and structured callbacks.
+Presentation motion must not advance gameplay time or dispatch domain commands.
+
+CSS design/motion tokens live in `styles/coastal/`; gallery fixtures/navigation
+keys in `content/ui/` and player-facing text in the locale catalog. Existing
+portrait assets and locally licensed fonts are reused; SVG waves are code-native.
+MotionScope owns cancellation, visibility pausing and reduced-motion changes;
+OverlayHost owns focus trapping/restoration and background inertness. No gameplay
+command waits for animation completion. See the [implementation review](ui-reviews/coastal-v1/README.md)
+for entry points, checks and remaining art/performance work.
+
 Add characters/cases/dialogue/maps through content modules and catalog entries.
 Add mechanics through focused domain handlers and explicit action contracts.
 Replace persistence by providing a different storage adapter. New phases, stats
