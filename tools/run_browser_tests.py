@@ -16,7 +16,11 @@ def main():
     parser.add_argument('--browser', default=r'C:\Program Files\Google\Chrome\Application\chrome.exe')
     parser.add_argument('--capture', action='store_true', help='Capture the supplied URL instead of testing it')
     parser.add_argument('--output-prefix', choices=['test', 'playtest'], default='test')
-    parser.add_argument('--virtual-time-budget', type=int, default=60000)
+    parser.add_argument('--virtual-time-budget', type=int, default=120000)
+    parser.add_argument('--screenshot-path', type=Path, help='Output path for capture mode; preserves historical previews')
+    parser.add_argument('--width', type=int, default=1440)
+    parser.add_argument('--height', type=int, default=1100)
+    parser.add_argument('--reduced-motion', action='store_true')
     args = parser.parse_args()
     root = Path(__file__).resolve().parent
     with urllib.request.urlopen(args.url, timeout=5) as response:
@@ -28,18 +32,21 @@ def main():
         arguments = [
             args.browser, '--headless', '--disable-gpu', '--no-first-run',
             '--no-default-browser-check', f'--user-data-dir={profile}',
-            '--window-size=1440,1100', f'--virtual-time-budget={args.virtual_time_budget}', '--dump-dom',
+            f'--window-size={args.width},{args.height}', f'--virtual-time-budget={args.virtual_time_budget}', '--dump-dom',
             '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
         ]
+        if args.reduced_motion:
+            arguments.append('--force-prefers-reduced-motion')
+        screenshot = (args.screenshot_path or root.parent / 'archive/development/reviews/sandbox-preview.png').resolve()
         if args.capture:
-            arguments.append(f'--screenshot={root.parent / "archive/development/reviews/sandbox-preview.png"}')
+            screenshot.parent.mkdir(parents=True, exist_ok=True)
+            arguments.append(f'--screenshot={screenshot}')
         arguments.append(args.url)
         result = subprocess.run(arguments, capture_output=True, text=True, encoding='utf-8', errors='replace',
             env=environment, timeout=45)
     (root / ('preview_dom.log' if args.capture else f'{args.output_prefix}_results.log')).write_text(result.stdout, encoding='utf-8')
     (root / ('preview_browser.log' if args.capture else f'{args.output_prefix}_browser.log')).write_text(result.stderr, encoding='utf-8')
     if args.capture:
-        screenshot = root.parent / 'archive/development/reviews/sandbox-preview.png'
         if result.returncode != 0 or not screenshot.exists():
             print('Screenshot failed. See tools/test_browser.log.')
             return 1
