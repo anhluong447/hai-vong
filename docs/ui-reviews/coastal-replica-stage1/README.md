@@ -2,7 +2,7 @@
 
 2026-10-09 · **R05–R08 đã bàn giao pipeline và mẫu 7 lớp thực.** Stage 0 đã commit
 ở `7d9a65a`. Mẫu Stage 1 chạy tại
-<http://127.0.0.1:8080/tools/coastal-replica-preview.html> sau khi bật server.
+<http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=1> sau khi bật server.
 Đây là mẫu kỹ thuật/art cho replica; G2 toàn màn chưa đạt.
 
 ## Bằng chứng

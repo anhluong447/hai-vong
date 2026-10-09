@@ -74,7 +74,7 @@ Keep the user-selected reference set in `docs/ui-concepts/coastal-editorial-v1/`
 with its prompt record and SHA-256 inventory. Do not overwrite it with later
 iterations or use its rasterized text/buttons as runtime UI.
 
-Stage 1 is available at `tools/coastal-replica-preview.html`. Edit the authoring
+Stage 1 is available at `tools/coastal-replica-preview.html?version=1`. Edit the authoring
 JSON in `content/ui/coastal-replica-pilot.json` and materials under
 `assets/ui/coastal-replica/v1/masters/`, then run:
 
@@ -83,7 +83,7 @@ python tools/build_replica_assets.py --build
 python tools/build_replica_assets.py --check
 python tools/check_architecture.py
 python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-replica-stage1.html
-python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --compare-reference --output docs/ui-reviews/coastal-replica-stage1/pilot-native-v3.png
+python tools/capture_replica.py --url 'http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=1' --screen dialogue --compare-reference --output docs/ui-reviews/coastal-replica-stage1/pilot-native-v4.png
 ```
 
 The art builder uses Pillow for read-only PNG alpha inspection; install Pillow
@@ -97,8 +97,35 @@ Use a new output version after art changes; historical captures are evidence,
 not proof that the current manifest matches. Always run the main browser suite
 and baseline checker before the focused suite overwrites `test_results.log`.
 
+Stage 2 is the default preview at `tools/coastal-replica-preview.html`. Edit
+`content/ui/coastal-dialogue.json` and `assets/ui/coastal-replica/v2/masters/materials.json`;
+keep bitmap masters and [generation prompts](../assets/ui/coastal-replica/v2/prompts.json).
+Never edit generated JS/export SVG/manifest directly. Its review has delivered
+R09-R14 implementation and comparison evidence, with G2 corrections still open.
+
+```powershell
+python tools/build_dialogue_replica.py --build
+python tools/build_dialogue_replica.py --check
+python tools/build_replica_assets.py --check
+python tools/coastal_reference_specs.py --check
+python tools/check_architecture.py
+python tools/run_browser_tests.py --url http://127.0.0.1:8080/tests/index.html
+python tools/check_baselines.py
+python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-replica-stage2.html --output-prefix playtest
+python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --compare-reference --output docs/ui-reviews/coastal-replica-stage2/dialogue-native-v5.png
+```
+
+Use `--output-prefix playtest` for focused suites to preserve main-suite evidence
+used by the baseline checker. Stage 2 also supports `--variant props` for the
+six PNG masters. Contact sheets and native captures must share the current
+manifest after an art change; use a new filename/version rather than replacing
+review history. The dialogue capture merges its supplemental fixture into the
+report; the original Stage 0 fixture/reference lock remains unchanged. Inspect
+alpha/native overlays and update the explicit G2 backlog in
+[Stage 2 review](ui-reviews/coastal-replica-stage2/README.md) before starting R15.
+
 The earlier component-gallery milestones below describe the v1 prototype.
-Replica work continues at R09-R45 and their art/static/motion gates. Runtime
+Replica work continues with R14 visual corrections, then R15-R45 and their art/static/motion gates. Runtime
 milestones require the verification above plus focused browser checks for
 focus/input, interrupted transitions and resource disposal. Store new review
 screenshots/video separately and record the device/browser for performance checks.

@@ -1,0 +1,1208 @@
+{
+  "version": 2,
+  "pack": "coastal-dialogue-stage2",
+  "stage": [
+    1672,
+    941
+  ],
+  "sourceReference": "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+  "sourceReferenceSHA256": "68C076B9D013523B745E61E1AF35A8251742BBF7B774C02245F89DACF3D2A5A2",
+  "compositionSource": "content/ui/coastal-dialogue.json",
+  "compositionSourceSHA256": "9BDF36A0D6C03C9429988BED3D26BA36D4EA131D71CC9F924EB18DA86B676A0B",
+  "assets": [
+    {
+      "id": "material.dialogue-paper",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/dialogue-paper.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/dialogue-paper.svg",
+      "size": [
+        1672,
+        342
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        1672,
+        342
+      ],
+      "sha256": "331017A41BD762E8C9102FBE1C437ABB4BD0047439830717F8D2C987503AC49D",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "paper-plane",
+          "asset": "material.dialogue-paper",
+          "layer": "paper",
+          "bounds": [
+            0,
+            599,
+            1672,
+            342
+          ],
+          "z": 30,
+          "placementPivot": [
+            0,
+            599
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.dialogue-wave",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/dialogue-wave.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/dialogue-wave.svg",
+      "size": [
+        1672,
+        342
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        1672,
+        342
+      ],
+      "sha256": "452DCBC60BD947F248A903E98526308927C739C0F9A0AE22A41BBFAADF9D7E9A",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "wave-plane",
+          "asset": "material.dialogue-wave",
+          "layer": "wave",
+          "bounds": [
+            0,
+            599,
+            1672,
+            342
+          ],
+          "z": 20,
+          "placementPivot": [
+            0,
+            599
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.choice-gold",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/choice-gold.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/choice-gold.svg",
+      "size": [
+        446,
+        63
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        446,
+        63
+      ],
+      "sha256": "32B2ECE284FF27AF1E8BD4AD753D704F9BFA880F5B0769B526B4F74F533BD0F5",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "verify-gold",
+          "asset": "material.choice-gold",
+          "layer": "print",
+          "bounds": [
+            482,
+            462,
+            446,
+            63
+          ],
+          "textKeys": [
+            "ui.replica.dialogue.choices.1"
+          ],
+          "variant": "selected",
+          "z": 40,
+          "placementPivot": [
+            482,
+            462
+          ]
+        },
+        {
+          "id": "draft-gold",
+          "asset": "material.choice-gold",
+          "layer": "print",
+          "bounds": [
+            483,
+            530,
+            413,
+            60
+          ],
+          "textKeys": [
+            "ui.replica.dialogue.choices.2"
+          ],
+          "variant": "selected",
+          "z": 40,
+          "placementPivot": [
+            483,
+            530
+          ]
+        },
+        {
+          "id": "listen-gold",
+          "asset": "material.choice-gold",
+          "layer": "print",
+          "bounds": [
+            483,
+            596,
+            413,
+            59
+          ],
+          "textKeys": [
+            "ui.replica.dialogue.choices.3"
+          ],
+          "variant": "selected",
+          "z": 40,
+          "placementPivot": [
+            483,
+            596
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.choice-plain",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/choice-plain.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/choice-plain.svg",
+      "size": [
+        413,
+        60
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        413,
+        60
+      ],
+      "sha256": "2DC67D67616C4874846C28CAD87840B323E0AF75BFA59F40E6D5D74339237E96",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "verify-plain",
+          "asset": "material.choice-plain",
+          "layer": "print",
+          "bounds": [
+            482,
+            462,
+            446,
+            63
+          ],
+          "textKeys": [
+            "ui.replica.dialogue.choices.1"
+          ],
+          "variant": "unselected",
+          "z": 40,
+          "placementPivot": [
+            482,
+            462
+          ]
+        },
+        {
+          "id": "draft-plain",
+          "asset": "material.choice-plain",
+          "layer": "print",
+          "bounds": [
+            483,
+            530,
+            413,
+            60
+          ],
+          "textKeys": [
+            "ui.replica.dialogue.choices.2"
+          ],
+          "variant": "unselected",
+          "z": 40,
+          "placementPivot": [
+            483,
+            530
+          ]
+        },
+        {
+          "id": "listen-plain",
+          "asset": "material.choice-plain",
+          "layer": "print",
+          "bounds": [
+            483,
+            596,
+            413,
+            59
+          ],
+          "textKeys": [
+            "ui.replica.dialogue.choices.3"
+          ],
+          "variant": "unselected",
+          "z": 40,
+          "placementPivot": [
+            483,
+            596
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.date-paper",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/date-paper.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/date-paper.svg",
+      "size": [
+        247,
+        115
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        247,
+        115
+      ],
+      "sha256": "D0706A58A44C915AD070F31E0967F96503C3DC4EDC949750230A771B001477EA",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "date-paper",
+          "asset": "material.date-paper",
+          "layer": "print",
+          "bounds": [
+            35,
+            30,
+            247,
+            115
+          ],
+          "z": 40,
+          "placementPivot": [
+            35,
+            30
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.insignia",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/insignia.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/insignia.svg",
+      "size": [
+        96,
+        64
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        96,
+        64
+      ],
+      "sha256": "0B8C6EB1363AB8D602193331692AEA0672E454B3849B78CCE6AA29683F42ECC9",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "speaker-mark",
+          "asset": "material.insignia",
+          "layer": "print",
+          "bounds": [
+            97,
+            692,
+            68,
+            48
+          ],
+          "z": 40,
+          "placementPivot": [
+            97,
+            692
+          ]
+        },
+        {
+          "id": "poster-mark",
+          "asset": "material.insignia",
+          "layer": "scene",
+          "bounds": [
+            844,
+            128,
+            49,
+            32
+          ],
+          "opacity": 0.66,
+          "z": 0,
+          "placementPivot": [
+            844,
+            128
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.icons",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/icons.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/icons.svg",
+      "size": [
+        384,
+        64
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        384,
+        64
+      ],
+      "sha256": "437154C8749771336ECC76E903BC6516FFD0B03486B681B73C5931AB7A6319A8",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "verify-icon",
+          "asset": "material.icons",
+          "layer": "print",
+          "bounds": [
+            511,
+            478,
+            28,
+            28
+          ],
+          "symbol": "quill",
+          "textKeys": [
+            "ui.replica.dialogue.choices.1"
+          ],
+          "z": 40,
+          "placementPivot": [
+            511,
+            478
+          ]
+        },
+        {
+          "id": "draft-icon",
+          "asset": "material.icons",
+          "layer": "print",
+          "bounds": [
+            512,
+            546,
+            28,
+            28
+          ],
+          "symbol": "chat",
+          "textKeys": [
+            "ui.replica.dialogue.choices.2"
+          ],
+          "z": 40,
+          "placementPivot": [
+            512,
+            546
+          ]
+        },
+        {
+          "id": "listen-icon",
+          "asset": "material.icons",
+          "layer": "print",
+          "bounds": [
+            512,
+            612,
+            28,
+            28
+          ],
+          "symbol": "proof",
+          "textKeys": [
+            "ui.replica.dialogue.choices.3"
+          ],
+          "z": 40,
+          "placementPivot": [
+            512,
+            612
+          ]
+        },
+        {
+          "id": "continue-icon",
+          "asset": "material.icons",
+          "layer": "text",
+          "bounds": [
+            1298,
+            876,
+            24,
+            25
+          ],
+          "z": 50,
+          "placementPivot": [
+            1298,
+            876
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.sun-seal",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/sun-seal.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/sun-seal.svg",
+      "size": [
+        87,
+        127
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        87,
+        127
+      ],
+      "sha256": "188DC429B5D78620BAC74D789D6F1D61344CEF8A134612DF43BEF1B7EBC065DE",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "date-ornament",
+          "asset": "material.sun-seal",
+          "layer": "print",
+          "bounds": [
+            48,
+            40,
+            87,
+            127
+          ],
+          "z": 40,
+          "placementPivot": [
+            48,
+            40
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.brand-mark",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/brand-mark.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/brand-mark.svg",
+      "size": [
+        160,
+        40
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        160,
+        40
+      ],
+      "sha256": "A66C993123F72A91FE976DCC9861B958B8F56757008A32B8364A868CE3E5167D",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "brand-mark",
+          "asset": "material.brand-mark",
+          "layer": "print",
+          "bounds": [
+            1486,
+            82,
+            143,
+            36
+          ],
+          "z": 40,
+          "placementPivot": [
+            1486,
+            82
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.newspaper-rules",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/newspaper-rules.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/newspaper-rules.svg",
+      "size": [
+        300,
+        150
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        300,
+        150
+      ],
+      "sha256": "33D03B1A35D32E2A74E0D3D691C394956F8858CA94716A3B043298E82CCC6B4D",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "newspaper-rules",
+          "asset": "material.newspaper-rules",
+          "layer": "portraits",
+          "bounds": [
+            0,
+            0,
+            300,
+            150
+          ],
+          "transform": "matrix(.98 -.273 -.567 .833 1281 527)",
+          "coordinateSpace": "newspaper-local",
+          "textKeys": [
+            "ui.replica.dialogue.newspaper.1"
+          ],
+          "z": 10,
+          "placementPivot": [
+            0,
+            0
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.shore-ink",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/shore-ink.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/shore-ink.svg",
+      "size": [
+        1672,
+        342
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        1672,
+        342
+      ],
+      "sha256": "8A45B9B6ABADE87374BD30BE3559F2BBD4B8901CD96362E757CFB66F0DC51CC2",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "shore-ink",
+          "asset": "material.shore-ink",
+          "layer": "print",
+          "bounds": [
+            0,
+            599,
+            1672,
+            342
+          ],
+          "z": 40,
+          "placementPivot": [
+            0,
+            599
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.cup-mark",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/cup-mark.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/cup-mark.svg",
+      "size": [
+        96,
+        64
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        96,
+        64
+      ],
+      "sha256": "72EFDD68A545F6E66F7A9A0DECE0179FFBFBF907750170A0D2C663E48B28931E",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "cup-mark",
+          "asset": "material.cup-mark",
+          "layer": "portraits",
+          "bounds": [
+            1427,
+            660,
+            43,
+            29
+          ],
+          "opacity": 0.66,
+          "z": 10,
+          "placementPivot": [
+            1427,
+            660
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "material.note-edge",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/note-edge.svg",
+      "file": "assets/ui/coastal-replica/v2/exports/note-edge.svg",
+      "size": [
+        128,
+        196
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        128,
+        196
+      ],
+      "sha256": "BF65410437ECB69DF2650F82586709EFEB560179A7451E936E056A15BC174290",
+      "source": "assets/ui/coastal-replica/v2/masters/materials.json",
+      "instances": [
+        {
+          "id": "note-bleed-restoration",
+          "asset": "material.note-edge",
+          "layer": "foreground",
+          "bounds": [
+            1544,
+            745,
+            128,
+            196
+          ],
+          "z": 60,
+          "placementPivot": [
+            1544,
+            745
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "dialogue.newsroom",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/newsroom-v2.png",
+      "file": "assets/ui/coastal-replica/v2/exports/newsroom-v2.png",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "visibleBounds": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "sha256": "B86B39438BCF19DBED7E3E1A850E6A7114ED30AF209DAE667464A93F45C8C66D",
+      "source": "assets/ui/coastal-replica/v2/prompts.json",
+      "instances": [
+        {
+          "id": "room",
+          "asset": "dialogue.newsroom",
+          "layer": "scene",
+          "bounds": [
+            0,
+            0,
+            1672,
+            941
+          ],
+          "z": 0,
+          "placementPivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "desk",
+          "asset": "dialogue.newsroom",
+          "layer": "portraits",
+          "bounds": [
+            0,
+            0,
+            1672,
+            941
+          ],
+          "clip": "desk",
+          "z": 10,
+          "placementPivot": [
+            0,
+            0
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "dialogue.khue",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/khue-seated-v2.png",
+      "file": "assets/ui/coastal-replica/v2/exports/khue-seated-v2.png",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        41,
+        38,
+        1607,
+        887
+      ],
+      "sha256": "135E532049444037E35D1BA1EECB19B03FAA5FAD555FEF569FDA55ADD8A217FF",
+      "source": "assets/ui/coastal-replica/v2/prompts.json",
+      "instances": [
+        {
+          "id": "khue",
+          "asset": "dialogue.khue",
+          "layer": "portraits",
+          "bounds": [
+            102,
+            14,
+            1103.52,
+            621.06
+          ],
+          "z": 10,
+          "placementPivot": [
+            102,
+            14
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "dialogue.van",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/van-seated-v2.png",
+      "file": "assets/ui/coastal-replica/v2/exports/van-seated-v2.png",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        1596,
+        941
+      ],
+      "sha256": "2FF76436F5ECA14196E8B5200C1F9921392EDA7730F864B23E1283DF3F4ED95E",
+      "source": "assets/ui/coastal-replica/v2/prompts.json",
+      "instances": [
+        {
+          "id": "van",
+          "asset": "dialogue.van",
+          "layer": "portraits",
+          "bounds": [
+            552,
+            34,
+            1086.8,
+            611.65
+          ],
+          "z": 10,
+          "placementPivot": [
+            552,
+            34
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "dialogue.foreground-left",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/foreground-left-v2.png",
+      "file": "assets/ui/coastal-replica/v2/exports/foreground-left-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        15,
+        1241,
+        1239
+      ],
+      "sha256": "6E43FC83FE16D3EC36C92BD5053D998AE0BAA944B2EFFA6AD63E65BFD1961B82",
+      "source": "assets/ui/coastal-replica/v2/prompts.json",
+      "instances": [
+        {
+          "id": "foreground-left",
+          "asset": "dialogue.foreground-left",
+          "layer": "foreground",
+          "bounds": [
+            0,
+            703,
+            238,
+            238
+          ],
+          "z": 60,
+          "placementPivot": [
+            0,
+            703
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "dialogue.foreground-right",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/foreground-right-v2.png",
+      "file": "assets/ui/coastal-replica/v2/exports/foreground-right-v2.png",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        41,
+        28,
+        1631,
+        913
+      ],
+      "sha256": "516080A7256ABFDF3185B12B59A013079E58F0829C153E1FA0A92CF1F69DCD9D",
+      "source": "assets/ui/coastal-replica/v2/prompts.json",
+      "instances": [
+        {
+          "id": "foreground-right",
+          "asset": "dialogue.foreground-right",
+          "layer": "foreground",
+          "bounds": [
+            1250,
+            710,
+            422,
+            231
+          ],
+          "sourceRect": [
+            594,
+            328,
+            1078,
+            613
+          ],
+          "fit": "slice",
+          "transform": "matrix(1 .04 -.18 1 127.8 -50)",
+          "z": 60,
+          "placementPivot": [
+            1250,
+            710
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    },
+    {
+      "id": "dialogue.harbor-print",
+      "version": 2,
+      "master": "assets/ui/coastal-replica/v2/masters/harbor-print-v2.png",
+      "file": "assets/ui/coastal-replica/v2/exports/harbor-print-v2.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "sha256": "5BA7857AFFFF64027626ED6E84DD28E8F45301F69D9407C82CCD2F9053F9D90E",
+      "source": "assets/ui/coastal-replica/v2/prompts.json",
+      "instances": [
+        {
+          "id": "paper-harbor",
+          "asset": "dialogue.harbor-print",
+          "layer": "print",
+          "bounds": [
+            0,
+            735,
+            1204,
+            206
+          ],
+          "opacity": 0.68,
+          "clip": "paper",
+          "transform": "translate(-28 0)",
+          "z": 40,
+          "placementPivot": [
+            0,
+            735
+          ]
+        },
+        {
+          "id": "newspaper-illustration",
+          "asset": "dialogue.harbor-print",
+          "layer": "portraits",
+          "bounds": [
+            66,
+            56,
+            170,
+            80
+          ],
+          "transform": "matrix(.98 -.273 -.567 .833 1281 527)",
+          "coordinateSpace": "newspaper-local",
+          "textKeys": [
+            "ui.replica.dialogue.newspaper.1"
+          ],
+          "z": 10,
+          "placementPivot": [
+            66,
+            56
+          ]
+        }
+      ],
+      "crop": "PNG native bytes retained; portraits use uniform registration; print/material rectangles are authored separately",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotRole": "file origin; placement/face anchors are distinct from future motion pivots",
+      "rights": "project art/vector source; prompts retained; fonts have separate OFL licenses",
+      "textPolicy": "all readable lettering is live catalog content",
+      "status": "Stage 2 static review; gate status in review report"
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Source Serif 4",
+      "vietnameseCodepointsChecked": 107,
+      "missing": []
+    },
+    {
+      "family": "Cormorant Garamond",
+      "vietnameseCodepointsChecked": 107,
+      "missing": []
+    },
+    {
+      "family": "Dancing Script",
+      "vietnameseCodepointsChecked": 107,
+      "missing": []
+    },
+    {
+      "family": "Be Vietnam Pro",
+      "vietnameseCodepointsChecked": 107,
+      "missing": [],
+      "provenance": "existing project OFL font pack; retained from commit 1519393",
+      "sources": [
+        {
+          "file": "assets/fonts/be-vietnam-pro-0.ttf",
+          "sha256": "4AD53EAC036092BE79A34B5FA0AA32D0EBB3C7E5DF4BC058764F5614FBF148A0"
+        },
+        {
+          "file": "assets/fonts/be-vietnam-pro-1.ttf",
+          "sha256": "557A1C42A7F8EB83F84255D475017B1235C1101B899367F974A1CBFA19CD7C3D"
+        },
+        {
+          "file": "assets/fonts/be-vietnam-pro-2.ttf",
+          "sha256": "CBF437BF71C8536A7AAED632DCE2583EA5EC97C07EFFFC625C31991D1027BA3B"
+        },
+        {
+          "file": "assets/fonts/be-vietnam-pro-3.ttf",
+          "sha256": "AEF76CD15B8C9FAA1FF21951BB71963A774AA381526C557E5A52F38D430C4650"
+        },
+        {
+          "file": "assets/fonts/be-vietnam-pro-4.ttf",
+          "sha256": "116124D76142998EC6B49B76B0024314D5F0EF910E8898FA75A5DC38F6F03C6A"
+        }
+      ],
+      "license": {
+        "file": "assets/fonts/OFL.txt",
+        "hashInput": "UTF-8 LF",
+        "sha256": "6B7F8F73609A25EA78C891E34CF37B06F8A676B7EA986E941E43B009110F2A85"
+      }
+    }
+  ],
+  "fontManifest": "assets/fonts/coastal-replica/manifest.json",
+  "textKeys": [
+    "ui.replica.dialogue.date.1",
+    "ui.replica.dialogue.date.2",
+    "ui.replica.dialogue.brand.1",
+    "ui.replica.dialogue.speaker.1",
+    "ui.replica.dialogue.line.1",
+    "ui.replica.dialogue.continue.1",
+    "ui.replica.dialogue.scene_signs.1",
+    "ui.replica.dialogue.scene_signs.2",
+    "ui.replica.dialogue.scene_signs.3",
+    "ui.replica.dialogue.newspaper.1",
+    "ui.replica.dialogue.cup.1",
+    "ui.replica.dialogue.foreground_note.1",
+    "ui.replica.dialogue.choices.1",
+    "ui.replica.dialogue.choices.2",
+    "ui.replica.dialogue.choices.3"
+  ],
+  "registration": {
+    "khue": {
+      "scale": 0.66,
+      "translation": [
+        102,
+        14
+      ],
+      "sourceEye": [
+        592,
+        395
+      ],
+      "targetEye": [
+        463,
+        280
+      ],
+      "kind": "manual face/shoulder anchors; no alpha-envelope stretching"
+    },
+    "van": {
+      "scale": 0.65,
+      "translation": [
+        552,
+        34
+      ],
+      "kind": "manual face/flower/held-paper anchors; same uniform scale"
+    },
+    "paper": {
+      "source": "docs/ui-specs/coastal-replica/layouts.json#dialogue.paper-top",
+      "visibleContour": "R12 native trace; hidden right continuation authored"
+    }
+  },
+  "paperContour": "M-8 89 C-6.667 88.333 -13.0 91.167 0 85 C13.0 78.833 40.0 59.167 70 52 C100.0 44.833 136.667 40.667 180 42 C223.333 43.333 275.0 52.833 330 60 C385.0 67.167 443.333 75.833 510 85 C576.667 94.167 657.5 107.167 730 115 C802.5 122.833 873.333 129.333 945 132 C1016.667 134.667 1090.833 128.333 1160 131 C1229.167 133.667 1300.0 142.167 1360 148 C1420.0 153.833 1466.667 156.0 1520 166 C1573.333 176.0 1653.333 201.0 1680 208 L1680 350L-8 350Z",
+  "gate": "native comparison and alpha review required; no parity inferred from tests"
+}

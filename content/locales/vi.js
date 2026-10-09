@@ -772,5 +772,12 @@ export default {
   "ui.replica.preview.label.choice": "Giấy lựa chọn",
   "ui.replica.preview.label.harbor": "Minh họa in / alpha",
   "ui.replica.preview.stageAria": "Mẫu thoại nhiều lớp Hồi Âm",
-  "ui.replica.preview.continueAria": "Tiếp tục thoại trong mẫu UI"
+  "ui.replica.preview.continueAria": "Tiếp tục thoại trong mẫu UI",
+  "ui.replica.dialogue.foreground_note.1": "Những\nngười trẻ\nvà thành phố\nbiển...",
+  "ui.replica.stage2.title": "Hồi Âm · Stage 2 — thoại replica",
+  "ui.replica.stage2.heading": "Coastal replica · Stage 2",
+  "ui.replica.stage2.note": "Bản thoại tĩnh được phục dựng theo concept. Dùng tách lớp và contact sheets để xem pose, alpha, giấy và typography; xem review native để đối chiếu sai lệch.",
+  "ui.replica.stage2.props": "Tiền cảnh và alpha",
+  "ui.replica.stage2.label.foreground": "Tiền cảnh tách lớp",
+  "ui.replica.stage2.label.portrait": "Chân dung / alpha"
 };

@@ -5,3 +5,4 @@ assets/ui/coastal-replica/**/*.svg text eol=lf
 assets/ui/coastal-replica/**/*.png binary
 assets/fonts/coastal-replica/**/*.ttf binary
 content/ui/coastal-replica-pilot.json text eol=lf
+content/ui/coastal-dialogue.json text eol=lf

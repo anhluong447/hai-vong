@@ -137,19 +137,20 @@ components below remain a technical prototype; their visual implementation has
 not passed the replica gates. Future screen compositions use a 1672x941 design
 stage with uniform scaling, authored art layers/masks and separate dialogue,
 menu, dossier and world/HUD compositions. Production assets, layout/light/motion
-sheets and deterministic captures follow the roadmap. Stage 1 implements the
-isolated art/preview boundaries below; production scenes and motion remain.
+sheets and deterministic captures follow the roadmap. Stage 2 implements the
+isolated static dialogue composition below; its visual G2 review remains open.
 Preserve session/text/input/save/lifecycle contracts
 while replacing the presentation. Art, static visual, motion, behavior and
 performance reviews are distinct acceptance gates.
 
-### Replica authoring and Stage 1
+### Replica authoring — Stage 1 and Stage 2
 
 `src/ui/replica/ReplicaStage.js` owns a fixed 1672x941 SVG scene with seven
 independent planes, uniform fit/letterboxing, scaled input, keyboard focus and
 resource disposal. It receives content and structured callbacks; it does not
-import domain/session/storage or advance gameplay time. This Stage 1 pilot
-is mounted only by `tools/coastal-replica-preview.html`, separately from v1.
+import domain/session/storage or advance gameplay time. It is mounted only by
+`tools/coastal-replica-preview.html`, separately from the coastal v1 gameplay UI.
+The default preview selects Stage 2; `?version=1` preserves the Stage 1 pilot.
 
 `content/ui/coastal-replica-pilot.json` owns authored placements, font styles,
 choices and contact-sheet fixtures. `tools/build_replica_assets.py` compiles it
@@ -167,6 +168,31 @@ locks interaction and publishes `replicaCapture.prepare`. Capture, contact sheet
 font measurements and overlay/diff are authoring evidence; visual acceptance is
 recorded in [Stage 1 review](ui-reviews/coastal-replica-stage1/README.md). Read the
 [asset contract](../assets/ui/coastal-replica/v1/README.md) before extending this pack.
+
+`content/ui/coastal-dialogue.json` owns Stage 2 art instances, desk/paper clips,
+uniform portrait registration, affine prop placement, typography and inspection
+fixtures. `tools/build_dialogue_replica.py` generates `coastal-dialogue-data.js`,
+while `coastal-dialogue.js` is its content facade. The version 2 manifest tracks
+19 independent exports and 29 instances; its PNG bytes stay native, and SVG
+paths/grain are generated from `v2/masters/materials.json`. Stage 1 sources remain
+unchanged. See the [Stage 2 contract](../assets/ui/coastal-replica/v2/README.md).
+
+The renderer receives this composition rather than importing authoring specs.
+It creates unique desk/paper clips per instance, paints clean desk art over the
+portraits, puts shore ink above the paper and keeps foreground props independent.
+Environment lettering uses catalog keys just like dialogue text; tiny newspaper
+rules remain graphics with an explicitly unresolved microcopy task. Be Vietnam
+Pro reuses the existing local OFL font pack alongside the three Stage 1 families.
+Typography measurements convert local text bounds into native scene coordinates.
+
+SVG art ignores pointer events; separate choice and continue targets receive
+input through transparent foreground pixels. Capture validates catalog/view
+before mutating state, resets selection/layer state, locks interactions and awaits
+decoded SVG resources and explicit font faces. The authoring capture tool merges
+`dialogue-production.json` into its recorded fixture; runtime never imports it.
+Static comparison and open G2 corrections are recorded in
+[Stage 2 review](ui-reviews/coastal-replica-stage2/README.md). Domain, gameplay
+entries, session/save schemas and calendar behavior are unchanged.
 
 ### Coastal UI components (v1)
 

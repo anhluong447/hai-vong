@@ -74,7 +74,9 @@ def main():
             raise RuntimeError('Test server is unavailable')
     # Windows may expose duplicate Path/PATH entries to PowerShell Start-Process.
     environment = {key.upper(): value for key, value in os.environ.items()}
-    with tempfile.TemporaryDirectory(prefix='press-club-test-') as profile:
+    # Chrome subprocesses can briefly retain cache handles after the main process
+    # exits on Windows. Cleanup must not discard the completed test result.
+    with tempfile.TemporaryDirectory(prefix='press-club-test-', ignore_cleanup_errors=True) as profile:
         arguments = [
             args.browser, '--headless', '--disable-gpu', '--no-first-run',
             '--no-default-browser-check', f'--user-data-dir={profile}',

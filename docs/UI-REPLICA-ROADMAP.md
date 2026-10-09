@@ -1,6 +1,6 @@
 # Hồi Âm — roadmap replica visual và chuyển động
 
-Ngày: 2026-10-09. Trạng thái: **Stage 0 / R01–R04 và Stage 1 / R05–R08 đã bàn giao**. Stage 1 là pipeline và mẫu xếp lớp; replica toàn màn chưa qua G2. R09–R45 chưa triển khai. Xem [bộ spec](ui-specs/coastal-replica/README.md) và [review Stage 1](ui-reviews/coastal-replica-stage1/README.md).
+Ngày: 2026-10-09. Trạng thái: **Stage 0 / R01–R04 và Stage 1 / R05–R08 đã bàn giao; Stage 2 / R09–R14 đã có bản dựng thoại tĩnh và bằng chứng review**. G2 chưa qua: R14 còn sửa silhouette/props/type/material. R15–R45 chưa triển khai. Xem [bộ spec](ui-specs/coastal-replica/README.md), [review Stage 1](ui-reviews/coastal-replica-stage1/README.md) và [review Stage 2](ui-reviews/coastal-replica-stage2/README.md).
 
 ## Mục tiêu và thứ tự ưu tiên
 
@@ -80,6 +80,13 @@ Mỗi work package bên dưới là một đơn vị triển khai/review nhỏ. 
 | R14 | Ghép toàn màn và sửa theo overlay/diff | Capture giống fixture ảnh 01; sửa lần lượt silhouette → anchor → ánh sáng → type → chi tiết | R08–R13 |
 
 **Mốc P2:** G2 đạt cho thoại. Đây là sản phẩm visual đầu tiên để đánh giá tiêu chuẩn toàn dự án. Không nhân rộng mẫu nếu còn khác xa ảnh tham chiếu.
+
+**Trạng thái sau Stage 2:** 19 asset / 29 instance độc lập, plate sạch và hai pose
+ngồi alpha, desk/paper masks, chữ cảnh từ catalog, native capture/overlay/diff và
+contact sáng/tối đã có. G2 chưa qua: tóc/áo/tay/báo, nền/props, dấu ngày/type và
+texture sóng/print còn sai lệch lớn ghi trong [review](ui-reviews/coastal-replica-stage2/README.md).
+Tiếp tục vòng sửa R14 trước khi bắt đầu R15; không dùng test hành vi hay MAE để
+nghiệm thu visual. Mốc P2 là bản tĩnh đạt chuẩn, chưa được đánh dấu hoàn thành.
 
 ## P3 — Ánh sáng và chiều sâu của màn thoại
 

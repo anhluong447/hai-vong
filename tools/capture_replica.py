@@ -42,7 +42,8 @@ def main():
     if output.suffix.lower() != '.png' or not output.is_relative_to(ROOT) or output.is_relative_to(REFERENCE) or output.is_relative_to(ROOT / '.git'):
         raise ValueError('Output must be a PNG in this workspace, outside locked references and .git')
     fixture = json.loads((SPEC / 'fixtures.json').read_text(encoding='utf-8'))
-    contract = {'screen': args.screen, 'capture': fixture['capture'], 'fixture': fixture['screens'][args.screen], 'catalog': fixture['catalog'], 'variant':args.variant}
+    supplemental = json.loads((SPEC / 'dialogue-production.json').read_text(encoding='utf-8')) if args.screen == 'dialogue' else {'catalog':{}}
+    contract = {'screen': args.screen, 'capture': fixture['capture'], 'fixture': fixture['screens'][args.screen], 'catalog': {**fixture['catalog'],**supplemental['catalog']}, 'variant':args.variant, 'supplementalFixture':supplemental}
     process, client = None, None
     with tempfile.TemporaryDirectory(prefix='coastal-capture-', ignore_cleanup_errors=True) as profile:
         try:

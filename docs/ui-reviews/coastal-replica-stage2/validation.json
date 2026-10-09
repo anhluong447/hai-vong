@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "stage": "P2 R09-R14 static implementation and comparison; visual corrections remain",
+  "priorCommit": "1519393",
+  "checks": {
+    "mainBrowser": {
+      "passed": 72,
+      "total": 72,
+      "evidence": "main-suite-results.txt"
+    },
+    "stage2Browser": {
+      "passed": 14,
+      "total": 14,
+      "evidence": "stage2-suite-results.txt"
+    },
+    "stage1Browser": {
+      "passed": 12,
+      "total": 12,
+      "evidence": "stage1-suite-results.txt"
+    },
+    "referenceTools": {
+      "passed": 13,
+      "total": 13,
+      "evidence": "reference-suite-results.txt"
+    },
+    "baselines": {
+      "sandboxPoliciesMatched": 8,
+      "gameplayPoliciesMatched": 4,
+      "changed": false
+    },
+    "architecture": {
+      "issues": 0,
+      "catalogEntries": 780
+    },
+    "assets": {
+      "count": 19,
+      "instances": 29,
+      "pngs": 6,
+      "svgs": 13,
+      "fontFamilies": 4,
+      "vietnameseCodepointsPerFamily": 109,
+      "pngMasterExportBytesIdentical": true,
+      "stage1Builder": "passed",
+      "stage2Builder": "passed",
+      "latestCapturesMatchCurrentManifest": true
+    },
+    "lockedReferences": {
+      "pngs": 4,
+      "regions": 169,
+      "plannedAssets": 104,
+      "plannedKeys": 96,
+      "unchanged": true
+    },
+    "pythonCompile": "passed",
+    "trackedWhitespaceCheck": "passed"
+  },
+  "visualAcceptance": {
+    "G1": "Stage 1 material sample retained; Stage 2 alpha sheets reviewed; production shape/native edges remain",
+    "G2": false,
+    "G3": false,
+    "G4": "preview only; no gameplay integration",
+    "G5": false,
+    "backlog": "README.md",
+    "next": "R14 corrections before R15-R17"
+  },
+  "comparison": {
+    "current": "dialogue-native-v4-comparison.json",
+    "meanAbsoluteErrorRGBA": 16.584525109447853,
+    "role": "diagnostic-only; not a similarity percentage or visual acceptance"
+  },
+  "rasterGeneration": {
+    "skill": "imagegen",
+    "mode": "builtin reference edits",
+    "prompts": "../../../assets/ui/coastal-replica/v2/prompts.json",
+    "pixelEditingByScript": false
+  },
+  "renderer": "Chrome headless software; no GPU/realtime lighting/motion acceptance",
+  "hashes": [
+    {
+      "file": "assets/ui/coastal-replica/v2/manifest.json",
+      "sha256": "A7F1473ED99B1637C6F1F0F448DC69AFE8D3E0837E33338B34406CF97BA81837"
+    },
+    {
+      "file": "content/ui/coastal-dialogue.json",
+      "sha256": "622CD3ED2EBA03E4442F5DE83D7473191F851162E4CEC430B0006EB254824C75"
+    },
+    {
+      "file": "assets/ui/coastal-replica/v2/prompts.json",
+      "sha256": "8B18AE85A4363D62D7DC0EFFCF823C6CF5D66E5757422DFE52D9FF7EEB675517"
+    },
+    {
+      "file": "docs/ui-specs/coastal-replica/dialogue-production.json",
+      "sha256": "9A12FDD0738ED2CCB960C65976DA167949D187C88989458570219B61223019D3"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/dialogue-native-v4.png",
+      "sha256": "28F7868B06F1B9F5F16A5E4D23052BE06966F5389CDBB5C3CA9D6791B0F4488C"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/dialogue-native-v4.json",
+      "sha256": "60D0966E53869CBE093BB62414F48FB790318641299A04E424B4EAD9B552ECF6"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/dialogue-native-v4-overlay.png",
+      "sha256": "E672EA74AC3A64A8893B495556975E59BB5AF340DCED46C75922F10CB08B3FE0"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/dialogue-native-v4-difference.png",
+      "sha256": "3A20F145A0F0DA4AB55AF1A74C79EA87E5A065828B3A857AB073C3A850AD7184"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/dialogue-native-v4-comparison.json",
+      "sha256": "D1CD465BAD5F677409FD41F88CDC54C9017FF0CB2B3E7812FAADFB05C137A057"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/material-light-v3.png",
+      "sha256": "BEFA4C7BC664AA3CF51BEBA77285BF6D0BC482C0A320B45A624842846ECC4309"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/material-light-v3.json",
+      "sha256": "10B18CAAA8BC1858A196C08B7B4091BC6E04A0499E967A2829C6CB9F20E9413F"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/material-dark-v3.png",
+      "sha256": "DF4CA2D1C339CFD4237B124D6FEEC23C86B80EDED6D623F2D262548EACC54957"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/material-dark-v3.json",
+      "sha256": "CE154AE40F5B19CCC3A075C0165F9A94844A7C51DF3F53EB51E58886DBFBA65B"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/props-v3.png",
+      "sha256": "44509E129CEB0AB968FB79049ED8889E786648E5F78EF7077753825805F979D6"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/props-v3.json",
+      "sha256": "24D9FC2440306FFA95118BE78CB9CF30F29B45F0FD13D8E3CD8C1EACF2A45F88"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/main-suite-results.txt",
+      "sha256": "9FE32503C1B03931A51834DB4B528B10F20AD009BB835E7227754D45B54A6221"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/stage2-suite-results.txt",
+      "sha256": "77E5231A0119D6CE91BBD55814A719FA3A5B07424B257D9720B32D0F49227CD6"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/stage1-suite-results.txt",
+      "sha256": "2558E5DB7C3FFE3737D6410CBF2B6768C38DF3DF0B19111DB8833567A4F54DA2"
+    },
+    {
+      "file": "docs/ui-reviews/coastal-replica-stage2/reference-suite-results.txt",
+      "sha256": "D3AA70A393EBEEDFD52216253B4CB61DFC656B7856680D0C8E5FF655363F2CD0"
+    },
+    {
+      "file": "tools/build_dialogue_replica.py",
+      "sha256": "A0A197564ED94CF41493739402A2642A2BE7187752DE4ED4001E7D4A8207D2A1"
+    },
+    {
+      "file": "src/ui/replica/ReplicaStage.js",
+      "sha256": "5FDA2C3070E62B104839578744C184DC819CECDBB6D81EF13B65AEA273E5184E"
+    },
+    {
+      "file": "tools/coastal-replica-preview.js",
+      "sha256": "9B0B7E35CE4533A69FDD6C39A216277178482D9A56986E1C710E7B0A9D331FDB"
+    },
+    {
+      "file": "tests/coastal-replica-stage2.js",
+      "sha256": "E5A2BD0A127C8A2FDB196DDC5B3B6B0CF923CF1BAC8CD599B7C7BB59D5D847A9"
+    }
+  ]
+}

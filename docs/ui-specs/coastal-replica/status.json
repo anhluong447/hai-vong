@@ -1,8 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "date": "2026-10-09",
-  "stage": "P1",
-  "status": "sample-complete",
+  "stage": "P2",
+  "status": "static-implementation-review-open",
   "tasks": {
     "R01": {
       "status": "complete",
@@ -66,18 +66,71 @@
         "../../../tests/coastal-replica-stage1.js",
         "../../ui-reviews/coastal-replica-stage1/pilot-native-v3.json"
       ]
+    },
+    "R09": {
+      "status": "implemented-visual-review-open",
+      "evidence": [
+        "../../../assets/ui/coastal-replica/v2/manifest.json",
+        "../../../content/ui/coastal-dialogue.json",
+        "../../ui-reviews/coastal-replica-stage2/README.md"
+      ]
+    },
+    "R10": {
+      "status": "implemented-visual-review-open",
+      "evidence": [
+        "../../../assets/ui/coastal-replica/v2/manifest.json",
+        "../../../content/ui/coastal-dialogue.json",
+        "../../ui-reviews/coastal-replica-stage2/README.md"
+      ]
+    },
+    "R11": {
+      "status": "implemented-visual-review-open",
+      "evidence": [
+        "../../../assets/ui/coastal-replica/v2/manifest.json",
+        "../../../content/ui/coastal-dialogue.json",
+        "../../ui-reviews/coastal-replica-stage2/README.md"
+      ]
+    },
+    "R12": {
+      "status": "implemented-visual-review-open",
+      "evidence": [
+        "../../../assets/ui/coastal-replica/v2/manifest.json",
+        "../../../content/ui/coastal-dialogue.json",
+        "../../ui-reviews/coastal-replica-stage2/README.md"
+      ]
+    },
+    "R13": {
+      "status": "implemented-visual-review-open",
+      "evidence": [
+        "../../../assets/ui/coastal-replica/v2/manifest.json",
+        "../../../content/ui/coastal-dialogue.json",
+        "../../ui-reviews/coastal-replica-stage2/README.md"
+      ]
+    },
+    "R14": {
+      "status": "comparison-delivered-visual-corrections-remain",
+      "evidence": [
+        "../../ui-reviews/coastal-replica-stage2/dialogue-native-v4.json",
+        "../../ui-reviews/coastal-replica-stage2/dialogue-native-v4-comparison.json",
+        "../../ui-reviews/coastal-replica-stage2/validation.json",
+        "../../ui-reviews/coastal-replica-stage2/README.md"
+      ]
     }
   },
   "gates": {
     "G0": "measured inventory and capture readiness established; production uncertainties explicitly tracked",
-    "G1": "paper/wave/choice material and icon sample accepted; production raster assets pending R09-R14",
-    "G2": "pilot capture compared; major pose/background/type differences remain unaccepted",
+    "G1": "Stage 1 material sample retained; Stage 2 light/dark alpha sheets reviewed, production native edges/shape corrections remain",
+    "G2": "not-accepted: native comparison delivered; major portrait/props/type/material differences explicitly tracked",
     "G3": "not-started",
-    "G4": "Stage 1 preview behavior tested; production gameplay integration pending",
+    "G4": "Stage 2 preview input/focus/capture/disposal tested; production gameplay integration pending",
     "G5": "not-started"
   },
-  "measurementPrecision": "manual envelopes ±4px rectangular / ±12px organic; production masks and 2px anchor acceptance remain",
+  "measurementPrecision": "Stage 0 manual envelopes retained; Stage 2 sampled paper anchors checked within 2px; other organic geometry not certified",
   "runtimeChanges": "isolated SVG preview only; gameplay entries unchanged",
-  "next": "P2 R09-R14",
-  "knownProductionTasks": "fixtures.json#unresolved"
+  "next": "R14 visual corrections before P3 R15-R17",
+  "knownProductionTasks": [
+    "fixtures.json#unresolved",
+    "dialogue-production.json#transcription",
+    "../../ui-reviews/coastal-replica-stage2/README.md"
+  ]
 }

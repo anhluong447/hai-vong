@@ -1,0 +1,408 @@
+{
+  "width": 1672,
+  "height": 941,
+  "colorSpace": "browser-decoded sRGB RGBA, 8 bits per channel",
+  "overlay": "reference plus candidate at opacity 0.5; source-over",
+  "difference": "RGB absolute difference multiplied by 4, clipped at 255; alpha error visible; output opaque",
+  "role": "diagnostic-only; does not certify G2",
+  "global": {
+    "meanAbsoluteErrorRGBA": 16.584525109447853,
+    "changedPixels": 1572138,
+    "changedFraction": 0.9992283989850967,
+    "maxChannelError": 255
+  },
+  "regions": [
+    {
+      "id": "room",
+      "bounds": [
+        0,
+        0,
+        1140,
+        640
+      ],
+      "meanAbsoluteErrorRGBA": 16.751553591008772,
+      "changedPixels": 729353,
+      "changedFraction": 0.9996614583333333
+    },
+    {
+      "id": "harbor",
+      "bounds": [
+        1120,
+        0,
+        552,
+        620
+      ],
+      "meanAbsoluteErrorRGBA": 12.979302536231884,
+      "changedPixels": 341502,
+      "changedFraction": 0.997843618513324
+    },
+    {
+      "id": "wall-lettering",
+      "bounds": [
+        570,
+        35,
+        562,
+        385
+      ],
+      "meanAbsoluteErrorRGBA": 18.61518463742663,
+      "changedPixels": 216279,
+      "changedFraction": 0.9995794241345842
+    },
+    {
+      "id": "khue",
+      "bounds": [
+        106,
+        47,
+        662,
+        554
+      ],
+      "meanAbsoluteErrorRGBA": 18.140798995495544,
+      "changedPixels": 366621,
+      "changedFraction": 0.99965371317635
+    },
+    {
+      "id": "van",
+      "bounds": [
+        806,
+        38,
+        704,
+        632
+      ],
+      "meanAbsoluteErrorRGBA": 16.686194170742233,
+      "changedPixels": 444562,
+      "changedFraction": 0.9991773949942463
+    },
+    {
+      "id": "held-newspaper",
+      "bounds": [
+        1242,
+        444,
+        309,
+        243
+      ],
+      "meanAbsoluteErrorRGBA": 21.14822805545567,
+      "changedPixels": 75047,
+      "changedFraction": 0.9994672846165115
+    },
+    {
+      "id": "held-news-text",
+      "bounds": [
+        1296,
+        458,
+        226,
+        160
+      ],
+      "meanAbsoluteErrorRGBA": 27.480593196902653,
+      "changedPixels": 36157,
+      "changedFraction": 0.9999170353982301
+    },
+    {
+      "id": "desk",
+      "bounds": [
+        0,
+        496,
+        1672,
+        253
+      ],
+      "meanAbsoluteErrorRGBA": 15.76492201240615,
+      "changedPixels": 422629,
+      "changedFraction": 0.999085140987575
+    },
+    {
+      "id": "desk-cup",
+      "bounds": [
+        1340,
+        443,
+        332,
+        302
+      ],
+      "meanAbsoluteErrorRGBA": 14.85962808186388,
+      "changedPixels": 99971,
+      "changedFraction": 0.9970777148328412
+    },
+    {
+      "id": "cup-mark",
+      "bounds": [
+        1406,
+        633,
+        67,
+        80
+      ],
+      "meanAbsoluteErrorRGBA": 13.230317164179105,
+      "changedPixels": 5340,
+      "changedFraction": 0.996268656716418
+    },
+    {
+      "id": "date-paper",
+      "bounds": [
+        36,
+        30,
+        247,
+        115
+      ],
+      "meanAbsoluteErrorRGBA": 31.0155430381975,
+      "changedPixels": 28403,
+      "changedFraction": 0.9999295898609399
+    },
+    {
+      "id": "date-ornament",
+      "bounds": [
+        44,
+        40,
+        87,
+        127
+      ],
+      "meanAbsoluteErrorRGBA": 29.572563127884877,
+      "changedPixels": 11048,
+      "changedFraction": 0.9999094940718617
+    },
+    {
+      "id": "date-text",
+      "bounds": [
+        122,
+        46,
+        147,
+        70
+      ],
+      "meanAbsoluteErrorRGBA": 26.642079689018466,
+      "changedPixels": 10289,
+      "changedFraction": 0.9999028182701653
+    },
+    {
+      "id": "brand-mark",
+      "bounds": [
+        1481,
+        79,
+        150,
+        33
+      ],
+      "meanAbsoluteErrorRGBA": 18.30287878787879,
+      "changedPixels": 4937,
+      "changedFraction": 0.9973737373737374
+    },
+    {
+      "id": "brand-text",
+      "bounds": [
+        1484,
+        33,
+        146,
+        48
+      ],
+      "meanAbsoluteErrorRGBA": 33.66299229452055,
+      "changedPixels": 7008,
+      "changedFraction": 1
+    },
+    {
+      "id": "choice-verify",
+      "bounds": [
+        482,
+        462,
+        446,
+        63
+      ],
+      "meanAbsoluteErrorRGBA": 13.449453697772084,
+      "changedPixels": 28098,
+      "changedFraction": 1
+    },
+    {
+      "id": "choice-draft",
+      "bounds": [
+        483,
+        530,
+        413,
+        60
+      ],
+      "meanAbsoluteErrorRGBA": 14.500453995157384,
+      "changedPixels": 24780,
+      "changedFraction": 1
+    },
+    {
+      "id": "choice-listen",
+      "bounds": [
+        483,
+        596,
+        413,
+        59
+      ],
+      "meanAbsoluteErrorRGBA": 15.486159560060738,
+      "changedPixels": 24367,
+      "changedFraction": 1
+    },
+    {
+      "id": "choice-icons",
+      "bounds": [
+        511,
+        478,
+        30,
+        163
+      ],
+      "meanAbsoluteErrorRGBA": 23.60286298568507,
+      "changedPixels": 4890,
+      "changedFraction": 1
+    },
+    {
+      "id": "choice-copy",
+      "bounds": [
+        557,
+        477,
+        312,
+        169
+      ],
+      "meanAbsoluteErrorRGBA": 16.55733670914884,
+      "changedPixels": 52728,
+      "changedFraction": 1
+    },
+    {
+      "id": "dialogue-wave",
+      "bounds": [
+        0,
+        602,
+        1520,
+        242
+      ],
+      "meanAbsoluteErrorRGBA": 17.27409743366681,
+      "changedPixels": 367715,
+      "changedFraction": 0.999660178338408
+    },
+    {
+      "id": "dialogue-paper",
+      "bounds": [
+        0,
+        640,
+        1520,
+        301
+      ],
+      "meanAbsoluteErrorRGBA": 18.659980984437837,
+      "changedPixels": 457384,
+      "changedFraction": 0.999702745235181
+    },
+    {
+      "id": "paper-harbor",
+      "bounds": [
+        0,
+        746,
+        770,
+        195
+      ],
+      "meanAbsoluteErrorRGBA": 22.249918414918415,
+      "changedPixels": 150098,
+      "changedFraction": 0.9996536796536797
+    },
+    {
+      "id": "speaker-mark",
+      "bounds": [
+        91,
+        689,
+        73,
+        53
+      ],
+      "meanAbsoluteErrorRGBA": 22.603127423106745,
+      "changedPixels": 3868,
+      "changedFraction": 0.9997415352804342
+    },
+    {
+      "id": "speaker-name",
+      "bounds": [
+        201,
+        700,
+        232,
+        37
+      ],
+      "meanAbsoluteErrorRGBA": 20.05926724137931,
+      "changedPixels": 8584,
+      "changedFraction": 1
+    },
+    {
+      "id": "speaker-rules",
+      "bounds": [
+        201,
+        721,
+        348,
+        29
+      ],
+      "meanAbsoluteErrorRGBA": 15.87784879112168,
+      "changedPixels": 10085,
+      "changedFraction": 0.9993063812921126
+    },
+    {
+      "id": "dialogue-line",
+      "bounds": [
+        233,
+        771,
+        940,
+        48
+      ],
+      "meanAbsoluteErrorRGBA": 23.906443927304963,
+      "changedPixels": 45114,
+      "changedFraction": 0.9998670212765958
+    },
+    {
+      "id": "continue-rules",
+      "bounds": [
+        814,
+        877,
+        384,
+        29
+      ],
+      "meanAbsoluteErrorRGBA": 13.52837643678161,
+      "changedPixels": 11136,
+      "changedFraction": 1
+    },
+    {
+      "id": "continue-copy",
+      "bounds": [
+        1220,
+        877,
+        104,
+        27
+      ],
+      "meanAbsoluteErrorRGBA": 28.396812678062677,
+      "changedPixels": 2808,
+      "changedFraction": 1
+    },
+    {
+      "id": "foreground-left",
+      "bounds": [
+        0,
+        497,
+        461,
+        444
+      ],
+      "meanAbsoluteErrorRGBA": 19.212034159973424,
+      "changedPixels": 204594,
+      "changedFraction": 0.9995602978249399
+    },
+    {
+      "id": "foreground-right",
+      "bounds": [
+        1280,
+        719,
+        392,
+        222
+      ],
+      "meanAbsoluteErrorRGBA": 27.40521867530796,
+      "changedPixels": 87007,
+      "changedFraction": 0.9998046515903659
+    },
+    {
+      "id": "choice-chevron",
+      "bounds": [
+        892,
+        481,
+        18,
+        23
+      ],
+      "meanAbsoluteErrorRGBA": 15.734903381642512,
+      "changedPixels": 414,
+      "changedFraction": 1
+    }
+  ],
+  "sourcePaths": [
+    "/docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+    "/docs/ui-reviews/coastal-replica-stage2/dialogue-native-v4.png"
+  ],
+  "sourceSHA256": [
+    "68C076B9D013523B745E61E1AF35A8251742BBF7B774C02245F89DACF3D2A5A2",
+    "28F7868B06F1B9F5F16A5E4D23052BE06966F5389CDBB5C3CA9D6791B0F4488C"
+  ]
+}
