@@ -12,4 +12,4 @@ Rebuild using `tools/import_khue_storyboard_walk.ps1`. Mechanical import uses th
 
 Review actual native-size animation, especially counter-swing and the two passing poses. Generated guides constrain the motion but do not guarantee identical anatomy or pixel clusters. This is a review candidate; it does not establish a production-approved animation set.
 
-After map integration: **57/57 browser checks passed**, including movement across maps and animation clip transitions. The actual map preview completed the yard-to-newsroom walk with no overflow. [In-map screenshot](../../../tools/pixel-map-v5-preview.png).
+After map integration: **57/57 browser checks passed**, including movement across maps and animation clip transitions. The actual map preview completed the yard-to-newsroom walk with no overflow. [In-map screenshot](../../../archive/development/reviews/pixel-map-v5-preview.png).

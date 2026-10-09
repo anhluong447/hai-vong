@@ -92,9 +92,9 @@ energy bằng 0, ngủ/chuyển ngày, save/load vị trí và layout rộng 390
 
 Kết quả ngày 2026-10-06: **56/56 passed**, gồm kiểm tra cũ, map, 84 frame anime cũ,
 128 frame pilot, nhịp clip, chuyển idle/walk/talk trong map và UI Sprite Lab.
-[Ảnh preview](../tools/pixel-map-preview.png).
+[Ảnh preview](../archive/development/reviews/pixel-map-preview.png).
 
-Sau khi thay walk lên/xuống Khuê bằng pilot-v6 ngày 2026-10-08: **58/58 passed**. Đã kiểm tra các pha animation trong lab và đường đi sân trường → CLB trên map thật. [Preview v6](../tools/pixel-map-v6-preview.png).
+Sau khi thay walk lên/xuống Khuê bằng pilot-v6 ngày 2026-10-08: **58/58 passed**. Đã kiểm tra các pha animation trong lab và đường đi sân trường → CLB trên map thật. [Preview v6](../archive/development/reviews/pixel-map-v6-preview.png).
 
 Map còn là một khu test nhỏ. Chưa có cutscene, lịch di chuyển tự động của
 NPC, portrait cuối cùng, nội thất đầy đủ từng cửa hàng hay asset truyện thật.

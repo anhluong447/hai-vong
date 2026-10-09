@@ -32,14 +32,14 @@ def main():
             '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
         ]
         if args.capture:
-            arguments.append(f'--screenshot={root / "sandbox-preview.png"}')
+            arguments.append(f'--screenshot={root.parent / "archive/development/reviews/sandbox-preview.png"}')
         arguments.append(args.url)
         result = subprocess.run(arguments, capture_output=True, text=True, encoding='utf-8', errors='replace',
             env=environment, timeout=45)
     (root / ('preview_dom.log' if args.capture else f'{args.output_prefix}_results.log')).write_text(result.stdout, encoding='utf-8')
     (root / ('preview_browser.log' if args.capture else f'{args.output_prefix}_browser.log')).write_text(result.stderr, encoding='utf-8')
     if args.capture:
-        screenshot = root / 'sandbox-preview.png'
+        screenshot = root.parent / 'archive/development/reviews/sandbox-preview.png'
         if result.returncode != 0 or not screenshot.exists():
             print('Screenshot failed. See tools/test_browser.log.')
             return 1

@@ -15,6 +15,6 @@ Map là một buổi giao lưu tại CLB, chia thành khu phóng viên, đối c
 
 `src/pixel/maps.js` chứa layout; `interaction-main.js` điều khiển hội thoại và dùng chung PixelWorld/DialogueSprite với map game. Các test kiểm tra đường đi thật, hai nhánh, sprite theo câu, quay lại/đóng, khóa di chuyển khi thoại và bố cục mobile.
 
-Đã xem trực tiếp [khung thoại Nhi trên mobile](../tools/interaction-map-mobile-preview.png). Focus canvas dùng `preventScroll` để thao tác bấm không bị lệch tọa độ khi map nằm dưới phần đầu trang. Preview tự đi map có tại `/tools/interaction-map-preview.html?character=nhi&expression=serious&mobile`.
+Đã xem trực tiếp [khung thoại Nhi trên mobile](../archive/development/reviews/interaction-map-mobile-preview.png). Focus canvas dùng `preventScroll` để thao tác bấm không bị lệch tọa độ khi map nằm dưới phần đầu trang. Preview tự đi map có tại `/tools/interaction-map-preview.html?character=nhi&expression=serious&mobile`.
 
-Kết quả sau bản sửa cuối: **63/63 browser tests pass**, bao gồm đường đi trên desktop/mobile và các map vòng chơi hiện có. [Bố cục map thử](../tools/interaction-map-room-preview.png).
+Kết quả sau bản sửa cuối: **63/63 browser tests pass**, bao gồm đường đi trên desktop/mobile và các map vòng chơi hiện có. [Bố cục map thử](../archive/development/reviews/interaction-map-room-preview.png).

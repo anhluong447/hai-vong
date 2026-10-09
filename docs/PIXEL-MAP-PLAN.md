@@ -6,7 +6,7 @@ trong map có asset, NPC và đồ vật, theo góc nhìn RPG 2D từ trên xu�
 **Trạng thái: đã triển khai.** Cả năm bước đã hoàn tất ở `pixel.html`.
 Bộ kiểm thử trình duyệt 52/52 passed, gồm một vòng ngày đi thật qua bốn map
 và kiểm tra lại các sandbox trước. [Hướng dẫn](PIXEL-MAP.md),
-[preview](../tools/pixel-map-preview.png).
+[preview](../archive/development/reviews/pixel-map-preview.png).
 
 ## Phạm vi triển khai
 

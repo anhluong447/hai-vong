@@ -1,0 +1,276 @@
+{
+  "date": "2026-10-09",
+  "reason": "Historical review images and completed one-time migration scripts; active runtime assets and tools remain available.",
+  "files": [
+    {
+      "source": "tools/dialogue-expression-review.png",
+      "destination": "archive/development/reviews/dialogue-expression-review.png",
+      "bytes": 751276,
+      "sha256": "41b329af6d52baa8dba4b737be7ffda8198901f6b71528862490952fd9d493ef"
+    },
+    {
+      "source": "tools/dialogue-khue-everyday-preview.png",
+      "destination": "archive/development/reviews/dialogue-khue-everyday-preview.png",
+      "bytes": 449359,
+      "sha256": "5760abe5e82edadce0e1cc353f983dc8e279e520c3b97651357acf1ad31a8c83"
+    },
+    {
+      "source": "tools/dialogue-khue-lab-preview.png",
+      "destination": "archive/development/reviews/dialogue-khue-lab-preview.png",
+      "bytes": 441988,
+      "sha256": "1773501b10be1b0f94855ba55f80c942fd75abf393490461ebcf82cef2d395be"
+    },
+    {
+      "source": "tools/dialogue-source-map-preview.png",
+      "destination": "archive/development/reviews/dialogue-source-map-preview.png",
+      "bytes": 709992,
+      "sha256": "f5219c5ac62c3049c6f12d5a7badb499f35bd31ae46a9dc226b4da1c0c336d94"
+    },
+    {
+      "source": "tools/dialogue-v2-expression-review.png",
+      "destination": "archive/development/reviews/dialogue-v2-expression-review.png",
+      "bytes": 1084378,
+      "sha256": "f253e60f1b61d7a98b4afcbf7dded33ce988b9885c71908951dbea188642f197"
+    },
+    {
+      "source": "tools/dialogue-v2-nhi-expression-preview.png",
+      "destination": "archive/development/reviews/dialogue-v2-nhi-expression-preview.png",
+      "bytes": 451964,
+      "sha256": "79d2ac29690dba5a35184f3b6ddc163a8659d63a9b907ac191b95657852b279c"
+    },
+    {
+      "source": "tools/dialogue-v2-nhi-mobile-preview.png",
+      "destination": "archive/development/reviews/dialogue-v2-nhi-mobile-preview.png",
+      "bytes": 292143,
+      "sha256": "e5bb0d680d431efe239c12ff0913413e20386e626a649a07ba2f2b84f14ac452"
+    },
+    {
+      "source": "tools/dialogue-v2-pose-review.png",
+      "destination": "archive/development/reviews/dialogue-v2-pose-review.png",
+      "bytes": 1411172,
+      "sha256": "c7ad01e253ce9a72cbacc066db646c4bf5da8ce1611031580509d6012cbf44ed"
+    },
+    {
+      "source": "tools/dialogue-v2-van-map-preview.png",
+      "destination": "archive/development/reviews/dialogue-v2-van-map-preview.png",
+      "bytes": 751403,
+      "sha256": "1cb7ea3d1fbae1bb3fd89b32ffc47bad5d04b5fc90b79e8e046b4cc67c8e7976"
+    },
+    {
+      "source": "tools/dialogue-van-map-preview.png",
+      "destination": "archive/development/reviews/dialogue-van-map-preview.png",
+      "bytes": 691774,
+      "sha256": "f226fdde395490b0c57ef4614e003f3021dcc04604625beb34b42ed5bcfd3682"
+    },
+    {
+      "source": "tools/dialogue-van-mobile-preview.png",
+      "destination": "archive/development/reviews/dialogue-van-mobile-preview.png",
+      "bytes": 290852,
+      "sha256": "e285c65f49a1a5c5f6ff335eef601c0ba7bbc8fae0a06e3a370675f0d099cec7"
+    },
+    {
+      "source": "tools/interaction-map-mobile-preview.png",
+      "destination": "archive/development/reviews/interaction-map-mobile-preview.png",
+      "bytes": 287036,
+      "sha256": "776722a367a398182430d4b569c3f0a59d6aa421d66602452eb93d864de40f4c"
+    },
+    {
+      "source": "tools/interaction-map-room-preview.png",
+      "destination": "archive/development/reviews/interaction-map-room-preview.png",
+      "bytes": 266193,
+      "sha256": "7633c1569d3e0c79bc24e0ee5b9be1400a5378c8e47925a1d4b7bdb3c40d9930"
+    },
+    {
+      "source": "tools/khue-full-walk-preview.png",
+      "destination": "archive/development/reviews/khue-full-walk-preview.png",
+      "bytes": 87130,
+      "sha256": "79b787e3b0111e2d9a5d66897d575fb542294629da65b9d10ffe55f96da638c8"
+    },
+    {
+      "source": "tools/khue-proportions-down.png",
+      "destination": "archive/development/reviews/khue-proportions-down.png",
+      "bytes": 89498,
+      "sha256": "24f7d7c5e9fcb25f4483d042e9252a1cc87fa5f09f93007d9fb81580f4cf3749"
+    },
+    {
+      "source": "tools/khue-proportions-right.png",
+      "destination": "archive/development/reviews/khue-proportions-right.png",
+      "bytes": 89672,
+      "sha256": "33c8d3438dea76c093e44cb78ca42f0350afd19672d35d55396e9b89724651a1"
+    },
+    {
+      "source": "tools/khue-proportions-up.png",
+      "destination": "archive/development/reviews/khue-proportions-up.png",
+      "bytes": 88071,
+      "sha256": "9c580826875d9b1acd8d7c0d578e06f3f9c17e86652e8a504fe2ce4b1c227559"
+    },
+    {
+      "source": "tools/khue-v5-contact-preview.png",
+      "destination": "archive/development/reviews/khue-v5-contact-preview.png",
+      "bytes": 91506,
+      "sha256": "2abac0c68b8db4bf90c81bada11d0bf811b6219454dd61d738c2dbd87ed3c231"
+    },
+    {
+      "source": "tools/khue-v6-animation-preview.png",
+      "destination": "archive/development/reviews/khue-v6-animation-preview.png",
+      "bytes": 87802,
+      "sha256": "50ff847b2c714a40a808c06ae0130d8e9c14ffef7e0f293e58cc9a2fd2f926d3"
+    },
+    {
+      "source": "tools/khue-v6-down-idle-comparison.png",
+      "destination": "archive/development/reviews/khue-v6-down-idle-comparison.png",
+      "bytes": 86926,
+      "sha256": "e0764ecac8567cfd56b61b5583893401c6b0ea9f5aa1782c8eed3bb4d01c0e56"
+    },
+    {
+      "source": "tools/khue-v6-up-idle-comparison.png",
+      "destination": "archive/development/reviews/khue-v6-up-idle-comparison.png",
+      "bytes": 85803,
+      "sha256": "e6a2138eaa78575b58c1cd84a18795fe7dee9c53c5cd6f9019e86880b969ff95"
+    },
+    {
+      "source": "tools/pilot-sprite-lab-preview.png",
+      "destination": "archive/development/reviews/pilot-sprite-lab-preview.png",
+      "bytes": 82054,
+      "sha256": "d0fee6e56769e67a35cba6aeca1d5be7a7805c55a3e02533c311cf76d3d402f4"
+    },
+    {
+      "source": "tools/pilot-van-dialog-preview.png",
+      "destination": "archive/development/reviews/pilot-van-dialog-preview.png",
+      "bytes": 514032,
+      "sha256": "fd01cb7db32cec2778ae69664bba42bd9b7204294cb667258a3bbed230c7f570"
+    },
+    {
+      "source": "tools/pilot-van-mobile-preview.png",
+      "destination": "archive/development/reviews/pilot-van-mobile-preview.png",
+      "bytes": 262848,
+      "sha256": "f806f2e622515e9cd6e6d6174642ba34edca45d322cafabd3811602fe5214565"
+    },
+    {
+      "source": "tools/pixel-anime-dialog-preview.png",
+      "destination": "archive/development/reviews/pixel-anime-dialog-preview.png",
+      "bytes": 557899,
+      "sha256": "dd9431da594e9a68237dd5e948c0634e10f9c7cedbcca999555247cfedfc8ce3"
+    },
+    {
+      "source": "tools/pixel-anime-map-preview.png",
+      "destination": "archive/development/reviews/pixel-anime-map-preview.png",
+      "bytes": 236344,
+      "sha256": "71a40ea71e696e9b036875f011b7e3651901a32d55e536936e960694728283b2"
+    },
+    {
+      "source": "tools/pixel-dialog-mobile-preview.png",
+      "destination": "archive/development/reviews/pixel-dialog-mobile-preview.png",
+      "bytes": 223513,
+      "sha256": "af66b28f05fbf7e9257f09b50fa7f1bd677227d340d5e7e3c1758194dbcc727c"
+    },
+    {
+      "source": "tools/pixel-dialog-preview.png",
+      "destination": "archive/development/reviews/pixel-dialog-preview.png",
+      "bytes": 555624,
+      "sha256": "e107428756d27ba9d32b185ecc52f3f4e698d9fa6de0aeb23ff678d918027986"
+    },
+    {
+      "source": "tools/pixel-map-preview.png",
+      "destination": "archive/development/reviews/pixel-map-preview.png",
+      "bytes": 50683,
+      "sha256": "dba842ada4494887dc88f495a5f470f47421cda7a5a03756c61cce1941a6d05c"
+    },
+    {
+      "source": "tools/pixel-map-v5-preview.png",
+      "destination": "archive/development/reviews/pixel-map-v5-preview.png",
+      "bytes": 230765,
+      "sha256": "b0a3ce4173c5f633cb6f2de9ed8e81f60f079cbe285187ff72b1d1a3879d6ef1"
+    },
+    {
+      "source": "tools/pixel-map-v6-preview.png",
+      "destination": "archive/development/reviews/pixel-map-v6-preview.png",
+      "bytes": 230758,
+      "sha256": "900c03913ff441b0c2a09033d05c3dc603c2cea94f502b5e5100346db993172d"
+    },
+    {
+      "source": "tools/sandbox-preview.png",
+      "destination": "archive/development/reviews/sandbox-preview.png",
+      "bytes": 266193,
+      "sha256": "7633c1569d3e0c79bc24e0ee5b9be1400a5378c8e47925a1d4b7bdb3c40d9930"
+    },
+    {
+      "source": "tools/walk-cycle-probe-attempt1-preview.png",
+      "destination": "archive/development/reviews/walk-cycle-probe-attempt1-preview.png",
+      "bytes": 105006,
+      "sha256": "ac4c100cc02cbd0bcb17dad5fb84651ab066ba0fd4cb0b197096ee38ccb70514"
+    },
+    {
+      "source": "tools/walk-cycle-probe-preview.png",
+      "destination": "archive/development/reviews/walk-cycle-probe-preview.png",
+      "bytes": 105621,
+      "sha256": "78991169dd43aabcbc4a326aef7e1bd786e1c25c7e0fd31acb6b7190d057a1d0"
+    },
+    {
+      "source": "tools/walk-cycle-probe-runtime-preview.png",
+      "destination": "archive/development/reviews/walk-cycle-probe-runtime-preview.png",
+      "bytes": 104471,
+      "sha256": "ac4de6adbfa9c94603bb167a26df54502fbef847509b094cd3e455faa882acff"
+    },
+    {
+      "source": "tools/walk-probe-preview.png",
+      "destination": "archive/development/reviews/walk-probe-preview.png",
+      "bytes": 117454,
+      "sha256": "4037295d02e324f31b372f1cad5b904a2d21353f1df9c4cbdc9fd512e8715c2b"
+    },
+    {
+      "source": "tools/walk-storyboards-frame-0.png",
+      "destination": "archive/development/reviews/walk-storyboards-frame-0.png",
+      "bytes": 191315,
+      "sha256": "2256d5ea52b781840afe5ed4cea3792b69a183d5506b28f2428361010b2e9ba4"
+    },
+    {
+      "source": "tools/walk-storyboards-frame-2.png",
+      "destination": "archive/development/reviews/walk-storyboards-frame-2.png",
+      "bytes": 181234,
+      "sha256": "6ac396b0d6f3cf1c5872cfbf5c74f6e0052ccbfd3d75b4e2be59238fbbae3d94"
+    },
+    {
+      "source": "tools/walk-storyboards-frame-4.png",
+      "destination": "archive/development/reviews/walk-storyboards-frame-4.png",
+      "bytes": 181056,
+      "sha256": "b518b659f1f660d09052d59751153ecf5116c0d16545b4717c1c4488adf12211"
+    },
+    {
+      "source": "tools/walk-storyboards-preview.png",
+      "destination": "archive/development/reviews/walk-storyboards-preview.png",
+      "bytes": 181234,
+      "sha256": "6ac396b0d6f3cf1c5872cfbf5c74f6e0052ccbfd3d75b4e2be59238fbbae3d94"
+    },
+    {
+      "source": "tools/refactor_content.py",
+      "destination": "archive/development/migrations/2026-10-09/refactor_content.py",
+      "bytes": 7498,
+      "sha256": "8a3b4db3e2a435b9c312410bb66462095dc4e5bd9039ea2b847f64191ff8a013"
+    },
+    {
+      "source": "tools/refactor_modules.py",
+      "destination": "archive/development/migrations/2026-10-09/refactor_modules.py",
+      "bytes": 9341,
+      "sha256": "0ea952c1bb86ed9198052af10d757a00a520c2ae8dd09d4ac48c93c0697491ec"
+    },
+    {
+      "source": "tools/finalize_refactor.py",
+      "destination": "archive/development/migrations/2026-10-09/finalize_refactor.py",
+      "bytes": 8179,
+      "sha256": "0a5f4957b52d555d6117564b8bb25995136ed786211e747f15fd8df6b1fabf65"
+    },
+    {
+      "source": "tools/finish_content.py",
+      "destination": "archive/development/migrations/2026-10-09/finish_content.py",
+      "bytes": 2726,
+      "sha256": "7ad352545f5bb9a93705e0a2b0aa5efbc429cd6fa5258d0eaf9d7c44dac6b0ab"
+    },
+    {
+      "source": "tools/prepare_review_archive.py",
+      "destination": "archive/development/migrations/2026-10-09/prepare_review_archive.py",
+      "bytes": 1076,
+      "sha256": "05a420eff8047d2c90b376503d644cee273cbf8ab97f72d45b68819af443b8bd"
+    }
+  ]
+}

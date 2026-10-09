@@ -35,7 +35,7 @@ Remaining limitations: arms, torso shape, garment highlights and limb shading st
 
 ## Validation and acceptance
 
-Browser loaded all eight character frames, eight guides and the comparison sheet, and playback visited all eight phases. Preview screenshot: `tools/walk-cycle-probe-preview.png`. A separate nominal-game-cadence preview is saved as `tools/walk-cycle-probe-runtime-preview.png`.
+Browser loaded all eight character frames, eight guides and the comparison sheet, and playback visited all eight phases. Preview screenshot: `archive/development/reviews/walk-cycle-probe-preview.png`. A separate nominal-game-cadence preview is saved as `archive/development/reviews/walk-cycle-probe-runtime-preview.png`.
 
 This is a usable motion review prototype, not a production-approved sheet. Final acceptance still needs continuous arm/hip trajectories, consistent garment shading, stance-foot behavior against moving ground, and all directions at the same semantic phase.
 

@@ -10,3 +10,7 @@ original SHA-256 before old active paths were removed. The inventory is
 The snapshot is preserved for recovery/reuse and is not used by the new game.
 Serve `archive/clb-hoi/` as the static server root to run the old entry page.
 Legacy browser storage keys are untouched.
+
+Historical review images and completed scripts from the 2026-10-09 architecture
+refactor are in [development/](development/README.md). The legacy snapshot above
+is unchanged; the development archive has its own inventory and verified hashes.

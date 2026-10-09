@@ -19,5 +19,5 @@ for($row=0;$row -lt $ids.Count;$row++) {
  }
 }
 $g.Dispose();$font.Dispose()
-$canvas.Save((Join-Path $PSScriptRoot 'dialogue-expression-review.png'),[System.Drawing.Imaging.ImageFormat]::Png)
+$canvas.Save((Join-Path $PSScriptRoot '../archive/development/reviews/dialogue-expression-review.png'),[System.Drawing.Imaging.ImageFormat]::Png)
 $canvas.Dispose()

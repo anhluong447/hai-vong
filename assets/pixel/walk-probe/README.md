@@ -23,7 +23,7 @@ Verdict: master + per-pose guide helps produce distinct contact/passing silhouet
 
 Recommended next step: keep approved head/torso pixels in editable layers, resolve both contact poses with explicit near/far leg landmarks, fill the remaining phases, then evaluate on the map. A guide-following generated pose is a draft to review, not an authoritative motion frame.
 
-Browser preview loaded all generated images, metrics, fonts and old frames successfully. Screenshot: `tools/walk-probe-preview.png`.
+Browser preview loaded all generated images, metrics, fonts and old frames successfully. Screenshot: `archive/development/reviews/walk-probe-preview.png`.
 
 Original generated files were copied from `C:/Users/anhlh52/.codex/generated_images/01a10a03-549c-7db3-b022-5e15fe7a905b/`:
 

@@ -2,7 +2,7 @@
 
 2026-10-08. Yêu cầu mới: `assets/pixel/characters-anime-source.png` là nguồn thiết kế chuẩn. Mỗi nhân vật có prompt riêng; pose, góc nhìn và khuôn mặt phải khác nhau, biểu cảm dễ đọc trên UI thật.
 
-Đã triển khai 24 ảnh / 9 nhân vật vào registry dùng chung cho game/lab. Khuê có thêm bộ đứng thường ngày (bình thường, cười nhẹ, lắng nghe); bộ cầm sổ giữ riêng cho điều tra. Long cười sảng khoái và Ngọc nháy mắt đã bỏ kính bị thêm nhầm. Xem [bộ v2 và prompt riêng](../assets/dialogue/v2/README.md), [pose toàn cast](../tools/dialogue-v2-pose-review.png), [biểu cảm](../tools/dialogue-v2-expression-review.png).
+Đã triển khai 24 ảnh / 9 nhân vật vào registry dùng chung cho game/lab. Khuê có thêm bộ đứng thường ngày (bình thường, cười nhẹ, lắng nghe); bộ cầm sổ giữ riêng cho điều tra. Long cười sảng khoái và Ngọc nháy mắt đã bỏ kính bị thêm nhầm. Xem [bộ v2 và prompt riêng](../assets/dialogue/v2/README.md), [pose toàn cast](../archive/development/reviews/dialogue-v2-pose-review.png), [biểu cảm](../archive/development/reviews/dialogue-v2-expression-review.png).
 
 ## Vì sao cần làm lại
 

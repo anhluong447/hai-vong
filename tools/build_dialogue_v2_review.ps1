@@ -16,7 +16,7 @@ for($i=0;$i -lt $ids.Count;$i++){
  $image.Dispose()
 }
 $g.Dispose();$font.Dispose()
-$canvas.Save((Join-Path $PSScriptRoot 'dialogue-v2-pose-review.png'),[System.Drawing.Imaging.ImageFormat]::Png)
+$canvas.Save((Join-Path $PSScriptRoot '../archive/development/reviews/dialogue-v2-pose-review.png'),[System.Drawing.Imaging.ImageFormat]::Png)
 $canvas.Dispose()
 # The expression sheet uses the same full-width, y0..650 crop for every cell.
 # These are inspection artifacts; no game asset is edited or recentered.
@@ -38,5 +38,5 @@ for($row=0;$row -lt 7;$row++){for($col=0;$col -lt 3;$col++){
  $image.Dispose()
 }}
 $g.Dispose();$font.Dispose()
-$canvas.Save((Join-Path $PSScriptRoot 'dialogue-v2-expression-review.png'),[System.Drawing.Imaging.ImageFormat]::Png)
+$canvas.Save((Join-Path $PSScriptRoot '../archive/development/reviews/dialogue-v2-expression-review.png'),[System.Drawing.Imaging.ImageFormat]::Png)
 $canvas.Dispose()

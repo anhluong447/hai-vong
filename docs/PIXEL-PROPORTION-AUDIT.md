@@ -22,7 +22,7 @@ Visual findings:
 
 The right/up/down upper bands change 180–186, 146–167 and 161–179 pixels respectively versus idle. These differences include colors/texture as well as position, so they must not be interpreted as a displacement count.
 
-Evidence: [right comparison](../tools/khue-proportions-right.png), [down comparison](../tools/khue-proportions-down.png), [up comparison](../tools/khue-proportions-up.png).
+Evidence: [right comparison](../archive/development/reviews/khue-proportions-right.png), [down comparison](../archive/development/reviews/khue-proportions-down.png), [up comparison](../archive/development/reviews/khue-proportions-up.png).
 
 Pipeline cause: the generator treated the idle image as an identity/style reference while rendering a new body over a generic mannequin. Import then applied a shared 0.95 scale and aligned each source row's top to y7. This corrects sheet padding, not internal anatomy. It also disregards direction-specific idle bounds, such as the right idle's y8 start and 37px height. Passing canvas/palette tests did not validate these proportions.
 
@@ -39,4 +39,4 @@ The active bank now uses regenerated up/down walk only. Each direction uses a co
 
 All eight up frames retain a 17×17px upper band, and all eight down frames retain 18×17px, at y7 with the same horizontal center as idle. Contact overlays also align the neck, shirt and waist more closely. These measurements constrain proportions without proving identical internal pixel clusters. The historical v5 JSON and screenshots above are retained; the live review tool reads the active bank.
 
-[Up comparison](../tools/khue-v6-up-idle-comparison.png), [down comparison](../tools/khue-v6-down-idle-comparison.png), [import and sources](../assets/pixel/pilot-v6/README.md).
+[Up comparison](../archive/development/reviews/khue-v6-up-idle-comparison.png), [down comparison](../archive/development/reviews/khue-v6-down-idle-comparison.png), [import and sources](../assets/pixel/pilot-v6/README.md).
