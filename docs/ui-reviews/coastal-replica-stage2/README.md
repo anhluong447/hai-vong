@@ -1,79 +1,90 @@
-# Coastal replica — Stage 2 dialogue review
+# Coastal replica — Stage 2 UI dialogue review
 
-2026-10-09 · triển khai từ commit `1519393`. Bản thoại tĩnh Stage 2 đã có art,
-composition, live text và kiểm thử; **chưa nghiệm thu G2**. Preview mặc định:
-<http://127.0.0.1:8080/tools/coastal-replica-preview.html>.
+2026-10-09 · **scope revision 2: replica UI, context thay được**.
+Bản dựng được commit ở `c21e732`; review full-scene trước đó không còn là tiêu
+chí nghiệm thu hiện hành. [Roadmap](../../UI-REPLICA-ROADMAP.md) và
+[UI scope](../../ui-specs/coastal-replica/ui-scope.json) quyết định việc tiếp tục.
+**G2 UI chưa nghiệm thu**, không tự chuyển thành đạt sau khi bỏ scope background.
+
+Preview: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=2>.
 Stage 1 vẫn mở bằng `?version=1`.
 
-## Bản dựng hiện tại
+Stage 3 đã có UI-isolated views, local light/depth và conservative interior mask.
+Đọc [review Stage 3](../coastal-replica-stage3/README.md) cho evidence/backlog mới;
+các trạng thái chưa triển khai bên dưới mô tả mốc review Stage 2.
+
+## Bản dựng đã có
 
 ![Thoại native Stage 2](dialogue-native-v4.png)
 
-| Task | Đã triển khai | Phạm vi còn review |
+Pack [v2](../../../assets/ui/coastal-replica/v2/README.md) có 19 asset / 29 instance
+khai báo, **gồm cả UI và context**: 6 PNG sinh bằng imagegen builtin/reference edit,
+13 SVG code-native. [Prompts](../../../assets/ui/coastal-replica/v2/prompts.json),
+masters, pack Stage 1, concept PNG và baseline được giữ nguyên.
+
+| Task | Đầu ra giữ lại | Việc tiếp tục theo scope mới |
 | --- | --- | --- |
-| R09 | Newsroom/window/desk plate sạch; chữ bảng và poster là live text | Geometry/props/nét nền chưa trùng source |
-| R10 | Hai PNG alpha pose ngồi; Vân cầm báo; scale đồng đều và face registration | Tóc, áo, vai, tay và báo còn sai silhouette |
-| R11 | Desk clip theo từng chồng sách/đạo cụ; hoa, sổ và lá là foreground riêng | Hình hoa/lá, crop sổ, edge restoration và overlap cục bộ |
-| R12 | Paper contour theo anchor, wave/shore ink, harbor print, speaker rules, continue | Hạt mực/foam, hình minh họa, độ rộng chữ và marks |
-| R13 | Ba choice có trạng thái, date seal, wordmark/brand mark, copy riêng | Viền giấy, glyph/icon, nét dấu ngày và spacing chưa khớp |
-| R14 | Native, overlay, difference, contact sheets và danh sách sai lệch | G2 mở; phải sửa các lỗi lớn bên dưới trước R15 |
+| R09 | Newsroom plate đang có | Dùng làm context; hoãn căn cảnh/bàn/cửa sổ 1:1 |
+| R10 | Hai portrait alpha đang có | Dùng tùy chọn; hoãn sửa tóc/áo/tay/pose/identity |
+| R11 | Hoa, notebook và foliage tách lớp | Chốt phần trang trí gắn UI, native alpha/crop/overlap/masks |
+| R12 | Paper/wave/shore ink/harbor print, speaker/rules/body/continue | Chỉnh shape/material/print/type của thanh thoại |
+| R13 | Choices/states/date/wordmark/marks | Chỉnh strips/icon/arrow/date/type; lưu logo dùng lại, thoại hiển thị tùy chọn |
+| R14 | Native/full-frame diagnostics lịch sử | Thêm UI isolation/production masks và review UI theo từng component |
 
-Pack [v2](../../../assets/ui/coastal-replica/v2/README.md) có **19 asset / 29
-instance**: 6 PNG sinh bằng skill imagegen builtin ở chế độ edit từ concept
-thoại, 13 SVG code-native. [Prompts](../../../assets/ui/coastal-replica/v2/prompts.json)
-được lưu đầy đủ. Các ảnh gốc, pack Stage 1 và baseline giữ nguyên.
+Chữ UI và decoration đã đi qua catalog. Chữ trên bảng/poster/cốc/báo cầm tay
+thuộc context; có thể giữ cách render hiện có, không cần phục dựng microcopy
+để qua G2 UI. Chữ trên **notebook trang trí thanh thoại** vẫn thuộc UI.
+Đọc [fixture bổ sung](../../ui-specs/coastal-replica/dialogue-production.json)
+như nguồn lịch sử, không nhập nó vào gameplay/runtime.
 
-Chữ trên bảng/poster/báo/cốc/sổ không nằm trong bitmap. Các hàng nhỏ trên báo
-hiện là rule đồ họa; ảnh minh họa báo là biến thể grayscale của cảng. Microcopy
-khó đọc chưa được phục dựng và được ghi trong
-[fixture bổ sung](../../ui-specs/coastal-replica/dialogue-production.json).
+## Bằng chứng đã lưu và phạm vi sử dụng
 
-## Bằng chứng và cách đọc
+- [Native v4](dialogue-native-v4.png), [capture contract](dialogue-native-v4.json),
+  [overlay 50/50](dialogue-native-v4-overlay.png),
+  [difference ×4](dialogue-native-v4-difference.png), [ROI report](dialogue-native-v4-comparison.json).
+- [Contact sáng](material-light-v3.png), [contact tối](material-dark-v3.png),
+  [sáu PNG masters](props-v3.png). Có crop mép 100%/50%.
+- [Validation lịch sử](validation.json) ghi hashes, font coverage, suite và
+  full-scene gate lúc capture; giữ nguyên nội dung để truy vết. Trạng thái mới
+  nằm ở [status](../../ui-specs/coastal-replica/status.json).
 
-- Hiện tại: [native v4](dialogue-native-v4.png), [capture contract](dialogue-native-v4.json),
-  [overlay 50/50](dialogue-native-v4-overlay.png), [difference ×4](dialogue-native-v4-difference.png),
-  [ROI report](dialogue-native-v4-comparison.json).
-- Asset: [nền sáng](material-light-v3.png), [nền tối](material-dark-v3.png),
-  [sáu master PNG](props-v3.png). Contact gồm portrait alpha, paper/ink,
-  choice/mark/print và crop mép 100%/50%; đây chưa thay được full native edge review.
-- [Validation](validation.json) ghi suite, source/evidence hashes, font coverage,
-  phạm vi visual gate và environment. Metadata capture ghi native type bounds
-  sau transform, font faces, manifest và từng decoded asset.
+Native viewport 1672×941, DPR 1, vi-VN/Asia-Bangkok, fixture clock/seed/static
+settled; capture chờ fonts/decoded SVG assets. Chrome headless software chưa
+nghiệm thu GPU hoặc realtime motion.
 
-Viewport nội dung 1672×941, DPR 1, vi-VN, Asia/Bangkok, clock/seed/motion khóa
-theo fixture; capture chờ local fonts và decode từng SVG image. Chrome headless
-software xác nhận bản tĩnh, chưa nghiệm thu GPU, realtime lighting hay motion.
+MAE RGBA v4 **16.5845**, Stage 1 **25.2556** là số đo **toàn ảnh theo scope cũ**,
+không dùng chấm UI. V2 thấp hơn nhưng crop mất phố trong minh họa giấy; lỗi đó
+thuộc UI, nên vẫn không chọn làm chuẩn. V3 sửa print, v4 nối phần giấy sổ bị cắt.
+Giữ v1–v4/contact cũ; không coi chúng là UI-only captures đã làm.
 
-MAE RGBA trung bình của v4 là **16.5845**, so với **25.2556** của pilot Stage 1.
-Đây là đo chẩn đoán trên toàn frame, không phải phần trăm giống ảnh. Bản v2 có
-MAE thấp hơn (16.3749) nhưng crop mất phố trong harbor print, nên **không được
-chọn làm bản chuẩn**. V3 sửa crop; v4 phục dựng khoảng giấy sổ bên phải. Giữ
-v1–v4 và contact cũ để thấy lịch sử, không dùng chúng chứng nhận manifest mới.
+## Backlog UI hiện hành
 
-## Sai lệch chặn G2 và lượt sửa tiếp theo
-
-| Mức | Vùng | Sai lệch và việc cần làm |
+| Mức | Component | Việc cần sửa / bằng chứng cần có |
 | --- | --- | --- |
-| Lớn | Khuê / Vân | Overlay còn double contour tóc, vai và áo; mắt/hoa đã gần anchor nhưng hình tay/báo và nếp áo khác. Sửa shape cục bộ từ source, không scale lệch trục hoặc blur để giấu sai |
-| Lớn | Báo Vân cầm | Headline/columns/illustration khác reference; rule đồ họa chưa thay được microcopy. Cần artwork báo và nội dung xác định, giữ chữ riêng khỏi sprite |
-| Lớn | Date / brand / speaker / body | Font nguồn chưa xác định; độ rộng, stroke seal/mark và baseline vẫn hiện bóng đôi ở overlay. Review từng type bound/glyph, không chỉ khớp envelope |
-| Lớn | Wave / paper / harbor print | Contour đã bám các anchor được đo nhưng foam/grain còn đều, print chưa đúng hình/độ đậm. Cần chi tiết mực và crop native theo từng đoạn |
-| Lớn | Sổ / hoa / lá tiền cảnh | Silhouette khác, sổ sinh ảnh bị cắt cần edge phục dựng; tiếp tục sửa crop/nét và hòa chất liệu ở phần nối |
-| Lớn | Newsroom / desk | Một số sách/ghế/cốc/khung cửa là phục dựng, vị trí/độ nét/nắng chưa giống source. Căn lại landmarks và desk overlap trước lighting chung |
+| Chặn review | UI isolation/masks | Phân loại vùng đã có; còn mask pixel UI và capture UI độc lập. Bounding box hoa/sổ pha scene không đủ để chấm G2 |
+| Lớn | Paper/wave/harbor print | Mép/silhouette, foam/grain quá đều, hình/độ đậm minh họa; native crops và UI-mask overlay |
+| Lớn | Hoa/notebook/foliage gắn UI | Shape/crop khác reference, sổ có edge phục dựng; alpha trên nền sáng/tối, texture/bóng tiếp xúc ở phần nối |
+| Lớn | Date/speaker/body/marks | Seal/icon stroke, type width/baseline/spacing; review glyph và bounds từng component |
+| Cần review riêng | Choices/continue | Shape/texture/icon/arrow/state, copy alignment và targets; behavior tests không thay visual review |
+| Tùy chọn | Logo thoại | Giữ mark/wordmark thành nguồn dùng lại; kiểm tra khi hiển thị, không chặn nếu ẩn |
 
-G1 production alpha còn cần kiểm tra mép native từng asset, nhất là tóc và sổ.
-R14 đã giao công cụ/bằng chứng nhưng còn vòng sửa visual. **R15–R17 chưa bắt đầu**;
-chưa nhân rộng menu/HUD/dossier hay thêm animation vào bản chưa qua G2.
+**Loại khỏi backlog chặn UI:** tóc/áo/tay/pose Khuê/Vân, báo Vân cầm,
+room/camera/bàn/ghế/cốc/cửa sổ, scene lettering và nắng scene. Các asset đó vẫn
+là context dùng được, không cần sinh/căn tiếp cho stage UI.
 
-## Kiểm chứng hành vi
+G1 còn review native edge cho **UI art**. Tiếp theo R11–R14 rồi R15–R17
+light/depth UI; không có dependency production portrait/background. G2 UI trước
+motion R18–R23. Layer isolation hiện có phục vụ inspection; chưa thay thế gallery
+UI đầy đủ hoặc masked comparison cần bổ sung ở R14.
 
-Main **72/72**, Stage 2 **14/14**, regression Stage 1 **12/12**, reference tooling
-**13/13**. Architecture **0 issue / 780 text entries**; 8 policy sandbox và 4
-policy gameplay khớp baseline. Hai builder và source lock Stage 0 đều qua check;
-Python compile và whitespace check qua.
+## Kiểm chứng đã chạy ở commit Stage 2
 
-Suite Stage 2 kiểm tra decoded asset/hash, portrait uniform scale, live multiline
-copy, paper anchors ≤2 px, clip IDs độc lập, input xuyên alpha foreground, targets
-choice ở hai scale, bàn phím/focus, callback một lần, capture reset/lock, lỗi
-catalog/view không làm đổi state và disposal. Các test này xác nhận renderer và
-hành vi; chất lượng nét vẽ/compositing vẫn cần review ảnh phía trên.
+Main 72/72; Stage 2 14/14; Stage 1 12/12; reference tools 13/13.
+Architecture 0 issue / 780 text entries; 8 sandbox + 4 gameplay policies khớp
+baseline. Builders, source lock, Python compile và whitespace check qua.
+
+Suite kiểm tra resources/hash, live copy/fonts, paper anchors, mask ID isolation,
+pointer input, scale, focus/callbacks, capture reset/lock và disposal. Các test
+portrait uniform scale vẫn là regression của context hiện có, không chứng nhận
+hay bắt buộc pose đúng concept. Chưa chạy kiểm thử UI-mask comparison vì đầu ra
+đó chưa được triển khai. Đợt revision này chỉ sửa plan/docs.

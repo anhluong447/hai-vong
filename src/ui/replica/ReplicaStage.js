@@ -1,5 +1,6 @@
 import {t} from '../../shared/text.js';
 import {dialoguePilot, replicaDesign, replicaFonts, replicaLayers} from '../../../content/ui/coastal-replica.js';
+import {drawDialogueUi} from './DialogueUiComposition.js';
 
 const namespace = 'http://www.w3.org/2000/svg';
 const projectRoot = new URL('../../../',import.meta.url);
@@ -22,6 +23,8 @@ export class ReplicaStage {
     this.layer = '';
     this.disposed = false;
     this.captureLocked = false;
+    this.lightingEnabled = true;
+    this.logoVisible = false;
     this.abort = new AbortController();
     this.assets = new Map();
     this.deskClipId = `replica-desk-${++nextStageId}`;
@@ -31,9 +34,9 @@ export class ReplicaStage {
     const response = await fetch(manifestURL,{signal:this.abort.signal});
     if (!response.ok) throw new Error(`Replica asset pack HTTP ${response.status}`);
     const manifest = await response.json();
-    if (![1,2].includes(manifest.version) || manifest.stage[0] !== replicaDesign.width || manifest.stage[1] !== replicaDesign.height) throw new RangeError('Unsupported replica asset pack');
-    const entries = await Promise.all(manifest.assets.map(async asset => {
-      if (!/^assets\/ui\/coastal-replica\/v[12]\/exports\/[^/]+\.(png|svg)$/.test(asset.file) || asset.file.includes('..')) throw new RangeError(`Invalid replica resource: ${asset.id}`);
+    if (![1,2,3].includes(manifest.version) || manifest.stage[0] !== replicaDesign.width || manifest.stage[1] !== replicaDesign.height) throw new RangeError('Unsupported replica asset pack');
+    const entries = await Promise.all([...manifest.assets,...manifest.contextAssets??[]].map(async asset => {
+      if (!/^assets\/ui\/coastal-replica\/v[123]\/exports\/[^/]+\.(png|svg)$/.test(asset.file) || asset.file.includes('..')) throw new RangeError(`Invalid replica resource: ${asset.id}`);
       const url = new URL(asset.file,projectRoot).href;
       const image = new Image();
       await new Promise((resolve,reject) => {
@@ -96,7 +99,7 @@ export class ReplicaStage {
     const svg = element('svg',{class:'replica-stage',viewBox:`0 0 ${replicaDesign.width} ${replicaDesign.height}`,preserveAspectRatio:'xMidYMid meet',role:'group','aria-label':t('ui.replica.preview.stageAria')});
     this.svg = svg;
     this.groups = new Map();
-    if (this.view === 'stage') this.drawStage(svg);
+    if (this.view === 'stage' || this.scene.uiOnly && this.scene.backdrops[this.view]) this.drawStage(svg);
     else if (this.view.startsWith('material-')) this.drawContact(svg,this.view === 'material-dark');
     else if (this.view === 'typography') this.drawTypography(svg);
     else if (this.view === 'props') this.drawProps(svg);
@@ -106,6 +109,7 @@ export class ReplicaStage {
   }
 
   drawStage(svg) {
+    if (this.scene.uiOnly) { drawDialogueUi(this,svg,element); return; }
     if (this.scene.art) { this.drawComposition(svg); return; }
     const defs = element('defs',{},svg);
     const clip = element('clipPath',{id:this.deskClipId,clipPathUnits:'userSpaceOnUse'},defs);
@@ -151,7 +155,8 @@ export class ReplicaStage {
     const selected = this.selectedChoice === choice.id;
     const group = element('g',{class:'choice',role:'button',tabindex:0,'data-choice-id':choice.id,
       'aria-label':t(choice.textKey),'aria-pressed':String(selected),'aria-disabled':String(this.captureLocked)},parent);
-    this.image(group,selected?'material.choice-gold':'material.choice-plain',choice.bounds).style.filter = 'drop-shadow(0 2px 2px #07273845)';
+    const surface=this.image(group,selected?'material.choice-gold':'material.choice-plain',choice.bounds);
+    surface.style.filter = this.scene.uiOnly ? (this.lightingEnabled?this.uiShadows.choice:'') : 'drop-shadow(0 2px 2px #07273845)';
     this.icon(group,choice.icon,[x+29,y+16,28,28]);
     if (selected) this.icon(group,'chevron',[x+width-40,y+15,25,29]);
     element('rect',{x,y,width,height,fill:'transparent','pointer-events':'all'},group);
@@ -222,6 +227,24 @@ export class ReplicaStage {
     this.render();
     if (focused) this.svg.querySelector(`[data-choice-id="${id}"]`)?.focus();
     this.onAction({type:'choose',id});
+  }
+
+  drawContinue(parent,make=element) {
+    const [x,y,width,height]=this.scene.continueBounds;
+    const next=make('g',{class:'continue',role:'button',tabindex:0,'aria-label':t('ui.replica.preview.continueAria'),
+      'aria-disabled':String(this.captureLocked)},parent);
+    make('rect',{x,y,width,height,fill:'transparent','pointer-events':'all'},next);
+    make('rect',{x,y,width,height,fill:'none',stroke:'#087185','stroke-width':2,class:'focus-ring','pointer-events':'none'},next);
+    const activate=()=>{if(!this.captureLocked&&!this.disposed)this.onAction({type:'continue'});};
+    next.addEventListener('click',activate);
+    next.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+  }
+
+  setPresentation({lighting=this.lightingEnabled,logo=this.logoVisible}={}) {
+    if(typeof lighting!=='boolean'||typeof logo!=='boolean') throw new TypeError('Invalid replica presentation flags');
+    this.lightingEnabled=lighting;
+    this.logoVisible=logo;
+    this.render();
   }
 
   nativePoint(clientX,clientY) {

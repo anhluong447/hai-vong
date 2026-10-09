@@ -1,200 +1,268 @@
-# Hồi Âm — roadmap replica visual và chuyển động
+# Hồi Âm — roadmap replica UI và chuyển động
 
-Ngày: 2026-10-09. Trạng thái: **Stage 0 / R01–R04 và Stage 1 / R05–R08 đã bàn giao; Stage 2 / R09–R14 đã có bản dựng thoại tĩnh và bằng chứng review**. G2 chưa qua: R14 còn sửa silhouette/props/type/material. R15–R45 chưa triển khai. Xem [bộ spec](ui-specs/coastal-replica/README.md), [review Stage 1](ui-reviews/coastal-replica-stage1/README.md) và [review Stage 2](ui-reviews/coastal-replica-stage2/README.md).
+Ngày: 2026-10-09 · revision 2, **phạm vi UI được người dùng chốt lại**.
+Stage 0 và Stage 1 đã có dữ liệu/pipeline; Stage 2 đã có bản dựng thoại ở commit
+`c21e732`. Stage 3 đã triển khai **R15/R16 light/depth UI** và evidence R17.
+G2 vẫn mở: tinh chỉnh sai khác UI tĩnh trong
+[review Stage 3](ui-reviews/coastal-replica-stage3/README.md) trước motion R18–R23.
+G2 UI chưa được nghiệm thu; background/pose không còn là điều kiện chặn.
 
-## Mục tiêu và thứ tự ưu tiên
+## Mục tiêu và ranh giới
 
-Tái dựng bốn màn trong [coastal-editorial-v1](ui-concepts/coastal-editorial-v1/README.md) theo mục tiêu replica 1:1: composition, hình dáng, tỷ lệ, crop, chất liệu, typography, ánh sáng và chiều sâu. Sau khi bản tĩnh đạt chuẩn, thêm chuyển động vào chính các lớp đó. Bộ ảnh là thiết kế đích, không chỉ là gợi ý bảng màu.
+Tái dựng **các thành phần UI cố định** trong bốn ảnh
+[coastal-editorial-v1](ui-concepts/coastal-editorial-v1/README.md): hình dáng,
+bố cục, crop, lớp chồng, chất giấy/mực, typography, icon, ánh sáng và chiều sâu.
+Sau khi UI tĩnh đạt chuẩn, thêm animation/effect vào chính các lớp UI đó.
 
-Ưu tiên: độ trung thành với ảnh → chất lượng asset và xếp lớp → ánh sáng → typography → chuyển động → tương tác/gameplay → hiệu năng và đóng gói. Tiêu chuẩn cao áp dụng ở từng bước; không gom mọi thiếu sót visual thành việc polish cuối dự án.
+Background, cảnh lớp học/cảng, nhân vật và đạo cụ trong world là context thay
+được. Có thể dùng art đang có, cảnh game hiện tại, màu trung tính hoặc ảnh gen
+mới phù hợp; không cần khớp camera, pose, tóc/áo, bàn ghế hay nắng của concept.
+Việc sản xuất scene/character/world art riêng nằm ở backlog làm sau.
 
-Bản coastal v1 hiện tại là prototype kỹ thuật. Giữ khả năng session, save/load, input, text service, focus và animation lifecycle còn hữu ích. Bố cục và các surface giản lược chưa đạt mục tiêu này. Các test 72/72 trước đây xác nhận hành vi, không chứng nhận độ giống concept.
+**Trang trí gắn với UI vẫn thuộc replica:** hoa, notebook và minh họa bờ kè/cảng
+của thanh thoại; sóng/giấy/hoa viền menu; kẹp/băng dính/ghi chú/minh họa trong
+hồ sơ. Nội dung ảnh nằm trong thumbnail/evidence là slot của UI, không kéo theo
+yêu cầu phục dựng toàn cảnh ngoài slot. Logo Hồi Âm được lưu làm asset/component
+dùng lại; hiển thị logo trên màn thoại là tùy chọn.
 
-Khung thiết kế gốc: **1672 × 941** cho cả bốn ảnh. Giai đoạn replica dựng trong một stage có hệ tọa độ này; kích thước cửa sổ khác scale đồng đều và dùng khoảng đệm nếu cần. Không reflow thành layout điện thoại, ẩn chân dung hoặc thay composition để vừa màn hình nhỏ. Trợ năng, bàn phím và giảm chuyển động vẫn được giữ trong cùng thiết kế.
+Ưu tiên: shape/layout UI → art/mask/texture → type/icon → light/depth UI →
+motion/feedback → gameplay integration → hiệu năng. Khung thiết kế **1672×941**,
+scale đồng đều và letterbox, giữ composition UI. Không giản lược thành toolbar
+web hay reflow mobile. Text từ catalog, dữ liệu và thông số visual từ content;
+không đóng chữ/nút vào một bitmap hoặc cố định dữ liệu gameplay theo ảnh.
 
-index.html hiện là sandbox công thức. Bản replica có đường preview riêng trước; đổi entry mặc định chỉ thực hiện ở bước tích hợp được ghi rõ. Không đổi luật gameplay hoặc baseline để phục vụ một khung ảnh.
+[Bản phân loại phạm vi](ui-specs/coastal-replica/ui-scope.json) ánh xạ toàn bộ
+169 vùng Stage 0 thành UI, UI tùy chọn, vùng pha trộn cần mask và context.
+Dữ liệu đo/asset inventory cũ được giữ như nguồn lịch sử; mapping này quyết định
+backlog/gate hiện hành. 104 asset dự kiến ban đầu gồm cả context, không còn là
+số lượng asset UI bắt buộc. Giữ R01–R45 để truy vết; các task đổi phạm vi được
+ghi rõ, không sửa lịch sử commit/capture để giả vờ đã đạt yêu cầu mới.
 
-## Bốn thiết kế đích
+## Bốn bộ UI đích
 
-| Màn | Thành phần bắt buộc theo ảnh | Điểm không được giản lược |
+| Màn | Replica bắt buộc | Context thay được |
 | --- | --- | --- |
-| 01 — Thoại | Nền tòa soạn/cảng; Khuê trái, Vân phải với pose ngồi; bàn và báo tiền cảnh; date seal trái trên; thương hiệu phải trên; ba dải lựa chọn xếp dọc; khung thoại giấy mép sóng ở đáy | Hai nhân vật, vị trí lựa chọn nổi ngoài vùng đọc, đường biên giấy và quan hệ che khuất với đạo cụ |
-| 02 — Menu | Cảnh cảng; mảng xanh lớn có đường biên hữu cơ; navigation icon lớn; hai mẩu hồ sơ có thumbnail; Khuê cầm sổ bên phải; tài nguyên trái dưới; dải phím tắt đáy | Không thay thành panel giấy chung; giữ silhouette tổng thể, tỷ lệ chân dung, dải hồ sơ và nhịp thông tin |
-| 03 — HUD/map | Tòa soạn nhiều lớp và đồ vật; nhân vật trong world; date seal trái trên, tài nguyên phải trên, mục tiêu trái; interaction prompt gần actor; location và controls ở đáy | World chiếm toàn stage; không có header/toolbar web đẩy map xuống; environment art là một nhánh công việc riêng |
-| 04 — Hồ sơ | Giấy chồng và kẹp; tiêu đề lớn; danh sách đánh số; ảnh chứng từ/sổ; ghi chú dán; minh họa cảng; Vân ngồi; nhãn cộng tác viên; nút nét cọ và back | Screen riêng, không phải menu thay heading; giữ góc giấy, ảnh tư liệu, props và portrait hòa trong cảnh |
+| 01 — Thoại | Giấy thoại nhiều lớp, mép sóng/mực, hoa, notebook, minh họa bờ kè; speaker/rules/body/continue; ba choice với icon/arrow/states; card ngày góc trái. Lưu logo, hiển thị tùy chọn | Lớp học/cảng, Khuê/Vân, báo cầm tay, bàn/cốc/poster trong scene |
+| 02 — Menu | Mảng xanh hữu cơ, brand/header/tagline, navigation/icon/highlight; hai card hồ sơ có thumbnail; resource strip, quote, sóng/giấy/hoa viền, key hints | Cảnh cảng/tòa soạn, Khuê và sổ đang cầm, poster tường |
+| 03 — HUD | Mảng mực viền, date seal, resources, objective note/highlight/spine, interaction prompt, location và controls | World/map, room/furniture/plants, ánh nắng, actors và chữ trên vật thể world |
+| 04 — Hồ sơ | Navigation, stack giấy/kẹp/ornament, heading/rules/steps; evidence frame/tape/nội dung trong slot; note, harbor print/hoa trang trí; collaborator tag/arrow, CTA nét cọ và back | Cảnh phía sau, Vân ngồi, mặt bàn/đồ vật scene |
 
-Trong fixture đối chiếu phải dùng nội dung và trạng thái giống ảnh. Khi nối gameplay, bước và số liệu thật vẫn đến từ content/session; không cố định ba bước hay energy cap giả chỉ vì concept có chúng.
+Collaborator tag và interaction prompt phải nhận anchor/target qua adapter để
+vẫn hoạt động khi context đổi. Không cần portrait đúng pose mới dựng được UI.
+Mọi chữ đọc được trong component/trang trí/evidence được render từ catalog;
+ảnh minh họa không chứa chữ giao diện đã bake.
 
-## Các cổng nghiệm thu
+## Cổng nghiệm thu áp dụng cho UI
 
-| Cổng | Bằng chứng phải có | Điều kiện qua cổng |
+| Cổng | Bằng chứng | Điều kiện |
 | --- | --- | --- |
-| G0 — Thiết kế đo được | Bản đồ lớp, bảng tọa độ/crop, inventory asset, text keys cho từng màn | Mọi thành phần nhìn thấy đã có vị trí, vai trò và cách sản xuất; ghi rõ phần bị che phải phục dựng |
-| G1 — Asset đạt chuẩn | Contact sheet, xem alpha trên nền sáng/tối, crop 100%, nguồn/master/version | Đúng pose, màu, ánh sáng và nét; không viền bẩn, seam, chữ bake vào art hoặc vật bị cắt thiếu |
-| G2 — Replica tĩnh | Capture 1672×941, overlay 50/50, difference image, danh sách sai lệch | Đúng silhouette và thứ bậc; không thiếu thành phần bắt buộc; không còn lỗi lớn về pose, crop, typography hoặc ánh sáng |
-| G3 — Motion đạt chuẩn | Video realtime và xem chậm, still ở đầu/giữa/cuối, thử loop dài và interruption | Chuyển động có nhịp và trọng lượng; không ghost, pop, trượt chân, seam sóng, texture bơi hoặc chữ lắc |
-| G4 — Tương tác đạt chuẩn | Browser checks, luồng command/save/load, input/focus, text dài và ảnh tải lỗi | Tương tác chính xác ở mọi scale; không double command, focus mất, input world lọt qua modal hay state cũ xuất hiện |
-| G5 — Bản production | Profile trên browser thật có GPU, asset/build inventory, kiểm tra visual sau tối ưu | Đạt budget đã đo trên máy chuẩn; texture/ánh sáng/composition giữ chất lượng; baseline gameplay khớp |
+| G0 — Phạm vi/thiết kế | UI scope, layout/layer map, source/crop/mask plan, text keys | Mọi UI bắt buộc có ownership và cách sản xuất; ranh giới UI/context rõ |
+| G1 — Asset UI | Masters/exports/hash, contact sáng/tối, alpha/native crops | Shape, palette, nét và texture UI đúng; không halo/seam, thiếu mép hoặc chữ bake |
+| G2 — UI tĩnh | Native 1672×941, UI-isolated capture, overlay/diff theo mask UI, backlog từng component | Không thiếu UI bắt buộc và không còn lỗi lớn về shape/layout/crop/type/material/light UI |
+| G3 — Motion UI | Video realtime/chậm, still đầu/giữa/cuối, loops và interruption | Có nhịp/trọng lượng; không seam, texture trượt, text rung, pop hay hit area dịch |
+| G4 — Hành vi | Input/focus/lifecycle, command/save/load, text dài/loading/error | Callback đúng, input/modal đúng ưu tiên, state/dispose ổn định |
+| G5 — Production UI | Profile browser có GPU, asset/build inventory, visual sau tối ưu | Budget đã đo, chất lượng UI giữ nguyên, baseline gameplay khớp |
 
-Lỗi visual được phân loại: **chặn nghiệm thu** (sai composition/pose/missing art/ánh sáng), **lớn** (crop, type, edge, overlap sai dễ thấy), **nhỏ** (chi tiết cục bộ). G2 không qua khi còn lỗi chặn hoặc lỗi lớn. Không dùng một điểm similarity trung bình để bỏ qua lỗi tại điểm nhìn chính.
+G2 không xét độ giống background/nhân vật. Context chỉ cần cho thấy UI đọc được
+và che lớp đúng khi đặt trên nền sáng/tối/chi tiết khác nhau. Phân loại lỗi UI:
+chặn (thiếu component/sai composition), lớn (shape/crop/type/edge/light thấy rõ),
+nhỏ (chi tiết cục bộ). Không qua G2 nếu còn lỗi UI chặn/lớn.
 
-Tại kích thước gốc, sai lệch điểm neo hoặc đường biên quan trọng trên 2 px được đưa vào danh sách review. Đây là ngưỡng phát hiện để kiểm tra, không phải chứng nhận toàn màn đã giống 1:1. Chữ được xét riêng về baseline, xuống dòng, độ rộng và dấu tiếng Việt; antialiasing được tách khỏi lỗi composition.
+Anchor/đường biên UI lệch trên 2 px ở native phải được review; đây là ngưỡng
+phát hiện, không phải chứng nhận similarity. Bounding box pha cả scene không
+đủ để chấm UI: cần mask phần giấy/hoa/sổ/wave thật và loại pixel context.
+MAE toàn frame cũ chỉ là lịch sử. Mask/reference extraction phải có version/hash;
+ghi rõ vùng mép alpha hay chữ bị che chưa đo được, không chứng nhận bằng số giả.
 
-Mỗi work package bên dưới là một đơn vị triển khai/review nhỏ. Commit asset, code và review có thể tách riêng. Không tự động bắt người dùng xác nhận từng bước; tự kiểm chứng theo cổng, báo kết quả ở các mốc lớn và xử lý phản hồi đã có. Nếu thiếu dữ liệu ảnh/source làm chặn replica, ghi chính xác phần thiếu thay vì thay bằng placeholder rồi đánh dấu hoàn thành.
+## P0 — Khóa reference và phạm vi UI (R01–R04)
 
-## P0 — Khóa yêu cầu và chuẩn đối chiếu
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R01 | Giữ PNG/prompt/hash gốc; ghi yêu cầu UI replica và context linh hoạt | Reference đã có |
+| R02 | Đo shape/anchors/type/layers của UI bốn màn; phân loại mọi vùng bằng ui-scope | R01 |
+| R03 | Inventory source/crop/vector/reconstruction cho UI và UI decoration; context tách backlog | R02 |
+| R04 | Native capture, fixture và overlay/diff; bổ sung UI isolation/mask ở R14 | R02 |
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R01 | Giữ nguyên reference PNG, prompt, hash; ghi đích replica mới và phân biệt prototype v1 | Reference inventory; trạng thái v1 chưa đạt replica; không ghi đè ảnh gốc | Đã có ảnh; kế hoạch lượt này |
-| R02 | Đo composition của cả bốn màn: các vùng, điểm neo, crop, type, khoảng trống và silhouette | Bốn layout sheets ở tọa độ 1672×941, có thumbnail đánh số lớp | R01 |
-| R03 | Lập inventory từng chi tiết; phân loại crop được, cần vector, cần phục dựng, cần source mới | Asset backlog theo màn, kích thước cần dùng, ownership/source và rủi ro che khuất | R02 |
-| R04 | Chuẩn capture và review | Stage không toolbar; fixture xác định; reset camera/animation/time; cùng font/viewport; cách tạo overlay/diff | R02 |
+**Đã có:** 169 vùng, 96 text key dự kiến, native capture và comparison tooling.
+Scope revision 2 bổ sung phân loại; Stage 3 có dialogue interior mask độc lập.
+File scope không phải pixel mask; reference alpha hoàn chỉnh cho fringe vẫn mở.
+Giữ nguồn Stage 0; không chạy lại toàn bộ phép đo world/actors.
 
-**Mốc P0:** G0 đạt cho cả bốn màn. Chưa tạo hàng loạt asset trước khi biết chúng nằm ở đâu và che nhau thế nào.
+## P1 — Pipeline và component nền (R05–R08)
 
-**Bàn giao Stage 0:** bốn sheet với 169 vùng, 104 asset dự kiến và 96 text key; công cụ native capture + overlay/diff được kiểm chứng. G0 có dữ liệu cho sản xuất; font, microcopy, hidden geometry và masks vẫn là task có ghi rõ ở giai đoạn sau. Các bounds là envelope ước lượng, chưa được nghiệm thu ở ngưỡng 2 px; G1/G2 chưa đạt. Prototype coastal v1 tiếp tục giữ vai trò kiểm chứng hành vi.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R05 | Source/master/export/manifest cho UI; version/hash/alpha/crop/layer/text keys/provenance | R03 |
+| R06 | Paper/ink/wave material và masks; contact sáng/tối, native/scale crops | R05 |
+| R07 | Typography tiếng Việt, icon/marks; lưu logo mark + wordmark live text dùng lại | R02, R05 |
+| R08 | Stage fixed, layer UI độc lập context, hit testing/focus/dispose và callbacks | R04, R06, R07 |
 
-## P1 — Pipeline art và một mẫu xếp lớp chuẩn
+**Đã có:** pack mẫu 15 asset, ba font local OFL, bảy plane và input scale.
+Tiếp tục dùng các boundary hiện tại, chưa thêm engine/framework. Art scene đã
+sinh là nguồn minh họa có thể giữ lại; chất lượng pose không chặn pipeline UI.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R05 | Quy định source/master/export | Giữ source chất lượng cao; manifest gồm ID, file, source, kích thước, alpha, pivot, crop, layer, text keys, version, quyền sử dụng | R03 |
-| R06 | Tái dựng một mẫu giấy + mực + mép sóng từ ảnh thoại | Texture và mask đúng; contact sheet; kiểm tra cạnh ở native scale và scale khác | R05 |
-| R07 | Tái dựng typography và bộ dấu/icon đầu tiên | Font có giấy phép, đủ dấu; mẫu heading/body/handwriting/numbers; logo mark không chứa chữ động; icon cùng nét | R02, R05 |
-| R08 | Dựng stage cố định và mẫu 5–7 lớp thực | Background/portrait/paper/text/foreground có tọa độ và vùng che đúng; hit testing scale đúng; không ảnh toàn màn với hitbox giả | R04, R06, R07 |
+## P2 — Replica UI thoại tĩnh (R09–R14)
 
-**Mốc P1:** G1 cho mẫu art và stage chứng minh được xếp lớp thật. Nếu DOM/SVG/Canvas hiện tại có giới hạn cụ thể, làm spike nhỏ với cùng cảnh và profile trước khi chọn thêm renderer. Không quyết định đổi engine từ suy đoán.
+| ID | Công việc / đầu ra theo phạm vi mới | Phụ thuộc |
+| --- | --- | --- |
+| R09 | Context background slot cho preview; dùng plate hiện có hoặc placeholder. Phục dựng newsroom 1:1 cũ được hoãn | R08; không chặn R11–R14 |
+| R10 | Context portrait slot tùy chọn; tái dùng sprites/art có sẵn. Pose/identity/character art cũ được hoãn | Không chặn UI |
+| R11 | Tách hoa, notebook, lá gắn thanh thoại; alpha/crop/mask/overlap đúng. Không sửa bàn/báo/cốc scene | R03, R05 |
+| R12 | Paper/wave/shore ink/harbor print, speaker/rules/body/continue thành lớp riêng, chữ live | R06, R07, R11 |
+| R13 | Choice strips/states/icon/arrow, date card, brand asset/component dùng lại; logo thoại tùy chọn | R07, R12 |
+| R14 | Review UI isolation và mask; sửa layout/shape → type → texture/edge; capture trên context sáng/tối khác nhau | R08, R11–R13 |
 
-**Bàn giao Stage 1:** 15 asset có master/export/hash/provenance, ba font local OFL đủ glyph tiếng Việt, mẫu giấy/mực/mép sóng và icon, stage SVG 7 lớp thực, chữ từ catalog và hitbox scale đồng đều. Preview riêng tại `tools/coastal-replica-preview.html`. Contact sheet sáng/tối, crop 100%/50%, typography, native capture và overlay/diff nằm trong [review Stage 1](ui-reviews/coastal-replica-stage1/README.md). G1 chỉ qua cho mẫu giấy/mực/icon; các PNG nền, chân dung và minh họa là pilot đăng ký lớp, còn sai pose/props/crop và không thay thế R09–R14. Chưa có motion/GPU acceptance, chưa nối gameplay và chưa đổi entry mặc định.
+**Đã có:** Stage 2 pack 19 asset/29 instance gồm cả UI và context; UI có bản dựng,
+live text, input và native captures. Không tự đánh dấu G2 đạt sau đổi scope.
+**Tiếp theo:** UI scope/mask → giấy/sóng/harbor/hoa/sổ → date/choices/type/marks.
+Dừng vòng căn tóc/áo/tay/báo, bàn ghế/cửa sổ và scene lettering.
 
-## P2 — Thoại replica tĩnh: màn đầu tiên hoàn chỉnh
+**Mốc P2:** G1/G2 cho UI thoại. Các sửa light/depth UI thuộc P3; một lỗi thuộc
+R15/R16 có thể xử lý trong lượt đó để đóng G2, không tạo vòng chờ gate tự khóa.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R09 | Phục dựng nền tòa soạn, cửa sổ/cảng và mặt bàn đúng ảnh 01 | Plate sạch, không chữ UI; phần bị actor che được bổ sung; màu và hướng nắng khớp | R03, R05 |
-| R10 | Chuẩn bị Khuê và Vân đúng pose ngồi/đạo cụ | Hai silhouette và facial identity đúng; crop/alpha sạch; pose masters và phần cần che khuất | R09 |
-| R11 | Tách tiền cảnh: báo, bút, cây/hoa, bàn và các vật che một phần scene/UI | Foreground plates và masks; độ mềm, tỷ lệ và chiều sâu đúng | R09, R10 |
-| R12 | Dựng dải giấy thoại theo đường biên thực | Mép sóng, mực, texture, minh họa cảng, speaker ornament và tiếp tục; chữ là lớp riêng | R06, R07, R11 |
-| R13 | Dựng choice strips, date seal và thương hiệu | Lựa chọn xếp dọc đúng vị trí, icon/arrow/highlight đúng; date seal và chữ đúng tỷ lệ | R07, R12 |
-| R14 | Ghép toàn màn và sửa theo overlay/diff | Capture giống fixture ảnh 01; sửa lần lượt silhouette → anchor → ánh sáng → type → chi tiết | R08–R13 |
+## P3 — Ánh sáng và chiều sâu UI (R15–R17)
 
-**Mốc P2:** G2 đạt cho thoại. Đây là sản phẩm visual đầu tiên để đánh giá tiêu chuẩn toàn dự án. Không nhân rộng mẫu nếu còn khác xa ảnh tham chiếu.
+**Đã triển khai:** pack v3 UI độc lập, local shadows/washes, paper clip/notebook
+alpha union, bốn nền review, lighting A/B và masked diagnostics. R17 đã có review
+package; chưa tự nghiệm thu G2. Mask interior không chấm fringe bị khuất như alpha
+đã trích xuất. Chữ, shapes/icon/foam và decoration cần các chỉnh sửa đã ghi trong
+[review hiện hành](ui-reviews/coastal-replica-stage3/README.md).
 
-**Trạng thái sau Stage 2:** 19 asset / 29 instance độc lập, plate sạch và hai pose
-ngồi alpha, desk/paper masks, chữ cảnh từ catalog, native capture/overlay/diff và
-contact sáng/tối đã có. G2 chưa qua: tóc/áo/tay/báo, nền/props, dấu ngày/type và
-texture sóng/print còn sai lệch lớn ghi trong [review](ui-reviews/coastal-replica-stage2/README.md).
-Tiếp tục vòng sửa R14 trước khi bắt đầu R15; không dùng test hành vi hay MAE để
-nghiệm thu visual. Mốc P2 là bản tĩnh đạt chuẩn, chưa được đánh dấu hoàn thành.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R15 | Light/shadow riêng giấy, choice, card, hoa/sổ: bóng tiếp xúc, độ nổi, ink density và palette | UI geometry R11–R14 ổn định |
+| R16 | Compositing UI: clip/mask, edge/alpha, foreground softness, overlap/texture; sạch halo/seam/double shadow | R15 |
+| R17 | Chốt UI tĩnh sau light/depth; UI-isolated + context variants, overlay/diff UI và backlog đóng | R14–R16 |
 
-## P3 — Ánh sáng và chiều sâu của màn thoại
+**Mốc P3:** xác nhận G2 UI. UI phải giữ chất liệu và độ đọc khi đổi background;
+không dùng filter phủ cả cảnh để thay bóng/ánh sáng từng component. Nắng cửa
+sổ, rim light tóc/áo và scene atmosphere không thuộc tiêu chí stage này.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R15 | Chuẩn hóa ánh sáng giữa nền, portrait và props | Hướng nắng, nhiệt độ màu, rim light, bóng tiếp xúc/che khuất và độ đậm đen thống nhất | R14 |
-| R16 | Hoàn thiện compositing | Occlusion masks, cạnh tóc/giấy, foreground focus, lớp khí quyển; không halo, viền trắng hoặc double shadow | R15 |
-| R17 | Chốt bản tĩnh chuẩn sau lighting | Native capture mới; ảnh đối chiếu; ghi lý do cho mọi sai lệch chủ ý; không áp filter chung làm mất mặt/chữ | R16 |
+## P4 — Motion và effect UI (R18–R23)
 
-**Mốc P3:** G2 được xác nhận lại sau lighting. Ánh sáng phải hòa từng asset vào scene; gradient phủ toàn màn không thay thế bước này.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R18 | Motion sheet từng lớp UI: pivot/path/time/easing/amplitude/loop/occlusion/end state | R17 |
+| R19 | Mép sóng chuyển động nhẹ, mực/texture bám hình, loop liền; chữ/vùng đọc ổn định | R18 |
+| R20 | Paper/choice enter-exit, stagger, hover/select/press có trọng lượng; target input ổn định | R18, R19 |
+| R21 | Hoa/lá/notebook trang trí UI: sway/parallax/lift tinh tế, pivot/edge/overlap đúng. Character blink/breath/hair chuyển backlog | R11, R18 |
+| R22 | UI sheen/ink reveal/highlight/focus/transition từng effect; kiểm tra độ đọc và reduced motion | R15, R18–R21 |
+| R23 | Review realtime/chậm, loop dài, thao tác nhanh, đổi nội dung, tab hidden, interruption/dispose | R19–R22 |
 
-## P4 — Thoại sống: motion và hiệu ứng
+**Mốc P4:** G3 thoại. Effect dẫn mắt, tăng chiều sâu; không rung chữ, bloom lóa
+hoặc tất cả lớp cùng slide/fade. Sea shimmer, sunlight/dust scene tùy chọn sau,
+không cần để đạt G3 UI.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R18 | Viết motion sheet theo từng lớp | Pivot, thứ tự vào/ra, đường đi, duration, easing, biên độ, loop seam, vùng che và trạng thái cuối | R17 |
-| R19 | Làm sóng có texture/mực chuyển động | Giữ silhouette cơ sở; chuyển động nhỏ ở mép; texture gắn với hình; loop không lộ nối; text đứng yên | R18 |
-| R20 | Làm giấy và lựa chọn có trọng lượng | Choice hover/select/press, paper enter/exit, stagger có nhịp; hit area ổn định; không mọi lớp dùng cùng slide/fade | R18, R19 |
-| R21 | Làm chuyển động nhân vật | Expression transitions trước; blink/breath/hair chỉ khi có layer/frames đúng pose; tránh warp cả ảnh và chuyển động lệch identity | R10, R18 |
-| R22 | Thêm ánh sáng và môi trường chuyển động | Thử shimmer biển, ánh nắng/bóng lá, bụi rất nhẹ hoặc foreground parallax từng hiệu ứng; kiểm tra lại ánh sáng và vùng đọc sau mỗi lần | R15, R18–R21 |
-| R23 | Nghiệm thu chuyển động và interruption | Video đầu/giữa/cuối; mở/đóng nhanh, đổi speaker khi tải asset, lựa chọn liên tiếp, ẩn tab, giảm motion; trạng thái cuối luôn đúng | R19–R22 |
+## P5 — Menu UI riêng (R24–R27)
 
-**Mốc P4:** G3 đạt cho thoại. Effect phải tăng chiều sâu và dẫn mắt; bỏ hoặc chỉnh effect gây nhiễu, bloom quá mức, lóe sáng, chữ trôi hoặc nhân vật mất tự nhiên. Số lượng effect không phải tiêu chí chất lượng.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R24 | Component map/menu layer slots; silhouette UI và extraction plan. Cảnh cảng/Khuê chỉ minh họa | R02, R03, R05; kinh nghiệm UI thoại |
+| R25 | Teal organic surface, nav spine/icons/highlight, header/quote/resource strip/controls, wave/hoa/giấy viền | R24, R06, R07 |
+| R26 | Hai case cards: punched paper, số/title/teaser, thumbnail crop/frame/overlap, state/data riêng | R25 |
+| R27 | Review G1/G2 menu; sau đó light/depth/reveal/selection/card focus và video G3 | R24–R26; tái dùng motion R18–R23 phù hợp |
 
-## P5 — Menu replica riêng
+**Mốc P5:** G1–G3 UI menu. Không phụ thuộc pose Khuê, sổ cầm tay hay plate cảng
+đúng concept. Thumbnail trong card là UI content slot; xác minh border/crop/type.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R24 | Dựng plate cảng/menu và Khuê cầm sổ | Đúng camera, pose, notebook, ánh nắng, foreground và crop ảnh 02 | G2 thoại; R03, R05 |
-| R25 | Dựng silhouette xanh, navigation và tài nguyên | Mảng xanh hữu cơ có texture, highlight nét cọ, icon, đường kẻ; energy dots/money và controls đúng vị trí | R24, R06, R07 |
-| R26 | Dựng hai mẩu hồ sơ | Giấy đục lỗ, số thứ tự, title/teaser/thumbnail, góc/overlap/mask đúng; các phần text dữ liệu riêng | R25 |
-| R27 | Ghép, lighting và motion menu | Qua G2 trước; sau đó wave reveal, selection, case focus, portrait/props entry; caption/type không rung | R24–R26; kinh nghiệm R23 |
+## P6 — Hồ sơ UI riêng (R28–R30)
 
-**Mốc P5:** G1–G3 cho menu. Có capture menu riêng và video riêng; không dùng ảnh hồ sơ để đại diện menu.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R28 | Folio paper stack, góc/kẹp/bề dày/masks/contact shadows; navigation composition riêng | R03, R05–R07 |
+| R29 | Steps, evidence/frame/tape/live annotations, note/harbor print/hoa; collaborator tag/arrow, brush CTA/back | R28 |
+| R30 | G1/G2 dossier rồi folio/tab/CTA/evidence motion; text phẳng/dễ đọc; video G3 | R29; motion sheet tương ứng |
 
-## P6 — Hồ sơ replica riêng
+**Mốc P6:** G1–G3 UI hồ sơ. Vân là portrait slot tùy chọn; collaborator label
+nhận anchor độc lập. Không phải menu đổi heading và không cần clone cảnh bàn.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R28 | Dựng nền/pose Vân ngồi và stack giấy | Đúng góc giấy, kẹp, bề dày, bóng tiếp xúc, chiều sâu và crop ảnh 04 | G2 thoại; R03, R05 |
-| R29 | Dựng nội dung hồ sơ và props | Step list đánh số, ảnh chứng từ, sổ, note/băng dính, dấu, minh họa cảng, tên cộng tác viên và CTA nét cọ | R28, R06, R07 |
-| R30 | Chốt static và motion hồ sơ | Qua G2; thử mở folio, chuyển tab, nhấn CTA và đổi chứng từ; giữ text phẳng/dễ đọc khi giấy nghiêng | R29; R23 |
+## P7 — HUD UI replica (R31–R35)
 
-**Mốc P6:** G1–G3 cho hồ sơ. Menu và dossier có composition riêng; chỉ dùng chung các bộ phận thật sự giống nhau.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R31 | HUD anchors/layout/layer map: date/resources/objective/prompt/location/controls | R02, R03, R08 |
+| R32 | HUD material/icon/marks: ink edge, paper/date, resource ribbon, objective spine/highlight, prompt | R31, R05–R07 |
+| R33 | HUD-only gallery trên nền trung tính và scene sáng/tối/chi tiết; fake target anchor chỉ trong preview | R31, R32 |
+| R34 | Ghép HUD fixed-stage; typography, reading lanes, scale/input, target mapping và UI-mask G2 | R33, R07, R08 |
+| R35 | HUD enter/update/feedback/prompt tracking/reduced motion, video G3. Nối world adapter thật ở P8 | R34; R18–R23 |
 
-## P7 — Environment art và HUD replica
+**Mốc P7:** G1–G3 HUD. Không có dependency dựng room/tiles/collision/camera mới,
+actor walk/idle hay ánh sáng world. Có thể tái dùng world hiện tại làm context.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R31 | Đo world ảnh 03 và xác định cách dựng | Bản bố trí tòa soạn/camera/depth/actor scale; kế hoạch collision, walking lanes và foreground occlusion; spike một bàn + actor | R02, R03, R08 |
-| R32 | Xây bộ environment | Sàn/tường/cửa sổ, bàn/kệ/báo/cây/props; các depth layers, light/shadow; actor style hòa với cảnh; seam/scale đúng | R31, R05 |
-| R33 | Ghép scene khám phá giống ảnh | Camera fixture, actor positions/poses, layer sorting và masks; capture tĩnh riêng environment trước khi HUD che lên | R32 |
-| R34 | Dựng HUD theo các góc của stage | Date trái trên, resources phải trên, objective trái, prompt gần actor, location/controls đáy; không web toolbar | R33, R07 |
-| R35 | Làm environment/HUD motion và navigation | Actor walk/idle/talk, interaction tracking, occlusion theo vị trí; light/sea loops, scene cut; UI không che đường đi quan trọng | R34; R23 |
+## P8 — Gameplay và trạng thái UI đầy đủ (R36–R39)
 
-**Mốc P7:** G1–G3 cho world/HUD. Đây là nhánh art và world riêng, không thể đạt chỉ bằng đổi CSS. R31 có thể nghiên cứu sau P1; sản xuất toàn bộ world sau khi đã chốt chất lượng thoại. Không dùng nền phẳng đẹp rồi tuyên bố world đã tương tác đầy đủ.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R36 | Nối thoại/menu qua view models và callbacks/guards GameSession; context/portrait providers riêng | G3 UI tương ứng |
+| R37 | Case/evidence/resource thật; collaborator/prompt anchor adapter cho world hiện tại; dữ liệu dài/nhiều mục | R30, R35, R36 |
+| R38 | Empty/loading/disabled/error/save/load/feedback/confirmation cùng art direction, chữ catalog | R36, R37 |
+| R39 | Input/focus/modal priority, load/cancel/dispose/reduced motion/scale; browser suite và baseline | R36–R38 |
 
-## P8 — Gameplay, nội dung và các trạng thái đầy đủ
+**Mốc P8:** G4. Controller sở hữu gameplay/world input, UI không tính outcome.
+Số bước/ngày/energy đến từ session/content. Scene production mới không chặn
+tích hợp vào world hiện tại. Các tab bổ sung cần component/content thật khi làm.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R36 | Nối thoại và menu với gameplay thật | View models, text keys, callbacks/guards qua GameSession; dialogue graphs, speaker và lịch thật; chuyển màn không reset world | G3 các màn được nối |
-| R37 | Nối dossier/HUD với dữ liệu thật | Case status/steps/owner, evidence và resource từ data; quy tắc rõ cho nội dung dài/nhiều mục, không bịa cơ chế để khớp fixture | R30, R35, R36 |
-| R38 | Dựng trạng thái phụ cùng tiêu chuẩn | Empty/loading/disabled/error/save/load, feedback trước ngủ, thông báo và confirmation; chữ có catalog; không rơi về modal mặc định giản lược | R36, R37 |
-| R39 | Kiểm chứng input, lifecycle và scale | Keyboard/mouse, focus/modal priority, hitboxes sau scale, asset loading/fallback, interruption, dispose và reduced motion; browser suite/baselines | R36–R38 |
+## P9 — Hiệu năng và bàn giao UI (R40–R45)
 
-**Mốc P8:** G4 đạt. Các màn đội, lịch, nhật ký và thiết lập trong menu cần thiết kế tương ứng khi chức năng được đưa vào; không gọi tên một tab chỉ để giống ảnh khi chưa có hành vi/data. Màn mở rộng phải đạt cùng tiêu chuẩn vật liệu, type, ánh sáng và layering.
+| ID | Công việc / đầu ra | Phụ thuộc |
+| --- | --- | --- |
+| R40 | GPU browser profile trên máy chuẩn; frame/drop/CPU/GPU/memory/load, UI-only và integration riêng | R23, lặp R27/R30/R35/R39 |
+| R41 | Tối ưu exports/preload/cache/repaint/layers với UI overlay/diff; giữ masters | R40 |
+| R42 | Polish sequence thoại → menu → dossier → HUD: material/type/light/motion thống nhất | R39, R41 |
+| R43 | Native/full-HD/tỷ lệ khác uniform fit, text dài, content và backgrounds khác nhau | R42 |
+| R44 | UI captures/video/masks/manifest/G0–G5, docs/entry/integration version và commit review được | R43 |
+| R45 | Archive phần thật sự được thay; kiểm tra usage, inventory/hash/link; giữ concept/master/history | R44 |
 
-## P9 — Hiệu năng, polish và bàn giao visual
+**Mốc P9:** G5 UI; hướng tới 60 fps trên thiết bị/browser được ghi rõ, budget cụ
+thể sau đo. Không tuyên bố production từ headless still/tests. Context cost được
+ghi riêng để không nhầm với cost UI.
 
-| ID | Công việc | Đầu ra / nghiệm thu | Phụ thuộc |
-| --- | --- | --- | --- |
-| R40 | Đo trên thiết bị/trình duyệt chuẩn có GPU | Ghi máy/browser/resolution; frame times, dropped frames, CPU/GPU, decoded image memory, tải lần đầu, chạy lâu và đổi màn liên tiếp | R23 rồi lặp ở R27/R30/R35/R39 |
-| R41 | Tối ưu có đối chiếu art | Export sizes/formats, preload theo màn, cache/layer count, tránh repaint không cần thiết; overlay/diff sau mỗi tối ưu; master không bị mất | R40 |
-| R42 | Polish toàn bộ sequence | Xem liên tục thoại → menu → dossier → world: nhịp chung, màu, chữ, độ sắc, ánh sáng, chất giấy và effect intensity thống nhất | R39, R41 |
-| R43 | Review ở scale và nội dung khác nhau | Native + full-HD + cửa sổ khác tỷ lệ bằng uniform scaling; nội dung dài, portraits/evidence khác; letterbox và trợ năng giữ art direction | R42 |
-| R44 | Chốt release và cập nhật kiến trúc | Reference/capture/video/diff cuối; asset manifest; checklist G0–G5; docs các boundary thật; entry game, phiên bản và commit review được | R43 |
-| R45 | Archive phần được thay thế | Kiểm tra nơi dùng CSS/tool/review cũ; inventory + hash + sửa link; giữ originals/source masters và snapshot lịch sử | R44 |
+## Backlog context độc lập — làm sau, không chặn UI
 
-**Mốc P9:** G5 đạt. Mục tiêu ban đầu là 60 fps trên máy chuẩn được ghi trong review. Budget frame/memory/load cụ thể được chốt bằng R08/R40; chưa tuyên bố đạt khi chỉ có headless test. Ưu tiên tối ưu renderer/asset/caching để giữ art direction; thay đổi visual để đáp ứng budget phải ghi tác động và đối chiếu lại.
+- Newsroom/harbor/environment/props, camera/depth/world art; collision/lanes nếu
+  một dự án world mới thật sự cần.
+- Character poses/expressions, hidden body geometry, blink/breath/hair và actors.
+- Báo/cốc/poster/chữ scene, scene sun/shadows/dust/sea shimmer.
+- Không xóa các asset đã sinh; tái dùng làm context preview và source lịch sử.
+  Khi quay lại nhánh này, lập plan/gate riêng, không gắn lại vào G2/G3 UI.
 
-## Quy tắc production cho layering, lighting và motion
+## Quy tắc triển khai và review
 
-Mỗi screen có layer manifest riêng; không áp một thứ tự z-index chung máy móc. Mẫu để phân tích: background xa → cảnh/props trung → actor → ánh sáng/bóng theo lớp → mặt giấy/UI → chữ và interaction → foreground/occluders → screen transition. Một số props đi giữa actor và UI; order phải theo ảnh. Light overlays phải chỉ ảnh hưởng những lớp phù hợp, không làm mờ chữ hoặc wash out mặt.
+Mỗi screen có composition riêng và UI/context providers tách được; không thêm
+framework tổng quát. Các lớp có thể là paper → print/wave → UI decorations →
+reading text/hit targets; thứ tự thực theo concept. Hoa/sổ/print thuộc UI được
+tách alpha/mask và phục dựng phần bị che cần thiết cho animation; không bake
+panel/text vào một ảnh. Art bỏ pointer events, interaction targets độc lập.
 
-Asset nguồn phẳng không cung cấp tự động các vùng bị che. Phải phục dựng và ghi provenance. Mỗi pose/expression có master cùng silhouette; mọi layer tóc/mắt/tay/đạo cụ giữ pivot, lighting và alpha sạch. Không dùng portrait đứng để thay pose ngồi/cầm sổ đã được chỉ định.
+Tất cả player-facing text từ `content/locales/vi.js` qua text service, kể cả
+note/slogan/controls/evidence và scene lettering nếu dùng. Asset IDs, layouts,
+styles và motion presets có source/version trong content; runtime nhận dữ liệu
+và callback, không import fixtures/specs. Domain/session/save không đổi vì visual.
 
-Mọi player-facing text, kể cả slogan, ghi chú viết tay, nhãn trên giấy/chứng từ, controls và lời trên bảng, được quản lý qua content/catalog rồi render thành lớp chữ phù hợp. Không bake text vào texture để đạt ảnh giống rồi khóa khả năng phát triển. Dữ liệu màn, text keys, asset IDs, layout coordinates và motion presets được quản lý tập trung, có version; tránh chuỗi/giá trị rải rác trong component.
+Capture UI độc lập và trên background khác nhau; reset selection/time/seed,
+chờ fonts/resources, native 1672×941/DPR1. Công cụ hiện tại có full-frame/ROI
+diagnostics lịch sử và **UI-isolated views/conservative interior comparison**
+đã triển khai ở Stage 3. Mixed fringe reference alpha còn mở. Review theo component và mask,
+không lấy MAE toàn ảnh hay tests làm chứng nhận G2/G3.
 
-Motion sheet phân ba mức: ambient chậm, chuyển màn có nhịp, feedback nhanh. Mỗi effect có lý do, lớp đích và trạng thái cuối. Không để mọi lớp cùng lặp hoặc cùng easing. Khi giảm motion, giữ bố cục, texture và trạng thái cuối đẹp như bản tĩnh đã đạt G2. Chuyển động không thay đổi lịch/energy hoặc quyết định outcome.
+Nơi lưu: reference ở `docs/ui-concepts/`; scope/layout/motion ở
+`docs/ui-specs/coastal-replica/`; masters/exports ở `assets/ui/coastal-replica/`;
+content/layout ở `content/ui/`; chữ ở catalog; review versioned ở
+`docs/ui-reviews/`. Giữ [review Stage 2](ui-reviews/coastal-replica-stage2/README.md)
+và validation cũ như lịch sử, bổ sung đánh giá theo scope mới.
 
-Nếu thử shader, deformation hay renderer mới, làm spike trên đúng mẫu art và đánh giá seam, readability, quality và GPU cost. Chỉ đưa vào production khi có lợi ích đo/nhìn thấy rõ; không dùng công nghệ mới như bằng chứng chất lượng.
+Tiến độ dùng trạng thái chưa bắt đầu / cần sửa UI / qua gate / context hoãn.
+Thay scope không tự nâng task thành complete. Commit theo component/work package.
+Khi đổi runtime/content/world chạy architecture, browser suite và baselines;
+khi chỉ đổi plan chạy architecture, source lock, JSON/scope/link checks phù hợp.
 
-## Nơi lưu và quản lý công việc
+## Thứ tự tiếp tục
 
-- `docs/ui-concepts/coastal-editorial-v1/`: reference gốc bất biến về ảnh/prompt.
-- `docs/ui-specs/coastal-replica/`: layout sheets, layer maps, asset inventory, type/light/motion sheets; tạo khi R02 bắt đầu.
-- `assets/ui/coastal-replica/`: runtime exports và manifest; source/master có đường lưu riêng được manifest dẫn tới, không ghi đè reference.
-- `content/ui/`: screen/layout/motion definitions và fixture có text keys; `content/locales/vi.js`: mọi chữ.
-- Component art cụ thể nằm dưới `src/ui/`; screen composition/adapters nằm trong presentation khi có nhu cầu thực. Giữ domain/application độc lập renderer.
-- `docs/ui-reviews/coastal-replica/<screen>/<revision>/`: captures, overlay/diff, video, thông số capture và lỗi còn mở; giữ review v1 làm lịch sử đối chiếu.
+**R11–R14 UI thoại → R15–R17 UI light/depth → R18–R23 UI motion → menu →
+hồ sơ → HUD → gameplay → polish/production.** G2 UI trước motion của màn đó;
+light/depth được sửa trong P3 để đóng G2. Không chờ background/portrait khớp
+concept và không tự bắt người dùng duyệt từng task.
 
-Mỗi Rxx theo dõi bằng trạng thái: chưa bắt đầu / đang làm / cần sửa visual / qua cổng. Ghi dependencies, đầu ra, kiểm tra đã chạy và tồn đọng. Không đánh dấu hoàn thành chỉ vì code chạy hoặc có một ảnh gen đẹp.
-
-Chia commit theo work package có đầu ra cụ thể, ví dụ `R06 dialogue paper assets`, `R08 fixed stage`, `R14 dialogue static replica`, `R23 dialogue motion review`. Khi thay runtime/content/world: architecture checker, browser suite và baseline comparison bắt buộc theo DEVELOPMENT.md. Kiểm tra visual/animation là bằng chứng riêng, bổ sung cho test hành vi.
-
-## Thứ tự khởi động
-
-Đợt đầu chỉ làm **R01–R04**: khóa chuẩn, đo cả bốn màn, lập inventory và phương pháp đối chiếu. Đợt tiếp theo **R05–R08** kiểm chứng pipeline bằng mẫu nhỏ. Sau đó tập trung **R09–R17** để hoàn thành thoại tĩnh và ánh sáng; qua G2 mới làm **R18–R23**. Menu, dossier và world triển khai dựa trên tiêu chuẩn đã chứng minh ở thoại, không phát triển hàng loạt placeholder song song.
-
-Không đặt deadline giả trước khi đo lượng asset phải phục dựng. Sau P0 có thể ước lượng theo số asset/layer và các rủi ro; sau P2 mới ước lượng đáng tin hơn cho các màn còn lại. Công việc hiện tại chỉ hoàn thiện roadmap, chưa bắt đầu sản xuất replica.
+Nguồn plan full-scene trước khi sửa nằm trong lịch sử commit `c21e732`.
+Stage 3 bổ sung implementation/evidence theo scope mới; giữ các gate còn mở,
+không nâng G2 thành đạt chỉ từ đổi scope hoặc kết quả tests.

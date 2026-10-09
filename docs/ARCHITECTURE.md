@@ -131,26 +131,35 @@ The prototype does not require a generic ECS, global event queue or engine migra
 
 ### Coastal visual target
 
-The active visual target is now a 1:1 reconstruction of the four original
-concepts, governed by [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md). The v1
+The active visual target is a faithful reconstruction of the fixed UI and its
+attached decorations in the four original concepts, governed by
+[UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md), scope revision 2. Backgrounds,
+characters, held props and world art are replaceable context; matching their
+camera/pose/identity is deferred and never blocks UI gates. The v1
 components below remain a technical prototype; their visual implementation has
 not passed the replica gates. Future screen compositions use a 1672x941 design
 stage with uniform scaling, authored art layers/masks and separate dialogue,
-menu, dossier and world/HUD compositions. Production assets, layout/light/motion
-sheets and deterministic captures follow the roadmap. Stage 2 implements the
-isolated static dialogue composition below; its visual G2 review remains open.
+menu, dossier and HUD compositions. The world remains a separate context provider.
+Production assets, layout/light/motion sheets and deterministic captures follow
+the roadmap. Stage 2 implements the
+isolated static dialogue composition below; G2 now requires a scoped UI review.
+[ui-scope.json](ui-specs/coastal-replica/ui-scope.json) classifies all 169 measured
+regions. UI/context separation and masked comparison are planned at R14, not yet
+provided by adding this documentation. Bright/dark/detailed context variants
+check UI readability and compositing without scene reconstruction requirements.
 Preserve session/text/input/save/lifecycle contracts
 while replacing the presentation. Art, static visual, motion, behavior and
 performance reviews are distinct acceptance gates.
 
-### Replica authoring — Stage 1 and Stage 2
+### Replica authoring — Stage 1, Stage 2 and Stage 3
 
 `src/ui/replica/ReplicaStage.js` owns a fixed 1672x941 SVG scene with seven
 independent planes, uniform fit/letterboxing, scaled input, keyboard focus and
 resource disposal. It receives content and structured callbacks; it does not
 import domain/session/storage or advance gameplay time. It is mounted only by
 `tools/coastal-replica-preview.html`, separately from the coastal v1 gameplay UI.
-The default preview selects Stage 2; `?version=1` preserves the Stage 1 pilot.
+The default preview selects Stage 3 UI; `?version=1` / `?version=2` preserve
+the earlier pilot and full-scene reconstruction.
 
 `content/ui/coastal-replica-pilot.json` owns authored placements, font styles,
 choices and contact-sheet fixtures. `tools/build_replica_assets.py` compiles it
@@ -191,8 +200,35 @@ before mutating state, resets selection/layer state, locks interactions and awai
 decoded SVG resources and explicit font faces. The authoring capture tool merges
 `dialogue-production.json` into its recorded fixture; runtime never imports it.
 Static comparison and open G2 corrections are recorded in
-[Stage 2 review](ui-reviews/coastal-replica-stage2/README.md). Domain, gameplay
+[Stage 2 review](ui-reviews/coastal-replica-stage2/README.md). Existing full-scene
+captures, asset packs and tests are historical evidence; their scene/portrait
+mismatches no longer block G2. The next composition boundaries are an independent
+UI overlay, replaceable context/portrait slots and small anchor adapters for HUD
+prompts/collaborator tags. Preserve paper, wave, flowers, notebook and harbor
+print attached to UI; scene desk/newspaper/cup/poster are context. Store the
+reusable logo mark and catalog-rendered wordmark; dialogue logo is optional.
+R15-R17 handle UI lighting/compositing; R18-R23 handle UI motion/effects. New
+world/collision/actor art is a separate future backlog. Domain, gameplay
 entries, session/save schemas and calendar behavior are unchanged.
+
+Stage 3 separates fixed dialogue UI into `content/ui/coastal-dialogue-ui.json`,
+compiled by `tools/build_dialogue_ui.py` and exposed by `coastal-dialogue-ui.js`.
+The v3 manifest separates 14 UI assets from one reused replaceable context plate.
+`DialogueUiComposition.js` paints the concrete overlay; `ReplicaStage` retains
+resource ownership, uniform fit, input and disposal. Content owns shadow/wash
+profiles and backdrop presets. Five local shadow filters, a paper clip and a
+notebook alpha mask get unique instance IDs. Notebook edge and PNG share one
+shadow; glyphs and context are unfiltered. Optional logo and static lighting
+toggles do not change gameplay state. No motion framework is added yet.
+
+Capture supports `--compare-ui`, `--flat-lighting` and `--logo`. The reference-owned
+v3 mask is a conservative interior diagnostic, not complete extracted alpha;
+mixed/occluded fringes remain a visual review limitation. `compareMasked` excludes
+context pixels outside the mask and exposes alpha-only errors. Stage 3 review
+stores light/dark/detailed/scene, contact and A/B evidence separately from old
+full-frame scores. Read [Stage 3 review](ui-reviews/coastal-replica-stage3/README.md)
+for remaining G2 UI corrections before motion. Passing behavior tests does not
+certify parity.
 
 ### Coastal UI components (v1)
 

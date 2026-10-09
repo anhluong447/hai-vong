@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><title>CLB Báo Chí · Tests</title>
+<style>body{font:14px system-ui;padding:24px;background:#f8f6ee;color:#243e32}.ok{color:#25733f}.bad{color:#af3423}pre{white-space:pre-wrap}iframe{width:1200px;height:900px;border:0;position:absolute;left:-2000px}</style></head>
+<body><h1>Kiểm tra sandbox CLB Báo Chí</h1><div id="results"><pre class="ok">ok S04 matches hand calculation including fatigue</pre><pre class="ok">ok fatigue, Q boundaries, and failed interview values</pre><pre class="ok">ok equipment thresholds remain unlocked after reputation falls</pre><pre class="ok">ok fixture data is deterministic: 96 subjects, eight each week</pre><pre class="ok">ok subject lifetime is five days and upcoming subjects cannot be scouted</pre><pre class="ok">ok scouting costs energy, reveals fixed truth, and cannot be repeated</pre><pre class="ok">ok interview consumes energy and fatigue exactly once, preserving original state</pre><pre class="ok">ok assignment rejects duplicate staff, locked staff, insufficient energy</pre><pre class="ok">ok solo support works with one available Khue, at half support stat</pre><pre class="ok">ok failed interview spends attention and fatigue, creates zero-value unpublished article</pre><pre class="ok">ok night recovery resets energy and availability; weekend adds extra recovery</pre><pre class="ok">ok grit is editable until publication, Q and fatigue do not change</pre><pre class="ok">ok only published articles add evidence and pressure</pre><pre class="ok">ok selection rejects unknown, duplicate, failed, and more than four articles</pre><pre class="ok">ok paper sorts slots and computes weights rather than drag order</pre><pre class="ok">ok article and paper scores are capped; van penalty applies after paper cap</pre><pre class="ok">ok van absence counts all attempted work, including unpublished failures, capped at 25%</pre><pre class="ok">ok empty and failed slots reduce reputation; a blank issue gets extra penalty</pre><pre class="ok">ok scheduled strikes use 40% and 80% boundaries; emergency is &gt;= threshold</pre><pre class="ok">ok emergency strike carries 30%, increases difficulty and suspends next issue only</pre><pre class="ok">ok consecutive heavy strikes preserve suspension and difficulty caps at two</pre><pre class="ok">ok pre-strike reputation can unlock equipment despite later strike penalty</pre><pre class="ok">ok endings require both thresholds, evidence alone is bitter</pre><pre class="ok">ok two zero-reputation weeks disband early and stop actions</pre><pre class="ok">ok cannot close a week early; day 60 concludes the semester without day 61 actions</pre><pre class="ok">ok save roundtrip retains edits, assignments, config and reports under separate namespace</pre><pre class="ok">ok save rejects legacy, malformed, future-version, and out-of-range state</pre><pre class="ok">ok storage failures propagate instead of reporting successful saves</pre><pre class="ok">ok sandbox validates state and config patches and logs explicit edits</pre><pre class="ok">ok auto day uses game actions, scouting does not see future subjects</pre><pre class="ok">ok all eight strategies terminate deterministically with valid week reports</pre><pre class="ok">ok comparison honors modified roster join dates without changing source roster</pre><pre class="ok">ok content: active pack validates; dangling maps and dialogue references fail</pre><pre class="ok">ok text: parameters, fallback and historical log messages resolve without changing event data</pre><pre class="ok">ok session: failed commands and invalid replacements leave the current state intact</pre><pre class="ok">ok world input: routing respects blocking and releases every listener on disposal</pre><pre class="ok">ok saves: versioned roundtrip, v1 migration, isolated modes and storage failures</pre><pre class="ok">ok real map UI: assign, interview, edit, publish, save/load and map station</pre><pre class="ok">ok real sandbox UI: patch state, tune roster, auto week, compare and change config</pre><pre class="ok">ok gameplay: interview costs energy, info opens before whole-case assignment, immutable transition</pre><pre class="ok">ok gameplay: bed blocks day transition, zero-energy approval, work processed once</pre><pre class="ok">ok gameplay: mismatch raises day one, reassignment restarts, loss is one working day</pre><pre class="ok">ok gameplay: Friday assignments pause Saturday/Sunday and resume Monday</pre><pre class="ok">ok gameplay: editorial work pauses on weekends and late writing rolls to next issue</pre><pre class="ok">ok gameplay: outside investigation uses separate slot energy and cannot become extra free activity</pre><pre class="ok">ok gameplay: Khue needs distinct verified steps, writes own article, no double packaging multiplier</pre><pre class="ok">ok gameplay: gifts cannot bypass events, romance requires affirmative choice</pre><pre class="ok">ok gameplay: betrayal reduces stats only for current female romantic partners</pre><pre class="ok">ok gameplay: matching base roster completes stories without upgrade or tool</pre><pre class="ok">ok gameplay: only one consumable boost per day, money and tools enforce cost</pre><pre class="ok">ok gameplay: mock ending requires both branches, two-week playthroughs finish all calendar days</pre><pre class="ok">ok gameplay real UI: map activity, feedback modal, free approval, sleep and isolated save</pre><pre class="ok">ok anime sprite atlas: 84 nonempty transparent frames, feet aligned, direction and walk poses distinct</pre><pre class="ok">ok pixel maps: all doors and interaction points are reachable; destination spawns are safe</pre><pre class="ok">ok pixel collision: wall, water, furniture and NPC tiles reject movement; paths never skip tiles</pre><pre class="ok">ok pixel NPC schedule: club during school hours, leisure after club and weekends, future joins hidden</pre><pre class="ok">ok pixel saves: invalid/out-of-bounds/blocked positions fall back to walkable spawn</pre><pre class="ok">ok pixel real UI: assets, keyboard, collision, walk through four maps, NPC/board, job, bed feedback and position save</pre><pre class="ok">ok pilot Khuê/Vân and storyboard candidate: 192 frames, binary alpha, shared limited palette, matched neutral height and fixed canvas</pre><pre class="ok">ok Khue up/down walk preserves idle upper proportions; idle/talk and sideways walk stay unchanged</pre><pre class="ok">ok pilot clips: distance-driven walk keeps phase across time/direction, variable idle durations and fallback</pre><pre class="ok">ok sprite lab real UI: all clips/directions, pause/step, onion skin, zoom and mobile containment</pre><pre class="ok">ok walk storyboards: four views retain anatomical contact, draw real poses and synchronize pause/step controls</pre><pre class="ok">ok dialogue art: nine identities, 24 transparent assets and registered pose groups load</pre><pre class="ok">ok dialogue renderer: latest speaker wins, failed expression falls back to neutral, rerender reuses loaded image</pre><pre class="ok">ok dialogue lab real UI: identity/expression selection and mobile buttons remain visible</pre><pre class="ok">ok interaction scenes: every choice resolves, all nine identities and 24 expressions are reachable</pre><pre class="ok">ok interaction map real UI: walk to all actors, branch conversations, restore movement and render mobile</pre><pre class="ok">ok coastal gallery: mobile portrait/choices, long text and reduced-motion CSS/JS</pre><pre class="ok">ok coastal overlays: trap focus, retain dialog, dismiss policy, unlock and restore focus</pre><pre class="ok">ok coastal dialogue: stable reading surface and portrait, latest update and disposal</pre><pre class="ok">ok coastal pixel shell: preserves world/HUD identity, overlay lock and mobile menu</pre><p class="ok">72/72 passed</p><pre id="dialogue-art-audit">[
+  {
+    "id": "khue",
+    "file": "v2/khue-standing-happy.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9977190393130283
+  },
+  {
+    "id": "khue",
+    "file": "v2/khue-standing-listening.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.996327570030827
+  },
+  {
+    "id": "khue",
+    "file": "v2/khue-happy.png",
+    "master": "investigate",
+    "bodySilhouetteOverlap": 0.9968152866242038
+  },
+  {
+    "id": "khue",
+    "file": "v2/khue-serious.png",
+    "master": "investigate",
+    "bodySilhouetteOverlap": 0.9976554885276995
+  },
+  {
+    "id": "van",
+    "file": "v2/van-happy.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9838633715886275
+  },
+  {
+    "id": "van",
+    "file": "v2/van-serious.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9855108482242712
+  },
+  {
+    "id": "long",
+    "file": "v2/long-happy-v2.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9927632984405041
+  },
+  {
+    "id": "long",
+    "file": "v2/long-serious.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9959303882195448
+  },
+  {
+    "id": "nhi",
+    "file": "v2/nhi-happy.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.994156642974303
+  },
+  {
+    "id": "nhi",
+    "file": "v2/nhi-serious.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9869962312837401
+  },
+  {
+    "id": "ngoc",
+    "file": "v2/ngoc-happy-v2.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9882103477523325
+  },
+  {
+    "id": "ngoc",
+    "file": "v2/ngoc-serious.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9947956658988141
+  },
+  {
+    "id": "an",
+    "file": "v2/an-happy.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9937433365131025
+  },
+  {
+    "id": "an",
+    "file": "v2/an-serious.png",
+    "master": "neutral",
+    "bodySilhouetteOverlap": 0.9953347198021472
+  }
+]</pre><pre id="benchmarks">[
+  {
+    "policy": "Cân bằng",
+    "outcome": "win",
+    "evidence": 233.37480000000002,
+    "reputation": 64.46073383453096,
+    "averageScore": 64391.913324999994,
+    "heavyStrikes": 3
+  },
+  {
+    "policy": "Dùng Vân bất chấp",
+    "outcome": "bitter",
+    "evidence": 218.79600000000005,
+    "reputation": 47.36404154519989,
+    "averageScore": 55151.977518750005,
+    "heavyStrikes": 4
+  },
+  {
+    "policy": "Gai góc 80%",
+    "outcome": "win",
+    "evidence": 351.2652,
+    "reputation": 61.31055980683888,
+    "averageScore": 66016.246875,
+    "heavyStrikes": 5
+  },
+  {
+    "policy": "Tham điểm 100%",
+    "outcome": "bitter",
+    "evidence": 426.78000000000003,
+    "reputation": 32.34947728573623,
+    "averageScore": 56942.750250000005,
+    "heavyStrikes": 8
+  },
+  {
+    "policy": "Chỉ an toàn",
+    "outcome": "defeat",
+    "evidence": 0,
+    "reputation": 44.954709928458776,
+    "averageScore": 41926.30496666667,
+    "heavyStrikes": 0
+  },
+  {
+    "policy": "Một bài / tuần",
+    "outcome": "defeat",
+    "evidence": 101.35200000000002,
+    "reputation": 19.172466093447063,
+    "averageScore": 43364.72000000001,
+    "heavyStrikes": 0
+  },
+  {
+    "policy": "Khuê làm một mình",
+    "outcome": "defeat",
+    "evidence": 111.30480000000001,
+    "reputation": 22.509351527181902,
+    "averageScore": 43378.903041666665,
+    "heavyStrikes": 2
+  },
+  {
+    "policy": "An toàn 5 tuần rồi bung",
+    "outcome": "defeat",
+    "evidence": 169.0032,
+    "reputation": 64.42784894522022,
+    "averageScore": 60917.56825833334,
+    "heavyStrikes": 2
+  }
+]</pre><pre id="gameplay-benchmarks">[
+  {
+    "policy": "solo",
+    "K": 77.26142857142857,
+    "T": 0,
+    "total": 30.90457142857143,
+    "good": false,
+    "teamArticles": 0,
+    "khueArticles": 2,
+    "metrics": {
+      "opened": 0,
+      "assigned": 0,
+      "restarts": 0,
+      "approvals": 0,
+      "energySpent": 10,
+      "unusedEnergy": 30,
+      "hangouts": 0,
+      "jobs": 0
+    },
+    "reports": [
+      {
+        "day": 5,
+        "week": 1,
+        "score": 76620,
+        "ids": [
+          "Q1"
+        ],
+        "reputation": 8
+      },
+      {
+        "day": 12,
+        "week": 2,
+        "score": 77656,
+        "ids": [
+          "Q2"
+        ],
+        "reputation": 16
+      }
+    ]
+  },
+  {
+    "policy": "team",
+    "K": 0,
+    "T": 76.8,
+    "total": 46.08,
+    "good": false,
+    "teamArticles": 4,
+    "khueArticles": 0,
+    "metrics": {
+      "opened": 4,
+      "assigned": 4,
+      "restarts": 0,
+      "approvals": 8,
+      "energySpent": 8,
+      "unusedEnergy": 32,
+      "hangouts": 0,
+      "jobs": 0
+    },
+    "reports": [
+      {
+        "day": 5,
+        "week": 1,
+        "score": 45128,
+        "ids": [
+          "W1-community",
+          "W1-documents"
+        ],
+        "reputation": 5
+      },
+      {
+        "day": 12,
+        "week": 2,
+        "score": 45128,
+        "ids": [
+          "W2-community",
+          "W2-documents"
+        ],
+        "reputation": 10
+      }
+    ]
+  },
+  {
+    "policy": "mixed",
+    "K": 77.26142857142857,
+    "T": 76.8,
+    "total": 76.98457142857143,
+    "good": true,
+    "teamArticles": 4,
+    "khueArticles": 2,
+    "metrics": {
+      "opened": 4,
+      "assigned": 4,
+      "restarts": 0,
+      "approvals": 8,
+      "energySpent": 18,
+      "unusedEnergy": 22,
+      "hangouts": 0,
+      "jobs": 0
+    },
+    "reports": [
+      {
+        "day": 5,
+        "week": 1,
+        "score": 55625,
+        "ids": [
+          "W1-community",
+          "W1-documents",
+          "Q1"
+        ],
+        "reputation": 6
+      },
+      {
+        "day": 12,
+        "week": 2,
+        "score": 55970,
+        "ids": [
+          "W2-community",
+          "W2-documents",
+          "Q2"
+        ],
+        "reputation": 12
+      }
+    ]
+  },
+  {
+    "policy": "mixed-84-days",
+    "K": 82.44714285714284,
+    "T": 76.80000000000003,
+    "total": 79.05885714285715,
+    "good": true,
+    "teamArticles": 24,
+    "khueArticles": 12,
+    "metrics": {
+      "opened": 24,
+      "assigned": 24,
+      "restarts": 0,
+      "approvals": 48,
+      "energySpent": 108,
+      "unusedEnergy": 132,
+      "hangouts": 0,
+      "jobs": 0
+    },
+    "reports": [
+      {
+        "day": 5,
+        "week": 1,
+        "score": 55625,
+        "ids": [
+          "W1-community",
+          "W1-documents",
+          "Q1"
+        ],
+        "reputation": 6
+      },
+      {
+        "day": 12,
+        "week": 2,
+        "score": 55970,
+        "ids": [
+          "W2-community",
+          "W2-documents",
+          "Q2"
+        ],
+        "reputation": 12
+      },
+      {
+        "day": 19,
+        "week": 3,
+        "score": 56315,
+        "ids": [
+          "W3-community",
+          "W3-documents",
+          "Q3"
+        ],
+        "reputation": 18
+      },
+      {
+        "day": 26,
+        "week": 4,
+        "score": 56661,
+        "ids": [
+          "W4-community",
+          "W4-documents",
+          "Q4"
+        ],
+        "reputation": 24
+      },
+      {
+        "day": 33,
+        "week": 5,
+        "score": 57006,
+        "ids": [
+          "W5-community",
+          "W5-documents",
+          "Q5"
+        ],
+        "reputation": 30
+      },
+      {
+        "day": 40,
+        "week": 6,
+        "score": 57351,
+        "ids": [
+          "W6-community",
+          "W6-documents",
+          "Q6"
+        ],
+        "reputation": 36
+      },
+      {
+        "day": 47,
+        "week": 7,
+        "score": 57696,
+        "ids": [
+          "W7-community",
+          "W7-documents",
+          "Q7"
+        ],
+        "reputation": 42
+      },
+      {
+        "day": 54,
+        "week": 8,
+        "score": 58041,
+        "ids": [
+          "W8-community",
+          "W8-documents",
+          "Q8"
+        ],
+        "reputation": 48
+      },
+      {
+        "day": 61,
+        "week": 9,
+        "score": 58386,
+        "ids": [
+          "W9-community",
+          "W9-documents",
+          "Q9"
+        ],
+        "reputation": 54
+      },
+      {
+        "day": 68,
+        "week": 10,
+        "score": 58731,
+        "ids": [
+          "W10-community",
+          "W10-documents",
+          "Q10"
+        ],
+        "reputation": 60
+      },
+      {
+        "day": 75,
+        "week": 11,
+        "score": 59077,
+        "ids": [
+          "W11-community",
+          "W11-documents",
+          "Q11"
+        ],
+        "reputation": 66
+      },
+      {
+        "day": 82,
+        "week": 12,
+        "score": 59422,
+        "ids": [
+          "W12-community",
+          "W12-documents",
+          "Q12"
+        ],
+        "reputation": 72
+      }
+    ]
+  }
+]</pre></div>
+<script type="module">
+import './core.test.js';
+import './architecture.test.js';
+import './ui.test.js';
+import './gameplay.test.js';
+import './gameplay-ui.test.js';
+import './pixel.test.js';
+import './pixel-ui.test.js';
+import './pilot-sprites.test.js';
+import './storyboard-guide.test.js';
+import './dialogue-sprites.test.js';
+import './interaction-map.test.js';
+import './coastal-ui.test.js';
+import {runAll} from './harness.js';
+const results = await runAll(); const root = document.querySelector('#results'); root.replaceChildren();
+for(const r of results) { const p = document.createElement('pre'); p.className=r.ok?'ok':'bad'; p.textContent=`${r.ok?'ok':'FAIL'} ${r.name}${r.error?'\n'+r.error:''}`; root.append(p); }
+const summary=document.createElement('p'); summary.className=results.every(r=>r.ok)?'ok':'bad'; summary.textContent=`${results.filter(r=>r.ok).length}/${results.length} passed`; root.append(summary);
+window.testResults=results;
+const dialogueAudit=document.createElement('pre');dialogueAudit.id='dialogue-art-audit';dialogueAudit.textContent=JSON.stringify(window.dialogueArtAudit,null,2);root.append(dialogueAudit);
+const benchmarks=document.createElement('pre'); benchmarks.id='benchmarks'; benchmarks.textContent=JSON.stringify(window.pressClubBenchmarks,null,2); root.append(benchmarks);
+const gameplay=document.createElement('pre'); gameplay.id='gameplay-benchmarks'; gameplay.textContent=JSON.stringify(window.gameplayBenchmarks,null,2); root.append(gameplay);
+</script>
+</body></html>

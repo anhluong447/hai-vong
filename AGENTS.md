@@ -19,3 +19,7 @@
   references. Preserve active art, source generation inputs and reusable tooling.
 - Build focused extension points for concrete features; avoid a speculative engine
   framework. Do not edit the historical `archive/clb-hoi/` snapshot during routine work.
+- Coastal replica work follows the UI scope in `docs/UI-REPLICA-ROADMAP.md` and
+  `docs/ui-specs/coastal-replica/ui-scope.json`: preserve fixed UI and attached
+  flowers/notebook/harbor decorations. Background/character/world matching is
+  deferred and must not block UI visual gates.

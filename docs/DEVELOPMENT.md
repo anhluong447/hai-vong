@@ -54,11 +54,15 @@ reason and playtest evidence recorded separately.
 
 ## Files and artifacts
 
-For coastal UI development, follow [UI-COMPONENTS-PLAN.md](UI-COMPONENTS-PLAN.md).
+For coastal UI development, follow [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md).
+[UI-COMPONENTS-PLAN.md](UI-COMPONENTS-PLAN.md) is the historical v1 plan.
 
 The active plan is now [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md); the older
 component plan is historical. Complete its R01-R04 measurement/inventory/capture
-work first, then a static dialogue replica before motion or wider integration.
+work first, then the fixed dialogue UI and attached decorations before motion
+or wider integration. Scope revision 2 excludes background/character/world
+matching. Reuse existing scene art, a neutral background or a new illustration;
+keep scene production in a separate future backlog.
 R01-R04 are now prepared in [Stage 0 specs](ui-specs/coastal-replica/README.md).
 Use `python tools/coastal_reference_specs.py --check` to validate locked sources,
 geometry/text mappings and generated sheets. The layer viewer is
@@ -66,9 +70,17 @@ geometry/text mappings and generated sheets. The layer viewer is
 `python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-reference-tools.html`.
 For native replica evidence, use `tools/capture_replica.py` and its readiness
 contract; Chrome window size alone does not guarantee the content viewport.
-Use the reference's native 1672x941 frame, identical fixtures and a settled
-animation state for overlays/diffs. Store versioned art/layer/light/motion review
-evidence separately from browser behavior results. Do not certify visual parity
+Use the reference's native 1672x941 UI plane, identical UI fixtures and a settled
+animation state for overlays/diffs. [ui-scope.json](ui-specs/coastal-replica/ui-scope.json)
+classifies measured regions; mixed UI/context regions need production masks.
+Compare UI shape/type/material/light inside UI masks, not whole-frame similarity.
+Capture isolated UI and bright/dark/detailed context variants. Background, actor
+pose and scene lettering never need to match the reference to pass a UI gate.
+Current tooling has historical full-frame/ROI diagnostics and Stage 3 isolated
+UI views/conservative masked comparison. Mixed fringe alpha is still unresolved.
+Store versioned
+art/layer/light/motion review evidence separately from browser behavior results.
+Do not certify visual parity
 from passing browser tests or trade the composition for mobile reflow.
 Keep the user-selected reference set in `docs/ui-concepts/coastal-editorial-v1/`
 with its prompt record and SHA-256 inventory. Do not overwrite it with later
@@ -97,11 +109,15 @@ Use a new output version after art changes; historical captures are evidence,
 not proof that the current manifest matches. Always run the main browser suite
 and baseline checker before the focused suite overwrites `test_results.log`.
 
-Stage 2 is the default preview at `tools/coastal-replica-preview.html`. Edit
+Stage 2 is retained at `tools/coastal-replica-preview.html?version=2`. Edit
 `content/ui/coastal-dialogue.json` and `assets/ui/coastal-replica/v2/masters/materials.json`;
 keep bitmap masters and [generation prompts](../assets/ui/coastal-replica/v2/prompts.json).
 Never edit generated JS/export SVG/manifest directly. Its review has delivered
-R09-R14 implementation and comparison evidence, with G2 corrections still open.
+R09-R14 implementation and historical full-scene comparison evidence. Reusable
+UI/context art is retained; G2 UI remains pending a scoped review. Continue
+paper/wave/harbor/flower/notebook/date/choice/type/icon work, rather than portrait,
+room or held-newspaper reconstruction. Save reusable logo sources; dialogue
+logo display is optional.
 
 ```powershell
 python tools/build_dialogue_replica.py --build
@@ -112,7 +128,7 @@ python tools/check_architecture.py
 python tools/run_browser_tests.py --url http://127.0.0.1:8080/tests/index.html
 python tools/check_baselines.py
 python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-replica-stage2.html --output-prefix playtest
-python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --compare-reference --output docs/ui-reviews/coastal-replica-stage2/dialogue-native-v5.png
+python tools/capture_replica.py --url 'http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=2' --screen dialogue --compare-reference --output docs/ui-reviews/coastal-replica-stage2/dialogue-native-v5.png
 ```
 
 Use `--output-prefix playtest` for focused suites to preserve main-suite evidence
@@ -122,10 +138,38 @@ manifest after an art change; use a new filename/version rather than replacing
 review history. The dialogue capture merges its supplemental fixture into the
 report; the original Stage 0 fixture/reference lock remains unchanged. Inspect
 alpha/native overlays and update the explicit G2 backlog in
-[Stage 2 review](ui-reviews/coastal-replica-stage2/README.md) before starting R15.
+[Stage 2 review](ui-reviews/coastal-replica-stage2/README.md). Historical validation
+and full-frame MAE keep their original meaning; they cannot certify the revised
+UI gate. Once UI geometry is stable, R15-R17 fix UI light/depth/compositing and
+close static G2 before motion. Keep world/portrait providers interchangeable.
+
+Stage 3 is the default preview, initially on a dark neutral canvas. Edit
+`content/ui/coastal-dialogue-ui.json` and `v3/masters/materials.json` for the fixed
+overlay and local lighting. Its builder inherits three UI PNGs byte-for-byte;
+do not regenerate scene/portrait art for a UI gate. Context is a separate slot.
+
+```powershell
+python tools/build_dialogue_ui.py --build
+python tools/build_dialogue_ui.py --check
+python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-replica-stage3.html --output-prefix playtest
+python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --variant ui-dark --compare-ui --output docs/ui-reviews/coastal-replica-stage3/ui-dark-v3.png
+python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --variant ui-dark --flat-lighting --output docs/ui-reviews/coastal-replica-stage3/ui-flat-v2.png
+```
+
+Also capture `ui-light`, `ui-detail`, `stage`, material sheets and optional
+`--logo`. `--compare-ui` accepts composed UI views only and writes transparent
+masked overlay/diff plus a report with reference/candidate/mask hashes. Never
+compare its interior score with an old full-frame score or treat the authored
+mask as recovered reference alpha. Keep uncertain/occluded edges in the visual
+backlog. Capture Chrome sequentially to avoid resource contention on the local
+server. Run main/baselines before focused checks, retain raw logs, update
+[Stage 3 review](ui-reviews/coastal-replica-stage3/README.md) and
+[status](ui-specs/coastal-replica/status.json). R15/R16 and R17 evidence are delivered;
+G2 visual corrections remain before Stage 4 motion.
 
 The earlier component-gallery milestones below describe the v1 prototype.
-Replica work continues with R14 visual corrections, then R15-R45 and their art/static/motion gates. Runtime
+Replica work continues with G2 UI corrections after Stage 3, then R18-R45 and
+their UI art/static/motion gates. Scene production is deferred. Runtime
 milestones require the verification above plus focused browser checks for
 focus/input, interrupted transitions and resource disposal. Store new review
 screenshots/video separately and record the device/browser for performance checks.

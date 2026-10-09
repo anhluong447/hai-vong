@@ -1,6 +1,6 @@
 # Hồi Âm — kế hoạch component và chuyển động UI
 
-> Kế hoạch v1 được giữ để đối chiếu lịch sử. Yêu cầu hiện tại là replica 1:1 theo cả bốn ảnh, với asset/layer/lighting/motion đạt chuẩn cao. **Kế hoạch thực thi hiện hành: [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md), 45 work packages và 6 cổng nghiệm thu.** Những lựa chọn v1 về giản lược art, reflow mobile và dùng chung bố cục menu/hồ sơ đã được thay thế. Prototype v1 chưa đạt đích visual.
+> Kế hoạch v1 được giữ để đối chiếu lịch sử. Yêu cầu hiện tại là replica phần UI cố định và trang trí gắn UI trong cả bốn ảnh, với asset/layer/lighting/motion đạt chuẩn cao. Background, nhân vật và world là context thay được, làm sau; scope revision 2 được ghi ở roadmap. **Kế hoạch thực thi hiện hành: [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md), 45 work packages và 6 cổng nghiệm thu.** Những lựa chọn v1 về giản lược art, reflow mobile và dùng chung bố cục menu/hồ sơ đã được thay thế. Prototype v1 chưa đạt đích visual.
 
 Ngày: 2026-10-09. Trạng thái: đã triển khai v1 của component nền, thoại, shell/HUD, overlay và menu/hồ sơ. Xem [review triển khai](ui-reviews/coastal-v1/README.md).
 

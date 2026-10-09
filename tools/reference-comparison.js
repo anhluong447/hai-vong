@@ -106,3 +106,32 @@ export function compare(reference, candidate, width, height, regions = []) {
     },
   };
 }
+
+// Reference-owned mask: background changes outside it have no score or pixels.
+// This is a conservative interior diagnostic, not extracted reference alpha.
+export function compareMasked(reference,candidate,mask,width,height) {
+  if([reference,candidate,mask].some(item=>item.width!==width||item.height!==height)) throw new RangeError('native-size-mismatch');
+  const a=pixels(reference,width,height).data,b=pixels(candidate,width,height).data,m=pixels(mask,width,height).data;
+  const overlay=canvas(width,height),difference=canvas(width,height),oc=overlay.getContext('2d'),dc=difference.getContext('2d');
+  const out=oc.createImageData(width,height),diff=dc.createImageData(width,height);
+  let selectedPixels=0,changedPixels=0,total=0,maxChannelError=0;
+  for(let i=0;i<a.length;i+=4) {
+    if(m[i+3]<128)continue;
+    selectedPixels++;
+    let changed=false;
+    for(let channel=0;channel<4;channel++) {
+      const delta=Math.abs(a[i+channel]-b[i+channel]);total+=delta;
+      maxChannelError=Math.max(maxChannelError,delta);changed||=delta>0;
+      if(channel<3) {out.data[i+channel]=Math.round((a[i+channel]+b[i+channel])/2);diff.data[i+channel]=Math.min(255,delta*4);}
+    }
+    const alphaError=Math.min(255,Math.abs(a[i+3]-b[i+3])*4);
+    for(let channel=0;channel<3;channel++) diff.data[i+channel]=Math.max(diff.data[i+channel],alphaError);
+    changedPixels+=Number(changed);out.data[i+3]=255;diff.data[i+3]=255;
+  }
+  if(!selectedPixels)throw new RangeError('empty-ui-mask');
+  oc.putImageData(out,0,0);dc.putImageData(diff,0,0);
+  return {overlay,difference,report:{width,height,mode:'reference-ui-mask',threshold:128,selectedPixels,
+    coverage:selectedPixels/(width*height),meanAbsoluteErrorRGBA:total/(selectedPixels*4),changedPixels,
+    changedFraction:changedPixels/selectedPixels,maxChannelError,
+    role:'conservative UI interiors only; not G2 certification or recovered reference alpha'}};
+}

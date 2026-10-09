@@ -779,5 +779,14 @@ export default {
   "ui.replica.stage2.note": "Bản thoại tĩnh được phục dựng theo concept. Dùng tách lớp và contact sheets để xem pose, alpha, giấy và typography; xem review native để đối chiếu sai lệch.",
   "ui.replica.stage2.props": "Tiền cảnh và alpha",
   "ui.replica.stage2.label.foreground": "Tiền cảnh tách lớp",
-  "ui.replica.stage2.label.portrait": "Chân dung / alpha"
+  "ui.replica.stage2.label.portrait": "Chân dung / alpha",
+  "ui.replica.stage3.title": "Hồi Âm · Stage 3 — ánh sáng UI",
+  "ui.replica.stage3.heading": "Coastal UI · Stage 3",
+  "ui.replica.stage3.note": "Giấy, sóng, hoa và notebook là các lớp UI độc lập. Đổi nền để xem độ nổi, bật/tắt ánh sáng để so sánh chất liệu; logo hiển thị tùy chọn.",
+  "ui.replica.stage3.view.scene": "UI trên cảnh minh họa",
+  "ui.replica.stage3.view.light": "UI trên nền sáng",
+  "ui.replica.stage3.view.dark": "UI trên nền tối",
+  "ui.replica.stage3.view.detail": "UI trên nền nhiều chi tiết",
+  "ui.replica.stage3.lighting": "Ánh sáng và bóng UI",
+  "ui.replica.stage3.logo": "Hiện logo"
 };

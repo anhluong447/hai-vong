@@ -1,0 +1,24 @@
+{
+  "width": 1672,
+  "height": 941,
+  "mode": "reference-ui-mask",
+  "threshold": 128,
+  "selectedPixels": 444143,
+  "coverage": 0.28229093044658793,
+  "meanAbsoluteErrorRGBA": 18.09542365859644,
+  "changedPixels": 444050,
+  "changedFraction": 0.9997906079798623,
+  "maxChannelError": 249,
+  "role": "conservative UI interiors only; not G2 certification or recovered reference alpha",
+  "sourcePaths": [
+    "/docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+    "/docs/ui-reviews/coastal-replica-stage3/ui-light-v1.png",
+    "/assets/ui/coastal-replica/v3/review/ui-mask.svg"
+  ],
+  "sourceSHA256": [
+    "68C076B9D013523B745E61E1AF35A8251742BBF7B774C02245F89DACF3D2A5A2",
+    "AB57D2F5B615AE56062C4A535A23557956A9F0928FEAB8F95B39BFE7F9B9AC7C",
+    "8127701E6DDD73C09E06F464DF8ED6E001029588C86C06003995120327C933E4"
+  ],
+  "maskUncertainty": "Mask interiors and manually bounded decoration polygons; excludes uncertain outer fringes and optional logo. Original raster alpha cannot be recovered from these masks."
+}

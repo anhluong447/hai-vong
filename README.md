@@ -14,7 +14,8 @@ powershell -ExecutionPolicy Bypass -File tools/serve.ps1
 - Sandbox vòng chơi theo bible mới: <http://localhost:8080/gameplay.html>
 - Map test 2D pixel: <http://localhost:8080/pixel.html>
 - Coastal UI có chuyển động: <http://localhost:8080/tools/coastal-ui-preview.html>
-- Replica Stage 2 — thoại tĩnh, art layers và contact sheets: <http://127.0.0.1:8080/tools/coastal-replica-preview.html>
+- Replica Stage 3 — UI thoại, ánh sáng/bóng riêng từng lớp, nền review và lighting A/B: <http://127.0.0.1:8080/tools/coastal-replica-preview.html>
+- Replica Stage 2 lịch sử: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=2>
 - Replica Stage 1 — pilot được giữ lại: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=1>
 - Thoại 9 nhân vật với component coastal: <http://localhost:8080/interaction.html>
 - Tests: <http://localhost:8080/tests/>
@@ -46,10 +47,11 @@ Xem [hướng dẫn và giới hạn](docs/GAMEPLAY-SANDBOX.md). Map truyện th
 - [Bộ luật và quyết định chuẩn hóa](docs/RULES.md)
 - [Kiến trúc](docs/ARCHITECTURE.md)
 - [Component và chuyển động coastal](docs/UI-COMPONENTS-PLAN.md), [review bản chạy v1](docs/ui-reviews/coastal-v1/README.md)
-- [Roadmap replica visual — 45 bước, chuẩn asset/lighting/motion](docs/UI-REPLICA-ROADMAP.md)
+- [Roadmap replica UI — 45 bước, background/nhân vật làm sau](docs/UI-REPLICA-ROADMAP.md)
 - [Stage 0 đã triển khai — layout sheets, asset inventory, native capture và overlay/diff](docs/ui-specs/coastal-replica/README.md)
 - [Stage 1 — pipeline art/font, mẫu 7 lớp và review sai lệch](docs/ui-reviews/coastal-replica-stage1/README.md)
-- [Stage 2 — bản thoại tĩnh, đối chiếu native và backlog G2](docs/ui-reviews/coastal-replica-stage2/README.md)
+- [Stage 2 — UI thoại, evidence lịch sử và backlog G2 theo scope UI](docs/ui-reviews/coastal-replica-stage2/README.md)
+- [Stage 3 — ánh sáng/chiều sâu UI, scoped comparison và backlog G2](docs/ui-reviews/coastal-replica-stage3/README.md)
 - [Quy trình phát triển và quy tắc nội dung](docs/DEVELOPMENT.md)
 - [Nội dung, văn bản và balance](content/README.md)
 - [Kết quả kiểm chứng và baseline](docs/VALIDATION.md)

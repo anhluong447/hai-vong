@@ -32,10 +32,17 @@ def main():
     parser.add_argument('--hook', choices=['replicaCapture', 'referenceReview'], default='replicaCapture')
     parser.add_argument('--variant', default='stage', help='Concrete preview view requested from replicaCapture')
     parser.add_argument('--compare-reference', action='store_true', help='Save native 50/50 overlay and 4x difference diagnostics')
+    parser.add_argument('--compare-ui', action='store_true', help='Compare only the versioned UI mask exposed by the Stage 3 preview')
+    parser.add_argument('--flat-lighting', action='store_true', help='Disable component lighting for an A/B native capture')
+    parser.add_argument('--logo', action='store_true', help='Show the optional dialogue logo')
     parser.add_argument('--browser', default=r'C:\Program Files\Google\Chrome\Application\chrome.exe')
     args = parser.parse_args()
     if args.compare_reference and (args.variant != 'stage' or args.hook != 'replicaCapture'):
         parser.error('--compare-reference requires a stage replica capture')
+    if args.compare_ui and (args.hook!='replicaCapture' or args.compare_reference):
+        parser.error('--compare-ui requires replicaCapture and cannot use full-frame comparison')
+    if args.compare_ui and args.variant not in ('stage', 'ui-light', 'ui-dark', 'ui-detail'):
+        parser.error('--compare-ui requires a composed UI view')
     if urlparse(args.url).hostname not in ('localhost', '127.0.0.1'):
         raise ValueError('Capture URL must be the local project server')
     output = args.output.resolve()
@@ -43,7 +50,8 @@ def main():
         raise ValueError('Output must be a PNG in this workspace, outside locked references and .git')
     fixture = json.loads((SPEC / 'fixtures.json').read_text(encoding='utf-8'))
     supplemental = json.loads((SPEC / 'dialogue-production.json').read_text(encoding='utf-8')) if args.screen == 'dialogue' else {'catalog':{}}
-    contract = {'screen': args.screen, 'capture': fixture['capture'], 'fixture': fixture['screens'][args.screen], 'catalog': {**fixture['catalog'],**supplemental['catalog']}, 'variant':args.variant, 'supplementalFixture':supplemental}
+    contract = {'screen': args.screen, 'capture': fixture['capture'], 'fixture': fixture['screens'][args.screen], 'catalog': {**fixture['catalog'],**supplemental['catalog']}, 'variant':args.variant, 'supplementalFixture':supplemental,
+                'lighting':not args.flat_lighting,'logo':args.logo}
     process, client = None, None
     with tempfile.TemporaryDirectory(prefix='coastal-capture-', ignore_cleanup_errors=True) as profile:
         try:
@@ -111,6 +119,29 @@ def main():
             output.parent.mkdir(parents=True, exist_ok=True)
             output.write_bytes(png)
             output.with_suffix('.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            if args.compare_ui:
+                diagnostics=client.evaluate('''(async()=>{
+                    const {compareMasked,decode,digest}=await import('/tools/reference-comparison.js');
+                    const api=window.replicaPreview.stage;
+                    if (!api.scene.uiOnly || !api.manifest.comparisonMask) throw new Error('Missing Stage 3 UI comparison mask');
+                    const mask=api.manifest.comparisonMask;
+                    const sources=['/'+api.manifest.sourceReference,CANDIDATE,'/'+mask.file];
+                    const blobs=await Promise.all(sources.map(async url=>{
+                        const response=await fetch(url,{cache:'no-store'});
+                        if(!response.ok)throw new Error('UI comparison resource failed');return response.blob();
+                    }));
+                    const hashes=await Promise.all(blobs.map(digest));
+                    if(hashes[0]!==api.manifest.sourceReferenceSHA256 || hashes[2]!==mask.sha256) throw new Error('UI reference/mask hash changed');
+                    const images=await Promise.all(blobs.map(decode));
+                    const result=compareMasked(...images,1672,941);
+                    return {report:{...result.report,sourcePaths:sources,sourceSHA256:hashes,maskUncertainty:mask.uncertainty},
+                        overlay:result.overlay.toDataURL('image/png').split(',')[1],
+                        difference:result.difference.toDataURL('image/png').split(',')[1]};
+                })()'''.replace('CANDIDATE',json.dumps('/'+output.relative_to(ROOT).as_posix())),await_promise=True)
+                for kind in ('overlay','difference'):
+                    output.with_name(output.stem+'-ui-'+kind+'.png').write_bytes(base64.b64decode(diagnostics[kind]))
+                output.with_name(output.stem+'-ui-comparison.json').write_text(json.dumps(diagnostics['report'],ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                print('Scoped UI comparison saved; context excluded outside conservative reference masks.')
             if args.compare_reference:
                 diagnostics = client.evaluate('''(async () => {
                     const {compare,decode,digest} = await import('/tools/reference-comparison.js');

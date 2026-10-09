@@ -1,0 +1,8 @@
+<html lang="en"><head><meta charset="utf-8"><title>Stage 1 rendering contract tests</title></head>
+<body>
+  <div id="results"><pre class="ok">Seven art planes remain independently inspectable; full-screen plate has no choices/text</pre><pre class="ok">Text is live catalog content and fits native reading/choice regions</pre><pre class="ok">Uniform hit testing and actual pointer targets agree at two letterboxed scales</pre><pre class="ok">Keyboard navigation, activation, ARIA and focus survive rendering</pre><pre class="ok">Layer isolation preserves text, native placement and selection</pre><pre class="ok">All three local licensed font faces are loaded without missing Vietnamese coverage</pre><pre class="ok">Paper alpha leaves the scene visible above its authored edge</pre><pre class="ok">Typography board uses the same catalog/local faces and preserves Vietnamese glyph lines</pre><pre class="ok">Separate stage instances never share clipping IDs</pre><pre class="ok">Capture rejects inconsistent text and unsupported animation states</pre><pre class="ok">Capture resets inspection/choice state, awaits resources and freezes interaction</pre><pre class="ok">Disposal aborts an in-flight load and prevents rendering or action callbacks</pre><p class="ok">12/12 passed</p></div>
+  <iframe id="pilot" src="../tools/coastal-replica-preview.html?version=1" width="1000" height="710" title="Replica under test"></iframe>
+  <script type="module" src="coastal-replica-stage1.js"></script>
+
+
+</body></html>

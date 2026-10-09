@@ -2,9 +2,9 @@
 
 Ngày: 2026-10-09. Tạo bằng công cụ image_gen tích hợp, để đánh giá hướng nghệ thuật trước khi triển khai UI.
 
-Người dùng đã chọn bộ này làm mốc tham chiếu để lập kế hoạch component và chuyển động. Giữ nguyên bốn ảnh và prompt trong phiên bản này; lưu hash trong [references.json](references.json). Xem [kế hoạch triển khai](../../UI-COMPONENTS-PLAN.md). Các thử nghiệm tiếp theo tạo phiên bản mới.
+Người dùng đã chọn bộ này làm mốc tham chiếu để lập kế hoạch component và chuyển động. Giữ nguyên bốn ảnh và prompt trong phiên bản này; lưu hash trong [references.json](references.json). Xem [roadmap hiện hành](../../UI-REPLICA-ROADMAP.md); [plan v1](../../UI-COMPONENTS-PLAN.md) giữ như lịch sử. Các thử nghiệm tiếp theo tạo phiên bản mới.
 
-Yêu cầu được chốt lại ngày 2026-10-09: **tái dựng replica 1:1 chính bốn màn này**, gồm composition, asset, lớp chồng, ánh sáng và vật liệu; sau đó làm animation. Xem [roadmap hiện hành — 45 bước](../../UI-REPLICA-ROADMAP.md). Khung chuẩn là 1672×941, ưu tiên giữ composition thay vì reflow mobile. Mô tả/prompt phía dưới ghi lại giai đoạn tạo concept; không còn giới hạn việc triển khai ở mức lấy cảm hứng.
+Yêu cầu được chốt lại ngày 2026-10-09, scope revision 2: **tái dựng phần UI cố định và trang trí gắn UI trong bốn concept**, gồm composition UI, shape, asset, lớp chồng, chữ/icon, ánh sáng và vật liệu; sau đó làm animation. Background/cảnh lớp học/cảng, nhân vật và world có thể khác concept, dùng art tạm hoặc gen mới; làm sau và không chặn các gate UI. Hoa, notebook và minh họa bờ kè của thanh thoại vẫn thuộc UI. Logo được lưu làm nguồn dùng lại, hiển thị ở thoại tùy chọn. Xem [roadmap hiện hành — 45 bước](../../UI-REPLICA-ROADMAP.md). Khung chuẩn là 1672×941, ưu tiên giữ composition thay vì reflow mobile. Mô tả/prompt phía dưới ghi lại giai đoạn tạo concept; không còn giới hạn việc triển khai ở mức lấy cảm hứng.
 
 ## Bộ màn hình
 

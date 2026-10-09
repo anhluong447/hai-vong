@@ -1,0 +1,670 @@
+{
+  "version": 1,
+  "url": "http://127.0.0.1:8080/tools/coastal-replica-preview.html",
+  "screen": "dialogue",
+  "hook": "replicaCapture",
+  "environment": {
+    "state": {
+      "ready": true,
+      "screen": "dialogue",
+      "clock": "2026-10-09T08:00:00+07:00",
+      "motionTimeMs": 0,
+      "randomSeed": 0,
+      "kind": "stage3-ui-light-depth",
+      "version": "3",
+      "variant": "ui-light",
+      "selectedChoice": "verify",
+      "lighting": true,
+      "logo": false,
+      "scope": "fixed-ui",
+      "comparisonMask": {
+        "file": "assets/ui/coastal-replica/v3/review/ui-mask.svg",
+        "sha256": "8127701E6DDD73C09E06F464DF8ED6E001029588C86C06003995120327C933E4",
+        "scope": "fixed-ui; reference-owned conservative masks",
+        "uncertainty": "Mask interiors and manually bounded decoration polygons; excludes uncertain outer fringes and optional logo. Original raster alpha cannot be recovered from these masks.",
+        "regions": [
+          {
+            "id": "date-card",
+            "path": "M42 35H270V108L220 116L43 128Z"
+          },
+          {
+            "id": "choices",
+            "path": "M487 466H923V518H487Z M487 534H891V585H487Z M487 600H891V650H487Z"
+          },
+          {
+            "id": "wave",
+            "path": "M0 620C80 615 140 628 188 640L250 650C140 638 63 649 0 671Z"
+          },
+          {
+            "id": "dialogue-paper",
+            "path": "M0 689L70 658L180 648L330 666L510 691L730 721L945 738L1160 737L1360 754L1460 770V941H0Z"
+          },
+          {
+            "id": "notebook",
+            "path": "M1510 760L1645 783L1620 890H1460Z"
+          }
+        ]
+      },
+      "assets": [
+        {
+          "id": "material.dialogue-paper",
+          "sha256": "BB4F4FB481F97C8870F0273050FE6BA611476285712A11176EA9D7BD8B3AC83A"
+        },
+        {
+          "id": "material.dialogue-wave",
+          "sha256": "336DF9C19E10515994C27B371794CD3A448305654C64CDC53ED1B3723B2DE455"
+        },
+        {
+          "id": "material.choice-gold",
+          "sha256": "32B2ECE284FF27AF1E8BD4AD753D704F9BFA880F5B0769B526B4F74F533BD0F5"
+        },
+        {
+          "id": "material.choice-plain",
+          "sha256": "2DC67D67616C4874846C28CAD87840B323E0AF75BFA59F40E6D5D74339237E96"
+        },
+        {
+          "id": "material.date-paper",
+          "sha256": "79E00A52401A0A0B29F890CC97B9D625B3CFECCCE23F29E3B64F76CD30F3A622"
+        },
+        {
+          "id": "material.insignia",
+          "sha256": "0B8C6EB1363AB8D602193331692AEA0672E454B3849B78CCE6AA29683F42ECC9"
+        },
+        {
+          "id": "material.icons",
+          "sha256": "437154C8749771336ECC76E903BC6516FFD0B03486B681B73C5931AB7A6319A8"
+        },
+        {
+          "id": "material.sun-seal",
+          "sha256": "188DC429B5D78620BAC74D789D6F1D61344CEF8A134612DF43BEF1B7EBC065DE"
+        },
+        {
+          "id": "material.brand-mark",
+          "sha256": "A66C993123F72A91FE976DCC9861B958B8F56757008A32B8364A868CE3E5167D"
+        },
+        {
+          "id": "material.shore-ink",
+          "sha256": "2FC7903DCD9283864B4F809A63F696C16527A0996EC7667C86D6C3C6C634A83B"
+        },
+        {
+          "id": "material.note-edge",
+          "sha256": "BF65410437ECB69DF2650F82586709EFEB560179A7451E936E056A15BC174290"
+        },
+        {
+          "id": "dialogue.foreground-left",
+          "sha256": "6E43FC83FE16D3EC36C92BD5053D998AE0BAA944B2EFFA6AD63E65BFD1961B82"
+        },
+        {
+          "id": "dialogue.foreground-right",
+          "sha256": "516080A7256ABFDF3185B12B59A013079E58F0829C153E1FA0A92CF1F69DCD9D"
+        },
+        {
+          "id": "dialogue.harbor-print",
+          "sha256": "5BA7857AFFFF64027626ED6E84DD28E8F45301F69D9407C82CCD2F9053F9D90E"
+        }
+      ],
+      "layers": [
+        "scene",
+        "portraits",
+        "wave",
+        "paper",
+        "print",
+        "text",
+        "foreground"
+      ],
+      "fonts": [
+        "Source Serif 4",
+        "Cormorant Garamond",
+        "Dancing Script"
+      ],
+      "typography": [
+        {
+          "key": "ui.replica.dialogue.date.1",
+          "region": "date",
+          "bounds": [
+            123,
+            46,
+            122.24092102050781,
+            37
+          ],
+          "localBounds": [
+            123,
+            46,
+            122.24092102050781,
+            37
+          ],
+          "copy": "THỨ NĂM",
+          "family": "\"Source Serif 4\", serif",
+          "size": "27px",
+          "weight": "500"
+        },
+        {
+          "key": "ui.replica.dialogue.date.2",
+          "region": "phase",
+          "bounds": [
+            134,
+            87,
+            120.359375,
+            29
+          ],
+          "localBounds": [
+            134,
+            87,
+            120.359375,
+            29
+          ],
+          "copy": "CHIỀU · CLB",
+          "family": "\"Source Serif 4\", serif",
+          "size": "21.2px",
+          "weight": "500"
+        },
+        {
+          "key": "ui.replica.dialogue.speaker.1",
+          "region": "speaker",
+          "bounds": [
+            200,
+            700,
+            225.53125,
+            40
+          ],
+          "localBounds": [
+            200,
+            700,
+            225.53125,
+            40
+          ],
+          "copy": "LỤC THANH VÂN",
+          "family": "\"Source Serif 4\", serif",
+          "size": "29.2px",
+          "weight": "500"
+        },
+        {
+          "key": "ui.replica.dialogue.line.1",
+          "region": "line",
+          "bounds": [
+            233,
+            766,
+            591.625,
+            45
+          ],
+          "localBounds": [
+            233,
+            766,
+            591.625,
+            45
+          ],
+          "copy": "Một bài báo tốt bắt đầu từ việc lắng nghe.",
+          "family": "\"Source Serif 4\", serif",
+          "size": "33.2px",
+          "weight": "500"
+        },
+        {
+          "key": "ui.replica.dialogue.continue.1",
+          "region": "continue",
+          "bounds": [
+            1222,
+            876,
+            73.811279296875,
+            28
+          ],
+          "localBounds": [
+            1222,
+            876,
+            73.811279296875,
+            28
+          ],
+          "copy": "Tiếp tục",
+          "family": "\"Source Serif 4\", serif",
+          "size": "20.5px",
+          "weight": "400"
+        },
+        {
+          "key": "ui.replica.dialogue.choices.1",
+          "region": "verify",
+          "bounds": [
+            559,
+            477,
+            237.15625,
+            29
+          ],
+          "localBounds": [
+            559,
+            477,
+            237.15625,
+            29
+          ],
+          "copy": "Cùng kiểm tra nguồn tin.",
+          "family": "\"Source Serif 4\", serif",
+          "size": "21.2px",
+          "weight": "500"
+        },
+        {
+          "key": "ui.replica.dialogue.choices.2",
+          "region": "draft",
+          "bounds": [
+            559,
+            544,
+            233.234375,
+            29
+          ],
+          "localBounds": [
+            559,
+            544,
+            233.234375,
+            29
+          ],
+          "copy": "Cho mình xem bản thảo.",
+          "family": "\"Source Serif 4\", serif",
+          "size": "21.2px",
+          "weight": "500"
+        },
+        {
+          "key": "ui.replica.dialogue.choices.3",
+          "region": "listen",
+          "bounds": [
+            559,
+            612,
+            234.734375,
+            29
+          ],
+          "localBounds": [
+            559,
+            612,
+            234.734375,
+            29
+          ],
+          "copy": "Kể mình nghe thêm nhé.",
+          "family": "\"Source Serif 4\", serif",
+          "size": "21.2px",
+          "weight": "500"
+        },
+        {
+          "key": "ui.replica.dialogue.foreground_note.1",
+          "region": "foreground-note-copy",
+          "bounds": [
+            1476.2122097792453,
+            752.3997388895235,
+            107.57884779739334,
+            90.59509682385658
+          ],
+          "localBounds": [
+            -0.9916068315505981,
+            -15.86570930480957,
+            86.35578155517578,
+            76.32374572753906
+          ],
+          "copy": "Nhữngngười trẻvà thành phốbiển...",
+          "family": "\"Dancing Script\", serif",
+          "size": "17.5px",
+          "weight": "400"
+        }
+      ]
+    },
+    "viewport": [
+      1672,
+      941
+    ],
+    "deviceScaleFactor": 1,
+    "scroll": [
+      0,
+      0
+    ],
+    "fonts": "loaded"
+  },
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/155.0.8059.39",
+    "revision": "@3ff7ac5a9224be9156d7f8703a06e22890aafd34",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "jsVersion": "15.5.35.20"
+  },
+  "renderer": "Chrome headless software; GPU/motion quality requires later real-browser review",
+  "captureSHA256": "AB57D2F5B615AE56062C4A535A23557956A9F0928FEAB8F95B39BFE7F9B9AC7C",
+  "fixtureSemanticSHA256": "871F657A8E56B83627670A1B5F13EB48D7826820EAD58E2CF594BFB72B0873E1",
+  "gate": "capture evidence only; G2 requires visual review",
+  "contract": {
+    "screen": "dialogue",
+    "capture": {
+      "width": 1672,
+      "height": 941,
+      "deviceScaleFactor": 1,
+      "locale": "vi-VN",
+      "clock": "2026-10-09T08:00:00+07:00",
+      "animationState": "settled-static",
+      "motionTimeMs": 0,
+      "randomSeed": 0,
+      "toolbar": false,
+      "scroll": [
+        0,
+        0
+      ],
+      "fonts": "await document.fonts.ready",
+      "images": "await load and decode",
+      "productionHook": "window.replicaCapture"
+    },
+    "fixture": {
+      "selected": null,
+      "groups": {
+        "dialogue.scene-signs": {
+          "region": "wall-lettering",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.scene_signs.1",
+            "ui.replica.dialogue.scene_signs.2",
+            "ui.replica.dialogue.scene_signs.3"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.scene_signs.1",
+              "role": "handwriting",
+              "fontSizeEstimatePx": 25,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            },
+            {
+              "key": "ui.replica.dialogue.scene_signs.2",
+              "role": "handwriting",
+              "fontSizeEstimatePx": 25,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            },
+            {
+              "key": "ui.replica.dialogue.scene_signs.3",
+              "role": "handwriting",
+              "fontSizeEstimatePx": 25,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        },
+        "dialogue.newspaper": {
+          "region": "held-news-text",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.newspaper.1"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.newspaper.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 23,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "headline-transcribed-microcopy-pending"
+        },
+        "dialogue.cup": {
+          "region": "cup-mark",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.cup.1"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.cup.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 18,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        },
+        "dialogue.date": {
+          "region": "date-text",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.date.1",
+            "ui.replica.dialogue.date.2"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.date.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 27,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            },
+            {
+              "key": "ui.replica.dialogue.date.2",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 27,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        },
+        "dialogue.brand": {
+          "region": "brand-text",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.brand.1"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.brand.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 42,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        },
+        "dialogue.choices": {
+          "region": "choice-copy",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.choices.1",
+            "ui.replica.dialogue.choices.2",
+            "ui.replica.dialogue.choices.3"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.choices.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 25,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            },
+            {
+              "key": "ui.replica.dialogue.choices.2",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 25,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            },
+            {
+              "key": "ui.replica.dialogue.choices.3",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 25,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        },
+        "dialogue.speaker": {
+          "region": "speaker-name",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.speaker.1"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.speaker.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 29,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        },
+        "dialogue.line": {
+          "region": "dialogue-line",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.line.1"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.line.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 34,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        },
+        "dialogue.continue": {
+          "region": "continue-copy",
+          "plannedTextKeys": [
+            "ui.replica.dialogue.continue.1",
+            "ui.replica.dialogue.continue.2"
+          ],
+          "entries": [
+            {
+              "key": "ui.replica.dialogue.continue.1",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 22,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            },
+            {
+              "key": "ui.replica.dialogue.continue.2",
+              "role": "editorial-serif",
+              "fontSizeEstimatePx": 22,
+              "fontStatus": "match-in-R07",
+              "lineBreaks": "preserve reference",
+              "rotationDegrees": 0
+            }
+          ],
+          "status": "transcribed-visible"
+        }
+      },
+      "world": null
+    },
+    "catalog": {
+      "ui.replica.dialogue.scene_signs.1": "Câu chuyện\nTừ Hải Vọng\nĐến mọi người",
+      "ui.replica.dialogue.scene_signs.2": "CLB BÁO CHÍ",
+      "ui.replica.dialogue.scene_signs.3": "Viết\nQuan sát\nLắng nghe\nKết nối",
+      "ui.replica.dialogue.newspaper.1": "Hải Vọng",
+      "ui.replica.dialogue.cup.1": "HỒI ÂM",
+      "ui.replica.dialogue.date.1": "THỨ NĂM",
+      "ui.replica.dialogue.date.2": "CHIỀU · CLB",
+      "ui.replica.dialogue.brand.1": "HỒI ÂM",
+      "ui.replica.dialogue.choices.1": "Cùng kiểm tra nguồn tin.",
+      "ui.replica.dialogue.choices.2": "Cho mình xem bản thảo.",
+      "ui.replica.dialogue.choices.3": "Kể mình nghe thêm nhé.",
+      "ui.replica.dialogue.speaker.1": "LỤC THANH VÂN",
+      "ui.replica.dialogue.line.1": "Một bài báo tốt bắt đầu từ việc lắng nghe.",
+      "ui.replica.dialogue.continue.1": "Tiếp tục",
+      "ui.replica.dialogue.continue.2": "↵",
+      "ui.replica.menu.scene_signs.1": "Viết\nQuan sát\nLắng nghe\nKết nối",
+      "ui.replica.menu.brand.1": "HỒI ÂM",
+      "ui.replica.menu.week.1": "Hải Vọng · Tuần 02",
+      "ui.replica.menu.tagline.1": "Câu chuyện\nTừ Hải Vọng\nĐến mọi người",
+      "ui.replica.menu.nav_cases.1": "HỒ SƠ",
+      "ui.replica.menu.nav_team.1": "ĐỒNG ĐỘI",
+      "ui.replica.menu.nav_calendar.1": "LỊCH",
+      "ui.replica.menu.nav_journal.1": "NHẬT KÝ",
+      "ui.replica.menu.nav_settings.1": "THIẾT LẬP",
+      "ui.replica.menu.heading.1": "Hồ sơ đang mở",
+      "ui.replica.menu.intro.1": "Những manh mối, con người và câu chuyện\nđang chờ được viết tiếp.",
+      "ui.replica.menu.case_one_number.1": "01",
+      "ui.replica.menu.case_one_title.1": "Khoản thu câu lạc bộ",
+      "ui.replica.menu.case_one_teaser.1": "Những con số, những câu hỏi,\nvà một buổi họp còn nhiều điều bỏ ngỏ.",
+      "ui.replica.menu.case_two_number.1": "02",
+      "ui.replica.menu.case_two_title.1": "Sân bóng đóng cửa",
+      "ui.replica.menu.case_two_teaser.1": "Vì sao sân bóng của trường\nbất ngờ tạm ngừng hoạt động?",
+      "ui.replica.menu.case_two_sign.1": "TẠM ĐÓNG CỬA",
+      "ui.replica.menu.quote.1": "“Có những chuyện\nchỉ thật sự bắt đầu\nkhi ta chịu lắng nghe.”",
+      "ui.replica.menu.energy.1": "Năng lượng",
+      "ui.replica.menu.energy.2": "3/4",
+      "ui.replica.menu.money.1": "450đ",
+      "ui.replica.menu.notebook.1": "CLB BÁO CHÍ",
+      "ui.replica.menu.controls.1": "↵",
+      "ui.replica.menu.controls.2": "Chọn",
+      "ui.replica.menu.controls.3": "Esc",
+      "ui.replica.menu.controls.4": "Trở lại",
+      "ui.replica.hud.scene_signs.1": "CLB BÁO CHÍ",
+      "ui.replica.hud.scene_signs.2": "HỒI ÂM",
+      "ui.replica.hud.scene_signs.3": "Viết\nQuan sát\nLắng nghe\nKết nối",
+      "ui.replica.hud.small_signs.1": "TÒA SOẠN",
+      "ui.replica.hud.small_signs.2": "BẢN THẢO",
+      "ui.replica.hud.small_signs.3": "Số 02: Sân bóng",
+      "ui.replica.hud.small_signs.4": "Phỏng vấn",
+      "ui.replica.hud.small_signs.5": "Ảnh tư liệu",
+      "ui.replica.hud.small_signs.6": "Bố cục",
+      "ui.replica.hud.small_signs.7": "Duyệt lần cuối",
+      "ui.replica.hud.date.1": "THỨ NĂM",
+      "ui.replica.hud.date.2": "Chiều · Phòng CLB",
+      "ui.replica.hud.resources.1": "Năng lượng 3 / 4",
+      "ui.replica.hud.resources.2": "450đ",
+      "ui.replica.hud.objective.1": "ĐANG THEO DÕI",
+      "ui.replica.hud.objective.2": "Trao đổi với Vân\nvề bản thảo.",
+      "ui.replica.hud.interaction.1": "E · Trò chuyện",
+      "ui.replica.hud.location.1": "TÒA SOẠN HỒI ÂM",
+      "ui.replica.hud.controls.1": "M · Bản đồ",
+      "ui.replica.hud.controls.2": "Esc",
+      "ui.replica.hud.controls.3": "· Menu",
+      "ui.replica.dossier.brand.1": "HỒI ÂM",
+      "ui.replica.dossier.brand.2": "Hải Vọng · Tuần 02",
+      "ui.replica.dossier.section.1": "HỒ SƠ",
+      "ui.replica.dossier.nav_overview.1": "Tổng quan",
+      "ui.replica.dossier.nav_sources.1": "Nguồn tin",
+      "ui.replica.dossier.nav_draft.1": "Bản thảo",
+      "ui.replica.dossier.side_quote.1": "“Câu chuyện\nTừ Hải Vọng\nĐến mọi người.”",
+      "ui.replica.dossier.eyebrow.1": "HỒ SƠ 01 · ĐANG XÁC MINH",
+      "ui.replica.dossier.heading.1": "Khoản thu câu lạc bộ",
+      "ui.replica.dossier.subtitle.1": "Làm rõ khoản thu và người phụ trách.",
+      "ui.replica.dossier.step_one_number.1": "01",
+      "ui.replica.dossier.step_one.1": "Thu thập thông tin",
+      "ui.replica.dossier.step_one.2": "Tìm hiểu quy định, trao đổi với\nthành viên và các bên liên quan.",
+      "ui.replica.dossier.step_two_number.1": "02",
+      "ui.replica.dossier.step_two.1": "Đối chiếu chứng từ",
+      "ui.replica.dossier.step_two.2": "Kiểm tra hóa đơn, sổ thu chi\nvà đối chiếu với thực tế hoạt động.",
+      "ui.replica.dossier.step_three_number.1": "03",
+      "ui.replica.dossier.step_three.1": "Hoàn thiện bản thảo",
+      "ui.replica.dossier.step_three.2": "Tổng hợp thông tin, xây dựng\nbài viết và xin ý kiến biên tập.",
+      "ui.replica.dossier.evidence.1": "CLB BÁO CHÍ",
+      "ui.replica.dossier.evidence.2": "HÓA ĐƠN",
+      "ui.replica.dossier.evidence.3": "Nội dung",
+      "ui.replica.dossier.evidence.4": "Số lượng",
+      "ui.replica.dossier.evidence.5": "Thành tiền",
+      "ui.replica.dossier.evidence.6": "Kế hoạch sự kiện",
+      "ui.replica.dossier.collaborator.1": "LỤC THANH VÂN",
+      "ui.replica.dossier.collaborator.2": "Biên tập",
+      "ui.replica.dossier.note.1": "GHI CHÚ",
+      "ui.replica.dossier.note.2": "Mỗi chi tiết cần\nmột nguồn đáng tin.",
+      "ui.replica.dossier.caption.1": "Những con số cũng\ncó thể kể một câu chuyện.",
+      "ui.replica.dossier.action.1": "Giao hồ sơ",
+      "ui.replica.dossier.back.1": "←",
+      "ui.replica.dossier.back.2": "Quay lại",
+      "ui.replica.dialogue.foreground_note.1": "Những\nngười trẻ\nvà thành phố\nbiển..."
+    },
+    "variant": "ui-light",
+    "supplementalFixture": {
+      "version": 2,
+      "reference": "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+      "catalog": {
+        "ui.replica.dialogue.foreground_note.1": "Những\nngười trẻ\nvà thành phố\nbiển..."
+      },
+      "transcription": "R14 visible foreground note, x1500..1600/y760..835; tiny newspaper/book microcopy remains unresolved",
+      "scope": "Supplement to Stage 0 fixture. Original reference PNGs and existing catalog entries are preserved."
+    },
+    "lighting": true,
+    "logo": false
+  }
+}

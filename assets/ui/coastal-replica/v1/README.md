@@ -1,5 +1,7 @@
 # Coastal replica — Stage 1 asset contract
 
+> Scope revision 2: pack giữ cả UI và context đã sinh. [Roadmap hiện hành](../../../../docs/UI-REPLICA-ROADMAP.md) chỉ nghiệm thu UI và trang trí gắn UI; background, portrait và scene props làm sau. Tiếp tục paper/wave/print/hoa/notebook/type/date/choices; pose/scene matching trong mô tả lịch sử không còn chặn gate UI. UI-scope classification chưa thay thế production masks hoặc scoped G2 review.
+
 2026-10-09 · R05–R08. Đây là pack mẫu sản xuất và ghép lớp. Inventory 104 asset
 trong Stage 0 vẫn là backlog đích; 15 asset của pack này không đồng nghĩa đã hoàn
 thành 15 asset production hay toàn bộ màn thoại.
