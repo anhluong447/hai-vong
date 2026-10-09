@@ -59,6 +59,13 @@ For coastal UI development, follow [UI-COMPONENTS-PLAN.md](UI-COMPONENTS-PLAN.md
 The active plan is now [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md); the older
 component plan is historical. Complete its R01-R04 measurement/inventory/capture
 work first, then a static dialogue replica before motion or wider integration.
+R01-R04 are now prepared in [Stage 0 specs](ui-specs/coastal-replica/README.md).
+Use `python tools/coastal_reference_specs.py --check` to validate locked sources,
+geometry/text mappings and generated sheets. The layer viewer is
+`tools/coastal-reference-review.html`; its focused browser suite runs with
+`python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-reference-tools.html`.
+For native replica evidence, use `tools/capture_replica.py` and its readiness
+contract; Chrome window size alone does not guarantee the content viewport.
 Use the reference's native 1672x941 frame, identical fixtures and a settled
 animation state for overlays/diffs. Store versioned art/layer/light/motion review
 evidence separately from browser behavior results. Do not certify visual parity
@@ -67,8 +74,8 @@ Keep the user-selected reference set in `docs/ui-concepts/coastal-editorial-v1/`
 with its prompt record and SHA-256 inventory. Do not overwrite it with later
 iterations or use its rasterized text/buttons as runtime UI.
 
-Implement in reviewable milestones: component gallery, shared dialogue view,
-persistent shell/HUD, menu/dossier, then visual/performance polish. Runtime
+The earlier component-gallery milestones below describe the v1 prototype.
+Replica work follows R05-R45 and their art/static/motion gates. Runtime
 milestones require the verification above plus focused browser checks for
 focus/input, interrupted transitions and resource disposal. Store new review
 screenshots/video separately and record the device/browser for performance checks.

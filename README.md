@@ -45,6 +45,7 @@ Xem [hướng dẫn và giới hạn](docs/GAMEPLAY-SANDBOX.md). Map truyện th
 - [Kiến trúc](docs/ARCHITECTURE.md)
 - [Component và chuyển động coastal](docs/UI-COMPONENTS-PLAN.md), [review bản chạy v1](docs/ui-reviews/coastal-v1/README.md)
 - [Roadmap replica visual — 45 bước, chuẩn asset/lighting/motion](docs/UI-REPLICA-ROADMAP.md)
+- [Stage 0 đã triển khai — layout sheets, asset inventory, native capture và overlay/diff](docs/ui-specs/coastal-replica/README.md)
 - [Quy trình phát triển và quy tắc nội dung](docs/DEVELOPMENT.md)
 - [Nội dung, văn bản và balance](content/README.md)
 - [Kết quả kiểm chứng và baseline](docs/VALIDATION.md)

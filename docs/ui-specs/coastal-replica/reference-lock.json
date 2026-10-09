@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "baselineCommit": "786adac",
+  "target": "four original concept screens; native 1672x941 replica",
+  "prototypeStatus": "coastal-v1 is behavior prototype; G2 not accepted",
+  "files": {
+    "01-dialogue.png": "68C076B9D013523B745E61E1AF35A8251742BBF7B774C02245F89DACF3D2A5A2",
+    "02-menu.png": "1DC54992B37A052BE60FC0B4DBC543D3E9153036C118038A981B65EC9DD3AA5B",
+    "03-hud-map.png": "FB4EF57D1CBCDA2DD87E2083764721052F0E06F4FAD7E43065BE7750F2BF8618",
+    "04-dossier.png": "9269F198BF76CC4EBD117DDEE9DD8F0A27E8314A70F17E4A334AA6E9F86BE620",
+    "prompts.json": "842731932338A09AEE9AC0A4333ECF55392F24EB95F491EA141B37BBAAC2A3CA",
+    "references.json": "FDEBBC83F0676803E82A2810E87359DC608EE62BD9EF54AD7A2023A2D43FFA92"
+  },
+  "jsonHashNormalization": "UTF-8, universal newlines normalized to LF; PNG hashes use raw bytes"
+}

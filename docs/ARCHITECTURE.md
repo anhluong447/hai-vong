@@ -51,6 +51,11 @@ src/main.js                  formula/debug UI composition
 src/infra/DebugMap.js         original debug world adapter
 tests/                       domain, content, save, browser UI and asset checks
 tools/                       serving, verification, authoring and playtests
+  coastal_reference_specs.py Stage 0 spec validation and generated sheets/inventory
+  coastal-reference-review.* authoring-only layer/overlay/diff viewer
+  browser_cdp.py             local Chrome transport for capture and wall-time tests
+  capture_replica.py         native viewport/DPR and fixture-readiness capture
+docs/ui-specs/coastal-replica/ measured envelopes, planned text fixture and asset backlog
 archive/development/         historical reviews and completed migration scripts
 archive/clb-hoi/             unchanged historical game snapshot
 ```
@@ -64,6 +69,13 @@ Composition creates the session, views and storage service with explicit depende
 The original config/fixtures modules and newer engine/maps/dialogue modules retain
 compatibility facades. Existing tools and tests can keep their import paths.
 Active entry points never import the legacy archive.
+
+Stage 0 replica specs and review tools are authoring resources; runtime/domain
+modules do not import them. [Stage 0 handoff](ui-specs/coastal-replica/README.md)
+records the 1672x941 coordinate plane, layer/source inventory and capture contract.
+`window.replicaCapture.prepare` is reserved for the R08 preview, not implemented
+in current game pages. Planned fixture text keys move into the live catalog when
+the corresponding UI is built. Visual fixture state never replaces gameplay saves.
 
 ## Text and content
 

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "stage": "P0",
+  "status": "preparation-complete",
+  "tasks": {
+    "R01": {"status": "complete", "evidence": ["reference-lock.json"]},
+    "R02": {"status": "complete", "evidence": ["layouts.json", "fixtures.json", "layouts/dialogue.md", "layouts/menu.md", "layouts/hud.md", "layouts/dossier.md"]},
+    "R03": {"status": "complete", "evidence": ["asset-inventory.json", "fixtures.json#unresolved"]},
+    "R04": {"status": "complete", "evidence": ["../../../tools/coastal-reference-review.html", "../../../tools/capture_replica.py", "verification/reference-plane.json", "verification/dialogue-layout.json", "verification/validation.json"]}
+  },
+  "gates": {
+    "G0": "measured inventory and capture readiness established; production uncertainties explicitly tracked",
+    "G1": "not-started",
+    "G2": "not-started",
+    "G3": "not-started",
+    "G4": "not-started",
+    "G5": "not-started"
+  },
+  "measurementPrecision": "manual envelopes ±4px rectangular / ±12px organic; production masks and 2px anchor acceptance remain",
+  "runtimeChanges": false,
+  "next": "P1 R05-R08",
+  "knownProductionTasks": "fixtures.json#unresolved"
+}

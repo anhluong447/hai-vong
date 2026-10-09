@@ -6,7 +6,48 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.request
+import json
+from browser_cdp import DevTools
+
+
+def run_real_time(arguments, url, profile, environment):
+    """Wait on actual completion for Canvas encoders/crypto worker tasks.
+
+    Headless virtual time can expire while those workers are still computing.
+    This optional mode shares the same DOM result contract as the normal suite.
+    """
+    deadline = time.monotonic() + 40
+    with open(Path(profile) / 'real-time-browser.log', 'w', encoding='utf-8') as log:
+        process = subprocess.Popen(arguments + ['--remote-debugging-port=0', 'about:blank'],
+                                   stdout=log, stderr=log, env=environment)
+    client = None
+    try:
+        port_file = Path(profile) / 'DevToolsActivePort'
+        while not port_file.is_file():
+            if process.poll() is not None or time.monotonic() >= deadline:
+                raise RuntimeError('Chrome did not start DevTools')
+            time.sleep(.05)
+        port = int(port_file.read_text().splitlines()[0])
+        with urllib.request.urlopen(f'http://127.0.0.1:{port}/json/list', timeout=5) as response:
+            pages = json.load(response)
+        client = DevTools(next(page['webSocketDebuggerUrl'] for page in pages if page['type'] == 'page'))
+        client.call('Page.enable')
+        client.call('Page.navigate', {'url':url})
+        while True:
+            result = client.evaluate('document.documentElement.outerHTML') or ''
+            if re.search(r'<p class="(?:ok|bad)">\d+/\d+ passed</p>', result):
+                return subprocess.CompletedProcess(arguments, 0, result, '')
+            if time.monotonic() >= deadline:
+                return subprocess.CompletedProcess(arguments, 1, result, 'Real-time tests did not finish within 40 seconds')
+            time.sleep(.1)
+    finally:
+        if client:
+            client.socket.close()
+        if process.poll() is None:
+            process.terminate()
+            process.wait(timeout=10)
 
 
 def main():
@@ -21,7 +62,12 @@ def main():
     parser.add_argument('--width', type=int, default=1440)
     parser.add_argument('--height', type=int, default=1100)
     parser.add_argument('--reduced-motion', action='store_true')
+    parser.add_argument('--require-capture-ready', action='store_true',
+                        help='Capture only succeeds when the page publishes data-capture-ready="true"')
+    parser.add_argument('--real-time', action='store_true', help='Wait for test completion in wall time using DevTools')
     args = parser.parse_args()
+    if args.real_time and args.capture:
+        parser.error('--real-time is for tests; use capture_replica.py for deterministic capture')
     root = Path(__file__).resolve().parent
     with urllib.request.urlopen(args.url, timeout=5) as response:
         if response.status != 200:
@@ -40,15 +86,23 @@ def main():
         screenshot = (args.screenshot_path or root.parent / 'archive/development/reviews/sandbox-preview.png').resolve()
         if args.capture:
             screenshot.parent.mkdir(parents=True, exist_ok=True)
+            arguments.extend(['--force-device-scale-factor=1', '--hide-scrollbars'])
             arguments.append(f'--screenshot={screenshot}')
-        arguments.append(args.url)
-        result = subprocess.run(arguments, capture_output=True, text=True, encoding='utf-8', errors='replace',
-            env=environment, timeout=45)
+        if args.real_time:
+            arguments = [argument for argument in arguments if argument != '--dump-dom' and not argument.startswith('--virtual-time-budget=')]
+            result = run_real_time(arguments, args.url, profile, environment)
+        else:
+            arguments.append(args.url)
+            result = subprocess.run(arguments, capture_output=True, text=True, encoding='utf-8', errors='replace',
+                env=environment, timeout=45)
     (root / ('preview_dom.log' if args.capture else f'{args.output_prefix}_results.log')).write_text(result.stdout, encoding='utf-8')
     (root / ('preview_browser.log' if args.capture else f'{args.output_prefix}_browser.log')).write_text(result.stderr, encoding='utf-8')
     if args.capture:
         if result.returncode != 0 or not screenshot.exists():
             print('Screenshot failed. See tools/test_browser.log.')
+            return 1
+        if args.require_capture_ready and not re.search(r'<html\b[^>]*\bdata-capture-ready="true"', result.stdout):
+            print('Capture page was not ready. Screenshot is diagnostic only; see tools/preview_dom.log.')
             return 1
         print(f'Screenshot: {screenshot}')
         return 0

@@ -1,6 +1,6 @@
 # Hồi Âm — roadmap replica visual và chuyển động
 
-Ngày: 2026-10-09. Trạng thái: đã lập kế hoạch; chưa triển khai các bước replica.
+Ngày: 2026-10-09. Trạng thái: **Stage 0 / R01–R04 đã hoàn thành phần chuẩn bị**; R05–R45 chưa triển khai. Xem [bộ spec, layout sheets và capture protocol](ui-specs/coastal-replica/README.md).
 
 ## Mục tiêu và thứ tự ưu tiên
 
@@ -52,6 +52,8 @@ Mỗi work package bên dưới là một đơn vị triển khai/review nhỏ. 
 | R04 | Chuẩn capture và review | Stage không toolbar; fixture xác định; reset camera/animation/time; cùng font/viewport; cách tạo overlay/diff | R02 |
 
 **Mốc P0:** G0 đạt cho cả bốn màn. Chưa tạo hàng loạt asset trước khi biết chúng nằm ở đâu và che nhau thế nào.
+
+**Bàn giao Stage 0:** bốn sheet với 169 vùng, 104 asset dự kiến và 96 text key; công cụ native capture + overlay/diff được kiểm chứng. G0 có dữ liệu cho sản xuất; font, microcopy, hidden geometry và masks vẫn là task có ghi rõ ở giai đoạn sau. Các bounds là envelope ước lượng, chưa được nghiệm thu ở ngưỡng 2 px; G1/G2 chưa đạt. Prototype coastal v1 tiếp tục giữ vai trò kiểm chứng hành vi.
 
 ## P1 — Pipeline art và một mẫu xếp lớp chuẩn
 
