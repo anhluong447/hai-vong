@@ -1,3 +1,4 @@
+import {MotionScope} from './coastal/MotionScope.js';
 import {t} from '../shared/text.js';
 const registryURL=new URL('../../assets/dialogue/manifest.json',import.meta.url);
 export async function loadDialogueRegistry(){
@@ -16,6 +17,7 @@ export class DialogueSprite{
   this.previous=document.createElement('img');this.previous.className='dialogue-sprite-image previous';this.previous.alt='';
   this.fallback=document.createElement('span');this.fallback.className='dialogue-sprite-fallback';
   this.node.append(this.backing,this.previous,this.image,this.fallback);
+  this.motion=new MotionScope(this.node);
  }
  get(id){return this.registry.characters[id];}
  fetchImage(file){const url=portraitURL(file);if(!this.cache.has(url))this.cache.set(url,this.load(url).catch(error=>{this.cache.delete(url);throw error;}));return this.cache.get(url);}
@@ -23,6 +25,7 @@ export class DialogueSprite{
  set(id,expression='neutral'){
   const character=this.get(id),selected=character?.expressions[expression]?expression:'neutral',key=`${id}/${selected}`;
   if(this.key===key)return this.ready;
+  this.motion.cancel();
   const changedSpeaker=this.id!==id,token=++this.token;this.id=id;this.key=key;
   this.node.dataset.speaker=id;this.node.dataset.expression=selected;this.node.dataset.status='loading';
   this.node.style.setProperty('--speaker',character?.color||'#ddb966');
@@ -31,14 +34,25 @@ export class DialogueSprite{
   if(!changedSpeaker&&this.image.getAttribute('src'))this.previous.src=this.image.src;
   this.image.removeAttribute('src');
   const duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:180;
-  if(changedSpeaker)this.node.animate([{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:duration?220:0,easing:'ease-out'});
+  if(changedSpeaker)this.motion.play(this.node,[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:duration?220:0,easing:'ease-out'});
   const resolve=async()=>{
    for(const file of [...new Set([character?.expressions[selected],character?.expressions.neutral].filter(Boolean))]){
-    try{const url=await this.fetchImage(file);if(token!==this.token)return;this.image.src=url;this.node.dataset.status='ready';this.node.dataset.expression=file===character.expressions.neutral?'neutral':selected;this.image.animate([{opacity:0},{opacity:1}],{duration});if(this.previous.getAttribute('src'))this.previous.animate([{opacity:1},{opacity:0}],{duration,fill:'forwards'}).finished.then(()=>{if(token===this.token)this.previous.removeAttribute('src');}).catch(()=>{});return;}catch{}
+    try{
+     const url=await this.fetchImage(file);if(token!==this.token)return;
+     this.image.src=url;this.node.dataset.status='ready';this.node.dataset.expression=file===character.expressions.neutral?'neutral':selected;
+     this.motion.play(this.image,[{opacity:0},{opacity:1}],{duration});
+     if(this.previous.getAttribute('src')){
+      const fade=this.motion.play(this.previous,[{opacity:1},{opacity:0}],{duration});
+      const clearPrevious=()=>{if(token===this.token)this.previous.removeAttribute('src');};
+      if(fade)fade.finished.then(clearPrevious,clearPrevious);else clearPrevious();
+     }
+     return;
+    }catch{}
    }
    if(token===this.token){this.previous.removeAttribute('src');this.node.dataset.status='fallback';}
   };
   this.ready=resolve();return this.ready;
  }
- clear(){++this.token;this.key=null;this.id=null;this.image.removeAttribute('src');this.previous.removeAttribute('src');}
+ clear(){this.motion.cancel();++this.token;this.key=null;this.id=null;this.image.removeAttribute('src');this.previous.removeAttribute('src');}
+ dispose(){this.clear();this.motion.dispose();}
 }

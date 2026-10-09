@@ -1,3 +1,7 @@
+import {CoastalShell} from '../ui/coastal/CoastalShell.js';
+import {OverlayHost} from '../ui/coastal/OverlayHost.js';
+import {DialogueView} from '../ui/coastal/DialogueView.js';
+import {MenuView} from '../ui/coastal/MenuView.js';
 import {t,eventText} from '../shared/text.js';
 import { createSession,transition,joined,person,week,weekend,weekday,summary,STAT_NAMES,QUEST_STEPS,effectiveStat } from '../gameplay/engine.js?v=gameplay-1';
 import { element as el,text,button } from '../ui/dom.js?v=gameplay-1';
@@ -16,7 +20,7 @@ const saves=new GameplaySaveService({mode:pixelMode?'pixel':'gameplay',storage})
 const session=new GameSession();
 let state=session.state,place='school',tab='cases',message=t("src.gameplay.main.bat_dau_14_ngay_thu_nghiem_nhi_mo_som_de_kiem_tra_phan_cong_ngoc"),modal=false;
 const app=document.querySelector('#app');
-let world=null,pixelInteraction=null,pixelMenu=false,previousPixelResources=null;
+let world=null,pixelInteraction=null,pixelMenu=false,shell=null,overlays=null,dialogueView=null,menuView=null;
 const pixelHost=pixelMode?el('div',{class:'pixel-stage'}):null;
 const fmt=n=>Number(n).toLocaleString('vi-VN',{maximumFractionDigits:1});
 const {casesPanel,questsPanel,teamPanel,editorPanel,reportsPanel,feedback}=createGameplayPanels(()=>({state,place,fmt,select,metric,dispatch,isFree}));
@@ -90,31 +94,35 @@ function save(){try{saves.save(state,pixelMode?world.snapshot():null);message=t(
 function load(){try{const payload=saves.load();const candidate=payload.state;if(!confirm(t("src.gameplay.main.tai_save_se_thay_tien_do_hien_tai_tiep_tuc")))return;state=session.replace(candidate);modal=state.phase==='bed'&&state.messages.some(m=>!m.resolved);if(pixelMode){pixelInteraction=null;pixelMenu=false;world.restore(payload.world);}message=t("src.gameplay.main.da_tai_luot_thu");render();}catch(error){message=error.message;render();}}
 function exportSession(){const url=URL.createObjectURL(new Blob([JSON.stringify({state,summary:summary(state),...(pixelMode?{world:world.snapshot()}: {})},null,2)],{type:'application/json'}));const a=el('a',{href:url,download:`hoi-am-day-${state.day}.json`});a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 window.pressGameplay=Object.freeze({get state(){return structuredClone(state);},navigate(id){tab=id;if(pixelMode)pixelMenu=true;render();}});
-function pixelNotice(value,error=false){message=value;const n=document.querySelector('.pixel-notice');if(n){n.textContent=value;n.classList.toggle('error',error);}const l=document.querySelector('.pixel-location');if(l&&world){if(l.textContent!==world.map.title){pixelHost.querySelector('.pixel-scene-cut')?.remove();const cut=el('div',{class:'pixel-scene-cut','aria-hidden':'true'});pixelHost.append(cut);setTimeout(()=>cut.remove(),500);}l.textContent=world.map.title;}}
-function closePixel(){pixelInteraction=null;pixelMenu=false;render();world.canvas.focus();}
-function pixelAction(action){pixelInteraction=null;pixelMenu=false;dispatch(action);world.canvas.focus();}
+function pixelNotice(value,error=false){
+ message=value;if(shell){shell.notice.textContent=value;shell.notice.classList.toggle('error',error);shell.setLocation(world.map.title);}
+}
+function closePixel(){pixelInteraction=null;pixelMenu=false;render();world.canvas.focus({preventScroll:true});}
+function pixelAction(action){pixelInteraction=null;pixelMenu=false;dispatch(action);if(!overlays.dialog)world.canvas.focus({preventScroll:true});}
 function renderPixel(){
- const pending=state.messages.some(m=>!m.resolved),locked=Boolean(pixelInteraction||pixelMenu||(modal&&pending));world.setBlocked(locked);world.setConversation(pixelInteraction?.person||null);world.bindPortrait(null);
- const pad=el('div',{class:'pixel-pad','aria-label':t("src.gameplay.main.dieu_huong_nhan_vat")});
- for(const [dir,label]of[['up',t("src.gameplay.main.text")],['left',t("src.gameplay.main.text_2")],['down',t("src.gameplay.main.text_3")],['right',t("src.gameplay.main.text_4")]]){const b=button(label,()=>{});b.setAttribute('aria-label',t("src.gameplay.main.di_value0", {value0: (dir)}));b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);world.move(dir);});for(const event of['pointerup','pointercancel','lostpointercapture'])b.addEventListener(event,()=>world.stop());pad.append(b);}
- const location=el('div',{class:'pixel-location'},world.map.title);pixelHost.querySelector('.pixel-location')?.remove();pixelHost.append(location);
- app.replaceChildren(el('header',{class:'pixel-masthead'},[el('div',{},[text('div',t("src.gameplay.main.2d_pixel_map_test"),'eyebrow'),text('h1',t("src.gameplay.main.hoi_am_mot_goc_hai_vong"))]),el('nav',{class:'actions'},[el('a',{href:'interaction.html'},[t("src.gameplay.main.map_tuong_tac")]),el('a',{href:'tools/dialogue-sprite-lab.html'},[t("src.gameplay.main.dialogue_art")]),el('a',{href:'tools/sprite-lab.html'},[t("src.gameplay.main.sprite_lab")]),el('a',{href:'gameplay.html'},[t("src.gameplay.main.sandbox_click")])])]),
-  el('div',{class:'pixel-hud'},[el('div',{class:'pixel-calendar'},[text('strong',t("src.gameplay.main.value0_ngay_value1_value2", {value0: (weekday(state.day)), value1: (state.day), value2: (state.config.days)})),text('span',phases[state.phase]),text('span',t('ui.energy_value',{energy:state.energy}),`pixel-resource ${previousPixelResources&&previousPixelResources.energy!==state.energy?'changed':''}`),text('span',t("src.gameplay.main.value0_d", {value0: (fmt(state.money))}),`pixel-resource ${previousPixelResources&&previousPixelResources.money!==state.money?'changed':''}`)]),el('div',{class:'actions'},[button(t("src.gameplay.main.luu"),save),button(t("src.gameplay.main.tai"),load),button(t('ui.menu_sandbox'),()=>{pixelMenu=true;tab='reports';render();}),...(state.phase==='investigation'?[button(t("src.gameplay.main.ket_thuc_dieu_tra"),()=>pixelAction({type:'finishInvestigation'}))]:[])])]),
-  pixelHost,text('p',message,'pixel-notice'),el('div',{class:'pixel-controls'},[pad,text('p',t("src.gameplay.main.wasd_phim_mui_ten_de_di_e_enter_tuong_tac_esc_dong_hoi_thoai_bam")),button(t("src.gameplay.main.e_tuong_tac"),()=>world.interact(),'pixel-interact',locked)]),
-  el('footer',{},[text('span',t("src.gameplay.main.4_map_sprite_pixel_anime_nhan_vat_hoi_thoai_mock")),text('span',state.ended?t("src.gameplay.main.luot_thu_da_ket_thuc"):t("src.gameplay.main.ngay_hoc_clb_doi_song_buoi_toi"))])
- );
- previousPixelResources={energy:state.energy,money:state.money};
- const status=document.querySelector('.pixel-notice');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
- if(pixelInteraction||pixelMenu){const label=pixelMenu?t('ui.menu_sandbox'):pixelInteraction.person?person(state,pixelInteraction.person).name:pixelInteraction.label;const content=el('section',{class:'pixel-dialog',role:'dialog','aria-modal':'true','aria-label':label},[el('div',{class:'pixel-dialog-head'},[text('h2',label),button(t("src.gameplay.main.dong_esc"),closePixel)])]);
-  if(pixelMenu)content.append(panel(),button(t("src.gameplay.main.xuat_luot_thu"),exportSession),button(t("src.gameplay.main.luot_moi"),()=>{if(confirm(t("src.gameplay.main.tao_luot_moi"))){state=session.reset(state.config);modal=false;pixelInteraction=null;pixelMenu=false;world.restore(null);render();}}));else renderPixelInteraction(content,pixelInteraction);
-  content.querySelectorAll('button').forEach((b,i)=>b.style.setProperty('--choice-index',Math.min(i,6)));
-  const conversation=!pixelMenu&&['teammate','source'].includes(pixelInteraction.kind);
-  let presentation=content;
-  if(conversation){const id=pixelInteraction.portraitId||pixelInteraction.person||pixelInteraction.id,character=dialogueSprite.get(id);dialogueSprite.set(id,pixelInteraction.expression||'neutral');presentation=el('div',{class:'dialogue-stage'},[dialogueSprite.node,content]);presentation.style.setProperty('--speaker',character?.color||'#ddb966');}else dialogueSprite.clear();
-  app.append(el('div',{class:`pixel-overlay ${conversation?'conversation':''}`},presentation));(content.querySelector('button.primary:not(:disabled)')||content.querySelector('button')).focus();
+ const pending=state.messages.some(m=>!m.resolved),locked=Boolean(pixelInteraction||pixelMenu||(modal&&pending));
+ world.setBlocked(locked);world.setConversation(pixelInteraction?.person||null);world.bindPortrait(null);
+ shell.update({date:t('src.gameplay.main.value0_ngay_value1_value2',{value0:weekday(state.day),value1:state.day,value2:state.config.days}),
+  phase:phases[state.phase],energy:t('ui.energy_value',{energy:state.energy}),money:t('src.gameplay.main.value0_d',{value0:fmt(state.money)}),
+  notice:message,location:world.map.title,locked,investigation:state.phase==='investigation',objective:state.quests.find(quest=>!quest.written)?.title||''});
+ if(modal&&pending){
+  dialogueSprite.clear();const dialog=feedback();dialog.firstChild.removeAttribute('role');dialog.firstChild.removeAttribute('aria-modal');
+  overlays.show(dialog,{key:'feedback',label:t('src.gameplay.main.tin_nhan_can_duyet'),dismissible:false});return;
  }
- else dialogueSprite.clear();
- if(modal&&pending){const dialog=feedback();app.append(dialog);dialog.querySelector('button:not(:disabled)')?.focus();}
+ if(!pixelInteraction&&!pixelMenu){overlays.clear();dialogueSprite.clear();return;}
+ const label=pixelMenu?t('ui.menu_sandbox'):pixelInteraction.person?person(state,pixelInteraction.person).name:pixelInteraction.label;
+ const conversation=!pixelMenu&&['teammate','source'].includes(pixelInteraction.kind);
+ if(conversation){
+  const body=el('div');renderPixelInteraction(body,pixelInteraction);body.querySelector('.dialogue-line')?.remove();
+  dialogueView.update({speaker:pixelInteraction.portraitId||pixelInteraction.person||pixelInteraction.id,expression:pixelInteraction.expression||'neutral',line:pixelInteraction.line||'',body:[...body.childNodes]});
+  overlays.show(dialogueView.node,{key:`conversation/${pixelInteraction.id}`,label,conversation:true});
+ }else{
+  dialogueSprite.clear();const body=el('div');
+  if(pixelMenu){body.append(panel(),button(t('src.gameplay.main.xuat_luot_thu'),exportSession),button(t('src.gameplay.main.luot_moi'),()=>{if(confirm(t('src.gameplay.main.tao_luot_moi'))){state=session.reset(state.config);modal=false;pixelInteraction=null;pixelMenu=false;world.restore(null);render();}}));}
+  else renderPixelInteraction(body,pixelInteraction);
+  menuView.update({title:label,body:[...body.childNodes],speaker:pixelMenu&&['cases','editor'].includes(tab)?'van':'khue',key:pixelMenu?tab:pixelInteraction.id});
+  overlays.show(menuView.node,{key:'menu',label});
+ }
 }
 function pixelQuestStep(root,step){const q=state.quests.find(q=>!q.written);if(!q)return;const label=QUEST_STEPS.find(([id])=>id===step)?.[1];root.append(button(t("src.gameplay.main.value0_1_e", {value0: (label)}),()=>dispatch({type:'quest',id:q.id,step}),'secondary',state.ended||!['club','investigation'].includes(state.phase)||state.energy<1||q.steps.includes(step)));}
 function renderPixelInteraction(root,o){
@@ -136,6 +144,13 @@ function renderPixelInteraction(root,o){
  else if(o.kind==='bed')root.append(text('p',t("src.gameplay.main.truoc_khi_ngu_phai_duyet_het_tin_nhan_dong_doi_duyet_khong_ton_e")),button(t("src.gameplay.main.nhan_giuong_di_ngu"),()=>pixelAction({type:'sleep'}),'primary',state.phase!=='bed'||state.ended),button(t("src.gameplay.main.nghi_ngoi_giam_met"),()=>pixelAction({type:'activity',kind:'rest'}),'',!isFree()||state.ended));
  else if(['rest','cafe'].includes(o.kind))root.append(text('p',t("src.gameplay.main.danh_mot_slot_nghi_chan_muon_hangout_hay_den_gap_nhan_vat_dang_o")),button(t("src.gameplay.main.nghi_ngoi_giam_met"),()=>pixelAction({type:'activity',kind:'rest'}),'primary',!isFree()||state.ended));
 }
-if(pixelMode){world=new PixelWorld(pixelHost,{getState:()=>state,onInteract:target=>{pixelInteraction=target;render();},onNotice:pixelNotice});window.pressPixel=Object.freeze({get ready(){return world.ready;},get world(){return world.snapshot();},get moving(){return Boolean(world.walk||world.path.length);},get animations(){return world.animationSnapshot();},get room(){return world.map.title;},screenPosition:(x,y)=>world.screenPosition(x,y)});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&(pixelInteraction||pixelMenu)&&!(modal&&state.messages.some(m=>!m.resolved))){e.preventDefault();closePixel();}});window.addEventListener('pagehide',()=>world.dispose());}
+if(pixelMode){world=new PixelWorld(pixelHost,{getState:()=>state,onInteract:target=>{pixelInteraction=target;render();},onNotice:pixelNotice});
+ shell=new CoastalShell(app,pixelHost,{save,load,menu:()=>{pixelMenu=true;pixelInteraction=null;tab='cases';render();},interact:()=>world.interact(),move:direction=>world.move(direction),stop:()=>world.stop(),finish:()=>pixelAction({type:'finishInvestigation'})});
+ overlays=new OverlayHost(app,shell.node,{onClose:closePixel,onLock:value=>world.setBlocked(value)});
+ dialogueView=new DialogueView(dialogueSprite,closePixel);menuView=new MenuView(dialogueSprite.registry,closePixel);
+ window.pressPixel=Object.freeze({get ready(){return world.ready;},get world(){return world.snapshot();},get moving(){return Boolean(world.walk||world.path.length);},get animations(){return world.animationSnapshot();},get room(){return world.map.title;},screenPosition:(x,y)=>world.screenPosition(x,y)});
+ const onKey=e=>{if(e.key==='Escape'&&(pixelInteraction||pixelMenu)&&!(modal&&state.messages.some(m=>!m.resolved))){e.preventDefault();closePixel();}};
+ window.addEventListener('keydown',onKey);
+ window.addEventListener('pagehide',()=>{window.removeEventListener('keydown',onKey);overlays.dispose();dialogueView.dispose();menuView.dispose();dialogueSprite.dispose();shell.dispose();world.dispose();},{once:true});}
 render();
 }

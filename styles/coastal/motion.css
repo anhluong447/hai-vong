@@ -1,0 +1,5 @@
+@keyframes coastalTide{to{transform:translateX(-50%)}}
+.coastal-app [hidden]{display:none!important}
+.coastal-app [data-hidden=true] *,.coastal-app [data-hidden=true] *:before,.coastal-app [data-hidden=true] *:after{animation-play-state:paused!important}
+.coastal-app [data-motion=reduced] *{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){.coastal-app *,.coastal-app *:before,.coastal-app *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

@@ -1,5 +1,6 @@
 // Player-facing text. Keys are stable; edit values without changing logic.
 export default {
+  "ui.coastal.tracking": "Đang theo dõi",
   "content.dialogue.interaction-scenes.chao_cau_buoi_giao_luu_hom_nay_co_gi_moi_khong": "Chào cậu. Buổi giao lưu hôm nay có gì mới không?",
   "content.dialogue.interaction-scenes.minh_hieu_roi_cung_chon_cach_xu_ly_nhe": "Mình hiểu rồi. Cùng chọn cách xử lý nhé.",
   "content.dialogue.interaction-scenes.de_minh_xem_lai_tu_lieu_truoc": "Để mình xem lại tư liệu trước.",
@@ -698,5 +699,28 @@ export default {
   "error.unknown_tab": "Unknown tab",
   "error.unknown_map": "Unknown pixel map: {map}",
   "error.dialogue_manifest": "Dialogue manifest: {status}",
-  "error.save_mode": "Unknown save mode: {mode}"
+  "error.save_mode": "Unknown save mode: {mode}",
+  "ui.coastal.title": "Hồi Âm",
+  "ui.coastal.city": "Hải Vọng · Tòa soạn học đường",
+  "ui.coastal.dialogue": "Giao lưu",
+  "ui.coastal.gallery": "Bộ UI",
+  "ui.coastal.footer": "Lắng nghe · Quan sát · Kết nối",
+  "ui.coastal.preview.title": "Sóng và những câu chuyện",
+  "ui.coastal.preview.subtitle": "Thoại, giấy, chân dung và chuyển động của Hồi Âm.",
+  "ui.coastal.preview.dialogue": "Thoại",
+  "ui.coastal.preview.menu": "Menu",
+  "ui.coastal.preview.dossier": "Hồ sơ",
+  "ui.coastal.preview.motion": "Mở lại chuyển cảnh",
+  "ui.coastal.preview.line": "Một bài báo tốt bắt đầu từ việc lắng nghe.",
+  "ui.coastal.preview.choice1": "Cùng kiểm tra nguồn tin.",
+  "ui.coastal.preview.choice2": "Cho mình xem bản thảo.",
+  "ui.coastal.preview.choice3": "Kể mình nghe thêm nhé.",
+  "ui.coastal.preview.caption": "Chiều · Phòng câu lạc bộ",
+  "ui.coastal.preview.note": "Bản thảo đang chờ một góc nhìn mới.",
+  "ui.coastal.preview.steps": "Thu thập thông tin · Đối chiếu nguồn tin · Hoàn thiện bản thảo",
+  "ui.coastal.preview.case": "Khoản thu câu lạc bộ",
+  "ui.coastal.preview.action": "Giao hồ sơ",
+  "ui.coastal.preview.back": "Về game",
+  "ui.coastal.preview.response": "Cảm ơn cậu. Mình cùng xem lại bản thảo nhé.",
+  "ui.coastal.preview.closed": "Chọn một màn để tiếp tục xem bộ UI."
 };
