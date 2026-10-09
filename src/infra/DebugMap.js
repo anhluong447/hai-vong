@@ -1,8 +1,9 @@
+import {t} from '../shared/text.js';
 export const STATIONS = [
-  { id: 'subjects', label: 'Bảng đề tài', sub: '01 / TÌM TIN', x: 0.23, y: 0.24, color: '#e7b34e' },
-  { id: 'team', label: 'Bàn phân công', sub: '02 / NHÂN SỰ', x: 0.76, y: 0.24, color: '#8ca69d' },
-  { id: 'editor', label: 'Bàn biên tập', sub: '03 / DÀN TRANG', x: 0.23, y: 0.68, color: '#cd886e' },
-  { id: 'reports', label: 'Máy in', sub: '04 / PHÁT HÀNH', x: 0.76, y: 0.68, color: '#99a8ba' },
+  { id: 'subjects', label: t("src.infra.DebugMap.bang_de_tai"), sub: t("src.infra.DebugMap.01_tim_tin"), x: 0.23, y: 0.24, color: '#e7b34e' },
+  { id: 'team', label: t("src.infra.DebugMap.ban_phan_cong"), sub: t("src.infra.DebugMap.02_nhan_su"), x: 0.76, y: 0.24, color: '#8ca69d' },
+  { id: 'editor', label: t("content.maps.definitions.ban_bien_tap"), sub: t("src.infra.DebugMap.03_dan_trang"), x: 0.23, y: 0.68, color: '#cd886e' },
+  { id: 'reports', label: t("content.maps.definitions.may_in"), sub: t("src.infra.DebugMap.04_phat_hanh"), x: 0.76, y: 0.68, color: '#99a8ba' },
 ];
 export class DebugMap {
   constructor(canvas,onStation) {
@@ -47,7 +48,7 @@ export class DebugMap {
     for (let y = 0; y < height; y += 38) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(width,y); ctx.stroke(); }
     ctx.fillStyle = '#526c5f'; ctx.fillRect(0,0,width,12); ctx.fillRect(0,0,12,height); ctx.fillRect(width - 12,0,12,height);
     ctx.fillStyle = '#fbf8ef'; ctx.fillRect(width * 0.39,0,width * 0.22,12);
-    ctx.fillStyle = '#637369'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('TÒA SOẠN / PHÒNG THỬ NGHIỆM',width / 2,40);
+    ctx.fillStyle = '#637369'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(t("src.infra.DebugMap.toa_soan_phong_thu_nghiem"),width / 2,40);
     for (const s of STATIONS) {
       const x = s.x * width; const y = s.y * height; const w = Math.min(170,width * 0.31);
       ctx.fillStyle = '#00000012'; ctx.fillRect(x - w/2 + 5,y - 26 + 7,w,60);
@@ -63,9 +64,9 @@ export class DebugMap {
     ctx.fillStyle = '#e4ba86'; ctx.beginPath(); ctx.arc(x,y - 8,8,0,Math.PI*2); ctx.fill();
     ctx.fillStyle = '#282e2a'; ctx.fillRect(x - 8,y - 16,16,6);
     ctx.fillStyle = '#f8f5ea'; ctx.fillRect(x + 7,y + 1,6,8);
-    ctx.fillStyle = '#314b3e'; ctx.font = '10px sans-serif'; ctx.fillText('KHUÊ',x,y + 30);
+    ctx.fillStyle = '#314b3e'; ctx.font = '10px sans-serif'; ctx.fillText(t("src.infra.DebugMap.khue"),x,y + 30);
     const near = STATIONS.find(s => Math.hypot(this.player.x - s.x,this.player.y - s.y) < 0.22);
-    if (near) { ctx.fillStyle = '#244b3be8'; ctx.fillRect(width/2 - 105,height - 40,210,26); ctx.fillStyle = '#fff'; ctx.font = '11px sans-serif'; ctx.fillText(`E · ${near.label}`,width/2,height - 23); }
+    if (near) { ctx.fillStyle = '#244b3be8'; ctx.fillRect(width/2 - 105,height - 40,210,26); ctx.fillStyle = '#fff'; ctx.font = '11px sans-serif'; ctx.fillText(t("src.infra.DebugMap.e_value0", {value0: (near.label)}),width/2,height - 23); }
   }
   snapshot() { return { ...this.player }; }
   restore(snapshot) { if (snapshot && Number.isFinite(snapshot.x) && Number.isFinite(snapshot.y)) this.player = { x: Math.max(0.08,Math.min(0.92,snapshot.x)), y: Math.max(0.10,Math.min(0.92,snapshot.y)) }; }

@@ -1,0 +1,15 @@
+export const DEFAULT_CONFIG = Object.freeze({
+  weeks: 12, daysPerWeek: 5, dailyEnergy: 4, scoutCost: 1,
+  slots: 4, slotWeights: [0.80, 0.25, 0.12, 0.08],
+  fatigueTask: 20, fatigueNight: 10, fatigueWeekend: 30, fatigueFactor: 0.5,
+  reporterWeight: 0.6, supporterWeight: 0.4, soloSupport: 0.5,
+  qualityOffset: 1, qualityCap: 1.4, qualityFail: 0.6,
+  maxScore: 100000, attractionExponent: 2,
+  scoreBase: 0.85, scoreGrit: 0.30, pressureBase: 0.5, evidenceBase: 12,
+  initialReputation: 30, reputationAlpha: 0.3, emptyPenalty: 2, blankPenalty: 5,
+  equipmentThresholds: [42, 55, 68], vanPenalty: 0.10, vanPenaltyCap: 0.25,
+  pressureDecay: 0.85, actThresholds: [100, 130, 160], scheduledWeeks: [3, 7],
+  strikeFractions: [0.4, 0.8], strikeReputation: [3, 6, 10],
+  pressureCarry: 0.3, suspensionMultiplier: 0.5, maxDifficultyOffset: 2,
+  evidenceRequired: 200, reputationRequired: 55,
+});

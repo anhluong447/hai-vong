@@ -1,6 +1,7 @@
+import {t} from '../shared/text.js';
 const registryURL=new URL('../../assets/dialogue/manifest.json',import.meta.url);
 export async function loadDialogueRegistry(){
- const response=await fetch(registryURL);if(!response.ok)throw new Error(`Dialogue manifest: ${response.status}`);
+ const response=await fetch(registryURL);if(!response.ok)throw new Error(t('error.dialogue_manifest',{status:response.status}));
  return response.json();
 }
 export function portraitURL(file){return new URL(`../../assets/dialogue/${file}`,import.meta.url).href;}

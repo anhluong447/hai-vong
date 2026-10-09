@@ -1,3 +1,4 @@
+import {t} from '../shared/text.js';
 import { DEFAULT_CONFIG } from './config.js?v=press-sandbox-2';
 
 export const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
@@ -20,7 +21,7 @@ export function articleValues(subject, q, grit, config = DEFAULT_CONFIG) {
   };
 }
 export function paperLabel(score) {
-  return [[90000,'BANGER'],[60000,'Lan ra ngoài trường'],[30000,'Được quan tâm'],[5000,'Được nhắc đến'],[500,'Lác đác bàn tán'],[50,'Chưa thu hút'],[0,'Chẳng ai quan tâm']].find(([n]) => score >= n)[1];
+  return [[90000,t('ui.banger')],[60000,t("src.core.rules.lan_ra_ngoai_truong")],[30000,t("src.core.rules.duoc_quan_tam")],[5000,t("src.core.rules.duoc_nhac_den")],[500,t("src.core.rules.lac_dac_ban_tan")],[50,t("src.core.rules.chua_thu_hut")],[0,t("src.core.rules.chang_ai_quan_tam")]].find(([n]) => score >= n)[1];
 }
 export function ending(state, config = DEFAULT_CONFIG) {
   if (state.zeroRepStreak >= 2) return 'disbanded';

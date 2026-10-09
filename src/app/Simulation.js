@@ -1,17 +1,18 @@
+import {t} from '../shared/text.js';
 import { createGame, activeSubjects, activeStaff, interview, scout, editArticle, selectArticles, nextDay } from '../core/game.js?v=press-sandbox-2';
 import { groupPower } from '../core/rules.js?v=press-sandbox-2';
 import { DEFAULT_CONFIG } from '../core/config.js?v=press-sandbox-2';
 import { STAFF } from '../core/fixtures.js?v=press-sandbox-2';
 
 export const POLICIES = [
-  { id: 'balanced', name: 'Cân bằng', scout: true, noVan: true, cap: 4 },
-  { id: 'use-van', name: 'Dùng Vân bất chấp', scout: true, cap: 4 },
-  { id: 'grit80', name: 'Gai góc 80%', scout: true, noVan: true, cap: 4, grit: 0.8 },
-  { id: 'greedy', name: 'Tham điểm 100%', noVan: true, cap: 4, grit: 1, greedy: true },
-  { id: 'safe', name: 'Chỉ an toàn', noVan: true, cap: 4, grit: 0, safe: true },
-  { id: 'hibernate', name: 'Một bài / tuần', scout: true, noVan: true, cap: 1 },
-  { id: 'solo', name: 'Khuê làm một mình', scout: true, noVan: true, cap: 4, solo: true },
-  { id: 'late', name: 'An toàn 5 tuần rồi bung', scout: true, noVan: true, cap: 4, late: true },
+  { id: 'balanced', name: t("src.app.Simulation.can_bang"), scout: true, noVan: true, cap: 4 },
+  { id: 'use-van', name: t("src.app.Simulation.dung_van_bat_chap"), scout: true, cap: 4 },
+  { id: 'grit80', name: t("src.app.Simulation.gai_goc_80"), scout: true, noVan: true, cap: 4, grit: 0.8 },
+  { id: 'greedy', name: t("src.app.Simulation.tham_diem_100"), noVan: true, cap: 4, grit: 1, greedy: true },
+  { id: 'safe', name: t("src.app.Simulation.chi_an_toan"), noVan: true, cap: 4, grit: 0, safe: true },
+  { id: 'hibernate', name: t("src.app.Simulation.mot_bai_tuan"), scout: true, noVan: true, cap: 1 },
+  { id: 'solo', name: t("src.app.Simulation.khue_lam_mot_minh"), scout: true, noVan: true, cap: 4, solo: true },
+  { id: 'late', name: t("src.app.Simulation.an_toan_5_tuan_roi_bung"), scout: true, noVan: true, cap: 4, late: true },
 ];
 function value(subject,state,policy) {
   const attraction = subject.scouted ? subject.attraction : subject.preview;
