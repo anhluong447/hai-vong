@@ -1,7 +1,7 @@
 # Architecture — CLB Báo Chí
 
-Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; no dependency or build
-step. Two explicit rulesets remain: the original formula sandbox and the newer
+Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; runtime has no build
+step. Art authoring uses the offline asset builder described below. Two explicit rulesets remain: the original formula sandbox and the newer
 gameplay/pixel prototype. Their calendars, scores and state schemas are distinct.
 
 ## Responsibility boundaries
@@ -129,7 +129,7 @@ The prototype does not require a generic ECS, global event queue or engine migra
 
 ## Future work
 
-### Coastal UI components (v1)
+### Coastal visual target
 
 The active visual target is now a 1:1 reconstruction of the four original
 concepts, governed by [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md). The v1
@@ -137,10 +137,38 @@ components below remain a technical prototype; their visual implementation has
 not passed the replica gates. Future screen compositions use a 1672x941 design
 stage with uniform scaling, authored art layers/masks and separate dialogue,
 menu, dossier and world/HUD compositions. Production assets, layout/light/motion
-sheets and deterministic captures are planned in the roadmap; those boundaries
-are not yet implemented. Preserve session/text/input/save/lifecycle contracts
+sheets and deterministic captures follow the roadmap. Stage 1 implements the
+isolated art/preview boundaries below; production scenes and motion remain.
+Preserve session/text/input/save/lifecycle contracts
 while replacing the presentation. Art, static visual, motion, behavior and
 performance reviews are distinct acceptance gates.
+
+### Replica authoring and Stage 1
+
+`src/ui/replica/ReplicaStage.js` owns a fixed 1672x941 SVG scene with seven
+independent planes, uniform fit/letterboxing, scaled input, keyboard focus and
+resource disposal. It receives content and structured callbacks; it does not
+import domain/session/storage or advance gameplay time. This Stage 1 pilot
+is mounted only by `tools/coastal-replica-preview.html`, separately from v1.
+
+`content/ui/coastal-replica-pilot.json` owns authored placements, font styles,
+choices and contact-sheet fixtures. `tools/build_replica_assets.py` compiles it
+to `coastal-replica-data.js`; `coastal-replica.js` exposes the runtime facade.
+Displayed copy comes from `content/locales/vi.js`. Asset IDs remain technical.
+`assets/ui/coastal-replica/v1/` retains editable material inputs, native bitmap
+masters, generation prompts, deterministic SVG exports and a versioned manifest.
+The builder records each instance's layer, placement/crop/pivot, text keys and
+source hash. Local font files/licenses/pinned upstream hashes live under
+`assets/fonts/coastal-replica/`. Source reference art stays under `docs/` and is
+never loaded as a flattened runtime UI.
+
+Preview capture awaits decoded art/local fonts, resets choice/layer inspection,
+locks interaction and publishes `replicaCapture.prepare`. Capture, contact sheets,
+font measurements and overlay/diff are authoring evidence; visual acceptance is
+recorded in [Stage 1 review](ui-reviews/coastal-replica-stage1/README.md). Read the
+[asset contract](../assets/ui/coastal-replica/v1/README.md) before extending this pack.
+
+### Coastal UI components (v1)
 
 The user-selected art reference and component roadmap are documented in
 [UI-COMPONENTS-PLAN.md](UI-COMPONENTS-PLAN.md). The first runtime version is used

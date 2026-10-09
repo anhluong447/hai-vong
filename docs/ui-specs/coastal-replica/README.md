@@ -1,6 +1,6 @@
 # Coastal replica — Stage 0
 
-2026-10-09 · **R01–R04 hoàn thành phần chuẩn bị**. Bốn màn đã có vùng đo, lớp, fixture chữ, asset backlog và quy trình capture/overlay/diff. G0 có dữ liệu để bắt đầu sản xuất; G1–G5 chưa nghiệm thu. UI game hiện tại vẫn là prototype coastal v1.
+2026-10-09 · **R01–R04 hoàn thành phần chuẩn bị**. Bốn màn đã có vùng đo, lớp, fixture chữ, asset backlog và quy trình capture/overlay/diff. [Stage 1 / R05–R08](../../ui-reviews/coastal-replica-stage1/README.md) đã bổ sung pipeline và mẫu xếp lớp; G1 chỉ áp dụng mẫu art, G2–G5 chưa nghiệm thu. UI game hiện tại vẫn là prototype coastal v1.
 
 ## Bộ dữ liệu và layout sheets
 
@@ -65,4 +65,4 @@ python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/
 
 Builder dùng Python stdlib, kiểm tra hash, dimensions, vùng trong stage, IDs, sources, anchors, contours, text keys và generated artifacts bị stale. Browser tests chạy ở wall time qua DevTools vì virtual time có thể hết khi Canvas/crypto worker vẫn đang xử lý. **13/13** kiểm chứng self-diff của bốn màn, perturb một pixel/ROI, file sai kích thước/format, metadata, export và control capture; đây là kiểm chứng công cụ, không phải visual acceptance của game.
 
-Tiếp theo là [P1 / R05–R08](../../UI-REPLICA-ROADMAP.md): source/master/export pipeline, một mẫu giấy/mực/mép sóng, font/icon và stage có 5–7 lớp art thật.
+R08 đã có `replicaCapture.prepare` trong preview Stage 1, với tùy chọn `variant`, readiness của SVG resources và metadata font/asset/typography. Tool thêm `--compare-reference` để lưu overlay/diff native. Các capture kiểm chứng Stage 0 ở trên giữ vai trò lịch sử. Tiếp theo là [P2 / R09–R14](../../UI-REPLICA-ROADMAP.md), hoàn thiện replica thoại tĩnh.

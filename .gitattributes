@@ -1,0 +1,7 @@
+# Source/licensing hashes and generated exports retain canonical LF on Windows.
+assets/fonts/coastal-replica/**/OFL.txt text eol=lf
+assets/fonts/coastal-replica/**/METADATA.pb text eol=lf
+assets/ui/coastal-replica/**/*.svg text eol=lf
+assets/ui/coastal-replica/**/*.png binary
+assets/fonts/coastal-replica/**/*.ttf binary
+content/ui/coastal-replica-pilot.json text eol=lf

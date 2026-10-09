@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "reference": "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+  "stage": [1672, 941],
+  "origin": "top-left",
+  "seed": 23,
+  "palette": {"ink": "#092d40", "teal": "#087185", "air": "#8dcbd0", "paper": "#f6f0e3", "sun": "#ffdc73"},
+  "paper": {
+    "size": [1672, 342],
+    "position": [0, 599],
+    "path": "M-8 91 C42 61 91 44 162 42 C242 36 340 59 451 73 C614 99 769 127 941 131 C1105 132 1244 131 1390 147 C1501 157 1590 166 1680 176 L1680 350 L-8 350 Z",
+    "edge": "M-8 91 C42 61 91 44 162 42 C242 36 340 59 451 73 C614 99 769 127 941 131 C1105 132 1244 131 1390 147 C1501 157 1590 166 1680 176",
+    "grainOpacity": 0.16,
+    "precision": "native manually authored contour; right edge behind foreground reconstructed provisionally, refine R12"
+  },
+  "wave": {
+    "size": [1672, 342],
+    "position": [0, 599],
+    "path": "M-8 21 C68 -9 128 -4 211 27 C348 61 495 83 658 109 C834 135 930 119 1090 120 C1240 119 1412 142 1680 163 L1680 350 L-8 350 Z",
+    "foam": ["M-8 29 C68 0 128 5 211 34 C348 66 495 90 658 114 C834 140 930 124 1090 125 C1240 124 1412 148 1680 170", "M-8 90 C42 60 91 43 162 41 C242 35 340 58 451 72 C614 98 769 126 941 130 C1105 131 1244 130 1390 146 C1501 156 1590 165 1680 175"],
+    "grainOpacity": 0.42
+  },
+  "choices": {
+    "gold": {"size": [446, 63], "path": "M6 1 L437 0 Q445 1 445 8 L444 55 Q443 61 437 62 L7 61 Q1 60 1 55 L0 9 Q0 3 6 1 Z"},
+    "plain": {"size": [413, 60], "path": "M7 1 L405 0 Q412 0 412 7 L412 52 Q412 58 405 59 L6 59 Q0 58 0 52 L1 8 Q1 2 7 1 Z"}
+  },
+  "date": {"size": [247, 115], "path": "M2 2 L243 0 L247 8 L243 24 L245 44 L242 67 L246 82 L240 106 L218 112 L8 114 L1 105 L4 76 L0 47 L4 25 Z"},
+  "textPolicy": "all lettering is a separate catalog-backed SVG text plane; no text nodes in art exports"
+}

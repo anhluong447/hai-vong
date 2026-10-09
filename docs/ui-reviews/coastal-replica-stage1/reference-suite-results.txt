@@ -1,0 +1,9 @@
+<html lang="en"><head><meta charset="utf-8"><title>Stage 0 authoring tool tests</title></head>
+<body>
+  <h1>Stage 0 authoring tool tests</h1>
+  <div id="results"><p id="progress">Finished</p><p class="ok">13/13 passed</p><pre class="ok">Native capture has no authoring chrome and keeps the original plane</pre><pre class="ok">All text regions resolve to planned fixture keys; all layer IDs are unique</pre><pre class="ok">Exact native self-comparison is zero: dialogue</pre><pre class="ok">Exact native self-comparison is zero: menu</pre><pre class="ok">Exact native self-comparison is zero: hud</pre><pre class="ok">Exact native self-comparison is zero: dossier</pre><pre class="ok">Region selection preserves planned text metadata and visibility toggle</pre><pre class="ok">One changed native pixel is reported in the affected ROI and raw metrics</pre><pre class="ok">Wrong-size PNG is rejected rather than resized or cropped</pre><pre class="ok">Non-PNG input is rejected</pre><pre class="ok">Uniform-scale coordinate conversion returns the native point</pre><pre class="ok">Exports retain native dimensions and include fixture/hash provenance</pre><pre class="ok">Saved DevTools control capture has the actual native viewport and zero image diff</pre></div>
+  <iframe id="review" src="../tools/coastal-reference-review.html?screen=dialogue&amp;capture=layout" width="850" height="500" title="Reference tooling under test"></iframe>
+  <script type="module" src="coastal-reference-tools.js"></script>
+
+
+</body></html>

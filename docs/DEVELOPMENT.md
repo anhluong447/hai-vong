@@ -74,8 +74,31 @@ Keep the user-selected reference set in `docs/ui-concepts/coastal-editorial-v1/`
 with its prompt record and SHA-256 inventory. Do not overwrite it with later
 iterations or use its rasterized text/buttons as runtime UI.
 
+Stage 1 is available at `tools/coastal-replica-preview.html`. Edit the authoring
+JSON in `content/ui/coastal-replica-pilot.json` and materials under
+`assets/ui/coastal-replica/v1/masters/`, then run:
+
+```powershell
+python tools/build_replica_assets.py --build
+python tools/build_replica_assets.py --check
+python tools/check_architecture.py
+python tools/run_browser_tests.py --real-time --url http://127.0.0.1:8080/tests/coastal-replica-stage1.html
+python tools/capture_replica.py --url http://127.0.0.1:8080/tools/coastal-replica-preview.html --screen dialogue --compare-reference --output docs/ui-reviews/coastal-replica-stage1/pilot-native-v3.png
+```
+
+The art builder uses Pillow for read-only PNG alpha inspection; install Pillow
+only when it is absent. Runtime has no Python dependency. SVG and JSON outputs
+are generated; change sources first. PNG master/export bytes remain identical.
+Font vendoring is an explicit network maintenance task via
+`tools/vendor_replica_fonts.py`; normal offline checks use committed fonts and
+their hashes/licenses. See the [asset contract](../assets/ui/coastal-replica/v1/README.md).
+Capture supports `--variant material-light`, `material-dark` and `typography`.
+Use a new output version after art changes; historical captures are evidence,
+not proof that the current manifest matches. Always run the main browser suite
+and baseline checker before the focused suite overwrites `test_results.log`.
+
 The earlier component-gallery milestones below describe the v1 prototype.
-Replica work follows R05-R45 and their art/static/motion gates. Runtime
+Replica work continues at R09-R45 and their art/static/motion gates. Runtime
 milestones require the verification above plus focused browser checks for
 focus/input, interrupted transitions and resource disposal. Store new review
 screenshots/video separately and record the device/browser for performance checks.

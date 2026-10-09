@@ -2,7 +2,7 @@
 
 Unlike --window-size alone, device metrics fix the *content* viewport and DPR.
 The referenceReview hook validates authoring tooling only; replicaCapture is the
-future R08 production contract. No game state is inferred from a screenshot.
+R08 stage readiness contract. No game state is inferred from a screenshot.
 """
 import argparse
 import base64
@@ -30,15 +30,19 @@ def main():
     parser.add_argument('--screen', required=True, choices=['dialogue', 'menu', 'hud', 'dossier'])
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--hook', choices=['replicaCapture', 'referenceReview'], default='replicaCapture')
+    parser.add_argument('--variant', default='stage', help='Concrete preview view requested from replicaCapture')
+    parser.add_argument('--compare-reference', action='store_true', help='Save native 50/50 overlay and 4x difference diagnostics')
     parser.add_argument('--browser', default=r'C:\Program Files\Google\Chrome\Application\chrome.exe')
     args = parser.parse_args()
+    if args.compare_reference and (args.variant != 'stage' or args.hook != 'replicaCapture'):
+        parser.error('--compare-reference requires a stage replica capture')
     if urlparse(args.url).hostname not in ('localhost', '127.0.0.1'):
         raise ValueError('Capture URL must be the local project server')
     output = args.output.resolve()
     if output.suffix.lower() != '.png' or not output.is_relative_to(ROOT) or output.is_relative_to(REFERENCE) or output.is_relative_to(ROOT / '.git'):
         raise ValueError('Output must be a PNG in this workspace, outside locked references and .git')
     fixture = json.loads((SPEC / 'fixtures.json').read_text(encoding='utf-8'))
-    contract = {'screen': args.screen, 'capture': fixture['capture'], 'fixture': fixture['screens'][args.screen], 'catalog': fixture['catalog']}
+    contract = {'screen': args.screen, 'capture': fixture['capture'], 'fixture': fixture['screens'][args.screen], 'catalog': fixture['catalog'], 'variant':args.variant}
     process, client = None, None
     with tempfile.TemporaryDirectory(prefix='coastal-capture-', ignore_cleanup_errors=True) as profile:
         try:
@@ -106,6 +110,29 @@ def main():
             output.parent.mkdir(parents=True, exist_ok=True)
             output.write_bytes(png)
             output.with_suffix('.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            if args.compare_reference:
+                diagnostics = client.evaluate('''(async () => {
+                    const {compare,decode,digest} = await import('/tools/reference-comparison.js');
+                    const layout = await (await fetch('/docs/ui-specs/coastal-replica/layouts.json')).json();
+                    const screen = layout.screens.find(item => item.id === SCREEN);
+                    const sources = ['/docs/ui-concepts/coastal-editorial-v1/'+screen.reference,CANDIDATE];
+                    const blobs = await Promise.all(sources.map(async url => {
+                        const response = await fetch(url,{cache:'no-store'});
+                        if (!response.ok) throw new Error('Comparison resource failed');
+                        return response.blob();
+                    }));
+                    const images = await Promise.all(blobs.map(decode));
+                    const result = compare(...images,1672,941,screen.layers);
+                    return {report:{...result.report,sourcePaths:sources,
+                        sourceSHA256:await Promise.all(blobs.map(digest))},
+                        overlay:result.overlay.toDataURL('image/png').split(',')[1],
+                        difference:result.difference.toDataURL('image/png').split(',')[1]};
+                })()'''.replace('SCREEN',json.dumps(args.screen)).replace('CANDIDATE',json.dumps('/'+output.relative_to(ROOT).as_posix())),await_promise=True)
+                for kind in ('overlay','difference'):
+                    evidence_path = output.with_name(output.stem+'-'+kind+'.png')
+                    evidence_path.write_bytes(base64.b64decode(diagnostics[kind]))
+                output.with_name(output.stem+'-comparison.json').write_text(json.dumps(diagnostics['report'],ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                print('Native overlay/difference saved; diagnostic only, G2 remains subject to visual review.')
             print(f'Native capture: {output.relative_to(ROOT)}; viewport 1672x941 @ DPR 1; {ready["state"]["kind"] if "kind" in ready["state"] else "replica fixture"}')
         finally:
             if client:

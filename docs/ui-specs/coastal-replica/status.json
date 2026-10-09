@@ -1,24 +1,83 @@
 {
   "version": 1,
   "date": "2026-10-09",
-  "stage": "P0",
-  "status": "preparation-complete",
+  "stage": "P1",
+  "status": "sample-complete",
   "tasks": {
-    "R01": {"status": "complete", "evidence": ["reference-lock.json"]},
-    "R02": {"status": "complete", "evidence": ["layouts.json", "fixtures.json", "layouts/dialogue.md", "layouts/menu.md", "layouts/hud.md", "layouts/dossier.md"]},
-    "R03": {"status": "complete", "evidence": ["asset-inventory.json", "fixtures.json#unresolved"]},
-    "R04": {"status": "complete", "evidence": ["../../../tools/coastal-reference-review.html", "../../../tools/capture_replica.py", "verification/reference-plane.json", "verification/dialogue-layout.json", "verification/validation.json"]}
+    "R01": {
+      "status": "complete",
+      "evidence": [
+        "reference-lock.json"
+      ]
+    },
+    "R02": {
+      "status": "complete",
+      "evidence": [
+        "layouts.json",
+        "fixtures.json",
+        "layouts/dialogue.md",
+        "layouts/menu.md",
+        "layouts/hud.md",
+        "layouts/dossier.md"
+      ]
+    },
+    "R03": {
+      "status": "complete",
+      "evidence": [
+        "asset-inventory.json",
+        "fixtures.json#unresolved"
+      ]
+    },
+    "R04": {
+      "status": "complete",
+      "evidence": [
+        "../../../tools/coastal-reference-review.html",
+        "../../../tools/capture_replica.py",
+        "verification/reference-plane.json",
+        "verification/dialogue-layout.json",
+        "verification/validation.json"
+      ]
+    },
+    "R05": {
+      "status": "complete",
+      "evidence": [
+        "../../../assets/ui/coastal-replica/v1/manifest.json",
+        "../../../assets/ui/coastal-replica/v1/README.md"
+      ]
+    },
+    "R06": {
+      "status": "sample-complete",
+      "evidence": [
+        "../../ui-reviews/coastal-replica-stage1/material-light-v2.png",
+        "../../ui-reviews/coastal-replica-stage1/material-dark-v2.png"
+      ]
+    },
+    "R07": {
+      "status": "sample-complete",
+      "evidence": [
+        "../../../assets/fonts/coastal-replica/manifest.json",
+        "../../ui-reviews/coastal-replica-stage1/typography-v2.png"
+      ]
+    },
+    "R08": {
+      "status": "sample-complete",
+      "evidence": [
+        "../../../src/ui/replica/ReplicaStage.js",
+        "../../../tests/coastal-replica-stage1.js",
+        "../../ui-reviews/coastal-replica-stage1/pilot-native-v3.json"
+      ]
+    }
   },
   "gates": {
     "G0": "measured inventory and capture readiness established; production uncertainties explicitly tracked",
-    "G1": "not-started",
-    "G2": "not-started",
+    "G1": "paper/wave/choice material and icon sample accepted; production raster assets pending R09-R14",
+    "G2": "pilot capture compared; major pose/background/type differences remain unaccepted",
     "G3": "not-started",
-    "G4": "not-started",
+    "G4": "Stage 1 preview behavior tested; production gameplay integration pending",
     "G5": "not-started"
   },
   "measurementPrecision": "manual envelopes ±4px rectangular / ±12px organic; production masks and 2px anchor acceptance remain",
-  "runtimeChanges": false,
-  "next": "P1 R05-R08",
+  "runtimeChanges": "isolated SVG preview only; gameplay entries unchanged",
+  "next": "P2 R09-R14",
   "knownProductionTasks": "fixtures.json#unresolved"
 }

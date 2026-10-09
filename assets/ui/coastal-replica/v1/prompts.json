@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "mode": "built-in image_gen",
+  "status": "Stage 1 pilot plates; source pose/alpha/scene fidelity still reviewed in R09-R11",
+  "outputs": [
+    {
+      "id": "pilot.newsroom",
+      "file": "masters/newsroom-pilot-v1.png",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png"
+      ],
+      "prompt": "Use case: precise-object-edit.\nAsset type: clean layered-game background plate, no interface, no characters.\nInput image 1 is the EDIT TARGET: our original 1672x941 Hoi Am coastal newsroom dialogue concept. Preserve its exact camera/framing, warm daylight from upper-right harbor windows, palette, painterly anime background technique, desk height and architectural placements.\nRemove both students completely (male at left, female at right), remove all interface: upper-left date stamp, upper-right wordmark, central three response strips, entire paper dialogue/wave overlay at bottom, all lettering on wall posters/blackboard/newspapers/cup. Reconstruct the newsroom and wide wooden desktop hidden behind these elements: bookshelves at left, blank dark green chalkboard/back wall at center, tall right windows overlooking the same bright coastal harbor and distant mountain ridgeline. Desk near y=550 with newspapers and a pencil cup/laptop at right; all newspapers have clean blank faces or purely non-text painterly marks. Keep only environmental props, no close foreground foliage or blurred newspaper at bottom because those are a separate layer. Leave the foreground desk open and clean enough for independent portraits and paper overlay.\nOutput ONE full-bleed widescreen image at the same 16:9 framing as input, no borders, no checkerboard. Strictly ZERO readable or pseudo letters, logos, symbols resembling words, numbers, UI, figures or people. This is an art-production spike plate, not a screenshot. Preserve lighting and scene depth; do not redesign the room or shift the harbor window."
+    },
+    {
+      "id": "pilot.van",
+      "file": "masters/van-seated-pilot-v1.png",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+        "assets/dialogue/v2/van-neutral.png"
+      ],
+      "prompt": "Use case: background-extraction / identity-preserve.\nAsset type: transparent upper-body seated character sprite for a layered original narrative game, not a screenshot.\nInput image 1: EDIT TARGET and exact pose/framing reference, the original Hoi Am newsroom dialogue concept. Extract/reconstruct ONLY the female student at the right, Luc Thanh Van. Input image 2: identity reference only. The final sprite must match the seated pose of image 1, NOT the crossed-arms pose of image 2.\nReproduce the female's exact head tilt and relaxed warm speaking smile from image 1, long brown highlighted hair with yellow five-petal flower at her left temple (viewer right), white blouse, rich teal bow. Her RIGHT hand (viewer left) rests against her cheek/chin with forearm down to desk; her LEFT hand (viewer right) holds a newspaper tilted toward viewer, its top tilted upward to right. Keep both arms, all fingers, hair silhouette and visible torso exactly arranged like image 1. Preserve image 1's warm daylight upper-right rim light and original anime painterly shading.\nReplace the held newspaper's printed front with clean warm-white paper, very faint purely abstract illustration shapes WITHOUT any letters, numbers, fake text, insignia or readable print. We will put all lettering in a separate code layer.\nOutput only this one character and held blank newspaper on a truly transparent background. Upper body only, framing like the original crop: crown, all visible hair, shoulders, torso and forearms; waist/lower body can end behind desk at bottom. No desk, plants, cup, pencils, chalkboard, UI, paper dialogue box, response strips, seals, logos, letters, shadows floating outside the sprite, or second person. Preserve clean fine hair alpha, no baked colored matte/halo; no body borders touching canvas except the intentional lower crop. Use a roughly square high-resolution canvas with a little transparent breathing room. This is a Stage 1 layered rendering pilot sprite, not a certified final replica character master."
+    },
+    {
+      "id": "pilot.khue",
+      "file": "masters/khue-seated-pilot-v1.png",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+        "assets/dialogue/v2/khue-standing-neutral.png"
+      ],
+      "prompt": "Use case: background-extraction / identity-preserve.\nAsset type: transparent seated upper-body character sprite for an original layered narrative game.\nInput image 1 is the EDIT TARGET / exact pose and painterly lighting reference: original Hoi Am newsroom dialogue scene. Extract/reconstruct only the MALE student at the left (Diep Khue). Input image 2 is ONLY identity reference: never copy its standing pose.\nMatch image 1's seated 3/4 pose exactly: short tousled navy-black hair, amber eyes looking slightly to viewer right, quiet attentive expression, pale white school shirt sleeves, teal necktie, brown satchel strap across shoulder. His LEFT hand (viewer right) supports his cheek with knuckles at jaw and elbow resting lower at desk height; other arm/torso relaxed. Reproduce crown, facial angle and head/hand/forearm silhouette as closely as possible to image 1, with warm upper-right window rim light and shaded torso.\nDeliver only this male student on a genuinely transparent background, no matte, no halo, no fake checkerboard. Crop at the lower torso/forearm line that will be hidden behind an independent desk/paper layer. Keep ALL hair tips/shoulders/forearm outline inside the canvas, with at least 5% transparent padding left/right/top. Body should occupy about 80% canvas width, do not crop arms at side edges. Upper-body composition, square high-resolution canvas. No girl, newspaper, desk, plants, books, cup, background, dialogue/choice panels, text, logos or symbols.\nThis sprite is for Stage 1 rendering registration tests; final pose/contour matching is refined in Stage 2."
+    },
+    {
+      "id": "pilot.harbor-print",
+      "file": "masters/harbor-print-pilot-v1.png",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png"
+      ],
+      "prompt": "Use case: background-extraction / stylized-concept.\nAsset type: transparent coastal harbor print ornament to composite over a warm-paper dialogue UI.\nInput image 1 is the exact STYLE and SUBJECT reference: the original Hoi Am dialogue image. Reproduce only the pale blue harbor illustration printed on the bottom-left paper, around reference region x=0..770 y=746..941. Remove all lettering, speaker insignia, dialogue type, UI lines, flowers and foreground props; these are separate layers.\nCreate a wide low-profile delicate screen-print/etching of the same Vietnamese coastal harbor: slim little lighthouse at far left, tiny masonry port houses with pitched roofs across lower middle, piers and cranes behind, boats and soft mountain silhouettes behind. Intricate etched linework, faded pale ocean teal and blue ink (#68aeb5, #a5cbd0), irregular ink stippling, broken edges and watercolor wash. Almost monochrome, light enough to sit under dark dialogue text. Detail and technique should closely match the original reference's paper illustration, not generic vector town icons, cartoon outlines, flat polygons or an independent poster. The ornament is deepest at bottom-left and fades into fine scattered marks toward top/right, leaving the top middle very open for live text.\nOutput one isolated transparent artwork, very wide composition with about 3:1 aspect ratio, no rectangle/paper sheet/background color/border/checkerboard. Do not include ANY letters, numbers, symbols, logo, quote marks, words or typography. Do not copy the characters or room. Use high-resolution soft natural alpha fringes, preserve the finely etched illustration quality. This is an ORIGINAL project art asset derived from our own concept."
+    },
+    {
+      "id": "pilot.foreground-flowers",
+      "file": "masters/foreground-flowers-pilot-v1.png",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png"
+      ],
+      "prompt": "Use case: background-extraction.\nAsset type: transparent foreground foliage/flower cluster for original layered coastal narrative game UI.\nInput image 1 is our own original dialogue concept, exact EDIT STYLE reference. Reconstruct only the very close foreground white/yellow small daisies and green leaves at bottom-left of the image. This must be independent of background, people and dialogue paper.\nA sparse natural spray hugging the left and bottom edges: soft out-of-focus teal-green leaves higher at far left, a few small ivory daisies with sunlight-yellow centers near lower-left, warm painterly rim highlights, some thin stems extending along bottom. Leave the top-right and right half mostly transparent/open; it should frame a reading surface without covering text. Original painterly anime-game background style, gently soft foreground lens depth matching image 1, no vector cartoon icons or sticker outline. Preserve warm upper-right lighting. Avoid large flower heads, dense bouquet, extra colorful blooms or excessive saturation.\nOutput ONE truly transparent RGBA cluster, roughly square high-resolution canvas, not a whole scene or collage. Do not include paper, printed artwork, newspaper, room, characters, UI, logos, words or numbers; no shadow matte/colored background/checkerboard. Use natural clean alpha around leaves/petals. The sprite will be positioned at the far-left lower foreground and clipped by the stage edge; this is the Stage 1 occlusion pilot, final foreground/crop refinement belongs to R11."
+    }
+  ]
+}

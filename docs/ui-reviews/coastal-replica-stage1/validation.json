@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "date": "2026-10-09",
+  "stage": "P1 R05-R08 sample delivery",
+  "priorCommit": "7d9a65a",
+  "checks": {
+    "mainBrowser": {
+      "passed": 72,
+      "total": 72,
+      "evidence": "main-suite-results.txt"
+    },
+    "stage1Browser": {
+      "passed": 12,
+      "total": 12,
+      "evidence": "stage1-suite-results.txt"
+    },
+    "referenceTools": {
+      "passed": 13,
+      "total": 13,
+      "evidence": "reference-suite-results.txt"
+    },
+    "baselines": {
+      "sandboxPoliciesMatched": 8,
+      "gameplayPoliciesMatched": 4,
+      "changed": false
+    },
+    "architecture": {
+      "issues": 0,
+      "catalogEntries": 773
+    },
+    "assets": {
+      "count": 15,
+      "fontFamilies": 3,
+      "vietnameseCodepointsPerFamily": 109,
+      "pngMasterExportBytesIdentical": true
+    },
+    "lockedReferences": {
+      "pngs": 4,
+      "regions": 169,
+      "plannedAssets": 104,
+      "plannedKeys": 96,
+      "unchanged": true
+    },
+    "pythonCompile": "passed",
+    "trackedWhitespaceCheck": "passed"
+  },
+  "visualAcceptance": {
+    "G1": "paper/wave/choice material and insignia/icon samples only",
+    "G2": false,
+    "G3": false,
+    "G4": "preview interactions only; no gameplay integration",
+    "G5": false
+  },
+  "renderer": "Chrome headless software, native capture 1672x941 DPR1; no real GPU/motion claim",
+  "hashes": {
+    "assets/ui/coastal-replica/v1/manifest.json": "5920C3DA2D2F89360DAC867A9AA4D74E5961AC961194F9BA007A85780E84E753",
+    "assets/ui/coastal-replica/v1/prompts.json": "59059A93B8C586DEFFD5FBBC8784CD2D16C0FD04C7E57A4D86B9B87D405B493C",
+    "assets/fonts/coastal-replica/manifest.json": "9BF43E4D1749BF324E9E739D53D5F623D7CA17BEDD693D6923CA4DB3144A59D3",
+    "content/ui/coastal-replica-pilot.json": "FE8B0D07D8CEC5807D0C8D04C04F690E0E725240146FE21676DFBD69155E5E70",
+    "content/ui/coastal-replica-data.js": "08811926555110B8DF5B47B31E8F166AC1ED26A697FA1A1237372883CCFEFF52",
+    "content/locales/vi.js": "7E1860246D6C6B87C29C6E637C513F398C1A8728646C7D7A8D0D8FCBD8F0CD05",
+    "src/ui/replica/ReplicaStage.js": "0EB2D4CA3EC2E451289A5282D69A5BC3CFF403498D18F9329A733D08A073170C",
+    "styles/replica.css": "9EA46B7EF9946FDCEF528936F3B6C74CFF46F64B3ECFF0BD3AE13C0CF3BBEC75",
+    "styles/replica-fonts.css": "008C753F5726D34F377AD5DF1653D94F6D99F990BC851B20AEB461BB666289B1",
+    "tools/coastal-replica-preview.js": "81BE40DC90000D340CF013720646997A35D6753566421E4DB00B6659941046FF",
+    "tools/build_replica_assets.py": "F2FDFA008D5A5AAA2A743157D338D4EA9EB1A9745A381824A6BB06D72AD24C3A",
+    "tools/capture_replica.py": "23A7BFBDAD857F9E8BBEEB39213A79B334C639B1F3BD96DD31565405ADB37D6B",
+    "tests/coastal-replica-stage1.js": "79A4ADCCA24F0C2D48D0115633A47924469517BE4A8AF616356EC9D4A7BEA8F5",
+    "docs/ui-reviews/coastal-replica-stage1/main-suite-results.txt": "9FE32503C1B03931A51834DB4B528B10F20AD009BB835E7227754D45B54A6221",
+    "docs/ui-reviews/coastal-replica-stage1/material-dark-v1.png": "FD0607322E2370B71BAD5F69B3F222B2F518A2ED13C2E4CA441D017FF8F12183",
+    "docs/ui-reviews/coastal-replica-stage1/material-dark-v2.png": "618D4D700B582315CACA55A41AB820F36B6B7D59B37828FBAAE2C83FD86A356A",
+    "docs/ui-reviews/coastal-replica-stage1/material-light-v1.png": "B0C185B93FBCE8F7DFDD734B9683DC75EBDF0E93E6B39C6017C1942EBFBF6A64",
+    "docs/ui-reviews/coastal-replica-stage1/material-light-v2.png": "A3C500520D681E3132D963BB29E8B4AB4D2E472A98357E429B0B228A92ADFAE1",
+    "docs/ui-reviews/coastal-replica-stage1/pilot-native-v1.png": "B7D9704F6AC3E2B3154BA43280F83C95CA127815DF106E2F3E3D31479ED90D8F",
+    "docs/ui-reviews/coastal-replica-stage1/pilot-native-v2.png": "99F4E5A7712AB2599B1EBD04734ED13D1BFD10341BD18B9C4F6CA0C15D6B36D6",
+    "docs/ui-reviews/coastal-replica-stage1/pilot-native-v3-difference.png": "769B1B482E31877088696F52E5530C19C3259A680A7D7BC58BC0E388BFDF31A8",
+    "docs/ui-reviews/coastal-replica-stage1/pilot-native-v3-overlay.png": "BF5026CBFA51BBFAFE69AF0EDA2CEB97C50E3570DDE668EAFB66EDE863F53BB2",
+    "docs/ui-reviews/coastal-replica-stage1/pilot-native-v3.png": "99F4E5A7712AB2599B1EBD04734ED13D1BFD10341BD18B9C4F6CA0C15D6B36D6",
+    "docs/ui-reviews/coastal-replica-stage1/reference-suite-results.txt": "D3AA70A393EBEEDFD52216253B4CB61DFC656B7856680D0C8E5FF655363F2CD0",
+    "docs/ui-reviews/coastal-replica-stage1/stage1-suite-results.txt": "8ED5D10D725414279C746D0F558E7AC102B1F5B36E61157B12142D9B65BA611F",
+    "docs/ui-reviews/coastal-replica-stage1/typography-v1.png": "548C79538CA9DAFEC039EDBC935EA3286BA9D28CA9AA5A982557492C38D1F223",
+    "docs/ui-reviews/coastal-replica-stage1/typography-v2.png": "6A60C45AD95490A040F7495D79EBD4D20FD99C20358DD1FF01CB493028D9D322"
+  }
+}

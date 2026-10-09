@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-text="ui.replica.preview.title"></title>
+  <link rel="stylesheet" href="../styles/replica.css">
+</head>
+<body>
+  <header class="replica-authoring">
+    <h1 data-text="ui.replica.preview.heading"></h1>
+    <p data-text="ui.replica.preview.note"></p>
+    <div class="replica-controls">
+      <select id="view"></select>
+      <label><span data-text="ui.replica.preview.layer"></span> <select id="layer"></select></label>
+    </div>
+    <p id="selection" role="status"></p>
+  </header>
+  <main id="pilot" class="replica-host"></main>
+  <script type="module" src="coastal-replica-preview.js"></script>
+</body>
+</html>

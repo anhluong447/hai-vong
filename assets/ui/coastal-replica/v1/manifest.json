@@ -1,0 +1,989 @@
+{
+  "version": 1,
+  "pack": "coastal-replica-stage1",
+  "stage": [
+    1672,
+    941
+  ],
+  "sourceReference": "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
+  "sourceReferenceSHA256": "68C076B9D013523B745E61E1AF35A8251742BBF7B774C02245F89DACF3D2A5A2",
+  "assets": [
+    {
+      "id": "material.dialogue-paper",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/dialogue-paper.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/dialogue-paper.svg",
+      "size": [
+        1672,
+        342
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        1672,
+        342
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "dialogue-paper",
+          "layer": "paper",
+          "z": 40,
+          "targetBounds": [
+            0,
+            599,
+            1672,
+            342
+          ],
+          "placementPivot": [
+            0,
+            599
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.speaker.1",
+            "ui.replica.dialogue.line.1",
+            "ui.replica.dialogue.continue.1"
+          ],
+          "clip": null
+        }
+      ],
+      "textKeys": [
+        "ui.replica.dialogue.continue.1",
+        "ui.replica.dialogue.line.1",
+        "ui.replica.dialogue.speaker.1"
+      ],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "94C31EDE8F4DC481D1508666AAD9ABA0DC32CFD9E39978AC5D71B7D7D946DF53"
+    },
+    {
+      "id": "material.dialogue-wave",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/dialogue-wave.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/dialogue-wave.svg",
+      "size": [
+        1672,
+        342
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        1672,
+        342
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "dialogue-wave",
+          "layer": "wave",
+          "z": 30,
+          "targetBounds": [
+            0,
+            599,
+            1672,
+            342
+          ],
+          "placementPivot": [
+            0,
+            599
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [],
+          "clip": null
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "11AD1603DCE4077E8C77091FB10A22FCA0F6B828D9429C32B4F2A821683C322A"
+    },
+    {
+      "id": "material.choice-gold",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/choice-gold.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/choice-gold.svg",
+      "size": [
+        446,
+        63
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        446,
+        63
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-verify",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            482,
+            462,
+            446,
+            63
+          ],
+          "placementPivot": [
+            482,
+            462
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.1"
+          ],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-draft",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            483,
+            530,
+            413,
+            60
+          ],
+          "placementPivot": [
+            483,
+            530
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.2"
+          ],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-listen",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            483,
+            596,
+            413,
+            59
+          ],
+          "placementPivot": [
+            483,
+            596
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.3"
+          ],
+          "clip": null
+        }
+      ],
+      "textKeys": [
+        "ui.replica.dialogue.choices.1",
+        "ui.replica.dialogue.choices.2",
+        "ui.replica.dialogue.choices.3"
+      ],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "32B2ECE284FF27AF1E8BD4AD753D704F9BFA880F5B0769B526B4F74F533BD0F5"
+    },
+    {
+      "id": "material.choice-plain",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/choice-plain.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/choice-plain.svg",
+      "size": [
+        413,
+        60
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        413,
+        60
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-verify",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            482,
+            462,
+            446,
+            63
+          ],
+          "placementPivot": [
+            482,
+            462
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.1"
+          ],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-draft",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            483,
+            530,
+            413,
+            60
+          ],
+          "placementPivot": [
+            483,
+            530
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.2"
+          ],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-listen",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            483,
+            596,
+            413,
+            59
+          ],
+          "placementPivot": [
+            483,
+            596
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.3"
+          ],
+          "clip": null
+        }
+      ],
+      "textKeys": [
+        "ui.replica.dialogue.choices.1",
+        "ui.replica.dialogue.choices.2",
+        "ui.replica.dialogue.choices.3"
+      ],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "2DC67D67616C4874846C28CAD87840B323E0AF75BFA59F40E6D5D74339237E96"
+    },
+    {
+      "id": "material.date-paper",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/date-paper.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/date-paper.svg",
+      "size": [
+        247,
+        115
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        247,
+        115
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "date-paper",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            36,
+            30,
+            247,
+            115
+          ],
+          "placementPivot": [
+            36,
+            30
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.date.1",
+            "ui.replica.dialogue.date.2"
+          ],
+          "clip": null
+        }
+      ],
+      "textKeys": [
+        "ui.replica.dialogue.date.1",
+        "ui.replica.dialogue.date.2"
+      ],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "D0706A58A44C915AD070F31E0967F96503C3DC4EDC949750230A771B001477EA"
+    },
+    {
+      "id": "material.insignia",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/insignia.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/insignia.svg",
+      "size": [
+        96,
+        64
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        96,
+        64
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "speaker-mark",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            91,
+            689,
+            73,
+            53
+          ],
+          "placementPivot": [
+            91,
+            689
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.speaker.1"
+          ],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "brand-mark",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            1481,
+            79,
+            150,
+            33
+          ],
+          "placementPivot": [
+            1481,
+            79
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.brand.1"
+          ],
+          "clip": null
+        }
+      ],
+      "textKeys": [
+        "ui.replica.dialogue.brand.1",
+        "ui.replica.dialogue.speaker.1"
+      ],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "0B8C6EB1363AB8D602193331692AEA0672E454B3849B78CCE6AA29683F42ECC9"
+    },
+    {
+      "id": "material.icons",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/icons.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/icons.svg",
+      "size": [
+        384,
+        64
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        384,
+        64
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-icon-quill",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            511,
+            478,
+            28,
+            28
+          ],
+          "placementPivot": [
+            511,
+            478
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.1"
+          ],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-icon-chat",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            512,
+            546,
+            28,
+            28
+          ],
+          "placementPivot": [
+            512,
+            546
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.2"
+          ],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "choice-icon-proof",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            512,
+            612,
+            28,
+            28
+          ],
+          "placementPivot": [
+            512,
+            612
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [
+            "ui.replica.dialogue.choices.3"
+          ],
+          "clip": null
+        }
+      ],
+      "textKeys": [
+        "ui.replica.dialogue.choices.1",
+        "ui.replica.dialogue.choices.2",
+        "ui.replica.dialogue.choices.3"
+      ],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "437154C8749771336ECC76E903BC6516FFD0B03486B681B73C5931AB7A6319A8"
+    },
+    {
+      "id": "material.sun-seal",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/sun-seal.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/sun-seal.svg",
+      "size": [
+        87,
+        127
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        87,
+        127
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "date-ornament",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            44,
+            40,
+            87,
+            127
+          ],
+          "placementPivot": [
+            44,
+            40
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [],
+          "clip": null
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "188DC429B5D78620BAC74D789D6F1D61344CEF8A134612DF43BEF1B7EBC065DE"
+    },
+    {
+      "id": "material.foreground-note",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/foreground-note.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/foreground-note.svg",
+      "size": [
+        392,
+        222
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        392,
+        222
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "foreground",
+          "layer": "foreground",
+          "z": 70,
+          "targetBounds": [
+            1280,
+            719,
+            392,
+            222
+          ],
+          "placementPivot": [
+            1280,
+            719
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [],
+          "clip": null
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "D83AF21CE2D466396E5E7320AD51B067B276452F6F8B67FC50FE124A54CBEB8D"
+    },
+    {
+      "id": "material.harbor-print",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/harbor-print.svg",
+      "source": "assets/ui/coastal-replica/v1/masters/materials.json",
+      "file": "assets/ui/coastal-replica/v1/exports/harbor-print.svg",
+      "size": [
+        770,
+        195
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        770,
+        195
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "sample-reviewed; screen parity pending R12-R14",
+      "sha256": "CFB5EE34C95B21092869840EEBDE18B0620EB66171886A96B9EEF0EFFD14EEC2"
+    },
+    {
+      "id": "pilot.newsroom",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/newsroom-pilot-v1.png",
+      "source": "assets/ui/coastal-replica/v1/prompts.json",
+      "file": "assets/ui/coastal-replica/v1/exports/newsroom-pilot-v1.png",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "visibleBounds": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "room",
+          "layer": "scene",
+          "z": 10,
+          "targetBounds": [
+            0,
+            0,
+            1672,
+            941
+          ],
+          "placementPivot": [
+            0,
+            0
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [],
+          "clip": null
+        },
+        {
+          "screen": "dialogue-pilot",
+          "region": "desk-occluder",
+          "layer": "portraits",
+          "z": 20,
+          "targetBounds": [
+            0,
+            0,
+            1672,
+            941
+          ],
+          "placementPivot": [
+            0,
+            0
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "native authored material rectangle",
+          "textKeys": [],
+          "clip": "pilot-desk-clip; y600+; paper/wave above"
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "registration pilot; final pose/background/edges pending R09-R11",
+      "sha256": "12DC172E7CB8BFC50AB14369EA90599F18B63C54B43BE9F4EA68B7069263FF39"
+    },
+    {
+      "id": "pilot.van",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/van-seated-pilot-v1.png",
+      "source": "assets/ui/coastal-replica/v1/prompts.json",
+      "file": "assets/ui/coastal-replica/v1/exports/van-seated-pilot-v1.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        25,
+        1254,
+        1229
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "van",
+          "layer": "portraits",
+          "z": 20,
+          "targetBounds": [
+            806,
+            38,
+            704,
+            632
+          ],
+          "placementPivot": [
+            806,
+            38
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "visible-alpha envelope, uniform scale/crop",
+          "textKeys": [],
+          "clip": null
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "registration pilot; final pose/background/edges pending R09-R11",
+      "sha256": "BA0A94F99A40C3268E6B90D1F57CE82CEF4F4D1A7D4AA465BDDC698DB07CD1C8"
+    },
+    {
+      "id": "pilot.khue",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/khue-seated-pilot-v1.png",
+      "source": "assets/ui/coastal-replica/v1/prompts.json",
+      "file": "assets/ui/coastal-replica/v1/exports/khue-seated-pilot-v1.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        25,
+        1246,
+        1229
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "khue",
+          "layer": "portraits",
+          "z": 20,
+          "targetBounds": [
+            106,
+            47,
+            662,
+            554
+          ],
+          "placementPivot": [
+            106,
+            47
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "visible-alpha envelope, uniform scale/crop",
+          "textKeys": [],
+          "clip": null
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "registration pilot; final pose/background/edges pending R09-R11",
+      "sha256": "63996D205207F75B8CC4713626C3C8258841B3E592033D7023D2652F95DEBEE7"
+    },
+    {
+      "id": "pilot.harbor-print",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/harbor-print-pilot-v1.png",
+      "source": "assets/ui/coastal-replica/v1/prompts.json",
+      "file": "assets/ui/coastal-replica/v1/exports/harbor-print-pilot-v1.png",
+      "size": [
+        2172,
+        724
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        2170,
+        724
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "paper-harbor",
+          "layer": "print",
+          "z": 50,
+          "targetBounds": [
+            0,
+            746,
+            770,
+            195
+          ],
+          "placementPivot": [
+            0,
+            746
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "visible-alpha envelope, uniform scale/crop",
+          "textKeys": [],
+          "clip": null
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "registration pilot; final pose/background/edges pending R09-R11",
+      "sha256": "D82AD68F4EF0D6BB3B9D34046A61A5E1C789A1FF731C6F298DF74C53250E9708"
+    },
+    {
+      "id": "pilot.foreground-flowers",
+      "version": 1,
+      "master": "assets/ui/coastal-replica/v1/masters/foreground-flowers-pilot-v1.png",
+      "source": "assets/ui/coastal-replica/v1/prompts.json",
+      "file": "assets/ui/coastal-replica/v1/exports/foreground-flowers-pilot-v1.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true,
+      "visibleBounds": [
+        0,
+        0,
+        1244,
+        1254
+      ],
+      "crop": "retain native master; no raster resampling",
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotStatus": "master origin; instance placement pivots recorded; final motion pivot pending R18",
+      "instances": [
+        {
+          "screen": "dialogue-pilot",
+          "region": "foreground",
+          "layer": "foreground",
+          "z": 70,
+          "targetBounds": [
+            0,
+            628,
+            244,
+            313
+          ],
+          "placementPivot": [
+            0,
+            628
+          ],
+          "pivotRole": "top-left placement; motion pivot remains separate",
+          "registration": "visible-alpha envelope, uniform scale/crop",
+          "textKeys": [],
+          "clip": null
+        }
+      ],
+      "textKeys": [],
+      "textPolicy": "no baked player-facing lettering",
+      "rights": "project-generated/vector source, prompt/provenance recorded; font licenses tracked separately",
+      "status": "registration pilot; final pose/background/edges pending R09-R11",
+      "sha256": "9F29FA63C536CEB28B6542458D710A0F82A5375C226715203D99B5384DFCA85A"
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Source Serif 4",
+      "vietnameseCodepointsChecked": 107,
+      "missing": []
+    },
+    {
+      "family": "Cormorant Garamond",
+      "vietnameseCodepointsChecked": 107,
+      "missing": []
+    },
+    {
+      "family": "Dancing Script",
+      "vietnameseCodepointsChecked": 107,
+      "missing": []
+    }
+  ],
+  "fontManifest": "assets/fonts/coastal-replica/manifest.json",
+  "compositionSource": "content/ui/coastal-replica-pilot.json",
+  "compositionSourceSHA256": "38CFF7C1CCA78066A04B04802FD47DC701A22BADEDE7FE3EDBF48B872B19F1AB",
+  "gate": "paper/material/icon sample review only; pilot portraits/background are not G2 assets",
+  "extension": "new versioned masters/instances; no speculative runtime engine"
+}

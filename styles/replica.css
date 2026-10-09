@@ -1,0 +1,23 @@
+@import url('./replica-fonts.css');
+:root { color-scheme: dark; font: 15px/1.55 system-ui,sans-serif; color:#e8ede9; background:#142a32; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.replica-authoring { padding: 16px 24px; }
+.replica-authoring h1 { margin:0; font-size:21px; }
+.replica-authoring p { margin:8px 0; max-width:1100px; }
+.replica-controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+select,button { font:inherit; padding:7px 10px; }
+.replica-host { width:100%; height:min(80vh,calc(100vw * 941 / 1672)); position:relative; overflow:hidden; background:#07171f; }
+.replica-viewport { position:absolute; inset:0; width:100%; height:100%; }
+.replica-stage { width:100%; height:100%; display:block; touch-action:manipulation; }
+.replica-stage text { font-family:'Source Serif 4',serif; font-kerning:normal; font-optical-sizing:auto; }
+.replica-stage .choice, .replica-stage .continue { cursor:pointer; }
+.replica-stage .choice:focus, .replica-stage .continue:focus { outline:none; }
+.replica-stage .focus-ring { opacity:0; }
+.replica-stage .choice:focus-visible .focus-ring { opacity:1; }
+.replica-stage .continue:focus-visible .focus-ring { opacity:1; }
+.replica-stage [aria-disabled="true"] { cursor:default; }
+.replica-stage .reading-copy { pointer-events:none; }
+.replica-fault { padding:24px; }
+.replica-capture .replica-authoring { display:none; }
+.replica-capture .replica-host { width:1672px; height:941px; }

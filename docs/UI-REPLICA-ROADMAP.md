@@ -1,6 +1,6 @@
 # Hồi Âm — roadmap replica visual và chuyển động
 
-Ngày: 2026-10-09. Trạng thái: **Stage 0 / R01–R04 đã hoàn thành phần chuẩn bị**; R05–R45 chưa triển khai. Xem [bộ spec, layout sheets và capture protocol](ui-specs/coastal-replica/README.md).
+Ngày: 2026-10-09. Trạng thái: **Stage 0 / R01–R04 và Stage 1 / R05–R08 đã bàn giao**. Stage 1 là pipeline và mẫu xếp lớp; replica toàn màn chưa qua G2. R09–R45 chưa triển khai. Xem [bộ spec](ui-specs/coastal-replica/README.md) và [review Stage 1](ui-reviews/coastal-replica-stage1/README.md).
 
 ## Mục tiêu và thứ tự ưu tiên
 
@@ -65,6 +65,8 @@ Mỗi work package bên dưới là một đơn vị triển khai/review nhỏ. 
 | R08 | Dựng stage cố định và mẫu 5–7 lớp thực | Background/portrait/paper/text/foreground có tọa độ và vùng che đúng; hit testing scale đúng; không ảnh toàn màn với hitbox giả | R04, R06, R07 |
 
 **Mốc P1:** G1 cho mẫu art và stage chứng minh được xếp lớp thật. Nếu DOM/SVG/Canvas hiện tại có giới hạn cụ thể, làm spike nhỏ với cùng cảnh và profile trước khi chọn thêm renderer. Không quyết định đổi engine từ suy đoán.
+
+**Bàn giao Stage 1:** 15 asset có master/export/hash/provenance, ba font local OFL đủ glyph tiếng Việt, mẫu giấy/mực/mép sóng và icon, stage SVG 7 lớp thực, chữ từ catalog và hitbox scale đồng đều. Preview riêng tại `tools/coastal-replica-preview.html`. Contact sheet sáng/tối, crop 100%/50%, typography, native capture và overlay/diff nằm trong [review Stage 1](ui-reviews/coastal-replica-stage1/README.md). G1 chỉ qua cho mẫu giấy/mực/icon; các PNG nền, chân dung và minh họa là pilot đăng ký lớp, còn sai pose/props/crop và không thay thế R09–R14. Chưa có motion/GPU acceptance, chưa nối gameplay và chưa đổi entry mặc định.
 
 ## P2 — Thoại replica tĩnh: màn đầu tiên hoàn chỉnh
 
