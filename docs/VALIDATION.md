@@ -1,5 +1,19 @@
 # Kết quả kiểm chứng sandbox
 
+## Refactor kiến trúc — 2026-10-09
+
+- Chrome headless: **68/68 passed**, gồm 63 kiểm tra hiện có và năm kiểm tra mới
+  cho content references, text fallback, session replacement, save migration và input lifecycle.
+- Architecture check: **0 issues**, 699 catalog entries.
+- Tám policy trong `sandbox-baseline.json` và bốn policy trong
+  `gameplay-baseline.json` khớp toàn bộ các field, gồm lượt 84 ngày; không ghi lại baseline.
+- 40 PNG review và năm script di cư/inventory đã chuyển vào `archive/development/`;
+  SHA-256 của cả 45 file đã kiểm tra sau khi chuyển. Link tài liệu đã cập nhật.
+- Node không có trong PATH; không tuyên bố đã chạy `npm test`.
+
+Các mục dưới đây là kết quả lịch sử. Baseline vẫn chỉ chứng minh regression của
+mock, không chứng minh balance cuối hay kết cục truyện sản phẩm.
+
 Ngày kiểm tra: 2026-10-05.
 
 ## Backup
@@ -21,7 +35,7 @@ di cư. Snapshot ở `archive/clb-hoi/`, inventory ở `BACKUP-MANIFEST.json`.
 - UI sandbox: chỉnh trạng thái/lịch gia nhập, chạy tuần, so sánh,
   đổi cấu hình, preset S04 và chạy hết học kỳ.
 
-Ảnh desktop được kiểm tra ở `tools/sandbox-preview.png`.
+Ảnh desktop được kiểm tra ở `archive/development/reviews/sandbox-preview.png`.
 Node không có trong PATH của môi trường thực hiện; không tuyên bố đã chạy Node.
 
 ## Baseline của dữ liệu cố định

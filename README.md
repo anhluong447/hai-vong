@@ -41,6 +41,8 @@ Xem [hướng dẫn và giới hạn](docs/GAMEPLAY-SANDBOX.md). Map truyện th
 - [Hướng dẫn sandbox](docs/SANDBOX.md)
 - [Bộ luật và quyết định chuẩn hóa](docs/RULES.md)
 - [Kiến trúc](docs/ARCHITECTURE.md)
+- [Quy trình phát triển và quy tắc nội dung](docs/DEVELOPMENT.md)
+- [Nội dung, văn bản và balance](content/README.md)
 - [Kết quả kiểm chứng và baseline](docs/VALIDATION.md)
 - [Playtest cơ chế qua UI và các chiến thuật bổ sung](docs/PLAYTEST-2026-10-05.md)
 - [Thiết kế v2 gốc](docs/v0.1/Draft.md), [mô phỏng Python gốc](docs/v0.1/sym.py)
@@ -55,7 +57,16 @@ powershell -ExecutionPolicy Bypass -File tools/test_unit_tests.ps1
 python tools/run_browser_tests.py
 # Khi có Node (core tests):
 npm test
+# Kiểm tra ranh giới kiến trúc và text:
+python tools/check_architecture.py
+# Sau browser tests, đối chiếu hai baseline đã lưu:
+python tools/check_baselines.py
 ```
 
 Dự án CLB Hỏi cũ nằm trong `archive/clb-hoi/`, có manifest SHA-256 đã kiểm tra
 trước khi dọn bản đang chạy. Save cũ không bị đọc hoặc ghi đè.
+
+Refactor 2026-10-09 tách gameplay domain, session, panels, saves và content.
+Văn bản hiển thị nằm trong `content/locales/vi.js`; không thêm prose trực tiếp
+vào runtime. Ảnh review lịch sử và script di cư đã hoàn tất nằm trong
+[`archive/development/`](archive/development/README.md).

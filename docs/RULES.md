@@ -6,7 +6,9 @@ không phải oracle tuyệt đối cho các quyết định chuẩn hóa dướ
 
 ## Công thức
 
-Tham số: `src/core/config.js`. Hàm thuần: `src/core/rules.js`.
+Tham số: `content/sandbox/balance.js` (facade `src/core/config.js`). Hàm thuần:
+`src/core/rules.js`. Đây là ruleset sandbox công thức; ruleset gameplay/pixel mới
+dùng `content/gameplay/balance.js` và `src/domain/`, không dùng chung lịch hay điểm.
 
 - Hiệu suất = `1 - 0.5 * fatigue / 100`.
 - N = `0.6 * PV_reporter * efficiency_reporter + 0.4 * need_supporter * efficiency_supporter`.
