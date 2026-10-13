@@ -8,3 +8,8 @@ content/ui/coastal-replica-pilot.json text eol=lf
 content/ui/coastal-dialogue.json text eol=lf
 content/ui/coastal-dialogue-ui.json text eol=lf
 content/ui/coastal-dialogue-motion.json text eol=lf
+assets/fonts/coastal-menu/**/OFL.txt text eol=lf
+assets/fonts/coastal-menu/**/METADATA.pb text eol=lf
+assets/fonts/coastal-menu/**/*.ttf binary
+assets/ui/coastal/**/*.svg text eol=lf
+assets/ui/coastal/**/*.png binary

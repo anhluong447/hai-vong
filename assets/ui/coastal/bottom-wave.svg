@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="200" viewBox="0 0 1672 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="waveGradDeep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#074856" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#052832" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="waveGradMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#147281" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#073e4a" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="waveGradFoam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6ad5cf" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#2a8b97" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <!-- Deep back wave -->
+  <path class="coastal-wave-back" d="M 0 60 C 240 20 480 80 720 50 C 960 20 1200 70 1440 40 C 1560 25 1620 45 1672 55 L 1672 200 L 0 200 Z" fill="url(#waveGradDeep)"/>
+  <!-- Middle wave -->
+  <path class="coastal-wave-mid" d="M 0 85 C 220 55 440 105 700 75 C 920 45 1180 95 1420 65 C 1540 50 1610 70 1672 80 L 1672 200 L 0 200 Z" fill="url(#waveGradMid)"/>
+  <!-- Foam crest wave -->
+  <path class="coastal-wave-foam" d="M 0 110 C 200 80 460 125 720 95 C 980 65 1220 115 1460 85 C 1570 70 1620 90 1672 100 L 1672 200 L 0 200 Z" fill="url(#waveGradFoam)"/>
+  <!-- Foam highlight crest strokes -->
+  <path d="M 0 109 C 200 79 460 124 720 94 C 980 64 1220 114 1460 84 C 1570 69 1620 89 1672 99" fill="none" stroke="#e6f7f5" stroke-width="1.8" opacity="0.75"/>
+</svg>

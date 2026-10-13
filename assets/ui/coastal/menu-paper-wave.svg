@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" width="1672" height="941">
+  <defs><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".48 .64" numOctaves="3" seed="19"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs>
+  <path d="M0 853C185 816 326 926 533 865S739 717 986 795S1192 797 1357 805S1559 819 1672 838V941H0Z" fill="#238b94" opacity=".85"/>
+  <path d="M0 863C197 825 361 932 555 868S737 731 992 810S1201 818 1372 821S1569 829 1672 855V941H0Z" fill="#7fcbc4" opacity=".6"/>
+  <path d="M0 873C199 839 353 938 559 881S748 748 995 830S1204 830 1374 838S1564 842 1672 869V941H0Z" fill="#f7f1e2" filter="url(#grain)"/>
+  <path d="M0 864C197 826 361 933 555 869S737 732 992 811S1201 819 1372 822S1569 830 1672 856" fill="none" stroke="#f8f4e6" stroke-width="2" opacity=".9"/>
+</svg>

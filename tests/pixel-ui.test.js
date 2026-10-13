@@ -4,7 +4,7 @@ function waitFor(fn,timeout=12000){return new Promise((resolve,reject)=>{const s
 test('pixel real UI: assets, keyboard, collision, walk through four maps, NPC/board, job, bed feedback and position save',async()=>{
  const f=document.createElement('iframe');f.src='../pixel.html';f.style.cssText='position:relative;left:0;width:1200px;height:900px';document.body.append(f);await waitFor(()=>f.contentWindow.pressPixel?.ready);const w=f.contentWindow,d=w.document;w.confirm=()=>true;
  const snapshot=()=>w.pressPixel.world,canvas=()=>d.querySelector('canvas');let steps=0,stage='initial';
- function click(label){const b=[...d.querySelectorAll('button')].find(b=>b.textContent===label);a.ok(b,`Missing ${label}`);a.ok(!b.disabled,`Disabled ${label}`);b.click();a.ok(!d.querySelector('.pixel-notice.error'),d.querySelector('.pixel-notice')?.textContent);}
+ function click(label){const b=[...d.querySelectorAll('button')].find(b=>b.textContent===label||b.getAttribute('aria-label')===label);a.ok(b,`Missing ${label}`);a.ok(!b.disabled,`Disabled ${label}`);b.click();a.ok(!d.querySelector('.pixel-notice.error'),d.querySelector('.pixel-notice')?.textContent);}
  function point(x,y){const rect=canvas().getBoundingClientRect(),p=w.pressPixel.screenPosition(x,y);a.ok(p.x>=0&&p.x<rect.width&&p.y>=0&&p.y<rect.height,'Destination is outside viewport');canvas().dispatchEvent(new w.PointerEvent('pointerdown',{clientX:rect.left+p.x,clientY:rect.top+p.y,bubbles:true}));}
  async function walkTo(goal){stage=`walk ${snapshot().mapId} to ${goal.x},${goal.y}`;const before=snapshot().mapId;for(let guard=0;guard<80;guard++){
   const s=snapshot();if(s.mapId!==before)return;if(s.x===goal.x&&s.y===goal.y&&!w.pressPixel.moving)return;
@@ -23,9 +23,9 @@ test('pixel real UI: assets, keyboard, collision, walk through four maps, NPC/bo
   await walkTo({x:12,y:18});a.equal(snapshot().mapId,'yard');await walkTo({x:20,y:26});a.equal(snapshot().mapId,'street');
   await talk('long');click('Hangout · tiến triển sự kiện');a.equal(w.pressGameplay.state.phase,'evening');a.equal(w.pressGameplay.state.people.find(p=>p.id==='long').bond,1);
   await talk('food-job');click('Làm thêm · +150đ');a.equal(w.pressGameplay.state.phase,'bed');a.equal(w.pressGameplay.state.money,450);
-  await walkTo({x:6,y:21});a.equal(snapshot().mapId,'home');const saved=snapshot();click('Lưu');
+  await walkTo({x:6,y:21});a.equal(snapshot().mapId,'home');const saved=snapshot();canvas().focus();canvas().dispatchEvent(new w.KeyboardEvent('keydown',{key:'F5',bubbles:true,cancelable:true}));
   await talk('bed');click('Nhấn giường · đi ngủ');a.equal(w.pressGameplay.state.day,1);a.ok(d.querySelector('[aria-label="Tin nhắn cần duyệt"]'));a.equal(w.pressGameplay.state.energy,0);click('Approve · tiếp tục');a.equal(w.pressGameplay.state.energy,0);
-  await talk('bed');click('Nhấn giường · đi ngủ');a.equal(w.pressGameplay.state.day,2);click('Tải');a.equal(w.pressGameplay.state.day,1);a.equal(w.pressGameplay.state.phase,'bed');a.equal(snapshot().mapId,saved.mapId);a.equal(snapshot().x,saved.x);a.equal(snapshot().y,saved.y);
+  await talk('bed');click('Nhấn giường · đi ngủ');a.equal(w.pressGameplay.state.day,2);canvas().dispatchEvent(new w.KeyboardEvent('keydown',{key:'F9',bubbles:true,cancelable:true}));click('Xác nhận · Enter');a.equal(w.pressGameplay.state.day,1);a.equal(w.pressGameplay.state.phase,'bed');a.equal(snapshot().mapId,saved.mapId);a.equal(snapshot().x,saved.x);a.equal(snapshot().y,saved.y);
   a.ok(!d.body.innerText.includes('undefined'));a.ok(!d.body.innerText.includes('NaN'));a.ok(steps>80,'Test should walk actual map routes');
   f.style.width='390px';await new Promise(resolve=>setTimeout(resolve,50));a.ok(d.documentElement.scrollWidth<=w.innerWidth+1,'Pixel map overflows on mobile');
  }catch(error){throw new Error(`${error.message}; stage=${stage}; world=${JSON.stringify(snapshot())}; moving=${w.pressPixel.moving}; phase=${w.pressGameplay.state.phase}; status=${d.querySelector('.pixel-notice')?.textContent}`);}finally{w.dispatchEvent(new w.Event('pagehide'));f.remove();}

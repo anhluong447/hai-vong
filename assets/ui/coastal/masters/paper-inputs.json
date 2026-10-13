@@ -1,0 +1,13 @@
+{
+  "origin": "Round 1 accepted procedural paper/thumbnail alpha; retained without byte changes",
+  "assets": [
+    {
+      "name": "menu-case-paper.png",
+      "sha256": "00fb7ded13c92dc108fd8082e1f05c89eae721d3ea31895a0678748cd92214b6"
+    },
+    {
+      "name": "menu-thumb-edge-mask.png",
+      "sha256": "be8a3d79a20eda49526dae36b76fb1b781e43dfd74cae5ec2cc7823df13198c0"
+    }
+  ]
+}

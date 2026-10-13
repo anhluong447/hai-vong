@@ -1,0 +1,86 @@
+/* Fixed 1672 x 941 design plane. All rules are scoped to game pages. */
+html.game-page,html.game-page body{margin:0;width:100%;height:100%;overflow:hidden;background:#101c24}
+.single-screen.coastal-app{padding:0;margin:0;max-width:none;width:100%;height:100%;font-size:20px;--sea-display:'Source Serif 4',Georgia,serif;--sea-font:'Be Vietnam Pro','Segoe UI',sans-serif}
+.game-viewport{position:fixed;inset:0;overflow:hidden;background:#101c24}
+.game-stage{position:absolute;left:50%;top:50%;width:1672px;height:941px;transform:translate(-50%,-50%) scale(var(--stage-scale,1));transform-origin:center;overflow:hidden;isolation:isolate;container-type:inline-size}
+.single-screen .coastal-shell{position:absolute;inset:0;margin:0;padding:0;min-height:0;overflow:hidden}
+.single-screen .pixel-stage{position:absolute;inset:0;width:1672px;height:941px;min-height:0;border:0;box-shadow:none;display:block;background:#172d2e;overflow:hidden}
+.single-screen .pixel-stage canvas{position:absolute;left:0;top:0;display:block;outline:0;border:0}
+.single-screen .pixel-hint{display:none}
+.single-screen .pixel-sign{font-size:16px;background:#102d42dc;padding:4px 10px;border:0;border-bottom:1px solid #62d6d077;box-shadow:0 2px 8px #001b3033}
+.single-screen .coastal-hud.pixel-hud{position:absolute;inset:0;display:block;width:100%;height:100%;margin:0;padding:0;color:var(--sea-paper);border:0;z-index:10;box-shadow:none}
+.single-screen [hidden]{display:none!important}
+.single-screen .coastal-hud-date-container{top:31px;left:29px}
+.single-screen .coastal-date-day{font-size:35px;line-height:1.2;white-space:nowrap}
+.single-screen .coastal-date-phase{font-size:19px;line-height:1.4;max-width:270px}
+.single-screen .coastal-date-paper{width:355px;height:110px;padding:12px 18px 12px 24px;gap:14px}
+.single-screen .coastal-date-mark{width:42px;flex:none}
+.single-screen .coastal-hud-resource-ribbon{top:21px;right:0;width:591px;height:83px}
+.single-screen .coastal-energy-text,.single-screen .coastal-money-text{font-size:25px;font-weight:500}
+.single-screen .coastal-energy-dot{width:15px;height:15px;box-shadow:none}
+.single-screen .coastal-energy-dots{gap:10px}
+.single-screen .coastal-resource-inner{padding:18px 36px;gap:24px}
+.single-screen .coastal-hud-objective{left:0;top:155px;width:342px}
+.single-screen .coastal-objective-title{font-size:23px;letter-spacing:.025em}
+.single-screen .coastal-objective-copy{font-size:22px;line-height:1.5;overflow-wrap:anywhere}
+.single-screen .coastal-hud-bottom{left:40px;right:40px;bottom:25px}
+.single-screen .coastal-location-copy,.single-screen .coastal-control-label{font-size:24px}
+.single-screen .coastal-esc-keycap{font-size:22px}
+.single-screen .coastal-control-item,.single-screen .coastal-interaction-bubble{pointer-events:auto}
+.single-screen .coastal-interaction-prompt{transform:translate(-50%,-100%)}
+.single-screen .coastal-interaction-bubble{padding:12px 22px;font:600 21px/1.4 var(--sea-font);color:#102d42;background:#ffd36b;border:1px solid #ffe7a2;box-shadow:0 4px 16px #001b3040;white-space:nowrap;max-width:400px}
+.single-screen .pixel-notice{position:absolute;left:430px;right:430px;bottom:32px;padding:8px 18px;margin:0;min-height:0;color:#f4f1e7;font-size:17px;line-height:1.5;text-align:center;background:#102d42c9;border-radius:3px;pointer-events:none;z-index:11}
+.single-screen .pixel-notice:empty{display:none}
+.single-screen .pixel-notice.error{color:#ffdb9a}
+.single-screen .coastal-overlay-host{position:absolute;inset:0;z-index:20;pointer-events:none}
+.single-screen .pixel-overlay{position:absolute;inset:0;padding:0;display:grid;place-items:center;background:#001c3066;pointer-events:auto}
+.single-screen .pixel-overlay.conversation{padding:0 48px 28px;place-items:end center;background:linear-gradient(transparent 25%,#001c3077)}
+.single-screen button:focus-visible,.single-screen [tabindex]:focus-visible,.single-screen select:focus-visible,.single-screen input:focus-visible,.single-screen textarea:focus-visible,.single-screen summary:focus-visible{outline:3px solid #eabf50;outline-offset:3px}
+.single-screen .pixel-overlay button:focus-visible{background:#ffdc82;color:#102d42}
+.single-screen .dialogue-stage.coastal-dialogue{width:1576px;max-width:none;min-height:0;display:block}
+.single-screen .coastal-dialogue .pixel-dialog.coastal-dialogue-surface{width:100%;max-width:none;min-height:350px;max-height:590px;padding:30px 100px 70px 420px;overflow:auto;border:0;border-top:2px solid #197686;border-radius:2px;background:#fbf7ed;box-shadow:0 -6px 34px #001b3033}
+.single-screen .coastal-dialogue .dialogue-sprite{left:6px;bottom:0;right:auto;width:385px;height:760px;max-height:none;z-index:3;overflow:hidden}
+.single-screen .coastal-dialogue .dialogue-sprite-image{object-fit:contain;object-position:center bottom}
+.single-screen .coastal-dialogue .pixel-dialog-head{margin:0;padding:0 0 8px;border:0;align-items:center}
+.single-screen .coastal-speaker{font:600 34px/1.35 var(--sea-display);letter-spacing:.035em}
+.single-screen .coastal-insignia{width:45px;height:34px}
+.single-screen .interaction-caption{font-size:16px;margin:2px 0 8px;letter-spacing:.04em}
+.single-screen .coastal-speaker-rule{margin:0 0 16px}
+.single-screen .dialogue-line{font:400 27px/1.65 var(--sea-display);margin:12px 0 20px;min-height:0;max-width:none}
+.single-screen .coastal-dialogue-actions{display:flex;flex-direction:column;gap:12px}
+.single-screen .coastal-dialogue-actions .interaction-actions{display:flex;flex-direction:column;gap:10px}
+.single-screen .coastal-dialogue-actions button,.single-screen .coastal-choice-card{font:500 19px/1.5 var(--sea-font);padding:12px 20px;margin:0;border:1px solid #d8ccb0;background:#f3ecdc;color:#102d42;text-align:left;min-height:50px;box-shadow:0 2px 7px #102d4215}
+.single-screen .coastal-dialogue-actions button:disabled{opacity:.45;box-shadow:none}
+.single-screen .coastal-dialogue-actions button.primary,.single-screen .coastal-choice-card.primary{background:#ffdd80;border-color:#ddb855}
+.single-screen .coastal-choices-stack{display:flex;flex-direction:column;gap:10px;max-width:840px}
+.single-screen .coastal-continue-bar{margin:16px 0 0}
+.single-screen .coastal-continue-btn{font-size:18px;padding:8px 16px}
+.single-screen .coastal-flowers{left:0;bottom:0;width:205px;height:150px;pointer-events:none}
+.single-screen .coastal-notebook{right:0;bottom:0;width:180px;height:120px;pointer-events:none}
+.single-screen .coastal-close{font:500 17px/1.4 var(--sea-font);padding:10px 15px;border:1px solid #6ea2a888;background:transparent;color:#176475;white-space:nowrap}
+.game-map{width:1460px;height:810px;padding:42px;background:#fbf5e8;box-shadow:0 12px 60px #001b3080;display:flex;flex-direction:column;color:#143e48}
+.game-map h2{font:500 42px var(--sea-display);margin:0 0 12px}
+.game-map-layout{display:grid;grid-template-columns:1fr 350px;gap:30px;min-height:0;flex:1}
+.game-map-canvas{background:#233e38;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+.game-map-places{overflow:auto;padding:12px}
+.game-map-places button{display:block;width:100%;text-align:left;padding:14px 20px;margin:0 0 12px;background:#f0e6d0;border:1px solid #bcc2b2;font:500 21px/1.5 var(--sea-font)}
+.game-map-places button.primary{background:#ffdd80}
+.game-map p{font-size:19px}.game-map footer{display:flex;justify-content:space-between;align-items:center;font-size:18px;margin-top:18px}
+.game-confirm{width:680px;padding:45px 50px;background:#fbf5e8;color:#153e48;border-top:5px solid #368d95;box-shadow:0 15px 80px #001b3070}
+.game-confirm h2{font:500 35px/1.3 var(--sea-display);margin:0 0 22px}
+.game-confirm p{font-size:23px;line-height:1.65;margin:0 0 28px}
+.game-confirm .actions{display:flex;justify-content:flex-end;gap:15px}
+.game-confirm button{font-size:20px;padding:12px 22px;border:1px solid #80a1a1;color:#153e48}
+.game-confirm .primary{background:#ffdd80}
+.single-screen .modal{position:static;inset:auto;width:1100px;max-height:800px;overflow:auto;background:transparent;padding:0}
+.single-screen .modal-window{max-width:none;width:100%;padding:36px;background:#fbf5e8;color:#143e48}
+@media(prefers-reduced-motion:reduce){.single-screen *,.single-screen *::before,.single-screen *::after{animation:none!important;transition:none!important}}
+
+.single-screen .coastal-resource-inner{padding:0;gap:22px}
+.single-screen .coastal-hud-resource-ribbon{padding:0 30px 0 50px}
+.single-screen .coastal-location-copy{max-width:530px}
+.single-screen .game-session-actions{border-top:1px solid #b8c8bf;padding-top:18px;margin-top:24px}
+.single-screen .game-session-actions .muted{font-size:16px}
+
+#app.single-screen{max-width:none;margin:0;padding:0;width:100%;height:100%}
+

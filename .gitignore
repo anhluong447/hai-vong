@@ -2,6 +2,7 @@
 /tools/*.log
 /tools/edge-test-profile/
 /tools/preview-profile/
+/tools/.single-screen-profiles/
 
 # Python bytecode cache
 __pycache__/
@@ -9,3 +10,6 @@ __pycache__/
 
 # Local Node dependencies
 node_modules/
+
+# Local drafts, review captures and temporary commit artifacts
+/drafts/

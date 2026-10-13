@@ -5,7 +5,7 @@ export class PixelInput {
   constructor(world,{keyMap=DEFAULT_KEYS,windowTarget=window,documentTarget=document}={}) {
     this.world=world;this.windowTarget=windowTarget;this.documentTarget=documentTarget;
     this.keydown=event=>{
-      if(world.blocked||/INPUT|SELECT|TEXTAREA|BUTTON/.test(event.target.tagName))return;
+      if(event.defaultPrevented||world.blocked||/INPUT|SELECT|TEXTAREA|BUTTON/.test(event.target.tagName))return;
       const direction=keyMap[event.key]||keyMap[event.key.toLowerCase()];
       if(direction){event.preventDefault();world.keys.add(direction);world.path=[];world.target=null;}
       if(['e','E','Enter',' '].includes(event.key)&&!event.repeat){event.preventDefault();world.interact();}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-text="ui.replica.menu.preview.title"></title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/gameplay.css">
+  <link rel="stylesheet" href="../styles/coastal.css">
+  <link rel="stylesheet" href="../styles/replica-fonts.css">
+  <link rel="stylesheet" href="../styles/coastal/menu.css">
+  <style>
+    body {
+      margin: 0;
+      background: #041a22;
+      color: #e4edf0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .preview-header {
+      padding: 14px 24px;
+      background: #03141a;
+      border-bottom: 1px solid #144f5c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      z-index: 100;
+    }
+    .preview-header h1 {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 500;
+      color: #f6f0e3;
+    }
+    .preview-header p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #89b4ba;
+    }
+    .preview-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .preview-btn {
+      background: #083c48;
+      border: 1px solid #237482;
+      color: #f6f0e3;
+      padding: 7px 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      transition: background 150ms ease;
+    }
+    .preview-btn:hover {
+      background: #0f5262;
+    }
+    .preview-btn.active {
+      background: #c29b38;
+      border-color: #f7d47a;
+      color: #121820;
+    }
+    .preview-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+      background: radial-gradient(circle at 50% 30%, #062b35 0%, #03131a 100%);
+    }
+    .preview-container {
+      width: 100%;
+      max-width: 1672px;
+    }
+  </style>
+</head>
+<body>
+  <header class="preview-header">
+    <div>
+      <h1 data-text="ui.replica.menu.preview.heading"></h1>
+      <p data-text="ui.replica.menu.preview.note"></p>
+    </div>
+    <div class="preview-actions">
+      <button id="btn-replay" class="preview-btn" type="button" data-text="ui.replica.menu.preview.replay"></button>
+      <button id="btn-motion" class="preview-btn" type="button" data-text="ui.replica.menu.preview.motion"></button>
+    </div>
+  </header>
+  <main class="preview-stage">
+    <div id="menu-root" class="preview-container"></div>
+  </main>
+  <script type="module" src="./coastal-menu-preview.js"></script>
+</body>
+</html>

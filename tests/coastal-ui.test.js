@@ -56,6 +56,6 @@ test('coastal pixel shell: preserves world/HUD identity, overlay lock and mobile
   const overlay=d.querySelector('[role=dialog]');a.ok(d.querySelector('.coastal-shell').inert);a.equal(d.querySelector('canvas'),canvas);a.equal(d.querySelector('.pixel-hud'),hud);
   w.pressGameplay.navigate('team');a.equal(d.querySelector('[role=dialog]'),overlay);a.equal(d.querySelector('canvas'),canvas);
   frame.style.width='390px';await new Promise(resolve=>setTimeout(resolve,80));a.ok(d.documentElement.scrollWidth<=w.innerWidth+1,'Coastal menu overflows mobile');
-  [...d.querySelectorAll('button')].find(node=>node.textContent===t('src.gameplay.main.dong_esc')).click();a.ok(!d.querySelector('[role=dialog]'));a.ok(!d.querySelector('.coastal-shell').inert);
+  d.querySelector('.coastal-menu-back').click();a.ok(!d.querySelector('[role=dialog]'));a.ok(!d.querySelector('.coastal-shell').inert);
  }finally{frame.contentWindow.dispatchEvent(new frame.contentWindow.Event('pagehide'));frame.remove();}
 });

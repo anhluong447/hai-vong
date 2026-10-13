@@ -6,7 +6,7 @@ export class WorldRenderer {
  constructor(world) { this.world=world; }
 resize(){
  const world=this.world;
-const box=world.host.getBoundingClientRect();if(!box.width||!box.height)return;world.scale=box.width<600?2:3;world.canvas.width=Math.max(120,Math.floor(box.width/world.scale));world.canvas.height=Math.max(120,Math.floor(box.height/world.scale));world.canvas.style.width=`${world.canvas.width*world.scale}px`;world.canvas.style.height=`${world.canvas.height*world.scale}px`;world.draw(0);}
+const box=world.host.closest('.game-stage')?{width:world.host.clientWidth,height:world.host.clientHeight}:world.host.getBoundingClientRect();if(!box.width||!box.height)return;world.scale=box.width<600?2:3;world.canvas.width=Math.max(120,Math.floor(box.width/world.scale));world.canvas.height=Math.max(120,Math.floor(box.height/world.scale));world.canvas.style.width=`${world.canvas.width*world.scale}px`;world.canvas.style.height=`${world.canvas.height*world.scale}px`;world.draw(0);}
 draw(time){
  const world=this.world;
 const ctx=world.canvas.getContext('2d'),w=world.canvas.width,h=world.canvas.height;ctx.imageSmoothingEnabled=false;ctx.fillStyle='#213e38';ctx.fillRect(0,0,w,h);if(!world.ready){ctx.fillStyle='#f0dfbc';ctx.font='10px monospace';ctx.fillText(world.error||t("src.pixel.PixelWorld.dang_tai_asset_pixel"),12,25);return;}
@@ -27,5 +27,6 @@ const ctx=world.canvas.getContext('2d'),w=world.canvas.width,h=world.canvas.heig
   const near=world.nearest();if(near){const x=(near.x+.5)*16-world.camera.x,y=near.sprite?(near.y+1)*16-world.sprite(near.sprite).frameHeight-world.camera.y:(near.y-1)*16-world.camera.y;ctx.fillStyle='#f5d786';ctx.fillRect(x-3,y-6,6,6);ctx.fillStyle='#344b41';ctx.fillRect(x-1,y-5,2,3);}
   if(world.portrait?.node.isConnected){const {node,id}=world.portrait,s=world.sprite(id);if(s.clips){const clock=world.actor(id),f=clipFrame(s,'talk','down',clock.elapsed);node.style.setProperty('--portrait-column',f.x/s.frameWidth);node.style.setProperty('--portrait-row',f.y/s.frameHeight);}}
   const door=world.map.portals.find(p=>Math.abs(p.x-world.player.x)+Math.abs(p.y-world.player.y)<=2);world.hint.textContent=world.blocked?t("src.pixel.PixelWorld.dong_de_tro_lai_map"):near?t("src.pixel.PixelWorld.e_enter_value0", {value0: (near.person?world.getState().people.find(p=>p.id===near.person)?.name:near.label)}):door?t("src.pixel.PixelWorld.cua_value0", {value0: (door.label)}):t("src.pixel.PixelWorld.wasd_di_e_enter_tuong_tac_bam_map_tim_duong");
+  world.onFrame?.();
  }
 }

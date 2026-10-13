@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941" width="1672" height="941">
+  <!-- Alpha mask for the existing newspaper art. Excludes baked key hints. -->
+  <!-- Cover the already-blurred art edge with solid alpha; feather outside it.
+       A feather centered inside the edge lets wave/foam show through the paper. -->
+  <defs><filter id="newspaperFeather" x="-5%" y="-15%" width="110%" height="135%"><feMorphology operator="dilate" radius="12"/><feGaussianBlur stdDeviation="2"/></filter></defs>
+  <path d="M432 941C551 927 660 864 780 789C932 803 1131 841 1422 941Z" fill="#fff" filter="url(#newspaperFeather)"/>
+</svg>

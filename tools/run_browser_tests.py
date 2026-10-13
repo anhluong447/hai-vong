@@ -12,13 +12,13 @@ import json
 from browser_cdp import DevTools
 
 
-def run_real_time(arguments, url, profile, environment):
+def run_real_time(arguments, url, profile, environment, timeout=40):
     """Wait on actual completion for Canvas encoders/crypto worker tasks.
 
     Headless virtual time can expire while those workers are still computing.
     This optional mode shares the same DOM result contract as the normal suite.
     """
-    deadline = time.monotonic() + 40
+    deadline = time.monotonic() + timeout
     with open(Path(profile) / 'real-time-browser.log', 'w', encoding='utf-8') as log:
         process = subprocess.Popen(arguments + ['--remote-debugging-port=0', 'about:blank'],
                                    stdout=log, stderr=log, env=environment)
@@ -40,7 +40,7 @@ def run_real_time(arguments, url, profile, environment):
             if re.search(r'<p class="(?:ok|bad)">\d+/\d+ passed</p>', result):
                 return subprocess.CompletedProcess(arguments, 0, result, '')
             if time.monotonic() >= deadline:
-                return subprocess.CompletedProcess(arguments, 1, result, 'Real-time tests did not finish within 40 seconds')
+                return subprocess.CompletedProcess(arguments, 1, result, f'Real-time tests did not finish within {timeout:g} seconds')
             time.sleep(.1)
     finally:
         if client:
@@ -65,7 +65,10 @@ def main():
     parser.add_argument('--require-capture-ready', action='store_true',
                         help='Capture only succeeds when the page publishes data-capture-ready="true"')
     parser.add_argument('--real-time', action='store_true', help='Wait for test completion in wall time using DevTools')
+    parser.add_argument('--timeout', type=float, help='Optional wall-time limit for larger suites (defaults remain 40/45 seconds)')
     args = parser.parse_args()
+    if args.timeout is not None and args.timeout <= 0:
+        parser.error('--timeout must be positive')
     if args.real_time and args.capture:
         parser.error('--real-time is for tests; use capture_replica.py for deterministic capture')
     root = Path(__file__).resolve().parent
@@ -92,11 +95,11 @@ def main():
             arguments.append(f'--screenshot={screenshot}')
         if args.real_time:
             arguments = [argument for argument in arguments if argument != '--dump-dom' and not argument.startswith('--virtual-time-budget=')]
-            result = run_real_time(arguments, args.url, profile, environment)
+            result = run_real_time(arguments, args.url, profile, environment, args.timeout or 40)
         else:
             arguments.append(args.url)
             result = subprocess.run(arguments, capture_output=True, text=True, encoding='utf-8', errors='replace',
-                env=environment, timeout=45)
+                env=environment, timeout=args.timeout or 45)
     (root / ('preview_dom.log' if args.capture else f'{args.output_prefix}_results.log')).write_text(result.stdout, encoding='utf-8')
     (root / ('preview_browser.log' if args.capture else f'{args.output_prefix}_browser.log')).write_text(result.stderr, encoding='utf-8')
     if args.capture:
