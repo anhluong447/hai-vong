@@ -1,8 +1,8 @@
 {
-  "version": 5,
-  "date": "2026-10-09",
-  "stage": "P4",
-  "status": "UI-motion-authoring-implemented; G2/G3-visual-review-open",
+  "version": 6,
+  "date": "2026-10-12",
+  "stage": "P5-preparation",
+  "status": "Stage-5-menu-UI-specification-prepared (R24-R27); dialogue-G2-refinements-updated",
   "tasks": {
     "R01": {
       "status": "complete",
@@ -227,25 +227,58 @@
         "../../ui-reviews/coastal-replica-stage4/README.md",
         "../../ui-reviews/coastal-replica-stage4/validation.json"
       ]
+    },
+    "R24": {
+      "status": "specification-ready; implementation-pending",
+      "scope": "component map, 7 layer slots and extraction plan; context deferred",
+      "evidence": [
+        "layouts/menu.md",
+        "ui-scope.json"
+      ]
+    },
+    "R25": {
+      "status": "specification-ready; implementation-pending",
+      "scope": "teal organic surface, nav spine/icons/highlight, header/quote/resource/controls",
+      "evidence": [
+        "layouts/menu.md",
+        "ui-scope.json"
+      ]
+    },
+    "R26": {
+      "status": "specification-ready; implementation-pending",
+      "scope": "case cards 01/02, punched paper quads, thumbnail slots & sign",
+      "evidence": [
+        "layouts/menu.md",
+        "ui-scope.json"
+      ]
+    },
+    "R27": {
+      "status": "specification-ready; implementation-pending",
+      "scope": "menu G1-G3 review, light/depth and motion cadence",
+      "evidence": [
+        "layouts/menu.md",
+        "ui-scope.json"
+      ]
     }
   },
   "gates": {
     "G0": "All locked measurements retained; 169 regions classified; dialogue conservative interior mask delivered, mixed fringe reference alpha unresolved.",
     "G1": "Material sample retained; review UI paper/wave/flower/notebook edges; scene/portrait matching excluded",
-    "G2": "not-accepted: Stage 3 scoped evidence delivered; shape/foam/type/icons/decorations need refinement; no context/pose blockers.",
+    "G2": "not-accepted: Stage 3 scoped evidence delivered; dialogue G2 visual refinements applied (shore ink gulls/broken contour, softened foam, editorial icons, sun-seal lighthouse, typography baselines/kerning); menu G2 spec prepared.",
     "G3": "not-accepted: R18-R23 authoring/tests/native clips delivered; static G2 corrections and real-browser/device visual cadence/overlap review remain.",
     "G4": "Stage 1/2/3/4 isolated input/focus/capture/disposal/reduced-motion tested; gameplay integration pending.",
     "G5": "not-started; UI performance with context cost recorded separately"
   },
   "measurementPrecision": "Native layout retained; conservative dialogue interior mask does not claim recovered alpha or uncertain fringe precision.",
   "runtimeChanges": "isolated SVG preview only; gameplay entries unchanged",
-  "next": "Resolve dialogue G2 visual corrections and G3 live/device review, then menu UI R24-R27.",
+  "next": "Build Stage 5 Menu UI assets and composition (R24-R27) following layouts/menu.md.",
   "knownProductionTasks": [
     "ui-scope.json",
     "../../ui-reviews/coastal-replica-stage2/README.md",
     "../../UI-REPLICA-ROADMAP.md",
     "../../ui-reviews/coastal-replica-stage3/README.md",
-    "../../ui-reviews/coastal-replica-stage4/README.md"
+    "../../ui-reviews/coastal-replica-stage4/README.md",
+    "layouts/menu.md"
   ],
   "scopeRevision": 2,
   "scope": "ui-scope.json",

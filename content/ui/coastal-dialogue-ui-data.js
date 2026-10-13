@@ -150,7 +150,7 @@ export default {
       ],
       "baseline": [
         559,
-        499
+        498
       ],
       "icon": "quill",
       "font": {
@@ -170,7 +170,7 @@ export default {
       ],
       "baseline": [
         559,
-        566
+        565
       ],
       "icon": "chat",
       "font": {
@@ -190,7 +190,7 @@ export default {
       ],
       "baseline": [
         559,
-        634
+        631
       ],
       "icon": "proof",
       "font": {
@@ -233,18 +233,18 @@ export default {
     {
       "id": "speaker",
       "key": "ui.replica.dialogue.speaker.1",
-      "x": 200,
-      "y": 730,
-      "size": 29.2,
+      "x": 201,
+      "y": 728,
+      "size": 29,
       "weight": 500,
       "fill": "#126477",
-      "spacing": 0.25
+      "spacing": 0.4
     },
     {
       "id": "line",
       "key": "ui.replica.dialogue.line.1",
-      "x": 233,
-      "y": 800,
+      "x": 234,
+      "y": 798,
       "size": 33.2,
       "weight": 500,
       "fill": "#16152f"
@@ -253,7 +253,7 @@ export default {
       "id": "continue",
       "key": "ui.replica.dialogue.continue.1",
       "x": 1222,
-      "y": 897,
+      "y": 893,
       "size": 20.5,
       "weight": 400,
       "fill": "#126477"
@@ -277,21 +277,21 @@ export default {
   "rules": [
     {
       "x1": 201,
-      "y1": 748,
+      "y1": 744,
       "x2": 545,
-      "y2": 748
+      "y2": 744
     },
     {
       "x1": 814,
-      "y1": 890,
+      "y1": 888,
       "x2": 1174,
-      "y2": 890
+      "y2": 888
     },
     {
       "x1": 1196,
-      "y1": 878,
+      "y1": 876,
       "x2": 1196,
-      "y2": 902
+      "y2": 900
     },
     {
       "x1": 110,
@@ -314,13 +314,13 @@ export default {
   ],
   "speakerArrow": {
     "x1": 467,
-    "y1": 726,
+    "y1": 724,
     "x2": 529,
-    "y2": 726
+    "y2": 724
   },
   "returnIcon": [
     1298,
-    876,
+    873,
     24,
     25
   ],

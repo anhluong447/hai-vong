@@ -26,12 +26,24 @@ try {
  $rowEdges += $inputImage.Height
  Write-Output "Source row boundaries: $($rowEdges -join ', ')"
  for ($row=0; $row -lt 7; $row++) {
+  $top=$rowEdges[$row]
+  $bottom=$rowEdges[$row+1]
+  $colEdges=@(0)
+  for ($edge=1; $edge -lt 12; $edge++) {
+   $nominal=[int][Math]::Round($edge*$inputImage.Width/12);$best=$nominal;$bestCount=[int]::MaxValue;$bestDistance=[int]::MaxValue
+   for ($x=[Math]::Max(0,$nominal-25); $x -le [Math]::Min($inputImage.Width-1,$nominal+25); $x++) {
+    $count=0;for ($y=$top;$y -lt $bottom;$y++){if($inputImage.GetPixel($x,$y).A -ge 160){$count++}}
+    $distance=[Math]::Abs($x-$nominal)
+    if ($count -lt $bestCount -or ($count -eq $bestCount -and $distance -lt $bestDistance)) {$best=$x;$bestCount=$count;$bestDistance=$distance}
+   }
+   $colEdges += $best
+  }
+  $colEdges += $inputImage.Width
+
   $cells = @()
   for ($column=0; $column -lt 12; $column++) {
-   $left=[int][Math]::Round($column*$inputImage.Width/12)
-   $right=[int][Math]::Round(($column+1)*$inputImage.Width/12)
-   $top=$rowEdges[$row]
-   $bottom=$rowEdges[$row+1]
+   $left=$colEdges[$column]
+   $right=$colEdges[$column+1]
    $minX=$right; $minY=$bottom; $maxX=$left; $maxY=$top
    for ($y=$top; $y -lt $bottom; $y++) {for ($x=$left; $x -lt $right; $x++) {
     if ($inputImage.GetPixel($x,$y).A -ge 160) {

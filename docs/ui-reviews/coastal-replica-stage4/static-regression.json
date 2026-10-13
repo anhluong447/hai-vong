@@ -1,7 +1,0 @@
-{
-  "reference": "../coastal-replica-stage3/ui-dark-v2.png",
-  "candidate": "settled-v3.png",
-  "changedPixels": 0,
-  "meanAbsoluteErrorRGBA": 0.0,
-  "role": "Settled SVG regression, not concept parity"
-}

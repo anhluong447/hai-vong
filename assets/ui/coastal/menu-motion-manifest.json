@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "source": "content\\ui\\coastal-menu-motion.json",
+  "contextSHA256": "ef508610ef51951bf57f12ce3f726ac39e6ce29065eb56b75c9dfb8837c34b99",
+  "assets": [
+    {
+      "path": "menu-wave-back-mask.png",
+      "size": [
+        1672,
+        231
+      ],
+      "sha256": "a512218e56bc5a8912b8ef000e22a7d88eb0fc77efa3505e1eceb89f6447bd85"
+    },
+    {
+      "path": "menu-wave-back-tile.png",
+      "size": [
+        768,
+        256
+      ],
+      "sha256": "d64fff8ee602a68bbc855f15c1f31d8d2c2227f6ee7003499f5340be6b01257e"
+    },
+    {
+      "path": "menu-wave-middle-mask.png",
+      "size": [
+        1672,
+        231
+      ],
+      "sha256": "88ae15bb16061140c5cc4581b94ed6d742ab6240ed2d5b160e204e956104d8f4"
+    },
+    {
+      "path": "menu-wave-middle-tile.png",
+      "size": [
+        768,
+        256
+      ],
+      "sha256": "b2dc8ad7fb86a0638acc3246b507faebfe859bcae6bf88eed32529f4c9526c26"
+    },
+    {
+      "path": "menu-wave-foam-mask.png",
+      "size": [
+        1672,
+        231
+      ],
+      "sha256": "54319bb7c0da6867a085c32b6faf509bebe8074564b28acb63b177a529beba75"
+    },
+    {
+      "path": "menu-wave-foam-tile.png",
+      "size": [
+        768,
+        256
+      ],
+      "sha256": "4df97effb34e07b729d258b80c9474125ea6d7ed4cb51a8965ed0a68cb674c7a"
+    },
+    {
+      "path": "menu-wave-safe-mask.png",
+      "size": [
+        1672,
+        231
+      ],
+      "sha256": "095e2959737835551710a8c6e5bc86ab7a8bf0f62025c4d2222961f8fcc66ce1"
+    },
+    {
+      "path": "menu-wave-forbidden-core.png",
+      "size": [
+        1672,
+        941
+      ],
+      "sha256": "070c1ef1bd96d34130985a574b726b714660cc84d6aa023a09afa1792be19cc6"
+    },
+    {
+      "path": "menu-top-leaves-mask.png",
+      "size": [
+        652,
+        160
+      ],
+      "sha256": "36f351572c12dea4178403b402e7dc02cd3e04dacaac56693d66259bc2114747"
+    },
+    {
+      "path": "menu-top-leaves-context.png",
+      "size": [
+        652,
+        160
+      ],
+      "sha256": "0d801acc6ba349424f96d932bcd85c7b5a4b8e94d76f4c74a03ae4f0cd550125"
+    }
+  ],
+  "notes": "Fixed outer mask reserves the complete foliage sweep and hand/book/newspaper. Upper foliage uses a local plate patch; no scene bytes changed."
+}

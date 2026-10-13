@@ -14,8 +14,9 @@
       --text: #e6edf3;
       --text-muted: #8b949e;
       --gold: #f1e05a;
-      --red: #f85149;
+      --pink: #db61a2;
       --green: #3fb950;
+      --cyan: #39c5bb;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -26,7 +27,7 @@
       line-height: 1.6;
     }
     .container {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
     }
     header {
@@ -47,12 +48,22 @@
     .tagline {
       display: inline-block;
       margin-top: 10px;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 12px;
-      background: rgba(88, 166, 255, 0.1);
+      background: rgba(88, 166, 255, 0.12);
       color: var(--accent);
       font-size: 13px;
       font-weight: 500;
+      border: 1px solid rgba(88, 166, 255, 0.3);
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      margin: 28px 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .track-list {
       display: flex;
@@ -65,6 +76,11 @@
       border-radius: 12px;
       padding: 24px;
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .track-card.featured {
+      border: 2px solid var(--accent);
+      background: #111e30;
+      box-shadow: 0 4px 20px var(--accent-glow);
     }
     .track-card:hover {
       border-color: var(--accent);
@@ -91,10 +107,11 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .badge-theme { background: rgba(88, 166, 255, 0.2); color: #58a6ff; }
-    .badge-investigation { background: rgba(241, 224, 90, 0.2); color: #f1e05a; }
-    .badge-romance { background: rgba(219, 97, 162, 0.2); color: #db61a2; }
-    .badge-crisis { background: rgba(248, 81, 73, 0.2); color: #f85149; }
+    .badge-sea { background: rgba(57, 197, 187, 0.2); color: #39c5bb; }
+    .badge-club { background: rgba(88, 166, 255, 0.2); color: #58a6ff; }
+    .badge-field { background: rgba(241, 224, 90, 0.2); color: #f1e05a; }
+    .badge-night { background: rgba(219, 97, 162, 0.2); color: #db61a2; }
+    .badge-archive { background: rgba(139, 148, 158, 0.2); color: #8b949e; }
 
     .track-desc {
       color: #b1bac4;
@@ -104,7 +121,7 @@
     .track-specs {
       font-size: 12.5px;
       color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.3);
       padding: 8px 12px;
       border-radius: 6px;
       margin-bottom: 16px;
@@ -115,13 +132,20 @@
       outline: none;
       border-radius: 8px;
     }
+    .files-badge {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #7ee787;
+    }
     footer {
-      margin-top: 40px;
+      margin-top: 48px;
       text-align: center;
       color: var(--text-muted);
       font-size: 13px;
       border-top: 1px solid var(--card-border);
-      padding-top: 20px;
+      padding-top: 24px;
     }
   </style>
 </head>
@@ -129,105 +153,121 @@
   <div class="container">
     <header>
       <h1>CLB Báo Chí — Soundtrack Suite (BGM)</h1>
-      <p class="subtitle">Trường THPT Tĩnh Tâm &bull; Thành phố biển Hải Vọng &bull; Tập san Hồi Âm</p>
-      <div class="tagline">Studio Synthesized 44.1kHz 16-bit Stereo Master</div>
+      <p class="subtitle">Trường THPT Tĩnh Tâm &bull; Thành phố biển Hải Vọng &bull; Dự án Hồi Âm</p>
+      <div class="tagline">Studio SoundFont 44.1kHz 16-bit Stereo Master &bull; General MIDI Orchestration</div>
     </header>
 
+    <div class="section-title">🌊 BỘ NHẠC NỀN CHỦ ĐỀ HOÀN THIỆN (SOUNDFONT MASTER SUITE)</div>
+
     <div class="track-list">
-      <!-- SOUNDFONT V2 BALANCED QUARTET -->
-      <div class="track-card" style="border: 2px solid #58a6ff; background: #0d2138; box-shadow: 0 4px 24px rgba(88, 166, 255, 0.2);">
+      <!-- BGM 1: THÀNH PHỐ BIỂN HẢI VỌNG -->
+      <div class="track-card featured">
         <div class="track-header">
-          <div class="track-title" style="color: #58a6ff;">✨ BẢN MỚI (V2): Hồi Âm Tứ Tấu Mộc (Piano + Nylon Guitar + Cello + Upright Bass)</div>
-          <span class="track-badge" style="background: rgba(88, 166, 255, 0.25); color: #58a6ff;">Acoustic Quartet Master</span>
+          <div class="track-title" style="color: #39c5bb;">1. Thành Phố Biển Hải Vọng (Gió Biển & Hoài Niệm)</div>
+          <span class="track-badge badge-sea">BGM 1 &bull; Biển / Lãng Đãng</span>
         </div>
         <p class="track-desc">
-          <strong>Đã khắc phục hoàn toàn lỗi lấn át & tiếng synth vo ve:</strong><br>
-          &bull; <strong>Nylon Guitar (Tai phải):</strong> Rải fingerpicking mộc mạc giòn tan xuyên suốt từng phách.<br>
-          &bull; <strong>Cello mộc (Tai trái):</strong> Kéo câu giai điệu đối thoại trầm ấm, có ngắt nghỉ tự nhiên (bỏ nốt drone kéo dài).<br>
-          &bull; <strong>Upright Bass (Chính giữa):</strong> Búng dây gỗ (plucked) nhịp nhàng ở beat 1 & 3, âm trầm ấm và nảy.<br>
-          &bull; <strong>Grand Piano:</strong> Chơi hợp âm êm ả và dạo chủ đề, để không gian thở cho guitar và cello.
+          <strong>Bối cảnh & Tâm trạng:</strong> Thành phố biển Hải Vọng, bờ biển lộng gió, những con dốc thoai thoải ngắm ngọn hải đăng cổ, cảm giác hoài niệm, lãng đãng, rộng mở của đại dương. Tiếng đàn guitar mộc rải dập dềnh như sóng vỗ, tiếng sáo phiêu lãng cùng tiếng gió biển rì rào.
         </p>
         <div class="track-specs">
-          <strong>Key:</strong> D Major &bull; <strong>Tempo:</strong> 72 BPM &bull; <strong>Thời lượng:</strong> 55s &bull; <strong>File:</strong> bgm_hoi_am_v2_quartet.wav &bull; <strong>Mix:</strong> Multi-track Stereo Staging
+          <strong>Key:</strong> G Major / E Minor &bull; <strong>Tempo:</strong> 70 BPM &bull; <strong>Thời lượng:</strong> 57s &bull; <strong>Hòa thanh:</strong> Gmaj7 - Cmaj7 - Bm7 - Em9 - Am7 - D7sus4 &bull; <strong>Nhạc cụ:</strong> Acoustic Nylon Guitar, Grand Piano, Cello mộc, Upright Bass, Flute, Tiếng gió biển Hải Vọng.
         </div>
-        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_hoi_am_v2_quartet.wav"></audio>
+        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_hai_vong_sea.wav"></audio>
+        <div class="files-badge">
+          <span>&check; Audio: assets/audio/bgm/bgm_hai_vong_sea.wav</span>
+          <span>&check; MIDI: assets/audio/bgm/bgm_hai_vong_sea.mid</span>
+        </div>
       </div>
 
-      <!-- SOUNDFONT V1 HANDMADE -->
-      <div class="track-card" style="border: 1px solid #30363d; opacity: 0.75;">
+      <!-- BGM 2: PHÒNG CLB BÁO CHÍ TĨNH TÂM -->
+      <div class="track-card featured">
         <div class="track-header">
-          <div class="track-title" style="color: #8b949e;">Bản thử nghiệm V1 (Bị lỗi Piano lấn át & Cello kéo lì)</div>
-          <span class="track-badge" style="background: rgba(139, 148, 158, 0.2); color: #8b949e;">V1 Archive</span>
-        </div>
-        <div class="track-specs">
-          bgm_hoi_am_handmade.wav (Bản cũ trước khi phân tách bè và cân bằng gain)
-        </div>
-        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_hoi_am_handmade.wav"></audio>
-      </div>
-
-      <!-- TRACK 1 -->
-      <div class="track-card">
-        <div class="track-header">
-          <div class="track-title">1. Hồi Âm Trong Gió Biển (Main & Clubroom Theme)</div>
-          <span class="track-badge badge-theme">Phòng CLB / Hoài Niệm</span>
+          <div class="track-title" style="color: #58a6ff;">2. Phòng CLB Báo Chí Tĩnh Tâm (Buổi Chiều Sau Giờ Học)</div>
+          <span class="track-badge badge-club">BGM 2 &bull; Học Đường / Ấm Cúng</span>
         </div>
         <p class="track-desc">
-          <strong>Bối cảnh:</strong> Căn phòng sinh hoạt CLB cũ phủ bụi, nắng chiều chiếu xiên qua cửa sổ, mùi giấy báo cũ và tiếng gió biển Hải Vọng. Giai điệu mộc mạc, hoài niệm nhưng dần bừng sáng niềm hy vọng phục hưng tờ báo cùng Vân.
+          <strong>Bối cảnh & Tâm trạng:</strong> Căn phòng sinh hoạt CLB Hồi Âm tầng 3 ngập tràn ánh nắng chiều. Tiếng lách cách thảo luận bài viết của Khuê, nụ cười của Vân, tiếng tách trà hoa cúc và không khí ấm cúng, thân thiện của tuổi học trò.
         </p>
         <div class="track-specs">
-          <strong>Key:</strong> D Major / B Minor &bull; <strong>Tempo:</strong> 76 BPM (4/4) &bull; <strong>Hòa thanh:</strong> Dmaj9 - Bm9 - Gmaj7 - A7 - F#m7 - Em9 - A13 &bull; <strong>Nhạc cụ:</strong> Acoustic Grand Piano, Strings Pad, Upright Bass, Music Box Bell, Sea Breeze Ambience.
+          <strong>Key:</strong> D Major &bull; <strong>Tempo:</strong> 84 BPM &bull; <strong>Thời lượng:</strong> 47s &bull; <strong>Hòa thanh:</strong> Dmaj7 - Em7 - F#m7 - Gmaj7 - Bm7 - Em9 - A7 &bull; <strong>Nhạc cụ:</strong> Acoustic Grand Piano, Nylon Guitar, Upright Bass, Vibraphone trong trẻo, Cello ấm áp.
         </div>
-        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_hoi_am_theme.wav"></audio>
+        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_clb_tinh_tam.wav"></audio>
+        <div class="files-badge">
+          <span>&check; Audio: assets/audio/bgm/bgm_clb_tinh_tam.wav</span>
+          <span>&check; MIDI: assets/audio/bgm/bgm_clb_tinh_tam.mid</span>
+        </div>
       </div>
 
-      <!-- TRACK 2 -->
-      <div class="track-card">
+      <!-- BGM 3: TÁC NGHIỆP HIỆN TRƯỜNG -->
+      <div class="track-card featured">
         <div class="track-header">
-          <div class="track-title">2. Góc Khuất Tĩnh Tâm (Investigative & Fieldwork Theme)</div>
-          <span class="track-badge badge-investigation">Tác Nghiệp / Điều Tra</span>
+          <div class="track-title" style="color: #f1e05a;">3. Tác Nghiệp Hiện Trường (Lần Theo Manh Mối)</div>
+          <span class="track-badge badge-field">BGM 3 &bull; Tác Nghiệp / Điều Tra</span>
         </div>
         <p class="track-desc">
-          <strong>Bối cảnh:</strong> Phỏng vấn hiện trường, tìm kiếm tài liệu ở thư viện, thẩm định chéo thông tin. Tinh tế, lôi cuốn, tò mò đậm chất Acid Jazz / Persona Detective Noir học đường.
+          <strong>Bối cảnh & Tâm trạng:</strong> Phỏng vấn nhân chứng ở cảng cá, đối chiếu tư liệu trong thư viện tỉnh, thẩm định chéo thông tin. Nhịp điệu điều tra tập trung, sắc sảo, tò mò đậm chất Acid Jazz / Detective Neo-Soul cùng tiếng gõ máy chữ cơ học nhịp nhàng.
         </p>
         <div class="track-specs">
-          <strong>Key:</strong> C Minor / Dorian &bull; <strong>Tempo:</strong> 98 BPM (Swing/Shuffle) &bull; <strong>Hòa thanh:</strong> Cm9 - Fm9 - Bb13 - Ebmaj7#11 - Abmaj7 - Dm7b5 - G7alt &bull; <strong>Nhạc cụ:</strong> Walking Upright Bass, Vibraphone / Marimba, Fender Rhodes Comping, Typewriter Clicks, Swing Drums.
+          <strong>Key:</strong> C Minor / Dorian &bull; <strong>Tempo:</strong> 100 BPM (Swing) &bull; <strong>Thời lượng:</strong> 40s &bull; <strong>Hòa thanh:</strong> Cm9 - Fm9 - Bb13 - Ebmaj7#11 - Abmaj7 - Dm7b5 - G7alt &bull; <strong>Nhạc cụ:</strong> Walking Upright Bass, Fender Rhodes Comping, Vibraphone, Grand Piano Staccato, Typewriter Foley.
         </div>
         <audio controls preload="metadata" src="../assets/audio/bgm/bgm_investigation.wav"></audio>
+        <div class="files-badge">
+          <span>&check; Audio: assets/audio/bgm/bgm_investigation.wav</span>
+          <span>&check; MIDI: assets/audio/bgm/bgm_investigation.mid</span>
+        </div>
       </div>
 
-      <!-- TRACK 3 -->
-      <div class="track-card">
+      <!-- BGM 4: ĐÊM TĨNH LẶNG / HẸN HÒ -->
+      <div class="track-card featured">
         <div class="track-header">
-          <div class="track-title">3. Hoàng Hôn Hải Vọng (Hangout & Romance Theme)</div>
-          <span class="track-badge badge-romance">Tình Cảm / Slow-Burn</span>
+          <div class="track-title" style="color: #db61a2;">4. Đêm Tĩnh Lặng & Hẹn Hò (Lời Chưa Nói)</div>
+          <span class="track-badge badge-night">BGM 4 &bull; Thư Thái / Nhẹ Nhàng / Lãng Mạn</span>
         </div>
         <p class="track-desc">
-          <strong>Bối cảnh:</strong> Những buổi chiều tan trường dạo bước bờ kè biển, quán nước vỉa hè, chia sẻ tâm sự đời thường cùng Vân, Nhi, Ngọc hay Long. Cảm giác thanh xuân trong trẻo, êm đềm, ngọt ngào.
+          <strong>Bối cảnh & Tâm trạng:</strong> Đêm buông xuống bờ kè biển Hải Vọng, ngọn hải đăng quét ánh sáng êm đềm ngoài khơi. Dạo bước bên nhau sau ngày dài mệt mỏi, chia sẻ những tâm sự sâu kín nhất. Thư thái, lắng đọng, ngọt ngào, rung động thanh xuân trong sáng.
         </p>
         <div class="track-specs">
-          <strong>Key:</strong> F# Major / Eb Minor &bull; <strong>Tempo:</strong> 82 BPM &bull; <strong>Hòa thanh:</strong> F#maj9 - Bmaj7 - C#7sus4 - D#m9 - G#m9 - C#13 &bull; <strong>Nhạc cụ:</strong> Plucked Nylon Guitar Arpeggio, Fender Rhodes, Analog Strings Pad, Lofi Beats, Acoustic Bass.
+          <strong>Key:</strong> E Major &bull; <strong>Tempo:</strong> 66 BPM &bull; <strong>Thời lượng:</strong> 60s &bull; <strong>Hòa thanh:</strong> Emaj9 - G#m7 - Aadd9 - B7sus4 - C#m9 - F#m9 - B7 &bull; <strong>Nhạc cụ:</strong> Fender Rhodes ấm áp, Nylon Guitar chậm rãi, Cello legato tha thiết, Upright Bass, Music Box lấp lánh như ánh sao.
         </div>
-        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_golden_hour.wav"></audio>
+        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_night_romance.wav"></audio>
+        <div class="files-badge">
+          <span>&check; Audio: assets/audio/bgm/bgm_night_romance.wav</span>
+          <span>&check; MIDI: assets/audio/bgm/bgm_night_romance.mid</span>
+        </div>
       </div>
+    </div>
 
-      <!-- TRACK 4 -->
+    <!-- KHO LƯU TRỮ & PHÁC THẢO -->
+    <div class="section-title">📂 KHO LƯU TRỮ & TRACK PHỤ TRỢ (ARCHIVES)</div>
+    <div class="track-list">
       <div class="track-card">
         <div class="track-header">
-          <div class="track-title">4. Trước Giờ Lên Khuôn (Crisis & Deadline Tension Theme)</div>
-          <span class="track-badge badge-crisis">Khủng Hoảng / Áp Lực</span>
+          <div class="track-title">Trước Giờ Lên Khuôn (Crisis & Deadline Tension Theme)</div>
+          <span class="track-badge" style="background: rgba(248, 81, 73, 0.2); color: #f85149;">Khủng Hoảng / Kịch Tính</span>
         </div>
         <p class="track-desc">
-          <strong>Bối cảnh:</strong> Hạn chót xuất bản số báo chiều thứ Năm, đối đầu với Phan Gia Huy và Ban Giám thị, nguy cơ đình bản. Đồng hồ đếm ngược từng giây, nhịp tim dồn dập, căng thẳng tột độ.
+          Hạn chót xuất bản tờ báo chiều thứ Năm, đối mặt với Hội học sinh và nguy cơ đình bản. Nhịp tim dồn dập, đồng hồ đếm ngược từng giây.
         </p>
         <div class="track-specs">
-          <strong>Key:</strong> D Minor &bull; <strong>Tempo:</strong> 120 BPM &bull; <strong>Hòa thanh:</strong> Dm - C/D - Bb - A7 - Gm - A7(#5) - Bb7 - C7 &bull; <strong>Nhạc cụ:</strong> Relentless 16th Staccato Piano Ostinato, Clockwork Ticks, Driving Bass, Snare Rolls, Dramatic Strings/Brass Stabs.
+          <strong>Key:</strong> D Minor &bull; <strong>Tempo:</strong> 120 BPM &bull; <strong>File:</strong> bgm_deadline_crisis.wav
         </div>
         <audio controls preload="metadata" src="../assets/audio/bgm/bgm_deadline_crisis.wav"></audio>
+      </div>
+
+      <div class="track-card">
+        <div class="track-header">
+          <div class="track-title">Hoàng Hôn Hải Vọng (Lofi Synth Sketch)</div>
+          <span class="track-badge badge-archive">Bản Thử Nghiệm Synth</span>
+        </div>
+        <div class="track-specs">
+          <strong>Key:</strong> F# Major &bull; <strong>File:</strong> bgm_golden_hour.wav
+        </div>
+        <audio controls preload="metadata" src="../assets/audio/bgm/bgm_golden_hour.wav"></audio>
       </div>
     </div>
 
     <footer>
-      Dành cho dự án game <em>CLB Báo Chí</em> (Tập san Hồi Âm) &bull; THPT Tĩnh Tâm
+      Dự án game <em>CLB Báo Chí</em> (Tập san Hồi Âm) &bull; THPT Tĩnh Tâm &bull; Thành phố biển Hải Vọng
     </footer>
   </div>
 </body>

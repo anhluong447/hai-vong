@@ -1,5 +1,5 @@
 import {test,assert as a} from './harness.js';
-import {createSession,transition as act,summary,person,effectiveStat} from '../src/gameplay/engine.js?v=gameplay-1';
+import {createSession,transition as act,summary,person,effectiveStat,totalWeeks,schoolDay,isPublicationDay,actForDay,storyAct,dayOfWeek,SEMESTER_WEEKS,SEMESTER_DAYS} from '../src/gameplay/engine.js?v=gameplay-1';
 const start=()=>act(createSession(),{type:'school'});
 function toBed(s){if(s.phase==='club')s=act(s,{type:'endClub'});while(['personal','evening','weekend1','weekend2'].includes(s.phase))s=act(s,{type:'activity',kind:'rest'});return s;}
 function approveAll(s){for(const m of s.messages.filter(m=>!m.resolved))s=act(s,{type:'approve',id:m.id,option:m.kind==='mismatch'?'cancel':'continue'});return s;}
@@ -69,4 +69,12 @@ test('gameplay: mock ending requires both branches, two-week playthroughs finish
  const full=play('mixed',84);a.equal(full.day,84);a.equal(full.reports.length,12);a.equal(full.messages.filter(m=>!m.resolved).length,0);a.ok(summary(full).good);
  window.gameplayBenchmarks=[solo,team,mixed].map((s,i)=>({policy:['solo','team','mixed'][i],...summary(s),metrics:s.metrics,reports:s.reports}));
  window.gameplayBenchmarks.push({policy:'mixed-84-days',...summary(full),metrics:full.metrics,reports:full.reports});
+});
+test('gameplay: 12-week semester progression, 3 story acts, school vs weekend, publication day',()=>{
+ a.equal(SEMESTER_WEEKS,12);a.equal(SEMESTER_DAYS,84);a.equal(totalWeeks(84),12);
+ a.equal(schoolDay(1),true);a.equal(schoolDay(5),true);a.equal(schoolDay(6),false);a.equal(schoolDay(7),false);
+ a.equal(dayOfWeek(1),1);a.equal(dayOfWeek(7),7);a.equal(dayOfWeek(8),1);
+ a.equal(isPublicationDay(5),true);a.equal(isPublicationDay(12),true);a.equal(isPublicationDay(1),false);
+ a.equal(storyAct(1),1);a.equal(storyAct(3),1);a.equal(storyAct(4),2);a.equal(storyAct(7),2);a.equal(storyAct(8),3);a.equal(storyAct(12),3);
+ a.equal(actForDay(1),1);a.equal(actForDay(25),2);a.equal(actForDay(80),3);
 });

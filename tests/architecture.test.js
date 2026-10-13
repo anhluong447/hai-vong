@@ -29,6 +29,7 @@ test('session: failed commands and invalid replacements leave the current state 
  const broken=session.snapshot();broken.people[0].stats.photo=NaN;
  a.throws(()=>session.replace(broken));a.equal(JSON.stringify(session.snapshot()),before);
  session.execute({type:'school'});a.equal(session.state.phase,'club');
+ a.equal(session.day,1);a.equal(session.phase,'club');a.equal(session.isEnded,false);a.ok(session.summary());
  const snapshot=session.snapshot();snapshot.money=0;a.equal(session.state.money,300);
 });
 

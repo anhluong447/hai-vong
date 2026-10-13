@@ -13,13 +13,36 @@ const stage=el('div',{class:'coastal-gallery-stage'}),background=el('div',{class
 let selected='dialogue';
 const close=()=>{stage.replaceChildren(text('p',t('ui.coastal.preview.closed')));};
 const dialogue=new DialogueView(sprite,close),menu=new MenuView(registry,close);
-function choices(){return el('div',{class:'interaction-actions'},previewChoices.map(choice=>button(t(choice.textKey),()=>{
- dialogue.update({speaker:'van',expression:choice.expression,title:t('ui.coastal.preview.caption'),line:t('ui.coastal.preview.response'),body:[choices()]});
-},choice.id==='verify'?'primary':'')));}
+function makeChoices(){
+ return previewChoices.map(choice=>({
+  id: choice.id,
+  text: t(choice.textKey),
+  expression: choice.expression,
+  primary: choice.id==='verify',
+  icon: choice.id==='verify'?'quill':choice.id==='draft'?'chat':'proof'
+ }));
+}
 function show(screen=selected){
  selected=screen;motion.cancel();
  if(screen==='dialogue'){
-  dialogue.update({speaker:'van',expression:'neutral',title:t('ui.coastal.preview.caption'),line:t('ui.coastal.preview.line'),body:[choices()]});stage.replaceChildren(dialogue.node);
+  const currentChoices=makeChoices();
+  dialogue.update({
+   speaker:'van',
+   expression:'neutral',
+   title:t('ui.coastal.preview.caption'),
+   line:t('ui.coastal.preview.line'),
+   choices:currentChoices,
+   onSelect:(choice)=>{
+    dialogue.update({
+     speaker:'van',
+     expression:choice.expression,
+     title:t('ui.coastal.preview.caption'),
+     line:t('ui.coastal.preview.response'),
+     choices:currentChoices
+    });
+   }
+  });
+  stage.replaceChildren(dialogue.node);
  }else{
   const nav=el('nav',{class:'screen-tabs','aria-label':t('src.gameplay.main.bang_he_thong')},menuItems.map(item=>button(t(item.textKey),()=>show(item.id==='cases'?'dossier':'menu'),item.id==='cases'?'active':'')));
   const body=el('div',{},[nav,text('p',t('ui.coastal.preview.note'),'phase-note'),el('article',{class:'subject-card'},[

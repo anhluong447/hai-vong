@@ -17,7 +17,7 @@
         "columns": 8, "rows": 8, "pivot": { "x": 16, "y": 46 },
         "directions": ["down", "left", "right", "up"],
         "clips": {
-          "walk": { "rows": [0,1,2,3], "columns": [0,1,2,3,4,5,6,7], "stridePixels": 48 },
+          "walk": { "rows": [0,1,2,3], "columns": [0,1,2,3,4,5,6,7], "stridePixels": 32, "stepPixels": 16, "phases": ["contact","down","pass","up","contact","down","pass","up"], "cadence": { "stepPixels": 16, "stepsPerCycle": 2, "cyclePixels": 32 } },
           "idle": { "rows": [4,5,6,7], "columns": [0,1,2,3], "durations": [1200,250,100,250] },
           "talk": { "rows": [4,5,6,7], "columns": [4,5,6,7], "durations": [250,180,300,180] }
         }
@@ -27,7 +27,7 @@
         "columns": 8, "rows": 8, "pivot": { "x": 16, "y": 46 },
         "directions": ["down", "left", "right", "up"],
         "clips": {
-          "walk": { "rows": [0,1,2,3], "columns": [0,1,2,3,4,5,6,7], "stridePixels": 48 },
+          "walk": { "rows": [0,1,2,3], "columns": [0,1,2,3,4,5,6,7], "stridePixels": 32, "stepPixels": 16, "phases": ["contact","down","pass","up","contact","down","pass","up"], "cadence": { "stepPixels": 16, "stepsPerCycle": 2, "cyclePixels": 32 } },
           "idle": { "rows": [4,5,6,7], "columns": [0,1,2,3], "durations": [1350,250,100,300] },
           "talk": { "rows": [4,5,6,7], "columns": [4,5,6,7], "durations": [300,180,320,180] }
         }

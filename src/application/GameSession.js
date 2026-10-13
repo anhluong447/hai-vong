@@ -1,5 +1,6 @@
 import {createSession,transition} from '../domain/session.js';
 import {validateGameplaySave} from '../domain/validateSave.js';
+import {summary} from '../domain/journalism.js';
 
 /** Owns one ruleset session; browser views and headless clients share this API. */
 export class GameSession {
@@ -20,4 +21,8 @@ export class GameSession {
     return next;
   }
   snapshot() { return structuredClone(this.state); }
+  summary() { return summary(this.state); }
+  get day() { return this.state.day; }
+  get phase() { return this.state.phase; }
+  get isEnded() { return this.state.ended; }
 }

@@ -1,6 +1,7 @@
 import {element as el,text,button} from '../dom.js';
 import {t} from '../../shared/text.js';
 import {MotionScope} from './MotionScope.js';
+import {MenuEffects} from './MenuEffects.js';
 import {replaceContent} from './surfaces.js';
 import {menuSections,menuRouteLabels,menuCaseArt,menuPreviewCases} from '../../../content/ui/coastal-menu.js';
 
@@ -36,7 +37,7 @@ export class MenuView {
       const node=button('',()=>this.selectTab(section.id),'menu-nav-tab-btn');
       node.dataset.tab=section.id;node.dataset.focusKey='tab/'+section.id;
       node.setAttribute('role','tab');node.setAttribute('aria-controls','game-menu-content');
-      node.append(el('span',{class:'menu-nav-spine-dot','aria-hidden':'true'}),el('span',{class:'menu-nav-tab-icon'},icon(section.icon)),text('span',t(section.textKey)));
+      node.append(el('span',{class:'menu-nav-spine-dot','aria-hidden':'true'}),el('span',{class:'menu-nav-tab-icon'},icon(section.icon)),text('span',t(section.textKey),'menu-nav-label'));
       this.nav.append(node);return node;
     });
     this.glider=art('menu-nav-dry-brush.png','menu-nav-highlight-glider');
@@ -78,6 +79,12 @@ export class MenuView {
       el('footer',{class:'menu-bottom-controls'},[choose,text('span','|','menu-control-sep'),close])
     ]);
     this.motion=new MotionScope(this.node);
+    this.effects=new MenuEffects(this.node);
+    this.reducedInput=el('input',{type:'checkbox','data-focus-key':'settings/reduced-motion'});
+    this.reducedOption=el('label',{class:'menu-motion-setting'},[this.reducedInput,text('span',t('ui.menu.reduceMotion'))]);
+    this.reducedInput.addEventListener('change',()=>this.effects.setReduced(this.reducedInput.checked));
+    this.effects.onReduced=reduced=>{this.reducedInput.checked=reduced;this.reducedInput.disabled=this.effects.media.matches;};
+    this.effects.sync();
     this.node.addEventListener('keydown',event=>{
       if(event.defaultPrevented||event.repeat||!this.overview||!['PageDown','PageUp'].includes(event.key))return;
       event.preventDefault();this.changePage(event.key==='PageDown'?1:-1);
@@ -86,9 +93,11 @@ export class MenuView {
   }
   selectTab(id,notify=true){
     const section=menuSections.find(item=>item.id===id);if(!section)return;
+    const changed=this.activeTab!==id;
     this.activeTab=id;
     this.tabButtons.forEach(node=>{const active=node.dataset.tab===id;node.classList.toggle('is-active',active);node.setAttribute('aria-selected',String(active));});
     this.glider.style.transform=`translateY(${menuSections.indexOf(section)*86/1672*100}cqi)`;
+    if(changed)this.effects?.selectFeedback(this.tabButtons.find(node=>node.dataset.tab===id),this.glider);
     if(notify){this.selectedCase=null;this.page=0;if(this.onTab)this.onTab(section.routes[0]);else{this.key=section.routes[0];this.refresh();}}
   }
   stepTab(delta){const index=menuSections.findIndex(section=>section.id===this.activeTab),next=(index+delta+menuSections.length)%menuSections.length;this.selectTab(menuSections[next].id);this.tabButtons[next].focus({preventScroll:true});}
@@ -138,6 +147,7 @@ export class MenuView {
     this.title.textContent=selected?.title||(this.overview?t('ui.replica.menu.heading.1'):this.contextTitle||t(menuRouteLabels[this.key]||'ui.replica.menu.heading.1'));
     this.customBody.querySelectorAll('[data-case]').forEach(node=>{node.hidden=Boolean(this.selectedCase&&node.dataset.case!==this.selectedCase);});
     this.renderCards();this.pages.hidden=!this.overview||this.summaries.length<=2;
+    if(this.key==='settings'&&!this.customBody.contains(this.reducedOption))this.customBody.prepend(this.reducedOption);
   }
   update({title,body=[],key='cases',energy=3,maxEnergy=4,money=450,week,onTab,cases}={}){
     const focused=document.activeElement,hadFocus=this.content.contains(focused),focusKey=focused?.dataset?.focusKey;
@@ -162,5 +172,5 @@ export class MenuView {
       if(restored)restored.focus({preventScroll:true});else this.focusDetails();
     }
   }
-  dispose(){this.motion.dispose();this.node.remove();}
+  dispose(){this.effects.dispose();this.motion.dispose();this.node.remove();}
 }

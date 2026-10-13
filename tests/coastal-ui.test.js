@@ -47,6 +47,40 @@ test('coastal dialogue: stable reading surface and portrait, latest update and d
  }finally{sprite.dispose();view.node.remove();}
 });
 
+test('coastal dialogue editorial: replica choices, icons, continue button, flowers, notebook, and v1 expressions',async()=>{
+ const registry=await loadDialogueRegistry(),sprite=new DialogueSprite(registry);let closed=false,chosen=null,continued=false;
+ const view=new DialogueView(sprite,()=>closed=true);document.body.append(view.node);
+ try{
+  view.update({
+   speaker:'van',
+   expression:'v1_happy',
+   title:t('ui.coastal.preview.caption'),
+   text:t('ui.replica.dialogue.line.1'),
+   choices:[
+    {id:'c1',text:t('ui.replica.dialogue.choices.1'),icon:'quill'},
+    {id:'c2',text:t('ui.replica.dialogue.choices.2'),icon:'chat'},
+    {id:'c3',text:t('ui.replica.dialogue.choices.3'),icon:'proof'}
+   ],
+   onSelect:choice=>chosen=choice.id,
+   onContinue:()=>continued=true
+  });
+  await sprite.ready;
+  a.equal(view.line.textContent,t('ui.replica.dialogue.line.1'));
+  a.ok(view.node.querySelector('.coastal-flowers'),'Flowers must be present');
+  a.ok(view.node.querySelector('.coastal-notebook'),'Notebook must be present');
+  a.ok(view.surface.querySelector('.coastal-insignia'),'Insignia emblem must be present');
+  a.ok(view.surface.querySelector('.coastal-continue-btn'),'Continue button must be present');
+  const cards=[...view.body.querySelectorAll('.coastal-choice-card')];
+  a.equal(cards.length,3,'Must render 3 choice cards');
+  a.ok(cards[0].querySelector('.coastal-choice-icon svg'),'Choice must have icon');
+  a.ok(cards[0].querySelector('.coastal-choice-chevron svg'),'Choice must have chevron');
+  cards[1].click();
+  a.equal(chosen,'c2','Selecting choice must trigger onSelect');
+  view.continueButton.click();
+  a.ok(continued,'Continue button must trigger onContinue');
+ }finally{view.dispose();sprite.dispose();view.node.remove();}
+});
+
 test('coastal pixel shell: preserves world/HUD identity, overlay lock and mobile menu',async()=>{
  const frame=el('iframe',{src:'../pixel.html'});frame.style.cssText='position:relative;left:0;width:1200px;height:900px';document.body.append(frame);
  const wait=fn=>new Promise((resolve,reject)=>{const start=Date.now();const poll=()=>fn()?resolve():Date.now()-start>14000?reject(new Error('Coastal UI timeout')):setTimeout(poll,20);poll();});

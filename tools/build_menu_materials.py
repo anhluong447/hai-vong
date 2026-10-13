@@ -164,9 +164,8 @@ def wave():
         for c1,c2,end in segments: pts.extend(bezier(pts[-1],c1,c2,end).tolist())
         pts=np.array(pts)
         return np.interp(np.arange(W),pts[:,0],pts[:,1])
-    crest=contour((0,848), [((150,822),(300,899),(470,890)),((555,898),(620,871),(660,833)),
-        ((710,786),(708,756),(782,758)),((880,746),(969,795),(1062,820)),
-        ((1175,865),(1247,804),(1355,811)),((1521,805),(1625,830),(1672,842))])
+    motion=json.loads((ROOT/'content/ui/coastal-menu-motion.json').read_text())
+    crest=contour(motion['waveStart'],motion['waveCurves'])
     yy,xx=np.mgrid[:H,:W]
     d=yy-crest[None,:]
     grain=noise(W,H,1); cloud=noise(W,H,20)

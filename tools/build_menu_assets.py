@@ -158,4 +158,6 @@ teal_mass = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941
 
 from build_menu_materials import main as build_materials
 build_materials()
+from build_menu_motion_assets import main as build_motion_materials
+build_motion_materials()
 print("All menu assets generated successfully in assets/ui/coastal/")

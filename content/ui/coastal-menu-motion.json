@@ -1,0 +1,45 @@
+{
+  "stage": [1672, 941],
+  "waveTop": 710,
+  "tile": [768, 256],
+  "canopyBox": [1020, 0, 652, 160],
+  "longestPeriodMs": 11000,
+  "rightLimit": {"x": 1380, "y": 830, "nativeAlphaTop": 838},
+  "waveStart": [0, 848],
+  "waveCurves": [
+    [[150,822],[300,899],[470,890]], [[555,898],[620,871],[660,833]],
+    [[710,786],[708,756],[782,758]], [[880,746],[969,795],[1062,820]],
+    [[1175,865],[1247,835],[1355,839]], [[1521,839],[1625,845],[1672,852]]
+  ],
+  "waves": [
+    {"id":"back","periodMs":6000,"amplitudeY":3,"amplitudeX":16,"phase":0,"offset":0,"depth":88,"opacity":0.72,"color":[35,142,153]},
+    {"id":"middle","periodMs":8000,"amplitudeY":4,"amplitudeX":23,"phase":2.1,"offset":12,"depth":78,"opacity":0.48,"color":[113,195,188]},
+    {"id":"foam","periodMs":11000,"amplitudeY":5,"amplitudeX":31,"phase":4.2,"offset":3,"depth":40,"opacity":0.84,"color":[243,247,224]}
+  ],
+  "safeZones": {
+    "handNotebook": [[1204,688],[1335,660],[1380,527],[1500,525],[1655,587],[1672,729],[1597,793],[1510,819],[1370,823],[1315,845],[1202,821]],
+    "newspaper": [[432,941],[498,927],[559,906],[631,865],[701,824],[780,789],[874,800],[968,818],[1087,851],[1208,887],[1313,925],[1422,941]],
+    "centerLeaves": [[457,941],[535,905],[607,881],[650,838],[703,793],[737,782],[766,814],[812,787],[850,804],[910,841],[851,898],[804,941]],
+    "padding": 14,
+    "feather": 4,
+    "flowerBox": [-33.44, 621.06, 484.88, 338.76]
+  },
+  "foliage": [
+    {"id":"flowers","periodMs":7300,"degrees":1.25,"phase":0.8,"origin":"30% 92%"},
+    {"id":"top","periodMs":9100,"degrees":1.0,"phase":2.7,"origin":"72% 0%"}
+  ],
+  "feedback": {"durationMs":170,"reducedDurationMs":35,"textTravelPx":4,"iconScale":1.08},
+  "sprites": [
+    {"kind":"glint","x":846,"y":110,"periodMs":7100,"phase":0.3,"size":5},
+    {"kind":"glint","x":909,"y":122,"periodMs":8300,"phase":2.4,"size":4},
+    {"kind":"glint","x":970,"y":105,"periodMs":9700,"phase":1.1,"size":5},
+    {"kind":"glint","x":1023,"y":124,"periodMs":7900,"phase":4.2,"size":4},
+    {"kind":"glint","x":1082,"y":137,"periodMs":10300,"phase":3.3,"size":5},
+    {"kind":"glint","x":949,"y":151,"periodMs":8900,"phase":5.1,"size":4},
+    {"kind":"glint","x":1054,"y":155,"periodMs":10700,"phase":1.8,"size":4},
+    {"kind":"dust","x":1630,"y":341,"periodMs":8600,"phase":1.2,"size":3},
+    {"kind":"dust","x":1608,"y":470,"periodMs":10100,"phase":3.2,"size":3},
+    {"kind":"dust","x":1065,"y":468,"periodMs":9400,"phase":4.7,"size":2},
+    {"kind":"dust","x":1652,"y":687,"periodMs":10800,"phase":2.1,"size":3}
+  ]
+}

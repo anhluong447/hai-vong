@@ -28,9 +28,16 @@ test('Khue up/down walk preserves idle upper proportions; idle/talk and sideways
 
 test('pilot clips: distance-driven walk keeps phase across time/direction, variable idle durations and fallback',async()=>{
  const atlas=await(await fetch('../assets/pixel/atlas.json')).json(),s=atlas.characters.overrides.khue;
- for(let i=0;i<8;i++)a.equal(clipFrame(s,'walk','down',999,i*6+.1).index,i);
- a.equal(clipFrame(s,'walk','down',9999,48).index,0);
- a.equal(clipFrame(s,'walk','left',0,18).index,clipFrame(s,'walk','right',2000,18).index);
+ const stride=s.clips.walk.stridePixels,stepDist=stride/8;
+ a.equal(stride,32);a.equal(s.clips.walk.stepPixels,16);
+ for(let i=0;i<8;i++)a.equal(clipFrame(s,'walk','down',999,i*stepDist+.1).index,i);
+ a.equal(clipFrame(s,'walk','down',9999,stride).index,0);
+ a.equal(clipFrame(s,'walk','left',0,stepDist*3).index,clipFrame(s,'walk','right',2000,stepDist*3).index);
+ a.equal(clipFrame(s,'walk','down',0,0).phase,'contact');a.equal(clipFrame(s,'walk','down',0,0).isContact,true);
+ a.equal(clipFrame(s,'walk','down',0,stepDist).phase,'down');
+ a.equal(clipFrame(s,'walk','down',0,stepDist*2).phase,'pass');
+ a.equal(clipFrame(s,'walk','down',0,stepDist*3).phase,'up');
+ a.equal(clipFrame(s,'walk','down',0,stepDist*4).phase,'contact');
  a.equal(clipFrame(s,'idle','down',1199).index,0);a.equal(clipFrame(s,'idle','down',1200).index,1);a.equal(clipFrame(s,'idle','down',1450).index,2);a.equal(clipFrame(s,'idle','down',1800).index,0);
  a.equal(clipFrame(s,'unavailable','up',0).clip,'idle');a.equal(clipFrame(s,'talk','right',0).y,6*48);
 });

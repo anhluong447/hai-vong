@@ -14,7 +14,9 @@ export const menuRouteLabels = {
 export const menuCaseArt = {documents:'card1-thumb.png',community:'card2-thumb-clean.png',photo:'menu-harbor-context.png'};
 // CSS-backed materials must decode as well as DOM images before native capture.
 export const menuMaterialFiles = ['menu-ink-wash.png','menu-case-paper.png','menu-thumb-edge-mask.png',
-  'menu-nav-dry-brush.png','menu-tidal-wash.png','menu-hint-paper.png','menu-foreground-paper.svg'];
+  'menu-nav-dry-brush.png','menu-tidal-wash.png','menu-hint-paper.png','menu-foreground-paper.svg',
+  'menu-wave-safe-mask.png','menu-top-leaves-mask.png','menu-top-leaves-context.png',
+  ...['back','middle','foam'].flatMap(id=>[`menu-wave-${id}-mask.png`,`menu-wave-${id}-tile.png`])];
 export const menuPreviewCases = [
   {id:'preview-documents',key:'documents',titleKey:'ui.replica.menu.case_one_title.1',teaserKey:'ui.replica.menu.case_one_teaser.1'},
   {id:'preview-community',key:'community',titleKey:'ui.replica.menu.case_two_title.1',teaserKey:'ui.replica.menu.case_two_teaser.1'}

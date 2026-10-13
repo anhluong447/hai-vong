@@ -5,6 +5,10 @@ Giai đoạn hiện tại: thử cơ chế trước khi viết câu chuyện th�
 
 ## Chạy
 
+Git chỉ giữ mã nguồn và các đầu vào nhỏ. Asset nhị phân, BGM, font, plan và
+ảnh review được giữ riêng trên máy; clone mới cần bổ sung gói asset trước khi
+chạy giao diện và browser test. Xem [quy tắc Git và khôi phục asset](docs/REPOSITORY.md).
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File tools/serve.ps1
 ```

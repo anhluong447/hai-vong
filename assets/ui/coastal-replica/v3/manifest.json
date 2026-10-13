@@ -49,7 +49,7 @@
         1672,
         342
       ],
-      "sha256": "336DF9C19E10515994C27B371794CD3A448305654C64CDC53ED1B3723B2DE455",
+      "sha256": "99A40F466DA1619D83BA4014C8346AAF161D86EE0295116E6B7CE4067E4A0FC6",
       "version": 3,
       "scope": "ui",
       "pivot": [
@@ -204,7 +204,7 @@
         384,
         64
       ],
-      "sha256": "437154C8749771336ECC76E903BC6516FFD0B03486B681B73C5931AB7A6319A8",
+      "sha256": "16F6B77AD88705FD57DE0E9FA4FD3B2153CA306B0B5CDEB69A79B220822BEDA8",
       "version": 3,
       "scope": "ui",
       "pivot": [
@@ -230,7 +230,7 @@
         87,
         127
       ],
-      "sha256": "188DC429B5D78620BAC74D789D6F1D61344CEF8A134612DF43BEF1B7EBC065DE",
+      "sha256": "D4550BAF8DFBD5DDA4F73420599A0FD7C1B7748CBADB60D69B5704150EC21487",
       "version": 3,
       "scope": "ui",
       "pivot": [
@@ -307,7 +307,7 @@
         1672,
         342
       ],
-      "sha256": "2FC7903DCD9283864B4F809A63F696C16527A0996EC7667C86D6C3C6C634A83B",
+      "sha256": "A4C7CE4D129FAF9842DC6ED1E2C02260F31C4EC92A1AF0DEAAD234AE46ADAF8A",
       "version": 3,
       "scope": "ui",
       "pivot": [
@@ -345,7 +345,7 @@
         128,
         196
       ],
-      "sha256": "BF65410437ECB69DF2650F82586709EFEB560179A7451E936E056A15BC174290",
+      "sha256": "13BA3548B15E54BB48FD991249E3A370593248EA174E0A7035D2A755C87B2B8A",
       "version": 3,
       "scope": "ui",
       "pivot": [
@@ -589,7 +589,7 @@
   ],
   "fontManifest": "assets/fonts/coastal-replica/manifest.json",
   "compositionSource": "content/ui/coastal-dialogue-ui.json",
-  "compositionSourceSHA256": "AB85AA4022234C3E5C5D77121A20A577E02002EB2D382E31B8AFA2827A9A4E79",
+  "compositionSourceSHA256": "741BAB46BDBFD2BD2943C0228187ED1C9C3782D2B777B6FB2FC0ED8B8183BE62",
   "sourceReference": "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
   "sourceReferenceSHA256": "68C076B9D013523B745E61E1AF35A8251742BBF7B774C02245F89DACF3D2A5A2",
   "comparisonMask": {

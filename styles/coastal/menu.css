@@ -821,3 +821,37 @@
 .game-menu:not(.menu-overview) .menu-section-title{font-size:calc(40/1672*100cqi);line-height:1.3;max-height:calc(105/1672*100cqi);overflow:hidden}
 .game-menu .menu-pagination{background:#0b3b45dd;padding:calc(3/1672*100cqi) calc(7/1672*100cqi);border-radius:2px}
 .game-menu[data-motion="reduced"] *,.game-menu[data-motion="reduced"] *::before,.game-menu[data-motion="reduced"] *::after{animation:none!important;transition:none!important}
+
+/* Fixed safety mask is outside all moving wave planes: no phase can move it. */
+.game-menu .menu-plane-wave{overflow:hidden;mask-image:url('../../assets/ui/coastal/menu-wave-safe-mask.png');mask-size:100% 100%;mask-repeat:no-repeat}
+.game-menu .menu-wave-layer{position:absolute;left:0;bottom:0;width:100%;mask-size:100% 100%;mask-repeat:no-repeat;overflow:hidden;will-change:transform}
+.game-menu .menu-wave-drift{position:absolute;left:-5%;top:0;width:110%;height:100%;background-repeat:repeat;will-change:transform}
+.game-menu .menu-wave-sparkle{mix-blend-mode:screen;pointer-events:none}
+.game-menu:not([data-effects-ready="true"]) .menu-wave-layer{visibility:hidden}
+.game-menu[data-effects-ready="true"] .menu-wave-static{display:none}
+.game-menu .menu-wave-static{position:absolute;bottom:0;width:100%;height:calc(941/1672*100cqi)!important}
+.game-menu .menu-top-foliage{position:absolute;inset:0;z-index:var(--menu-layer-foliage);pointer-events:none;overflow:hidden;mask-image:url('../../assets/ui/coastal/menu-top-leaves-mask.png');mask-size:100% 100%;mask-repeat:no-repeat}
+.game-menu .menu-top-foliage img{display:block;width:100%;height:100%;object-fit:fill;will-change:transform}
+.game-menu .menu-foreground-flowers{will-change:transform}
+.game-menu .menu-ambient-light{position:absolute;inset:0;z-index:var(--menu-layer-scene);pointer-events:none;overflow:hidden}
+.game-menu .menu-ambient-sprite{position:absolute;display:block;mix-blend-mode:screen;opacity:0;will-change:transform,opacity}
+.game-menu .menu-glint{background:radial-gradient(ellipse,#e9fff5 0%,#d3f8ec88 30%,transparent 72%);box-shadow:0 0 2px #effff544;transform-origin:center}
+.game-menu .menu-glint::after{content:'';position:absolute;left:-45%;right:-45%;top:45%;height:12%;background:#e9fff5aa}
+.game-menu .menu-dust{border-radius:50%;background:radial-gradient(#ffeac3,transparent 72%)}
+.game-menu .menu-nav-highlight-glider{transition:transform 170ms cubic-bezier(.16,1,.3,1)}
+.game-menu .menu-nav-label{display:block}
+.coastal-app .game-menu .menu-case-card,.game-menu .menu-case-card{transition:transform 160ms ease,box-shadow 160ms ease}
+.game-menu .menu-case-card::before{transition:filter 160ms ease}
+.game-menu .menu-case-card:hover::before,.game-menu .menu-case-card:focus-visible::before{filter:drop-shadow(0 8px 10px #001b3080)}
+.coastal-app .game-menu .menu-case-card.card-one:hover,.coastal-app .game-menu .menu-case-card.card-one:focus-visible,.game-menu .menu-case-card.card-one:hover,.game-menu .menu-case-card.card-one:focus-visible{transform:translateY(-3px) rotate(-1.9deg)}
+.coastal-app .game-menu .menu-case-card.card-two:hover,.coastal-app .game-menu .menu-case-card.card-two:focus-visible,.game-menu .menu-case-card.card-two:hover,.game-menu .menu-case-card.card-two:focus-visible{transform:translateY(-3px) rotate(-2.5deg)}
+.game-menu .menu-motion-setting{display:flex;align-items:center;gap:calc(12/1672*100cqi);padding:calc(12/1672*100cqi) 0;margin-bottom:calc(15/1672*100cqi);border-bottom:1px solid #bdc7b5;cursor:pointer}
+.game-menu .menu-motion-setting input{accent-color:#176475;width:calc(22/1672*100cqi);height:calc(22/1672*100cqi);margin:0}
+.game-menu[data-menu-reduced="true"] .menu-ambient-sprite{opacity:0!important}
+.game-menu[data-menu-reduced="true"] *,.game-menu[data-menu-reduced="true"] *::before,.game-menu[data-menu-reduced="true"] *::after{animation:none!important;transition:none!important}
+.game-menu[data-menu-reduced="true"] .menu-nav-highlight-glider{transition-duration:35ms}
+.game-menu[data-menu-reduced="true"] .menu-case-card.card-one:hover,.game-menu[data-menu-reduced="true"] .menu-case-card.card-one:focus-visible{transform:rotate(-2.2deg)}
+.game-menu[data-menu-reduced="true"] .menu-case-card.card-two:hover,.game-menu[data-menu-reduced="true"] .menu-case-card.card-two:focus-visible{transform:rotate(-2.8deg)}
+.game-menu[data-wave-isolation="true"]{background:#000;box-shadow:none}
+.game-menu[data-wave-isolation="true"]>:not(.menu-plane-wave){visibility:hidden!important}
+.game-menu[data-wave-isolation="true"] .menu-plane-wave{animation:none!important;opacity:1!important}

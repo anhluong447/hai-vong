@@ -37,19 +37,24 @@ replayBtn.addEventListener('click', () => {
 let reduced = false;
 motionBtn.addEventListener('click', () => {
   reduced = !reduced;
-  menu.node.dataset.motion = reduced ? 'reduced' : 'full';
+  menu.effects.setReduced(reduced);
   motionBtn.classList.toggle('active', reduced);
 });
 
 window.menuPreview = {menu};
 window.replicaCapture={prepare:async request=>{
   if(!captureMode||request.screen!=='menu')throw new Error('Menu capture requires capture=1 and screen=menu');
-  menu.update();menu.node.dataset.motion='reduced';menu.motion.cancel();
+  menu.update();menu.node.classList.remove('is-entering');menu.motion.cancel();
+  await menu.effects.ready;
+  const sampled=typeof request.motionSampleMs==='number';
+  menu.node.dataset.motion=sampled?'full':'reduced';
+  menu.effects.freeze(sampled?request.motionSampleMs:0,{reduced:!sampled});
+  menu.node.dataset.waveIsolation=String(request.variant==='menu-wave-isolation');
   await document.fonts.ready;
   await Promise.all(menuMaterialFiles.map(async filename=>{
     const image=new Image();image.src=new URL(`../assets/ui/coastal/${filename}`,import.meta.url).href;await image.decode();
   }));
   await Promise.all([...document.images].map(image=>image.decode()));
-  return {ready:true,screen:'menu',clock:request.capture.clock,motionTimeMs:request.capture.motionTimeMs,randomSeed:request.capture.randomSeed};
+  return {ready:true,screen:'menu',clock:request.capture.clock,motionTimeMs:request.capture.motionTimeMs,randomSeed:request.capture.randomSeed,menuEffects:menu.effects.snapshot()};
 }};
 window.addEventListener('pagehide', () => {menu.dispose();stage?.dispose();});
