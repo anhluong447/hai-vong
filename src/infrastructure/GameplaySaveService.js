@@ -2,7 +2,7 @@ import {validateGameplaySave} from '../domain/validateSave.js';
 export {validateGameplaySave};
 import {t} from '../shared/text.js';
 export const GAMEPLAY_SAVE_KEYS = Object.freeze({
-  gameplay:'clb-bao-chi.gameplay.v1', pixel:'clb-bao-chi.pixel.v1',
+  gameplay:'clb-bao-chi.gameplay.v1', pixel:'clb-bao-chi.pixel.v1', coastal:'clb-bao-chi.coastal.v3',
 });
 const invalid = () => { throw new Error(t('save.invalid')); };
 export class GameplaySaveService {
@@ -16,14 +16,17 @@ export class GameplaySaveService {
     this.storage.setItem(GAMEPLAY_SAVE_KEYS[this.mode],JSON.stringify(envelope));
   }
   load() {
-    const raw = this.storage.getItem(GAMEPLAY_SAVE_KEYS[this.mode]);
+    let raw = this.storage.getItem(GAMEPLAY_SAVE_KEYS[this.mode]);
+    const legacyFallback=!raw&&this.mode==='coastal';
+    if(legacyFallback)raw=this.storage.getItem(GAMEPLAY_SAVE_KEYS.pixel);
     if (!raw) invalid();
     const payload = JSON.parse(raw);
     if (payload?.kind === 'press-gameplay-save') {
-      if (payload.version !== 1 || payload.contentVersion !== 1 || payload.mode !== this.mode) invalid();
+      if (payload.version !== 1 || payload.contentVersion !== 1 || (payload.mode !== this.mode&&!(legacyFallback&&payload.mode==='pixel'))) invalid();
       return {state:validateGameplaySave(payload.state),world:payload.world};
     }
     // Historical gameplay saves were raw states; pixel saves wrapped state and world.
-    return {state:validateGameplaySave(this.mode==='pixel'?payload?.state:payload),world:this.mode==='pixel'?payload.world:null};
+    const wrapped=this.mode==='pixel'||this.mode==='coastal';
+    return {state:validateGameplaySave(wrapped?payload?.state:payload),world:wrapped?payload.world:null};
   }
 }

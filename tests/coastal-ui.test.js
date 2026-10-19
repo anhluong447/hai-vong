@@ -82,7 +82,7 @@ test('coastal dialogue editorial: replica choices, icons, continue button, flowe
 });
 
 test('coastal pixel shell: preserves world/HUD identity, overlay lock and mobile menu',async()=>{
- const frame=el('iframe',{src:'../pixel.html'});frame.style.cssText='position:relative;left:0;width:1200px;height:900px';document.body.append(frame);
+ const frame=el('iframe',{src:'../pixel.html?legacy=1'});frame.style.cssText='position:relative;left:0;width:1200px;height:900px';document.body.append(frame);
  const wait=fn=>new Promise((resolve,reject)=>{const start=Date.now();const poll=()=>fn()?resolve():Date.now()-start>14000?reject(new Error('Coastal UI timeout')):setTimeout(poll,20);poll();});
  try{
   await wait(()=>frame.contentWindow.pressPixel?.ready);const w=frame.contentWindow,d=w.document,canvas=d.querySelector('canvas'),hud=d.querySelector('.pixel-hud');

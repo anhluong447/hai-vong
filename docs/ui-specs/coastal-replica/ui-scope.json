@@ -1,7 +1,21 @@
 {
   "version": 2,
-  "scopeRevision": 2,
-  "date": "2026-10-09",
+  "scopeRevision": 3,
+  "date": "2026-10-15",
+  "menuOverride": {
+    "authority": "User request 2026-10-15: six-tab concept layout; scenery without decorative Khue; animated waves, foliage, particles and lighting.",
+    "plan": "../../MENU-V2-IMPLEMENTATION.md",
+    "references": "../../ui-concepts/coastal-editorial-menu-prototypes-v2/README.md",
+    "images": ["01-ho-so.png", "02-ky-nang.png", "03-trang-bi.png", "04-dong-doi.png", "05-ban-do.png", "06-cai-dat.png"],
+    "defaultTab": "cases",
+    "resetToDefaultOnOpen": true,
+    "separateRootScreen": false,
+    "decorativeHero": false,
+    "implementation": "First playable in pixel.html; isolated preview tools/coastal-menu-v2-preview.html; visual and physical-GPU acceptance still open.",
+    "preserveAttachedDecorations": true,
+    "legacyMenuRegions": "Historical only; measure new six-tab layouts before implementation.",
+    "precedence": "Overrides old menu layout and deferred menu scenery/motion entries only. Dialogue/HUD scope remains unchanged; old dossier is a material reference, not the v2 quest navigation."
+  },
   "authority": "User clarification: replicate fixed UI and attached visual decorations; background/characters may differ or be placeholders.",
   "target": "ui-replica",
   "stage": [

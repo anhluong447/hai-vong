@@ -16,6 +16,8 @@ import './interaction-map.test.js';
 import './coastal-ui.test.js';
 import './single-screen.test.js';
 import './menu-effects.test.js';
+import './coastal-v2.test.js';
+import './dossier-polish.test.js';
 import {runAll} from './harness.js';
 const results = await runAll(); const root = document.querySelector('#results'); root.replaceChildren();
 for(const r of results) { const p = document.createElement('pre'); p.className=r.ok?'ok':'bad'; p.textContent=`${r.ok?'ok':'FAIL'} ${r.name}${r.error?'\n'+r.error:''}`; root.append(p); }

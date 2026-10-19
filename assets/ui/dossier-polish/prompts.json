@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "tool": "Built-in image_gen.imagegen",
+  "outputs": [
+    {
+      "file": "school-window.png",
+      "transparent_background": false,
+      "prompt": "Use case: stylized-concept. Asset type: full-screen clean painted background for a 1672x941 coastal Vietnamese school journalism game menu. Reference attached is style/composition inspiration ONLY; generate scenery without any interface. View from a sunlit wooden classroom/newsroom window toward a green school courtyard, chain-link sports field in middle distance, ochre school buildings and blue coastal hills beyond, airy blue sky with cumulus. Rich hand-painted anime environment, detailed warm wood, textured paint, deep sea teal shadows and honey afternoon sun. Window mullions at edges, bright clear center. Empty foreground wooden desk along bottom, no objects because separate overlay will be added. No people, no UI, no title, no panels, no text, no lettering, no logo, no foreground flowers or foliage. Entire scene fully painted, no empty dark flat panel. Wide 16:9.",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/01-ho-so.png"
+      ]
+    },
+    {
+      "file": "desk-cluster.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: isolated foreground desk-object overlay with actual transparent alpha for coastal editorial school journalism menu. Match the warm hand-painted anime material style of attached reference. A compact still life on a small edge of wooden newsroom desk: a vintage black camera, metal cup of paintbrushes/pencils, stack of cream newspapers completely blank with no lettering, a blank off-white notebook, a small tilted photo print showing sea and distant green hills, and fresh white five-petalled flowers with green leaves tucked between objects. Arrange low and wide as an organic cluster, taller cup toward upper left, camera center/right, flowers near lower left and paper near bottom. All objects visible and fully within canvas, transparent air around silhouette and between objects, no rectangular background. No people, no UI, no text, no logos. Output wide composition, transparent background.",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/01-ho-so.png"
+      ]
+    },
+    {
+      "file": "canteen-photo.png",
+      "transparent_background": false,
+      "prompt": "Use case: stylized-concept. Asset type: illustration to be placed INSIDE a dossier polaroid by game UI, not a complete polaroid frame. Painterly anime environmental still of an empty Vietnamese high-school canteen in a sunny coastal town, modest tiled roof awning, simple lunch tables and benches, serving counter closed and tidy, a few pale green school buildings beyond. Gentle afternoon sunlight, ochre cream, teal green shadows, textured paint, realistic school atmosphere. Eye level documentary framing, vertical 3:4 image, no people, no text, no lettering, no signage, no UI, no border, no paperclip. Full-bleed image only.",
+      "references": []
+    },
+    {
+      "file": "field-photo.png",
+      "transparent_background": false,
+      "prompt": "Use case: stylized-concept. Asset type: documentary-style anime illustration to place INSIDE a quest polaroid by game UI. Close view of a closed chain-link school sports-field gate with a simple padlock, green football field and goal behind, ochre high-school buildings and coastal blue sky in distance. Warm dappled sun, subtle leaves along upper edge, intricate painterly anime background matching coastal editorial game concept. Vertical 3:4 composition, no people, no signs or readable text, no labels, no interface, no photo border, no paperclip. Full-bleed picture only.",
+      "references": []
+    },
+    {
+      "file": "side-wave.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: genuine transparent painted vertical sidebar divider for a coastal editorial game menu. Reference image attached for the exact teal/cream print texture language only. A tall narrow organic S-shaped coastal ink current flowing from the top edge to the bottom edge: multiple overlapping uneven ribbons of midnight petrol teal, blue turquoise, dusty pale aqua, fine thin warm ivory seams; irregular dry-brush edges, distressed woodcut/grain details, tiny turbulent eddies within the ink. No simple equal-width stripes. The overall divider is slender, slightly meandering, no broad panel. Entire ribbon visible, tall portrait framing with transparent margins on both sides, flat 2D editorial printed artwork, not 3D. No scene, no people, no UI, no text or lettering, no logo. Real transparent alpha background.",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/01-ho-so.png"
+      ]
+    },
+    {
+      "file": "harbor-wave.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: full native 1672x941 transparent foreground footer overlay for a 16:9 coastal editorial game menu. Reference attached for printed paper-wave treatment. Upper three quarters must be genuinely transparent and empty; design only occupies bottom 200 pixels approximately. Layered organic dark petrol teal and turquoise waves curve low near bottom-left and rise gently toward right to around y=740; fine warm ivory paper ribbons separate irregular hand-painted teal waves, rough ink grain and dry-brush texture. In the right-hand part INSIDE the wave band is an intricate ivory and petrol-blue woodcut/engraved coastal harbor panorama: small sailboats, hillside houses, sea wall, lighthouse and distant mountains. Left portion keeps calm dark teal so UI resources can be overlaid. The bottom edge is fully filled teal with no empty gap. No words, no letters, no numbers, no UI controls, no people, no separate white rectangular picture. This is a decorative horizontal irregular coastal ribbon with the harbor drawing integrated INTO the waves, genuine alpha everywhere above the curving top edge.",
+      "references": [
+        "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/01-ho-so.png"
+      ]
+    }
+  ]
+}

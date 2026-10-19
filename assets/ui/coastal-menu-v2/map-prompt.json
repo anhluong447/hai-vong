@@ -1,0 +1,6 @@
+{
+  "tool": "built-in image_gen",
+  "source": "docs/hai-vong.png",
+  "file": "map.png",
+  "prompt": "Use case: precise-object-edit. Edit target: attached Hai Vong illustrated city map. Remove ALL interface labels, numbered circles, location pins, title typography HAI VONG, subtitle, underlines, logo-like mountain lines, glow highlights, and every piece of readable lettering including shop signage. Seamlessly paint the scenery that was obscured beneath labels: rooftops, trees, roads, sky, hills. Preserve the exact map composition, buildings, shoreline, road geometry, harbor, school, library, cafe, square, homes, boats, lighthouse, paint texture and colors. No people hero, no new UI, no labels or text anywhere. Output a clean full-bleed scenic map background only in the same 16:9 framing so real interactive labels can later be placed on top."
+}

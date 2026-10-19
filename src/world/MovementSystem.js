@@ -9,7 +9,7 @@ if(world.walk||world.blocked||!world.ready)return;const [dx,dy]=DIRECTIONS[direc
 update(dt){
  const world=this.world;
 if(!world.ready)return;for(const clock of world.actorClocks.values())clock.elapsed+=dt*1000;if(world.blocked)return;
-  if(world.walk){world.actor('khue').distance+=Math.min(dt,world.stepSeconds-world.walk.elapsed)*TILE/world.stepSeconds;world.walk.elapsed+=dt;if(world.walk.elapsed>=world.stepSeconds){world.player.x=world.walk.to.x;world.player.y=world.walk.to.y;world.walk=null;const portal=world.map.portals.find(p=>p.x===world.player.x&&p.y===world.player.y);if(portal){world.enter(portal.to,portal.spawn);return;}}}
+  if(world.walk){world.actor('khue').distance+=Math.min(dt,world.stepSeconds-world.walk.elapsed)*TILE/world.stepSeconds;world.walk.elapsed+=dt;if(world.walk.elapsed>=world.stepSeconds){world.player.x=world.walk.to.x;world.player.y=world.walk.to.y;world.walk=null;const portal=world.map.portals.find(p=>p.x===world.player.x&&p.y===world.player.y);if(portal){if(world.onBeforeEnter)world.onBeforeEnter(portal.to,portal.spawn);else world.enter(portal.to,portal.spawn);return;}}}
   if(!world.walk){if(world.path.length){const to=world.path.shift();const dx=to.x-world.player.x,dy=to.y-world.player.y;world.step(dx<0?'left':dx>0?'right':dy<0?'up':'down');if(!world.walk){world.path=[];world.target=null;}}
    else if(world.target){const t=world.target;world.target=null;world.interact(t.id);}
    else if(world.keys.size)world.step([...world.keys].at(-1));}

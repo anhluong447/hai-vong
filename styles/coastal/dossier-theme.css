@@ -1,0 +1,49 @@
+/* Dossier polish: all new visual tuning lives here. Palette sampled by
+   tools/sample_dossier_palette.py; see docs/ui-specs/dossier-polish/palette.json. */
+.menu-v2{
+  --ds-sidebar:#052132;--ds-paper:#f1e8da;--ds-gold:#f9c155;
+  --ds-teal:#013347;--ds-ink:#00001b;--ds-tape:#b6b8b3;--ds-cream:#f2e6d4;
+  --ds-clear:transparent;--ds-scene-shade:linear-gradient(90deg,#052132 19%,#052132eb 23%,#052132b0 33%,#05213200 53%);
+  --ds-desk-left:355px;--ds-desk-bottom:48px;--ds-desk-width:495px;--ds-desk-height:342px;
+  --ds-paper-padding:36px;--ds-paper-radius:3px;--ds-paper-edge:#bca986;
+  --ds-paper-grain:url('../../assets/ui/coastal/menu-case-paper.png');--ds-paper-tile:700px;
+  --ds-paper-shadow:0 18px 38px #05213266;--ds-paper-rise:-24px;--ds-paper-extra-height:24px;
+  --ds-paper-near:rotate(-1deg) translate(-5px,-9px);--ds-paper-far:rotate(1.2deg) translate(8px,-18px);
+  --ds-edge-shape:polygon(0 .8%,12% 0,29% .5%,48% 0,69% .4%,88% 0,100% .7%,99.7% 28%,100% 53%,99.6% 80%,100% 99%,74% 100%,49% 99.7%,22% 100%,0 99.3%,.3% 76%,0 49%,.4% 24%);
+  --ds-paper-title:42px;--ds-paper-title-weight:750;--ds-paper-title-leading:1.18;
+  --ds-title-mark-width:138px;--ds-title-mark-height:7px;--ds-title-mark-space:16px;
+  --ds-title-mark-rotate:-1deg;--ds-section-space:28px;--ds-intro-gap:24px;
+  --ds-photo-width:248px;--ds-photo-height:294px;--ds-photo-padding:12px;--ds-photo-bottom:27px;
+  --ds-photo-rotate:4deg;--ds-photo-paper:#fff8e8;--ds-photo-shadow:0 5px 12px #4a38274a;
+  --ds-clip-top:12px;--ds-clip-right:24px;--ds-clip-height:60px;--ds-clip-width:15px;--ds-clip-stroke:3px;--ds-clip-color:#5e645a;
+  --ds-label-font:26px;--ds-label-height:42px;--ds-label-padding:8px 25px;
+  --ds-label-rotate:-1.2deg;--ds-label-gap:13px;--ds-label-space:20px;
+  --ds-brush-shape:polygon(0 10%,7% 5%,8% 0,31% 5%,59% 1%,83% 4%,100% 0,97% 18%,100% 37%,96% 55%,99% 76%,95% 93%,67% 96%,41% 100%,17% 94%,2% 100%,4% 76%,0 51%,3% 31%);
+  --ds-check-size:28px;--ds-check-radius:3px;--ds-check-blue:#113b57;--ds-check-white:#fff9ed;
+  --ds-history-gap:15px;--ds-history-height:112px;--ds-history-font:22px;
+  --ds-hint-wash:#f9c15512;--ds-hint-border:#d6aa43;--ds-hint-padding:10px 20px 16px;
+  --ds-brush-grain:url('../../assets/ui/coastal/menu-nav-dry-brush.png');--ds-brush-crop:34px;
+  --ds-row-radius:6px;--ds-row-gap:14px;--ds-row-padding:18px 20px;
+  --ds-row-height:76px;--ds-row-font:26px;--ds-row-fill:#052132b5;--ds-row-border:#c4d2cd70;
+  --ds-row-hover:#28596bd9;--ds-row-hover-border:#d9e0ce;
+  --ds-row-icon:29px;--ds-row-mark:31px;--ds-row-mark-font:23px;
+  --ds-row-shadow:0 2px 8px #05213233;--ds-tab-shadow:0 1px 4px #052132;
+  --ds-list-height:520px;--ds-tabs-gap:24px;--ds-tabs-bottom:28px;
+  --ds-nav-shape:polygon(0 3%,94% 0,100% 12%,96% 26%,100% 44%,96% 64%,100% 83%,95% 97%,0 100%,2% 79%,0 53%,2% 29%);
+  --ds-nav-icon:44px;--ds-brand-width:270px;--ds-brand-height:108px;--ds-brand-font:46px;
+  --ds-brand-stamp:65px;--ds-brand-wave-width:235px;--ds-brand-wave-height:33px;
+  --ds-resource-width:238px;--ds-resource-gap:4px;--ds-date-font:16px;--ds-energy-font:37px;
+  --ds-energy-gap:14px;--ds-lightning-width:42px;--ds-lightning-height:58px;--ds-money-font:20px;
+  --ds-side-left:205px;--ds-side-top:-40px;--ds-side-width:300px;--ds-side-height:1040px;
+  --ds-wave-amplitude:3px;--ds-wave-phase:0;
+  --ds-harbor-height:700px;
+  --ds-heading-font:94px;--ds-heading-weight:800;--ds-heading-height:110px;
+  --ds-heading-gap:18px;--ds-heading-padding:30px;--ds-heading-space:16px;
+  --ds-heading-gull:40px;--ds-heading-stamp:92px;
+  --ds-key-font:17px;--ds-key-border:2px;--ds-key-radius:3px;--ds-key-padding:4px 8px;
+  --ds-key-color:#fff9ed;--ds-key-back:#052132e8;--ds-key-outline:#d5e2d6;--ds-key-hint-gap:12px;
+  --ds-action-padding:10px;--ds-action-shadow:0 -8px 16px #f1e8dabf;
+  --ds-label-weight:750;--ds-row-weight:750;--ds-mark-weight:800;--ds-row-leading:1.25;
+  --ds-heading-leading:1.15;--ds-muted-opacity:.7;--ds-thin-border:1px;
+  --ds-summary-height:244px;
+}

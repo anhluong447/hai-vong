@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <symbol id="cases" viewBox="0 0 40 40"><path fill-rule="evenodd" d="M9 3h16l8 8v24a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm15 2v9h9ZM12 20v2h15v-2Zm0 6v2h15v-2Zm0 6v2h10v-2Z"/></symbol>
+  <symbol id="skills" viewBox="0 0 40 40"><path d="M19 9h3v10L10 30l-2-2 11-11Zm1 9 13 10-2 2-12-10Z"/><path fill-rule="evenodd" d="M20 2a7 7 0 1 1 0 14 7 7 0 0 1 0-14Zm0 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM7 25a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm26-3a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></symbol>
+  <symbol id="equipment" viewBox="0 0 40 40"><path d="m11 4-9 7 5 10 5-3v19h16V18l5 3 5-10-9-7h-4a5 5 0 0 1-10 0Z"/></symbol>
+  <symbol id="team" viewBox="0 0 40 40"><path d="M13 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm15 1a6 6 0 1 0 0 12 6 6 0 0 0 0-12ZM3 36V24c0-8 19-8 19 0v12h-5V25h-2v11H9V25H7v11Zm22 0V24a13 13 0 0 0-2-7c8-3 15 1 15 8v11h-5V25h-2v11Z"/></symbol>
+  <symbol id="map" viewBox="0 0 40 40"><path d="m3 7 10-4v30L3 37Zm13-3 10 4v29l-10-4Zm13 4 9-5v30l-9 4Z"/></symbol>
+  <symbol id="settings" viewBox="0 0 40 40"><path fill-rule="evenodd" d="m16 2 8 0 1 5 3 2 5-2 5 7-4 4v4l4 4-5 7-5-2-3 2-1 5h-8l-1-5-3-2-5 2-5-7 4-4v-4l-4-4 5-7 5 2 3-2Zm4 10a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z"/></symbol>
+  <symbol id="lightning" viewBox="0 0 40 40"><path d="M24 1 4 24h13l-3 15 23-25H23Z"/></symbol>
+  <symbol id="gull" viewBox="0 0 40 40"><path d="M2 9q11 2 17 13Q28 10 39 9q-12 6-19 23Q13 15 2 9Z"/></symbol>
+  <symbol id="stamp" viewBox="0 0 40 40"><path fill="none" stroke="currentColor" stroke-width="1.3" d="m5 5 2 1 2-2 2 1 2-2 2 1 2-2 2 1 2-2 2 1 2-2 2 1 3-1 4 30-3 1-2-1-2 2-2-1-2 2-2-1-2 2-2-1-2 2-2-1-2 2-2-1-3 1Z M11 27q7-5 15-2 M11 30q7-5 15-2 M12 17l5 4 9-11"/></symbol>
+  <symbol id="document-stamp" viewBox="0 0 40 40"><path fill-rule="evenodd" d="M7 4h22v30H7Zm3 3v24h16V7Zm3 6h10v2H13Zm0 6h10v2H13Z"/><path fill="none" stroke="currentColor" stroke-width="1.5" d="M30 9q5-4 10-3M30 15q5-4 10-3M30 21q5-4 10-3M30 27q5-4 10-3"/></symbol>
+  <symbol id="logo-waves" viewBox="0 0 240 35"><path fill="none" stroke="currentColor" stroke-width="2" d="M2 15C50-5 71 30 120 15S190 4 238 24 M14 22C62 2 81 34 134 22S205 12 230 30"/></symbol>
+</svg>

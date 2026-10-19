@@ -12,20 +12,26 @@ import {phases, places} from '../../content/gameplay/presentation.js';
 import {createGameplayPanels} from './gameplay-panels.js';
 import {GameplaySaveService} from '../infrastructure/GameplaySaveService.js';
 import {GameSession} from '../application/GameSession.js';
+import {MenuV2View} from '../ui/coastal/MenuV2View.js';
+import {coastalMenuModel} from './coastal-menu-model.js';
+import {coastalBalance as coastalCosts} from '../../content/gameplay/coastal-v2.js';
 
 export async function mountGameplay({pixelMode=false,storage=globalThis.localStorage}={}) {
 
 const dialogueSprite=pixelMode?new DialogueSprite(await loadDialogueRegistry()):null;
 if(dialogueSprite)dialogueSprite.preload(['khue','van']);
-const saves=new GameplaySaveService({mode:pixelMode?'pixel':'gameplay',storage});
-const session=new GameSession();
-let state=session.state,place='school',tab='cases',message=t("src.gameplay.main.bat_dau_14_ngay_thu_nghiem_nhi_mo_som_de_kiem_tra_phan_cong_ngoc"),modal=false;
+const coastalMode=pixelMode&&!new URLSearchParams(location.search).has('legacy');
+const saves=new GameplaySaveService({mode:coastalMode?'coastal':pixelMode?'pixel':'gameplay',storage});
+const session=new GameSession({},{coastal:coastalMode});
+let menuV2=null;
+let messageDebug=true;
+let state=session.state,place='school',tab='cases',message=t(coastalMode?'menu.v2.start':'src.gameplay.main.bat_dau_14_ngay_thu_nghiem_nhi_mo_som_de_kiem_tra_phan_cong_ngoc'),modal=false;
 const app=document.querySelector('#app');
 let world=null,pixelInteraction=null,pixelMenu=false,shell=null,overlays=null,dialogueView=null,menuView=null,mapView=null,pixelMap=false,confirmation=null;
 const pixelHost=pixelMode?el('div',{class:'pixel-stage'}):null;
 const fmt=n=>Number(n).toLocaleString('vi-VN',{maximumFractionDigits:1});
 const {casesPanel,questsPanel,teamPanel,editorPanel,reportsPanel,feedback}=createGameplayPanels(()=>({state,place,fmt,select,metric,dispatch,isFree}));
-function dispatch(action){try{state=session.execute(action);message=(state.log.at(-1) ? eventText(state.log.at(-1)) : '') || t("src.gameplay.main.da_cap_nhat");if(action.type==='sleep')modal=state.messages.some(m=>!m.resolved);render();}catch(error){message=error.message;const status=document.querySelector('[role=status]');if(status){status.textContent=message;status.classList.add('error');}}}
+function dispatch(action){try{state=session.execute(action);messageDebug=false;message=(state.log.at(-1) ? eventText(state.log.at(-1)) : '') || t("src.gameplay.main.da_cap_nhat");if(action.type==='sleep')modal=state.messages.some(m=>!m.resolved);render();}catch(error){message=error.message;messageDebug=false;if(coastalMode&&pixelMenu)menuV2.setNotice(message);const status=document.querySelector('[role=status]');if(status){status.textContent=message;status.classList.add('error');}}}
 function metric(label,value,detail){return el('div',{class:'metric'},[text('span',label,'metric-label'),text('strong',value),text('small',detail)]);}
 function select(name,options){return el('select',{name},options.map(([value,label])=>el('option',{value},[label])));}
 function go(id){place=id;tab=id==='club'?'cases':id==='school'?'cases':'activities';render();}
@@ -97,32 +103,35 @@ function debugPanel(root){root.append(text('h2',t("src.gameplay.main.thiet_lap_l
  root.append(el('details',{},[el('summary',{},[t("src.gameplay.main.cac_gioi_han_cua_ban_mock")]),text('p',t("src.gameplay.main.cot_truyen_phan_cong_theo_ap_luc_va_hoi_phuc_sau_phan_boi_chua_t")) ]));
 }
 
-function save(){try{saves.save(state,pixelMode?world.snapshot():null);message=t("src.gameplay.main.da_luu_sandbox_vong_choi");render();}catch(error){message=error.message;render();}}
+function save(){try{saves.save(state,pixelMode?world.snapshot():null);messageDebug=true;message=t("src.gameplay.main.da_luu_sandbox_vong_choi");render();}catch(error){message=error.message;messageDebug=false;render();}}
 function load(){try{const payload=saves.load();requestConfirm(t('src.gameplay.main.tai_save_se_thay_tien_do_hien_tai_tiep_tuc'),()=>{
  state=session.replace(payload.state);modal=state.phase==='bed'&&state.messages.some(m=>!m.resolved);
  if(pixelMode){pixelInteraction=null;pixelMenu=false;pixelMap=false;world.restore(payload.world);}
- message=t('src.gameplay.main.da_tai_luot_thu');render();
- });}catch(error){message=error.message;render();}}
+ message=t('src.gameplay.main.da_tai_luot_thu');messageDebug=true;render();
+ });}catch(error){message=error.message;messageDebug=false;render();}}
 function exportSession(){const url=URL.createObjectURL(new Blob([JSON.stringify({state,summary:summary(state),...(pixelMode?{world:world.snapshot()}: {})},null,2)],{type:'application/json'}));const a=el('a',{href:url,download:`hoi-am-day-${state.day}.json`});a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-window.pressGameplay=Object.freeze({get state(){return structuredClone(state);},navigate(id){tab=id;if(pixelMode){pixelMenu=true;pixelMap=false;}render();}});
+window.pressGameplay=Object.freeze({get state(){return structuredClone(state);},navigate(id){tab=id;if(pixelMode){pixelMenu=true;pixelMap=false;if(coastalMode)menuV2.selectTab(id);}render();}});
 function pixelNotice(value,error=false){
- message=value;if(shell){shell.notice.textContent=value;shell.notice.classList.toggle('error',error);shell.setLocation(world.map.title);}
+ message=value;messageDebug=!error;if(shell){shell.notice.textContent=value;shell.notice.classList.toggle('error',error);shell.setLocation(world.map.title);}
 }
 function closePixel(){
+ if(coastalMode&&pixelMenu&&!confirmation&&menuV2.back())return;
  if(pixelMenu&&!confirmation&&menuView.back())return;
- if(confirmation){confirmation=null;render();return;}
+ if(confirmation){cancelConfirmation();return;}
  pixelInteraction=null;pixelMenu=false;pixelMap=false;render();world.canvas.focus({preventScroll:true});
 }
-function openMenu(){pixelMenu=true;pixelMap=false;pixelInteraction=null;render();}
-function openMap(){pixelMap=true;pixelMenu=false;pixelInteraction=null;render();}
+function openMenu(){pixelMenu=true;pixelMap=false;pixelInteraction=null;if(coastalMode){tab='cases';menuV2.open();}render();}
+function openMap(){if(coastalMode){pixelMenu=true;pixelMap=false;pixelInteraction=null;menuV2.selectTab('map');render();return;}pixelMap=true;pixelMenu=false;pixelInteraction=null;render();}
 function requestConfirm(label,accept){
  if(!pixelMode){if(confirm(label))accept();return;}
- confirmation={label,accept};render();
+ confirmation={label,accept,focusKey:document.activeElement?.dataset.focusKey};render();
 }
+function restoreConfirmationFocus(current){if(current?.focusKey)[...document.querySelectorAll('[data-focus-key]')].find(n=>n.dataset.focusKey===current.focusKey)?.focus({preventScroll:true});}
+function cancelConfirmation(){const current=confirmation;confirmation=null;render();restoreConfirmationFocus(current);}
 function renderConfirmation(){
  const current=confirmation;
- const cancel=()=>{confirmation=null;render();};
- const accept=()=>{confirmation=null;try{current.accept();}catch(error){message=error.message;}render();};
+ const cancel=cancelConfirmation;
+ const accept=()=>{confirmation=null;try{current.accept();}catch(error){message=error.message;}render();restoreConfirmationFocus(current);};
  const content=el('section',{class:'game-confirm'},[
    text('h2',t('ui.game.confirmTitle')),text('p',current.label),
    el('div',{class:'actions'},[
@@ -149,9 +158,13 @@ function renderPixel(){
  const pending=state.messages.some(m=>!m.resolved),locked=Boolean(pixelInteraction||pixelMenu||pixelMap||confirmation||(modal&&pending));
  world.setBlocked(locked);world.setConversation(pixelInteraction?.person||null);world.bindPortrait(null);
  shell.update({date:weekday(state.day),
-  phase:phases[state.phase],energy:state.energy,maxEnergy:Math.max(state.config.clubEnergy,state.energy),money:state.money,
+  phase:coastalMode?t(`menu.v2.${state.phase==='club'?'clubPhase':state.phase}`):phases[state.phase],energy:state.energy,maxEnergy:coastalMode?10:Math.max(state.config.clubEnergy,state.energy),money:state.money,
   notice:message,location:world.map.title,locked,investigation:state.phase==='investigation',objective:state.quests.find(quest=>!quest.written)?.title||''});
  if(confirmation){renderConfirmation();return;}
+ if(coastalMode&&pixelMenu){
+   menuV2.update(coastalMenuModel(state));menuV2.setNotice(message,{debug:messageDebug});
+   overlays.show(menuV2.node,{key:'menu-v2',label:t('ui.menu_sandbox')});return;
+ }
  if(pixelMap){mapView.update();overlays.show(mapView.node,{key:'map',label:t('src.gameplay.main.ban_do_hai_vong')});return;}
  if(modal&&pending){
   dialogueSprite.clear();const dialog=feedback();dialog.firstChild.removeAttribute('role');dialog.firstChild.removeAttribute('aria-modal');
@@ -168,12 +181,13 @@ function renderPixel(){
   dialogueSprite.clear();const body=el('div');
   if(pixelMenu){body.append(panel());if(tab==='settings')body.append(sessionActions());}
   else renderPixelInteraction(body,pixelInteraction);
-  menuView.update({title:pixelMenu?null:label,body:[...body.childNodes],speaker:pixelMenu&&['cases','editor'].includes(tab)?'van':'khue',key:pixelMenu?tab:pixelInteraction.id,energy:state.energy,maxEnergy:Math.max(state.config.clubEnergy,state.energy),money:state.money,week:week(state.day),cases:pixelMenu?state.cases.filter(item=>!['expired','cancelled'].includes(item.status)).map(item=>({id:item.id,key:item.key,title:item.title,teaser:item.teaser})).sort((a,b)=>(a.key==='documents'?0:1)-(b.key==='documents'?0:1)):[],onTab:pixelMenu?id=>{tab=id;render();}:null});
+  menuView.update({title:pixelMenu?null:label,body:[...body.childNodes],speaker:pixelMenu&&['cases','editor'].includes(tab)?'van':'khue',key:pixelMenu?tab:pixelInteraction.id,energy:state.energy,maxEnergy:coastalMode?10:Math.max(state.config.clubEnergy,state.energy),money:state.money,week:week(state.day),cases:pixelMenu?state.cases.filter(item=>!['expired','cancelled'].includes(item.status)).map(item=>({id:item.id,key:item.key,title:item.title,teaser:item.teaser})).sort((a,b)=>(a.key==='documents'?0:1)-(b.key==='documents'?0:1)):[],onTab:pixelMenu?id=>{tab=id;render();}:null});
   overlays.show(menuView.node,{key:'menu',label});
  }
 }
 function pixelQuestStep(root,step){const q=state.quests.find(q=>!q.written);if(!q)return;const label=QUEST_STEPS.find(([id])=>id===step)?.[1];root.append(button(t("src.gameplay.main.value0_1_e", {value0: (label)}),()=>dispatch({type:'quest',id:q.id,step}),'secondary',state.ended||!['club','investigation'].includes(state.phase)||state.energy<1||q.steps.includes(step)));}
 function renderPixelInteraction(root,o){
+ if(coastalMode){renderCoastalInteraction(root,o);return;}
  if(o.line)root.append(text('p',o.line,['teammate','source'].includes(o.kind)?'dialogue-line':''));
  if(o.kind==='school'){root.append(text('p',t("src.gameplay.main.buoi_sang_hoc_tren_lop_tan_hoc_moi_bat_dau_hai_gio_clb")),button(t("src.gameplay.main.di_hoc_buoi_clb"),()=>pixelAction({type:'school'}),'primary',state.phase!=='morning'||state.ended));}
  else if(o.kind==='source'){casesPanel(root,o.caseKey);if(o.step)pixelQuestStep(root,o.step);}
@@ -192,11 +206,44 @@ function renderPixelInteraction(root,o){
  else if(o.kind==='bed')root.append(text('p',t("src.gameplay.main.truoc_khi_ngu_phai_duyet_het_tin_nhan_dong_doi_duyet_khong_ton_e")),button(t("src.gameplay.main.nhan_giuong_di_ngu"),()=>pixelAction({type:'sleep'}),'primary',state.phase!=='bed'||state.ended),button(t("src.gameplay.main.nghi_ngoi_giam_met"),()=>pixelAction({type:'activity',kind:'rest'}),'',!isFree()||state.ended));
  else if(['rest','cafe'].includes(o.kind))root.append(text('p',t("src.gameplay.main.danh_mot_slot_nghi_chan_muon_hangout_hay_den_gap_nhan_vat_dang_o")),button(t("src.gameplay.main.nghi_ngoi_giam_met"),()=>pixelAction({type:'activity',kind:'rest'}),'primary',!isFree()||state.ended));
 }
+function coastalTravel(destination){
+ const arrive=()=>{world.enter(destination.map,destination.position||undefined);place=destination.id;pixelMenu=false;pixelInteraction=null;render();};
+ if(destination.id==='home'&&['club','evening'].includes(state.phase)){
+   requestConfirm(t(state.phase==='club'?'menu.v2.returnEvening':'menu.v2.returnNight'),()=>{state=session.execute({type:'returnHome'});arrive();});
+ }else arrive();
+}
+function renderCoastalInteraction(root,o){
+ const active=['club','evening'].includes(state.phase)&&!state.ended;
+ const act=(label,action,disabled=false)=>button(label,()=>pixelAction(action),'primary',disabled||state.ended);
+ if(o.kind==='school')root.append(act(t('menu.v2.afternoon'),{type:'school'},state.phase!=='morning'));
+ else if(o.step){
+   const q=state.quests.find(q=>!q.written&&!q.steps.includes(o.step));
+   if(q)root.append(act(t('menu.v2.nextStep',{step:QUEST_STEPS.find(([id])=>id===o.step)?.[1],cost:coastalCosts.questCost}),{type:'quest',id:q.id,step:o.step},!active||state.energy<coastalCosts.questCost));
+   root.append(button(t('menu.v2.cases'),openMenu));
+ }
+ else if(o.kind==='bed'){
+   if(['club','evening'].includes(state.phase))root.append(button(t('menu.v2.goHome'),()=>coastalTravel({id:'home',map:'home'}),'primary'));
+   root.append(act(t('menu.v2.sleep'),{type:'sleep'},state.phase!=='bed'),act(t('menu.v2.studyLate'),{type:'stayUp',kind:'study'},state.phase!=='bed'),act(t('menu.v2.gameLate'),{type:'stayUp',kind:'game'},state.phase!=='bed'));
+ }else if(o.kind==='job')root.append(act(t('menu.v2.work',{cost:coastalCosts.jobCost}),{type:'activity',kind:'job'},!active||state.energy<coastalCosts.jobCost));
+ else if(o.kind==='training'){
+   const stat=select('coastal-training',Object.entries(STAT_NAMES));root.append(stat,button(t('menu.v2.train',{cost:coastalCosts.trainingCost}),()=>pixelAction({type:'activity',kind:'train',stat:stat.value}),'primary',!active||state.energy<coastalCosts.trainingCost||state.money<state.config.trainingCost));
+ }else if(o.kind==='teammate')root.append(act(t('menu.v2.hangout',{cost:coastalCosts.hangoutCost}),{type:'activity',kind:'hangout',person:o.person},!active||state.energy<coastalCosts.hangoutCost),button(t('menu.v2.team'),()=>{pixelInteraction=null;pixelMenu=true;menuV2.selectTab('team');render();}));
+ else if(o.kind==='schedule')root.append(button(t('menu.v2.goHome'),()=>coastalTravel({id:'home',map:'home'}),'primary'));
+ else root.append(button(t('menu.v2.cases'),openMenu,'primary'));
+}
 if(pixelMode){world=new PixelWorld(pixelHost,{getState:()=>state,onInteract:target=>{pixelInteraction=target;render();},onNotice:pixelNotice});
  shell=new CoastalShell(app,pixelHost,{menu:openMenu,map:openMap,interact:()=>world.interact()});
  world.onFrame=()=>shell.syncPrompt(world);
  overlays=new OverlayHost(shell.stage.node,shell.node,{onClose:closePixel,onLock:value=>world.setBlocked(value)});
  dialogueView=new DialogueView(dialogueSprite,closePixel);menuView=new MenuView(dialogueSprite.registry,closePixel);mapView=new MapView(world,closePixel);
+ if(coastalMode){
+   menuV2=new MenuV2View(dialogueSprite.registry,{debug:new URLSearchParams(location.search).has('debug'),onClose:closePixel,onAction:dispatch,onTravel:coastalTravel,
+     onSave:()=>requestConfirm(t('menu.v2.saveConfirm'),save),onLoad:load,onConfirm:requestConfirm});
+   world.onBeforeEnter=(id,position)=>{
+     if(id==='home'&&['club','evening'].includes(state.phase)){world.clearInput();coastalTravel({id:'home',map:id,position});}
+     else world.enter(id,position);
+   };
+ }
  window.pressPixel=Object.freeze({get ready(){return world.ready;},get world(){return world.snapshot();},get moving(){return Boolean(world.walk||world.path.length);},get animations(){return world.animationSnapshot();},get room(){return world.map.title;},screenPosition:(x,y)=>world.screenPosition(x,y)});
  const onKey=e=>{
   if(e.defaultPrevented||e.repeat||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;
@@ -207,6 +254,6 @@ if(pixelMode){world=new PixelWorld(pixelHost,{getState:()=>state,onInteract:targ
   else if(e.key==='F9'){e.preventDefault();load();}
  };
  window.addEventListener('keydown',onKey);
- window.addEventListener('pagehide',()=>{window.removeEventListener('keydown',onKey);overlays.dispose();dialogueView.dispose();menuView.dispose();mapView.dispose();dialogueSprite.dispose();world.onFrame=null;shell.dispose();world.dispose();},{once:true});}
+ window.addEventListener('pagehide',()=>{window.removeEventListener('keydown',onKey);overlays.dispose();dialogueView.dispose();menuView.dispose();menuV2?.dispose();mapView.dispose();dialogueSprite.dispose();world.onFrame=null;shell.dispose();world.dispose();},{once:true});}
 render();
 }

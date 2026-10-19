@@ -3,6 +3,14 @@
 The project remains plain HTML/CSS, Canvas and ES modules. Python serves it; Chrome
 or Edge runs the browser tests. Node is optional for the non-browser suite.
 
+For the current Hồ sơ refinement, see [visual review and staged captures](ui-reviews/dossier-polish/README.md).
+Use `python tools/review_dossier.py --base-url http://127.0.0.1:8088` for native
+runtime/fixture captures and `python tools/check_dossier_assets.py` for retained
+artwork provenance. Capture and browser tests sequentially on this Windows setup.
+New dossier visual tuning belongs in `styles/coastal/dossier-theme.css`; quest
+photos are optional presentation metadata, with sample concept content confined
+to authoring fixtures. PNG exports stay local under the existing Git ignore policy.
+
 ## Required rules
 
 - Put player-facing text in `content/locales/vi.js`; put static no-JavaScript text
@@ -53,6 +61,20 @@ make a refactor pass. Rebaseline only for an intentional gameplay change, with i
 reason and playtest evidence recorded separately.
 
 ## Files and artifacts
+
+Menu-only update (2026-10-15): follow
+[MENU-V2-IMPLEMENTATION.md](MENU-V2-IMPLEMENTATION.md) for the new six-tab menu,
+including its scenery/ambient motion scope. The older menu layout and its deferred
+scene work below are superseded for this screen; dialogue/HUD scope still applies.
+
+The six-tab first implementation runs in `pixel.html`; open with Esc (M for map).
+Use `pixel.html?legacy=1` for the older UI/ruleset regression path. The isolated
+authoring preview is `tools/coastal-menu-v2-preview.html?tab=cases` (also skills,
+equipment, team, map, settings). Verify local images using
+`python tools/check_menu_v2_assets.py`; `python tools/review_menu_v2.py --base-url http://127.0.0.1:8088`
+captures all six tabs and motion/lifecycle diagnostics. See
+[review notes](ui-reviews/coastal-menu-v2/README.md) for tuning, schema migration and
+visual/performance work that remains before production acceptance.
 
 For coastal UI development, follow [UI-REPLICA-ROADMAP.md](UI-REPLICA-ROADMAP.md).
 [UI-COMPONENTS-PLAN.md](UI-COMPONENTS-PLAN.md) is the historical v1 plan.

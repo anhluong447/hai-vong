@@ -1,5 +1,9 @@
 # Legacy archive
 
+The previous coastal menu is copied in
+[menus/coastal-menu-legacy-2026-10-15/](menus/coastal-menu-legacy-2026-10-15/README.md),
+with its own SHA-256 inventory, source inputs and recovery instructions.
+
 `clb-hoi/` is the complete pre-migration snapshot: stories, maps, characters,
 sprites, source, tests, audio, tools, docs, prototype and `_backup_3d_version`.
 

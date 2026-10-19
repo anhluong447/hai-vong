@@ -20,6 +20,9 @@ export class OverlayHost {
       }
       // Native fields own their arrows/space/Enter. Escape and Tab remain modal.
       if(/INPUT|SELECT|TEXTAREA/.test(event.target.tagName))return;
+      // The city map owns directional selection; keep Escape/Tab modal above.
+      if(active?.closest('.menu-v2 [data-map-input]')&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','w','a','s','d'].includes(event.key))return;
+      if(active?.closest('.menu-v2 .mv-tree')&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key))return;
       if(event.key==='Enter'||event.key===' '){
         const target=items.includes(active)&&active.matches('button,a,summary')?active:items.find(item=>item.matches('button.primary'))||items.find(item=>item.matches('button,a,summary'));
         event.preventDefault();event.stopImmediatePropagation();
@@ -53,7 +56,11 @@ export class OverlayHost {
     this.key=key;this.dismissible=dismissible;this.onLock(true);
     if(!this.dialog){this.dialog=el('div',{class:'pixel-overlay',role:'dialog','aria-modal':'true',tabindex:'-1'});this.node.append(this.dialog);}
     this.dialog.classList.toggle('conversation',conversation);this.dialog.setAttribute('aria-label',label);
-    if(this.dialog.firstChild!==content)this.dialog.replaceChildren(content);
+    if(this.dialog.firstChild!==content){
+      this.dialog.firstChild?.dispatchEvent(new CustomEvent('coastal-visibility',{detail:{visible:false}}));
+      this.dialog.replaceChildren(content);
+    }
+    content.dispatchEvent(new CustomEvent('coastal-visibility',{detail:{visible:true}}));
     if(changed){this.motion.cancel();this.motion.play(content,[{opacity:0},{opacity:1}],{duration:160});}
     if(!this.dialog.contains(document.activeElement)){
       const items=this.items();
@@ -67,6 +74,7 @@ export class OverlayHost {
   }
   clear(){
     if(!this.dialog)return;
+    this.dialog.firstChild?.dispatchEvent(new CustomEvent('coastal-visibility',{detail:{visible:false}}));
     this.motion.cancel();this.dialog.remove();this.dialog=null;this.key=null;this.background.inert=false;this.onLock(false);
     if(this.returnFocus?.isConnected)this.returnFocus.focus({preventScroll:true});this.returnFocus=null;
   }

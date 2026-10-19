@@ -113,5 +113,9 @@ node_modules/
 Thumbs.db
 /tools/.repo-cleanup/
 
+# Frozen menu payloads stay local; retain inventory, recovery notes and verifier.
+/archive/menus/**/files/
+/archive/menus/**/preview-frozen.*
+
 # Preserve the historical snapshot and its existing backup manifest.
 !/archive/clb-hoi/**

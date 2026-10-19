@@ -1,5 +1,27 @@
 # Architecture — CLB Báo Chí
 
+Menu target update, 2026-10-15: the six-tab layout in
+[MENU-V2-IMPLEMENTATION.md](MENU-V2-IMPLEMENTATION.md) supersedes the old menu
+target only. Open directly on Hồ sơ; use scenery without a decorative Khuê hero.
+The first implementation is active in `pixel.html`; `?legacy=1` retains the old
+pixel path for regression. `gameplay.html` and the formula sandbox retain their
+existing rules. See [implementation evidence](ui-reviews/coastal-menu-v2/README.md).
+[Legacy menu backup](../archive/menus/coastal-menu-legacy-2026-10-15/README.md)
+preserves source, generation inputs and evidence. Dialogue/HUD boundaries remain.
+
+Coastal gameplay revision uses state v3 through `GameSession({},{coastal:true})`.
+`src/domain/coastalSession.js` owns its immutable daily/quest/progression transitions;
+`content/gameplay/coastal-v2.js` and `coastal-progression.js` own tuning/definitions.
+`coastalMenuModel` adapts session data to `MenuV2View`; the view emits intents only.
+The save service uses a separate `clb-bao-chi.coastal.v3` key and validates/migrates
+legacy pixel saves before replacement. Legacy v2 validators/baselines remain covered.
+
+Dossier visual refinement keeps these boundaries: optional quest photos come from
+`content/ui/dossier-media.js` by stable ID and are presentation metadata, not save
+fields. `dossier-fixtures.js` is imported only by authoring/tests. New visual tuning
+lives in `styles/coastal/dossier-theme.css`; the native view and single effects
+clock remain in place. See the [dossier review](ui-reviews/dossier-polish/README.md).
+
 Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; runtime has no build
 step. Art authoring uses the offline asset builder described below. Two explicit rulesets remain: the original formula sandbox and the newer
 gameplay/pixel prototype. Their calendars, scores and state schemas are distinct.

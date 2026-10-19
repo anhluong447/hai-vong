@@ -1,0 +1,112 @@
+{
+  "source": "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/01-ho-so.png",
+  "sha256": "e7637e3e73f1287496f1a1ced3a10580469a6743b7bd1b7434332514c2cdadbf",
+  "method": "Exact RGB mode per ROI; dark-pixel filter for text ink",
+  "samples": {
+    "sidebar": {
+      "box": [
+        20,
+        350,
+        240,
+        620
+      ],
+      "modeRGB": [
+        5,
+        33,
+        50
+      ],
+      "hex": "#052132",
+      "filter": null
+    },
+    "paper": {
+      "box": [
+        880,
+        355,
+        1230,
+        430
+      ],
+      "modeRGB": [
+        241,
+        232,
+        218
+      ],
+      "hex": "#f1e8da",
+      "filter": null
+    },
+    "gold": {
+      "box": [
+        490,
+        365,
+        690,
+        382
+      ],
+      "modeRGB": [
+        249,
+        193,
+        85
+      ],
+      "hex": "#f9c155",
+      "filter": null
+    },
+    "teal": {
+      "box": [
+        342,
+        230,
+        354,
+        330
+      ],
+      "modeRGB": [
+        1,
+        51,
+        71
+      ],
+      "hex": "#013347",
+      "filter": null
+    },
+    "ink": {
+      "box": [
+        900,
+        218,
+        1230,
+        262
+      ],
+      "modeRGB": [
+        0,
+        0,
+        27
+      ],
+      "hex": "#00001b",
+      "filter": "max-channel<85"
+    },
+    "tape": {
+      "box": [
+        908,
+        463,
+        1100,
+        483
+      ],
+      "modeRGB": [
+        182,
+        184,
+        179
+      ],
+      "hex": "#b6b8b3",
+      "filter": null
+    },
+    "cream": {
+      "box": [
+        75,
+        482,
+        87,
+        494
+      ],
+      "modeRGB": [
+        242,
+        230,
+        212
+      ],
+      "hex": "#f2e6d4",
+      "filter": null
+    }
+  }
+}

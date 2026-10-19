@@ -16,7 +16,7 @@ test('single screen HUD: complete weekday, numeric resources and dynamic energy 
  }finally{hud.dispose();}
 });
 test('single screen: keyboard menu uses live panels, map, confirmations, focus and scaling',async()=>{
- const frame=document.createElement('iframe');frame.src='../pixel.html';frame.style.cssText='position:relative;left:0;width:1280px;height:720px';document.body.append(frame);
+ const frame=document.createElement('iframe');frame.src='../pixel.html?legacy=1';frame.style.cssText='position:relative;left:0;width:1280px;height:720px';document.body.append(frame);
  try{
   await wait(()=>frame.contentWindow.pressPixel?.ready);
   const w=frame.contentWindow,d=w.document,canvas=d.querySelector('canvas'),stage=d.querySelector('.game-stage');

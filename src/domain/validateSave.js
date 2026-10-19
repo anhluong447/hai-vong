@@ -2,6 +2,7 @@ import {LEGACY_SKILLS} from '../../content/gameplay/migrations.js';
 import {createSession} from './session.js';
 import {STAT_NAMES} from '../../content/gameplay/definitions.js';
 import {t} from '../shared/text.js';
+import {slots,skillNodes,equipmentItems} from '../../content/gameplay/coastal-progression.js';
 const phases = new Set(['morning','club','personal','evening','weekend1','weekend2','investigation','bed']);
 const statuses = new Set(['available','working','blocked','draft','expired','cancelled']);
 const invalid = () => { throw new Error(t('save.invalid')); };
@@ -12,6 +13,18 @@ const unique = values => new Set(values).size === values.length;
 
 /** Migrates legacy v1 states, then validates before a session can be replaced. */
 export function validateGameplaySave(candidate) {
+  if(candidate?.version===3){
+    const state=validateGameplaySave({...candidate,version:2});
+    const c=state.coastal;
+    if(!c||!integer(c.skillPoints)||!Array.isArray(c.learned)||!unique(c.learned)||!Array.isArray(c.inventory)||!unique(c.inventory))invalid();
+    if(c.learned.some(id=>!skillNodes.some(n=>n.id===id))||c.inventory.some(id=>!equipmentItems.some(i=>i.id===id)))invalid();
+    if(skillNodes.some(n=>c.learned.includes(n.id)&&n.prerequisite&&!c.learned.includes(n.prerequisite)))invalid();
+    if(!c.equipment||Object.keys(c.equipment).length!==slots.length||!slots.every(slot=>Object.hasOwn(c.equipment,slot)))invalid();
+    for(const slot of slots){const id=c.equipment[slot],item=equipmentItems.find(i=>i.id===id);if(id!==null&&(!item||!c.inventory.includes(id)||item.slot!==(slot.startsWith('accessory')?'accessory':slot)))invalid();}
+    if(!unique(Object.values(c.equipment).filter(Boolean))||!finite(state.energy,0,10))invalid();
+    if(!['morning','club','evening','bed'].includes(state.phase)||state.quests.some(q=>!['main','side'].includes(q.kind)))invalid();
+    state.version=3;return state;
+  }
   if (!candidate || ![1,2].includes(candidate.version) || !candidate.config) invalid();
   const state = structuredClone(candidate);
   const defaults = createSession(state.config);
