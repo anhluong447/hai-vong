@@ -1,4 +1,5 @@
 import {test,assert as a} from './harness.js';
+import {walkable} from '../src/pixel/maps.js';
 async function withEditor(run){
  const frame=document.createElement('iframe');frame.src='../tools/world-editor.html';frame.style.cssText='position:relative;left:0;width:1200px;height:850px';document.body.append(frame);
  try{await new Promise((resolve,reject)=>{const start=Date.now(),poll=()=>frame.contentWindow.worldEditor?.world.ready?resolve():Date.now()-start>15000?reject(new Error('Tile editor timeout')):setTimeout(poll,20);poll();});
@@ -64,4 +65,24 @@ test('Tile editor: a captured brush outside the canvas cannot paint hidden terra
  const outsideX=Math.ceil((e.world.camera.x+e.world.canvas.width)/16)+1;
  p('pointerdown',3,3);p('pointermove',outsideX,3);p('pointermove',8,3);p('pointerup',8,3);
  a.equal(e.document.draft.tiles[3][4],before);a.equal(e.document.draft.tiles[3][8],2);
+}));
+test('Tile editor: committed pixels, collision overlays and undo stay synchronized across maps',()=>withEditor(e=>{
+ e.setEditLayer('tiles');const world=e.world,original=world.backgrounds.home,other=world.backgrounds.street,source=e.document.draft.tiles[4][4];
+ e.document.applyTileEdits([{x:4,y:4,tile:5}]);a.ok(world.backgrounds.home!==original);a.equal(world.backgrounds.street,other);a.ok(!walkable(world.map,4,4,world.npcs));
+ const pixel=(x,y)=>{const point={x:Math.floor((x+.5)*16-world.camera.x),y:Math.floor((y+.5)*16-world.camera.y)};return e.overlay.getContext('2d').getImageData(point.x,point.y,1,1).data[3];};
+ e.tileEditor.showCollision=true;e.drawOverlay();a.ok(pixel(4,4)>0);a.ok(pixel(3,4)>0,'Solid object footprints are included');
+ e.tileEditor.showCollision=false;e.drawOverlay();a.equal(pixel(4,4),0);a.ok(!walkable(world.map,4,4,world.npcs));
+ e.switchMap('street');e.switchMap('home');a.equal(world.map.tiles[4][4],5);
+ e.document.undo();a.equal(world.map.tiles[4][4],source);a.ok(walkable(world.map,4,4,world.npcs));e.document.redo();a.equal(world.map.tiles[4][4],5);
+}));
+test('Tile editor: playtest uses safe player position after terrain changes and keeps session isolated',()=>withEditor(e=>{
+ e.setEditLayer('tiles');const before=JSON.stringify(e.session.snapshot());
+ e.world.restore({mapId:'home',x:6,y:8,direction:'down'});e.document.applyTileEdits([{x:6,y:8,tile:5}]);
+ e.setMode('play');a.equal(e.world.player.x,e.document.draft.spawn.x);a.equal(e.world.player.y,e.document.draft.spawn.y);
+ a.ok(!walkable(e.world.map,6,8,e.world.npcs));e.setMode('edit');a.equal(JSON.stringify(e.session.snapshot()),before);
+}));
+test('Tile editor: visible hint and inspector describe the selected tile tool',()=>withEditor((e,w)=>{
+ e.setEditLayer('tiles');e.world.draw(0);a.ok(e.world.hint.textContent.includes('Brush'));a.equal(w.document.querySelector('#world-inspector-heading').textContent,'Tile Inspector');
+ e.tileEditor.setTool('fill');e.world.draw(0);a.ok(e.world.hint.textContent.includes('Fill'));
+ e.setEditLayer('entities');a.equal(w.document.querySelector('#world-inspector-heading').textContent,'Object Inspector');
 }));

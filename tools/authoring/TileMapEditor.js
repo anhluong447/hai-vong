@@ -28,11 +28,13 @@ export class TileMapEditor{
  insideCanvas(event){const r=this.editor.world.canvas.getBoundingClientRect();return event.clientX>=r.left&&event.clientX<r.right&&event.clientY>=r.top&&event.clientY<r.bottom;}
  refresh(){
   const e=this.editor;this.controls.hidden=e.editLayer!=='tiles';e.root.querySelector('#entity-controls').hidden=e.editLayer==='tiles';e.root.querySelector('#world-inspector').hidden=e.editLayer==='tiles';e.root.querySelector('#tile-help').hidden=e.editLayer!=='tiles';
+  e.root.querySelector('#world-inspector-heading').textContent=e.editLayer==='tiles'?copy('inspector'):t('authoring.world.inspector');
   for(const b of e.root.querySelectorAll('[data-layer]'))b.setAttribute('aria-pressed',String(b.dataset.layer===e.editLayer));
   for(const [key,b]of this.buttons){b.disabled=!this.active;b.setAttribute('aria-pressed',String(key==='grid'?this.showGrid:key==='collision'?this.showCollision:key===this.tool));}
   for(const [id,{button}]of this.tiles){button.disabled=!this.active;button.setAttribute('aria-pressed',String(id===this.primaryTile));}
   e.root.querySelector('#tile-erase').disabled=!this.active;e.root.querySelector('#tile-erase').value=this.eraseTile;
  }
+ hint(){return t('authoring.tiles.canvasHint',{tool:copy(this.tool)});}
  paintPalette(){if(!this.editor.world?.ready||this.paletteImage===this.editor.world.tiles)return;this.paletteImage=this.editor.world.tiles;
   for(const [id,{canvas}]of this.tiles){const r=tileSourceRect(id),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;ctx.drawImage(this.paletteImage,r.x,r.y,r.width,r.height,0,0,canvas.width,canvas.height);}
  }

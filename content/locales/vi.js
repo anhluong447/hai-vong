@@ -1,4 +1,6 @@
 export default {
+  "authoring.tiles.inspector": "Tile Inspector",
+  "authoring.tiles.canvasHint": "{tool} · Enter: apply · Space + drag: pan · Esc: cancel",
   "authoring.tiles.entities": "Entities",
   "authoring.tiles.tiles": "Tiles",
   "authoring.tiles.brush": "Brush",
