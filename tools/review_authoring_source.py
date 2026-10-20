@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_PATHS = sorted(set(RESOURCES.values()) | set().union(*GENERATED.values()) | {
     'content/ui/menu-layout-contract.json', 'content/maps/scene-contract.json',
     'content/maps/prefabs.json', 'content/locales/vi.js',
+    'content/world/tileset.json', 'assets/pixel/atlas.json',
 })
 
 

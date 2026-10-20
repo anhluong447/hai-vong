@@ -1,13 +1,13 @@
 import {t} from '../shared/text.js';
 import {MAPS} from '../../content/maps/definitions.js';
+import {isTerrainBlocked} from '../../content/world/tileset.js';
 export {MAPS};
-const terrainBlocked = new Set([5,6,7,8,12,13,15]);
 export function visibleNPCs(map,state){return map.npcs.filter(n=>{
  if(!n.person)return true;const p=state?.people.find(p=>p.id===n.person);if(!p||p.joinDay>state.day)return false;
  const off=(state.day-1)%7>=5;const club=!off&&['morning','club'].includes(state.phase);
  return n.schedule==='club'?club:!club;
 });}
-export function walkable(map,x,y,npcs=[]){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<map.width&&y<map.height&&!terrainBlocked.has(map.tiles[y][x])&&!map.objects.some(o=>o.solid&&o.footprint.some(([dx,dy])=>o.x+dx===x&&o.y+dy===y))&&!npcs.some(n=>n.solid&&(n.footprint||[[0,0]]).some(([dx,dy])=>n.x+dx===x&&n.y+dy===y));}
+export function walkable(map,x,y,npcs=[]){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<map.width&&y<map.height&&!isTerrainBlocked(map.tiles[y][x])&&!map.objects.some(o=>o.solid&&o.footprint.some(([dx,dy])=>o.x+dx===x&&o.y+dy===y))&&!npcs.some(n=>n.solid&&(n.footprint||[[0,0]]).some(([dx,dy])=>n.x+dx===x&&n.y+dy===y));}
 export function findPath(map,start,goal,npcs=[]){
  if(!walkable(map,goal.x,goal.y,npcs))return null;const key=p=>`${p.x},${p.y}`;const queue=[{...start}],parent=new Map([[key(start),null]]);let end=null;
  for(let i=0;i<queue.length;i++){const p=queue[i];if(p.x===goal.x&&p.y===goal.y){end=p;break;}for(const [dx,dy]of[[0,1],[-1,0],[1,0],[0,-1]]){const n={x:p.x+dx,y:p.y+dy};if(walkable(map,n.x,n.y,npcs)&&!parent.has(key(n))){parent.set(key(n),p);queue.push(n);}}}

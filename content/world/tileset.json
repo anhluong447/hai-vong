@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "assetId": "pixel.tiles",
+  "tilePixels": 16,
+  "columns": 8,
+  "count": 16,
+  "tiles": [
+    {
+      "id": 0,
+      "atlasIndex": 0,
+      "labelKey": "authoring.tiles.tile.0",
+      "blocked": false
+    },
+    {
+      "id": 1,
+      "atlasIndex": 1,
+      "labelKey": "authoring.tiles.tile.1",
+      "blocked": false
+    },
+    {
+      "id": 2,
+      "atlasIndex": 2,
+      "labelKey": "authoring.tiles.tile.2",
+      "blocked": false
+    },
+    {
+      "id": 3,
+      "atlasIndex": 3,
+      "labelKey": "authoring.tiles.tile.3",
+      "blocked": false
+    },
+    {
+      "id": 4,
+      "atlasIndex": 4,
+      "labelKey": "authoring.tiles.tile.4",
+      "blocked": false
+    },
+    {
+      "id": 5,
+      "atlasIndex": 5,
+      "labelKey": "authoring.tiles.tile.5",
+      "blocked": true
+    },
+    {
+      "id": 6,
+      "atlasIndex": 6,
+      "labelKey": "authoring.tiles.tile.6",
+      "blocked": true
+    },
+    {
+      "id": 7,
+      "atlasIndex": 7,
+      "labelKey": "authoring.tiles.tile.7",
+      "blocked": true
+    },
+    {
+      "id": 8,
+      "atlasIndex": 8,
+      "labelKey": "authoring.tiles.tile.8",
+      "blocked": true
+    },
+    {
+      "id": 9,
+      "atlasIndex": 9,
+      "labelKey": "authoring.tiles.tile.9",
+      "blocked": false
+    },
+    {
+      "id": 10,
+      "atlasIndex": 10,
+      "labelKey": "authoring.tiles.tile.10",
+      "blocked": false
+    },
+    {
+      "id": 11,
+      "atlasIndex": 11,
+      "labelKey": "authoring.tiles.tile.11",
+      "blocked": false
+    },
+    {
+      "id": 12,
+      "atlasIndex": 12,
+      "labelKey": "authoring.tiles.tile.12",
+      "blocked": true
+    },
+    {
+      "id": 13,
+      "atlasIndex": 13,
+      "labelKey": "authoring.tiles.tile.13",
+      "blocked": true
+    },
+    {
+      "id": 14,
+      "atlasIndex": 14,
+      "labelKey": "authoring.tiles.tile.14",
+      "blocked": false
+    },
+    {
+      "id": 15,
+      "atlasIndex": 15,
+      "labelKey": "authoring.tiles.tile.15",
+      "blocked": true
+    }
+  ]
+}

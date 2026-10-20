@@ -4,6 +4,13 @@ import {validateWorldScene} from '../src/shared/validateWorldScene.js';
 import {materializeScene} from '../src/pixel/scene-data.js';
 import {MAPS} from '../content/maps/definitions.js';
 import {t} from '../src/shared/text.js';
+test('Tile registry shares native atlas frames and terrain collision',async()=>{
+ const {tileDefinition,tileSourceRect,isTerrainBlocked}=await import('../content/world/tileset.js');
+ assert.equal(JSON.stringify(tileSourceRect(0)),JSON.stringify({x:0,y:0,width:16,height:16}));
+ assert.equal(JSON.stringify(tileSourceRect(15)),JSON.stringify({x:112,y:16,width:16,height:16}));
+ assert.equal(JSON.stringify(Array.from({length:16},(_,i)=>i).filter(isTerrainBlocked)),JSON.stringify([5,6,7,8,12,13,15]));
+ for(const id of [-1,16,true,'0',null])assert.throws(()=>tileDefinition(id));
+});
 test('All world scenes materialize the pre-refactor map contract',async()=>{
  const original=await fetch('fixtures/world-original-maps.json').then(r=>r.json());
  for(const [id,scene] of Object.entries(SCENES)){

@@ -5,6 +5,7 @@ import {t} from '../shared/text.js';
 import {MAPS,visibleNPCs,walkable,findPath,pathToObject,safePosition} from './maps.js?v=pixel-1';
 import {clipFrame} from './animation.js?v=pilot-2';
 import {worldMetrics,gridToPixel,clientToGrid,pickHeight} from '../../content/world/metrics.js';
+import {tileSourceRect} from '../../content/world/tileset.js';
 const TILE=worldMetrics.tilePixels,DIRECTIONS={down:[0,1],left:[-1,0],right:[1,0],up:[0,-1]};
 export class PixelWorld{
  constructor(host,{onInteract,onNotice,getState,mapId='yard',mapCatalog=MAPS,authoredNPCs=false}){
@@ -31,7 +32,7 @@ export class PixelWorld{
  }catch(error){this.error=error.message;this.onNotice(error.message,true);}}
  rebuildBackgrounds(){
   this.backgrounds??={};this.backgroundSources??={};
-  for(const map of Object.values(this.mapCatalog)){const signature=JSON.stringify([map.width,map.height,map.tiles]);if(this.backgroundSources[map.id]===signature)continue;const canvas=document.createElement('canvas');canvas.width=gridToPixel(map.width);canvas.height=gridToPixel(map.height);const context=canvas.getContext('2d');for(let y=0;y<map.height;y++)for(let x=0;x<map.width;x++){const tile=map.tiles[y][x];context.drawImage(this.tiles,(tile%8)*TILE,Math.floor(tile/8)*TILE,TILE,TILE,gridToPixel(x),gridToPixel(y),TILE,TILE);}this.backgrounds[map.id]=canvas;this.backgroundSources[map.id]=signature;}
+  for(const map of Object.values(this.mapCatalog)){const signature=JSON.stringify([map.width,map.height,map.tiles]);if(this.backgroundSources[map.id]===signature)continue;const canvas=document.createElement('canvas');canvas.width=gridToPixel(map.width);canvas.height=gridToPixel(map.height);const context=canvas.getContext('2d');for(let y=0;y<map.height;y++)for(let x=0;x<map.width;x++){const frame=tileSourceRect(map.tiles[y][x]);context.drawImage(this.tiles,frame.x,frame.y,frame.width,frame.height,gridToPixel(x),gridToPixel(y),TILE,TILE);}this.backgrounds[map.id]=canvas;this.backgroundSources[map.id]=signature;}
   for(const id of Object.keys(this.backgrounds))if(!this.mapCatalog[id]){delete this.backgrounds[id];delete this.backgroundSources[id];}
  }
  replaceMapCatalog(mapCatalog){if(!mapCatalog[this.mapId])throw new Error('world.catalog.currentMapMissing');this.mapCatalog=mapCatalog;if(this.tiles)this.rebuildBackgrounds();this.signMap=null;}

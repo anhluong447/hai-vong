@@ -21,8 +21,33 @@ def catalog(root=ROOT):
     return json.loads(raw.split('export default ', 1)[1].rstrip().removesuffix(';'))
 
 
-def blocked_cells(scene, prefabs):
-    cells = {(x, y) for y, row in enumerate(scene['tiles']) for x, tile in enumerate(row) if tile in (5, 6, 7, 8, 12, 13, 15)}
+def tile_definitions(root=ROOT):
+    root = Path(root)
+    registry = read(root / 'content/world/tileset.json')
+    atlas = read(root / 'assets/pixel/atlas.json')
+    if (registry.get('schemaVersion') != 1 or registry.get('assetId') != 'pixel.tiles'
+            or type(registry.get('tilePixels')) is not int or registry['tilePixels'] != 16
+            or type(registry.get('columns')) is not int or registry['columns'] != atlas['tiles']['columns']
+            or type(registry.get('count')) is not int or registry['count'] != 16
+            or registry['count'] != atlas['tiles']['count'] or registry['tilePixels'] != atlas['tileSize']):
+        raise ValueError('world.tileset.atlas')
+    tiles = registry.get('tiles')
+    if not isinstance(tiles, list) or len(tiles) != registry['count']:
+        raise ValueError('world.tileset.tiles')
+    texts = catalog(root)
+    for index, tile in enumerate(tiles):
+        if (not isinstance(tile, dict) or set(tile) != {'id', 'atlasIndex', 'labelKey', 'blocked'}
+                or type(tile['id']) is not int or tile['id'] != index
+                or type(tile['atlasIndex']) is not int or tile['atlasIndex'] != index
+                or type(tile['blocked']) is not bool
+                or tile['labelKey'] not in texts or not tile['labelKey'].startswith('authoring.tiles.')):
+            raise ValueError('world.tileset.tile')
+    return registry
+
+
+def blocked_cells(scene, prefabs, tileset):
+    blocked = {tile['id'] for tile in tileset['tiles'] if tile['blocked']}
+    cells = {(x, y) for y, row in enumerate(scene['tiles']) for x, tile in enumerate(row) if tile in blocked}
     for instance in scene['objects'] + scene['npcs']:
         entity = dict(prefabs[instance['prefab']], **instance['overrides'])
         if entity['solid']:
@@ -35,6 +60,7 @@ def validate_scene(payload, resource_id=None, *, root=ROOT):
     contract = read(map_dir / 'scene-contract.json')
     prefabs = read(map_dir / 'prefabs.json')['prefabs']
     texts = catalog(root)
+    tileset = tile_definitions(root)
     def require(value, path):
         if not value: raise ValueError(f'world.scene.{path}')
     def integer(value): return type(value) is int
@@ -52,7 +78,7 @@ def validate_scene(payload, resource_id=None, *, root=ROOT):
     w, h = scene.get('width'), scene.get('height')
     require(integer(w) and integer(h) and 3 <= w <= 256 and 3 <= h <= 256, 'size')
     require(isinstance(scene.get('tiles'), list) and len(scene['tiles']) == h, 'tiles')
-    require(all(isinstance(row, list) and len(row) == w and all(integer(t) and 0 <= t < 16 for t in row) for row in scene['tiles']), 'tiles')
+    require(all(isinstance(row, list) and len(row) == w and all(integer(t) and 0 <= t < tileset['count'] for t in row) for row in scene['tiles']), 'tiles')
     point(scene.get('spawn'), 'spawn', w, h)
     ids = set()
     for category in ('objects', 'npcs'):
@@ -97,12 +123,12 @@ def validate_scene(payload, resource_id=None, *, root=ROOT):
         for sign in scene['signs']:
             require(isinstance(sign, list) and len(sign) == 3 and isinstance(sign[2], str) and sign[2] in texts, 'sign')
             point({'x': sign[0], 'y': sign[1]}, 'sign.position', w, h)
-    require([scene['spawn']['x'], scene['spawn']['y']] not in blocked_cells(scene, prefabs), 'spawn.blocked')
+    require([scene['spawn']['x'], scene['spawn']['y']] not in blocked_cells(scene, prefabs, tileset), 'spawn.blocked')
     for portal in scene['portals']:
-        require([portal['x'], portal['y']] not in blocked_cells(scene, prefabs), 'portal.blocked')
+        require([portal['x'], portal['y']] not in blocked_cells(scene, prefabs, tileset), 'portal.blocked')
         target = scene if portal['to'] == scene['id'] else read(map_dir / 'scenes' / (portal['to'] + '.json'))
-        require([portal['spawn']['x'], portal['spawn']['y']] not in blocked_cells(target, prefabs), 'portal.spawn.blocked')
-    blocks = blocked_cells(scene, prefabs)
+        require([portal['spawn']['x'], portal['spawn']['y']] not in blocked_cells(target, prefabs, tileset), 'portal.spawn.blocked')
+    blocks = blocked_cells(scene, prefabs, tileset)
     for other_id in contract['sceneIds']:
         other = scene if other_id == scene['id'] else read(map_dir / 'scenes' / (other_id + '.json'))
         for portal in other['portals']:
@@ -117,7 +143,8 @@ def render_outputs(root=ROOT, overrides=None):
     contract = read(map_dir / 'scene-contract.json')
     scenes = {sid: validate_scene(overrides[sid] if sid in overrides else read(map_dir / 'scenes' / f'{sid}.json'), root=root) for sid in contract['sceneIds']}
     prefabs = read(map_dir / 'prefabs.json')['prefabs']
-    blocks = {sid: blocked_cells(s, prefabs) for sid, s in scenes.items()}
+    tileset = tile_definitions(root)
+    blocks = {sid: blocked_cells(s, prefabs, tileset) for sid, s in scenes.items()}
     for scene in scenes.values():
         for portal in scene['portals']:
             if [portal['spawn']['x'], portal['spawn']['y']] in blocks[portal['to']]: raise ValueError('world.scene.portal.spawn.blocked')
@@ -125,7 +152,7 @@ def render_outputs(root=ROOT, overrides=None):
     refs = dict(contract, textKeys=list(catalog(root)), mapSizes={sid: {'width': s['width'], 'height': s['height']} for sid, s in scenes.items()}, mapBlockedCells=blocks, mapIncomingSpawns=arrivals)
     dumps = lambda value: json.dumps(value, ensure_ascii=False, separators=(',', ':'))
     hashes = {sid: hashlib.sha256((json.dumps(overrides[sid], ensure_ascii=False, indent=2) + '\n').encode('utf-8') if sid in overrides else (map_dir / 'scenes' / f'{sid}.json').read_bytes()).hexdigest() for sid in scenes}
-    output = '// Generated by tools/build_world_scenes.py; edit scene JSON sources.\n' + ''.join(f'export const {name}={dumps(value)};\n' for name, value in [('SCENES', scenes), ('PREFABS', prefabs), ('KNOWN_REFS', refs), ('SCENE_SOURCE_HASHES', hashes)])
+    output = '// Generated by tools/build_world_scenes.py; edit scene JSON sources.\n' + ''.join(f'export const {name}={dumps(value)};\n' for name, value in [('TILESET', tileset), ('SCENES', scenes), ('PREFABS', prefabs), ('KNOWN_REFS', refs), ('SCENE_SOURCE_HASHES', hashes)])
     return {'content/maps/scenes-data.js': output}
 
 

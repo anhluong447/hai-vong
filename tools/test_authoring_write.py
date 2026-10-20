@@ -328,6 +328,9 @@ class CompilerIntegrationTests(WriterFixture, unittest.TestCase):
             shutil.copyfile(repository / 'content/maps' / name, maps / name)
         (self.root / 'content/locales').mkdir()
         shutil.copyfile(repository / 'content/locales/vi.js', self.root / 'content/locales/vi.js')
+        for relative in ['content/world/tileset.json', 'assets/pixel/atlas.json']:
+            (self.root / relative).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(repository / relative, self.root / relative)
         writer = self.mod.AuthoringWriter(self.root)
         resource = writer.read('scene/home')
         result = writer.save({'resourceId': 'scene/home', 'schemaVersion': 1,

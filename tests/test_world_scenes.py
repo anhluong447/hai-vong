@@ -2,6 +2,8 @@
 import copy
 import importlib.util
 import json
+import tempfile
+import shutil
 from pathlib import Path
 import unittest
 
@@ -9,6 +11,38 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class WorldScenesTest(unittest.TestCase):
+    def test_tileset_registry_preserves_atlas_and_collision(self):
+        registry = self.builder.tile_definitions(ROOT)
+        self.assertEqual(registry['tilePixels'], 16)
+        self.assertEqual(registry['columns'], 8)
+        self.assertEqual([t['id'] for t in registry['tiles']], list(range(16)))
+        self.assertEqual([t['atlasIndex'] for t in registry['tiles']], list(range(16)))
+        self.assertEqual([t['id'] for t in registry['tiles'] if t['blocked']], [5,6,7,8,12,13,15])
+
+    def test_tileset_invalid_records_rejected_from_fixture_root(self):
+        registry = self.builder.tile_definitions(ROOT)
+        (ROOT/'tmp').mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=ROOT/'tmp') as temporary:
+            fixture = Path(temporary)
+            for relative in ['assets/pixel/atlas.json', 'content/locales/vi.js']:
+                (fixture/relative).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT/relative, fixture/relative)
+            target = fixture/'content/world/tileset.json'
+            target.parent.mkdir(parents=True)
+            for change in [
+                lambda r:r['tiles'].pop(),
+                lambda r:r['tiles'][1].update(id=0),
+                lambda r:r['tiles'][0].update(id=True),
+                lambda r:r['tiles'][0].update(atlasIndex=16),
+                lambda r:r['tiles'][0].update(blocked=1),
+                lambda r:r['tiles'][0].update(labelKey='missing.key'),
+                lambda r:r.update(columns=4),
+            ]:
+                candidate = copy.deepcopy(registry)
+                change(candidate)
+                target.write_text(json.dumps(candidate), encoding='utf-8')
+                with self.assertRaises(ValueError): self.builder.tile_definitions(fixture)
+
     @classmethod
     def setUpClass(cls):
         spec = importlib.util.spec_from_file_location('build_world_scenes', ROOT / 'tools/build_world_scenes.py')
