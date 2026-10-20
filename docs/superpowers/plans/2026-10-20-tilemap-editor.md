@@ -1,6 +1,6 @@
 # Tilemap Editor Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Vẽ địa hình bằng tile trực tiếp trong World Editor, dùng chung draft,
 undo/redo, collision, Playtest và lưu scene hiện có.
@@ -81,23 +81,23 @@ maps.js, JS validator, locale; tests world-scenes/Python/authoring-write fixture
 Python thêm `tile_definitions(root=ROOT) -> dict` và đổi thành
 `blocked_cells(scene,prefabs,tileset) -> list[list[int]]`, truyền registry tường minh.
 
-- [ ] Thêm failing tests: đủ ID 0–15, crop ID 0=`[0,0,16,16]`, ID 15=
+- [x] Thêm failing tests: đủ ID 0–15, crop ID 0=`[0,0,16,16]`, ID 15=
   `[112,16,16,16]`, blocked set giữ nguyên; từ chối ID 16/-1, bool, string,
   duplicate/missing registry ID, atlasIndex ngoài atlas và label key không tồn tại.
-- [ ] Chạy Python world tests và focused browser suite; xác nhận lỗi do chưa có
+- [x] Chạy Python world tests và focused browser suite; xác nhận lỗi do chưa có
   registry/helpers. Dùng danh sách file kiểm thử hiện có, không tạo test phụ mirror
   từng dòng triển khai.
-- [ ] Thêm registry/facade và compile TILESET vào output world hiện hành. Validate
+- [x] Thêm registry/facade và compile TILESET vào output world hiện hành. Validate
   columns/count/tile size với `assets/pixel/atlas.json`; default ID = atlas index.
   Thêm English label keys trước build; không chạy lại art generator.
-- [ ] Thay các giới hạn ID và blocked lists lặp ở renderer/runtime/JS/Python bằng
+- [x] Thay các giới hạn ID và blocked lists lặp ở renderer/runtime/JS/Python bằng
   registry. Cập nhật `render_outputs(root=fixture, overrides=...)` và fixture copier
   trong writer tests để mang theo tileset JSON + atlas metadata; không lệ thuộc
   registry của checkout thật khi đang compile bản sao.
-- [ ] Build/check world; chạy tests Python, focused browser và original renderer
+- [x] Build/check world; chạy tests Python, focused browser và original renderer
   equivalence cho đủ năm map. Kết quả bắt buộc: MAPS materialize như fixture và
   pixels cũ khớp; không đổi source scene hay fixture.
-- [ ] Commit `refactor(world): share tile definitions across rendering and validation`.
+- [x] Commit `refactor(world): share tile definitions across rendering and validation`.
 
 ## T2 — Thuật toán tạo patch thuần và transaction trong document
 
@@ -113,19 +113,19 @@ reject tọa độ/ID invalid, deduplicate theo ô (edit sau thắng).
 `WorldDocument.applyTileEdits(edits:TileEdit[]) -> boolean` trả false cho no-op,
 ngược lại validate candidate rồi dùng `replace` đúng một lần.
 
-- [ ] Thêm failing fixture tests: đường ngang/dọc/chéo/đảo chiều và bước nhảy nhanh;
+- [x] Thêm failing fixture tests: đường ngang/dọc/chéo/đảo chiều và bước nhảy nhanh;
   rectangle đảo góc, biên map; fill vùng đóng/bốn hướng và map 256×256 không recursion;
   duplicate edits, input bất biến, malformed edits và no-op không đổi history/redo.
-- [ ] Thêm document regression: một patch 100 ô = một undo, redo khôi phục;
+- [x] Thêm document regression: một patch 100 ô = một undo, redo khôi phục;
   patch chặn spawn, portal nguồn hoặc incoming spawn bị từ chối toàn bộ, byte draft,
   source hash và history/future không đổi; painting không sửa objects/NPCs/portals.
-- [ ] Chạy focused suite để chứng minh các test mới fail trước triển khai.
-- [ ] Viết các hàm thuần; dùng raster line số nguyên và queue fill với visited set
+- [x] Chạy focused suite để chứng minh các test mới fail trước triển khai.
+- [x] Viết các hàm thuần; dùng raster line số nguyên và queue fill với visited set
   cùng head index (không Array.shift), tối đa width×height ô. WorldDocument không
   nhận state tool/cursor/preview.
-- [ ] Chạy focused suite; xác nhận mọi fixture expected patch khớp, cancel/undo cũ
+- [x] Chạy focused suite; xác nhận mọi fixture expected patch khớp, cancel/undo cũ
   của object editor vẫn qua. Không lưu candidate invalid vào document.
-- [ ] Commit `feat(authoring): add immutable tile painting operations`.
+- [x] Commit `feat(authoring): add immutable tile painting operations`.
 
 ## T3 — Palette và gesture vẽ có preview, không thay draft giữa chừng
 
@@ -139,22 +139,22 @@ tilemap-editor.test.js và world-editor.test.js.
 `draw(context,world) -> void` vẽ preview/cursor, dùng T1/T2. WorldEditor giữ
 `editLayer:'entities'|'tiles'` và `setEditLayer(layer)`; không tách lịch sử.
 
-- [ ] Viết failing browser tests: palette đủ 16 thumbnail từ ảnh đã load; hai mode
+- [x] Viết failing browser tests: palette đủ 16 thumbnail từ ảnh đã load; hai mode
   riêng Entities/Tiles; mỗi tool cho patch mong đợi; Eyedropper không thêm history
   và trở về Brush; Eraser dùng eraseTile, không sinh null/transparent.
-- [ ] Thêm regression: pointermove chỉ đổi preview, draft/history còn nguyên;
+- [x] Thêm regression: pointermove chỉ đổi preview, draft/history còn nguyên;
   pointerup commit một lần, rectangle/fill invalid rollback cả gesture; no-op không
   xóa redo. Overlay không cho object drag chạy khi Tiles đang active.
-- [ ] Chạy focused suite, xác nhận RED; rồi tạo palette/tool controls qua t()/data-text,
+- [x] Chạy focused suite, xác nhận RED; rồi tạo palette/tool controls qua t()/data-text,
   focus/aria-pressed và cursor tile outline. Tái sử dụng world.tiles đã load;
   không hardcode đường dẫn ảnh mới trong JS.
-- [ ] Nối pointer handlers qua TileMapEditor. Preview dùng Map ô khác nhau, không
+- [x] Nối pointer handlers qua TileMapEditor. Preview dùng Map ô khác nhau, không
   gọi WorldEditor.changed()/rebuildBackgrounds trên từng pointer event. Khi commit
   dùng document đã khóa lúc bắt đầu; validate fail thì xóa preview, báo lỗi rồi
   giữ document nguyên vẹn. Grid/Collision là các toggle độc lập.
-- [ ] Chạy focused suite và object editor regressions; chụp desktop + compact để
+- [x] Chạy focused suite và object editor regressions; chụp desktop + compact để
   xác nhận palette/toolbar không che canvas hoặc làm mất focus/capture.
-- [ ] Commit `feat(authoring): add tile palette and painting mode to world editor`.
+- [x] Commit `feat(authoring): add tile palette and painting mode to world editor`.
 
 ## T4 — Input gián đoạn, keyboard và điều hướng camera editor
 
@@ -167,25 +167,25 @@ locale, tilemap-editor.test.js; mở rộng CDP review world.
 Camera override chỉ dùng khi world.editing; units là native pixels. Renderer dùng
 quy tắc clamp/căn giữa sẵn có, không biến editor camera thành session state.
 
-- [ ] Viết failing tests cho đúng phím tắt trong spec; không cướp key ở field,
+- [x] Viết failing tests cho đúng phím tắt trong spec; không cướp key ở field,
   Ctrl/Cmd/Alt+B/R/F/I/E, Play hoặc Entities. Rectangle bằng hai Enter và Escape;
   cursor clamp, auto-pan và keyboard-only paint/undo đều hoạt động.
-- [ ] Thêm tests hủy stroke qua Escape/capture loss/pointercancel/blur, đổi map,
+- [x] Thêm tests hủy stroke qua Escape/capture loss/pointercancel/blur, đổi map,
   tool/layer/Edit–Play, import/restore/reset, undo/redo/export/source-save và dispose.
   Kiểm tra draft/history/redo giữ nguyên, không repaint sau cancellation.
-- [ ] Thêm mapping cases: fast drag ở CSS scale khác nhau; sample ngoài map
+- [x] Thêm mapping cases: fast drag ở CSS scale khác nhau; sample ngoài map
   không ghi và không nối nét khi quay vào; pointerId thứ hai/nút phải bị bỏ qua;
   document đổi từ ngoài hủy preview. Chạy suite để xác nhận RED.
-- [ ] Triển khai keyboard/input lifecycle. Release capture một lần; không rebuild
+- [x] Triển khai keyboard/input lifecycle. Release capture một lần; không rebuild
   overlay DOM trong gesture. Pan bằng Space+drag dùng transport riêng, không tạo
   history. Reset previous brush point khi pointer sample ra ngoài map.
-- [ ] Thêm editor camera override + camera state theo map trong tool. Play bỏ
+- [x] Thêm editor camera override + camera state theo map trong tool. Play bỏ
   override và dùng safePosition hiện tại; trở lại Edit khôi phục camera tool.
   Map nhỏ giữ căn giữa, map lớn 256×256 tiếp cận được cả bốn góc bằng pan/cursor.
-- [ ] Chạy focused suite + original renderer equivalence. CDP thực: brush nhanh,
+- [x] Chạy focused suite + original renderer equivalence. CDP thực: brush nhanh,
   kéo ra ngoài canvas khi capture, Escape, pan, undo và map switch tại desktop và
   compact viewport; session snapshot không đổi trong edit. Lưu report input/scale.
-- [ ] Commit `feat(authoring): support tile keyboard input and editor camera panning`.
+- [x] Commit `feat(authoring): support tile keyboard input and editor camera panning`.
 
 ## T5 — Cache, collision overlay và chơi thử bản nháp
 
@@ -196,22 +196,22 @@ tilemap-editor.test.js, world-editor.test.js, review_world_authoring.py.
 TileMapEditor.draw dùng T1 terrain metadata cộng solid footprints từ cùng draft.
 Không thay đổi quy tắc visibleNPCs hoặc pathfinding.
 
-- [ ] Thêm integration tests: commit/undo/redo đổi tile pixels và collision tương ứng;
+- [x] Thêm integration tests: commit/undo/redo đổi tile pixels và collision tương ứng;
   map khác không bị mất draft; overlay solid footprint khớp runtime; tắt overlay
   không thay walkability. Đổi tile dưới vị trí player rồi Play dùng safe spawn.
-- [ ] Chạy tests để xác định phần còn thiếu. Với case đã pass do cơ chế sẵn có,
+- [x] Chạy tests để xác định phần còn thiếu. Với case đã pass do cơ chế sẵn có,
   giữ regression và ghi rõ không cần code fix; không tạo failure giả. Nối cache
   update sau commit nếu cần, giữ preview ở lớp tool và chỉ vẽ các ô preview nằm
   trong viewport. Không refactor cache hoặc tối ưu khác khi chưa có measurement.
-- [ ] Chơi thử draft: tile blocked chặn di chuyển, tile walkable đi được, portal
+- [x] Chơi thử draft: tile blocked chặn di chuyển, tile walkable đi được, portal
   còn dùng được và thoát Play không ghi save/session. Giữ interactionDisabled hiện
   hành của world editor; không âm thầm chạy story commands.
-- [ ] Review thao tác vẽ map 256×256 trên scene fixture hợp lệ, Fill vùng lớn và
+- [x] Review thao tác vẽ map 256×256 trên scene fixture hợp lệ, Fill vùng lớn và
   drag dài: không stack overflow, palette/canvas không bị thay node, mỗi gesture
   một history. Ghi thời gian đo được như diagnostic, không tự đặt tuyên bố FPS.
-- [ ] Chạy focused suite, đối chiếu ảnh mặc định đủ năm map và chụp một draft đã
+- [x] Chạy focused suite, đối chiếu ảnh mặc định đủ năm map và chụp một draft đã
   vẽ + collision + Play. Hoàn tác draft sau capture, không ghi source thật.
-- [ ] Commit `fix(authoring): keep painted terrain and playtest collision synchronized`.
+- [x] Commit `fix(authoring): keep painted terrain and playtest collision synchronized`.
 
 ## T6 — Lưu/reload, gate toàn dự án và hướng dẫn sử dụng
 
@@ -222,22 +222,22 @@ tools/review_authoring_source.py, review_world_authoring.py, docs workflow/revie
 `content/maps/scenes-data.js`; không mở rộng resource allowlist. `acceptSource`
 chấp nhận submitted snapshot, không dùng draft mới hơn trong lúc chờ response.
 
-- [ ] Thêm integration tests bằng disposable source root: paint → save →
+- [x] Thêm integration tests bằng disposable source root: paint → save →
   compile → reload → save lần hai giữ tile và hash; stale409/invalid422 giữ source
   và generated bytes. Registry/atlas được đọc từ đúng root fixture.
-- [ ] Test save đang chờ: stroke chưa thả bị hủy trước submit; stroke commit mới
+- [x] Test save đang chờ: stroke chưa thả bị hủy trước submit; stroke commit mới
   sau submit vẫn còn trong draft và dirty khi response về. Import/draft restore
   giữ tile, objects/NPCs/schedules, identity; lỗi import không thay history.
-- [ ] Chạy targeted tests; xác nhận RED cho hành vi còn thiếu, giữ các case đã
+- [x] Chạy targeted tests; xác nhận RED cho hành vi còn thiếu, giữ các case đã
   pass mà không tạo failure giả. Chỉ sửa writer/acceptSource nếu test chứng minh
   có thiếu sót, không thêm endpoint hoặc nguồn state thứ hai.
-- [ ] Chạy gate ở phần dưới theo đúng thứ tự main → baselines, Chrome tuần tự.
+- [x] Chạy gate ở phần dưới theo đúng thứ tự main → baselines, Chrome tuần tự.
   Tiêu chí: mọi test main đều pass, 12 policies khớp, builder/inventory đồng bộ,
   architecture không có lỗi và source map gốc không đổi.
-- [ ] Cập nhật DATA-AUTHORING, ARCHITECTURE và review README: phím tắt, Eraser là
+- [x] Cập nhật DATA-AUTHORING, ARCHITECTURE và review README: phím tắt, Eraser là
   replacement, invalid stroke rollback, pan/Edit–Play, save/export, feature deferred,
   lệnh reproduce và kết quả thật. Retain ảnh/report local theo ignore policy.
-- [ ] Review cuối tập trung vào năm mục Review Focus, sửa issue trước bàn giao;
+- [x] Review cuối tập trung vào năm mục Review Focus, sửa issue trước bàn giao;
   ghi commit IDs và file source để rollback. Commit
   `test(authoring): verify tilemap persistence and document painting workflow`.
 
@@ -276,7 +276,8 @@ trước số test mới; baseline hiện tại trước triển khai là main12
 T1 → T2 → T3 → T4 → T5 → T6. Đề xuất triển khai native tuần tự trong cùng phiên,
 vì phần input phụ thuộc interface patch/document và camera; review độc lập một lần
 cuối. Trước khi thực thi, áp dụng workflow execution/worktree phù hợp workspace.
-Chưa có thay đổi runtime hay commit triển khai nào trong lượt lập kế hoạch này.
+Trạng thái thực thi: T1–T6 đã hoàn thành trên feature branch; final review và hai
+regression focus/cursor đã qua. Main145/145, focused32/32; 12 baseline khớp.
 
 Gate bàn giao: toàn bộ năm điểm nghiệm thu trong spec có test hoặc capture/report,
 map source/fixture/baseline giữ nguyên, English chrome đầy đủ, các editor khác

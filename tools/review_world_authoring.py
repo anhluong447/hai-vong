@@ -66,6 +66,11 @@ def main():
             assert client.evaluate('worldEditor.document.undoStack.length')==point['history']+1
             assert client.evaluate(f'worldEditor.document.draft.tiles[{point["gy"]}].slice({point["gx"]},{point["gx"]+3}).every(t=>t===2)')
             capture(name+'-painted')
+            client.evaluate("worldEditor.tileEditor.showCollision=true;worldEditor.world.draw(0)")
+            capture(name+'-collision')
+            client.evaluate("worldEditor.setMode('play');worldEditor.world.draw(0)")
+            capture(name+'-playtest')
+            client.evaluate("worldEditor.setMode('edit');worldEditor.tileEditor.showCollision=false;worldEditor.world.draw(0)")
             client.evaluate('worldEditor.document.undo()')
             assert client.evaluate('worldEditor.document.exportJSON()')==point['before']
             mouse('mousePressed',point['x'],point['y'])
@@ -73,6 +78,12 @@ def main():
             for kind in ['keyDown','keyUp']:client.call('Input.dispatchKeyEvent',dict(type=kind,key='Escape',code='Escape',windowsVirtualKeyCode=27))
             mouse('mouseReleased',point['x']+point['step'],point['y'])
             assert client.evaluate('worldEditor.document.exportJSON()')==point['before']
+            client.evaluate("worldEditor.tileEditor.setTool('rectangle');worldEditor.overlay.focus()")
+            for kind in ['keyDown','keyUp']:client.call('Input.dispatchKeyEvent',dict(type=kind,key='Enter',code='Enter',windowsVirtualKeyCode=13))
+            assert client.evaluate('Boolean(worldEditor.tileEditor.stroke)')
+            for kind in ['keyDown','keyUp']:client.call('Input.dispatchKeyEvent',dict(type=kind,key='Tab',code='Tab',windowsVirtualKeyCode=9))
+            assert client.evaluate('worldEditor.tileEditor.stroke===null')
+            client.evaluate("worldEditor.tileEditor.setTool('brush');worldEditor.overlay.focus()")
             client.call('Input.dispatchKeyEvent',dict(type='keyDown',key=' ',code='Space',windowsVirtualKeyCode=32))
             mouse('mousePressed',point['x'],point['y'])
             mouse('mouseMoved',point['x']-point['step'],point['y']-point['step'])
@@ -83,11 +94,13 @@ def main():
             assert client.evaluate('JSON.stringify(worldEditor.session.snapshot())')==before
             return dict(viewport=[width,height],paintedCells=3,previewOnlyUntilRelease=True,oneUndo=True,escapeCancel=True,panWithoutDocumentChange=True)
         def drag(entity_id, dx):
+            client.evaluate('new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))',await_promise=True)
             point = client.evaluate("""(()=>{const e=worldEditor; e.select(ID);const o=e.entity(),r=e.world.canvas.getBoundingClientRect(),p=e.world.screenPosition(o.x,o.y);return{x:r.left+p.x,y:r.top+p.y,delta:DELTA*e.world.scale*r.width/(e.world.canvas.width*e.world.scale),oldX:o.x};})()""".replace('ID', json.dumps(entity_id)).replace('DELTA', str(dx * 16)))
             client.call('Input.dispatchMouseEvent', {'type': 'mouseMoved', 'x': point['x'], 'y': point['y']})
-            client.call('Input.dispatchMouseEvent', {'type': 'mousePressed', 'button': 'left', 'clickCount': 1, 'x': point['x'], 'y': point['y']})
-            client.call('Input.dispatchMouseEvent', {'type': 'mouseMoved', 'buttons': 1, 'x': point['x'] + point['delta'], 'y': point['y']})
-            client.call('Input.dispatchMouseEvent', {'type': 'mouseReleased', 'button': 'left', 'clickCount': 1, 'x': point['x'] + point['delta'], 'y': point['y']})
+            client.call('Input.dispatchMouseEvent', {'type': 'mousePressed', 'button': 'left', 'buttons':1,'clickCount': 1, 'x': point['x'], 'y': point['y']})
+            client.evaluate('new Promise(r=>requestAnimationFrame(r))',await_promise=True)
+            client.call('Input.dispatchMouseEvent', {'type': 'mouseMoved', 'button':'left','buttons': 1, 'x': point['x'] + point['delta'], 'y': point['y']})
+            client.call('Input.dispatchMouseEvent', {'type': 'mouseReleased', 'button': 'left', 'buttons':0,'clickCount': 1, 'x': point['x'] + point['delta'], 'y': point['y']})
             actual = client.evaluate('worldEditor.entity().x')
             if actual != point['oldX'] + dx: raise AssertionError(f'Pointer drag: expected {point["oldX"] + dx}, got {actual}')
             return {'entity': entity_id, 'fromX': point['oldX'], 'toX': actual, 'clientDelta': point['delta']}
@@ -112,7 +125,9 @@ def main():
         capture('04-compact-dragged')
         assert client.evaluate('JSON.stringify(worldEditor.session.snapshot())') == before
         tile_reports=[tile_pointer(1400,900,'05-tiles-native'),tile_pointer(390,844,'06-tiles-compact')]
-        report = {'tiles':tile_reports,'native': native, 'compact': compact, 'historyOneEntry': True, 'undoRedoRoundTrip': True, 'allAuthoredStreetNPCs': 6, 'hiddenSchedulePreserved': True, 'sessionUnchanged': True, 'browser': client.call('Browser.getVersion')}
+        fill=client.evaluate("(async()=>{const {floodCells}=await import('/tools/authoring/TilePaint.js');const grid=Array.from({length:256},()=>Array(256).fill(0)),start=performance.now(),count=floodCells(grid,{x:0,y:0}).length;return {count,milliseconds:performance.now()-start,diagnosticOnly:true};})()",await_promise=True)
+        assert fill['count']==65536
+        report = {'fill256':fill,'tiles':tile_reports,'native': native, 'compact': compact, 'historyOneEntry': True, 'undoRedoRoundTrip': True, 'allAuthoredStreetNPCs': 6, 'hiddenSchedulePreserved': True, 'sessionUnchanged': True, 'browser': client.call('Browser.getVersion')}
         (output / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
         print('World editor: real pointer drag at 1400 and 390 px, undo/redo/export round trip, hidden schedules and session isolation verified')
     finally:

@@ -5,7 +5,7 @@ import {lineCells,rectangleCells,floodCells} from './TilePaint.js';
 const copy=key=>t('authoring.tiles.'+key),tools=['brush','rectangle','fill','eyedropper','eraser'];
 export class TileMapEditor{
  constructor(editor){
-  this.editor=editor;this.tool='brush';this.primaryTile=2;this.eraseTile=0;this.stroke=null;this.cursor={x:0,y:0};this.active=false;this.showGrid=true;this.showCollision=false;this.abort=new AbortController();this.buttons=new Map();this.tiles=new Map();
+  this.editor=editor;this.tool='brush';this.primaryTile=2;this.eraseTile=0;this.stroke=null;this.cursor={...editor.document.draft.spawn};this.active=false;this.showGrid=true;this.showCollision=false;this.abort=new AbortController();this.buttons=new Map();this.tiles=new Map();
   const root=editor.root;this.controls=root.querySelector('#tile-controls');
   for(const layer of ['entities','tiles']){const b=this.button(layer,()=>editor.setEditLayer(layer));b.dataset.layer=layer;root.querySelector('#world-layers').append(b);}
   for(const tool of tools){const b=this.button(tool,()=>this.setTool(tool));b.dataset.tileTool=tool;this.buttons.set(tool,b);root.querySelector('#tile-toolbar').append(b);}
@@ -20,7 +20,7 @@ export class TileMapEditor{
   window.addEventListener('keyup',event=>{if(event.code==='Space'||event.key===' '){this.space=false;if(this.pan)this.cancel();}},{signal});
  }
  button(key,action){const b=document.createElement('button');b.type='button';if(key)b.textContent=copy(key);b.addEventListener('click',action,{signal:this.abort.signal});return b;}
- setActive(active){if(this.active!==active)this.cancel();this.active=active;this.refresh();}
+ setActive(active){const changed=this.active!==active;if(changed)this.cancel();this.active=active;if(active&&!this.activated){this.activated=true;if(this.editor.world?.ready)this.ensureCursorVisible();}this.refresh();}
  setTool(tool){if(!tools.includes(tool))throw new RangeError('world.tile.tool');this.cancel();this.tool=tool;this.refresh();}
  setPrimaryTile(id){tileDefinition(id);this.cancel();this.primaryTile=id;this.refresh();}
  setEraseTile(id){tileDefinition(id);this.cancel();this.eraseTile=id;this.refresh();}

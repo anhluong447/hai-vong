@@ -36,6 +36,7 @@ export class WorldEditor{
   this.world.onBeforeEnter=(id,spawn)=>this.switchMap(id,spawn);if(position?.mapId===this.mapId)this.world.restore(position);this.world.setEditing(this.mode==='edit');
   this.overlay=document.createElement('canvas');this.overlay.className='world-grid-overlay';this.overlay.setAttribute('aria-label',text('selected'));this.overlay.tabIndex=0;this.host.append(this.overlay);this.overlay.hidden=this.mode!=='edit';
   this.overlayAbort?.abort();this.overlayAbort=new AbortController();const signal=this.overlayAbort.signal;this.overlay.addEventListener('pointerdown',event=>this.down(event),{signal});this.overlay.addEventListener('pointermove',event=>this.move(event),{signal});this.overlay.addEventListener('pointerup',event=>this.up(event),{signal});this.overlay.addEventListener('pointercancel',()=>this.cancel(),{signal});this.overlay.addEventListener('lostpointercapture',()=>{this.cancel();},{signal});
+  this.overlay.addEventListener('blur',()=>{this.tileEditor.space=false;this.cancel();},{signal});
   this.world.onFrame=()=>{this.world.hint.textContent=this.mode==='edit'&&this.editLayer==='tiles'?this.tileEditor.hint():text(this.mode==='edit'?'editHint':'playHint');this.drawOverlay();};
  }
  changed(){if(!this.world)return;this.tileEditor?.cancel();this.world.replaceMapCatalog(this.catalog());this.world.draw(0);this.refresh();if(!this.saving)this.status.textContent=t(this.document.dirty?'authoring.dirty':'authoring.world.ready');}

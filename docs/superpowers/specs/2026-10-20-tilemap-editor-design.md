@@ -8,8 +8,8 @@ Người dùng muốn tự vẽ địa hình bên cạnh việc đặt object/NP
 độ **Tiles** trong World Editor, dùng chung scene document, lịch sử, draft,
 import/export, chơi thử và cơ chế lưu source hiện hành. Phạm vi v1 là năm map
 `home`, `yard`, `newsroom`, `street`, `interaction`, một lớp nền và 16 tile hiện có.
-Đây là thiết kế làm cơ sở cho implementation plan theo yêu cầu người dùng;
-chưa phải thông báo tính năng đã được triển khai.
+Thiết kế được người dùng duyệt để triển khai; T1–T6 và final review đã hoàn tất.
+Xem kết quả tại docs/ui-reviews/tilemap-editor/README.md.
 
 Không thêm dependency hay editor riêng. Không thêm map ID, đổi kích thước map,
 đa lớp, autotile, vẽ texture mới, sửa atlas, sửa portal hoặc thay gameplay/save.

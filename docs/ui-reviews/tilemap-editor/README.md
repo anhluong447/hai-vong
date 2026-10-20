@@ -17,7 +17,7 @@ entire map without moving the player.
 
 Verification so far:
 
-- Focused world browser **31/31**, including original renderer pixels for five
+- Focused world browser **32/32**, including original renderer pixels for five
   maps, pure patch fixtures, 65,536-cell fill, 256×256 camera navigation,
   cancellation, viewport capture boundaries, focus/modifiers, hidden entity
   selection, collision/cache/Playtest, draft and asynchronous save.
@@ -30,8 +30,20 @@ Verification so far:
   compile/reload → second save, invalid422 and stale409 preserve source/generated
   bytes. Original sources remain unchanged.
 
-The whole-project browser/baseline gate and final review will be recorded after
-completion. No skip counts as a pass and no capture certifies performance.
+Final whole-project browser: **145/145**, with all **12 baseline policies matching**.
+All layout/world/dialogue builders and the asset inventory pass their checks.
+The source scene files, original map/renderer fixtures and archive have no diff
+against the starting revision.
+
+Independent branch review found no critical/important implementation defects and
+identified two focus/cursor issues. Both were addressed with regressions: initial
+cursor uses spawn and is visible on first activation; leaving canvas focus cancels
+a keyboard rectangle. Native CDP Tab exercises the focus transition at both sizes.
+The browser iframe regression explicitly transports blur because background
+headless iframes do not emit native focus events. Final main remains 145/145.
+No deferred review findings remain. No skip counts as a pass and no capture
+certifies performance. A 256×256 flood visits 65,536 cells; per-run milliseconds
+are retained in report.json as a diagnostic.
 
 Reproduce with a static server (8096 normally; isolated worktree used 8097):
 

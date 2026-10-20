@@ -108,3 +108,14 @@ test('Tile editor: entity shortcuts cannot edit a hidden selection while Tiles i
  e.overlay.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Delete',bubbles:true,cancelable:true}));
  a.equal(JSON.stringify(e.document.draft.objects),before);a.equal(e.document.undoStack.length,0);
 }));
+test('Tile editor: first keyboard cursor is visible and leaving canvas focus cancels a rectangle',()=>withEditor((e,w)=>{
+ e.setEditLayer('tiles');const tile=e.tileEditor,s=e.document.draft.spawn;
+ a.equal(tile.cursor.x,s.x);a.equal(tile.cursor.y,s.y);
+ a.ok(tile.cursor.y*16>=e.world.camera.y&&tile.cursor.y*16+16<=e.world.camera.y+e.world.canvas.height);
+ const before=e.document.exportJSON();e.overlay.focus();e.overlay.dispatchEvent(new w.KeyboardEvent('keydown',{key:'r',bubbles:true}));e.overlay.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));a.ok(tile.stroke);
+ const field=w.document.querySelector('#tile-erase');field.focus();
+ // Background headless iframes do not emit native focus events; exercise the
+ // actual blur handler with that transport explicit. CDP covers native Tab.
+ e.overlay.dispatchEvent(new w.FocusEvent('blur',{relatedTarget:field}));
+ a.ok(tile.stroke===null);a.equal(e.document.exportJSON(),before);a.equal(e.document.undoStack.length,0);
+}));
