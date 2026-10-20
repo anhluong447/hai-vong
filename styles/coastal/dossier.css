@@ -9,12 +9,12 @@
 .menu-v2 .mv-paper-back{position:absolute;inset:0;border-radius:var(--ds-paper-radius);background:var(--ds-paper) var(--ds-paper-grain) center/var(--ds-paper-tile) repeat;box-shadow:var(--ds-paper-shadow);clip-path:var(--ds-edge-shape)}
 .menu-v2 .mv-paper-back-near{transform:var(--ds-paper-near);z-index:-1}
 .menu-v2 .mv-paper-back-far{transform:var(--ds-paper-far);z-index:-2}
-.menu-v2 .mv-dossier{height:100%;padding:var(--ds-paper-padding);border-color:var(--ds-paper-edge);background-color:var(--ds-paper);background-size:var(--ds-paper-tile);background-repeat:repeat;background-blend-mode:multiply;box-shadow:var(--ds-paper-shadow);color:var(--ds-ink);border-radius:var(--ds-paper-radius)}
+.menu-v2 .mv-dossier{height:100%;padding:var(--ml-cases-paper-padding,var(--ds-paper-padding));border-color:var(--ds-paper-edge);background-color:var(--ds-paper);background-size:var(--ds-paper-tile);background-repeat:repeat;background-blend-mode:multiply;box-shadow:var(--ds-paper-shadow);color:var(--ds-ink);border-radius:var(--ds-paper-radius)}
 .menu-v2 .mv-dossier::before{right:var(--ds-clip-right);top:var(--ds-clip-top);height:var(--ds-clip-height);width:var(--ds-clip-width);border:var(--ds-clip-stroke) solid var(--ds-clip-color);z-index:3}
 .menu-v2 .mv-dossier-intro{display:contents}
 .menu-v2 .mv-dossier-summary{display:flow-root;min-width:0}
 .menu-v2 .mv-dossier[data-has-photo=true] .mv-dossier-summary{min-height:var(--ds-summary-height)}
-.menu-v2 .mv-dossier h2{font-size:var(--ds-paper-title);font-weight:var(--ds-paper-title-weight);line-height:var(--ds-paper-title-leading);border:0;padding:0;margin:0 0 var(--ds-section-space);overflow-wrap:anywhere}
+.menu-v2 .mv-dossier h2{font-size:var(--ml-cases-paper-title-size,var(--ds-paper-title));font-weight:var(--ds-paper-title-weight);line-height:var(--ds-paper-title-leading);border:0;padding:0;margin:0 0 var(--ds-section-space);overflow-wrap:anywhere}
 .menu-v2 .mv-dossier h2::after{content:'';display:block;width:var(--ds-title-mark-width);height:var(--ds-title-mark-height);margin-top:var(--ds-title-mark-space);background:var(--ds-gold);transform:rotate(var(--ds-title-mark-rotate));border-radius:var(--ds-paper-radius)}
 .menu-v2 .mv-polaroid{float:right;width:var(--ds-photo-width);height:var(--ds-photo-height);padding:var(--ds-photo-padding);padding-bottom:var(--ds-photo-bottom);margin:0 0 var(--ds-section-space) var(--ds-intro-gap);background:var(--ds-photo-paper);transform:rotate(var(--ds-photo-rotate));box-shadow:var(--ds-photo-shadow)}
 .menu-v2 .mv-polaroid img{display:block;width:100%;height:100%;object-fit:cover}

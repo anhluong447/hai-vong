@@ -2,6 +2,7 @@ import {element as el,text,button} from '../dom.js';
 import {t} from '../../shared/text.js';
 import {tabs,groups,branches} from '../../../content/ui/menu-v2.js';
 import {MenuV2Effects} from './MenuV2Effects.js';
+import {MenuLayoutAdapter} from './MenuLayoutAdapter.js';
 import {MenuV2Keyboard} from './MenuV2Keyboard.js';
 import {itemMedia,slotMedia,branchColors} from '../../../content/ui/menu-v2-media.js';
 
@@ -66,6 +67,7 @@ export class MenuV2View{
       image(asset('ui/coastal-replica/v1/exports/harbor-print.svg'),'mv-harbor'),
       el('footer',{class:'mv-footer'},[this.status,text('span',t('menu.refinement.regions'),'mv-region-hint'),el('span',{class:'mv-keyhint'},[text('kbd',label('enter')),text('span',label('choose'))]),close])
     ]);
+    this.layout=new MenuLayoutAdapter(this.node);
     this.effects=new MenuV2Effects(this.node);
     this.keyboard=new MenuV2Keyboard(this);
   }
@@ -98,6 +100,7 @@ export class MenuV2View{
     const rows=this.content.querySelector('.mv-quest-rows');if(rows&&rows.dataset.group===oldRows?.dataset.group)rows.scrollTop=listScroll;
     const currentQuest=this.content.querySelector('.mv-quest-rows .active')?.dataset.focusKey;
     if(currentQuest&&currentQuest===oldQuest)this.content.querySelector('.mv-dossier').scrollTop=paperScroll;
+    this.layout.bind();
     if(owned){const next=[...this.content.querySelectorAll('[data-focus-key]')].find(n=>n.dataset.focusKey===token&&!n.disabled);(next||this.content.querySelector(`[data-menu-region="${oldRegion}"]`)||this.content).focus({preventScroll:true});}
   }
   action(labelText,action,disabled=false){return button(labelText,()=>this.act(action),'mv-brush',disabled);}
@@ -220,5 +223,5 @@ export class MenuV2View{
     }
     this.content.append(el('div',{class:'mv-settings-layout'},[options,detail]));
   }
-  dispose(){this.effects.dispose();this.keyboard.dispose();this.node.remove();}
+  dispose(){this.effects.dispose();this.keyboard.dispose();this.layout.dispose();this.node.remove();}
 }

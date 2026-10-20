@@ -1,0 +1,176 @@
+{
+  "cases": {
+    "resources": {
+      "x": 45,
+      "y": 710,
+      "width": 244,
+      "height": 121.296875
+    },
+    "content": {
+      "x": 420,
+      "y": 42,
+      "width": 1200,
+      "height": 772
+    },
+    "typography": {
+      "x": 432,
+      "y": 46.953125,
+      "width": 199.953125,
+      "height": 102.078125
+    },
+    "cases-list": {
+      "x": 420,
+      "y": 176,
+      "width": 1200,
+      "height": 620
+    },
+    "cases-paper": {
+      "x": 841,
+      "y": 152,
+      "width": 779,
+      "height": 644
+    }
+  },
+  "skills": {
+    "resources": {
+      "x": 45,
+      "y": 710,
+      "width": 244,
+      "height": 121.296875
+    },
+    "content": {
+      "x": 420,
+      "y": 42,
+      "width": 1200,
+      "height": 772
+    },
+    "typography": {
+      "x": 432,
+      "y": 46.953125,
+      "width": 290.9375,
+      "height": 102.078125
+    },
+    "skills-detail": {
+      "x": 1255,
+      "y": 159,
+      "width": 365,
+      "height": 557
+    },
+    "skills-tree": {
+      "x": 420,
+      "y": 176,
+      "width": 798,
+      "height": 620
+    }
+  },
+  "equipment": {
+    "resources": {
+      "x": 45,
+      "y": 710,
+      "width": 244,
+      "height": 121.296875
+    },
+    "content": {
+      "x": 420,
+      "y": 42,
+      "width": 1200,
+      "height": 772
+    },
+    "typography": {
+      "x": 432,
+      "y": 46.953125,
+      "width": 306.25,
+      "height": 102.078125
+    },
+    "equipment-detail": {
+      "x": 1240,
+      "y": 159,
+      "width": 380,
+      "height": 557
+    },
+    "equipment-slots": {
+      "x": 420,
+      "y": 176,
+      "width": 772,
+      "height": 620
+    }
+  },
+  "team": {
+    "resources": {
+      "x": 45,
+      "y": 710,
+      "width": 244,
+      "height": 121.296875
+    },
+    "content": {
+      "x": 420,
+      "y": 42,
+      "width": 1200,
+      "height": 772
+    },
+    "typography": {
+      "x": 420,
+      "y": -8.53125,
+      "width": 326.578125,
+      "height": 102.078125
+    },
+    "team-detail": {
+      "x": 1061.6275634765625,
+      "y": 107.11181640625,
+      "width": 561.744873046875,
+      "height": 652.7763671875
+    }
+  },
+  "map": {
+    "resources": {
+      "x": 45,
+      "y": 710,
+      "width": 244,
+      "height": 121.296875
+    },
+    "content": {
+      "x": 420,
+      "y": 42,
+      "width": 1200,
+      "height": 772
+    },
+    "typography": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  "settings": {
+    "resources": {
+      "x": 45,
+      "y": 710,
+      "width": 244,
+      "height": 121.296875
+    },
+    "content": {
+      "x": 420,
+      "y": 42,
+      "width": 1200,
+      "height": 772
+    },
+    "typography": {
+      "x": 420,
+      "y": 154,
+      "width": 360,
+      "height": 126.15625
+    },
+    "settings-detail": {
+      "x": 851,
+      "y": 192,
+      "width": 769,
+      "height": 570
+    },
+    "settings-categories": {
+      "x": 420,
+      "y": 192,
+      "width": 355,
+      "height": 570
+    }
+  }
+}

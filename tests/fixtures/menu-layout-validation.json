@@ -1,0 +1,27 @@
+{
+  "cases": [
+    {"name":"defaults","valid":true},
+    {"name":"fractional position and permitted artwork bleed","valid":true,"set":{"regions.resources.x":-12.25,"regions.skills-detail.y":-20.5}},
+    {"name":"zero gap","valid":true,"set":{"regions.skills-tree.gap":0}},
+    {"name":"unknown schema","valid":false,"set":{"schemaVersion":2},"errorPath":"schemaVersion"},
+    {"name":"boolean schema","valid":false,"set":{"schemaVersion":true},"errorPath":"schemaVersion"},
+    {"name":"stage size mismatch","valid":false,"set":{"stage.width":1600},"errorPath":"stage.width"},
+    {"name":"unknown stage field","valid":false,"set":{"stage.zoom":1},"errorPath":"stage.zoom"},
+    {"name":"unknown root field","valid":false,"set":{"script":"alert(1)"},"errorPath":"script"},
+    {"name":"unknown region","valid":false,"set":{"regions.unregistered":{}},"errorPath":"regions.unregistered"},
+    {"name":"missing region","valid":false,"remove":["regions.content"],"errorPath":"regions.content"},
+    {"name":"missing field","valid":false,"remove":["regions.resources.width"],"errorPath":"regions.resources.width"},
+    {"name":"unknown numeric field","valid":false,"set":{"regions.resources.opacity":0.5},"errorPath":"regions.resources.opacity"},
+    {"name":"css injection","valid":false,"set":{"regions.resources.x":"0; color: red"},"errorPath":"regions.resources.x"},
+    {"name":"null size","valid":false,"set":{"regions.resources.width":null},"errorPath":"regions.resources.width"},
+    {"name":"boolean size","valid":false,"set":{"regions.resources.width":true},"errorPath":"regions.resources.width"},
+    {"name":"negative size","valid":false,"set":{"regions.resources.width":-1},"errorPath":"regions.resources.width"},
+    {"name":"zero size","valid":false,"set":{"regions.content.height":0},"errorPath":"regions.content.height"},
+    {"name":"negative gap","valid":false,"set":{"regions.skills-tree.gap":-1},"errorPath":"regions.skills-tree.gap"},
+    {"name":"excessive size","valid":false,"set":{"regions.content.width":100000},"errorPath":"regions.content.width"},
+    {"name":"array region","valid":false,"set":{"regions.resources":[]},"errorPath":"regions.resources"},
+    {"name":"nonfinite number","valid":false,"nonFinite":{"regions.resources.x":"NaN"},"errorPath":"regions.resources.x"},
+    {"name":"positive infinity","valid":false,"nonFinite":{"regions.resources.width":"Infinity"},"errorPath":"regions.resources.width"},
+    {"name":"negative infinity","valid":false,"nonFinite":{"regions.skills-detail.y":"-Infinity"},"errorPath":"regions.skills-detail.y"}
+  ]
+}

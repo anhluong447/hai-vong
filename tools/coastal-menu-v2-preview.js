@@ -14,19 +14,25 @@ const session=new GameSession({},{coastal:true});session.execute({type:'school'}
 const stage=new GameStage(document.querySelector('#app'));
 const memory=new Map(),saves=new GameplaySaveService({mode:'coastal',storage:{getItem:key=>memory.get(key),setItem:(key,value)=>memory.set(key,value)}});
 const params=new URLSearchParams(location.search),variant=params.get('variant')||'concept';
+let authoringMode=false;
 const render=()=>{const model=coastalMenuModel(session.state);menu.update(params.get('fixture')==='dossier'?dossierFixture(model,variant):model);};
 const menu=new MenuV2View(await loadDialogueRegistry(),{
   debug:params.has('debug'),
-  onAction:action=>{try{session.execute(action);render();}catch(error){menu.setNotice(error.message);}},
-  onSave:()=>{saves.save(session.state);menu.setNotice(t('src.gameplay.main.da_luu_sandbox_vong_choi'),{debug:true});},
-  onLoad:()=>{try{session.replace(saves.load().state);render();}catch(error){menu.setNotice(error.message);}},
-  onTravel:place=>{menu.setNotice(place.name);},onClose:()=>menu.open()
+  onAction:action=>{if(authoringMode)return;try{session.execute(action);render();}catch(error){menu.setNotice(error.message);}},
+  onSave:()=>{if(authoringMode)return;saves.save(session.state);menu.setNotice(t('src.gameplay.main.da_luu_sandbox_vong_choi'),{debug:true});},
+  onLoad:()=>{if(authoringMode)return;try{session.replace(saves.load().state);render();}catch(error){menu.setNotice(error.message);}},
+  onTravel:place=>{if(authoringMode)return;menu.setNotice(place.name);},onClose:()=>{if(!authoringMode)menu.open();}
 });
 if(params.get('fixture')==='dossier')menu.selected.quest='fixture-field';
 stage.node.append(menu.node);render();
 const tab=new URLSearchParams(location.search).get('tab');if(tab)menu.selectTab(tab);
 const group=new URLSearchParams(location.search).get('group');if(groups.includes(group)){menu.group=group;render();}
 window.menuV2Preview={menu,session,render,applyDossierFixture(variant){if(!dossierVariants.includes(variant))throw new Error('Unknown authoring fixture');menu.group='main';menu.selected.quest='fixture-field';menu.update(dossierFixture(coastalMenuModel(session.state),variant));}};
+if(params.has('edit')){
+ document.documentElement.lang='en';document.title=t('authoring.title');menu.node.lang='vi';
+ const {MenuEditor}=await import('./authoring/MenuEditor.js');
+ window.menuEditor=await new MenuEditor({menu,stage,onInputMode:mode=>authoringMode=mode==='edit'}).mount();
+}
 window.replicaCapture={prepare:async request=>{
   if(document.readyState!=='complete')await new Promise(resolve=>window.addEventListener('load',resolve,{once:true}));
   await document.fonts.ready;await Promise.all([...document.images].map(img=>img.decode()));
@@ -37,4 +43,4 @@ window.replicaCapture={prepare:async request=>{
     fixture:{rules:'coastal-v3',day:menu.model.day,phase:menu.model.phase,energy:menu.model.energy,authoringOnly:params.get('fixture')==='dossier',variant:params.get('fixture')==='dossier'?variant:null},
     legacyReplicaFixtureApplied:false,menuEffects:menu.effects.snapshot()};
 }};
-window.addEventListener('pagehide',()=>{menu.dispose();stage.dispose();},{once:true});
+window.addEventListener('pagehide',()=>{window.menuEditor?.dispose();menu.dispose();stage.dispose();},{once:true});

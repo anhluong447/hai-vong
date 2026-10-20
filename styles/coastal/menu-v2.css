@@ -35,7 +35,7 @@
 .menu-v2 .mv-paper h3{font-size:26px;font-weight:650;line-height:1.3;margin:23px 0 12px}
 .menu-v2 .mv-paper p{font-size:22px;line-height:1.55;margin:14px 0}
 .menu-v2 .mv-paper small{display:block;font-size:17px}
-.menu-v2 .mv-cases-layout{display:grid;grid-template-columns:375px 1fr;gap:46px;height:620px}
+.menu-v2 .mv-cases-layout{display:grid;grid-template-columns:var(--ml-cases-list-width,375px) 1fr;gap:var(--ml-cases-list-gap,46px);height:620px}
 .menu-v2 .mv-quest-list{min-height:0}
 .menu-v2 .mv-filters{display:flex;gap:20px;border-bottom:1px solid #9bbfbd;margin-bottom:27px}
 .menu-v2 .mv-filters button{border:0;border-bottom:4px solid transparent;background:none;padding:12px 10px;font-size:25px}

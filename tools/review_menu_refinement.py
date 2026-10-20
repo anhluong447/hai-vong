@@ -18,6 +18,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base-url',default='http://127.0.0.1:8096')
     parser.add_argument('--output',type=Path,default=ROOT/'docs/ui-reviews/menu-refinement/native-v1')
+    parser.add_argument('--authoring-inventory',action='store_true')
     args=parser.parse_args()
     assert args.base_url.startswith(('http://127.0.0.1:','http://localhost:'))
     output=args.output.resolve()
@@ -62,6 +63,15 @@ def main():
             (output/(name+'.json')).write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
             reports.append(report);print(name,flush=True)
         (output/'report.json').write_text(json.dumps(reports,indent=2)+'\n',encoding='utf-8')
+        if args.authoring_inventory:
+            original=client.evaluate("(async()=>JSON.parse(JSON.stringify((await import('/content/maps/definitions.js')).MAPS)))()",await_promise=True)
+            keyed=client.evaluate("""(async()=>{const source=await (await fetch('/content/maps/definitions.js')).text();return Function('t',source.replace(/^import[^\\n]*\\n/gm,'').replace('export const MAPS','const MAPS')+';return MAPS;')(key=>({textKey:key}));})()""",await_promise=True)
+            (ROOT/'tests/fixtures').mkdir(exist_ok=True)
+            (ROOT/'tests/fixtures/world-original-maps.json').write_text(json.dumps(original,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            (ROOT/'tmp/world-original-keyed.json').write_text(json.dumps(keyed,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            geometry=client.evaluate("""(async()=>{const {menuLayoutRegions}=await import('/content/ui/menu-layout-regions.js');const v=menuV2Preview.menu,result={};for(const tab of ['cases','skills','equipment','team','map','settings']){v.selectTab(tab);await new Promise(r=>requestAnimationFrame(r));result[tab]={};for(const region of menuLayoutRegions){const n=v.node.querySelector(region.selector);if(n){const b=n.getBoundingClientRect();result[tab][region.id]={x:b.x,y:b.y,width:b.width,height:b.height};}}}return result;})()""",await_promise=True)
+            (ROOT/'docs/ui-specs/authoring').mkdir(parents=True,exist_ok=True)
+            (ROOT/'docs/ui-specs/authoring/menu-geometry.json').write_text(json.dumps(geometry,indent=2)+'\n',encoding='utf-8')
         client.call('Page.navigate',{'url':args.base_url+'/pixel.html'})
         deadline=time.monotonic()+30
         while not client.evaluate('Boolean(window.pressPixel?.ready)'):
