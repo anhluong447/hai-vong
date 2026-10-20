@@ -278,8 +278,10 @@ export class ReplicaStage {
   }
 
   hitTest(clientX,clientY) {
-    const [x,y] = this.nativePoint(clientX,clientY);
     return this.scene.choices.find(choice => {
+      const matrix=this.svg.querySelector(`[data-choice-id="${choice.id}"]`)?.getScreenCTM();
+      if(!matrix)return false;
+      const {x,y}=new DOMPoint(clientX,clientY).matrixTransform(matrix.inverse());
       const [left,top,width,height] = choice.bounds;
       return x >= left && x <= left+width && y >= top && y <= top+height;
     })?.id ?? null;

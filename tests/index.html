@@ -19,6 +19,15 @@ import './menu-effects.test.js';
 import './coastal-v2.test.js';
 import './dossier-polish.test.js';
 import './menu-refinement.test.js';
+import './menu-layout.test.js';
+import './menu-authoring-document.test.js';
+import './menu-editor.test.js';
+import './screen-layout.test.js';
+import './dialogue-layout.test.js';
+import './world-scenes.test.js';
+import './world-coordinates.test.js';
+import './world-editor.test.js';
+import './world-assets.test.js';
 import {runAll} from './harness.js';
 const results = await runAll({onProgress:name=>document.querySelector('#results').textContent=name}); const root = document.querySelector('#results'); root.replaceChildren();
 for(const r of results) { const p = document.createElement('pre'); p.className=r.ok?'ok':'bad'; p.textContent=`${r.ok?'ok':'FAIL'} ${r.name}${r.error?'\n'+r.error:''}`; root.append(p); }

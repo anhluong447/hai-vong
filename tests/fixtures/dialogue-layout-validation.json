@@ -1,0 +1,13 @@
+[
+  {"name":"fractional offset","path":["dialogue-panel","x"],"value":12.25,"valid":true},
+  {"name":"minimum scale","path":["dialogue-choices","scaleY"],"value":0.25,"valid":true},
+  {"name":"zero scale","path":["dialogue-panel","scaleX"],"value":0,"valid":false},
+  {"name":"negative scale","path":["dialogue-date","scaleY"],"value":-1,"valid":false},
+  {"name":"large offset","path":["dialogue-panel","x"],"value":3345,"valid":false},
+  {"name":"string number","path":["dialogue-panel","x"],"value":"12","valid":false},
+  {"name":"boolean number","path":["dialogue-date","x"],"value":true,"valid":false},
+  {"name":"missing field","path":["dialogue-date"],"value":{"x":0,"y":0,"scaleX":1},"valid":false},
+  {"name":"unknown region","path":["portrait"],"value":{"x":0,"y":0,"scaleX":1,"scaleY":1},"valid":false},
+  {"name":"null root","path":[],"value":null,"valid":false},
+  {"name":"array root","path":[],"value":[],"valid":false}
+]

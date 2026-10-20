@@ -1,5 +1,7 @@
 import {element as el,text} from '../dom.js';
 import {t} from '../../shared/text.js';
+import {ScreenLayoutAdapter} from './ScreenLayoutAdapter.js';
+import {screenLayout} from '../../../content/ui/screen-layout-data.js';
 
 function createSvg(htmlString) {
   const template = document.createElement('div');
@@ -19,7 +21,7 @@ const ICONS = {
 };
 
 export class CoastalHud {
-  constructor({onMap,onMenu,onInteract} = {}) {
+  constructor({onMap,onMenu,onInteract,layout=screenLayout} = {}) {
     this.handlers = {onMap,onMenu,onInteract};
     this.lastDate = null;
     this.lastEnergy = null;
@@ -126,7 +128,11 @@ export class CoastalHud {
       this.interactionPrompt,
       this.bottomBar
     ]);
+    this.layoutAdapter=new ScreenLayoutAdapter(this.node,'hud');
+    this.setLayout(layout);
   }
+
+  setLayout(layout) { return this.layoutAdapter.apply(layout); }
 
   update({date,day,weekday,phase,energy,maxEnergy=4,money,location,objective,prompt,promptVisible=true,targetPosition}={}) {
     if(day!==undefined||date!==undefined||weekday!==undefined){
@@ -237,6 +243,7 @@ export class CoastalHud {
   }
 
   dispose() {
+    this.layoutAdapter.dispose();
     this.node.remove();
   }
 }

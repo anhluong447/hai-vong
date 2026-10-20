@@ -589,7 +589,7 @@
   ],
   "fontManifest": "assets/fonts/coastal-replica/manifest.json",
   "compositionSource": "content/ui/coastal-dialogue-ui.json",
-  "compositionSourceSHA256": "741BAB46BDBFD2BD2943C0228187ED1C9C3782D2B777B6FB2FC0ED8B8183BE62",
+  "compositionSourceSHA256": "34DCFB778E734CF0D14CD3367A9274B50A25900763C9F2EC9657335023731521",
   "sourceReference": "docs/ui-concepts/coastal-editorial-v1/01-dialogue.png",
   "sourceReferenceSHA256": "68C076B9D013523B745E61E1AF35A8251742BBF7B774C02245F89DACF3D2A5A2",
   "comparisonMask": {

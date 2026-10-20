@@ -279,19 +279,22 @@ export default {
       "x1": 201,
       "y1": 744,
       "x2": 545,
-      "y2": 744
+      "y2": 744,
+      "component": "speaker-name"
     },
     {
       "x1": 814,
       "y1": 888,
       "x2": 1174,
-      "y2": 888
+      "y2": 888,
+      "component": "continue-rule"
     },
     {
       "x1": 1196,
       "y1": 876,
       "x2": 1196,
-      "y2": 900
+      "y2": 900,
+      "component": "continue-rule"
     },
     {
       "x1": 110,
@@ -300,7 +303,8 @@ export default {
       "y2": 115,
       "stroke": "#9e9b89",
       "width": 0.7,
-      "layer": "print"
+      "layer": "print",
+      "component": "date-card"
     },
     {
       "x1": 125,
@@ -309,7 +313,8 @@ export default {
       "y2": 76,
       "stroke": "#6b6b5e",
       "width": 0.75,
-      "layer": "print"
+      "layer": "print",
+      "component": "date-card"
     }
   ],
   "speakerArrow": {
@@ -550,5 +555,175 @@ export default {
       941
     ],
     "scope": "replaceable-preview-only"
+  },
+  "layout": {
+    "dialogue-panel": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-date": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choices": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-paper": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-harbor": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-shore": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-speaker-mark": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-speaker": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-line": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-continue": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-continue-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-continue-icon": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-flowers": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-notebook": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-note-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-date-paper": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-date-ornament": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-date-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-phase-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choice-verify": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choice-verify-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choice-draft": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choice-draft-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choice-listen": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choice-listen-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-brand": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-brand-mark": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-brand-text": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    }
   }
 };

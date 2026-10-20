@@ -1,3 +1,5 @@
+import {attachDialogueLayout} from './DialogueLayout.js';
+
 // Concrete dialogue overlay. The stage owns resources, input and lifecycle.
 export function drawDialogueUi(stage, svg, element) {
   const scene=stage.scene, prefix=stage.deskClipId;
@@ -55,7 +57,7 @@ export function drawDialogueUi(stage, svg, element) {
   const overlay=element('g',{'data-ui-component':'dialogue-paper'},plane('paper'));
   if(scene.motion)plane('paper').setAttribute('data-motion-paper','true');
   if(stage.lightingEnabled) overlay.setAttribute('filter',stage.uiShadows.paper);
-  stage.image(plane('wave'),'material.dialogue-wave',scene.paperBounds);
+  stage.image(plane('wave'),'material.dialogue-wave',scene.paperBounds).dataset.uiComponent='dialogue-wave';
   if(scene.motion) {
     plane('wave').setAttribute('data-motion-wave','true');
     element('path',{'data-motion-flow':'true',fill:'none',stroke:scene.motion.wave.stroke,
@@ -92,14 +94,16 @@ export function drawDialogueUi(stage, svg, element) {
     'data-ui-light':'notebook-wash','pointer-events':'none'},notebookRoot);
   for(const copy of scene.environmentText) stage.keyedText(scene.motion?notebookRoot:plane(copy.layer),copy.key,{...copy,'data-region':copy.id});
   if(scene.motion) {
-    const clipGroup=element('g',{'clip-path':`url(#${paperClip})`,'pointer-events':'none'},plane('print'));
+    const clipGroup=element('g',{'clip-path':`url(#${paperClip})`,'pointer-events':'none','data-ui-component':'paper-sheen'},plane('print'));
     const [x,y,,height]=scene.motion.sheen.bounds;
     element('rect',{x,y,width:scene.motion.sheen.width,height,fill:sheenFill,opacity:0,'data-motion-sheen':'true'},clipGroup);
   }
   for(const rule of scene.rules) element('line',{...rule,stroke:rule.stroke??'#126477','stroke-width':rule.width??1.25,
+    'data-ui-component':rule.component,
     'data-motion-copy':scene.motion?'true':undefined,'pointer-events':'none'},plane(rule.layer??'print'));
   const arrow=scene.speakerArrow;
   element('path',{d:`M${arrow.x1} ${arrow.y1}H${arrow.x2}l-4 -2m4 2l-4 2`,fill:'none',stroke:'#126477','stroke-width':1.25,
+    'data-ui-component':'speaker-name',
     'data-motion-copy':scene.motion?'true':undefined,'pointer-events':'none'},plane('print'));
   for(const choice of scene.choices) stage.drawChoice(plane('print'),choice);
   const copyPlane=plane('text');copyPlane.classList.add('reading-copy');
@@ -110,6 +114,8 @@ export function drawDialogueUi(stage, svg, element) {
   }
   for(const choice of scene.choices) stage.keyedText(copyPlane,choice.textKey,{x:choice.baseline[0],y:choice.baseline[1],...choice.font,'data-choice-copy':choice.id});
   const returnIcon=stage.icon(copyPlane,'return',scene.returnIcon);
+  returnIcon.dataset.uiComponent='continue-icon';
   if(scene.motion)returnIcon.setAttribute('data-motion-copy','true');
   stage.drawContinue(plane('print'),element);
+  attachDialogueLayout(stage);
 }

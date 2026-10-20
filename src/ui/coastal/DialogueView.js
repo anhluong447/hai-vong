@@ -2,6 +2,8 @@ import {element as el,text,button} from '../dom.js';
 import {t} from '../../shared/text.js';
 import {MotionScope} from './MotionScope.js';
 import {paperSurface,waveLayer,replaceContent} from './surfaces.js';
+import {ScreenLayoutAdapter} from './ScreenLayoutAdapter.js';
+import {screenLayout} from '../../../content/ui/screen-layout-data.js';
 
 const ICONS = {
   quill: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M6 25 Q13 8 27 3 Q29 10 23 17 L17 20 L14 24 L6 25Z" fill="currentColor" stroke="none"/><path d="M3 29 L24 7 M6 24 L13 25 M7 28 L22 28 M16 15 L20 18"/></svg>',
@@ -47,7 +49,7 @@ function resolveSpeaker(speaker, registry) {
  * notebook decorations, large anime portrait, and vertical choice cards.
  */
 export class DialogueView {
-  constructor(sprite, onClose) {
+  constructor(sprite, onClose, {layout=screenLayout}={}) {
     this.sprite = sprite;
     this.onClose = onClose;
     this.onContinue = null;
@@ -131,7 +133,11 @@ export class DialogueView {
 
     this.motion = new MotionScope(this.node);
     this.key = null;
+    this.layoutAdapter=new ScreenLayoutAdapter(this.node,'dialogue');
+    this.setLayout(layout);
   }
+
+  setLayout(layout) { return this.layoutAdapter.apply(layout); }
 
   handleClose() {
     if (typeof this.onClose === 'function') this.onClose();
@@ -263,9 +269,11 @@ export class DialogueView {
       }
     }
     this.key = key;
+    this.layoutAdapter.apply(this.layoutAdapter.layout);
   }
 
   dispose() {
+    this.layoutAdapter.dispose();
     this.motion.dispose();
     this.sprite.clear();
   }

@@ -9,8 +9,8 @@ export class GameStage {
     this.viewport=el('div',{class:'game-viewport'},this.node);
     app.append(this.viewport);
     this.resize=()=>{
-      const vw=window.innerWidth||this.viewport.clientWidth||1672;
-      const vh=window.innerHeight||this.viewport.clientHeight||941;
+      const vw=this.viewport.clientWidth||window.innerWidth||1672;
+      const vh=this.viewport.clientHeight||window.innerHeight||941;
       const scale=Math.min(vw/1672,vh/941);
       this.node.style.setProperty('--stage-scale',scale);
     };

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "stage": {
+    "width": 1672,
+    "height": 941
+  },
+  "regions": {
+    "hud-date": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "hud-resources": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "hud-objective": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-panel": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-portrait": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    },
+    "dialogue-choices": {
+      "x": 0,
+      "y": 0,
+      "scaleX": 1,
+      "scaleY": 1
+    }
+  }
+}
