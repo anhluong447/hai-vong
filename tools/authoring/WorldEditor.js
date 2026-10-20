@@ -6,6 +6,7 @@ import {SCENES,PREFABS,KNOWN_REFS,SCENE_SOURCE_HASHES} from '../../content/maps/
 import {worldMetrics,gridToPixel,actorFoot,clientToGrid,pickHeight} from '../../content/world/metrics.js';
 import {WorldDocument} from './WorldDocument.js';
 import {SourceSaveClient} from './SourceSaveClient.js';
+import {TileMapEditor} from './TileMapEditor.js';
 
 const text=id=>t(`authoring.world.${id}`);
 export class WorldEditor{
@@ -17,10 +18,12 @@ export class WorldEditor{
   const palette=root.querySelector('#world-palette');for(const [prefab,ids] of [['prop',KNOWN_REFS.assets],['npc',KNOWN_REFS.sprites.filter(id=>id!=='khue')]])for(const id of ids){const option=document.createElement('option');option.value=`${prefab}:${id}`;option.textContent=`${prefab} / ${id}`;palette.append(option);}
   const toolbar=root.querySelector('#world-toolbar');for(const action of ['edit','play','undo','redo','export','import','draftSave','draftRestore','sourceSave']){const button=this.button(action,()=>this.action(action));button.dataset.action=action;toolbar.append(button);}
   root.querySelector('#world-palette-actions').append(this.button('spawn',()=>this.spawn()),this.button('delete',()=>this.remove()));
-  this.listen(root.querySelector('#world-import'),'change',async event=>{const file=event.target.files[0],target=this.document;if(this.drag)this.cancel();if(file)try{const text=await file.text();if(this.disposed)return;if(this.drag)this.cancel();target.importJSON(text);}catch(error){this.reportError(error);}event.target.value='';});
+  this.listen(root.querySelector('#world-import'),'change',async event=>{const file=event.target.files[0],target=this.document;this.cancel();if(file)try{const text=await file.text();if(this.disposed)return;this.cancel();target.importJSON(text);}catch(error){this.reportError(error);}event.target.value='';});
+  this.editLayer='entities';this.tileEditor=new TileMapEditor(this);
   this.listen(root,'keydown',event=>this.key(event));for(const document of this.documents.values())document.subscribe(()=>this.changed());this.buildWorld();this.refresh();
  }
  get document(){return this.documents.get(this.mapId);}
+ setEditLayer(layer){if(!['entities','tiles'].includes(layer))throw new RangeError('world.tile.layer');this.cancel();this.editLayer=layer;this.tileEditor.setActive(layer==='tiles'&&this.mode==='edit');this.refresh();}
  listen(target,type,listener){target.addEventListener(type,listener,{signal:this.abort.signal});}
  button(id,action){const button=document.createElement('button');button.type='button';button.textContent=text(id);this.listen(button,'click',()=>{try{action();}catch(error){this.reportError(error);}});return button;}
  notice(id){this.status.textContent=text(id);}
@@ -32,20 +35,21 @@ export class WorldEditor{
   this.world.canvas.setAttribute('aria-label',text('canvas'));
   this.world.onBeforeEnter=(id,spawn)=>this.switchMap(id,spawn);if(position?.mapId===this.mapId)this.world.restore(position);this.world.setEditing(this.mode==='edit');
   this.overlay=document.createElement('canvas');this.overlay.className='world-grid-overlay';this.overlay.setAttribute('aria-label',text('selected'));this.overlay.tabIndex=0;this.host.append(this.overlay);this.overlay.hidden=this.mode!=='edit';
-  this.overlayAbort?.abort();this.overlayAbort=new AbortController();const signal=this.overlayAbort.signal;this.overlay.addEventListener('pointerdown',event=>this.down(event),{signal});this.overlay.addEventListener('pointermove',event=>this.move(event),{signal});this.overlay.addEventListener('pointerup',event=>this.up(event),{signal});this.overlay.addEventListener('pointercancel',()=>this.cancel(),{signal});this.overlay.addEventListener('lostpointercapture',()=>{if(this.drag)this.cancel();},{signal});
+  this.overlayAbort?.abort();this.overlayAbort=new AbortController();const signal=this.overlayAbort.signal;this.overlay.addEventListener('pointerdown',event=>this.down(event),{signal});this.overlay.addEventListener('pointermove',event=>this.move(event),{signal});this.overlay.addEventListener('pointerup',event=>this.up(event),{signal});this.overlay.addEventListener('pointercancel',()=>this.cancel(),{signal});this.overlay.addEventListener('lostpointercapture',()=>{this.cancel();},{signal});
   this.world.onFrame=()=>{this.world.hint.textContent=text(this.mode==='edit'?'editHint':'playHint');this.drawOverlay();};
  }
- changed(){if(!this.world)return;this.world.replaceMapCatalog(this.catalog());this.world.draw(0);this.refresh();if(!this.saving)this.status.textContent=t(this.document.dirty?'authoring.dirty':'authoring.world.ready');}
- switchMap(id,spawn){if(this.drag)this.cancel();this.mapId=id;this.root.querySelector('#world-map').value=id;this.selection=null;this.world.replaceMapCatalog(this.catalog());this.world.enter(id,spawn||this.world.mapCatalog[id].spawn);this.refresh();}
- setMode(mode){if(this.drag)this.cancel();this.mode=mode;if(mode==='play')this.world.restore(this.world.snapshot());this.world.setEditing(mode==='edit');this.overlay.hidden=mode!=='edit';this.refresh();if(mode==='play')this.world.canvas.focus();}
+ changed(){if(!this.world)return;this.tileEditor?.cancel();this.world.replaceMapCatalog(this.catalog());this.world.draw(0);this.refresh();if(!this.saving)this.status.textContent=t(this.document.dirty?'authoring.dirty':'authoring.world.ready');}
+ switchMap(id,spawn){this.cancel();this.mapId=id;this.root.querySelector('#world-map').value=id;this.selection=null;this.world.replaceMapCatalog(this.catalog());this.world.enter(id,spawn||this.world.mapCatalog[id].spawn);this.refresh();}
+ setMode(mode){this.cancel();this.mode=mode;if(mode==='play')this.world.restore(this.world.snapshot());this.world.setEditing(mode==='edit');this.overlay.hidden=mode!=='edit';this.refresh();if(mode==='play')this.world.canvas.focus();}
  select(id){this.selection=[...this.document.draft.objects,...this.document.draft.npcs].some(o=>o.id===id)?id:null;this.refresh();this.world.draw(0);}
  entity(){return[...this.document.draft.objects,...this.document.draft.npcs].find(o=>o.id===this.selection);}
  point(event){return clientToGrid({x:event.clientX,y:event.clientY},this.world.canvas.getBoundingClientRect(),this.world.canvas.width,this.world.scale,this.world.camera);}
- down(event){if(this.mode!=='edit'||!this.world.ready)return;event.preventDefault();const p=this.point(event),entities=[...this.world.map.objects,...this.world.map.npcs].sort((a,b)=>b.y-a.y),hit=entities.find(o=>o.x===p.x&&p.y<=o.y&&p.y>=o.y-pickHeight(o,o.sprite?this.world.sprite(o.sprite):null)+1);this.select(hit?.id);if(!hit)return;this.document.begin();this.drag={id:hit.id,pointerId:event.pointerId,start:p,origin:{x:hit.x,y:hit.y}};this.overlay.setPointerCapture(event.pointerId);this.overlay.focus();}
- move(event){if(!this.drag||event.pointerId!==this.drag.pointerId)return;const p=this.point(event),drag=this.drag;try{this.document.updateEntity(drag.id,{x:drag.origin.x+p.x-drag.start.x,y:drag.origin.y+p.y-drag.start.y});this.notice('ready');}catch(error){this.reportError(error);}}
- up(event){if(!this.drag||event.pointerId!==this.drag.pointerId)return;const id=this.drag.pointerId;this.drag=null;this.document.commit();if(this.overlay.hasPointerCapture(id))this.overlay.releasePointerCapture(id);}
- cancel(){const pointerId=this.drag?.pointerId;this.drag=null;this.document.cancel();if(pointerId!==undefined&&this.overlay.hasPointerCapture(pointerId))this.overlay.releasePointerCapture(pointerId);}
+ down(event){if(this.tileEditor.handlePointerDown(event))return;if(this.mode!=='edit'||!this.world.ready)return;event.preventDefault();const p=this.point(event),entities=[...this.world.map.objects,...this.world.map.npcs].sort((a,b)=>b.y-a.y),hit=entities.find(o=>o.x===p.x&&p.y<=o.y&&p.y>=o.y-pickHeight(o,o.sprite?this.world.sprite(o.sprite):null)+1);this.select(hit?.id);if(!hit)return;this.document.begin();this.drag={id:hit.id,pointerId:event.pointerId,start:p,origin:{x:hit.x,y:hit.y}};this.overlay.setPointerCapture(event.pointerId);this.overlay.focus();}
+ move(event){if(this.tileEditor.handlePointerMove(event))return;if(!this.drag||event.pointerId!==this.drag.pointerId)return;const p=this.point(event),drag=this.drag;try{this.document.updateEntity(drag.id,{x:drag.origin.x+p.x-drag.start.x,y:drag.origin.y+p.y-drag.start.y});this.notice('ready');}catch(error){this.reportError(error);}}
+ up(event){if(this.tileEditor.handlePointerUp(event))return;if(!this.drag||event.pointerId!==this.drag.pointerId)return;const id=this.drag.pointerId;this.drag=null;this.document.commit();if(this.overlay.hasPointerCapture(id))this.overlay.releasePointerCapture(id);}
+ cancel(){this.tileEditor?.cancel();const pointerId=this.drag?.pointerId;this.drag=null;this.document.cancel();if(pointerId!==undefined&&this.overlay.hasPointerCapture(pointerId))this.overlay.releasePointerCapture(pointerId);}
  key(event){
+  if(this.tileEditor.handleKey(event))return;
   if(event.key==='Escape'&&this.drag){event.preventDefault();this.cancel();return;}
   if(this.mode!=='edit'||/INPUT|TEXTAREA|SELECT/.test(event.target.tagName))return;
   if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='z'){event.preventDefault();this.cancel();event.shiftKey?this.document.redo():this.document.undo();return;}
@@ -56,6 +60,7 @@ export class WorldEditor{
  spawn(){if(this.mode!=='edit')return;const [prefab,visual]=this.root.querySelector('#world-palette').value.split(':');const {width,height}=this.document.draft;const p={x:Math.max(1,Math.min(width-2,this.world.player.x+1)),y:Math.max(1,Math.min(height-2,this.world.player.y))};this.select(this.document.spawn(prefab,visual,p));}
  remove(){if(this.mode==='edit'&&this.selection){this.document.deleteEntity(this.selection);this.selection=null;this.refresh();}}
  refresh(){
+  this.tileEditor.setActive(this.editLayer==='tiles'&&this.mode==='edit');
   const list=this.root.querySelector('#world-entities');list.replaceChildren();for(const entity of [...this.document.draft.objects,...this.document.draft.npcs]){const option=document.createElement('option');option.value=entity.id;option.textContent=entity.id;list.append(option);}list.value=this.selection||'';
   for(const button of this.root.querySelectorAll('[data-action]')){if(['edit','play'].includes(button.dataset.action))button.setAttribute('aria-pressed',String(button.dataset.action===this.mode));if(['undo','redo'].includes(button.dataset.action))button.disabled=this.mode!=='edit';}
   const inspector=this.root.querySelector('#world-inspector');inspector.replaceChildren();const entity=this.entity();if(!entity){inspector.textContent=text('noSelection');return;}const selected=document.createElement('p');selected.className='world-selected';selected.textContent=entity.id;inspector.append(selected);
@@ -64,13 +69,14 @@ export class WorldEditor{
   const label=document.createElement('label'),span=document.createElement('span'),area=document.createElement('textarea');span.textContent=text('footprint');area.value=JSON.stringify(o.footprint||[[0,0]]);area.dataset.field='footprint';area.disabled=this.mode!=='edit';label.append(span,area);inspector.append(label);area.addEventListener('change',()=>{try{this.document.updateEntity(entity.id,{overrides:{footprint:JSON.parse(area.value)}});}catch(error){this.reportError(error);}});
  }
  drawOverlay(){
-  if(!this.overlay||this.mode!=='edit'||!this.world.ready)return;const world=this.world,rect=world.canvas.getBoundingClientRect(),hostRect=this.host.getBoundingClientRect(),overlay=this.overlay;overlay.width=world.canvas.width;overlay.height=world.canvas.height;overlay.style.width=`${rect.width}px`;overlay.style.height=`${rect.height}px`;overlay.style.left=`${rect.left-hostRect.left-this.host.clientLeft}px`;overlay.style.top=`${rect.top-hostRect.top-this.host.clientTop}px`;const ctx=overlay.getContext('2d'),tile=worldMetrics.tilePixels;ctx.lineWidth=.3;ctx.strokeStyle='#c4eee52d';for(let x=-world.camera.x%tile;x<overlay.width;x+=tile){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,overlay.height);ctx.stroke();}for(let y=-world.camera.y%tile;y<overlay.height;y+=tile){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(overlay.width,y);ctx.stroke();}
+  if(!this.overlay||this.mode!=='edit'||!this.world.ready)return;const world=this.world,rect=world.canvas.getBoundingClientRect(),hostRect=this.host.getBoundingClientRect(),overlay=this.overlay;overlay.width=world.canvas.width;overlay.height=world.canvas.height;overlay.style.width=`${rect.width}px`;overlay.style.height=`${rect.height}px`;overlay.style.left=`${rect.left-hostRect.left-this.host.clientLeft}px`;overlay.style.top=`${rect.top-hostRect.top-this.host.clientTop}px`;const ctx=overlay.getContext('2d'),tile=worldMetrics.tilePixels;ctx.lineWidth=.3;ctx.strokeStyle='#c4eee52d';if(this.editLayer!=='tiles'||this.tileEditor.showGrid){for(let x=-world.camera.x%tile;x<overlay.width;x+=tile){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,overlay.height);ctx.stroke();}for(let y=-world.camera.y%tile;y<overlay.height;y+=tile){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(overlay.width,y);ctx.stroke();}
+  }if(this.editLayer==='tiles'){this.tileEditor.draw(ctx,world);return;}
   const source=this.entity();if(!source)return;const o={...PREFABS[source.prefab],...source.overrides},sprite=o.sprite?world.sprite(o.sprite):null,foot=actorFoot(source.x,source.y),x=foot.x-world.camera.x+(o.offsetPx?.x||0),y=foot.y-world.camera.y+(o.offsetPx?.y||0),fw=sprite?.frameWidth||32,fh=sprite?.frameHeight||48,pivot=o.pivotPx||sprite?.pivot||{x:fw/2,y:fh-2};ctx.lineWidth=1;ctx.strokeStyle='#70dffa';ctx.strokeRect(x-pivot.x,y-pivot.y,fw,fh);ctx.strokeStyle='#ffcf65';ctx.strokeRect(gridToPixel(source.x)-world.camera.x,gridToPixel(source.y-pickHeight(o,sprite)+1)-world.camera.y,tile,pickHeight(o,sprite)*tile);ctx.fillStyle='#ff8b7770';for(const [dx,dy] of o.footprint||[[0,0]])ctx.fillRect(gridToPixel(source.x+dx)-world.camera.x,gridToPixel(source.y+dy)-world.camera.y,tile,tile);ctx.strokeStyle='#fff';ctx.beginPath();ctx.moveTo(x-3,y);ctx.lineTo(x+3,y);ctx.moveTo(x,y-3);ctx.lineTo(x,y+3);ctx.stroke();
  }
  async action(action){
   if(action==='sourceSave'&&this.saving)return;
   try{
-   if(this.drag)this.cancel();
+   this.cancel();
    if(action==='edit'||action==='play')this.setMode(action);
    else if(action==='undo')this.document.undo();
    else if(action==='redo')this.document.redo();
@@ -87,5 +93,5 @@ export class WorldEditor{
    }
   }catch(error){this.reportError(error);}finally{if(action==='sourceSave')this.saving=false;}
  }
- dispose(){this.disposed=true;this.cancel();this.abort.abort();this.overlayAbort?.abort();this.world.dispose();this.host.replaceChildren();}
+ dispose(){this.disposed=true;this.cancel();this.tileEditor.dispose();this.abort.abort();this.overlayAbort?.abort();this.world.dispose();this.host.replaceChildren();}
 }
