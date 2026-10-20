@@ -25,11 +25,16 @@ def run_real_time(arguments, url, profile, environment, timeout=40):
     client = None
     try:
         port_file = Path(profile) / 'DevToolsActivePort'
-        while not port_file.is_file():
+        port = None
+        while port is None:
+            try:
+                port = int(port_file.read_text().splitlines()[0])
+                break
+            except (FileNotFoundError, PermissionError, ValueError, IndexError):
+                pass  # Windows can briefly lock the file while Chrome writes it.
             if process.poll() is not None or time.monotonic() >= deadline:
                 raise RuntimeError('Chrome did not start DevTools')
             time.sleep(.05)
-        port = int(port_file.read_text().splitlines()[0])
         with urllib.request.urlopen(f'http://127.0.0.1:{port}/json/list', timeout=5) as response:
             pages = json.load(response)
         client = DevTools(next(page['webSocketDebuggerUrl'] for page in pages if page['type'] == 'page'))
@@ -44,10 +49,17 @@ def run_real_time(arguments, url, profile, environment, timeout=40):
             time.sleep(.1)
     finally:
         if client:
+            try:
+                client.call('Browser.close')
+            except (OSError, RuntimeError):
+                pass
             client.socket.close()
         if process.poll() is None:
-            process.terminate()
-            process.wait(timeout=10)
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.terminate()
+                process.wait(timeout=10)
 
 
 def main():
@@ -55,6 +67,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--url', default='http://localhost:8080/tests/index.html')
     parser.add_argument('--browser', default=r'C:\Program Files\Google\Chrome\Application\chrome.exe')
+    parser.add_argument('--profile-root', type=Path, help='Writable parent for isolated Chrome profiles, e.g. tmp/browser-tests on Windows')
     parser.add_argument('--capture', action='store_true', help='Capture the supplied URL instead of testing it')
     parser.add_argument('--output-prefix', choices=['test', 'playtest'], default='test')
     parser.add_argument('--virtual-time-budget', type=int, default=120000)
@@ -79,7 +92,9 @@ def main():
     environment = {key.upper(): value for key, value in os.environ.items()}
     # Chrome subprocesses can briefly retain cache handles after the main process
     # exits on Windows. Cleanup must not discard the completed test result.
-    with tempfile.TemporaryDirectory(prefix='press-club-test-', ignore_cleanup_errors=True) as profile:
+    if args.profile_root:
+        args.profile_root.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='press-club-test-', dir=args.profile_root, ignore_cleanup_errors=True) as profile:
         arguments = [
             args.browser, '--headless', '--disable-gpu', '--no-first-run',
             '--no-default-browser-check', f'--user-data-dir={profile}',

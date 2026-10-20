@@ -8,6 +8,8 @@ export class OverlayHost {
     this.node=el('div',{class:'coastal-overlay-host'});app.append(this.node);this.motion=new MotionScope(this.node);
     this.keydown=event=>{
       if(!this.dialog)return;
+      const localMenu=event.target.closest?.('.menu-v2');
+      if(localMenu){const delegated=new CustomEvent('coastal-menu-key',{detail:event,cancelable:true});localMenu.dispatchEvent(delegated);if(delegated.defaultPrevented)return;}
       if(event.key==='Escape'){
         event.preventDefault();event.stopImmediatePropagation();
         if(!event.repeat&&this.dismissible)this.onClose();

@@ -1,0 +1,9 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Menu refinement tests</title></head>
+<body><div id="results"></div><script type="module">
+import './menu-refinement.test.js';
+import {runAll} from './harness.js';
+const root=document.querySelector('#results');
+const results=await runAll({onProgress:name=>root.textContent=name});root.replaceChildren();
+for(const r of results){const p=document.createElement('pre');p.className=r.ok?'ok':'bad';p.textContent=r.name+(r.error?'\n'+r.error:'');root.append(p);}
+const summary=document.createElement('p');summary.className=results.every(r=>r.ok)?'ok':'bad';summary.textContent=`${results.filter(r=>r.ok).length}/${results.length} passed`;root.append(summary);window.testResults=results;
+</script></body></html>

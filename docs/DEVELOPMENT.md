@@ -3,6 +3,14 @@
 The project remains plain HTML/CSS, Canvas and ES modules. Python serves it; Chrome
 or Edge runs the browser tests. Node is optional for the non-browser suite.
 
+The six-tab visual/keyboard refinement has a [review](ui-reviews/menu-refinement/README.md)
+and focused suite at `tests/menu-refinement.html`. Use
+`python tools/review_menu_refinement.py --base-url http://127.0.0.1:8096` for native
+captures and actual CDP key input in `pixel.html`. On Windows, the browser runner
+accepts `--profile-root tmp/browser-tests` to avoid inaccessible system Temp profiles.
+Chrome still needs permission to create its local IPC channels. Run captures and
+browser tests sequentially, then compare baselines from the main-suite log.
+
 For the current Hồ sơ refinement, see [visual review and staged captures](ui-reviews/dossier-polish/README.md).
 Use `python tools/review_dossier.py --base-url http://127.0.0.1:8088` for native
 runtime/fixture captures and `python tools/check_dossier_assets.py` for retained

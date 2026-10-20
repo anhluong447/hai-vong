@@ -22,6 +22,13 @@ fields. `dossier-fixtures.js` is imported only by authoring/tests. New visual tu
 lives in `styles/coastal/dossier-theme.css`; the native view and single effects
 clock remain in place. See the [dossier review](ui-reviews/dossier-polish/README.md).
 
+Menu refinement (2026-10-20) shares those materials across all six tabs through
+`styles/coastal/menu-refinement.css`. `MenuV2Keyboard` owns menu-local region,
+tree and spatial equipment navigation; `OverlayHost` delegates menu keys through
+`coastal-menu-key` while retaining modal close/lock behavior. Native item SVG
+symbols are mapped by stable ID in `content/ui/menu-v2-media.js`; they do not add
+save fields or change gameplay tuning. See the [menu review](ui-reviews/menu-refinement/README.md).
+
 Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; runtime has no build
 step. Art authoring uses the offline asset builder described below. Two explicit rulesets remain: the original formula sandbox and the newer
 gameplay/pixel prototype. Their calendars, scores and state schemas are distinct.

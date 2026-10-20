@@ -2,6 +2,8 @@ import {element as el,text,button} from '../dom.js';
 import {t} from '../../shared/text.js';
 import {tabs,groups,branches} from '../../../content/ui/menu-v2.js';
 import {MenuV2Effects} from './MenuV2Effects.js';
+import {MenuV2Keyboard} from './MenuV2Keyboard.js';
+import {itemMedia,slotMedia,branchColors} from '../../../content/ui/menu-v2-media.js';
 
 const asset=file=>new URL(`../../../assets/${file}`,import.meta.url).href;
 const label=id=>t(`menu.v2.${id}`);
@@ -24,10 +26,20 @@ const paths={cases:'M7 3H21L29 11V33H7Z M21 3V11H29 M12 17H24 M12 23H24 M12 28H2
   hand:'M14 2H24V10M14 28V36H24V28 M19 9A10 10 0 1 0 19 29A10 10 0 1 0 19 9 M19 13V20L24 23',
   feet:'M5 6H15L19 21L32 25Q35 26 34 32H4V23Z M4 28H34',
   accessory1:'M8 3H29V34H8Z M5 9H11 M5 17H11 M5 25H11 M15 11H24',
-  accessory2:'M10 3H28V34H10Z M14 8H24V16H14Z M19 21A4 4 0 1 0 19 29A4 4 0 1 0 19 21'};
+  accessory2:'M10 3H28V34H10Z M14 8H24V16H14Z M19 21A4 4 0 1 0 19 29A4 4 0 1 0 19 21',
+  lock:'M9 15V10A9 9 0 0 1 27 10V15 M6 15H30V34H6Z M18 23V28',
+  heart:'M18 33C10 27 2 22 2 13C2 2 14 0 18 9C22 0 34 2 34 13C34 22 26 27 18 33Z',
+  save:'M5 3H27L33 9V34H5Z M11 3V14H26V3 M11 34V22H27V34',
+  load:'M4 14H32V34H4Z M18 25V3 M10 11L18 3L26 11',
+  sound:'M3 14H10L20 5V32L10 23H3Z M26 11Q34 18 26 26',
+  resolution:'M3 4H33V27H3Z M18 27V34 M10 34H26',
+  graphics:'M3 4H33V33H3Z M3 28L13 16L21 25L27 19L33 27 M25 10A3 3 0 1 0 25 16A3 3 0 1 0 25 10'};
 function icon(id){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 38 38');svg.setAttribute('aria-hidden','true');const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',paths[id]||paths.documents);svg.append(path);return svg;}
 function folioLabel(key,kind,mark){return el('h3',{class:`mv-folio-label mv-folio-${kind}`},[...(mark?[icon(mark)]:[]),text('span',label(key))]);}
 function editorialIcon(id){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox',id==='logo-waves'?'0 0 240 35':'0 0 40 40');svg.setAttribute('class','mv-editorial-icon');svg.setAttribute('aria-hidden','true');const use=document.createElementNS(svg.namespaceURI,'use');use.setAttribute('href',asset('ui/dossier-polish/editorial-icons.svg')+`#${id}`);svg.append(use);return svg;}
+function itemArt(id,className=''){const media=itemMedia[id],svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 240 200');svg.setAttribute('class',`mv-item-art ${className}`);svg.setAttribute('aria-hidden','true');if(media){const use=document.createElementNS(svg.namespaceURI,'use');use.setAttribute('href',`${asset(media.file)}#${media.symbol}`);svg.append(use);}return svg;}
+function region(node,id){node.dataset.menuRegion=id;node.setAttribute('tabindex','-1');return node;}
+function decoratePaper(node){node.classList.add('mv-editorial-paper');return node;}
 function waves(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 1672 941');svg.setAttribute('class','mv-waves');svg.setAttribute('aria-hidden','true');
   const defs=document.createElementNS(svg.namespaceURI,'defs'),pattern=document.createElementNS(svg.namespaceURI,'pattern'),texture=document.createElementNS(svg.namespaceURI,'image');
   pattern.id='mv-wave-grain';pattern.setAttribute('patternUnits','userSpaceOnUse');pattern.setAttribute('width','560');pattern.setAttribute('height','560');
@@ -41,6 +53,7 @@ export class MenuV2View{
     Object.assign(this,{registry,onClose,onAction,onTravel,onSave,onLoad,onConfirm,debug});
     this.activeTab='cases';this.group='main';this.selected={};this.settingsPage='basic';
     this.nav=el('nav',{class:'game-menu-nav mv-nav',role:'tablist','aria-label':label('choose'),'aria-orientation':'vertical'});
+    region(this.nav,'navigation');
     this.tabs=tabs.map(id=>{const node=button('',()=>this.selectTab(id),'mv-tab');node.dataset.tab=id;node.dataset.focusKey=`v2-tab/${id}`;node.id=`v2-tab-${id}`;node.setAttribute('role','tab');node.setAttribute('aria-controls','v2-content');node.append(editorialIcon(id),text('span',label(id)));this.nav.append(node);return node;});
     this.content=el('main',{class:'game-menu-content mv-content',id:'v2-content',role:'tabpanel',tabindex:'0'});
     this.resources=el('div',{class:'mv-resources'});this.status=text('p','','mv-status');this.status.setAttribute('role','status');
@@ -51,31 +64,25 @@ export class MenuV2View{
       el('div',{class:'mv-brand','data-asset-status':'logo-placeholder'},[text('strong',t('ui.replica.menu.brand.1')),image(asset('ui/dossier-polish/logo-stamp-placeholder.svg'),'mv-logo-placeholder'),editorialIcon('logo-waves')]),this.nav,this.resources,this.content,
       image(asset('ui/coastal-replica/v3/exports/foreground-left-v2.png'),'mv-foliage mv-flowers'),
       image(asset('ui/coastal-replica/v1/exports/harbor-print.svg'),'mv-harbor'),
-      el('footer',{class:'mv-footer'},[this.status,el('span',{class:'mv-keyhint'},[text('kbd',label('enter')),text('span',label('choose'))]),close])
+      el('footer',{class:'mv-footer'},[this.status,text('span',t('menu.refinement.regions'),'mv-region-hint'),el('span',{class:'mv-keyhint'},[text('kbd',label('enter')),text('span',label('choose'))]),close])
     ]);
     this.effects=new MenuV2Effects(this.node);
-    this.keydown=event=>{
-      if(this.activeTab==='skills'&&event.target.closest('.mv-tree')&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)){
-        event.preventDefault();event.stopImmediatePropagation();const nodes=this.model.skills,current=nodes.find(n=>n.id===event.target.dataset.skill)||nodes[0];
-        const column=Math.max(0,Math.min(branches.length-1,current.column+(event.key==='ArrowRight'?1:event.key==='ArrowLeft'?-1:0)));
-        const rank=Math.max(1,Math.min(5,current.rank+(event.key==='ArrowDown'?1:event.key==='ArrowUp'?-1:0)));
-        const next=nodes.find(n=>n.column===column&&n.rank===rank)||current;
-        this.pick('skill',next.id);const target=this.content.querySelector(`[data-skill="${next.id}"]`);target.focus({preventScroll:true});target.scrollIntoView({block:'nearest',inline:'nearest'});return;
-      }
-      if(this.activeTab!=='map'||!this.content.contains(event.target)||/INPUT|SELECT|TEXTAREA/.test(event.target.tagName))return;
-      const keys={ArrowLeft:-1,ArrowUp:-1,a:-1,w:-1,ArrowRight:1,ArrowDown:1,d:1,s:1};
-      if(Object.hasOwn(keys,event.key)){event.preventDefault();event.stopImmediatePropagation();this.stepPlace(keys[event.key]);}
-    };
-    this.node.addEventListener('keydown',this.keydown,true);
+    this.keyboard=new MenuV2Keyboard(this);
   }
   open(){this.selected={};this.group='main';this.selectTab('cases');}
   update(model){this.model=model;this.render();}
-  selectTab(id){if(!tabs.includes(id))return;this.activeTab=id;this.picker=false;this.assigning=false;this.render();}
-  back(){if(this.picker||this.assigning){this.picker=false;this.assigning=false;this.render();return true;}return false;}
+  selectTab(id){if(!tabs.includes(id))return;this.activeTab=id;this.picker=false;delete this.selected.item;this.assigning=false;this.render();}
+  back(){
+    if(this.picker){this.picker=false;delete this.selected.item;this.render();this.keyboard.focusKey(`slot/${this.selected.slot}`);return true;}
+    if(this.assigning){this.assigning=false;this.render();return true;}
+    if(this.activeTab==='skills'&&this.content.querySelector('.mv-skill-detail')?.contains(document.activeElement)){this.keyboard.focusKey(`skill/${this.selected.skill}`);return true;}
+    return false;
+  }
+  openPicker(){this.picker=true;delete this.selected.item;this.render();const picker=this.content.querySelector('.mv-item-picker');this.keyboard.focus(picker?.querySelector('button:not(:disabled)')||this.content.querySelector('[data-focus-key="gear/cancel"]'));}
   act(action){this.onAction(action);}
   render(){
     if(!this.model)return;
-    const token=document.activeElement?.dataset?.focusKey,owned=this.content.contains(document.activeElement);
+    const token=document.activeElement?.dataset?.focusKey,owned=this.content.contains(document.activeElement),oldRegion=document.activeElement?.closest('[data-menu-region]')?.dataset.menuRegion;
     const treeScroll=this.content.querySelector('.mv-tree')?.scrollLeft||0;
     const oldRows=this.content.querySelector('.mv-quest-rows'),listScroll=oldRows?.scrollTop||0;
     const oldQuest=this.content.querySelector('.mv-quest-rows .active')?.dataset.focusKey,paperScroll=this.content.querySelector('.mv-dossier')?.scrollTop||0;
@@ -85,13 +92,13 @@ export class MenuV2View{
     this.resources.replaceChildren(text('small',t('menu.dossier.date',{weekday:this.model.weekday||t('menu.v2.day',{day:this.model.day,phase:this.model.phaseText}),phase:this.model.phaseText})),
       el('div',{class:'mv-energy-row'},[editorialIcon('lightning'),text('strong',`${this.model.energy}/${this.model.maxEnergy}`)]),text('span',t('ui.replica.hud.resources.2',{money:this.model.money.toLocaleString('vi-VN')}),'mv-money'));
     const heading=text('h1',label(this.activeTab),'mv-heading');
-    this.content.replaceChildren(this.activeTab==='cases'?el('div',{class:'mv-dossier-heading'},[editorialIcon('gull'),heading,editorialIcon('document-stamp')]):heading);
+    this.content.replaceChildren(el('div',{class:`mv-dossier-heading mv-title-${this.activeTab}`},[editorialIcon('gull'),heading,editorialIcon(this.activeTab==='cases'?'document-stamp':this.activeTab)]));
     ({cases:()=>this.renderCases(),skills:()=>this.renderSkills(),equipment:()=>this.renderEquipment(),team:()=>this.renderTeam(),map:()=>this.renderMap(),settings:()=>this.renderSettings()})[this.activeTab]();
     const tree=this.content.querySelector('.mv-tree');if(tree)tree.scrollLeft=treeScroll;
     const rows=this.content.querySelector('.mv-quest-rows');if(rows&&rows.dataset.group===oldRows?.dataset.group)rows.scrollTop=listScroll;
     const currentQuest=this.content.querySelector('.mv-quest-rows .active')?.dataset.focusKey;
     if(currentQuest&&currentQuest===oldQuest)this.content.querySelector('.mv-dossier').scrollTop=paperScroll;
-    if(owned){const next=[...this.content.querySelectorAll('[data-focus-key]')].find(n=>n.dataset.focusKey===token);(next||this.content).focus({preventScroll:true});}
+    if(owned){const next=[...this.content.querySelectorAll('[data-focus-key]')].find(n=>n.dataset.focusKey===token&&!n.disabled);(next||this.content.querySelector(`[data-menu-region="${oldRegion}"]`)||this.content).focus({preventScroll:true});}
   }
   action(labelText,action,disabled=false){return button(labelText,()=>this.act(action),'mv-brush',disabled);}
   setNotice(value,{debug=false}={}){this.status.textContent=value;this.status.hidden=debug&&!this.debug;this.status.dataset.debug=String(debug);}
@@ -99,11 +106,14 @@ export class MenuV2View{
   stats(list){return el('dl',{class:'mv-stats'},list.flatMap(stat=>[el('dt',{},[icon(stat.id),text('span',stat.name)]),text('dd',String(stat.value))]));}
   renderCases(){
     const list=el('div',{class:'mv-quest-list'}),filter=el('div',{class:'mv-filters'});
+    region(filter,'quest-filters');
     groups.forEach(id=>{const b=button(label(id),()=>{this.group=id;this.assigning=false;this.render();},this.group===id?'active':'');b.setAttribute('aria-pressed',String(this.group===id));b.dataset.focusKey=`group/${id}`;filter.append(b);});list.append(filter);
     const matches=this.model.quests.filter(q=>q.kind===this.group),current=matches.find(q=>q.id===this.selected.quest)||matches[0];
     const rows=el('div',{class:'mv-quest-rows','data-group':this.group});list.append(rows);
+    region(rows,'quest-list');
     matches.forEach(q=>{const b=button('',()=>{this.assigning=false;this.pick('quest',q.id);},`mv-row ${q===current?'active':''}`);b.append(text('span',q.kind==='main'?'!':'','mv-quest-mark'),text('span',q.title),icon('cases'));b.dataset.kind=q.kind;b.dataset.focusKey=`quest/${q.id}`;b.setAttribute('title',q.title);b.setAttribute('aria-pressed',String(q===current));rows.append(b);});
     const detail=paper();detail.classList.add('mv-dossier');
+    region(detail,'quest-detail');
     if(!current){detail.append(text('p',label('empty')));}else{
       const summary=el('div',{class:'mv-dossier-summary'},[text('h2',current.title),text('p',current.description,'mv-description')]);
       const intro=el('header',{class:'mv-dossier-intro'},summary);
@@ -136,21 +146,28 @@ export class MenuV2View{
     this.content.append(el('div',{class:'mv-cases-layout'},[list,stack]));
   }
   renderSkills(){
-    const board=el('div',{class:'mv-tree','data-focus-key':'tree',tabindex:'0'}),tree=el('div',{class:'mv-tree-inner'});
-    branches.forEach(stat=>{const nodes=this.model.skills.filter(n=>n.stat===stat),column=el('section',{class:'mv-branch'},text('h3',nodes[0]?.branch||''));
-      nodes.forEach(n=>{const b=button('',()=>this.pick('skill',n.id),`mv-skill ${n.learned?'learned':''} ${n.locked?'locked':''} ${this.selected.skill===n.id?'selected':''}`);b.append(icon(n.stat),text('span',String(n.rank)));b.setAttribute('aria-label',n.name);b.dataset.focusKey=`skill/${n.id}`;b.dataset.skill=n.id;column.append(b);});tree.append(column);});board.append(tree);
     const n=this.model.skills.find(n=>n.id===this.selected.skill)||this.model.skills[0];
-    const detail=paper(text('p',t('menu.v2.skillPoints',{points:this.model.points}),'mv-eyebrow'),el('div',{class:'mv-skill-art'},icon(n.stat)),text('h2',n.name),text('p',n.description),
-      text('p',n.locked?label('skillLocked'):n.learned?label('learned'):''),this.action(n.learned?label('learned'):t('menu.v2.learn',{cost:n.cost}),{type:'learnSkill',id:n.id},n.disabled));
-    this.content.append(el('div',{class:'mv-skills-layout'},[board,detail,text('small',label('skillKeys'),'mv-tree-hint')]));
+    this.selected.skill=n.id;
+    const board=region(el('div',{class:'mv-tree','data-focus-key':'tree'}),'skill-tree'),tree=el('div',{class:'mv-tree-inner'});
+    branches.forEach(stat=>{const nodes=this.model.skills.filter(n=>n.stat===stat),column=el('section',{class:'mv-branch'},el('h3',{},[icon(stat),text('span',nodes[0]?.branch||'')]));
+      column.style.setProperty('--branch-color',branchColors[stat]);
+      nodes.forEach(node=>{const b=button('',()=>this.pick('skill',node.id),`mv-skill ${node.learned?'learned':''} ${node.locked?'locked':''} ${n.id===node.id?'selected':''}`);b.append(icon(node.locked?'lock':node.learned?'check':node.stat),text('span',String(node.rank)));b.setAttribute('aria-label',node.name);b.setAttribute('aria-pressed',String(n.id===node.id));b.dataset.focusKey=`skill/${node.id}`;b.dataset.skill=node.id;column.append(b);});tree.append(column);});board.append(tree);
+    const learn=this.action(n.learned?label('learned'):t('menu.v2.learn',{cost:n.cost}),{type:'learnSkill',id:n.id},n.disabled);learn.dataset.focusKey=`skill/${n.id}/learn`;
+    const detail=region(decoratePaper(paper(el('div',{class:'mv-skill-art'},[image(asset('ui/dossier-polish/field-photo.png'),'mv-skill-photo'),icon(n.stat)]),text('h2',n.name),text('p',n.description),
+      text('p',n.locked?label('skillLocked'):n.learned?label('learned'):t('menu.refinement.skillCost',{cost:n.cost}),'mv-skill-state'),learn)),'skill-detail');detail.classList.add('mv-skill-detail');
+    this.content.append(el('div',{class:'mv-skills-layout'},[board,detail,el('small',{class:'mv-tree-hint'},[text('span',label('skillKeys')),text('span',t('menu.refinement.skillAction'))])]));
+    this.content.querySelector('.mv-dossier-heading').append(text('p',t('menu.v2.skillPoints',{points:this.model.points}),'mv-points-badge'));
   }
   renderEquipment(){
     const current=this.model.equipment.find(s=>s.id===this.selected.slot)||this.model.equipment[0],equipped=this.model.items.find(i=>i.id===current.item);
-    const grid=el('div',{class:'mv-slots'});
-    this.model.equipment.forEach(slot=>{const item=this.model.items.find(i=>i.id===slot.item),b=button('',()=>{this.picker=false;this.pick('slot',slot.id);},`mv-slot ${slot.id===current.id?'selected':''}`);b.append(text('span',label(slot.id)),icon(slot.id==='body'?'equipment':slot.id),text('small',item?.name||label('emptySlot')));b.dataset.focusKey=`slot/${slot.id}`;grid.append(b);});
-    const detail=paper(text('h2',equipped?.name||label(current.id)),text('p',equipped?`${equipped.statName} +${equipped.bonus}`:label('emptySlot')));
-    if(!this.picker)detail.append(text('h3',label('stats')),this.stats(this.model.stats));
-    detail.append(button(label(this.picker?'cancel':'changeGear'),()=>{this.picker=!this.picker;this.render();},'mv-brush'));
+    this.selected.slot=current.id;
+    const grid=region(el('div',{class:'mv-slots'}),'gear-slots');
+    this.model.equipment.forEach(slot=>{const item=this.model.items.find(i=>i.id===slot.item),b=button('',()=>{this.picker=false;this.pick('slot',slot.id);},`mv-slot ${slot.id===current.id?'selected':''} ${item?'occupied':'unoccupied'}`);b.append(text('span',label(slot.id)),itemArt(item?.id||slotMedia[slot.id]),text('small',item?.name||label('emptySlot')));b.dataset.focusKey=`slot/${slot.id}`;b.dataset.slot=slot.id;b.setAttribute('aria-pressed',String(slot.id===current.id));grid.append(b);});
+    const preview=(this.picker?this.model.items.find(i=>i.id===this.selected.item):null)||equipped;
+    const detail=region(decoratePaper(paper(itemArt(preview?.id||slotMedia[current.id],'mv-item-hero'),text('h2',preview?.name||label(current.id)),text('p',preview?t('menu.refinement.itemBonus',{name:preview.statName,bonus:preview.bonus}):label('emptySlot'),'mv-item-bonus'))),'gear-detail');
+    if(!this.picker)detail.append(folioLabel('stats','tape'),this.stats(this.model.stats));
+    const change=button(label(this.picker?'cancel':'changeGear'),()=>{if(this.picker)this.back();else this.openPicker();},'mv-brush');change.dataset.focusKey=this.picker?'gear/cancel':'gear/change';
+    detail.append(change);
     if(this.picker){const items=this.model.items.filter(i=>i.slot===(current.id.startsWith('accessory')?'accessory':current.id));
       const picker=el('div',{class:'mv-item-picker'});items.forEach(i=>{
         const comparisons=this.model.stats.filter(s=>s.id===i.stat||s.id===equipped?.stat).map(stat=>{
@@ -158,23 +175,27 @@ export class MenuV2View{
           return t('menu.v2.compare',{name:stat.name,before:stat.value,after});
         });
         const used=this.model.equipment.some(s=>s.id!==current.id&&s.item===i.id);
-        picker.append(button(i.name,()=>{this.picker=false;this.act({type:'equip',slot:current.id,id:i.id});},'mv-item',used||this.model.ended),...comparisons.map(line=>text('small',line)));
-      });picker.append(this.action(label('unequip'),{type:'equip',slot:current.id,id:null},!current.item||this.model.ended));detail.append(picker);}
+        const choose=button('',()=>{this.picker=false;delete this.selected.item;this.act({type:'equip',slot:current.id,id:i.id});this.keyboard.focusKey(`slot/${current.id}`);},'mv-item',used||this.model.ended);
+        choose.append(itemArt(i.id),el('span',{},[text('strong',i.name),...comparisons.map(line=>text('small',line))]));choose.dataset.item=i.id;choose.dataset.focusKey=`item/${i.id}`;
+        choose.addEventListener('focus',()=>{this.selected.item=i.id;detail.querySelector('.mv-item-hero').replaceWith(itemArt(i.id,'mv-item-hero'));detail.querySelector('h2').textContent=i.name;detail.querySelector('.mv-item-bonus').textContent=t('menu.refinement.itemBonus',{name:i.statName,bonus:i.bonus});});picker.append(choose);
+      });const unequip=button(label('unequip'),()=>{this.picker=false;delete this.selected.item;this.act({type:'equip',slot:current.id,id:null});this.keyboard.focusKey(`slot/${current.id}`);},'mv-brush',!current.item||this.model.ended);unequip.dataset.focusKey='gear/unequip';picker.append(unequip);if(!items.length)picker.prepend(text('p',label('empty')));detail.append(picker);}
     this.content.append(el('div',{class:'mv-equipment-layout'},[grid,detail]));
   }
   portrait(id,className){const src=this.registry?.characters?.[id]?.expressions?.neutral;return src?image(asset(`dialogue/${src}`),className):el('div',{class:className},icon('team'));}
   renderTeam(){
     const p=this.model.people.find(p=>p.id===this.selected.person)||this.model.people[0];if(!p){this.content.append(paper(text('p',label('empty'))));return;}
-    const strip=el('nav',{class:'mv-roster','aria-label':label('team')});this.model.people.forEach(person=>{const b=button('',()=>this.pick('person',person.id),person.id===p.id?'active':'');b.append(this.portrait(person.id,'mv-thumb'),text('span',person.name.split(' ').at(-1)));b.dataset.focusKey=`person/${person.id}`;b.setAttribute('aria-label',person.name);strip.append(b);});
-    const detail=paper(text('h2',p.name),text('p',p.nickname,'mv-nickname'),text('h3',t('menu.v2.bond',{bond:p.bond}),'mv-bond'),text('h3',label('assignment')));
+    this.selected.person=p.id;
+    const strip=region(el('nav',{class:'mv-roster','aria-label':label('team')}),'team-roster');this.model.people.forEach(person=>{const b=button('',()=>this.pick('person',person.id),person.id===p.id?'active':'');b.append(this.portrait(person.id,'mv-thumb'),text('span',person.name.split(' ').at(-1)));b.dataset.person=person.id;b.dataset.focusKey=`person/${person.id}`;b.setAttribute('aria-label',person.name);strip.append(b);});
+    const hearts=el('span',{class:'mv-hearts','aria-hidden':'true'},Array.from({length:5},(_,i)=>{const heart=icon('heart');heart.classList.add(i<Math.min(5,Math.floor(p.bond))?'filled':'unfilled');return heart;}));
+    const detail=region(decoratePaper(paper(el('div',{class:'mv-postmark','aria-hidden':'true'},editorialIcon('document-stamp')),text('h2',p.name),text('p',p.nickname,'mv-nickname'),el('div',{class:'mv-bond'},[text('span',t('menu.v2.bond',{bond:p.bond})),hearts]),folioLabel('assignment','tape','cases'))),'team-detail');
     if(p.assignments.length)p.assignments.forEach(q=>{detail.append(button(q.title,()=>{this.group='general';this.selected.quest=q.id;this.selectTab('cases');},'mv-assignment-link'),text('small',q.progress));});else detail.append(text('p',label('noAssignment')));
-    detail.append(text('h3',label('skills')),this.stats(p.stats),text('h3',label('biography')),text('p',p.bio));
+    detail.append(folioLabel('skills','tape','skills'),this.stats(p.stats),folioLabel('biography','tape','empathy'),text('p',p.bio,'mv-biography'));
     this.content.append(el('div',{class:'mv-team-layout'},[strip,this.portrait(p.id,'mv-portrait'),detail]));
   }
   stepPlace(delta){const list=this.model.places,index=list.findIndex(p=>p.id===this.selected.place);this.selected.place=list[(Math.max(0,index)+delta+list.length)%list.length].id;this.render();this.content.querySelector(`[data-place="${this.selected.place}"]`)?.focus({preventScroll:true});}
   renderMap(){
     const current=this.model.places.find(p=>p.id===this.selected.place)||this.model.places[0];
-    const map=el('div',{class:'mv-map','data-map-input':'true',tabindex:'0','data-focus-key':'map'});
+    const map=region(el('div',{class:'mv-map','data-map-input':'true','data-focus-key':'map'}),'map');
     map.append(image(asset('ui/coastal-menu-v2/map.png'),'mv-map-art'));
     this.model.places.forEach((p,i)=>{const b=button('',()=>this.onTravel(p),`mv-pin ${p.id===current.id?'selected':''}`);
       b.append(text('span',String(i+1).padStart(2,'0'),'mv-pin-number'),text('span',p.name),text('span',p.marker?{quest:'!',bond:'\u2665',job:'\u25c9'}[p.marker]:''));
@@ -183,14 +204,14 @@ export class MenuV2View{
       b.addEventListener('focus',()=>{this.selected.place=p.id;this.travelLabel.textContent=p.name;this.content.querySelectorAll('.mv-pin').forEach(n=>n.classList.toggle('selected',n.dataset.place===p.id));});map.append(b);
     });
     this.travelLabel=text('strong',current.name);
-    const travel=el('div',{class:'mv-map-travel'},[this.travelLabel,button(label('travel'),()=>this.onTravel(this.model.places.find(p=>p.id===this.selected.place)||current),'mv-brush'),text('small',label('mapKeys'))]);
+    const travel=region(el('div',{class:'mv-map-travel'},[this.travelLabel,button(label('travel'),()=>this.onTravel(this.model.places.find(p=>p.id===this.selected.place)||current),'mv-brush'),text('small',label('mapKeys'))]),'map-travel');
     this.content.append(map,travel,el('div',{class:'mv-map-legend'},[text('span',label('questMarker')),text('span',label('bondMarker')),text('span',label('jobMarker'))]));
   }
   renderSettings(){
-    const options=el('div',{class:'mv-settings-options'});['basic','save','load'].forEach(id=>options.append(button(label(id),()=>{this.settingsPage=id;this.render();},`mv-row ${this.settingsPage===id?'active':''}`)));
-    const detail=paper(text('h2',label(this.settingsPage==='basic'?'basic':'saveSlot')));
+    const options=region(el('div',{class:'mv-settings-options'}),'settings-categories');['basic','save','load'].forEach(id=>{const b=button('',()=>{this.settingsPage=id;this.render();},`mv-row ${this.settingsPage===id?'active':''}`);b.append(icon(id==='basic'?'settings':id),text('span',label(id)));b.dataset.setting=id;b.dataset.focusKey=`settings/${id}`;b.setAttribute('aria-pressed',String(this.settingsPage===id));options.append(b);});
+    const detail=region(decoratePaper(paper(el('div',{class:'mv-postmark','aria-hidden':'true'},editorialIcon('document-stamp')),text('h2',label(this.settingsPage==='basic'?'basic':'saveSlot')))),'settings-detail');
     if(this.settingsPage==='basic'){
-      ['sound','resolution','graphics'].forEach(id=>detail.append(el('div',{class:'mv-setting-row'},[text('span',label(id)),button(label('placeholder'),()=>{},'',true)])));
+      ['sound','resolution','graphics'].forEach(id=>detail.append(el('div',{class:'mv-setting-row'},[el('span',{},[icon(id),text('span',label(id))]),button(label('placeholder'),()=>{},'',true)])));
       const input=el('input',{type:'checkbox',checked:this.effects.manualReduced||this.effects.media.matches,disabled:this.effects.media.matches});input.addEventListener('change',()=>this.effects.setReduced(input.checked));
       detail.append(el('label',{class:'mv-setting-row'},[text('span',t('ui.menu.reduceMotion')),input]));
     }else{
@@ -199,5 +220,5 @@ export class MenuV2View{
     }
     this.content.append(el('div',{class:'mv-settings-layout'},[options,detail]));
   }
-  dispose(){this.effects.dispose();this.node.removeEventListener('keydown',this.keydown,true);this.node.remove();}
+  dispose(){this.effects.dispose();this.keyboard.dispose();this.node.remove();}
 }

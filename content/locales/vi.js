@@ -1128,5 +1128,9 @@ export default {
   "ui.menu.page": "Trang {current}/{total}",
   "ui.menu.nextPage": "Trang sau",
   "ui.menu.week": "Tuần {week}",
-  "ui.menu.energy": "Năng lượng: {current}/{max}"
+  "ui.menu.energy": "Năng lượng: {current}/{max}",
+  "menu.refinement.skillCost": "Cần {cost} điểm kỹ năng",
+  "menu.refinement.itemBonus": "{name} +{bonus}",
+  "menu.refinement.regions": "Tab · Đổi vùng   ↑ ↓ ← → · Chọn",
+  "menu.refinement.skillAction": "Enter · Chi tiết / Học    Esc · Về cây"
 };

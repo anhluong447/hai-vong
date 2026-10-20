@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloth" x2=".85" y2="1"><stop stop-color="#f8efd8"/><stop offset=".5" stop-color="#d9d4bd"/><stop offset="1" stop-color="#9caeab"/></linearGradient>
+    <linearGradient id="ink" x2=".8" y2="1"><stop stop-color="#667d84"/><stop offset=".55" stop-color="#263e4a"/><stop offset="1" stop-color="#102330"/></linearGradient>
+    <linearGradient id="leather" x2="1" y2="1"><stop stop-color="#bda478"/><stop offset=".5" stop-color="#8f7046"/><stop offset="1" stop-color="#594a38"/></linearGradient>
+    <linearGradient id="metal" x2=".8" y2="1"><stop stop-color="#fcf2cc"/><stop offset=".25" stop-color="#8c9b99"/><stop offset=".55" stop-color="#edf0d8"/><stop offset="1" stop-color="#536c73"/></linearGradient>
+    <radialGradient id="lens"><stop stop-color="#184858"/><stop offset=".4" stop-color="#071d2e"/><stop offset=".65" stop-color="#5b9396"/><stop offset=".73" stop-color="#112e40"/><stop offset="1" stop-color="#061a28"/></radialGradient>
+    <pattern id="weave" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 1H7M1 0V7" stroke="#fff9df" stroke-width=".5" opacity=".16"/></pattern>
+  </defs>
+  <symbol id="cap" viewBox="0 0 240 200">
+    <ellipse cx="123" cy="161" rx="89" ry="9" fill="#001a27" opacity=".15"/>
+    <path d="M49 126C44 75 75 36 119 34C159 33 187 60 188 120L151 145Z" fill="url(#ink)" stroke="#879691" stroke-width="2"/>
+    <path d="M49 126C44 75 75 36 119 34C159 33 187 60 188 120L151 145Z" fill="url(#weave)"/>
+    <path d="M117 36Q88 70 89 130M120 36Q154 65 154 131" fill="none" stroke="#aab8ad" stroke-width="1.5" opacity=".6"/>
+    <path d="M48 125Q106 106 165 124L218 145Q178 173 127 154Q91 143 40 147Z" fill="url(#ink)" stroke="#acb5a6" stroke-width="2"/>
+    <path d="M44 139Q100 123 151 141Q176 155 205 148" fill="none" stroke="#9aab9f" stroke-dasharray="3 3"/>
+    <ellipse cx="120" cy="34" rx="7" ry="3" fill="#9ba99b"/>
+    <path d="M106 81Q122 68 137 81V105Q121 118 106 105Z" fill="#dab975" opacity=".8"/>
+    <path d="M113 85H130M113 92H127M113 99H130" stroke="#3e5960" stroke-width="2"/>
+  </symbol>
+  <symbol id="shirt" viewBox="0 0 240 200">
+    <ellipse cx="120" cy="183" rx="76" ry="7" fill="#001a27" opacity=".13"/>
+    <path d="M83 24L51 38L19 80L51 105L69 84L65 180Q120 192 175 180L172 84L191 105L222 80L190 38L157 24Z" fill="url(#cloth)" stroke="#788d8b" stroke-width="2"/>
+    <path d="M83 24L51 38L19 80L51 105L69 84L65 180Q120 192 175 180L172 84L191 105L222 80L190 38L157 24Z" fill="url(#weave)"/>
+    <path d="M84 23L120 43L156 23L145 64L120 47L97 65Z" fill="#f8f0dd" stroke="#9aaca3" stroke-width="2"/>
+    <path d="M114 46H126L132 60L124 67L133 135L120 151L109 135L117 67L108 60Z" fill="#1f5665" stroke="#123948"/>
+    <path d="M120 153V185M67 173Q120 183 174 173M59 47L68 85M182 47L172 85" fill="none" stroke="#9fae9e" stroke-width="1.5"/>
+    <path d="M142 83H167V110Q156 120 142 110Z" fill="#e3ddc5" stroke="#879f99"/>
+    <path d="M147 87H162M147 92H162" stroke="#1d5965" stroke-width="2"/>
+    <circle cx="122" cy="165" r="2" fill="#7c9390"/>
+  </symbol>
+  <symbol id="watch" viewBox="0 0 240 200">
+    <ellipse cx="120" cy="184" rx="47" ry="6" fill="#001a27" opacity=".14"/>
+    <path d="M100 9H143L148 71L147 133L139 190H98L93 133L94 71Z" fill="url(#leather)" stroke="#d3bc8c" stroke-width="2"/>
+    <path d="M103 14L104 65M137 14L138 65M104 143V181M136 143L132 181" stroke="#dac8a0" stroke-width="1.4" stroke-dasharray="3 3"/>
+    <rect x="105" y="16" width="30" height="16" rx="2" fill="none" stroke="url(#metal)" stroke-width="5"/>
+    <circle cx="120" cy="102" r="49" fill="url(#metal)" stroke="#8b9c99" stroke-width="2"/>
+    <rect x="166" y="95" width="9" height="14" rx="2" fill="url(#metal)"/>
+    <circle cx="120" cy="102" r="40" fill="#f0ead8" stroke="#1f3e4a" stroke-width="4"/>
+    <g stroke="#466269" stroke-width="2"><path d="M120 68V76M120 128V136M86 102H94M146 102H154M96 78L101 83M139 121L145 127M96 127L101 122M140 83L145 78"/></g>
+    <path d="M120 80V102L142 112" fill="none" stroke="#1c4757" stroke-width="3" stroke-linecap="round"/>
+    <path d="M120 102L107 118" stroke="#bd864e" stroke-width="1.5"/>
+    <circle cx="120" cy="102" r="4" fill="#2c5965"/>
+  </symbol>
+  <symbol id="shoes" viewBox="0 0 240 200">
+    <ellipse cx="124" cy="171" rx="100" ry="9" fill="#001a27" opacity=".14"/>
+    <g transform="translate(21 -20) rotate(-12 120 110)">
+      <path d="M39 89L58 57L83 68L114 108L172 119Q199 123 198 144H35Z" fill="#b3b7a7" stroke="#6b817f" stroke-width="2"/>
+      <path d="M35 136Q122 157 198 136V151Q116 174 35 151Z" fill="#eee4cc" stroke="#9c9d89" stroke-width="2"/>
+      <path d="M77 75L103 108M69 85L95 115M85 86L66 99M93 96L76 108" stroke="#f9f2df" stroke-width="4"/>
+    </g>
+    <path d="M32 117L46 76L78 86L107 126L169 137Q202 140 207 158L190 171H31Z" fill="url(#cloth)" stroke="#9aa597" stroke-width="2"/>
+    <path d="M31 153Q117 177 207 153V169Q128 191 30 169Z" fill="#eee6d3" stroke="#778e8b" stroke-width="2"/>
+    <path d="M114 129Q119 149 102 160M47 85L67 96L40 120M79 91L102 128" fill="none" stroke="#a6b4a6" stroke-width="2"/>
+    <path d="M74 97L59 109M82 107L65 118M91 117L74 129M96 127L84 138" stroke="#fff8e5" stroke-width="4" stroke-linecap="round"/>
+    <path d="M38 164Q115 183 198 164" stroke="#a24e42" fill="none" stroke-width="2"/>
+    <circle cx="54" cy="129" r="7" fill="#466e74" stroke="#dfdfcc" stroke-width="2"/>
+  </symbol>
+  <symbol id="notebook" viewBox="0 0 240 200">
+    <ellipse cx="124" cy="177" rx="73" ry="9" fill="#001a27" opacity=".17"/>
+    <g transform="rotate(-12 120 100)">
+      <path d="M58 25L180 28V174L58 171Z" fill="#d1cbb3" stroke="#6e6f60" stroke-width="3"/>
+      <path d="M62 19H180V165H62Z" fill="url(#leather)" stroke="#e5c795" stroke-width="2"/>
+      <path d="M62 19H180V165H62Z" fill="url(#weave)"/>
+      <path d="M72 30H169V155H72Z" fill="none" stroke="#d6c196" stroke-dasharray="3 3"/>
+      <path d="M157 20V164" stroke="#3c555b" stroke-width="8"/>
+      <rect x="88" y="62" width="53" height="43" rx="2" fill="#ded1ad" opacity=".9"/>
+      <path d="M98 74H132M98 83H129M98 92H119" stroke="#7d785b" stroke-width="2"/>
+      <g fill="none" stroke="#233c48" stroke-width="3"><path d="M67 35C44 25 44 48 67 42M67 58C44 48 44 71 67 65M67 81C44 71 44 94 67 88M67 104C44 94 44 117 67 111M67 127C44 117 44 140 67 134M67 150C44 140 44 163 67 157"/></g>
+      <path d="M116 165V183L124 177L131 184V165" fill="#507d81"/>
+    </g>
+  </symbol>
+  <symbol id="recorder" viewBox="0 0 240 200">
+    <ellipse cx="127" cy="181" rx="51" ry="7" fill="#001a27" opacity=".17"/>
+    <g transform="rotate(13 120 100)">
+      <rect x="79" y="16" width="84" height="168" rx="12" fill="url(#metal)" stroke="#293f4a" stroke-width="2"/>
+      <rect x="85" y="22" width="72" height="156" rx="9" fill="url(#ink)"/>
+      <g stroke="#9eb2ae" stroke-width="1" opacity=".7"><path d="M94 31H149M94 36H149M94 41H149M94 46H149M94 51H149"/></g>
+      <rect x="94" y="62" width="55" height="34" rx="3" fill="#b2c2b0" stroke="#112b37" stroke-width="3"/>
+      <path d="M100 86V77H106V81H112V73H118V86H125V76H132V83H143" stroke="#4d6d67" fill="none"/>
+      <circle cx="122" cy="124" r="19" fill="#122f40" stroke="#92a7a1" stroke-width="2"/>
+      <circle cx="122" cy="124" r="8" fill="#b25344" stroke="#d8b49b"/>
+      <circle cx="102" cy="158" r="5" fill="#a7b6ac"/><circle cx="139" cy="158" r="5" fill="#a7b6ac"/>
+      <path d="M163 44L175 52V83L163 90" fill="none" stroke="#a6b4a2" stroke-width="3"/>
+    </g>
+  </symbol>
+  <symbol id="camera" viewBox="0 0 240 200">
+    <ellipse cx="120" cy="165" rx="91" ry="9" fill="#001a27" opacity=".16"/>
+    <path d="M33 62H76L90 42H151L167 62H207V154H33Z" fill="url(#metal)" stroke="#738e8c" stroke-width="2"/>
+    <rect x="33" y="79" width="174" height="66" rx="4" fill="url(#ink)"/>
+    <rect x="33" y="79" width="174" height="66" fill="url(#weave)"/>
+    <path d="M54 62V48H72V62" fill="url(#ink)"/>
+    <rect x="99" y="49" width="40" height="14" rx="3" fill="#243d49"/>
+    <circle cx="124" cy="113" r="47" fill="url(#metal)" stroke="#1e3e4a" stroke-width="4"/>
+    <circle cx="124" cy="113" r="36" fill="url(#lens)" stroke="#a9b7a5" stroke-width="2"/>
+    <path d="M105 96Q118 82 134 96" fill="none" stroke="#a0dbd2" stroke-width="4" opacity=".7"/>
+    <circle cx="183" cy="71" r="7" fill="#b8d1bd" stroke="#426d75" stroke-width="2"/>
+    <path d="M44 94H65M44 99H65M44 104H65M44 109H65" stroke="#8b9d93"/>
+  </symbol>
+</svg>
