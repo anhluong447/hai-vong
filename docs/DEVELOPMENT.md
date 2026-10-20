@@ -247,4 +247,19 @@ Do not delete historical art sources or move an active atlas, generation input o
 tool solely because it looks old. Resolve runtime/tool references first. Inventory
 archive moves and verify their hashes; update links after relocation.
 
+Visual data authoring now has menu, world, DOM HUD and Stage 4 SVG dialogue tools. Read
+[DATA-AUTHORING.md](DATA-AUTHORING.md) for URLs, editing controls, JSON sources,
+builders and the optional source-write server. Run the menu, screen, dialogue UI
+and world builder
+`--check` commands and `tools/check_asset_packs.py --check` before the normal
+architecture/browser/baseline gate. Scene compilation also follows locale-key
+changes. Generated modules are committed artifacts; runtime requires no compiler
+or authoring server. Editor drafts and temporary play sessions never become
+player saves. Dialogue exports update `content/ui/coastal-dialogue-ui.json` through
+its existing builder; 28 SVG objects cover paper, text, decorations, individual
+choices, date and optional logo. Parent groups carry children; object transforms
+remain separate from motion transforms. Legacy three-group exports normalize on
+import. See DATA-AUTHORING.md for canvas selection and group dragging.
+Check `tools/build_dialogue_motion.py --check` after rebuilding dialogue UI.
+
 The legacy `archive/clb-hoi/` snapshot is preserved and is not imported by active code.

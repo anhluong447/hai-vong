@@ -29,6 +29,28 @@ tree and spatial equipment navigation; `OverlayHost` delegates menu keys through
 symbols are mapped by stable ID in `content/ui/menu-v2-media.js`; they do not add
 save fields or change gameplay tuning. See the [menu review](ui-reviews/menu-refinement/README.md).
 
+Data authoring (2026-10-20) keeps JSON sources in `content/ui/` and
+`content/maps/scenes/`, with explicit contracts and deterministic offline builders.
+Runtime imports the generated ES modules synchronously: `MenuLayoutAdapter`
+owns menu CSS variables, `ScreenLayoutAdapter` owns DOM HUD and legacy dialogue
+offsets, and the maps facade hydrates validated scenes into the existing MAPS
+shape. `content/world/metrics.js` separates 16 px grid units from sprite pivots.
+`content/assets/` inventories active manifest-backed packs without preloading them.
+Editors live only in `tools/`, use separate drafts/memory sessions, and pause
+gameplay input during editing. The optional loopback authoring server writes
+allowlisted menu/scene JSON with hash conflicts and atomic replacement; ordinary
+static hosting and runtime have no write API dependency. Save schemas, rulesets
+and baselines remain unchanged. The Dialogue editor uses `ReplicaStage` Stage 4,
+with 28 independently editable SVG objects in a parent hierarchy, persisted in
+the existing `coastal-dialogue-ui.json` source and
+`build_dialogue_ui.py` pipeline. These wrappers keep attached decorations,
+animation transforms and clip/mask coordinates together; they do not reuse the
+DOM layout contract. The content contract supplies stable IDs, selectors, origins
+and parent relationships. Legacy three-group imports expand to neutral child
+transforms; partial object layouts fail validation. The initial editor's DOM dialogue fallback was incorrect
+and has been replaced. See [authoring workflow](DATA-AUTHORING.md) and
+[verification](ui-reviews/data-authoring/README.md).
+
 Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; runtime has no build
 step. Art authoring uses the offline asset builder described below. Two explicit rulesets remain: the original formula sandbox and the newer
 gameplay/pixel prototype. Their calendars, scores and state schemas are distinct.
@@ -39,7 +61,11 @@ gameplay/pixel prototype. Their calendars, scores and state schemas are distinct
 content/
   locales/vi.js              player-facing text and parameterized templates
   gameplay/                  roster, cases, quest steps, balance, phase/city data
-  maps/definitions.js        authored layouts, objects, portals and NPC schedules
+  maps/definitions.js        compatibility facade over compiled scene hydration
+  maps/scenes/               authored layouts, objects, portals and NPC schedules
+  ui/*layout*.json           explicit menu and DOM HUD/dialogue layout contracts
+  assets/                   active pack inventory, hashes and restoration metadata
+  world/metrics.js          grid units and coordinate conversions
   dialogue/                  nine mock interaction dialogue graphs
   sandbox/                   formula sandbox balance and temporary fixtures
   manifest.js                active gameplay pack and content version
