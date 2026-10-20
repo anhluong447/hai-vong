@@ -39,8 +39,8 @@ export class WorldEditor{
   this.world.onFrame=()=>{this.world.hint.textContent=text(this.mode==='edit'?'editHint':'playHint');this.drawOverlay();};
  }
  changed(){if(!this.world)return;this.tileEditor?.cancel();this.world.replaceMapCatalog(this.catalog());this.world.draw(0);this.refresh();if(!this.saving)this.status.textContent=t(this.document.dirty?'authoring.dirty':'authoring.world.ready');}
- switchMap(id,spawn){this.cancel();this.mapId=id;this.root.querySelector('#world-map').value=id;this.selection=null;this.world.replaceMapCatalog(this.catalog());this.world.enter(id,spawn||this.world.mapCatalog[id].spawn);this.refresh();}
- setMode(mode){this.cancel();this.mode=mode;if(mode==='play')this.world.restore(this.world.snapshot());this.world.setEditing(mode==='edit');this.overlay.hidden=mode!=='edit';this.refresh();if(mode==='play')this.world.canvas.focus();}
+ switchMap(id,spawn){this.cancel();this.tileEditor.saveCamera();this.world.editorCamera=null;this.mapId=id;this.root.querySelector('#world-map').value=id;this.selection=null;this.world.replaceMapCatalog(this.catalog());this.world.enter(id,spawn||this.world.mapCatalog[id].spawn);this.tileEditor.enterMap();this.refresh();}
+ setMode(mode){this.cancel();this.tileEditor.saveCamera();this.mode=mode;if(mode==='play')this.world.restore(this.world.snapshot());this.world.setEditing(mode==='edit');if(mode==='play')this.world.setEditorCamera(null);else this.tileEditor.restoreCamera();this.overlay.hidden=mode!=='edit';this.refresh();if(mode==='play')this.world.canvas.focus();}
  select(id){this.selection=[...this.document.draft.objects,...this.document.draft.npcs].some(o=>o.id===id)?id:null;this.refresh();this.world.draw(0);}
  entity(){return[...this.document.draft.objects,...this.document.draft.npcs].find(o=>o.id===this.selection);}
  point(event){return clientToGrid({x:event.clientX,y:event.clientY},this.world.canvas.getBoundingClientRect(),this.world.canvas.width,this.world.scale,this.world.camera);}

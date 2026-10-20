@@ -15,6 +15,9 @@ export class TileMapEditor{
    const option=document.createElement('option');option.value=tile.id;option.textContent=t(tile.labelKey);erase.append(option);
   }
   erase.value=this.eraseTile;erase.addEventListener('change',()=>this.setEraseTile(Number(erase.value)),{signal:this.abort.signal});
+  this.cameras=new Map();const signal=this.abort.signal;
+  window.addEventListener('blur',()=>{this.space=false;this.cancel();},{signal});
+  window.addEventListener('keyup',event=>{if(event.code==='Space'||event.key===' '){this.space=false;if(this.pan)this.cancel();}},{signal});
  }
  button(key,action){const b=document.createElement('button');b.type='button';if(key)b.textContent=copy(key);b.addEventListener('click',action,{signal:this.abort.signal});return b;}
  setActive(active){if(this.active!==active)this.cancel();this.active=active;this.refresh();}
@@ -22,6 +25,7 @@ export class TileMapEditor{
  setPrimaryTile(id){tileDefinition(id);this.cancel();this.primaryTile=id;this.refresh();}
  setEraseTile(id){tileDefinition(id);this.cancel();this.eraseTile=id;this.refresh();}
  valid(p){const scene=this.editor.document.draft;return p.x>=0&&p.y>=0&&p.x<scene.width&&p.y<scene.height;}
+ insideCanvas(event){const r=this.editor.world.canvas.getBoundingClientRect();return event.clientX>=r.left&&event.clientX<r.right&&event.clientY>=r.top&&event.clientY<r.bottom;}
  refresh(){
   const e=this.editor;this.controls.hidden=e.editLayer!=='tiles';e.root.querySelector('#entity-controls').hidden=e.editLayer==='tiles';e.root.querySelector('#world-inspector').hidden=e.editLayer==='tiles';e.root.querySelector('#tile-help').hidden=e.editLayer!=='tiles';
   for(const b of e.root.querySelectorAll('[data-layer]'))b.setAttribute('aria-pressed',String(b.dataset.layer===e.editLayer));
@@ -34,27 +38,59 @@ export class TileMapEditor{
  }
  add(cells){const s=this.stroke;for(const p of cells)if(this.valid(p))s.edits.set(p.y*this.editor.document.draft.width+p.x,{...p,tile:s.tile});}
  handlePointerDown(event){
-  if(!this.active)return false;if(event.button!==0||this.stroke)return true;event.preventDefault();const e=this.editor,p=e.point(event);e.overlay.focus();if(!this.valid(p))return true;this.cursor=p;
+  if(!this.active)return false;if(event.button!==0||this.stroke||this.pan)return true;event.preventDefault();const e=this.editor,p=e.point(event);e.overlay.focus();
+  if(this.space){this.pan={pointerId:event.pointerId,node:e.overlay,x:event.clientX,y:event.clientY,camera:{...e.world.camera}};e.overlay.setPointerCapture(event.pointerId);return true;}
+  if(!this.valid(p)||!this.insideCanvas(event))return true;this.cursor=p;
   if(this.tool==='eyedropper'){this.setPrimaryTile(e.document.draft.tiles[p.y][p.x]);this.setTool('brush');return true;}
   this.stroke={document:e.document,pointerId:event.pointerId,node:e.overlay,start:p,previous:p,tile:this.tool==='eraser'?this.eraseTile:this.primaryTile,edits:new Map()};
   if(this.tool==='fill'){if(e.document.draft.tiles[p.y][p.x]!==this.primaryTile)this.add(floodCells(e.document.draft.tiles,p));}else this.add([p]);
   e.overlay.setPointerCapture(event.pointerId);return true;
  }
  handlePointerMove(event){
-  if(!this.active)return false;const p=this.editor.point(event);if(this.valid(p))this.cursor=p;
+  if(!this.active)return false;
+  if(this.pan){if(this.pan.pointerId===event.pointerId){const world=this.editor.world,ratio=world.canvas.getBoundingClientRect().width/world.canvas.width;world.setEditorCamera({x:this.pan.camera.x-(event.clientX-this.pan.x)/ratio,y:this.pan.camera.y-(event.clientY-this.pan.y)/ratio});}return true;}
+  const p=this.editor.point(event),inside=this.insideCanvas(event);if(inside&&this.valid(p)&&(!this.stroke||this.stroke.pointerId===event.pointerId))this.cursor=p;
   const s=this.stroke;if(!s||s.pointerId!==event.pointerId)return true;
   if(s.document!==this.editor.document){this.cancel();return true;}
   if(this.tool==='rectangle'){s.edits.clear();this.add(rectangleCells(s.start,p,this.editor.document.draft));}
-  else if(this.tool!=='fill'){if(this.valid(p)){this.add(s.previous?lineCells(s.previous,p):[p]);s.previous=p;}else s.previous=null;}
+  else if(this.tool!=='fill'){if(inside&&this.valid(p)){this.add(s.previous?lineCells(s.previous,p):[p]);s.previous=p;}else s.previous=null;}
   return true;
  }
- handlePointerUp(event){if(!this.active)return false;if(this.stroke?.pointerId===event.pointerId)this.commit();return true;}
+ handlePointerUp(event){if(!this.active)return false;if(this.pan?.pointerId===event.pointerId){const pan=this.pan;this.pan=null;this.release(pan);}else if(this.stroke?.pointerId===event.pointerId){this.handlePointerMove(event);this.commit();}return true;}
  release(s){if(s?.node?.hasPointerCapture(s.pointerId))s.node.releasePointerCapture(s.pointerId);}
- cancel(){const s=this.stroke;this.stroke=null;this.release(s);}
+ cancel(){const s=this.stroke,pan=this.pan;this.stroke=null;this.pan=null;this.release(s);this.release(pan);}
  commit(){const s=this.stroke;if(!s)return;this.stroke=null;this.release(s);if(s.document!==this.editor.document)return;
   try{s.document.applyTileEdits([...s.edits.values()]);}catch{this.editor.status.textContent=copy('invalid');}
  }
- handleKey(){return false;}
+ handleKey(event){
+  if(!this.active)return false;
+  if(event.key==='Escape'&&(this.stroke||this.pan)){event.preventDefault();this.cancel();return true;}
+  if(event.target!==this.editor.overlay)return false;
+  const key=event.key.toLowerCase();
+  if(event.ctrlKey||event.metaKey){if(key==='z'){event.preventDefault();this.cancel();event.shiftKey?this.editor.document.redo():this.editor.document.undo();return true;}return false;}
+  if(event.altKey)return false;
+  if(event.code==='Space'||event.key===' '){event.preventDefault();this.space=true;return true;}
+  const tool={b:'brush',r:'rectangle',f:'fill',i:'eyedropper',e:'eraser'}[key];
+  if(tool){event.preventDefault();this.setTool(tool);return true;}
+  if(key==='g'||key==='c'){event.preventDefault();this[key==='g'?'showGrid':'showCollision']=!this[key==='g'?'showGrid':'showCollision'];this.refresh();return true;}
+  const delta={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[event.key];
+  if(delta){event.preventDefault();if(this.stroke&&this.stroke.pointerId!==null)return true;const step=event.shiftKey?5:1,s=this.editor.document.draft;this.cursor={x:Math.max(0,Math.min(s.width-1,this.cursor.x+delta[0]*step)),y:Math.max(0,Math.min(s.height-1,this.cursor.y+delta[1]*step))};
+   if(this.stroke){this.stroke.edits.clear();this.add(rectangleCells(this.stroke.start,this.cursor,s));}this.ensureCursorVisible();return true;
+  }
+  if(event.key==='Enter'){
+   event.preventDefault();if(event.repeat)return true;if(this.stroke){if(this.stroke.pointerId===null)this.commit();return true;}
+   if(this.tool==='eyedropper'){this.setPrimaryTile(this.editor.document.draft.tiles[this.cursor.y][this.cursor.x]);this.setTool('brush');return true;}
+   this.stroke={document:this.editor.document,pointerId:null,node:null,start:{...this.cursor},tile:this.tool==='eraser'?this.eraseTile:this.primaryTile,edits:new Map()};
+   if(this.tool==='fill'){if(this.editor.document.draft.tiles[this.cursor.y][this.cursor.x]!==this.primaryTile)this.add(floodCells(this.editor.document.draft.tiles,this.cursor));}else this.add([this.cursor]);
+   if(this.tool!=='rectangle')this.commit();return true;
+  }
+  return false;
+ }
+ saveCamera(){if(this.editor.mode==='edit')this.cameras.set(this.editor.mapId,{...this.editor.world.camera});}
+ restoreCamera(){this.editor.world.setEditorCamera(this.cameras.get(this.editor.mapId)??null);}
+ enterMap(){this.cursor={...this.editor.document.draft.spawn};if(this.editor.mode==='edit')this.restoreCamera();}
+ panBy(dxPx,dyPx){const world=this.editor.world;world.setEditorCamera({x:world.camera.x+dxPx,y:world.camera.y+dyPx});}
+ ensureCursorVisible(){const world=this.editor.world,size=TILESET.tilePixels;let {x,y}=world.camera;const left=this.cursor.x*size,top=this.cursor.y*size;if(left<x)x=left;else if(left+size>x+world.canvas.width)x=left+size-world.canvas.width;if(top<y)y=top;else if(top+size>y+world.canvas.height)y=top+size-world.canvas.height;world.setEditorCamera({x,y});}
  draw(ctx,world){
   this.paintPalette();if(!this.active)return;const size=TILESET.tilePixels,scene=this.editor.document.draft,left=Math.max(0,Math.floor(world.camera.x/size)),top=Math.max(0,Math.floor(world.camera.y/size)),right=Math.min(scene.width,Math.ceil((world.camera.x+world.canvas.width)/size)),bottom=Math.min(scene.height,Math.ceil((world.camera.y+world.canvas.height)/size));
   if(this.showCollision){ctx.fillStyle='#ed6f6a77';for(let y=top;y<bottom;y++)for(let x=left;x<right;x++)if(isTerrainBlocked(scene.tiles[y][x]))ctx.fillRect(x*size-world.camera.x,y*size-world.camera.y,size,size);

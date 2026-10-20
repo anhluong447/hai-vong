@@ -45,6 +45,7 @@ export class PixelWorld{
  bindPortrait(node,id){this.portrait=node?{node,id}:null;}
  animationSnapshot(){return Object.fromEntries([...this.actorClocks].filter(([id])=>this.sprite(id)?.clips).map(([id,c])=>[id,{...clipFrame(this.sprite(id),c.mode,id==='khue'?this.player.direction:c.direction,c.elapsed,c.distance),distance:c.distance}]));}
  setEditing(value){this.editing=!!value;this.setBlocked(this.editing);if(value){this.walk=null;this.setActorMode('khue','idle');}}
+ setEditorCamera(position){if(position&&(!Number.isFinite(position.x)||!Number.isFinite(position.y)))throw new TypeError('world.camera.position');this.editorCamera=position?{x:position.x,y:position.y}:null;this.draw(0);}
  setBlocked(value){this.blocked=value;if(value)this.clearInput();}
  move(direction){if(this.blocked||!this.ready)return;this.clearInput();this.keys.add(direction);this.step(direction);}
  stop(){this.keys.clear();}

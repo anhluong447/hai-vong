@@ -13,6 +13,7 @@ draw(time){
 const ctx=world.canvas.getContext('2d'),w=world.canvas.width,h=world.canvas.height;ctx.imageSmoothingEnabled=false;ctx.fillStyle='#213e38';ctx.fillRect(0,0,w,h);if(!world.ready){ctx.fillStyle='#f0dfbc';ctx.font='10px monospace';ctx.fillText(world.error||t("src.pixel.PixelWorld.dang_tai_asset_pixel"),12,25);return;}
   const amount=world.walk?Math.min(1,world.walk.elapsed/world.stepSeconds):0;const px=world.walk?world.walk.from.x+(world.walk.to.x-world.walk.from.x)*amount:world.player.x,py=world.walk?world.walk.from.y+(world.walk.to.y-world.walk.from.y)*amount:world.player.y;
   const mw=gridToPixel(world.map.width),mh=gridToPixel(world.map.height);world.camera={x:Math.round(mw<w?(mw-w)/2:Math.max(0,Math.min(mw-w,gridToPixel(px+.5)-w/2))),y:Math.round(mh<h?(mh-h)/2:Math.max(0,Math.min(mh-h,gridToPixel(py+.5)-h/2)))};
+  if(world.editing&&world.editorCamera){world.camera={x:Math.round(mw<w?(mw-w)/2:Math.max(0,Math.min(mw-w,world.editorCamera.x))),y:Math.round(mh<h?(mh-h)/2:Math.max(0,Math.min(mh-h,world.editorCamera.y)))};world.editorCamera={...world.camera};}
   ctx.drawImage(world.backgrounds[world.mapId],-world.camera.x,-world.camera.y);
 
   // DOM signs keep Vietnamese text crisp instead of scaling a tiny canvas font.
