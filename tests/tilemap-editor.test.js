@@ -2,7 +2,7 @@ import {test,assert as a} from './harness.js';
 import {walkable} from '../src/pixel/maps.js';
 async function withEditor(run){
  const frame=document.createElement('iframe');frame.src='../tools/world-editor.html';frame.style.cssText='position:relative;left:0;width:1200px;height:850px';document.body.append(frame);
- try{await new Promise((resolve,reject)=>{const start=Date.now(),poll=()=>frame.contentWindow.worldEditor?.world.ready?resolve():Date.now()-start>15000?reject(new Error('Tile editor timeout')):setTimeout(poll,20);poll();});
+ try{await new Promise((resolve,reject)=>{const start=Date.now(),poll=()=>frame.contentWindow.worldEditor?.world.ready?resolve():Date.now()-start>15000?reject(new Error('Tile editor timeout: '+JSON.stringify({ready:frame.contentDocument.readyState,error:frame.contentWindow.worldEditor?.world.error,body:frame.contentDocument.body?.textContent.slice(0,250)}))):setTimeout(poll,20);poll();});
  const e=frame.contentWindow.worldEditor;e.world.setEditorCamera({x:0,y:0});e.overlay.setPointerCapture=()=>{};e.overlay.hasPointerCapture=()=>false;
  const pointer=(type,x,y,id=17)=>{const r=e.world.canvas.getBoundingClientRect(),ratio=r.width/e.world.canvas.width;const ev=new frame.contentWindow.PointerEvent(type,{button:0,pointerId:id,clientX:r.left+((x+.5)*16-e.world.camera.x)*ratio,clientY:r.top+((y+.5)*16-e.world.camera.y)*ratio,bubbles:true,cancelable:true});e.overlay.dispatchEvent(ev);};
  await run(e,frame.contentWindow,pointer);
@@ -85,4 +85,26 @@ test('Tile editor: visible hint and inspector describe the selected tile tool',(
  e.setEditLayer('tiles');e.world.draw(0);a.ok(e.world.hint.textContent.includes('Brush'));a.equal(w.document.querySelector('#world-inspector-heading').textContent,'Tile Inspector');
  e.tileEditor.setTool('fill');e.world.draw(0);a.ok(e.world.hint.textContent.includes('Fill'));
  e.setEditLayer('entities');a.equal(w.document.querySelector('#world-inspector-heading').textContent,'Object Inspector');
+}));
+test('Tile editor: draft/export round trips retain terrain and invalid imports preserve history',()=>withEditor(e=>{
+ const doc=e.document;doc.applyTileEdits([{x:4,y:4,tile:2}]);const exported=doc.exportJSON(),envelope=doc.draftEnvelope(),source=JSON.stringify(doc.draft.objects);
+ doc.reset();doc.restoreDraft(envelope);a.equal(doc.draft.tiles[4][4],2);a.equal(JSON.stringify(doc.draft.objects),source);
+ doc.reset();doc.importJSON(exported);a.equal(doc.draft.tiles[4][4],2);const before=doc.exportJSON(),history=doc.undoStack.length;
+ const invalid=JSON.parse(before);invalid.tiles[4][4]=true;a.throws(()=>doc.importJSON(JSON.stringify(invalid)));a.equal(doc.exportJSON(),before);a.equal(doc.undoStack.length,history);
+}));
+test('Tile editor: source save cancels pending preview and preserves terrain committed while request waits',()=>withEditor(async(e,w,p)=>{
+ e.setEditLayer('tiles');p('pointerdown',3,3);p('pointermove',5,3);
+ const doc=e.document,original=doc.draft.tiles[3][3],hash=doc.sourceHash;let finishRead,finishSave,submitted;
+ e.sourceClient={getResource:()=>new Promise(resolve=>finishRead=resolve),saveResource:(id,request)=>{submitted=request.payload;return new Promise(resolve=>finishSave=resolve);}};
+ const saving=e.action('sourceSave');a.ok(e.tileEditor.stroke===null);a.equal(doc.draft.tiles[3][3],original);
+ doc.applyTileEdits([{x:3,y:3,tile:4}]);finishRead({hash,payload:doc.source});await new Promise(resolve=>setTimeout(resolve,0));
+ a.equal(submitted.tiles[3][3],original);finishSave({hash:'paint-save-fixture',applied:true,sourceSaved:true});await saving;
+ a.equal(doc.source.tiles[3][3],original);a.equal(doc.draft.tiles[3][3],4);a.ok(doc.dirty);a.equal(doc.sourceHash,'paint-save-fixture');
+}));
+test('Tile editor: entity shortcuts cannot edit a hidden selection while Tiles is active',()=>withEditor((e,w)=>{
+ e.select('home-desk');e.setEditLayer('tiles');const before=JSON.stringify(e.document.draft.objects);
+ const palette=w.document.querySelector('[data-tile-id]');palette.focus();
+ palette.dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}));
+ e.overlay.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Delete',bubbles:true,cancelable:true}));
+ a.equal(JSON.stringify(e.document.draft.objects),before);a.equal(e.document.undoStack.length,0);
 }));

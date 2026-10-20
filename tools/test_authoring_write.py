@@ -338,6 +338,23 @@ class CompilerIntegrationTests(WriterFixture, unittest.TestCase):
         self.assertTrue(result['applied'], result)
         self.assertEqual(result['hash'], hashlib.sha256((maps / 'scenes/home.json').read_bytes()).hexdigest())
         self.assertIn(result['hash'], (maps / 'scenes-data.js').read_text(encoding='utf-8'))
+        for tile in [2, 4]:
+            remote = writer.read('scene/home')
+            payload = remote['payload']
+            payload['tiles'][4][4] = tile
+            saved = writer.save({'resourceId':'scene/home','schemaVersion':1,'baseHash':remote['hash'],'payload':payload})
+            self.assertTrue(saved['applied'], saved)
+            self.assertEqual(writer.read('scene/home')['payload']['tiles'][4][4], tile)
+            generated = (maps/'scenes-data.js').read_bytes()
+            source_bytes = (maps/'scenes/home.json').read_bytes()
+            bad = json.loads(source_bytes)
+            bad['tiles'][4][4] = True
+            with self.assertRaises(self.mod.AuthoringError):
+                writer.save({'resourceId':'scene/home','schemaVersion':1,'baseHash':saved['hash'],'payload':bad})
+            with self.assertRaises(self.mod.AuthoringError):
+                writer.save({'resourceId':'scene/home','schemaVersion':1,'baseHash':remote['hash'],'payload':payload})
+            self.assertEqual((maps/'scenes-data.js').read_bytes(), generated)
+            self.assertEqual((maps/'scenes/home.json').read_bytes(), source_bytes)
 
 
 class ReviewToolTests(unittest.TestCase):

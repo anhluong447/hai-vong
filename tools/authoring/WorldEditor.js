@@ -53,7 +53,7 @@ export class WorldEditor{
   if(event.key==='Escape'&&this.drag){event.preventDefault();this.cancel();return;}
   if(this.mode!=='edit'||/INPUT|TEXTAREA|SELECT/.test(event.target.tagName))return;
   if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='z'){event.preventDefault();this.cancel();event.shiftKey?this.document.redo():this.document.undo();return;}
-  if(this.drag)return;
+  if(this.drag||this.editLayer==='tiles')return;
   if(event.key==='Delete'){event.preventDefault();this.remove();}
   else if(this.selection&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)){event.preventDefault();const e=this.entity(),delta=event.shiftKey?5:1;try{this.document.updateEntity(e.id,{x:e.x+(event.key==='ArrowLeft'?-delta:event.key==='ArrowRight'?delta:0),y:e.y+(event.key==='ArrowUp'?-delta:event.key==='ArrowDown'?delta:0)});}catch(error){this.reportError(error);}}
  }

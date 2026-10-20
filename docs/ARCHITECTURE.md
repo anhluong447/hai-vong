@@ -51,6 +51,17 @@ transforms; partial object layouts fail validation. The initial editor's DOM dia
 and has been replaced. See [authoring workflow](DATA-AUTHORING.md) and
 [verification](ui-reviews/data-authoring/README.md).
 
+Tilemap authoring extends WorldEditor with Entities/Tiles modes.
+`content/world/tileset.json` compiles into TILESET in the existing world module;
+its facade owns atlas lookup and terrain collision shared by rendering, runtime
+walkability and scene validators. Scene schema v1 and original tile IDs remain.
+TilePaint provides pure immutable patches; TileMapEditor owns palette, preview,
+pointer/keyboard gestures and an editor-only camera. A validated patch enters
+WorldDocument once per gesture, preserving undo/draft/source-save semantics.
+Invalid strokes never replace the document. Camera overrides apply only during
+editing and do not enter gameplay saves. See the
+[tilemap review](ui-reviews/tilemap-editor/README.md).
+
 Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; runtime has no build
 step. Art authoring uses the offline asset builder described below. Two explicit rulesets remain: the original formula sandbox and the newer
 gameplay/pixel prototype. Their calendars, scores and state schemas are distinct.

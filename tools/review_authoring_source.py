@@ -84,7 +84,7 @@ BROWSER_PROBE = r'''(async()=>{
  for(const resourceId of ['menu-layout','scene/home']){
   const original=await client.getResource(resourceId),payload=structuredClone(original.payload);
   if(resourceId==='menu-layout'){payload.regions.resources.x+=1;payload.regions['skills-detail'].width+=20;payload.regions['equipment-slots'].columnGap+=16;}
-  else {const object=payload.objects[0];object.overrides.offsetPx={x:object.overrides.offsetPx?.x===.25?0:.25,y:object.overrides.offsetPx?.y||0};}
+  else {const object=payload.objects[0];object.overrides.offsetPx={x:object.overrides.offsetPx?.x===.25?0:.25,y:object.overrides.offsetPx?.y||0};payload.tiles[4][4]=payload.tiles[4][4]===2?4:2;}
   const saved=await client.saveResource(resourceId,{schemaVersion:1,baseHash:original.hash,payload});
   check(saved.sourceSaved&&saved.applied&&!saved.buildError,'SOURCE_NOT_APPLIED');
   check(saved.hash!==original.hash,'UNCHANGED_TEST_HASH');
@@ -93,7 +93,7 @@ BROWSER_PROBE = r'''(async()=>{
   catch(error){conflict={code:error.code,status:error.status};}
   check(conflict?.code==='CONFLICT'&&conflict.status===409,'STALE_HASH_ACCEPTED');
   const invalid=structuredClone(payload);
-  if(resourceId==='menu-layout')invalid.regions.resources.width=-1;else invalid.objects[0].x=-1;
+  if(resourceId==='menu-layout')invalid.regions.resources.width=-1;else invalid.tiles[4][4]=true;
   let rejected=null;
   try{await client.saveResource(resourceId,{schemaVersion:1,baseHash:saved.hash,payload:invalid});}
   catch(error){rejected={code:error.code,status:error.status};}
@@ -112,6 +112,7 @@ BROWSER_PROBE = r'''(async()=>{
    const generated=await import('/content/maps/scenes-data.js'+suffix);
    check(generated.SCENE_SOURCE_HASHES.home===saved.hash,'WORLD_GENERATED_HASH_STALE');
    check(generated.SCENES.home.objects[0].overrides.offsetPx.x===payload.objects[0].overrides.offsetPx.x,'WORLD_GENERATED_STALE');
+   check(generated.SCENES.home.tiles[4][4]===payload.tiles[4][4],'TILE_GENERATED_STALE');
   }
   reports.push({resourceId,beforeHash:original.hash,savedHash:saved.hash,
    sourceSaved:saved.sourceSaved,applied:saved.applied,conflict,rejected,
@@ -132,6 +133,15 @@ MENU_SAVE_PROBE = r'''(async()=>{
  if(editor.status.textContent!==t('authoring.sourceApplied')||remote.hash!==editor.serverHash||
     remote.payload.regions.resources.x!==editor.document.value.regions.resources.x)throw Error('MENU_SAVE_RELOAD_REGRESSION');
  return {hash:remote.hash,x:remote.payload.regions.resources.x,sourceApplied:true};
+})()'''
+
+WORLD_TILE_SAVE_PROBE = r'''(async()=>{
+ const e=window.worldEditor;e.setEditLayer('tiles');
+ const tile=e.document.draft.tiles[4][4]===2?4:2;
+ e.document.applyTileEdits([{x:4,y:4,tile}]);await e.action('sourceSave');
+ const remote=await e.sourceClient.getResource('scene/home');
+ if(remote.hash!==e.document.sourceHash||remote.payload.tiles[4][4]!==tile||e.document.dirty)throw Error('TILE_SAVE_RELOAD_REGRESSION');
+ return {hash:remote.hash,tile,sourceApplied:true};
 })()'''
 
 
@@ -159,6 +169,13 @@ def review(client, origin, timeout=40, menu_editor=True):
             wait_for(client, f'location.href==={json.dumps(url)}&&document.readyState==="complete"&&Boolean(window.menuEditor)', timeout)
             cycles.append(client.evaluate(MENU_SAVE_PROBE, await_promise=True))
         report['menuEditor'] = {'saveReloadSecondSave': True, 'cycles': cycles}
+        cycles=[]
+        for cycle in range(2):
+            url=origin+'/tools/world-editor.html?map=home&tile-save-review='+str(cycle)
+            client.call('Page.navigate',{'url':url})
+            wait_for(client, f'location.href==={json.dumps(url)}&&Boolean(window.worldEditor?.world.ready)',timeout)
+            cycles.append(client.evaluate(WORLD_TILE_SAVE_PROBE,await_promise=True))
+        report['tileEditor']={'saveReloadSecondSave':True,'cycles':cycles}
     return report
 
 

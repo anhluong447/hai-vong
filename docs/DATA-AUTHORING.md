@@ -54,6 +54,33 @@ Export cũ gồm đúng ba nhóm được nâng cấp khi import: giữ giá tr�
 các object mới nhận vị trí 0 và scale 1. Import thiếu object ở format mới bị từ
 chối. Không đưa các thông số này vào `screen-layout.json` của DOM.
 
+## Vẽ địa hình bằng Tiles
+
+Trong World Editor, chọn **Tiles** bên cạnh **Entities**. Palette có 16 ảnh tile,
+nhãn tiếng Anh và mô tả Walkable/Blocked. Chọn Brush, Rectangle hoặc Fill rồi
+chọn tile cần vẽ; Eyedropper lấy mẫu và trở về Brush. Eraser thay ô bằng **Erase
+Tile** đã chọn (mặc định Grass), không tạo ô trong suốt.
+
+Nét kéo chỉ hiện preview, thả chuột mới ghi vào draft và tạo một undo. Rectangle
+bao gồm hai góc; Fill nối bốn hướng. Nét chặn spawn hoặc portal bị từ chối toàn bộ.
+Brush ngừng vẽ ngoài canvas và bắt đầu đoạn mới khi quay vào. Escape hủy preview;
+đổi map/tool/mode, import, undo, export hoặc lưu source cũng hủy preview đang kéo.
+
+Khi canvas có focus: **B/R/F/I/E** chọn tool, **G/C** bật grid/collision, mũi tên
+dịch cursor một ô, Shift dịch năm ô, **Enter** dùng tool. Rectangle dùng Enter
+đặt góc đầu, mũi tên đặt góc sau rồi Enter xác nhận. **Space + drag** pan camera;
+cursor tự cuộn tới ô đang chọn. Ctrl+Z/Shift+Ctrl+Z undo/redo dùng chung với Entities.
+
+Playtest dùng terrain đã commit trong draft và camera gameplay. Trở lại Edit
+khôi phục camera editor; ô player vừa bị vẽ thành vật cản sẽ dùng safe spawn khi
+chơi thử. Save Scene Draft, Restore Draft, Export/Import Scene JSON và Save Scene
+to Source giữ nguyên quy trình bên dưới. V1 sửa năm map hiện có, một lớp nền;
+map mới, resize, zoom, nhiều lớp và autotile chưa nằm trong phạm vi.
+
+Định nghĩa tile nằm ở `content/world/tileset.json`; builder world compile TILESET
+vào `scenes-data.js`. Giữ ID/atlas/collision ổn định khi authoring; không sửa file
+generated bằng tay. Xem [bằng chứng tilemap](ui-reviews/tilemap-editor/README.md).
+
 ## Nháp, export và áp dụng
 
 Menu và bản đồ có bản nháp local riêng với version và hash nguồn. Nháp khác
