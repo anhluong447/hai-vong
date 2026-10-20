@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "sceneIds": ["yard", "newsroom", "street", "home", "interaction"],
+  "sceneFields": ["schemaVersion", "id", "titleKey", "width", "height", "tiles", "objects", "npcs", "portals", "spawn", "signs"],
+  "instanceFields": ["id", "prefab", "x", "y", "overrides"],
+  "overrideFields": ["asset", "sprite", "portraitId", "kind", "labelKey", "label", "solid", "footprint", "step", "caseKey", "lineKey", "person", "schedule", "expression", "scene", "offsetPx", "pivotPx", "pickHeightTiles"],
+  "schedules": ["club", "leisure"],
+  "sprites": ["khue", "van", "long", "nhi", "ngoc", "an", "source"],
+  "assets": ["tree", "desk", "bookcase", "bed", "planter", "board", "printer", "bench", "shop", "lamp", "camera", "clock"],
+  "kinds": ["school", "questStep", "rest", "source", "board", "write", "editor", "schedule", "teammate", "shop", "cafe", "job", "training", "bed", "reports", "dialogueTest"],
+  "people": ["van", "long", "nhi", "ngoc", "an"],
+  "steps": ["photo", "interview", "courage", "documents"],
+  "caseKeys": ["community", "documents", "photo"],
+  "dialogueScenes": ["khue", "van", "long", "nhi", "ngoc", "an", "groundskeeper", "teacher", "harbor-source"]
+}
