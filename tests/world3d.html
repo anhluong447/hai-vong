@@ -1,6 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><title>World 3D tests</title></head><body><div id="results"></div><script type="module">
 import './world3d-navigation.test.js';
 import './world3d-meshes.test.js';
+import './world3d-runtime.test.js';
 import {runAll} from './harness.js';
 const root=document.querySelector('#results'),results=await runAll({onProgress:name=>root.textContent=name});root.replaceChildren();
 for(const result of results){const line=document.createElement('pre');line.className=result.ok?'ok':'bad';line.textContent=result.name+(result.error?'\n'+result.error:'');root.append(line);}
