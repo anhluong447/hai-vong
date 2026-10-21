@@ -153,7 +153,7 @@ def render_outputs(root=ROOT, overrides=None, tileset_override=None):
     overrides = overrides or {}
     contract = read(map_dir / 'scene-contract.json')
     candidates={sid:overrides[sid] if sid in overrides else read(map_dir/'scenes'/f'{sid}.json') for sid in contract['sceneIds']}
-    scenes={sid:validate_scene(candidate,root=root,tileset_override=tileset_override,scenes_override=candidates) for sid,candidate in candidates.items()}
+    scenes={sid:validate_scene(candidate,resource_id=f'scene/{sid}',root=root,tileset_override=tileset_override,scenes_override=candidates) for sid,candidate in candidates.items()}
     prefabs = read(map_dir / 'prefabs.json')['prefabs']
     tileset = tile_definitions(root, tileset_override)
     blocks = {sid: blocked_cells(s, prefabs, tileset) for sid, s in scenes.items()}

@@ -60,7 +60,37 @@ unrelated UI/font readiness failures. Node is unavailable in this environment.
 - Autotile, regions, event pages and map expansion beyond the existing five
   scenes belong to subsequent roadmap work.
 
-Verification before whole-branch review: focused browser **47/47**, main browser
-**160/160**, eight formula and four gameplay policies match. The native 256×256
-fill measurement was **22.3 ms** on this machine. Whole-branch findings/fixes
-are recorded at handoff.
+Final verification: focused browser **51/51**, main browser **164/164**;
+**13 world tests** and **40 authoring tests** run, with two environment skips.
+Architecture reports zero issues and generated world data is synchronized.
+Eight formula and four gameplay baseline policies match unchanged. Node is
+unavailable. The native 256×256 fill measured **80 ms** in the final run
+(22.3 ms previously); measurements are diagnostic, not a performance guarantee.
+
+## Whole-branch review and fixes
+
+One independent review identified the following issues. Each was reproduced by
+a failing regression before the fix, then passed in the final suites:
+
+- Scene Undo/Redo could install missing or reassigned tile IDs. History now
+  records tile identities and validates the candidate before changing stacks.
+- Undoing an import while its native save was pending could reuse its IDs.
+  Pending publication identities stay protected; later property edits stay dirty.
+- Scene save accepted an ID different from the resource filename. Both route
+  and builder now reject this before writing source.
+- Rejected local drafts lacked recovery UI. The original envelope is preserved,
+  Save Draft cannot overwrite it, and Download/Revalidate actions are available.
+  Revalidation still checks source hash, stable identities and project validity.
+- Ctrl+Y did not redo tileset properties. It now shares the panel history with
+  Ctrl+Shift+Z and respects text/select/contenteditable focus. This was treated
+  as required keyboard behavior rather than deferred polish.
+
+No findings declined or minor findings deferred. No second review was dispatched.
+
+Implementation decisions, in order: native Windows bookkeeping replaces POSIX
+skill helpers (portability cost only); legacy hydrated layers are non-enumerable
+(clones must normalize them again); legacy atlas SHA remains null (existing pack
+validation supplies integrity); catalog save limit is 4 MiB (larger local request
+cap); optional working-catalog injection moved into the tileset UI task (legacy
+callers retain defaults). Real-time browser timeout is 240 seconds because the
+default is too short for the expanded suite; tests and baselines were unchanged.

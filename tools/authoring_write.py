@@ -104,6 +104,7 @@ class AuthoringWriter:
         resource=request['resourceId'];payload=request['payload']
         if not isinstance(resource,str) or resource not in RESOURCES or not resource.startswith('scene/'):raise AuthoringError('UNKNOWN_RESOURCE',404)
         if type(request['schemaVersion']) is not int or request['schemaVersion']!=1 or not isinstance(payload,dict) or type(payload.get('schemaVersion')) is not int or payload['schemaVersion'] not in (1,2):raise AuthoringError('UNSUPPORTED_SCHEMA',422)
+        if payload.get('id')!=resource.split('/',1)[1]:raise AuthoringError('VALIDATION_FAILED',422)
         for key in ('baseHash','catalogHash'):
             if not isinstance(request[key],str) or not re.fullmatch('[0-9a-f]{64}',request[key]):raise AuthoringError('INVALID_BASE_HASH')
         data=_encode(payload)

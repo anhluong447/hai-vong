@@ -165,5 +165,12 @@ class TilesetWriterTest(unittest.TestCase):
         with self.assertRaises(AuthoringError) as caught:writer.save_scene(large)
         self.assertEqual(caught.exception.status,413)
 
+    def test_scene_resource_and_payload_id_must_match(self):
+        from tools.authoring_write import AuthoringWriter
+        writer=AuthoringWriter(self.root);source=writer.read('scene/home');payload=copy.deepcopy(source['payload']);payload['id']='yard'
+        request={'resourceId':'scene/home','schemaVersion':1,'baseHash':source['hash'],'catalogHash':self.writer.read()['hash'],'payload':payload}
+        with self.assertRaises(AuthoringError) as caught:writer.save_scene(request)
+        self.assertEqual(caught.exception.status,422);self.assertEqual(writer.read('scene/home'),source)
+
 
 if __name__=='__main__':unittest.main()

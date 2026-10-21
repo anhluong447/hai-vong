@@ -15,7 +15,9 @@ harness và Chrome CDP hiện có; không thêm runtime dependency.
 
 **Spec:** [2026-10-21-world-map-foundation-design.md](../specs/2026-10-21-world-map-foundation-design.md).
 **Programme:** [WORLD-MAP-AUTHORING.md](../../WORLD-MAP-AUTHORING.md).
-**Source checkpoint:** `2185a55`. Status: planned; chưa task nào được triển khai.
+**Source checkpoint:** `2185a55`; approved planning checkpoint `388b3e1`.
+**Status:** T1–T9 implemented; review fixes and final evidence are recorded in
+[foundation verification](../../ui-reviews/world-map-foundation/README.md).
 
 ## Global Constraints
 

@@ -26,7 +26,8 @@ export class WorldEditor{
   root.querySelector('#world-palette-actions').append(this.button('spawn',()=>this.spawn()),this.button('delete',()=>this.remove()));
   this.listen(root.querySelector('#world-import'),'change',async event=>{const file=event.target.files[0],target=this.document;this.cancel();if(file)try{const text=await file.text();if(this.disposed)return;this.cancel();target.importJSON(text);}catch(error){this.reportError(error);}event.target.value='';});
   this.editLayer='entities';this.tilesetEditor=new TilesetEditor(root.querySelector('#tileset-inspector'),{document:this.tilesetDocument,onCatalogChange:catalog=>this.applyTilesetDraft(catalog),onImport:prepared=>this.importTileset(prepared),onSave:()=>this.saveTileset(),onError:error=>this.reportError(error),getImage:atlas=>this.downloadTileImage(atlas)});this.tileEditor=new TileMapEditor(this);
-  this.listen(root,'keydown',event=>this.key(event));for(const document of this.documents.values())document.subscribe(()=>this.changed());this.buildWorld();this.refresh();
+  this.listen(root,'keydown',event=>{try{this.key(event);}catch(error){this.reportError(error);}});for(const document of this.documents.values())document.subscribe(()=>this.changed());this.buildWorld();this.refresh();
+  this.recoveryPanel=root.querySelector('#world-draft-recovery');this.recoveryPanel.append(this.button('draftDownload',()=>this.downloadRecoveryDraft()),this.button('draftRevalidate',()=>this.revalidateRecoveryDraft()));
  }
  get document(){return this.documents.get(this.mapId);}
  setEditLayer(layer){if(!['entities','tiles'].includes(layer))throw new RangeError('world.tile.layer');this.cancel();this.editLayer=layer;this.tileEditor.setActive(layer==='tiles'&&this.mode==='edit');this.refresh();}
@@ -91,8 +92,8 @@ export class WorldEditor{
    else if(action==='redo')this.document.redo();
    else if(action==='import')this.root.querySelector('#world-import').click();
    else if(action==='export'){const blob=new Blob([this.document.exportJSON()],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`${this.mapId}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),0);}
-   else if(action==='draftSave'){localStorage.setItem(`clb-bao-chi.authoring.world.v1.${this.mapId}`,JSON.stringify(this.document.draftEnvelope()));this.status.textContent=t('authoring.draftSaved');}
-   else if(action==='draftRestore'){const saved=localStorage.getItem(`clb-bao-chi.authoring.world.v1.${this.mapId}`);if(saved)this.document.restoreDraft(JSON.parse(saved));}
+   else if(action==='draftSave'){if(this.recoveryDraft?.sceneId===this.mapId)throw new Error('world.draft.recoveryPending');localStorage.setItem(`clb-bao-chi.authoring.world.v1.${this.mapId}`,JSON.stringify(this.document.draftEnvelope()));this.status.textContent=t('authoring.draftSaved');}
+   else if(action==='draftRestore'){const saved=localStorage.getItem(`clb-bao-chi.authoring.world.v1.${this.mapId}`);if(saved){try{this.document.restoreDraft(JSON.parse(saved));}catch(error){if(!this.recoveryDraft){this.recoveryDraft={sceneId:this.mapId,saved};this.recoveryPanel.hidden=false;}throw error;}}}
    else if(action==='sourceSave'){
     if(this.tilesetDocument.dirty)throw new Error('world.tileset.unsaved');
     this.saving=true;this.document.commit();this.status.textContent=t('authoring.saving');
@@ -107,6 +108,7 @@ export class WorldEditor{
   if(this.world&&!this.world.ready)throw new Error('world.tileset.loading');
   const catalog=normalizeTileset(candidate,undefined,{textKeys:KNOWN_REFS.textKeys});
   for(const old of this.tilesetDocument?.source.tiles||[])if(!catalog.tiles.some(t=>t.id===old.id&&t.atlasId===old.atlasId&&t.atlasIndex===old.atlasIndex))throw new Error('world.tileset.persistedIdentity');
+  for(const old of this.pendingCatalog?.tiles||[])if(!catalog.tiles.some(t=>t.id===old.id&&t.atlasId===old.atlasId&&t.atlasIndex===old.atlasIndex))throw new Error('world.tileset.pendingIdentity');
   validateWorldProject(this.sceneSources(),PREFABS,KNOWN_REFS,catalog);return catalog;
  }
  applyTilesetDraft(catalog,images){
@@ -126,6 +128,7 @@ export class WorldEditor{
  async saveTileset({allowPreview=false}={}){
   if(this.catalogSaving)return;this.cancel();this.catalogSaving=true;
   const doc=this.tilesetDocument,snapshot=structuredClone(doc.draft),baseHash=doc.sourceHash;
+  this.pendingCatalog=snapshot;
   try{
    const current=await this.sourceClient.getResource('tileset-catalog');if(this.disposed)return;if(current.hash!==baseHash)throw Object.assign(new Error('CONFLICT'),{code:'CONFLICT'});
    let persisted=current;
@@ -134,8 +137,10 @@ export class WorldEditor{
    }
    const result=await this.sourceClient.saveTileset({baseHash:persisted.hash,payload:snapshot});if(this.disposed)return;doc.acceptSource(result.hash,snapshot);this.tilesetEditor.status.textContent=t(doc.dirty?'authoring.savedWithDraft':'authoring.tileset.saved');
   }catch(error){if(allowPreview&&error.status===404){this.tilesetEditor.status.textContent=t('authoring.tileset.previewOnly');}else{this.tilesetEditor.status.textContent=t('authoring.tileset.saveFailed');this.reportError(error);}}
-  finally{this.catalogSaving=false;}
+  finally{this.catalogSaving=false;this.pendingCatalog=null;}
  }
+ downloadRecoveryDraft(){if(this.recoveryDraft)this.tilesetEditor.download(`${this.recoveryDraft.sceneId}-recovery-draft.json`,new Blob([this.recoveryDraft.saved],{type:'application/json'}));}
+ revalidateRecoveryDraft(){if(!this.recoveryDraft)return;const {sceneId,saved}=this.recoveryDraft;this.documents.get(sceneId).restoreDraft(JSON.parse(saved),{allowCatalogChange:true});this.recoveryDraft=null;this.recoveryPanel.hidden=true;this.status.textContent=t('authoring.draftRestored');}
  async downloadTileImage(atlas){
   const local=this.localTileImports.get(atlas.id);if(local)this.tilesetEditor.download(atlas.imagePath.split('/').at(-1),new Blob([local.bytes],{type:'image/png'}));
   else{const response=await fetch(atlas.imagePath);if(!response.ok)throw new Error('world.tileset.image.missing');this.tilesetEditor.download(atlas.imagePath.split('/').at(-1),await response.blob());}

@@ -130,10 +130,15 @@ trước publish; mismatch trả 409. Response giữ contract scene save hiện 
 API `/__authoring/save` giữ compatibility v1/giới hạn cũ cho consumer cũ;
 transport version và payload version không được đánh đồng.
 
-Draft envelope v2 thêm `catalogHash`, giữ `sourceHash`. Read draft v1 qua adapter;
+Draft envelope v2 thêm `catalogHash` và `tileIdentities` (ID, atlas ID, atlas index), giữ `sourceHash`. Read draft v1 qua adapter;
 chỉ restore nếu source hash khớp và mọi tile còn hợp lệ. V2 mismatch catalog hash
 không âm thầm restore; cho export bản draft để giữ việc, reload catalog rồi thử
-revalidate rõ ràng. Image blob chưa lưu không được giả vờ là durable draft.
+revalidate rõ ràng. UI giữ nguyên envelope bị từ chối, chặn ghi đè và có nút tải
+xuống/revalidate. Revalidate vẫn kiểm tra source hash và identity từng tile;
+envelope cũ thiếu identity chỉ cho tải xuống để phục hồi thủ công khi lệch catalog.
+Undo/Redo cũng kiểm tra identity và validate trước khi đổi draft/history. Import
+đang lưu bảo vệ identity đã cấp để Undo không tái sử dụng ID đang được publish.
+Image blob chưa lưu không được giả vờ là durable draft.
 
 ## 7. Collision và renderer
 

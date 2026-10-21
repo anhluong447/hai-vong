@@ -36,3 +36,26 @@ test('Import preview rebases onto property edits made after the preview was prep
  e.tilesetDocument.updateTiles([2],{editorName:'Keep this later edit'});await e.importTileset(prepared);
  assert.equal(e.tileCatalog.tiles.find(t=>t.id===2).editorName,'Keep this later edit');
 }));
+async function preparedTile(e,w,color){const {prepareTilesetImport}=await import('../tools/authoring/TilesetImport.js'),canvas=w.document.createElement('canvas');canvas.width=canvas.height=16;canvas.getContext('2d').fillStyle=color;canvas.getContext('2d').fillRect(0,0,16,16);const bytes=Uint8Array.from(atob(canvas.toDataURL('image/png').split(',')[1]),c=>c.charCodeAt(0));return prepareTilesetImport(new File([bytes],'identity.png'),{tilePixels:16,margin:0,spacing:0},e.tileCatalog);}
+test('Scene redo validates membership and stable tile identity before modifying history',()=>withEditor(async(e,w)=>{
+ await e.importTileset(await preparedTile(e,w,'red'));e.document.applyLayerEdits('layer-2',[{x:4,y:4,tile:16}]);e.document.undo();e.tilesetDocument.undo();
+ const before=e.document.exportJSON(),count=e.document.redoStack.length;assert.throws(()=>e.document.redo());assert.equal(e.document.exportJSON(),before);assert.equal(e.document.redoStack.length,count);
+ await e.importTileset(await preparedTile(e,w,'blue'));assert.throws(()=>e.document.redo(),/tileIdentityConflict/);assert.equal(e.document.exportJSON(),before);assert.equal(e.document.redoStack.length,count);
+}));
+test('Pending native import protects its identities while allowing later property edits',()=>withEditor(async(e,w)=>{
+ const baseline={hash:e.tilesetDocument.sourceHash,payload:structuredClone(e.tilesetDocument.source)};let release;const imported=await preparedTile(e,w,'red');
+ e.sourceClient={getResource:async()=>baseline,importTileset:()=>new Promise(resolve=>release=resolve),saveTileset:async request=>({hash:'b'.repeat(64),payload:request.payload,applied:true})};
+ const saving=e.importTileset(imported);await new Promise(resolve=>setTimeout(resolve,0));assert.ok(release);
+ let rejected=false;try{e.tilesetDocument.undo();}catch{rejected=true;}
+ e.tilesetDocument.updateTiles([2],{editorName:'Later property'});release({hash:'a'.repeat(64),payload:imported.payload,applied:true});await saving;
+ assert.ok(rejected);assert.equal(e.tilesetDocument.draft.tiles.find(t=>t.id===16).atlasId,imported.atlasId);assert.equal(e.tilesetDocument.draft.tiles.find(t=>t.id===2).editorName,'Later property');assert.ok(e.tilesetDocument.dirty);
+}));
+test('Rejected draft can be exported and explicitly revalidated without overwriting its stored copy',()=>withEditor(async(e,w)=>{
+ e.document.applyLayerEdits('layer-2',[{x:4,y:4,tile:0}]);await e.action('draftSave');const key=`clb-bao-chi.authoring.world.v1.${e.mapId}`,stored=w.localStorage.getItem(key);e.document.reset();e.tilesetDocument.sourceHash='changed-catalog';
+ await e.action('draftRestore');assert.ok(e.recoveryDraft);assert.ok(!w.document.querySelector('#world-draft-recovery').hidden);await e.action('draftSave');assert.equal(w.localStorage.getItem(key),stored);
+ let blob;e.tilesetEditor.download=(name,value)=>blob=value;e.downloadRecoveryDraft();assert.equal(JSON.parse(await blob.text()).payload.layers[1].tiles[4][4],0);
+ e.revalidateRecoveryDraft();assert.equal(e.document.draft.layers[1].tiles[4][4],0);assert.equal(w.localStorage.getItem(key),stored);w.localStorage.removeItem(key);
+}));
+test('Tileset Ctrl+Y redoes properties when inspector controls have focus',()=>withEditor((e,w)=>{
+ e.setEditLayer('tiles');e.tilesetDocument.updateTiles([2],{drawPriority:'above'});e.tilesetDocument.undo();const button=w.document.querySelector('[data-tileset-action=undo]');button.focus();button.dispatchEvent(new w.KeyboardEvent('keydown',{key:'y',ctrlKey:true,bubbles:true,cancelable:true}));assert.equal(e.tileCatalog.tiles.find(t=>t.id===2).drawPriority,'above');
+}));
