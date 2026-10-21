@@ -23,3 +23,16 @@ test('Static tileset import paints with working images and exports durable metad
  let downloaded;e.tilesetEditor.download=(name,blob)=>downloaded={name,blob};await e.downloadTileImage(prepared.payload.atlases.at(-1));assert.equal(downloaded.blob.size,bytes.length);
  assert.throws(()=>e.tilesetDocument.undo());
 }));
+test('Scene save captures its catalog dependency together with the submitted scene',()=>withEditor(async e=>{
+ const original=e.tilesetDocument.sourceHash,sceneHash=e.document.sourceHash;let read,finish,request;
+ e.sourceClient={getResource:()=>new Promise(resolve=>read=resolve),saveScene:(id,input)=>{request=input;return new Promise(resolve=>finish=resolve);}};
+ const saving=e.action('sourceSave');e.tilesetDocument.sourceHash='new-catalog-hash';read({hash:sceneHash});await new Promise(resolve=>setTimeout(resolve,0));
+ const captured=request.catalogHash;finish({hash:'scene-next',sourceSaved:true,applied:true});await saving;assert.equal(captured,original);
+}));
+test('Import preview rebases onto property edits made after the preview was prepared',()=>withEditor(async(e,w)=>{
+ const {prepareTilesetImport}=await import('../tools/authoring/TilesetImport.js'),canvas=w.document.createElement('canvas');canvas.width=canvas.height=16;
+ const bytes=Uint8Array.from(atob(canvas.toDataURL('image/png').split(',')[1]),c=>c.charCodeAt(0));
+ const prepared=await prepareTilesetImport(new File([bytes],'later.png'),{tilePixels:16,margin:0,spacing:0},e.tileCatalog);
+ e.tilesetDocument.updateTiles([2],{editorName:'Keep this later edit'});await e.importTileset(prepared);
+ assert.equal(e.tileCatalog.tiles.find(t=>t.id===2).editorName,'Keep this later edit');
+}));

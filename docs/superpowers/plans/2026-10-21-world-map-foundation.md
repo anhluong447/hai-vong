@@ -292,19 +292,19 @@ existing review_authoring_source script, browser/source and Python tests.
 hash together; later in-memory edits cannot be accepted as that submitted snapshot.
 Catalog save revalidates source scenes; scene save validates against fresh catalog.
 
-- [ ] Add disposable-project sequence: import → edit properties → paint several
+- [x] Add disposable-project sequence: import → edit properties → paint several
   layers → undo/redo → save catalog → save scene → new page/reload → Playtest.
   Assert image SHA, tile IDs, layer values, flags and resulting collision.
-- [ ] Add delayed-save edit, unsaved tile dependency, changed catalog during scene
+- [x] Add delayed-save edit, unsaved tile dependency, changed catalog during scene
   save, scene update during catalog save and incompatible incoming-spawn cases.
   Explicit reload/revalidate preserves an exportable recovery copy on conflict.
-- [ ] Add missing file/hash mismatch after reload and catalog image load failure;
+- [x] Add missing file/hash mismatch after reload and catalog image load failure;
   show specific status, prevent false applied success, allow restoring correct PNG.
-- [ ] Run failing cases, fix integration in owning modules; do not add a second
+- [x] Run failing cases, fix integration in owning modules; do not add a second
   project model, storage service or undo stack to work around an integration issue.
-- [ ] Run Python authoring/world tests, focused browser and native source review
+- [x] Run Python authoring/world tests, focused browser and native source review
   against temporary root; verify real default maps/atlas bytes did not change.
-- [ ] Commit: `test(authoring): verify layered map and tileset persistence`.
+- [x] Commit: `test(authoring): verify layered map and tileset persistence`.
 
 ## T9 — Regression, documentation và handoff
 

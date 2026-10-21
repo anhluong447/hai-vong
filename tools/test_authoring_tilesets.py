@@ -134,5 +134,20 @@ class TilesetWriterTest(unittest.TestCase):
         large=dict(request,baseHash=result['hash'],payload=scene);self.assertGreater(len(json.dumps(large)),1024*1024)
         self.assertTrue(writer.save_scene(large)['applied'])
 
+    def test_review_server_tilesets_use_writer_root_not_static_repository(self):
+        from tools.authoring_server import create_server
+        from tools.authoring_write import AuthoringWriter
+        with create_server(ROOT,enabled=True,port=0,writer=AuthoringWriter(self.root)) as server:
+            self.assertEqual(server.tilesets.root,self.root.resolve())
+
+    def test_changed_catalog_during_scene_save_does_not_publish_scene(self):
+        from tools.authoring_write import AuthoringWriter
+        writer=AuthoringWriter(self.root);source=writer.read('scene/home')
+        request={'resourceId':'scene/home','schemaVersion':1,'baseHash':source['hash'],'catalogHash':self.writer.read()['hash'],'payload':source['payload']}
+        catalog=self.root/'content/world/tileset.json';before=(self.root/'content/maps/scenes/home.json').read_bytes()
+        with patch.object(writer,'_before_scene_publish',side_effect=lambda:catalog.write_bytes(catalog.read_bytes()+b'\n')):
+            with self.assertRaises(AuthoringError) as caught:writer.save_scene(request)
+        self.assertEqual(caught.exception.code,'CONFLICT');self.assertEqual((self.root/'content/maps/scenes/home.json').read_bytes(),before)
+
 
 if __name__=='__main__':unittest.main()

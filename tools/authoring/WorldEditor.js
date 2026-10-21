@@ -96,9 +96,9 @@ export class WorldEditor{
    else if(action==='sourceSave'){
     if(this.tilesetDocument.dirty)throw new Error('world.tileset.unsaved');
     this.saving=true;this.document.commit();this.status.textContent=t('authoring.saving');
-    const doc=this.document,resource=`scene/${this.mapId}`,submitted=JSON.parse(doc.exportJSON()),baseHash=doc.sourceHash,current=await this.sourceClient.getResource(resource);
+    const doc=this.document,resource=`scene/${this.mapId}`,submitted=JSON.parse(doc.exportJSON()),baseHash=doc.sourceHash,catalogHash=this.tilesetDocument.sourceHash,current=await this.sourceClient.getResource(resource);
     if(current.hash!==baseHash)throw new Error('world.draft.sourceConflict');
-    const result=await this.sourceClient.saveScene(resource,{baseHash,catalogHash:this.tilesetDocument.sourceHash,payload:submitted});doc.acceptSource(result.hash,submitted);
+    const result=await this.sourceClient.saveScene(resource,{baseHash,catalogHash,payload:submitted});if(this.disposed)return;doc.acceptSource(result.hash,submitted);
     if(doc===this.document)this.status.textContent=t(result.applied?(doc.dirty?'authoring.savedWithDraft':'authoring.world.sourceApplied'):'authoring.world.sourceBuildFailed');
    }
   }catch(error){this.reportError(error);}finally{if(action==='sourceSave')this.saving=false;}
@@ -116,8 +116,11 @@ export class WorldEditor{
   this.tileEditor?.rebuildPalette();
  }
  async importTileset(prepared){
-  this.cancel();if(this.disposed)return;this.localTileImages.set(prepared.atlasId,prepared.image);this.localTileImports.set(prepared.atlasId,prepared);
-  this.tilesetDocument.replace(prepared.payload);this.tileEditor.setPrimaryTile(prepared.payload.tiles.find(t=>t.atlasId===prepared.atlasId).id);
+  this.cancel();if(this.disposed)return;const payload=structuredClone(this.tileCatalog),atlas=prepared.payload.atlases.find(a=>a.id===prepared.atlasId),existing=payload.atlases.find(a=>a.id===atlas.id);
+  if(existing){if(['tilePixels','margin','spacing'].some(k=>existing[k]!==atlas[k]))throw new Error('world.tileset.atlas.layout');}
+  else{payload.atlases.push(atlas);for(const tile of prepared.payload.tiles.filter(t=>t.atlasId===atlas.id))payload.tiles.push({...tile,id:payload.nextTileId++});}
+  this.validateTilesetDraft(payload);this.localTileImages.set(prepared.atlasId,prepared.image);this.localTileImports.set(prepared.atlasId,prepared);
+  this.tilesetDocument.replace(payload);this.tileEditor.setPrimaryTile(payload.tiles.find(t=>t.atlasId===prepared.atlasId).id);
   await this.saveTileset({allowPreview:true});
  }
  async saveTileset({allowPreview=false}={}){

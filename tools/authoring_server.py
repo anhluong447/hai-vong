@@ -150,7 +150,7 @@ def create_server(root, *, enabled=False, host='127.0.0.1', port=0, writer=None)
     server = ThreadingHTTPServer(('127.0.0.1', port), partial(AuthoringHandler, directory=str(root)))
     server.token = secrets.token_urlsafe(32)
     server.writer = writer if writer is not None else AuthoringWriter(root)
-    server.tilesets=TilesetWriter(root,server.writer.lock)
+    server.tilesets=TilesetWriter(server.writer.root,server.writer.lock)
     try:server.tilesets.recover()
     except BaseException:server.server_close();raise
     return server
