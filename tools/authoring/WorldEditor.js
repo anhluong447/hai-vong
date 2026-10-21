@@ -12,8 +12,10 @@ import {worldMetrics,gridToPixel,actorFoot,clientToGrid,pickHeight} from '../../
 import {WorldDocument} from './WorldDocument.js';
 import {SourceSaveClient} from './SourceSaveClient.js';
 import {TileMapEditor} from './TileMapEditor.js';
+import {ObjectBrowser} from './ObjectBrowser.js';
 
 const text=id=>t(`authoring.world.${id}`);
+const workspace=(id,params)=>t(`authoring.workspace.${id}`,params);
 export class WorldEditor{
  constructor(root){
   this.root=root;this.host=root.querySelector('#world-stage');this.status=root.querySelector('#world-status');this.abort=new AbortController();this.documents=new Map();this.mapId=new URLSearchParams(location.search).get('map')||'home';if(!SCENES[this.mapId])this.mapId='home';this.mode='edit';this.selection=null;this.session=new GameSession();this.sourceClient=new SourceSaveClient();
@@ -21,11 +23,12 @@ export class WorldEditor{
   for(const [id,source] of Object.entries(SCENES))this.documents.set(id,new WorldDocument({source,prefabs:PREFABS,knownRefs:KNOWN_REFS,sourceHash:SCENE_SOURCE_HASHES[id],getCatalog:()=>this.tileCatalog,getCatalogHash:()=>this.tilesetDocument.sourceHash,validateScene:candidate=>this.documents.size===Object.keys(SCENES).length?validateWorldProject({...this.sceneSources(),[candidate.id]:candidate},PREFABS,KNOWN_REFS,this.tileCatalog)[candidate.id]:validateWorldScene(candidate,PREFABS,KNOWN_REFS,{catalog:this.tileCatalog})}));
   const mapSelect=root.querySelector('#world-map');for(const id of Object.keys(SCENES)){const option=document.createElement('option');option.value=id;option.textContent=text(`map.${id}`);mapSelect.append(option);}mapSelect.value=this.mapId;
   this.listen(mapSelect,'change',()=>this.switchMap(mapSelect.value));this.listen(root.querySelector('#world-entities'),'change',event=>this.select(event.target.value));
+  this.entityBrowser=new ObjectBrowser(root.querySelector('#world-object-browser'),{onSelect:id=>this.select(id)});
   const palette=root.querySelector('#world-palette');for(const [prefab,ids] of [['prop',KNOWN_REFS.assets],['npc',KNOWN_REFS.sprites.filter(id=>id!=='khue')]])for(const id of ids){const option=document.createElement('option');option.value=`${prefab}:${id}`;option.textContent=`${prefab} / ${id}`;palette.append(option);}
-  const toolbar=root.querySelector('#world-toolbar');for(const action of ['edit','play','undo','redo','export','import','draftSave','draftRestore','sourceSave']){const button=this.button(action,()=>this.action(action));button.dataset.action=action;toolbar.append(button);}
+  const toolbar=root.querySelector('#world-toolbar');for(const action of ['edit','play','undo','redo','export','import','draftSave','draftRestore','sourceSave']){const button=this.button(action,()=>this.action(action));button.dataset.action=action;const group=['edit','play'].includes(action)?'mode':['undo','redo'].includes(action)?'history':action==='sourceSave'?'save':'files';if(action==='sourceSave')button.className='editor-primary';toolbar.querySelector(`[data-toolbar-group="${group}"]`).append(button);}
   root.querySelector('#world-palette-actions').append(this.button('spawn',()=>this.spawn()),this.button('delete',()=>this.remove()));
   this.listen(root.querySelector('#world-import'),'change',async event=>{const file=event.target.files[0],target=this.document;this.cancel();if(file)try{const text=await file.text();if(this.disposed)return;this.cancel();target.importJSON(text);}catch(error){this.reportError(error);}event.target.value='';});
-  this.editLayer='entities';this.tilesetEditor=new TilesetEditor(root.querySelector('#tileset-inspector'),{document:this.tilesetDocument,onCatalogChange:catalog=>this.applyTilesetDraft(catalog),onImport:prepared=>this.importTileset(prepared),onSave:()=>this.saveTileset(),onError:error=>this.reportError(error),getImage:atlas=>this.downloadTileImage(atlas)});this.tileEditor=new TileMapEditor(this);
+  this.editLayer='entities';this.tilesetEditor=new TilesetEditor(root.querySelector('#tileset-inspector'),{document:this.tilesetDocument,onCatalogChange:catalog=>this.applyTilesetDraft(catalog),onImport:prepared=>this.importTileset(prepared),onSave:()=>this.saveTileset(),onError:error=>this.reportError(error),getImage:atlas=>this.downloadTileImage(atlas),getTileImage:id=>this.world?.tileImages.get(id)||this.localTileImages.get(id),onSelectionChange:()=>this.tileEditor?.refresh(),onStateChange:()=>this.refreshWorkspace()});this.tileEditor=new TileMapEditor(this);
   this.listen(root,'keydown',event=>{try{this.key(event);}catch(error){this.reportError(error);}});for(const document of this.documents.values())document.subscribe(()=>this.changed());this.buildWorld();this.refresh();
   this.recoveryPanel=root.querySelector('#world-draft-recovery');this.recoveryPanel.append(this.button('draftDownload',()=>this.downloadRecoveryDraft()),this.button('draftRevalidate',()=>this.revalidateRecoveryDraft()));
  }
@@ -45,7 +48,7 @@ export class WorldEditor{
   this.overlay=document.createElement('canvas');this.overlay.className='world-grid-overlay';this.overlay.setAttribute('aria-label',text('selected'));this.overlay.tabIndex=0;this.host.append(this.overlay);this.overlay.hidden=this.mode!=='edit';
   this.overlayAbort?.abort();this.overlayAbort=new AbortController();const signal=this.overlayAbort.signal;this.overlay.addEventListener('pointerdown',event=>this.down(event),{signal});this.overlay.addEventListener('pointermove',event=>this.move(event),{signal});this.overlay.addEventListener('pointerup',event=>this.up(event),{signal});this.overlay.addEventListener('pointercancel',()=>this.cancel(),{signal});this.overlay.addEventListener('lostpointercapture',()=>{this.cancel();},{signal});
   this.overlay.addEventListener('blur',()=>{this.tileEditor.space=false;this.cancel();},{signal});
-  this.world.onFrame=()=>{this.world.hint.textContent=this.mode==='edit'&&this.editLayer==='tiles'?this.tileEditor.hint():text(this.mode==='edit'?'editHint':'playHint');this.drawOverlay();};
+  this.world.onFrame=()=>{this.world.hint.textContent=this.mode==='edit'&&this.editLayer==='tiles'?this.tileEditor.hint():text(this.mode==='edit'?'editHint':'playHint');this.tilesetEditor.paintSelection();this.drawOverlay();};
  }
  changed(){if(!this.world)return;this.tileEditor?.cancel();this.world.replaceMapCatalog(this.catalog());this.world.draw(0);this.refresh();if(!this.saving)this.status.textContent=t(this.document.dirty?'authoring.dirty':'authoring.world.ready');}
  switchMap(id,spawn){this.cancel();this.tileEditor.saveCamera();this.world.editorCamera=null;this.mapId=id;this.root.querySelector('#world-map').value=id;this.selection=null;this.world.replaceMapCatalog(this.catalog());this.world.enter(id,spawn||this.world.mapCatalog[id].spawn);this.tileEditor.enterMap();this.refresh();}
@@ -70,13 +73,24 @@ export class WorldEditor{
  spawn(){if(this.mode!=='edit')return;const [prefab,visual]=this.root.querySelector('#world-palette').value.split(':');const {width,height}=this.document.draft;const p={x:Math.max(1,Math.min(width-2,this.world.player.x+1)),y:Math.max(1,Math.min(height-2,this.world.player.y))};this.select(this.document.spawn(prefab,visual,p));}
  remove(){if(this.mode==='edit'&&this.selection){this.document.deleteEntity(this.selection);this.selection=null;this.refresh();}}
  refresh(){
+  this.refreshWorkspace();
   this.tileEditor.setActive(this.editLayer==='tiles'&&this.mode==='edit');
   const list=this.root.querySelector('#world-entities');list.replaceChildren();for(const entity of [...this.document.draft.objects,...this.document.draft.npcs]){const option=document.createElement('option');option.value=entity.id;option.textContent=entity.id;list.append(option);}list.value=this.selection||'';
-  for(const button of this.root.querySelectorAll('[data-action]')){if(['edit','play'].includes(button.dataset.action))button.setAttribute('aria-pressed',String(button.dataset.action===this.mode));if(['undo','redo'].includes(button.dataset.action))button.disabled=this.mode!=='edit';}
+  this.entityBrowser.setItems([...this.document.draft.objects,...this.document.draft.npcs].map(entity=>({id:entity.id,label:entity.id})),this.selection);
+  for(const button of this.root.querySelectorAll('[data-action]'))if(['edit','play'].includes(button.dataset.action))button.setAttribute('aria-pressed',String(button.dataset.action===this.mode));
   const inspector=this.root.querySelector('#world-inspector');inspector.replaceChildren();const entity=this.entity();if(!entity){inspector.textContent=text('noSelection');return;}const selected=document.createElement('p');selected.className='world-selected';selected.textContent=entity.id;inspector.append(selected);
   const o={...PREFABS[entity.prefab],...entity.overrides},sprite=o.sprite?this.world.sprite(o.sprite):null,pivot=o.pivotPx||sprite?.pivot||{x:o.asset?16:(sprite?.frameWidth||24)/2,y:o.asset?46:(sprite?.frameHeight||36)-2};
   for(const [key,value] of [['x',entity.x],['y',entity.y],['pivotX',pivot.x],['pivotY',pivot.y],['offsetX',o.offsetPx?.x||0],['offsetY',o.offsetPx?.y||0]]){const label=document.createElement('label'),span=document.createElement('span'),input=document.createElement('input');span.textContent=text(key);input.type='number';input.step=['x','y'].includes(key)?'1':'.01';input.value=value;input.dataset.field=key;input.disabled=this.mode!=='edit';label.append(span,input);inspector.append(label);input.addEventListener('change',()=>{try{const n=Number(input.value);if(input.value.trim()===''||!Number.isFinite(n))throw new Error('world.field.number');const patch=['x','y'].includes(key)?{[key]:n}:{overrides:{[key.startsWith('pivot')?'pivotPx':'offsetPx']:{...(key.startsWith('pivot')?pivot:o.offsetPx||{x:0,y:0}),[key.endsWith('X')?'x':'y']:n}}};this.document.updateEntity(entity.id,patch);}catch(error){this.reportError(error);}});}
   const label=document.createElement('label'),span=document.createElement('span'),area=document.createElement('textarea');span.textContent=text('footprint');area.value=JSON.stringify(o.footprint||[[0,0]]);area.dataset.field='footprint';area.disabled=this.mode!=='edit';label.append(span,area);inspector.append(label);area.addEventListener('change',()=>{try{this.document.updateEntity(entity.id,{overrides:{footprint:JSON.parse(area.value)}});}catch(error){this.reportError(error);}});
+ }
+ refreshWorkspace(){
+  const state=this.saving?'saving':this.document.dirty?'dirty':'saved',badge=this.root.querySelector('#world-scene-state');badge.dataset.state=state;badge.textContent=workspace(this.saving?'saving':this.document.dirty?'sceneDirty':'sceneSaved');
+  const tiles=this.root.querySelector('#world-tileset-state');tiles.dataset.state=this.catalogSaving?'saving':this.tilesetDocument.dirty?'dirty':'saved';tiles.textContent=workspace(this.catalogSaving?'saving':this.tilesetDocument.dirty?'tilesetDirty':'tilesetSaved');
+  this.root.querySelector('#world-current-map').textContent=text(`map.${this.mapId}`);this.root.querySelector('#world-map-size').textContent=workspace('mapSize',this.document.draft);this.root.querySelector('#world-save-order').hidden=!this.tilesetDocument.dirty;
+  const brush=this.root.querySelector('#world-brush-state');if(this.editLayer==='tiles'&&this.tileEditor){brush.textContent=workspace('brushState',{tool:t(`authoring.tiles.${this.tileEditor.tool}`),layer:t('authoring.tiles.layerName',{number:Number(this.tileEditor.activeLayerId.slice(-1))}),id:this.tileEditor.primaryTile});brush.dataset.brushTileId=this.tileEditor.primaryTile;}else{brush.textContent=this.selection||workspace('entityState');delete brush.dataset.brushTileId;}
+  this.root.querySelector('#world-canvas-tools').hidden=this.editLayer!=='tiles';const save=this.root.querySelector('[data-action=sourceSave]');save.disabled=!!this.saving||this.mode!=='edit'||this.tilesetDocument.dirty;
+  for(const action of ['undo','redo']){const button=this.root.querySelector(`[data-action=${action}]`);button.disabled=this.mode!=='edit'||!(action==='undo'?this.document.undoStack:this.document.redoStack).length;}
+  if(this.tilesetEditor?.saveButton)this.tilesetEditor.saveButton.disabled=!!this.catalogSaving;
  }
  drawOverlay(){
   if(!this.overlay||this.mode!=='edit'||!this.world.ready)return;const world=this.world,rect=world.canvas.getBoundingClientRect(),hostRect=this.host.getBoundingClientRect(),overlay=this.overlay;overlay.width=world.canvas.width;overlay.height=world.canvas.height;overlay.style.width=`${rect.width}px`;overlay.style.height=`${rect.height}px`;overlay.style.left=`${rect.left-hostRect.left-this.host.clientLeft}px`;overlay.style.top=`${rect.top-hostRect.top-this.host.clientTop}px`;const ctx=overlay.getContext('2d'),tile=worldMetrics.tilePixels;ctx.lineWidth=.3;ctx.strokeStyle='#c4eee52d';if(this.editLayer!=='tiles'||this.tileEditor.showGrid){for(let x=-world.camera.x%tile;x<overlay.width;x+=tile){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,overlay.height);ctx.stroke();}for(let y=-world.camera.y%tile;y<overlay.height;y+=tile){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(overlay.width,y);ctx.stroke();}
@@ -96,13 +110,13 @@ export class WorldEditor{
    else if(action==='draftRestore'){const saved=localStorage.getItem(`clb-bao-chi.authoring.world.v1.${this.mapId}`);if(saved){try{this.document.restoreDraft(JSON.parse(saved));}catch(error){if(!this.recoveryDraft){this.recoveryDraft={sceneId:this.mapId,saved};this.recoveryPanel.hidden=false;}throw error;}}}
    else if(action==='sourceSave'){
     if(this.tilesetDocument.dirty)throw new Error('world.tileset.unsaved');
-    this.saving=true;this.document.commit();this.status.textContent=t('authoring.saving');
+    this.saving=true;this.document.commit();this.refreshWorkspace();this.status.textContent=t('authoring.saving');
     const doc=this.document,resource=`scene/${this.mapId}`,submitted=JSON.parse(doc.exportJSON()),baseHash=doc.sourceHash,catalogHash=this.tilesetDocument.sourceHash,current=await this.sourceClient.getResource(resource);
     if(current.hash!==baseHash)throw new Error('world.draft.sourceConflict');
     const result=await this.sourceClient.saveScene(resource,{baseHash,catalogHash,payload:submitted});if(this.disposed)return;doc.acceptSource(result.hash,submitted);
     if(doc===this.document)this.status.textContent=t(result.applied?(doc.dirty?'authoring.savedWithDraft':'authoring.world.sourceApplied'):'authoring.world.sourceBuildFailed');
    }
-  }catch(error){this.reportError(error);}finally{if(action==='sourceSave')this.saving=false;}
+  }catch(error){this.reportError(error);}finally{if(action==='sourceSave')this.saving=false;this.refreshWorkspace();}
  }
  validateTilesetDraft(candidate){
   if(this.world&&!this.world.ready)throw new Error('world.tileset.loading');
@@ -129,6 +143,7 @@ export class WorldEditor{
   if(this.catalogSaving)return;this.cancel();this.catalogSaving=true;
   const doc=this.tilesetDocument,snapshot=structuredClone(doc.draft),baseHash=doc.sourceHash;
   this.pendingCatalog=snapshot;
+  this.refreshWorkspace();
   try{
    const current=await this.sourceClient.getResource('tileset-catalog');if(this.disposed)return;if(current.hash!==baseHash)throw Object.assign(new Error('CONFLICT'),{code:'CONFLICT'});
    let persisted=current;
@@ -137,7 +152,7 @@ export class WorldEditor{
    }
    const result=await this.sourceClient.saveTileset({baseHash:persisted.hash,payload:snapshot});if(this.disposed)return;doc.acceptSource(result.hash,snapshot);this.tilesetEditor.status.textContent=t(doc.dirty?'authoring.savedWithDraft':'authoring.tileset.saved');
   }catch(error){if(allowPreview&&error.status===404){this.tilesetEditor.status.textContent=t('authoring.tileset.previewOnly');}else{this.tilesetEditor.status.textContent=t('authoring.tileset.saveFailed');this.reportError(error);}}
-  finally{this.catalogSaving=false;this.pendingCatalog=null;}
+  finally{this.catalogSaving=false;this.pendingCatalog=null;this.refreshWorkspace();}
  }
  downloadRecoveryDraft(){if(this.recoveryDraft)this.tilesetEditor.download(`${this.recoveryDraft.sceneId}-recovery-draft.json`,new Blob([this.recoveryDraft.saved],{type:'application/json'}));}
  revalidateRecoveryDraft(){if(!this.recoveryDraft)return;const {sceneId,saved}=this.recoveryDraft;this.documents.get(sceneId).restoreDraft(JSON.parse(saved),{allowCatalogChange:true});this.recoveryDraft=null;this.recoveryPanel.hidden=true;this.status.textContent=t('authoring.draftRestored');}
@@ -145,5 +160,5 @@ export class WorldEditor{
   const local=this.localTileImports.get(atlas.id);if(local)this.tilesetEditor.download(atlas.imagePath.split('/').at(-1),new Blob([local.bytes],{type:'image/png'}));
   else{const response=await fetch(atlas.imagePath);if(!response.ok)throw new Error('world.tileset.image.missing');this.tilesetEditor.download(atlas.imagePath.split('/').at(-1),await response.blob());}
  }
- dispose(){this.disposed=true;this.cancel();this.tileEditor.dispose();this.tilesetEditor.dispose();this.abort.abort();this.overlayAbort?.abort();this.world.dispose();this.host.replaceChildren();}
+ dispose(){this.disposed=true;this.cancel();this.entityBrowser.dispose();this.tileEditor.dispose();this.tilesetEditor.dispose();this.abort.abort();this.overlayAbort?.abort();this.world.dispose();this.host.replaceChildren();}
 }

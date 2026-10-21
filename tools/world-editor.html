@@ -1,6 +1,38 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1"><title data-text="authoring.world.title"></title><link rel="stylesheet" href="styles/pixel.css"><link rel="stylesheet" href="tools/world-editor.css"></head><body>
-<header><h1 data-text="authoring.world.title"></h1><nav id="world-toolbar"></nav><nav id="world-layers"></nav></header>
-<main><aside><label><span data-text="authoring.world.map"></span><select id="world-map"></select></label><div id="entity-controls"><h2 data-text="authoring.world.objects"></h2><select id="world-entities" size="12"></select><h2 data-text="authoring.world.palette"></h2><select id="world-palette"></select><div id="world-palette-actions"></div></div><div id="tile-controls" hidden><h2 data-text="authoring.tiles.palette"></h2><div id="tile-layer-controls"></div><div id="tile-toolbar"></div><label><span data-text="authoring.tileset.atlas"></span><select id="tile-atlas"></select></label><label><span data-text="authoring.tileset.search"></span><input id="tile-search" type="search"></label><div id="tile-palette"></div><label><span data-text="authoring.tiles.eraseTile"></span><select id="tile-erase"></select></label></div></aside>
-<section><div id="world-stage" class="pixel-stage"></div><output id="world-status" aria-live="polite"></output><div id="world-draft-recovery" hidden><p data-text="authoring.world.draftRecovery"></p></div></section>
-<aside><h2 id="world-inspector-heading" data-text="authoring.world.inspector"></h2><div id="world-inspector"></div><section id="tileset-inspector" hidden></section><p id="tile-help" data-text="authoring.tiles.help" hidden></p></aside></main>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-text="authoring.world.title"></title><link rel="stylesheet" href="styles/pixel.css"><link rel="stylesheet" href="tools/authoring/editor-shell.css"><link rel="stylesheet" href="tools/world-editor.css"></head>
+<body class="editor-surface world-editor">
+<header class="editor-header">
+ <div class="editor-brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m16 3 13 7-13 7L3 10 16 3Z" stroke="currentColor" stroke-width="2"/><path d="m3 16 13 7 13-7M3 22l13 7 13-7" stroke="currentColor" stroke-width="2"/></svg><div><h1 data-text="authoring.world.title"></h1><p class="editor-muted" data-text="authoring.workspace.subtitle"></p></div></div>
+ <nav id="world-toolbar" class="editor-toolbar"><div class="editor-action-group" data-toolbar-group="mode"></div><div class="editor-action-group" data-toolbar-group="history"></div><details class="editor-file-menu"><summary data-text="authoring.workspace.files"></summary><div data-toolbar-group="files"></div></details><div class="editor-action-group" data-toolbar-group="save"></div><a class="editor-help-link" href="docs/guides/WORLD-EDITOR-GUIDE.md" target="_blank" rel="noopener" data-text="authoring.workspace.guide"></a></nav>
+</header>
+<main class="world-workspace">
+ <aside class="editor-panel world-browser">
+  <label class="world-map-picker"><span data-text="authoring.world.map"></span><select id="world-map"></select></label>
+  <nav id="world-layers" class="world-mode-switch"></nav>
+  <div id="entity-controls"><h2 data-text="authoring.world.objects"></h2><select id="world-entities" size="12" hidden></select><div id="world-object-browser"></div><h3 data-text="authoring.world.palette"></h3><select id="world-palette"></select><div id="world-palette-actions"></div></div>
+  <div id="tile-controls" hidden>
+   <h2 data-text="authoring.workspace.layers"></h2><div id="tile-layer-controls"></div>
+   <div class="editor-pane-heading"><h2 data-text="authoring.tiles.palette"></h2><output id="tile-palette-count" class="editor-muted"></output></div>
+   <label><span data-text="authoring.tileset.atlas"></span><select id="tile-atlas"></select></label>
+   <label class="tile-search-label"><input id="tile-search" type="search" data-text-aria-label="authoring.tileset.search" data-text-placeholder="authoring.tileset.search"></label>
+   <div id="tile-palette"></div><p class="editor-muted" data-text="authoring.workspace.tileSelectionHint"></p>
+   <details class="editor-disclosure"><summary data-text="authoring.tiles.eraseTile"></summary><select id="tile-erase" data-text-aria-label="authoring.tiles.eraseTile"></select></details>
+  </div>
+ </aside>
+ <section class="world-canvas-panel">
+  <div class="world-canvas-header"><div><h2 id="world-current-map"></h2><p id="world-map-size" class="editor-muted"></p></div><output id="world-scene-state" class="editor-badge"></output></div>
+  <div id="world-canvas-tools"><div id="tile-toolbar"></div></div>
+  <div id="world-stage" class="pixel-stage editor-viewport"></div>
+  <div class="world-canvas-footer"><span id="world-brush-state"></span><span data-text="authoring.workspace.canvasHint"></span></div>
+  <output id="world-status" aria-live="polite"></output>
+  <div id="world-draft-recovery" hidden><p data-text="authoring.world.draftRecovery"></p></div>
+ </section>
+ <aside class="editor-panel world-properties">
+  <div class="editor-pane-heading"><h2 id="world-inspector-heading" data-text="authoring.world.inspector"></h2><output id="world-tileset-state" class="editor-badge"></output></div>
+  <p id="world-save-order" class="world-save-order" data-text="authoring.workspace.saveOrder" hidden></p>
+  <div id="world-inspector"></div><section id="tileset-inspector" hidden></section>
+  <details class="editor-disclosure"><summary data-text="authoring.workspace.shortcuts"></summary><p id="tile-help" data-text="authoring.tiles.help" hidden></p></details>
+ </aside>
+</main>
 <input id="world-import" type="file" accept="application/json,.json" hidden><script type="module" src="tools/world-editor.js"></script></body></html>

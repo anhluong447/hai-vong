@@ -40,18 +40,23 @@ Quy trình làm một map:
 
 | Vùng | Dùng để làm gì |
 | --- | --- |
-| Thanh trên cùng | Đổi Edit Map/Playtest, Undo/Redo, lưu nháp, import/export scene và lưu source |
+| Thanh trên cùng | Đổi Edit Map/Playtest, Undo/Redo, Save Scene to Source; nháp và import/export nằm trong Files & drafts |
 | Entities / Tiles | Chuyển giữa chỉnh object/NPC và vẽ tile |
 | Map ở cột trái | Chọn map đang sửa |
 | Layer 1–4 | Chọn lớp vẽ, bật/tắt Show và Lock |
 | Tile Palette | Chọn ảnh tileset, tìm tile theo tên/ID, chọn tile để vẽ |
 | Canvas ở giữa | Xem map, vẽ tile, di chuyển object và chơi thử |
-| Tileset Properties ở cột phải | Đặt tên, collision, cạnh chặn, thứ tự vẽ và import PNG |
+| Properties / Import PNG ở cột phải | Properties chỉnh tile; Import PNG mở form nhập ảnh và xem lưới |
 | Object Inspector trong Entities | Chỉnh vị trí, điểm neo, lệch hình và footprint của object/NPC |
 | Dòng trạng thái dưới map/panel | Xem thao tác đã áp dụng, đã lưu hay bị từ chối |
 
 Chờ map tải xong trước khi sửa hoặc import. Trên màn hình hẹp, inspector chuyển
 xuống dưới; cuộn trang để tìm các nút trong panel.
+
+Trong **Entities**, ô tìm kiếm lọc object theo tên/ID; mũi tên lên/xuống và
+Home/End đổi object đang chọn trong danh sách. Escape trong ô tìm kiếm xóa bộ
+lọc. Nhãn **Scene unsaved** và **Tileset unsaved** cho biết loại dữ liệu còn
+chưa lưu; khi có thay đổi tileset, editor nhắc lưu tileset trước scene.
 
 ## 3. Xác định tile nào là tường, nền hoặc đi dưới được
 
@@ -93,7 +98,7 @@ Object/NPC cũng có thể chặn đường bằng footprint dù nền đang đi
 
 ## 4. Import ảnh tileset PNG
 
-Trong **Tiles**, cuộn panel phải tới **Import Tileset**:
+Trong **Tiles**, chọn tab **Import PNG** ở panel phải:
 
 1. Chọn file ở ô **Choose tileset PNG**.
 2. Đặt **Source tile size** đúng với kích thước một ô trong ảnh: 16, 24, 32
@@ -130,6 +135,9 @@ là đã lưu khi có trạng thái thành công. Nếu thấy **Preview only**,
 3. Để sửa nhiều tile cùng lúc, giữ Ctrl hoặc Shift rồi bấm từng tile để
    thêm/bớt khỏi nhóm chọn. Đối chiếu Selected tile IDs trước khi áp dụng.
 4. Sửa **Editor name**, **Collision**, **Blocked edges**, **Draw priority**.
+   Có thể bấm **Floor**, **Wall** hoặc **Overhead** trong **Quick setup** để
+   điền nhanh collision/priority và bỏ các cạnh chặn. Preset chỉ điền form,
+   chưa thay catalog; Editor name vẫn giữ giá trị đang hiển thị.
 5. Bấm **Apply Properties**. Việc chỉ đổi giá trị trong ô nhập chưa áp dụng
    vào catalog.
 6. Kiểm tra map bằng **Collision** và **Playtest**, rồi **Save Tileset Source**.
@@ -261,6 +269,11 @@ chọn vị trí đứng hợp lệ khi bắt đầu chơi thử.
 | Save Scene to Source | Lưu map hiện tại vào source và compile dữ liệu runtime |
 | Export Tileset JSON | Tải catalog hiện tại xuống máy |
 | Download Selected PNG | Tải ảnh atlas chứa tile đang chọn |
+
+Các nút nháp và import/export scene nằm trong **Files & drafts** trên thanh
+trên. **Export Tileset JSON** và **Download Selected PNG** nằm trong mục
+**Export & image backup** của tab **Properties**. Undo/Redo bị mờ khi history
+tương ứng chưa có bước để hoàn tác/làm lại.
 
 **Thứ tự nên dùng: lưu tileset → lưu từng scene → reload để kiểm tra.** Nếu
 tileset còn thay đổi chưa lưu, Save Scene to Source bị từ chối. Việc đổi thuộc

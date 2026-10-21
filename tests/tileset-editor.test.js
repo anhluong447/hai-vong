@@ -59,3 +59,36 @@ test('Rejected draft can be exported and explicitly revalidated without overwrit
 test('Tileset Ctrl+Y redoes properties when inspector controls have focus',()=>withEditor((e,w)=>{
  e.setEditLayer('tiles');e.tilesetDocument.updateTiles([2],{drawPriority:'above'});e.tilesetDocument.undo();const button=w.document.querySelector('[data-tileset-action=undo]');button.focus();button.dispatchEvent(new w.KeyboardEvent('keydown',{key:'y',ctrlKey:true,bubbles:true,cancelable:true}));assert.equal(e.tileCatalog.tiles.find(t=>t.id===2).drawPriority,'above');
 }));
+
+test('Editor presets stage tile behavior until Apply and retain validated history',()=>withEditor(async(e,w)=>{
+ await e.importTileset(await preparedTile(e,w,'#234567'));e.setEditLayer('tiles');e.tilesetEditor.select([16]);
+ const before=e.document.exportJSON(),session=JSON.stringify(e.session.snapshot()),history=e.tilesetDocument.undoStack.length;
+ w.document.querySelector('[data-tile-preset=wall]').click();assert.equal(e.tilesetEditor.fields.collision.value,'solid');assert.equal(e.tileCatalog.tiles.find(t=>t.id===16).collision,'none');
+ w.document.querySelector('[data-tileset-action=apply]').click();assert.equal(e.tileCatalog.tiles.find(t=>t.id===16).collision,'solid');assert.equal(e.tilesetDocument.undoStack.length,history+1);
+ w.document.querySelector('[data-tile-preset=overhead]').click();assert.equal(e.tilesetEditor.fields.drawPriority.value,'above');assert.equal(e.tileCatalog.tiles.find(t=>t.id===16).collision,'solid');
+ w.document.querySelector('[data-tileset-action=apply]').click();assert.equal(e.tileCatalog.tiles.find(t=>t.id===16).collision,'none');assert.equal(e.tileCatalog.tiles.find(t=>t.id===16).drawPriority,'above');
+ assert.equal(e.document.exportJSON(),before);assert.equal(JSON.stringify(e.session.snapshot()),session);
+}));
+
+test('Tileset inspector tabs support keyboard navigation without losing pending fields',()=>withEditor((e,w)=>{
+ e.setEditLayer('tiles');const field=e.tilesetEditor.fields.editorName;field.value='Unapplied name';
+ const tab=w.document.querySelector('[data-tileset-tab=import]');tab.click();assert.ok(w.document.querySelector('#tileset-properties-panel').hidden);assert.ok(!w.document.querySelector('#tileset-import-panel').hidden);assert.equal(tab.getAttribute('aria-selected'),'true');
+ tab.focus();tab.dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true,cancelable:true}));
+ assert.ok(!w.document.querySelector('#tileset-properties-panel').hidden);assert.ok(w.document.querySelector('#tileset-import-panel').hidden);assert.equal(field.value,'Unapplied name');assert.ok(!e.tilesetDocument.dirty);
+}));
+
+test('Palette inspection selection is visible and arrow navigation follows the displayed columns',()=>withEditor((e,w)=>{
+ e.setEditLayer('tiles');e.tileEditor.setPrimaryTile(2);const tile=w.document.querySelector('[data-tile-id="3"]');tile.dispatchEvent(new w.MouseEvent('click',{ctrlKey:true,bubbles:true}));
+ assert.equal(tile.dataset.inspected,'true');assert.equal(w.document.querySelector('[data-tile-id="2"]').dataset.inspected,'true');
+ const palette=w.document.querySelector('#tile-palette'),first=w.document.querySelector('[data-tile-id="0"]'),columns=w.getComputedStyle(palette).gridTemplateColumns.split(' ').length;
+ first.focus();first.dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));assert.equal(e.tileEditor.primaryTile,columns);
+ assert.ok(w.document.querySelector('#tileset-selected-preview'));assert.equal(w.document.querySelector('#world-brush-state').dataset.brushTileId,String(columns));
+}));
+
+test('Workspace scene state and save control reflect pending source snapshots',()=>withEditor(async(e,w)=>{
+ const state=w.document.querySelector('#world-scene-state'),button=w.document.querySelector('[data-action=sourceSave]');assert.equal(state.dataset.state,'saved');
+ e.document.applyLayerEdits('layer-2',[{x:4,y:4,tile:0}]);assert.equal(state.dataset.state,'dirty');
+ const hash=e.document.sourceHash;let release;e.sourceClient={getResource:async()=>({hash}),saveScene:()=>new Promise(resolve=>release=resolve)};
+ const saving=e.action('sourceSave');await new Promise(resolve=>setTimeout(resolve,0));assert.ok(button.disabled);assert.equal(state.dataset.state,'saving');release({hash:'saved-next',applied:true});await saving;
+ assert.equal(state.dataset.state,'saved');assert.ok(!button.disabled);
+}));

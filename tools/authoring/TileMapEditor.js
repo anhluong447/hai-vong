@@ -10,6 +10,7 @@ export class TileMapEditor{
  constructor(editor){
   this.editor=editor;this.activeLayerId='layer-1';this.hiddenLayers=new Set();this.lockedLayers=new Set();this.layerControls=new Map();this.tool='brush';this.primaryTile=2;this.eraseTile=0;this.stroke=null;this.cursor={...editor.document.draft.spawn};this.active=false;this.showGrid=true;this.showCollision=false;this.abort=new AbortController();this.buttons=new Map();this.tiles=new Map();
   const root=editor.root;this.controls=root.querySelector('#tile-controls');
+  root.querySelector('#tile-search').setAttribute('aria-label',t('authoring.tileset.search'));root.querySelector('#tile-search').placeholder=t('authoring.tileset.search');root.querySelector('#tile-erase').setAttribute('aria-label',copy('eraseTile'));
   for(const layer of ['entities','tiles']){const b=this.button(layer,()=>editor.setEditLayer(layer));b.dataset.layer=layer;root.querySelector('#world-layers').append(b);}
   for(const id of TILE_LAYER_IDS){const row=document.createElement('div'),button=this.button('',()=>this.selectLayer(id));button.textContent=t('authoring.tiles.layerName',{number:TILE_LAYER_IDS.indexOf(id)+1});button.dataset.tileLayerId=id;row.append(button);const controls={button};for(const kind of ['visible','locked']){const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.dataset.tileLayerControl=kind;input.dataset.tileLayerFor=id;input.checked=kind==='visible';label.append(input,document.createTextNode(copy(kind)));row.append(label);input.addEventListener('change',()=>kind==='visible'?this.setLayerVisible(id,input.checked):this.setLayerLocked(id,input.checked),{signal:this.abort.signal});controls[kind]=input;}root.querySelector('#tile-layer-controls').append(row);this.layerControls.set(id,controls);}
   for(const tool of tools){const b=this.button(tool,()=>this.setTool(tool));b.dataset.tileTool=tool;this.buttons.set(tool,b);root.querySelector('#tile-toolbar').append(b);}
@@ -18,7 +19,7 @@ export class TileMapEditor{
   root.querySelector('#tile-erase').addEventListener('change',event=>this.setEraseTile(Number(event.target.value)),{signal:this.abort.signal});
   root.querySelector('#tile-atlas').addEventListener('change',event=>{this.cancel();this.atlasId=event.target.value;this.rebuildPalette();},{signal:this.abort.signal});
   root.querySelector('#tile-search').addEventListener('input',()=>this.rebuildPalette(),{signal:this.abort.signal});
-  root.querySelector('#tile-palette').addEventListener('keydown',event=>{const ids=[...this.tiles.keys()],index=ids.indexOf(Number(event.target.closest('[data-tile-id]')?.dataset.tileId)),delta={ArrowLeft:-1,ArrowRight:1,ArrowUp:-2,ArrowDown:2}[event.key];if(index>=0&&delta){event.preventDefault();event.stopPropagation();const id=ids[Math.max(0,Math.min(ids.length-1,index+delta))];this.setPrimaryTile(id);this.tiles.get(id)?.button.focus();}},{signal:this.abort.signal});
+  root.querySelector('#tile-palette').addEventListener('keydown',event=>{const palette=root.querySelector('#tile-palette'),columns=getComputedStyle(palette).gridTemplateColumns.split(' ').length,ids=[...this.tiles.keys()],index=ids.indexOf(Number(event.target.closest('[data-tile-id]')?.dataset.tileId)),delta={ArrowLeft:-1,ArrowRight:1,ArrowUp:-columns,ArrowDown:columns}[event.key];if(index>=0&&delta){event.preventDefault();event.stopPropagation();const id=ids[Math.max(0,Math.min(ids.length-1,index+delta))];this.setPrimaryTile(id);this.tiles.get(id)?.button.focus();}},{signal:this.abort.signal});
   this.cameras=new Map();const signal=this.abort.signal;
   window.addEventListener('blur',()=>{this.space=false;this.cancel();},{signal});
   window.addEventListener('keyup',event=>{if(event.code==='Space'||event.key===' '){this.space=false;if(this.pan)this.cancel();}},{signal});
@@ -44,6 +45,7 @@ export class TileMapEditor{
    const button=document.createElement('button'),canvas=document.createElement('canvas'),span=document.createElement('span');button.type='button';canvas.width=canvas.height=worldMetrics.tilePixels;canvas.setAttribute('aria-hidden','true');span.textContent=label;button.append(canvas,span);button.dataset.tileId=tile.id;button.setAttribute('aria-label',t('authoring.tiles.tileLabel',{name:label,id:tile.id,kind:copy(tile.collision==='solid'?'blocked':'walkable')}));button.title=button.getAttribute('aria-label');
    button.addEventListener('click',event=>{if(event.ctrlKey||event.metaKey||event.shiftKey){const ids=new Set(this.editor.tilesetEditor.selected);ids.has(tile.id)?ids.delete(tile.id):ids.add(tile.id);this.editor.tilesetEditor.select(ids.size?[...ids]:[tile.id]);}else this.setPrimaryTile(tile.id);});palette.append(button);this.tiles.set(tile.id,{button,canvas});
   }
+  root.querySelector('#tile-palette-count').textContent=t('authoring.workspace.tileCount',{shown:this.tiles.size,total:catalog.tiles.filter(tile=>tile.atlasId===this.atlasId).length});
   if(this.editor.world)this.refresh();
  }
  button(key,action){const b=document.createElement('button');b.type='button';if(key)b.textContent=copy(key);b.addEventListener('click',action,{signal:this.abort.signal});return b;}
@@ -59,7 +61,9 @@ export class TileMapEditor{
   e.root.querySelector('#world-inspector-heading').textContent=e.editLayer==='tiles'?copy('inspector'):t('authoring.world.inspector');
   for(const b of e.root.querySelectorAll('[data-layer]'))b.setAttribute('aria-pressed',String(b.dataset.layer===e.editLayer));
   for(const [key,b]of this.buttons){b.disabled=!this.active;b.setAttribute('aria-pressed',String(key==='grid'?this.showGrid:key==='collision'?this.showCollision:key===this.tool));}
-  for(const [id,{button}]of this.tiles){button.disabled=!this.active;button.setAttribute('aria-pressed',String(id===this.primaryTile));}
+  for(const [id,{button}]of this.tiles){button.disabled=!this.active;button.setAttribute('aria-pressed',String(id===this.primaryTile));button.dataset.inspected=String(this.editor.tilesetEditor.selected.includes(id));}
+  for(const [key,button]of this.buttons){const shortcut={brush:'B',rectangle:'R',fill:'F',eyedropper:'I',eraser:'E',grid:'G',collision:'C'}[key];button.dataset.shortcut=shortcut;button.title=`${copy(key)} (${shortcut})`;}
+  e.refreshWorkspace();
   e.root.querySelector('#tile-erase').disabled=!this.active;e.root.querySelector('#tile-erase').value=this.eraseTile;
  }
  hint(){const hint=t('authoring.tiles.canvasHint',{tool:copy(this.tool)});return this.hiddenLayers.size&&this.showCollision?t('authoring.tiles.hiddenCollision',{hint}):hint;}
