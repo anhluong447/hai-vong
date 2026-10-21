@@ -2,7 +2,7 @@
 
 Feature: regular PNG tileset import/properties and four tile layers. Source
 checkpoint: `388b3e1`; implementation lives on `feature/world-map-foundation`.
-See [spec](../../superpowers/specs/2026-10-21-world-map-foundation-design.md).
+See [spec](../../design/specs/2026-10-21-world-map-foundation-design.md).
 
 ## Acceptance evidence
 

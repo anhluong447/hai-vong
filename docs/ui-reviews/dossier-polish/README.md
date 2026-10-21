@@ -74,7 +74,7 @@ giữ trong Git. Không thay ảnh concept gốc hay snapshot menu cũ.
 | Art nguồn | `assets/ui/dossier-polish/`: sáu PNG, `editorial-icons.svg`, `logo-stamp-placeholder.svg`, `prompts.json`, `inventory.json`, `README.md` |
 | Authoring | `tools/coastal-menu-v2-preview.js`; `tools/review_dossier.py`; `tools/sample_dossier_palette.py`; `tools/check_dossier_assets.py` |
 | Test | `tests/dossier-polish.test.js`; `tests/index.html` |
-| Tài liệu | `docs/ui-specs/dossier-polish/palette.json`; README này; liên kết bổ sung trong `docs/ARCHITECTURE.md`, `docs/DEVELOPMENT.md` và review menu v2 |
+| Tài liệu | `docs/ui-specs/dossier-polish/palette.json`; README này; liên kết bổ sung trong `docs/engineering/ARCHITECTURE.md`, `docs/engineering/DEVELOPMENT.md` và review menu v2 |
 
 Các thay đổi gameplay/menu v2 và archive đã có trong working tree từ lượt trước
 được giữ nguyên. Không nhập dữ liệu thử concept vào domain. `photo` chỉ là metadata

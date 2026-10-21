@@ -73,4 +73,4 @@ tests/clip không tự nâng gate thành đạt. Hiện sway hoa là cả cụm 
 cũng còn foliage gắn trong PNG; motion từng lá/hoa riêng cần thêm art layers
 nếu muốn biên độ lớn hơn. Chưa tạo camera parallax hoặc chuyển động scene/actors.
 Tiếp theo sửa/chốt visual thoại, rồi menu UI R24–R27; performance thiết bị và
-integration theo các stage sau trong [roadmap](../../UI-REPLICA-ROADMAP.md).
+integration theo các stage sau trong [roadmap](../../design/ui/UI-REPLICA-ROADMAP.md).

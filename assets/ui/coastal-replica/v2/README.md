@@ -1,6 +1,6 @@
 # Coastal replica — Stage 2 dialogue art
 
-> Scope revision 2: pack giữ cả UI và context đã sinh. [Roadmap hiện hành](../../../../docs/UI-REPLICA-ROADMAP.md) chỉ nghiệm thu UI và trang trí gắn UI; background, portrait và scene props làm sau. Tiếp tục paper/wave/print/hoa/notebook/type/date/choices; pose/scene matching trong mô tả lịch sử không còn chặn gate UI. UI-scope classification chưa thay thế production masks hoặc scoped G2 review.
+> Scope revision 2: pack giữ cả UI và context đã sinh. [Roadmap hiện hành](../../../../docs/design/ui/UI-REPLICA-ROADMAP.md) chỉ nghiệm thu UI và trang trí gắn UI; background, portrait và scene props làm sau. Tiếp tục paper/wave/print/hoa/notebook/type/date/choices; pose/scene matching trong mô tả lịch sử không còn chặn gate UI. UI-scope classification chưa thay thế production masks hoặc scoped G2 review.
 
 2026-10-09 · R09–R14 · bản tĩnh đang review, **G2 chưa qua**.
 Pack này có **19 asset: 6 PNG và 13 SVG**, với 29 instance khai báo trong

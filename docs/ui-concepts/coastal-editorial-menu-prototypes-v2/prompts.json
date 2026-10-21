@@ -5,7 +5,7 @@
   "styleReferences": [
     "../coastal-editorial-v1/02-menu.png",
     "../coastal-editorial-v1/04-dossier.png",
-    "../../hai-vong.png"
+    "../references/hai-vong.png"
   ],
   "images": [
     {
@@ -57,7 +57,7 @@
       "output": "05-ban-do.png",
       "references": [
         "01-ho-so.png",
-        "../../hai-vong.png"
+        "../references/hai-vong.png"
       ]
     },
     {

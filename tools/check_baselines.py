@@ -25,7 +25,7 @@ def main():
         match=re.search(r'<pre id="'+element+r'">(.*?)</pre>',source,re.S)
         if not match:raise ValueError(f'Missing browser benchmark: {element}')
         actual=json.loads(html.unescape(match[1]))
-        expected=json.loads((ROOT/'docs'/filename).read_text(encoding='utf-8-sig'))
+        expected=json.loads((ROOT/'docs/testing/baselines'/filename).read_text(encoding='utf-8-sig'))
         if field:expected=expected[field]
         compare(expected,actual,filename)
         print(f'{filename}: all {len(expected)} policies match')

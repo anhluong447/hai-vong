@@ -4,8 +4,8 @@ Ngày 2026-10-20. Áp dụng mặc định trong `pixel.html`; Esc mở Hồ sơ
 Preview từng tab: `tools/coastal-menu-v2-preview.html?tab=skills` (hoặc cases,
 equipment, team, map, settings).
 
-[Thiết kế đã duyệt](../../superpowers/specs/2026-10-20-menu-refinement-design.md)
-và [kế hoạch triển khai](../../superpowers/plans/2026-10-20-menu-refinement.md).
+[Thiết kế đã duyệt](../../design/specs/2026-10-20-menu-refinement-design.md).
+Checklist triển khai đã hoàn tất và được dọn; kết quả bàn giao nằm trong báo cáo này.
 
 ## Kết quả giao diện
 

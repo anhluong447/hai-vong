@@ -30,7 +30,7 @@ Chỉ đánh giá UI, vùng nội dung và thao tác. Không yêu cầu khớp p
 | Vừa | Đồng đội | Danh sách dài với avatar chữ cái, stat và bond bằng chữ; phải cuộn | Chọn chân dung rồi xem tên, biệt danh, tiểu sử, quest, skill và bond của một người | [Runtime](runtime-03-team.png); [concept](../../ui-concepts/coastal-editorial-menu-prototypes-v2/04-dong-doi.png) |
 | Vừa | Cài đặt | Giảm chuyển động, hướng dẫn phím, Lưu/Tải, Xuất lượt thử, Lượt mới và nút chuyển buổi gameplay | Thiết lập cơ bản placeholder, lưu game, tải game | [Runtime](runtime-05-settings.png); [concept](../../ui-concepts/coastal-editorial-menu-prototypes-v2/06-cai-dat.png) |
 | Vừa | Diện tích và thứ bậc | Vùng nội dung khoảng 685 px, 40.97% chiều rộng stage; panel chi tiết khoảng 409 px cao. Wordmark, tagline, chân dung cố định và phần trang trí chiếm phần lớn vùng còn lại | Rail trái khoảng 21%; phần bên phải dành cho bố cục riêng của từng tab, ít chữ thừa | [MenuView](../../../src/ui/coastal/MenuView.js); [menu.css](../../../styles/coastal/menu.css); DOM rects trong report |
-| Liên quan gameplay | Energy và quy trình | Fresh session sáng hiện 0/4; config clubEnergy=4, outsideEnergy=2; còn route Đội soạn, bước chấp bút và chọn bài | Quỹ energy chung 10/5, chiều tự do, tài liệu tự bàn giao xuất bản | Report state; [balance](../../../content/gameplay/balance.js); [bible v2](../../game_story_bible_v2.md) |
+| Liên quan gameplay | Energy và quy trình | Fresh session sáng hiện 0/4; config clubEnergy=4, outsideEnergy=2; còn route Đội soạn, bước chấp bút và chọn bài | Quỹ energy chung 10/5, chiều tự do, tài liệu tự bàn giao xuất bản | Report state; [balance](../../../content/gameplay/balance.js); [bible v2](../../design/narrative/game_story_bible_v2.md) |
 
 Lượt kiểm tra map đầu tiên trong runtime-audit.json gọi click qua DOM rồi Enter khi focus còn ở nút cũ. Không dùng lượt đó làm chứng cứ cho focus/teleport. Follow-up đã focus đúng `newsroom`, click rồi Enter: selectedMap=newsroom nhưng world.mapId vẫn là yard. Đây là bằng chứng kiểm tra map đầy đủ hơn.
 
@@ -41,7 +41,7 @@ Lượt kiểm tra map đầu tiên trong runtime-audit.json gọi click qua DOM
 - `gameplay-panels.js` đưa các form/list prototype vào khung nội dung cũ, nên chỉ thay CSS của khung không đủ cho skill tree, loadout hoặc hồ sơ nhân vật.
 - `openMenu()` không reset `tab`, trái quyết định luôn mở Hồ sơ.
 - `MapView.select()` chỉ vẽ background phòng và đổi selection; không thực hiện chuyển vị trí thế giới.
-- [ARCHITECTURE.md](../../ARCHITECTURE.md) và roadmap vẫn ghi mục tiêu replica theo bốn concept gốc. Khi triển khai menu mới cần cập nhật phạm vi menu có chủ đích, giữ reference/art cũ và các phần dialogue/HUD không liên quan.
+- [ARCHITECTURE.md](../../engineering/ARCHITECTURE.md) và roadmap vẫn ghi mục tiêu replica theo bốn concept gốc. Khi triển khai menu mới cần cập nhật phạm vi menu có chủ đích, giữ reference/art cũ và các phần dialogue/HUD không liên quan.
 
 ## Thứ tự sửa đề xuất
 

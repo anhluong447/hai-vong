@@ -1,8 +1,10 @@
 # Tilemap editor review
 
-Implementation starts from `c242d59` under the approved
-[design](../../superpowers/specs/2026-10-20-tilemap-editor-design.md) and
-[plan](../../superpowers/plans/2026-10-20-tilemap-editor.md).
+Historical single-layer implementation, starting from `c242d59`. Its completed
+execution checklist and superseded v1 design were removed during documentation
+cleanup. Current behavior is specified by the
+[four-layer foundation design](../../design/specs/2026-10-21-world-map-foundation-design.md)
+and [current review](../world-map-foundation/README.md).
 
 World Editor now has Entities/Tiles modes, a 16-tile image palette and Brush,
 Rectangle, Fill, Eyedropper and replacement Eraser. Scene schema, object/NPC and

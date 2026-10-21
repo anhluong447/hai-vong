@@ -4,7 +4,7 @@
 nhường chỗ cho nội dung. Chân dung đồng đội có chức năng vẫn giữ. Thêm sóng xanh/
 xanh nhạt lượn, hoa/lá đung đưa, particle và ánh sáng nắng nhẹ. Các PNG dưới đây
 chưa tạo lại; áp điều chỉnh này khi dựng runtime theo
-[kế hoạch triển khai](../../MENU-V2-IMPLEMENTATION.md).
+[kế hoạch triển khai](../../design/ui/MENU-V2-IMPLEMENTATION.md).
 
 Bản chạy đầu tiên đã có trong `pixel.html` (Esc mở menu, M mở bản đồ).
 Xem [ghi nhận triển khai và kiểm tra](../../ui-reviews/coastal-menu-v2/README.md).
@@ -22,7 +22,7 @@ Ngày: 2026-10-15. Bộ **6 màn menu** tạo bằng **built-in image_gen**. **M
 
 Ảnh 00 đã được người dùng xóa do không cần màn menu tổng. Ảnh Hồ sơ là reference chung cho các chỉnh sửa tiếp theo để giữ thanh điều hướng, wordmark, energy, typography và đồ trang trí. [prompts.json](prompts.json) ghi hành vi mở menu và prompt đã điều chỉnh cho reference hiện có; các PNG còn lại chưa được tạo lại.
 
-[generation-history.json](generation-history.json) giữ nguyên prompt và reference của lần tạo ảnh ban đầu để bảo toàn nguồn gốc. Các tên ảnh đã xóa xuất hiện trong lịch sử chỉ là provenance, không phải dependency hiện hành. Màn Đồng đội dùng [concept dossier gốc](../coastal-editorial-v1/04-dossier.png) làm reference cho Vân; bản đồ dùng [hai-vong.png](../../hai-vong.png) làm reference địa hình.
+[generation-history.json](generation-history.json) giữ nguyên prompt và reference của lần tạo ảnh ban đầu để bảo toàn nguồn gốc. Các tên ảnh đã xóa xuất hiện trong lịch sử chỉ là provenance, không phải dependency hiện hành. Màn Đồng đội dùng [concept dossier gốc](../coastal-editorial-v1/04-dossier.png) làm reference cho Vân; bản đồ dùng [hai-vong.png](../references/hai-vong.png) làm reference địa hình.
 
 Ảnh là prototype raster để đánh giá bố cục; chưa phải UI tương tác hoặc asset runtime. Skill, chỉ số, biệt danh, quest, mức bond và tiền là dữ liệu minh họa. Chân dung đồng đội phụ cần thay bằng art nhân vật đã duyệt (đặc biệt thumbnail Ngọc trong ảnh hiện tại chưa đúng giới tính/nhận diện). Không xem lettering phát sinh trong cảnh hoặc giấy tờ là nội dung canonical.
 

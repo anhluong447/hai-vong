@@ -21,4 +21,4 @@ Import accepts 16/24/32/48-pixel square source tiles, integer margin/spacing
 divide exactly; catalog capacity is 8192 tile records. World grid remains 16 px.
 Animated PNG and MZ A1–A4 autotile interpretation are outside this importer.
 
-See [authoring workflow](../../docs/DATA-AUTHORING.md).
+See [authoring workflow](../../docs/guides/DATA-AUTHORING.md).

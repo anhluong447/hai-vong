@@ -4,8 +4,8 @@
   Use `content/locales/vi.js` and the shared text service. Static no-JavaScript
   fallback text belongs in `content/fallback/`.
 - Keep game definitions and balance in `content/`; technical IDs remain stable and
-  never depend on translated labels. Read `docs/ARCHITECTURE.md` and
-  `docs/DEVELOPMENT.md` before changing module boundaries.
+  never depend on translated labels. Read `docs/engineering/ARCHITECTURE.md` and
+  `docs/engineering/DEVELOPMENT.md` before changing module boundaries.
 - Preserve the separate formula-sandbox and gameplay rulesets. Domain transitions
   must remain immutable and independent of DOM, storage and network APIs.
 - Issue gameplay commands through `GameSession`; validate saves before replacing
@@ -19,7 +19,7 @@
   references. Preserve active art, source generation inputs and reusable tooling.
 - Build focused extension points for concrete features; avoid a speculative engine
   framework. Do not edit the historical `archive/clb-hoi/` snapshot during routine work.
-- Coastal replica work follows the UI scope in `docs/UI-REPLICA-ROADMAP.md` and
+- Coastal replica work follows the UI scope in `docs/design/ui/UI-REPLICA-ROADMAP.md` and
   `docs/ui-specs/coastal-replica/ui-scope.json`: preserve fixed UI and attached
   flowers/notebook/harbor decorations. Background/character/world matching is
   deferred and must not block UI visual gates.

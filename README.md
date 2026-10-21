@@ -7,7 +7,7 @@ Giai đoạn hiện tại: thử cơ chế trước khi viết câu chuyện th�
 
 Git chỉ giữ mã nguồn và các đầu vào nhỏ. Asset nhị phân, BGM, font, plan và
 ảnh review được giữ riêng trên máy; clone mới cần bổ sung gói asset trước khi
-chạy giao diện và browser test. Xem [quy tắc Git và khôi phục asset](docs/REPOSITORY.md).
+chạy giao diện và browser test. Xem [quy tắc Git và khôi phục asset](docs/engineering/REPOSITORY.md).
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File tools/serve.ps1
@@ -39,31 +39,17 @@ Di chuyển WASD/mũi tên, E tương tác; cũng có thể bấm vào bàn ho�
 Sandbox công thức dùng 96 đề tài thử. Bản vòng chơi mới có lịch đủ 7 ngày,
 hồ sơ nhiều ngày, feedback trước khi ngủ, đồng đội nghỉ cuối tuần, quest Khuê,
 đội soạn, hangout/romance, tiền, công cụ và suất nâng cấp ở mức mock.
-Xem [hướng dẫn và giới hạn](docs/GAMEPLAY-SANDBOX.md). Map truyện thật chưa triển khai.
+Xem [hướng dẫn và giới hạn](docs/guides/GAMEPLAY-SANDBOX.md). Map truyện thật chưa triển khai.
 
 ## Tài liệu
 
-- [Bible đề xuất journalism + dating sim](docs/BIBLE-CLB-BAO-CHI-PROPOSAL.md)
-- [Bible đang dùng](docs/game_story_bible.md)
-- [Sandbox vòng chơi](docs/GAMEPLAY-SANDBOX.md)
-- [Map test pixel và điều khiển](docs/PIXEL-MAP.md)
-- [Kế hoạch triển khai map pixel](docs/PIXEL-MAP-PLAN.md)
-- [Hướng dẫn sandbox](docs/SANDBOX.md)
-- [Bộ luật và quyết định chuẩn hóa](docs/RULES.md)
-- [Kiến trúc](docs/ARCHITECTURE.md)
-- [Component và chuyển động coastal](docs/UI-COMPONENTS-PLAN.md), [review bản chạy v1](docs/ui-reviews/coastal-v1/README.md)
-- [Roadmap replica UI — 45 bước, background/nhân vật làm sau](docs/UI-REPLICA-ROADMAP.md)
-- [Stage 0 đã triển khai — layout sheets, asset inventory, native capture và overlay/diff](docs/ui-specs/coastal-replica/README.md)
-- [Stage 1 — pipeline art/font, mẫu 7 lớp và review sai lệch](docs/ui-reviews/coastal-replica-stage1/README.md)
-- [Stage 2 — UI thoại, evidence lịch sử và backlog G2 theo scope UI](docs/ui-reviews/coastal-replica-stage2/README.md)
-- [Stage 3 — ánh sáng/chiều sâu UI, scoped comparison và backlog G2](docs/ui-reviews/coastal-replica-stage3/README.md)
-- [Stage 4 — motion sheet, clips native, interruption/reduced motion và review G3](docs/ui-reviews/coastal-replica-stage4/README.md)
-- [Quy trình phát triển và quy tắc nội dung](docs/DEVELOPMENT.md)
-- [Nội dung, văn bản và balance](content/README.md)
-- [Kết quả kiểm chứng và baseline](docs/VALIDATION.md)
-- [Playtest cơ chế qua UI và các chiến thuật bổ sung](docs/PLAYTEST-2026-10-05.md)
-- [Thiết kế v2 gốc](docs/v0.1/Draft.md), [mô phỏng Python gốc](docs/v0.1/sym.py)
-- [Backup CLB Hỏi](archive/README.md)
+- [Mục lục tài liệu](docs/README.md)
+- [World Editor: tileset, bốn layer, object/NPC và lưu map](docs/guides/WORLD-EDITOR-GUIDE.md)
+- [Editor menu, HUD và hội thoại](docs/guides/DATA-AUTHORING.md)
+- [Bible v2 và thiết kế sản phẩm](docs/design/README.md)
+- [Kiến trúc](docs/engineering/ARCHITECTURE.md) và [quy trình phát triển](docs/engineering/DEVELOPMENT.md)
+- [Kiểm chứng và baseline](docs/testing/README.md)
+- [Git và khôi phục asset](docs/engineering/REPOSITORY.md)
 
 ## Kiểm thử
 

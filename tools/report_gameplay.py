@@ -16,7 +16,7 @@ report = {
     'browser_tests_passed': int(summary[1]),
     'policies': rows,
 }
-target = root / 'docs/gameplay-baseline.json'
+target = root / 'docs/testing/baselines/gameplay-baseline.json'
 target.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 for row in rows:
     print(f"{row['policy']}: K={row['K']:.1f}, T={row['T']:.1f}, total={row['total']:.1f}, gate={row['good']}, articles={row['khueArticles']}/{row['teamArticles']}")

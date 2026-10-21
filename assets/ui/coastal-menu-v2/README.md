@@ -4,7 +4,7 @@ Three local native 1672×941 images generated with the **built-in image_gen** to
 
 - `scene.png`: clean newsroom window/harbor scenery without characters or UI.
 - `foliage.png`: isolated leaves with actual transparent alpha, animated around the branch origin.
-- `map.png`: clean scenery derived from `docs/hai-vong.png`; labels and pins are live UI.
+- `map.png`: clean scenery derived from `docs/ui-concepts/references/hai-vong.png`; labels and pins are live UI.
 
 [prompts.json](prompts.json) and [map-prompt.json](map-prompt.json) preserve the exact
 generation requests. [inventory.json](inventory.json) records size, dimensions and

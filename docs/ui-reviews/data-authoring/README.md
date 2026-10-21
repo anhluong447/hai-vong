@@ -5,7 +5,7 @@ roadmap. Initial fresh main: 95/95; eight formula and four gameplay baselines
 matched. Native original captures and geometry are retained under `M0-before/`.
 
 M0–M8 technical implementation is delivered. Entry points and controls:
-[DATA-AUTHORING.md](../../DATA-AUTHORING.md). No save schema, gameplay tuning,
+[DATA-AUTHORING.md](../../guides/DATA-AUTHORING.md). No save schema, gameplay tuning,
 baseline, source artwork or archive was intentionally changed.
 
 | Milestone | Delivered evidence |

@@ -2,7 +2,7 @@
 
 2026-10-09 · **scope revision 2: replica UI, context thay được**.
 Bản dựng được commit ở `c21e732`; review full-scene trước đó không còn là tiêu
-chí nghiệm thu hiện hành. [Roadmap](../../UI-REPLICA-ROADMAP.md) và
+chí nghiệm thu hiện hành. [Roadmap](../../design/ui/UI-REPLICA-ROADMAP.md) và
 [UI scope](../../ui-specs/coastal-replica/ui-scope.json) quyết định việc tiếp tục.
 **G2 UI chưa nghiệm thu**, không tự chuyển thành đạt sau khi bỏ scope background.
 

@@ -12,7 +12,7 @@ if not match:
 report = json.loads(html.unescape(match[1]))
 if not all(row['ok'] for row in report['results']):
     raise SystemExit('Some UI routes failed; inspect playtest_results.log.')
-target = root / 'docs/gameplay-route-playtest-2026-10-05.json'
+target = root / 'docs/testing/reports/gameplay-route-playtest-2026-10-05.json'
 target.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 for row in report['results']:
     print(json.dumps({key: row[key] for key in ['id','clicks','K','T','total','good','money','khueArticles','teamArticles','romances','betrayal','reputation','averageIssueScore','metrics']}, ensure_ascii=False))

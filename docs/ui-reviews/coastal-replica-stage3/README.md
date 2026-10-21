@@ -72,7 +72,7 @@ notebook alpha wash. Giữ chúng làm lịch sử; dùng các phiên bản hi�
 Đây là backlog UI, không có camera, pose, tóc/áo nhân vật hay scene sunlight làm
 blocker. R17 có review package hoàn chỉnh nhưng **chưa đóng G2 acceptance**.
 Tiếp theo tinh chỉnh các component còn lệch và review UI tĩnh, rồi R18–R23 làm
-motion từng lớp theo [roadmap](../../UI-REPLICA-ROADMAP.md).
+motion từng lớp theo [roadmap](../../design/ui/UI-REPLICA-ROADMAP.md).
 
 ## Kiểm chứng
 

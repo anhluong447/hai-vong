@@ -1,6 +1,6 @@
 # Coastal UI — bản chạy v1
 
-> Bản này là prototype kỹ thuật và **chưa đạt chuẩn replica visual**: thiếu composition, scene art, pose, texture và các thành phần của concept. Test hành vi phía dưới không chứng nhận độ giống ảnh. Hướng thay thế đã chốt trong [roadmap replica](../../UI-REPLICA-ROADMAP.md); giữ bộ review này làm lịch sử để đối chiếu.
+> Bản này là prototype kỹ thuật và **chưa đạt chuẩn replica visual**: thiếu composition, scene art, pose, texture và các thành phần của concept. Test hành vi phía dưới không chứng nhận độ giống ảnh. Hướng thay thế đã chốt trong [roadmap replica](../../design/ui/UI-REPLICA-ROADMAP.md); giữ bộ review này làm lịch sử để đối chiếu.
 
 Ngày: 2026-10-09. Đây là ảnh chụp UI dựng bằng DOM/CSS/SVG trên Chrome headless, khác với [ảnh concept gốc](../../ui-concepts/coastal-editorial-v1/README.md).
 

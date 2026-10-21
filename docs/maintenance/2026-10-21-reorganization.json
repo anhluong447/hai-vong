@@ -1,0 +1,878 @@
+{
+  "date": "2026-10-21",
+  "baseRevision": "192b3fa331abb1a6365ec72797a2d4590ebe9900",
+  "scope": "Documentation maintenance authorized by user; delete superseded checklists, retain unique design/source inputs and baseline bytes.",
+  "historicalInventory": "engineering/repository-local-files.json retains original 2026-10-09 paths and hashes intentionally; it is not an active-path index.",
+  "operations": [
+    {
+      "source": "docs/WORLD-EDITOR-GUIDE.md",
+      "bytes": 20796,
+      "sha256Before": "e0d2333927e7fe9545a4c32eddbb158f34219601dec67665e03870963e48d9df",
+      "trackedBefore": false,
+      "action": "move",
+      "destination": "docs/guides/WORLD-EDITOR-GUIDE.md",
+      "sha256AfterMove": "e0d2333927e7fe9545a4c32eddbb158f34219601dec67665e03870963e48d9df",
+      "sha256AfterRelinking": "f6ea8d6048d4751ede88fcc0684d42fe3a97ab69b069b79b2936c28d4a310e81",
+      "sha256AfterCleanup": "f6ea8d6048d4751ede88fcc0684d42fe3a97ab69b069b79b2936c28d4a310e81"
+    },
+    {
+      "source": "docs/DATA-AUTHORING.md",
+      "bytes": 13368,
+      "sha256Before": "248a2af818f45217c60bcfbb07f71285f648bc487ab57229b310b054f24a1ea4",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/guides/DATA-AUTHORING.md",
+      "sha256AfterMove": "248a2af818f45217c60bcfbb07f71285f648bc487ab57229b310b054f24a1ea4",
+      "sha256AfterRelinking": "30c1589a074712a3064a439e47d2f60a250dad87fe03addea470a70cfc4e7e2e",
+      "sha256AfterCleanup": "30c1589a074712a3064a439e47d2f60a250dad87fe03addea470a70cfc4e7e2e"
+    },
+    {
+      "source": "docs/SANDBOX.md",
+      "bytes": 4390,
+      "sha256Before": "398c369c291f44a523cd3f0f7ddece0b1083ccc728a91a7e6dc10dce110c43b7",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/guides/SANDBOX.md",
+      "sha256AfterMove": "398c369c291f44a523cd3f0f7ddece0b1083ccc728a91a7e6dc10dce110c43b7",
+      "sha256AfterRelinking": "4db4042617f5f3bcc8c2917388ded5ae361e1d328305cab4526af774980ac30a",
+      "sha256AfterCleanup": "4db4042617f5f3bcc8c2917388ded5ae361e1d328305cab4526af774980ac30a"
+    },
+    {
+      "source": "docs/GAMEPLAY-SANDBOX.md",
+      "bytes": 6314,
+      "sha256Before": "0c80e111f25368bec92c0f8d2731f7e86b2db387dc41692219c682387f6aac38",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/guides/GAMEPLAY-SANDBOX.md",
+      "sha256AfterMove": "0c80e111f25368bec92c0f8d2731f7e86b2db387dc41692219c682387f6aac38",
+      "sha256AfterRelinking": "8faba54362204927abf71c43f0a83443b144312c43a16680cbcaccd33d464f79",
+      "sha256AfterCleanup": "8faba54362204927abf71c43f0a83443b144312c43a16680cbcaccd33d464f79"
+    },
+    {
+      "source": "docs/PIXEL-MAP.md",
+      "bytes": 8044,
+      "sha256Before": "66878d05ed89f147739524750e1acf107c77bb9f49df8b1927095085f76a9c92",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/guides/PIXEL-MAP.md",
+      "sha256AfterMove": "66878d05ed89f147739524750e1acf107c77bb9f49df8b1927095085f76a9c92",
+      "sha256AfterRelinking": "3feaf1f2779077a09f12359eaf5390f36a6126b0600b67b92bf6c3539e7d0613",
+      "sha256AfterCleanup": "3feaf1f2779077a09f12359eaf5390f36a6126b0600b67b92bf6c3539e7d0613"
+    },
+    {
+      "source": "docs/INTERACTION-MAP.md",
+      "bytes": 2576,
+      "sha256Before": "f5159d944a405044ea44b756b3497f522c66f4118c186c10fe124dd97a13c687",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/guides/INTERACTION-MAP.md",
+      "sha256AfterMove": "f5159d944a405044ea44b756b3497f522c66f4118c186c10fe124dd97a13c687",
+      "sha256AfterRelinking": "6b4014e9f02f7d7f054d6544f0bc7c48030877fdea5accd682d4faa5352ccc94",
+      "sha256AfterCleanup": "6b4014e9f02f7d7f054d6544f0bc7c48030877fdea5accd682d4faa5352ccc94"
+    },
+    {
+      "source": "docs/ARCHITECTURE.md",
+      "bytes": 24786,
+      "sha256Before": "4d8416ade204045fc7ed2eb9410e9bb59dcefb15f1e6f6b7671b12125674e738",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/engineering/ARCHITECTURE.md",
+      "sha256AfterMove": "4d8416ade204045fc7ed2eb9410e9bb59dcefb15f1e6f6b7671b12125674e738",
+      "sha256AfterRelinking": "6242de05130d1a4b06b0051ecb72040db7d4515dd6d083624150f568754ab129",
+      "sha256AfterCleanup": "6242de05130d1a4b06b0051ecb72040db7d4515dd6d083624150f568754ab129"
+    },
+    {
+      "source": "docs/DEVELOPMENT.md",
+      "bytes": 17138,
+      "sha256Before": "a087c0b732d31bdfdac6793cdb9636e74a6e50fe9a667cc542bd8faa680ebd92",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/engineering/DEVELOPMENT.md",
+      "sha256AfterMove": "a087c0b732d31bdfdac6793cdb9636e74a6e50fe9a667cc542bd8faa680ebd92",
+      "sha256AfterRelinking": "c9e299a7d29cf1fbf055d581a6fb5f3ab16a6f36de24c6742de7dbdb05851faf",
+      "sha256AfterCleanup": "c9e299a7d29cf1fbf055d581a6fb5f3ab16a6f36de24c6742de7dbdb05851faf"
+    },
+    {
+      "source": "docs/REPOSITORY.md",
+      "bytes": 2588,
+      "sha256Before": "538e4fca92d01b053b9e75de90ddb6dbc8cee63e666f8a8e406df474447a97dd",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/engineering/REPOSITORY.md",
+      "sha256AfterMove": "538e4fca92d01b053b9e75de90ddb6dbc8cee63e666f8a8e406df474447a97dd",
+      "sha256AfterRelinking": "538e4fca92d01b053b9e75de90ddb6dbc8cee63e666f8a8e406df474447a97dd",
+      "sha256AfterCleanup": "ba62583a1dde758647ec25845b3e42be2347df810a08baa06bdf386cff7f3a8b"
+    },
+    {
+      "source": "docs/repository-local-files.json",
+      "bytes": 106902,
+      "sha256Before": "d64449fbcb58563e3164283105816847c86a94776349677a2d48dcb1816fc5d5",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/engineering/repository-local-files.json",
+      "sha256AfterMove": "d64449fbcb58563e3164283105816847c86a94776349677a2d48dcb1816fc5d5",
+      "sha256AfterRelinking": "d64449fbcb58563e3164283105816847c86a94776349677a2d48dcb1816fc5d5",
+      "sha256AfterCleanup": "d64449fbcb58563e3164283105816847c86a94776349677a2d48dcb1816fc5d5"
+    },
+    {
+      "source": "docs/game_story_bible_v2.md",
+      "bytes": 104647,
+      "sha256Before": "efe216aa94730fccc919ba65c485d9438e0911857778027bba93c3d438c7dee9",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/narrative/game_story_bible_v2.md",
+      "sha256AfterMove": "efe216aa94730fccc919ba65c485d9438e0911857778027bba93c3d438c7dee9",
+      "sha256AfterRelinking": "4b44f36d0ac599ba2c3b7b11e7e3ebaf527a6ce2f1ee8b3984d0e02faae2de17",
+      "sha256AfterCleanup": "4b44f36d0ac599ba2c3b7b11e7e3ebaf527a6ce2f1ee8b3984d0e02faae2de17"
+    },
+    {
+      "source": "docs/NARRATIVE-PROLOGUE-VISION.md",
+      "bytes": 26084,
+      "sha256Before": "daed71617a373fe9cd0f78f9f7551c6a770eb02669f4a88669f76365b2779dd8",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/narrative/NARRATIVE-PROLOGUE-VISION.md",
+      "sha256AfterMove": "daed71617a373fe9cd0f78f9f7551c6a770eb02669f4a88669f76365b2779dd8",
+      "sha256AfterRelinking": "daed71617a373fe9cd0f78f9f7551c6a770eb02669f4a88669f76365b2779dd8",
+      "sha256AfterCleanup": "daed71617a373fe9cd0f78f9f7551c6a770eb02669f4a88669f76365b2779dd8"
+    },
+    {
+      "source": "docs/ENVIRONMENTAL-STORYTELLING-PROLOGUE.md",
+      "bytes": 27107,
+      "sha256Before": "9f9a90063b3f2f0cd197dc83289369264116645413d4cbf9764b5c7c2542dbff",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/narrative/ENVIRONMENTAL-STORYTELLING-PROLOGUE.md",
+      "sha256AfterMove": "9f9a90063b3f2f0cd197dc83289369264116645413d4cbf9764b5c7c2542dbff",
+      "sha256AfterRelinking": "d81e732f1c41642f8189c984e54ec5c42f8c33ccf4c22fd16ff63a7afd0e3b68",
+      "sha256AfterCleanup": "d81e732f1c41642f8189c984e54ec5c42f8c33ccf4c22fd16ff63a7afd0e3b68"
+    },
+    {
+      "source": "docs/script_opening_scenes.md",
+      "bytes": 27889,
+      "sha256Before": "75b584db32cd00fa1a358f70e2c5340a20e6e521bb7a630c1ca9147d3465e7d2",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/narrative/script_opening_scenes.md",
+      "sha256AfterMove": "75b584db32cd00fa1a358f70e2c5340a20e6e521bb7a630c1ca9147d3465e7d2",
+      "sha256AfterRelinking": "75b584db32cd00fa1a358f70e2c5340a20e6e521bb7a630c1ca9147d3465e7d2",
+      "sha256AfterCleanup": "75b584db32cd00fa1a358f70e2c5340a20e6e521bb7a630c1ca9147d3465e7d2"
+    },
+    {
+      "source": "docs/SCRIPT-EDITORIAL-REVIEW.md",
+      "bytes": 41428,
+      "sha256Before": "fe55474e4d80a791a27be2e7b222992125d287f539a990eb5d755f2998cc4e07",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/narrative/SCRIPT-EDITORIAL-REVIEW.md",
+      "sha256AfterMove": "fe55474e4d80a791a27be2e7b222992125d287f539a990eb5d755f2998cc4e07",
+      "sha256AfterRelinking": "18a2e85b4da67a8a24c6f8b9bc891b458d52fba41c5f2e7822919818e2418c54",
+      "sha256AfterCleanup": "18a2e85b4da67a8a24c6f8b9bc891b458d52fba41c5f2e7822919818e2418c54"
+    },
+    {
+      "source": "docs/RULES.md",
+      "bytes": 4432,
+      "sha256Before": "1bc5b3e1821ef16c8028054a6fa68e3f4328d3a6ca89669e5956b3d80258f742",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/gameplay/RULES.md",
+      "sha256AfterMove": "1bc5b3e1821ef16c8028054a6fa68e3f4328d3a6ca89669e5956b3d80258f742",
+      "sha256AfterRelinking": "065dea2e24f3dcbb857017fb222d3659d6ba5fd27f023ba3f1e857881b77f21b",
+      "sha256AfterCleanup": "065dea2e24f3dcbb857017fb222d3659d6ba5fd27f023ba3f1e857881b77f21b"
+    },
+    {
+      "source": "docs/v0.2/GDD-Attack.md",
+      "bytes": 38975,
+      "sha256Before": "81dc97f72eb5cc4f26bf8dc4e4300fd098ed912ad4b7d6e748dfafb4d47b8276",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/gameplay/GDD-Attack.md",
+      "sha256AfterMove": "81dc97f72eb5cc4f26bf8dc4e4300fd098ed912ad4b7d6e748dfafb4d47b8276",
+      "sha256AfterRelinking": "81dc97f72eb5cc4f26bf8dc4e4300fd098ed912ad4b7d6e748dfafb4d47b8276",
+      "sha256AfterCleanup": "81dc97f72eb5cc4f26bf8dc4e4300fd098ed912ad4b7d6e748dfafb4d47b8276"
+    },
+    {
+      "source": "docs/v0.2/GDD-Defense.md",
+      "bytes": 37378,
+      "sha256Before": "0ed1b0503f28b4c103de7dbe7270b1dd5f3d2b147359a3c65b08692f36996986",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/gameplay/GDD-Defense.md",
+      "sha256AfterMove": "0ed1b0503f28b4c103de7dbe7270b1dd5f3d2b147359a3c65b08692f36996986",
+      "sha256AfterRelinking": "0ed1b0503f28b4c103de7dbe7270b1dd5f3d2b147359a3c65b08692f36996986",
+      "sha256AfterCleanup": "0ed1b0503f28b4c103de7dbe7270b1dd5f3d2b147359a3c65b08692f36996986"
+    },
+    {
+      "source": "docs/AUDIO-BGM-SPEC.md",
+      "bytes": 9832,
+      "sha256Before": "ee4512bb1f9095647d06e7bd0498e77eb35f1b389038b6a5a2dad5d305d9eb22",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/art/AUDIO-BGM-SPEC.md",
+      "sha256AfterMove": "ee4512bb1f9095647d06e7bd0498e77eb35f1b389038b6a5a2dad5d305d9eb22",
+      "sha256AfterRelinking": "ee4512bb1f9095647d06e7bd0498e77eb35f1b389038b6a5a2dad5d305d9eb22",
+      "sha256AfterCleanup": "ee4512bb1f9095647d06e7bd0498e77eb35f1b389038b6a5a2dad5d305d9eb22"
+    },
+    {
+      "source": "docs/DIALOGUE-DESIGN-V2.md",
+      "bytes": 5329,
+      "sha256Before": "b1a535575987bca911cecea3044fea523de027bc06ba8651310fbafe94cb3d91",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/art/DIALOGUE-DESIGN-V2.md",
+      "sha256AfterMove": "b1a535575987bca911cecea3044fea523de027bc06ba8651310fbafe94cb3d91",
+      "sha256AfterRelinking": "0fa29e4b124752799fad3fec02a17deb69db8a963e0a7e05774b313fa54984bc",
+      "sha256AfterCleanup": "0fa29e4b124752799fad3fec02a17deb69db8a963e0a7e05774b313fa54984bc"
+    },
+    {
+      "source": "docs/PIXEL-CHARACTER-STANDARD.md",
+      "bytes": 8599,
+      "sha256Before": "ae2e20255060b51bbcdcd4b3468a6aaff9a9b02202d2e17b1d2a638dff486edb",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/art/PIXEL-CHARACTER-STANDARD.md",
+      "sha256AfterMove": "ae2e20255060b51bbcdcd4b3468a6aaff9a9b02202d2e17b1d2a638dff486edb",
+      "sha256AfterRelinking": "08284edc3b315f34d501816f69292a2c8cf0119d2a198cf44b1ddb1eafb953b5",
+      "sha256AfterCleanup": "08284edc3b315f34d501816f69292a2c8cf0119d2a198cf44b1ddb1eafb953b5"
+    },
+    {
+      "source": "docs/MENU-V2-IMPLEMENTATION.md",
+      "bytes": 16756,
+      "sha256Before": "1f4de129cb4c3e05066c975f124a7c1102ddf23cc4d807fb82a2baea66c4709b",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/ui/MENU-V2-IMPLEMENTATION.md",
+      "sha256AfterMove": "1f4de129cb4c3e05066c975f124a7c1102ddf23cc4d807fb82a2baea66c4709b",
+      "sha256AfterRelinking": "74ce4b0ad7b86ff24d390d1cc19bc949f1250e6933dca7886d77ba70ebc3ca74",
+      "sha256AfterCleanup": "74ce4b0ad7b86ff24d390d1cc19bc949f1250e6933dca7886d77ba70ebc3ca74"
+    },
+    {
+      "source": "docs/UI-REPLICA-ROADMAP.md",
+      "bytes": 20702,
+      "sha256Before": "1b94331b45ddff3bb9bc491a07deb529cdc5463d716e65e89a58d682a05614e2",
+      "trackedBefore": false,
+      "action": "move",
+      "destination": "docs/design/ui/UI-REPLICA-ROADMAP.md",
+      "sha256AfterMove": "1b94331b45ddff3bb9bc491a07deb529cdc5463d716e65e89a58d682a05614e2",
+      "sha256AfterRelinking": "c7d6214d763e9bb656e13dd84c2f9447ffd918f1adcace6765bc7e510b19b257",
+      "sha256AfterCleanup": "c7d6214d763e9bb656e13dd84c2f9447ffd918f1adcace6765bc7e510b19b257"
+    },
+    {
+      "source": "docs/WORLD-MAP-AUTHORING.md",
+      "bytes": 9315,
+      "sha256Before": "60ea0558beec49ac5eace5606ed63cdbac1310bd61946cae02fa31952263af8c",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/world/WORLD-MAP-AUTHORING.md",
+      "sha256AfterMove": "60ea0558beec49ac5eace5606ed63cdbac1310bd61946cae02fa31952263af8c",
+      "sha256AfterRelinking": "3a8f83b416bff120e982527ca648398ed085f081a93c32b594292255265963e5",
+      "sha256AfterCleanup": "373f5fa34f2893e665974810ad441223725f193d2f55e47e11b91522dd3dde1d"
+    },
+    {
+      "source": "docs/superpowers/specs/2026-10-20-data-authoring-design.md",
+      "bytes": 11549,
+      "sha256Before": "99b404041d04cd0617f95a052a5e221d4a11d9fa471b18f601e3370277bdafe7",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/specs/2026-10-20-data-authoring-design.md",
+      "sha256AfterMove": "99b404041d04cd0617f95a052a5e221d4a11d9fa471b18f601e3370277bdafe7",
+      "sha256AfterRelinking": "b117cb3fc04ff502ecd65fbf3e60940b1f25714d02d908745429197e350ae258",
+      "sha256AfterCleanup": "e591ad2495257feb27cec11f8feeaeb132d5be9bfb3a1a4234e145cb0390c826"
+    },
+    {
+      "source": "docs/superpowers/specs/2026-10-20-menu-refinement-design.md",
+      "bytes": 2970,
+      "sha256Before": "bf670cadec003e7effa16d072973a8a08d57513478866fe85fa63829b08732f8",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/specs/2026-10-20-menu-refinement-design.md",
+      "sha256AfterMove": "bf670cadec003e7effa16d072973a8a08d57513478866fe85fa63829b08732f8",
+      "sha256AfterRelinking": "bf670cadec003e7effa16d072973a8a08d57513478866fe85fa63829b08732f8",
+      "sha256AfterCleanup": "bf670cadec003e7effa16d072973a8a08d57513478866fe85fa63829b08732f8"
+    },
+    {
+      "source": "docs/superpowers/specs/2026-10-21-world-map-foundation-design.md",
+      "bytes": 15688,
+      "sha256Before": "e4916273e6916ae49e63f1a0ad9977433b7b47068dde5db6c9297b90aa3640ef",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/design/specs/2026-10-21-world-map-foundation-design.md",
+      "sha256AfterMove": "e4916273e6916ae49e63f1a0ad9977433b7b47068dde5db6c9297b90aa3640ef",
+      "sha256AfterRelinking": "379d578cf969062406c7a0d6e4bed7fe7f189875ca0b3ecdd150e384383b6c4d",
+      "sha256AfterCleanup": "379d578cf969062406c7a0d6e4bed7fe7f189875ca0b3ecdd150e384383b6c4d"
+    },
+    {
+      "source": "docs/sandbox-baseline.json",
+      "bytes": 1665,
+      "sha256Before": "fd143306ce1c21e71a151c04a40ef92902ef8cc31e9850160100b0b383b0fc13",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/baselines/sandbox-baseline.json",
+      "sha256AfterMove": "fd143306ce1c21e71a151c04a40ef92902ef8cc31e9850160100b0b383b0fc13",
+      "sha256AfterRelinking": "fd143306ce1c21e71a151c04a40ef92902ef8cc31e9850160100b0b383b0fc13",
+      "sha256AfterCleanup": "fd143306ce1c21e71a151c04a40ef92902ef8cc31e9850160100b0b383b0fc13"
+    },
+    {
+      "source": "docs/gameplay-baseline.json",
+      "bytes": 5982,
+      "sha256Before": "122d17b2cb259cfad5e887ab8317cb25eb1190fd24ba82936b105ff696069dd8",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/baselines/gameplay-baseline.json",
+      "sha256AfterMove": "122d17b2cb259cfad5e887ab8317cb25eb1190fd24ba82936b105ff696069dd8",
+      "sha256AfterRelinking": "122d17b2cb259cfad5e887ab8317cb25eb1190fd24ba82936b105ff696069dd8",
+      "sha256AfterCleanup": "122d17b2cb259cfad5e887ab8317cb25eb1190fd24ba82936b105ff696069dd8"
+    },
+    {
+      "source": "docs/VALIDATION.md",
+      "bytes": 3409,
+      "sha256Before": "b556249fbcb32fb28eda9487ae09d2074ed67929bc51ca124eb1f066e16d0bd6",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/reports/VALIDATION.md",
+      "sha256AfterMove": "b556249fbcb32fb28eda9487ae09d2074ed67929bc51ca124eb1f066e16d0bd6",
+      "sha256AfterRelinking": "3e1d11150187865bd07271ef10198a485ef438aab2b6dd74e70b9393dfa66044",
+      "sha256AfterCleanup": "3e1d11150187865bd07271ef10198a485ef438aab2b6dd74e70b9393dfa66044"
+    },
+    {
+      "source": "docs/PLAYTEST-2026-10-05.md",
+      "bytes": 8004,
+      "sha256Before": "af26230e2142d5ba9c7e60c9f151e53e6d17c0319142099d400f073bc7f03be9",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/reports/PLAYTEST-2026-10-05.md",
+      "sha256AfterMove": "af26230e2142d5ba9c7e60c9f151e53e6d17c0319142099d400f073bc7f03be9",
+      "sha256AfterRelinking": "6333f9ac1389c6070ff84c4d2e3275a87c229983ca57b7b7a7ec857bcde748d9",
+      "sha256AfterCleanup": "6333f9ac1389c6070ff84c4d2e3275a87c229983ca57b7b7a7ec857bcde748d9"
+    },
+    {
+      "source": "docs/playtest-2026-10-05.json",
+      "bytes": 841501,
+      "sha256Before": "a6af540127e10a499bc0c9caf7f612587ad30498c2252bb601f017e5674c4d81",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/reports/playtest-2026-10-05.json",
+      "sha256AfterMove": "a6af540127e10a499bc0c9caf7f612587ad30498c2252bb601f017e5674c4d81",
+      "sha256AfterRelinking": "a6af540127e10a499bc0c9caf7f612587ad30498c2252bb601f017e5674c4d81",
+      "sha256AfterCleanup": "a6af540127e10a499bc0c9caf7f612587ad30498c2252bb601f017e5674c4d81"
+    },
+    {
+      "source": "docs/GAMEPLAY-ROUTE-PLAYTEST-2026-10-05.md",
+      "bytes": 7360,
+      "sha256Before": "42e179f0a648e6d97c0c50103203724ea6eb19c476bb68140994774255e3c0cb",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/reports/GAMEPLAY-ROUTE-PLAYTEST-2026-10-05.md",
+      "sha256AfterMove": "42e179f0a648e6d97c0c50103203724ea6eb19c476bb68140994774255e3c0cb",
+      "sha256AfterRelinking": "42e179f0a648e6d97c0c50103203724ea6eb19c476bb68140994774255e3c0cb",
+      "sha256AfterCleanup": "42e179f0a648e6d97c0c50103203724ea6eb19c476bb68140994774255e3c0cb"
+    },
+    {
+      "source": "docs/gameplay-route-playtest-2026-10-05.json",
+      "bytes": 165250,
+      "sha256Before": "54f01e232021f441f89dd71ab0ec253feb476f0a5bc2fd602897823d2f371a44",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/reports/gameplay-route-playtest-2026-10-05.json",
+      "sha256AfterMove": "54f01e232021f441f89dd71ab0ec253feb476f0a5bc2fd602897823d2f371a44",
+      "sha256AfterRelinking": "54f01e232021f441f89dd71ab0ec253feb476f0a5bc2fd602897823d2f371a44",
+      "sha256AfterCleanup": "54f01e232021f441f89dd71ab0ec253feb476f0a5bc2fd602897823d2f371a44"
+    },
+    {
+      "source": "docs/PIXEL-PROPORTION-AUDIT.md",
+      "bytes": 4889,
+      "sha256Before": "8b2cbd07d92401e76abd95fd577da8e0e6fff4eaad5504bde9b8299b16dba483",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/testing/reports/PIXEL-PROPORTION-AUDIT.md",
+      "sha256AfterMove": "8b2cbd07d92401e76abd95fd577da8e0e6fff4eaad5504bde9b8299b16dba483",
+      "sha256AfterRelinking": "fb364001d7c0c6da555a51f0cf6a93d0e1119a188524b4f6e238c2fd66b66e62",
+      "sha256AfterCleanup": "fb364001d7c0c6da555a51f0cf6a93d0e1119a188524b4f6e238c2fd66b66e62"
+    },
+    {
+      "source": "docs/game_story_bible.md",
+      "bytes": 90494,
+      "sha256Before": "4737841e764c85aa4ab9b440f1053a47b2ff934af1c439c9bb1c424dc0db520a",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/history/narrative/game_story_bible.md",
+      "sha256AfterMove": "4737841e764c85aa4ab9b440f1053a47b2ff934af1c439c9bb1c424dc0db520a",
+      "sha256AfterRelinking": "4737841e764c85aa4ab9b440f1053a47b2ff934af1c439c9bb1c424dc0db520a",
+      "sha256AfterCleanup": "8f3dde4303d00f92381430fa814ab5de10d7fcd57909911f97773c6f3ff388a1"
+    },
+    {
+      "source": "docs/BIBLE-CLB-BAO-CHI-PROPOSAL.md",
+      "bytes": 46496,
+      "sha256Before": "5640ede3f3937ac1be3aade40d0082dce1ec961174d85202694a5a86476ce6e0",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/history/narrative/BIBLE-CLB-BAO-CHI-PROPOSAL.md",
+      "sha256AfterMove": "5640ede3f3937ac1be3aade40d0082dce1ec961174d85202694a5a86476ce6e0",
+      "sha256AfterRelinking": "4a6ac919148b315310b15fc462d62849b3b44d85dc477a999f42a6da538499bf",
+      "sha256AfterCleanup": "778830397ed8ab7c7f25d0978f35f0b4cae0efd127efbf04ae1ebf57019b1a23"
+    },
+    {
+      "source": "docs/UI-COMPONENTS-PLAN.md",
+      "bytes": 16264,
+      "sha256Before": "c6923bc7682df7e001cbebc88a6989043e9958fc4f53b93f4f7f2bcbd03b11f9",
+      "trackedBefore": false,
+      "action": "move",
+      "destination": "docs/history/ui/UI-COMPONENTS-PLAN.md",
+      "sha256AfterMove": "c6923bc7682df7e001cbebc88a6989043e9958fc4f53b93f4f7f2bcbd03b11f9",
+      "sha256AfterRelinking": "404954d31e3556323598f125ccf9320829b7b7b99e1ea12e042d1f3f3135656e",
+      "sha256AfterCleanup": "404954d31e3556323598f125ccf9320829b7b7b99e1ea12e042d1f3f3135656e"
+    },
+    {
+      "source": "docs/v0.1/Draft.md",
+      "bytes": 36434,
+      "sha256Before": "4b320dd1c65869626178d34924e3795e590e5619071b9f433de91e0e9ec6a0e6",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/history/formula/Draft.md",
+      "sha256AfterMove": "4b320dd1c65869626178d34924e3795e590e5619071b9f433de91e0e9ec6a0e6",
+      "sha256AfterRelinking": "4b320dd1c65869626178d34924e3795e590e5619071b9f433de91e0e9ec6a0e6",
+      "sha256AfterCleanup": "4b320dd1c65869626178d34924e3795e590e5619071b9f433de91e0e9ec6a0e6"
+    },
+    {
+      "source": "docs/v0.1/sym.py",
+      "bytes": 14300,
+      "sha256Before": "df0c5d63b25875470871843866b573bac5ecc03caa28011d51febc72c2aa54ff",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/history/formula/sym.py",
+      "sha256AfterMove": "df0c5d63b25875470871843866b573bac5ecc03caa28011d51febc72c2aa54ff",
+      "sha256AfterRelinking": "df0c5d63b25875470871843866b573bac5ecc03caa28011d51febc72c2aa54ff",
+      "sha256AfterCleanup": "df0c5d63b25875470871843866b573bac5ecc03caa28011d51febc72c2aa54ff"
+    },
+    {
+      "source": "docs/PIXEL-ANIMATION-RESEARCH.md",
+      "bytes": 14675,
+      "sha256Before": "1ec98c3e7230a9418da9d7d01f34a31b91e403db4bb34f5cb5d7877281a1df50",
+      "trackedBefore": true,
+      "action": "move",
+      "destination": "docs/research/PIXEL-ANIMATION-RESEARCH.md",
+      "sha256AfterMove": "1ec98c3e7230a9418da9d7d01f34a31b91e403db4bb34f5cb5d7877281a1df50",
+      "sha256AfterRelinking": "34ed1a6917c9278fa813cfd7e2dcea926efc89e7ce35c67ea47fba925a020b4a",
+      "sha256AfterCleanup": "34ed1a6917c9278fa813cfd7e2dcea926efc89e7ce35c67ea47fba925a020b4a"
+    },
+    {
+      "source": "docs/hai-vong.png",
+      "bytes": 3605038,
+      "sha256Before": "1ee95ff0a40c04a6c716c25798b18171fc5347bb065e4920807d35befd98f3dc",
+      "trackedBefore": false,
+      "action": "move",
+      "destination": "docs/ui-concepts/references/hai-vong.png",
+      "sha256AfterMove": "1ee95ff0a40c04a6c716c25798b18171fc5347bb065e4920807d35befd98f3dc",
+      "sha256AfterRelinking": "1ee95ff0a40c04a6c716c25798b18171fc5347bb065e4920807d35befd98f3dc",
+      "sha256AfterCleanup": "1ee95ff0a40c04a6c716c25798b18171fc5347bb065e4920807d35befd98f3dc"
+    },
+    {
+      "source": "docs/PIXEL-UI.md",
+      "bytes": 1243,
+      "sha256Before": "a7cc0acbeb8c4c155882ce3e4d2ae271a72343b0b91282eb6d4579e09b16445a",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Legacy DOM dialogue/menu styling superseded by Coastal replica and current menu design.",
+      "replacement": "docs/design/ui/MENU-V2-IMPLEMENTATION.md"
+    },
+    {
+      "source": "docs/UI-SINGLE-SCREEN.md",
+      "bytes": 3974,
+      "sha256Before": "213ba13ee4a1f24ce6e91ceb8ec5e9c611fda906d81446cf1ea72c7e038ea3a7",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Superseded five-tab menu specification; current fixed UI scope and six-tab design are retained.",
+      "replacement": "docs/design/ui/MENU-V2-IMPLEMENTATION.md"
+    },
+    {
+      "source": "docs/refactor_guide.md",
+      "bytes": 17245,
+      "sha256Before": "6e435e8a6d20f71612a9d8107d5d2c2e9a86d89132f3fabca0dfc9ef56150921",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Generic engine rewrite prompt superseded by the project-specific implemented authoring design and architecture.",
+      "replacement": "docs/design/specs/2026-10-20-data-authoring-design.md"
+    },
+    {
+      "source": "docs/DIALOGUE-SPRITES-PLAN.md",
+      "bytes": 7945,
+      "sha256Before": "d9e612cf56619172d38d707f5fec90062161fa29038cc3f657fcccb49d5e911e",
+      "trackedBefore": false,
+      "action": "delete",
+      "reason": "Completed initial sprite checklist superseded by shipped v2 art design and retained generation inputs.",
+      "replacement": "docs/design/art/DIALOGUE-DESIGN-V2.md"
+    },
+    {
+      "source": "docs/PIXEL-MAP-PLAN.md",
+      "bytes": 2730,
+      "sha256Before": "49ab6e499186278065fd42f1d33622b67d7db4e48a04438d7630646a9e2fcae5",
+      "trackedBefore": false,
+      "action": "delete",
+      "reason": "Completed prototype implementation checklist; usage guide and review evidence remain.",
+      "replacement": "docs/guides/PIXEL-MAP.md"
+    },
+    {
+      "source": "docs/superpowers/plans/2026-10-20-data-authoring-roadmap.md",
+      "bytes": 32788,
+      "sha256Before": "ad0c86001a5435ad9b4d41c2004778ff4b3d05f803f5070fb50897a775e67b5f",
+      "trackedBefore": false,
+      "action": "delete",
+      "reason": "Completed M0-M8 execution checklist; design, usage and implementation evidence remain.",
+      "replacement": "docs/ui-reviews/data-authoring/README.md"
+    },
+    {
+      "source": "docs/superpowers/plans/2026-10-20-dialogue-editor-correction.md",
+      "bytes": 1211,
+      "sha256Before": "b1bc66ad3f1ed0360af509a8723e0cc2e76ea4b6f890381038a1a6e24c9916e0",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Completed correction checklist; it still describes three groups, replaced by the 28-object editor.",
+      "replacement": "docs/ui-reviews/data-authoring/README.md"
+    },
+    {
+      "source": "docs/superpowers/plans/2026-10-20-menu-refinement.md",
+      "bytes": 10877,
+      "sha256Before": "b6a6de4ab6f142b6bc30f76a4737acdbee1b89dd33cf268e4add56dc5e37c6bb",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Completed execution checklist; accepted design and final review remain.",
+      "replacement": "docs/ui-reviews/menu-refinement/README.md"
+    },
+    {
+      "source": "docs/superpowers/plans/2026-10-20-tilemap-editor.md",
+      "bytes": 20950,
+      "sha256Before": "befefe86b7e06bd29a2b89db4a0275facdd78211df138f4572e43b6e3c0ba57f",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Completed single-layer execution checklist superseded by four-layer foundation.",
+      "replacement": "docs/ui-reviews/tilemap-editor/README.md"
+    },
+    {
+      "source": "docs/superpowers/plans/2026-10-21-world-map-foundation.md",
+      "bytes": 22401,
+      "sha256Before": "5e10c730af1febccfd8df0dafbf9267745103fbf7bcee963949b93db9c9d789e",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Completed T1-T9 execution checklist; final design, guide, roadmap and review evidence remain.",
+      "replacement": "docs/ui-reviews/world-map-foundation/README.md"
+    },
+    {
+      "source": "docs/superpowers/specs/2026-10-20-tilemap-editor-design.md",
+      "bytes": 7266,
+      "sha256Before": "217d1d4f4172320d2a3eb27cd5219ef89ada140d887a1df299f8cf0e1a79d9b3",
+      "trackedBefore": true,
+      "action": "delete",
+      "reason": "Single-layer/fixed-16-tile design superseded by compatible imported-tileset/four-layer design.",
+      "replacement": "docs/design/specs/2026-10-21-world-map-foundation-design.md"
+    },
+    {
+      "source": "docs/screenshot.png",
+      "bytes": 239962,
+      "sha256Before": "54ef9fb0d4bf339caf70aa6b15a2bdbb5bb624fc204c7718ae0b9fea894c7c22",
+      "trackedBefore": false,
+      "action": "delete",
+      "reason": "Unreferenced screenshot of obsolete dialogue preview; current native review captures are retained.",
+      "replacement": "docs/ui-reviews/coastal-replica-stage4/README.md"
+    },
+    {
+      "source": "docs/ui-specs/coastal-replica/layouts/menu.md",
+      "action": "extract-authored-source",
+      "destination": "docs/history/ui/MENU-STAGE5-LAYOUT.md",
+      "bytes": 20889,
+      "sha256Before": "5162f15ced0ac0474eb4728b998256080a49dd40ba1823be760a8a3874ba3207",
+      "sha256AfterMove": "5162f15ced0ac0474eb4728b998256080a49dd40ba1823be760a8a3874ba3207",
+      "trackedBefore": true,
+      "sourceRetainedAsGenerated": true,
+      "reason": "Authored Stage-5 draft had already overwritten the generated Stage-0 sheet before this cleanup. Preserve authored design separately; restore generated output from unchanged layouts/fixtures JSON.",
+      "sha256Generated": "9351dcf334cd144171da0995a819474d3efdc0328d77d9865fc03c9736d042c1",
+      "sha256AfterCleanup": "727d7dcd58d519b10ddb94b15437aeb71e6d0831bd6c79ff30d6d6963ed66faf"
+    }
+  ],
+  "referenceEdits": [
+    {
+      "path": "docs/engineering/ARCHITECTURE.md",
+      "sha256Before": "4d8416ade204045fc7ed2eb9410e9bb59dcefb15f1e6f6b7671b12125674e738",
+      "sha256After": "6242de05130d1a4b06b0051ecb72040db7d4515dd6d083624150f568754ab129"
+    },
+    {
+      "path": "docs/engineering/DEVELOPMENT.md",
+      "sha256Before": "a087c0b732d31bdfdac6793cdb9636e74a6e50fe9a667cc542bd8faa680ebd92",
+      "sha256After": "c9e299a7d29cf1fbf055d581a6fb5f3ab16a6f36de24c6742de7dbdb05851faf"
+    },
+    {
+      "path": "docs/guides/DATA-AUTHORING.md",
+      "sha256Before": "248a2af818f45217c60bcfbb07f71285f648bc487ab57229b310b054f24a1ea4",
+      "sha256After": "30c1589a074712a3064a439e47d2f60a250dad87fe03addea470a70cfc4e7e2e"
+    },
+    {
+      "path": "docs/guides/GAMEPLAY-SANDBOX.md",
+      "sha256Before": "0c80e111f25368bec92c0f8d2731f7e86b2db387dc41692219c682387f6aac38",
+      "sha256After": "8faba54362204927abf71c43f0a83443b144312c43a16680cbcaccd33d464f79"
+    },
+    {
+      "path": "docs/guides/INTERACTION-MAP.md",
+      "sha256Before": "f5159d944a405044ea44b756b3497f522c66f4118c186c10fe124dd97a13c687",
+      "sha256After": "6b4014e9f02f7d7f054d6544f0bc7c48030877fdea5accd682d4faa5352ccc94"
+    },
+    {
+      "path": "docs/guides/PIXEL-MAP.md",
+      "sha256Before": "66878d05ed89f147739524750e1acf107c77bb9f49df8b1927095085f76a9c92",
+      "sha256After": "3feaf1f2779077a09f12359eaf5390f36a6126b0600b67b92bf6c3539e7d0613"
+    },
+    {
+      "path": "docs/guides/SANDBOX.md",
+      "sha256Before": "398c369c291f44a523cd3f0f7ddece0b1083ccc728a91a7e6dc10dce110c43b7",
+      "sha256After": "4db4042617f5f3bcc8c2917388ded5ae361e1d328305cab4526af774980ac30a"
+    },
+    {
+      "path": "docs/guides/WORLD-EDITOR-GUIDE.md",
+      "sha256Before": "e0d2333927e7fe9545a4c32eddbb158f34219601dec67665e03870963e48d9df",
+      "sha256After": "f6ea8d6048d4751ede88fcc0684d42fe3a97ab69b069b79b2936c28d4a310e81"
+    },
+    {
+      "path": "docs/research/PIXEL-ANIMATION-RESEARCH.md",
+      "sha256Before": "1ec98c3e7230a9418da9d7d01f34a31b91e403db4bb34f5cb5d7877281a1df50",
+      "sha256After": "34ed1a6917c9278fa813cfd7e2dcea926efc89e7ce35c67ea47fba925a020b4a"
+    },
+    {
+      "path": "docs/design/art/DIALOGUE-DESIGN-V2.md",
+      "sha256Before": "b1a535575987bca911cecea3044fea523de027bc06ba8651310fbafe94cb3d91",
+      "sha256After": "0fa29e4b124752799fad3fec02a17deb69db8a963e0a7e05774b313fa54984bc"
+    },
+    {
+      "path": "docs/design/art/PIXEL-CHARACTER-STANDARD.md",
+      "sha256Before": "ae2e20255060b51bbcdcd4b3468a6aaff9a9b02202d2e17b1d2a638dff486edb",
+      "sha256After": "08284edc3b315f34d501816f69292a2c8cf0119d2a198cf44b1ddb1eafb953b5"
+    },
+    {
+      "path": "docs/design/gameplay/RULES.md",
+      "sha256Before": "1bc5b3e1821ef16c8028054a6fa68e3f4328d3a6ca89669e5956b3d80258f742",
+      "sha256After": "065dea2e24f3dcbb857017fb222d3659d6ba5fd27f023ba3f1e857881b77f21b"
+    },
+    {
+      "path": "docs/design/narrative/ENVIRONMENTAL-STORYTELLING-PROLOGUE.md",
+      "sha256Before": "9f9a90063b3f2f0cd197dc83289369264116645413d4cbf9764b5c7c2542dbff",
+      "sha256After": "d81e732f1c41642f8189c984e54ec5c42f8c33ccf4c22fd16ff63a7afd0e3b68"
+    },
+    {
+      "path": "docs/design/narrative/game_story_bible_v2.md",
+      "sha256Before": "efe216aa94730fccc919ba65c485d9438e0911857778027bba93c3d438c7dee9",
+      "sha256After": "4b44f36d0ac599ba2c3b7b11e7e3ebaf527a6ce2f1ee8b3984d0e02faae2de17"
+    },
+    {
+      "path": "docs/design/narrative/SCRIPT-EDITORIAL-REVIEW.md",
+      "sha256Before": "fe55474e4d80a791a27be2e7b222992125d287f539a990eb5d755f2998cc4e07",
+      "sha256After": "18a2e85b4da67a8a24c6f8b9bc891b458d52fba41c5f2e7822919818e2418c54"
+    },
+    {
+      "path": "docs/design/specs/2026-10-20-data-authoring-design.md",
+      "sha256Before": "99b404041d04cd0617f95a052a5e221d4a11d9fa471b18f601e3370277bdafe7",
+      "sha256After": "e591ad2495257feb27cec11f8feeaeb132d5be9bfb3a1a4234e145cb0390c826"
+    },
+    {
+      "path": "docs/design/specs/2026-10-21-world-map-foundation-design.md",
+      "sha256Before": "e4916273e6916ae49e63f1a0ad9977433b7b47068dde5db6c9297b90aa3640ef",
+      "sha256After": "379d578cf969062406c7a0d6e4bed7fe7f189875ca0b3ecdd150e384383b6c4d"
+    },
+    {
+      "path": "docs/design/ui/MENU-V2-IMPLEMENTATION.md",
+      "sha256Before": "1f4de129cb4c3e05066c975f124a7c1102ddf23cc4d807fb82a2baea66c4709b",
+      "sha256After": "74ce4b0ad7b86ff24d390d1cc19bc949f1250e6933dca7886d77ba70ebc3ca74"
+    },
+    {
+      "path": "docs/design/ui/UI-REPLICA-ROADMAP.md",
+      "sha256Before": "1b94331b45ddff3bb9bc491a07deb529cdc5463d716e65e89a58d682a05614e2",
+      "sha256After": "c7d6214d763e9bb656e13dd84c2f9447ffd918f1adcace6765bc7e510b19b257"
+    },
+    {
+      "path": "docs/design/world/WORLD-MAP-AUTHORING.md",
+      "sha256Before": "60ea0558beec49ac5eace5606ed63cdbac1310bd61946cae02fa31952263af8c",
+      "sha256After": "373f5fa34f2893e665974810ad441223725f193d2f55e47e11b91522dd3dde1d"
+    },
+    {
+      "path": "docs/history/narrative/BIBLE-CLB-BAO-CHI-PROPOSAL.md",
+      "sha256Before": "5640ede3f3937ac1be3aade40d0082dce1ec961174d85202694a5a86476ce6e0",
+      "sha256After": "778830397ed8ab7c7f25d0978f35f0b4cae0efd127efbf04ae1ebf57019b1a23"
+    },
+    {
+      "path": "docs/history/ui/UI-COMPONENTS-PLAN.md",
+      "sha256Before": "c6923bc7682df7e001cbebc88a6989043e9958fc4f53b93f4f7f2bcbd03b11f9",
+      "sha256After": "404954d31e3556323598f125ccf9320829b7b7b99e1ea12e042d1f3f3135656e"
+    },
+    {
+      "path": "docs/testing/reports/PIXEL-PROPORTION-AUDIT.md",
+      "sha256Before": "8b2cbd07d92401e76abd95fd577da8e0e6fff4eaad5504bde9b8299b16dba483",
+      "sha256After": "fb364001d7c0c6da555a51f0cf6a93d0e1119a188524b4f6e238c2fd66b66e62"
+    },
+    {
+      "path": "docs/testing/reports/PLAYTEST-2026-10-05.md",
+      "sha256Before": "af26230e2142d5ba9c7e60c9f151e53e6d17c0319142099d400f073bc7f03be9",
+      "sha256After": "6333f9ac1389c6070ff84c4d2e3275a87c229983ca57b7b7a7ec857bcde748d9"
+    },
+    {
+      "path": "docs/testing/reports/VALIDATION.md",
+      "sha256Before": "b556249fbcb32fb28eda9487ae09d2074ed67929bc51ca124eb1f066e16d0bd6",
+      "sha256After": "3e1d11150187865bd07271ef10198a485ef438aab2b6dd74e70b9393dfa66044"
+    },
+    {
+      "path": "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/README.md",
+      "sha256Before": "cdffdc6a50eead1bb8083e81288d217fd4a695b3870fc8fdac934e1818b5fbb3",
+      "sha256After": "d12cb0e651267535609fe537ffd660ba0d53f49947c158a56c106c7bd862f551"
+    },
+    {
+      "path": "docs/ui-concepts/coastal-editorial-v1/README.md",
+      "sha256Before": "39d16a4ce252c6c3c66afd035728b7913ae7b6e9750132a2f2b5fc0412f662ee",
+      "sha256After": "3e1a8dba035bbf1cd3afa52d94826919115a2a1bab09859e8e5784e1c73ea6bd"
+    },
+    {
+      "path": "docs/ui-reviews/coastal-replica-stage1/README.md",
+      "sha256Before": "fe31a7c5fd8851e81c2f536a186648cf52a4d7857426bd2e6a5df00ec8159977",
+      "sha256After": "616732e152b3f89cd3da5761a8d132b859977316f51fe42af7be26d37d97946f"
+    },
+    {
+      "path": "docs/ui-reviews/coastal-replica-stage2/README.md",
+      "sha256Before": "466afa150b0f1e2a2d70f959d5d399bdba327f664e89a9fd815aaa5c389752bc",
+      "sha256After": "53d3c9706fdc10c17777a86db5c5ad0414ab54cb1e4f3e98b06e123e9d5ff202"
+    },
+    {
+      "path": "docs/ui-reviews/coastal-replica-stage3/README.md",
+      "sha256Before": "f79db65333d9c727230f0a3a70d6931015062b5722ff867b972c8af127fad286",
+      "sha256After": "d79795bbb051c40be6166973421a5557c23e11cf50a492bdd542322a4373c3c5"
+    },
+    {
+      "path": "docs/ui-reviews/coastal-replica-stage4/README.md",
+      "sha256Before": "7660b8d045ea1446bc46d2ace627e95cc45786d454e5ccf0ef4782d31d5fc202",
+      "sha256After": "070f750c9802c72d69061113b750e3ecc60bb714f7975ec6d101925425883e86"
+    },
+    {
+      "path": "docs/ui-reviews/coastal-v1/README.md",
+      "sha256Before": "cb19b5359c9dfe45fa132bc3615e22dc288c5e07b2773f0f329e2d903e3166e2",
+      "sha256After": "f17ce38d766b77ded5e10bf08fb672502719e86123d728c2f8d8c28d2bec0d84"
+    },
+    {
+      "path": "docs/ui-reviews/data-authoring/README.md",
+      "sha256Before": "1806ca9874600f920eb3eedef9d7e13a55838d9fd5243a7d463052a997fb9d65",
+      "sha256After": "cf40f676f4ef9212a2bf71a0b377ff97db08ad99ffcd3c1ae91fe77f35e8c1e9"
+    },
+    {
+      "path": "docs/ui-reviews/dossier-polish/README.md",
+      "sha256Before": "e7f3665cc4dae55f10323510631978754638d6916d7030fee57ebc8bbe322335",
+      "sha256After": "8b728b5d7c95e2c02168bd5452062c10d9319b54d081f50df770066a69bd2568"
+    },
+    {
+      "path": "docs/ui-reviews/menu-refinement/README.md",
+      "sha256Before": "d35771335b1e189bea2176fec46667da849435295313388cf68286de8b9ad7fa",
+      "sha256After": "916254c26e5af8177a3f207b5e44958448265c6bc67b2006e473e38ce03ee59d"
+    },
+    {
+      "path": "docs/ui-reviews/menu-v2-gap-audit-2026-10-15/README.md",
+      "sha256Before": "3da5218ff9d8cb1eb520fb39d8dd093d3ba0e439e47aebc98149efed98108fe5",
+      "sha256After": "1821168d1cb0e7e09c989227513ed45bda5e3052b6baab9ef33362f472bc2987"
+    },
+    {
+      "path": "docs/ui-reviews/tilemap-editor/README.md",
+      "sha256Before": "16f6cd4de30fa7f9cddfc3c7d593a9a6a250d3e791959d8eba5c0f7e5818eb4d",
+      "sha256After": "ec91f8730144faf64fef668101c3eb76ce0bd7a58e337c5284e60dc90d00b06e"
+    },
+    {
+      "path": "docs/ui-reviews/world-map-foundation/README.md",
+      "sha256Before": "9a31d01803d8b40b74cdbe1f169d48f2235d9f0a9160d51b0e611d2be64cb806",
+      "sha256After": "dd6cb20f6f58e1d2776364f6d8860876c24d336e62392ea992e3974836f07489"
+    },
+    {
+      "path": "docs/ui-specs/coastal-replica/layouts/menu.md",
+      "sha256Before": "9f2ba0703f25c6b0dc468c997a6fe1bd7c70dbb89cf171b4471ce8d88453e908",
+      "sha256After": "9351dcf334cd144171da0995a819474d3efdc0328d77d9865fc03c9736d042c1"
+    },
+    {
+      "path": "tools/report_gameplay.py",
+      "sha256Before": "cdddc501fd2f53639adc8ca655a0fa79f36236bb649487bd61c25c1f48fbad7b",
+      "sha256After": "b0b3bfbc0d756f01cccb9c66eb317bbc4f1bd1114e21e77aa2aede5702dc42f6"
+    },
+    {
+      "path": "tools/report_gameplay_playtest.py",
+      "sha256Before": "ee6fa1bd637e5b7645d52a4995297a6f88574bac404d39dc9309e1b3b3f0b351",
+      "sha256After": "167f49720772f457cd46a858d9731d4f3501e3d5fd410bb608616ccc4edfeb44"
+    },
+    {
+      "path": "assets/tilesets/README.md",
+      "sha256Before": "ea47348a3a8a56eba01ad3e93d75c48770200271246a7a6a1a6df619974d4683",
+      "sha256After": "4f748b7ae5f6f72161f050d550c71c529931ca8d2eda956efa41f7a69d89e90e"
+    },
+    {
+      "path": "assets/ui/coastal-menu-v2/map-prompt.json",
+      "sha256Before": "84cbefce2d1dad07608519655dbf8c0c20dc222dbfe0a81d3f20ed81604c82ee",
+      "sha256After": "32c6daf8049f0e8136a60f18acc42046aa692d096ef966390a3be0b8ee3652c9"
+    },
+    {
+      "path": "assets/ui/coastal-menu-v2/README.md",
+      "sha256Before": "5e2efb2bfe87bc4511adcfd1daafec928961cc130c083b81249638b4ff63f989",
+      "sha256After": "05ca796e0581c6b710a656ced6a6714973749db61f2c639dc1d887b9d8773414"
+    },
+    {
+      "path": "assets/ui/coastal-replica/v1/README.md",
+      "sha256Before": "2b0f435cf072d269370d76af8af5ecc6d9046d62e33a4ee341564e9ebe234896",
+      "sha256After": "6be06df474778721e7d23237df22b15f28198c9732db93d4a1733189a33c74e7"
+    },
+    {
+      "path": "assets/ui/coastal-replica/v2/README.md",
+      "sha256Before": "0579026b75e51fc12070d85a51ed5aee9dc2d9d27971df210b5d755e2a93205c",
+      "sha256After": "f0dbe2cd9bf699886e11d60b547cf4ab7e941acb56a3e3c9a9046ffed16995da"
+    },
+    {
+      "path": "README.md",
+      "sha256Before": "fe0158bea23c4f4c6cdcc3f290a47e6c475d63c1bfa5566acff1c36824b7952c",
+      "sha256After": "9b5965e4dc4b3ea818a04ed6ea39c05edc8f15c5cd5129c52882ec2978dc8803"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256Before": "7656c600c9a37c039ac677eabf84bb975a710ec1985e41b07abd46de1a89983f",
+      "sha256After": "a8d2bab68ef8b8cf185f671c1d49f24b720c581eea802a9fa230e28129f6a4cd"
+    },
+    {
+      "path": "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/inventory.json",
+      "sha256Before": "aac67d5f2cab5809b4296296a607df651e149b722fe478a9f5582d2369ad5a9d",
+      "sha256After": "083fa9888fb8cd181b331a3d61b406021871c469b9d12e723c6bc09a51c77784"
+    },
+    {
+      "path": "docs/ui-concepts/coastal-editorial-menu-prototypes-v2/prompts.json",
+      "sha256Before": "c2a97aa69a2a83c75f7714f6c1502a617028ede0be6ce0e533cbf27f77fd91ad",
+      "sha256After": "25fb5affc0524d9974e393e97395e8bda12242beedd005b4529165a2554aafcd"
+    },
+    {
+      "path": "src/main.js",
+      "sha256Before": "0bd6eb260d46f6f74ed08ff47e0486b516be0989d6e9ee88cd7db2c7a4aae784",
+      "sha256After": "f2beac263d8a8ee3f195199c7d67c46df539727b2918928776c474c45ea97ca2"
+    },
+    {
+      "path": "src/presentation/gameplay-controller.js",
+      "sha256Before": "a50a347b375152f0eeb2711fcd24d1eb29ff7b1480f212a85804554f81201bcb",
+      "sha256After": "7abf4d1864189815d764144db5868e10e349e9958ce9a80d4e5adb184809fa32"
+    },
+    {
+      "path": "tools/check_baselines.py",
+      "sha256Before": "bd1abd0c5d98998c4dd1cdd97185c12a8d90732742a858d800dcb35e35212588",
+      "sha256After": "ff410dfb5c2eebd4606cdcbd0c990d92730835b2e578e4877d5f3ed1bdb8fe06"
+    }
+  ],
+  "verification": {
+    "moves": 43,
+    "deletions": 12,
+    "markdownLinksChecked": 510,
+    "brokenMarkdownLinks": [],
+    "staleLiveDocPaths": [],
+    "protectedBytes": "All moved non-Markdown files exactly match their original SHA-256.",
+    "browser": "164/164 passed",
+    "architectureIssues": 0,
+    "baselineComparison": "All eight formula and four gameplay policies match; no baseline regenerated.",
+    "checksPassed": [
+      "world scenes --check",
+      "coastal reference specs --check",
+      "menu v2 assets",
+      "active asset packs --check"
+    ],
+    "conceptReference": "Original Hai Vong PNG byte size/SHA verified against concept inventory; active prompt references resolve.",
+    "runtimeHelpUrls": "Both relocated guide URLs, world editor guide and documentation index return HTTP 200.",
+    "temporarySnapshot": "Verified against inventory before removal; deleted local-only obsolete files are not retained in Git."
+  }
+}

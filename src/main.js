@@ -29,7 +29,7 @@ const controls = el('section',{ class:'lab-controls' });
 app.append(
   el('header',{ class:'masthead' },[
     el('div',{},[text('div',t("src.main.tinh_tam_phong_thuc_nghiem"),'eyebrow'),text('h1',t("src.main.clb_bao_chi")),text('p',sandbox ? t("src.main.sandbox_co_che_chinh_chay_thu_doi_chieu") : t("src.main.map_debug_thu_vong_quan_ly_truoc_khi_viet_cau_chuyen"),'subtitle')]),
-    el('nav',{ class:'top-nav' },[el('a',{ href:'pixel.html' },[t('ui.map_pixel')]),el('a',{ href:'gameplay.html' },[t("src.gameplay.main.sandbox_vong_choi")]),el('a',{ href:'index.html',class:!sandbox?'current':'' },['Map debug']),el('a',{ href:'sandbox.html',class:sandbox?'current':'' },[t("src.gameplay.main.cong_thuc_cu")]),el('a',{ href:'docs/SANDBOX.md',target:'_blank' },[t("src.gameplay.main.huong_dan")])]),
+    el('nav',{ class:'top-nav' },[el('a',{ href:'pixel.html' },[t('ui.map_pixel')]),el('a',{ href:'gameplay.html' },[t("src.gameplay.main.sandbox_vong_choi")]),el('a',{ href:'index.html',class:!sandbox?'current':'' },['Map debug']),el('a',{ href:'sandbox.html',class:sandbox?'current':'' },[t("src.gameplay.main.cong_thuc_cu")]),el('a',{ href:'docs/guides/SANDBOX.md',target:'_blank' },[t("src.gameplay.main.huong_dan")])]),
   ]),
   stats,
   el('div',{ class:'toolbar' },[

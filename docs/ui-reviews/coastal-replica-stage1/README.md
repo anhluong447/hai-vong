@@ -1,6 +1,6 @@
 # Coastal replica — Stage 1 review
 
-> Scope revision 2: đây là review lịch sử của pilot. [Roadmap hiện hành](../../UI-REPLICA-ROADMAP.md) replica UI và trang trí gắn UI; scene/portrait matching được hoãn. Full-frame diff và backlog pose/background bên dưới không còn chặn G2 UI; UI masks/review mới vẫn cần thực hiện ở R14.
+> Scope revision 2: đây là review lịch sử của pilot. [Roadmap hiện hành](../../design/ui/UI-REPLICA-ROADMAP.md) replica UI và trang trí gắn UI; scene/portrait matching được hoãn. Full-frame diff và backlog pose/background bên dưới không còn chặn G2 UI; UI masks/review mới vẫn cần thực hiện ở R14.
 
 2026-10-09 · **R05–R08 đã bàn giao pipeline và mẫu 7 lớp thực.** Stage 0 đã commit
 ở `7d9a65a`. Mẫu Stage 1 chạy tại
@@ -67,6 +67,6 @@ paper alpha, typography, clip IDs, capture rejection/reset/input lock và dispos
 Các kết quả còn lại và hash hiện hành được lưu trong [validation.json](validation.json).
 Chrome headless software phù hợp capture tĩnh; chưa đo GPU/motion/performance thật.
 
-Tiếp tục **Stage 2 / R09–R14** theo [roadmap](../../UI-REPLICA-ROADMAP.md): ưu tiên
+Tiếp tục **Stage 2 / R09–R14** theo [roadmap](../../design/ui/UI-REPLICA-ROADMAP.md): ưu tiên
 pose/silhouette và environment/occlusion, rồi paper print/type, cuối cùng native
 overlay từng vùng. Chưa nhân rộng mẫu sang menu/HUD/dossier khi thoại chưa qua G2.
