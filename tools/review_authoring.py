@@ -58,9 +58,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base-url', default='http://127.0.0.1:8096')
     parser.add_argument('--dialogue-only', action='store_true', help='Review the corrected SVG dialogue editor against the original Stage 4')
+    parser.add_argument('--workbenches-only', action='store_true', help='Review current editor chrome and native input without reconstructing historical fixtures')
+    parser.add_argument('--output', type=Path, default=ROOT / 'docs/ui-reviews/data-authoring/after')
     args = parser.parse_args()
     assert args.base_url.startswith(('http://127.0.0.1:', 'http://localhost:'))
-    output = ROOT / 'docs/ui-reviews/data-authoring/after'
+    output = args.output.resolve()
+    if not output.is_relative_to(ROOT / 'docs/ui-reviews'):
+        parser.error('output must be below docs/ui-reviews')
     output.mkdir(parents=True, exist_ok=True)
     profile = ROOT / 'tmp' / ('authoring-review-' + uuid.uuid4().hex)
     profile.mkdir(parents=True)
@@ -116,30 +120,105 @@ def main():
             client.call('Input.dispatchMouseEvent', dict(type=kind, x=x, y=y, button='left' if mouse_down or kind == 'mouseReleased' else 'none', buttons=1 if mouse_down else 0, clickCount=1))
             client.evaluate('new Promise(r=>requestAnimationFrame(r))', await_promise=True)
 
+        def click(selector):
+            client.evaluate('document.querySelector(SELECTOR).scrollIntoView({block:"nearest"})'.replace('SELECTOR', json.dumps(selector)))
+            settle()  # Commit page/panel scrolling to Chrome's input hit-test tree.
+            point = client.evaluate("(()=>{const n=document.querySelector(SELECTOR),r=n.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()".replace('SELECTOR', json.dumps(selector)))
+            hit = client.evaluate("(()=>{const n=document.querySelector(SELECTOR),h=document.elementFromPoint(POINT_X,POINT_Y);return {ok:n===h||n.contains(h),target:h?.outerHTML.slice(0,350),scrollY,viewport:innerHeight,rect:n.getBoundingClientRect().toJSON()};})()".replace('SELECTOR', json.dumps(selector)).replace('POINT_X', str(point['x'])).replace('POINT_Y', str(point['y'])))
+            if not hit['ok']:
+                capture('failed-native-click')
+                raise AssertionError({'selector':selector,'point':point,'hit':hit})
+            mouse('mousePressed', point['x'], point['y'])
+            mouse('mouseReleased', point['x'], point['y'])
+
+        def key(name, code, number, modifiers=0):
+            for kind in ['keyDown', 'keyUp']:
+                client.call('Input.dispatchKeyEvent', dict(type=kind, key=name, code=code, windowsVirtualKeyCode=number, modifiers=modifiers))
+
+        if args.workbenches_only:
+            reports = []
+            for width, height in [(1400, 900), (390, 600)]:
+                viewport(width, height)
+                open_page('/tools/coastal-menu-v2-preview.html?edit=1', 'Boolean(window.menuEditor?.sharedCss.sheet)')
+                before = client.evaluate('JSON.stringify(menuV2Preview.session.state)')
+                click('#menu-object-browser input')
+                client.call('Input.insertText', {'text': 'resources'})
+                assert client.evaluate('menuEditor.browser.buttons.size===1')
+                click('#menu-object-browser [data-object-id=resources]')
+                key('ArrowDown', 'ArrowDown', 40)
+                assert client.evaluate('menuEditor.document.history.length===0'), 'Object navigation must not move the document'
+                client.evaluate('menuEditor.draw()')
+                settle()
+                start = client.evaluate("(()=>{const e=menuEditor,n=e.gizmo.querySelector('[data-region=resources]'),r=n.getBoundingClientRect();for(const fy of [.5,.25,.75])for(const fx of [.25,.5,.75]){const x=r.x+r.width*fx,y=r.y+r.height*fy;if(document.elementFromPoint(x,y)===n)return {x,y,scale:e.stage.node.getBoundingClientRect().width/1672};}throw new Error('No draggable surface');})()")
+                mouse('mousePressed', start['x'], start['y'])
+                mouse('mouseMoved', start['x']+24*start['scale'], start['y'])
+                mouse('mouseReleased', start['x']+24*start['scale'], start['y'])
+                assert client.evaluate('menuEditor.document.value.regions.resources.x===69&&menuEditor.document.history.length===1')
+                key('z', 'KeyZ', 90, 2)
+                assert client.evaluate('menuEditor.document.value.regions.resources.x===45')
+                key('y', 'KeyY', 89, 2)
+                assert client.evaluate('menuEditor.document.value.regions.resources.x===69')
+                key('z', 'KeyZ', 90, 2)
+                assert client.evaluate('JSON.stringify(menuV2Preview.session.state)') == before
+                # Shared chrome roots need their own panel styling and scrolling.
+                assert client.evaluate("getComputedStyle(menuEditor.panel).overflowY==='auto'&&getComputedStyle(menuEditor.header).display==='flex'")
+                capture(f'workbench-menu-{width}')
+                if width == 390:
+                    click('.authoring-panel details summary')
+                    client.evaluate('menuEditor.panel.scrollTop=menuEditor.panel.scrollHeight')
+                    assert client.evaluate('menuEditor.panel.scrollTop>0')
+                    capture('workbench-menu-390-properties')
+                reports.append(dict(editor='menu', viewport=[width,height], nativeSearch=True, keyboardSelection=True, nativeDrag=24, undoRedo=True, sessionUnchanged=True, independentPanelScroll=True))
+                for screen, region in [('hud','hud-resources'), ('dialogue','dialogue-flowers')]:
+                    open_page('/tools/ui-layout-editor.html?screen='+screen, 'Boolean(window.uiPackEditor)')
+                    click('#ui-object-browser input')
+                    client.call('Input.insertText', {'text': region})
+                    click('#ui-object-browser [data-object-id='+region+']')
+                    assert client.evaluate('uiPackEditor.document.history.length===0')
+                    key('ArrowRight', 'ArrowRight', 39)
+                    values = 'regions' if screen == 'hud' else 'layout'
+                    expression = f'uiPackEditor.document.draft.{values}[{json.dumps(region)}].x'
+                    assert client.evaluate(expression) == 1, {'screen':screen,'width':width,'actual':client.evaluate(expression),'focus':client.evaluate('document.activeElement.tagName'),'selection':client.evaluate("document.querySelector('#ui-selection-id').textContent"),'history':client.evaluate('uiPackEditor.document.history.length')}
+                    key('z', 'KeyZ', 90, 2)
+                    assert client.evaluate(expression) == 0
+                    key('y', 'KeyY', 89, 2)
+                    assert client.evaluate(expression) == 1
+                    key('z', 'KeyZ', 90, 2)
+                    click('#ui-object-browser input')
+                    key('Escape', 'Escape', 27)
+                    assert client.evaluate("document.querySelector('#ui-object-browser input').value===''"), 'Escape should clear search'
+                    client.evaluate("document.activeElement.blur();window.scrollTo(0,0)")
+                    capture(f'workbench-{screen}-{width}')
+                    reports.append(dict(editor=screen, viewport=[width,height], nativeSearch=True, keyboardNudge=True, undoRedo=True, escapeClearsSearch=True))
+            report = {'browser':client.call('Browser.getVersion'), 'workbenches':reports}
+            (output/'workbenches.json').write_text(json.dumps(report,indent=2)+'\n')
+            print(json.dumps(report,indent=2))
+            return
+
         def compare_dialogue_editor():
             # Load at native scale from the first frame. Resizing already painted
             # SVG turbulence filters can retain a differently sampled raster.
-            viewport(1932,1063)
+            viewport(2166,1063)
             open_page('/tools/ui-layout-editor.html?screen=dialogue','Boolean(window.uiPackEditor)')
-            start=client.evaluate("(()=>{const n=document.querySelector('[data-region=dialogue-panel]'),r=n.getBoundingClientRect();const x=r.left+r.width*.6,y=r.bottom-1;window.dialoguePointerEvents=[];for(const name of ['pointerdown','pointermove','pointerup','pointercancel','lostpointercapture'])window.addEventListener(name,e=>dialoguePointerEvents.push({type:e.type,target:e.target.className?.baseVal??e.target.className,region:e.target.dataset?.region,x:e.clientX,y:e.clientY}),true);return {x,y,box:{x:r.x,y:r.y,w:r.width,h:r.height},hit:document.elementFromPoint(x,y)?.outerHTML.slice(0,250)};})()")
+            start=client.evaluate("(()=>{const n=document.querySelector('[data-region=dialogue-panel]'),r=n.getBoundingClientRect();const x=r.left+r.width*.6,y=r.bottom-1;window.dialoguePointerEvents=[];for(const name of ['pointerdown','pointermove','pointerup','pointercancel','lostpointercapture'])window.addEventListener(name,e=>dialoguePointerEvents.push({type:e.type,target:e.target.className?.baseVal??e.target.className,region:e.target.dataset?.region,x:e.clientX,y:e.clientY}),true);return {x,y,scale:document.querySelector('#plane').getBoundingClientRect().width/1672,box:{x:r.x,y:r.y,w:r.width,h:r.height},hit:document.elementFromPoint(x,y)?.outerHTML.slice(0,250)};})()")
             mouse('mouseMoved',start['x'],start['y'])
             mouse('mousePressed',start['x'],start['y'])
-            mouse('mouseMoved',start['x']+20,start['y'])
-            mouse('mouseReleased',start['x']+20,start['y'])
+            mouse('mouseMoved',start['x']+20*start['scale'],start['y'])
+            mouse('mouseReleased',start['x']+20*start['scale'],start['y'])
             assert client.evaluate('uiPackEditor.dialogueDocument.draft.layout["dialogue-panel"].x===20&&uiPackEditor.dialogueDocument.history.length===1'),{'start':start,'result':client.evaluate('({layout:uiPackEditor.document.draft.layout,history:uiPackEditor.document.history.length,events:dialoguePointerEvents,plane:document.querySelector("#plane").getBoundingClientRect().toJSON(),targets:uiPackEditor.dialogue.layoutTargets.get("dialogue-panel").map(n=>({child:n.firstChild.outerHTML.slice(0,180),bounds:n.getBoundingClientRect().toJSON()}))})')}
             client.evaluate('uiPackEditor.dialogueDocument.undo()')
             assert client.evaluate('uiPackEditor.dialogueDocument.draft.layout["dialogue-panel"].x===0')
             mouse('mousePressed',start['x'],start['y'])
-            mouse('mouseMoved',start['x']+20,start['y'])
+            mouse('mouseMoved',start['x']+20*start['scale'],start['y'])
             for kind in ['keyDown','keyUp']:
                 client.call('Input.dispatchKeyEvent',dict(type=kind,key='Escape',code='Escape',windowsVirtualKeyCode=27))
-            mouse('mouseReleased',start['x']+20,start['y'])
+            mouse('mouseReleased',start['x']+20*start['scale'],start['y'])
             assert client.evaluate('uiPackEditor.dialogueDocument.draft.layout["dialogue-panel"].x===0&&uiPackEditor.dialogueDocument.pending===null')
             flower=client.evaluate("(()=>{const r=uiPackEditor.dialogue.svg.querySelector('[data-region=foreground-left]').getBoundingClientRect();return {x:r.x+r.width*.5,y:r.y+r.height*.5};})()")
             mouse('mouseMoved',flower['x'],flower['y'])
             mouse('mousePressed',flower['x'],flower['y'])
-            mouse('mouseMoved',flower['x']+20,flower['y'])
-            mouse('mouseReleased',flower['x']+20,flower['y'])
+            mouse('mouseMoved',flower['x']+20*start['scale'],flower['y'])
+            mouse('mouseReleased',flower['x']+20*start['scale'],flower['y'])
             assert client.evaluate('uiPackEditor.dialogueDocument.draft.layout["dialogue-flowers"].x===20&&uiPackEditor.dialogueDocument.draft.layout["dialogue-panel"].x===0')
             capture('dialogue-objects-flowers')
             (output/'dialogue-objects-example.json').write_text(client.evaluate('uiPackEditor.dialogueDocument.export()'),encoding='utf-8')
