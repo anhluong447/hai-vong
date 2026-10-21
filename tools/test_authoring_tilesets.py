@@ -122,5 +122,17 @@ class TilesetWriterTest(unittest.TestCase):
                     self.assertEqual(post('/__authoring/tilesets/import',self.request(),**headers)[0],403)
             finally:server.shutdown();thread.join(timeout=2)
 
+    def test_layered_scene_save_checks_catalog_hash_and_supports_large_maps(self):
+        from tools.authoring_write import AuthoringWriter
+        from tools.world_tilesets import normalize_tile_layers
+        writer=AuthoringWriter(self.root);source=writer.read('scene/home');scene=source['payload'];scene['layers']=normalize_tile_layers(scene);scene['schemaVersion']=2;del scene['tiles'];scene['layers'][1]['tiles'][4][4]=0
+        request={'resourceId':'scene/home','schemaVersion':1,'baseHash':source['hash'],'catalogHash':self.writer.read()['hash'],'payload':scene}
+        with self.assertRaises(AuthoringError):writer.save_scene(dict(request,catalogHash='0'*64))
+        result=writer.save_scene(request);self.assertTrue(result['applied']);self.assertEqual(writer.read('scene/home')['payload']['schemaVersion'],2)
+        scene['width']=scene['height']=256
+        for layer in scene['layers']:layer['tiles']=[[0 if layer['id']=='layer-1' else None]*256 for _ in range(256)]
+        large=dict(request,baseHash=result['hash'],payload=scene);self.assertGreater(len(json.dumps(large)),1024*1024)
+        self.assertTrue(writer.save_scene(large)['applied'])
+
 
 if __name__=='__main__':unittest.main()

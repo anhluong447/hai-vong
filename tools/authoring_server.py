@@ -10,11 +10,11 @@ import sys
 from urllib.parse import parse_qs, urlsplit
 
 if __package__:
-    from .authoring_write import AuthoringError, AuthoringWriter, MAX_BODY
+    from .authoring_write import AuthoringError, AuthoringWriter, MAX_BODY, MAX_SCENE_BODY
     from .serve import DevelopmentHandler
 else:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from tools.authoring_write import AuthoringError, AuthoringWriter, MAX_BODY
+    from tools.authoring_write import AuthoringError, AuthoringWriter, MAX_BODY, MAX_SCENE_BODY
     from tools.serve import DevelopmentHandler
 from tools.authoring_tilesets import TilesetWriter, MAX_IMPORT_BODY, MAX_CATALOG_BODY
 
@@ -107,6 +107,7 @@ class AuthoringHandler(DevelopmentHandler):
         try:
             self._policy(writing=True)
             routes={'/__authoring/save':(MAX_BODY,self.server.writer.save),
+                    '/__authoring/scenes/save':(MAX_SCENE_BODY,self.server.writer.save_scene),
                     '/__authoring/tilesets/import':(MAX_IMPORT_BODY,self.server.tilesets.import_png),
                     '/__authoring/tilesets/save':(MAX_CATALOG_BODY,self.server.tilesets.save_catalog)}
             if self.path not in routes:

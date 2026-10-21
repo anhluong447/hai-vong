@@ -18,7 +18,7 @@ export class WorldEditor{
  constructor(root){
   this.root=root;this.host=root.querySelector('#world-stage');this.status=root.querySelector('#world-status');this.abort=new AbortController();this.documents=new Map();this.mapId=new URLSearchParams(location.search).get('map')||'home';if(!SCENES[this.mapId])this.mapId='home';this.mode='edit';this.selection=null;this.session=new GameSession();this.sourceClient=new SourceSaveClient();
   this.tileCatalog=INITIAL_TILESET;this.localTileImages=new Map();this.localTileImports=new Map();this.tilesetDocument=new TilesetDocument({source:INITIAL_TILESET,sourceHash:TILESET_SOURCE_HASH,validate:c=>this.validateTilesetDraft(c)});
-  for(const [id,source] of Object.entries(SCENES))this.documents.set(id,new WorldDocument({source,prefabs:PREFABS,knownRefs:KNOWN_REFS,sourceHash:SCENE_SOURCE_HASHES[id],getCatalog:()=>this.tileCatalog,validateScene:candidate=>this.documents.size===Object.keys(SCENES).length?validateWorldProject({...this.sceneSources(),[candidate.id]:candidate},PREFABS,KNOWN_REFS,this.tileCatalog)[candidate.id]:validateWorldScene(candidate,PREFABS,KNOWN_REFS,{catalog:this.tileCatalog})}));
+  for(const [id,source] of Object.entries(SCENES))this.documents.set(id,new WorldDocument({source,prefabs:PREFABS,knownRefs:KNOWN_REFS,sourceHash:SCENE_SOURCE_HASHES[id],getCatalog:()=>this.tileCatalog,getCatalogHash:()=>this.tilesetDocument.sourceHash,validateScene:candidate=>this.documents.size===Object.keys(SCENES).length?validateWorldProject({...this.sceneSources(),[candidate.id]:candidate},PREFABS,KNOWN_REFS,this.tileCatalog)[candidate.id]:validateWorldScene(candidate,PREFABS,KNOWN_REFS,{catalog:this.tileCatalog})}));
   const mapSelect=root.querySelector('#world-map');for(const id of Object.keys(SCENES)){const option=document.createElement('option');option.value=id;option.textContent=text(`map.${id}`);mapSelect.append(option);}mapSelect.value=this.mapId;
   this.listen(mapSelect,'change',()=>this.switchMap(mapSelect.value));this.listen(root.querySelector('#world-entities'),'change',event=>this.select(event.target.value));
   const palette=root.querySelector('#world-palette');for(const [prefab,ids] of [['prop',KNOWN_REFS.assets],['npc',KNOWN_REFS.sprites.filter(id=>id!=='khue')]])for(const id of ids){const option=document.createElement('option');option.value=`${prefab}:${id}`;option.textContent=`${prefab} / ${id}`;palette.append(option);}
@@ -98,7 +98,7 @@ export class WorldEditor{
     this.saving=true;this.document.commit();this.status.textContent=t('authoring.saving');
     const doc=this.document,resource=`scene/${this.mapId}`,submitted=JSON.parse(doc.exportJSON()),baseHash=doc.sourceHash,current=await this.sourceClient.getResource(resource);
     if(current.hash!==baseHash)throw new Error('world.draft.sourceConflict');
-    const result=await this.sourceClient.saveResource(resource,{schemaVersion:1,baseHash,payload:submitted});doc.acceptSource(result.hash,submitted);
+    const result=await this.sourceClient.saveScene(resource,{baseHash,catalogHash:this.tilesetDocument.sourceHash,payload:submitted});doc.acceptSource(result.hash,submitted);
     if(doc===this.document)this.status.textContent=t(result.applied?(doc.dirty?'authoring.savedWithDraft':'authoring.world.sourceApplied'):'authoring.world.sourceBuildFailed');
    }
   }catch(error){this.reportError(error);}finally{if(action==='sourceSave')this.saving=false;}

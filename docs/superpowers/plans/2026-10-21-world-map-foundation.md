@@ -245,20 +245,20 @@ payload version checks, source client consumers; document/scene/writer tests.
   `AuthoringWriter.save_scene(request)` implements the resource/version/hash
   contract and 8 MiB limit from spec §6. Old saveResource/menu API is unchanged.
 
-- [ ] Test open/select/no-op does not dirty v1; first real mutation produces v2;
+- [x] Test open/select/no-op does not dirty v1; first real mutation produces v2;
   undo restores exact v1; redo restores v2; entity-only mutation stays v1.
-- [ ] Test null overlay erase, forbidden null base, ID 0 placement, unknown ID,
+- [x] Test null overlay erase, forbidden null base, ID 0 placement, unknown ID,
   wrong layer/grid size and invalid arrival rollback with redo stack unchanged.
-- [ ] Test v1/v2 import/export/draft roundtrip; reject ambiguous tiles+layers and
+- [x] Test v1/v2 import/export/draft roundtrip; reject ambiguous tiles+layers and
   stale catalog hash without overwriting draft. Keep export available for recovery.
-- [ ] Test full four-layer 256×256 scene save >1 MiB succeeds on new 8 MiB route;
+- [x] Test full four-layer 256×256 scene save >1 MiB succeeds on new 8 MiB route;
   >8 MiB is rejected; old API still rejects >1 MiB; menu cannot use scene route.
-- [ ] Run red tests; implement pure edits, document integration and version handling.
+- [x] Run red tests; implement pure edits, document integration and version handling.
   Add scene route, client and writer methods; validate resource payload version
   independently from transport version and cross-map catalog/arrival references.
-- [ ] Run Python world/writer, focused browser, builder build/check and architecture.
+- [x] Run Python world/writer, focused browser, builder build/check and architecture.
   Confirm all default scene source files are byte-identical to checkpoint.
-- [ ] Commit: `feat(authoring): persist versioned layer edits with compatible history`.
+- [x] Commit: `feat(authoring): persist versioned layer edits with compatible history`.
 
 ## T7 — Layer controls, tools và keyboard lifecycle
 

@@ -22,6 +22,7 @@ GENERATED = {
        for name in ('home', 'yard', 'newsroom', 'street', 'interaction')},
 }
 MAX_BODY = 1024 * 1024
+MAX_SCENE_BODY = 8 * 1024 * 1024
 
 
 class AuthoringError(Exception):
@@ -92,6 +93,36 @@ class AuthoringWriter:
             except (ValueError, RecursionError):
                 raise AuthoringError('INVALID_SOURCE', 422) from None
             return {'payload': payload, 'hash': _hash(data)}
+
+    def _before_scene_publish(self):
+        """Dependency-race test seam; no source writes have happened here."""
+
+    def save_scene(self, request):
+        from .authoring_tilesets import TilesetWriter
+        if not isinstance(request,dict) or set(request)!={'resourceId','schemaVersion','baseHash','catalogHash','payload'}:raise AuthoringError('INVALID_REQUEST')
+        _safe_json(request)
+        resource=request['resourceId'];payload=request['payload']
+        if resource not in RESOURCES or not resource.startswith('scene/'):raise AuthoringError('UNKNOWN_RESOURCE',404)
+        if type(request['schemaVersion']) is not int or request['schemaVersion']!=1 or not isinstance(payload,dict) or type(payload.get('schemaVersion')) is not int or payload['schemaVersion'] not in (1,2):raise AuthoringError('UNSUPPORTED_SCHEMA',422)
+        for key in ('baseHash','catalogHash'):
+            if not isinstance(request[key],str) or not re.fullmatch('[0-9a-f]{64}',request[key]):raise AuthoringError('INVALID_BASE_HASH')
+        data=_encode(payload)
+        if len(_encode(request))>MAX_SCENE_BODY:raise AuthoringError('PAYLOAD_TOO_LARGE',413)
+        with self.lock:
+            tilesets=TilesetWriter(self.root,self.lock);tilesets._check_hash(request['catalogHash']);dependencies=tilesets._dependencies()
+            current=self.read(resource)
+            if current['hash']!=request['baseHash']:raise AuthoringError('CONFLICT',409,hash=current['hash'])
+            try:
+                module=importlib.import_module('tools.build_world_scenes');module.render_outputs(root=self.root,overrides={resource.split('/',1)[1]:payload})
+            except (OSError,ValueError,KeyError,TypeError,RecursionError):raise AuthoringError('VALIDATION_FAILED',422) from None
+            self._before_scene_publish()
+            if tilesets._dependencies()!=dependencies:raise AuthoringError('CONFLICT',409,hash=self.read(resource)['hash'])
+            self._replace_source(self._source(resource),data,request['baseHash'],resource)
+            try:applied,build_error=self._build(resource,payload)
+            except Exception:applied,build_error=False,'BUILD_FAILED'
+            result={'sourceSaved':True,'applied':applied,'hash':_hash(data)}
+            if build_error:result['buildError']=build_error
+            return result
 
     def _validate(self, resource, payload):
         if self.validators is not None:

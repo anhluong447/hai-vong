@@ -1,15 +1,17 @@
 import {validateWorldScene} from '../../src/shared/validateWorldScene.js';
 import {SCENES} from '../../content/maps/scenes-data.js';
 import {TILESET} from '../../content/world/tileset.js';
-import {applyTileEdits} from './TilePaint.js';
+import {applyTileEdits,applyLayerEdits} from './TilePaint.js';
+import {normalizeTileLayers} from '../../src/shared/tileLayers.js';
 const clone=value=>structuredClone(value);
 const canonical=value=>typeof value==='number'?Math.round(value*100)/100:Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
 
 export class WorldDocument{
- constructor({source,prefabs,knownRefs,sourceHash,getCatalog=()=>TILESET,validateScene=null}){this.getCatalog=getCatalog;this.validateScene=validateScene;this.prefabs=prefabs;this.knownRefs=knownRefs;this.sourceHash=sourceHash;this.sceneId=source?.id;this.source=this.validate(source);this.draft=clone(this.source);this.undoStack=[];this.redoStack=[];this.pending=null;this.listeners=new Set();}
+ constructor({source,prefabs,knownRefs,sourceHash,getCatalog=()=>TILESET,getCatalogHash=()=>null,validateScene=null}){this.getCatalog=getCatalog;this.getCatalogHash=getCatalogHash;this.validateScene=validateScene;this.prefabs=prefabs;this.knownRefs=knownRefs;this.sourceHash=sourceHash;this.sceneId=source?.id;this.source=this.validate(source);this.draft=clone(this.source);this.undoStack=[];this.redoStack=[];this.pending=null;this.listeners=new Set();}
  validate(candidate){if(candidate?.id!==this.sceneId)throw new Error('world.document.sceneIdentity');return this.validateScene?this.validateScene(candidate):validateWorldScene(candidate,this.prefabs,this.knownRefs,{catalog:this.getCatalog()});}
  subscribe(listener){this.listeners.add(listener);return()=>this.listeners.delete(listener);}
  applyTileEdits(edits){if(this.pending)throw new Error('world.tile.pending');const tiles=applyTileEdits(this.draft.tiles,edits,{catalog:this.getCatalog()});if(tiles.every((row,y)=>row.every((tile,x)=>tile===this.draft.tiles[y][x])))return false;this.replace({...this.draft,tiles});return true;}
+ applyLayerEdits(layerId,edits){if(this.pending)throw new Error('world.tile.pending');const candidate=applyLayerEdits(this.draft,layerId,edits,{catalog:this.getCatalog()});if(JSON.stringify(candidate.layers)===JSON.stringify(normalizeTileLayers(this.draft)))return false;this.replace(candidate);return true;}
  get dirty(){return JSON.stringify(canonical(this.draft))!==JSON.stringify(canonical(this.source));}
  notify(){for(const listener of this.listeners)listener(this.draft);}
  begin(){if(!this.pending)this.pending=clone(this.draft);}
@@ -24,7 +26,7 @@ export class WorldDocument{
  deleteEntity(id){const next=clone(this.draft);next.objects=next.objects.filter(o=>o.id!==id);next.npcs=next.npcs.filter(o=>o.id!==id);this.replace(next);}
  exportJSON(){return JSON.stringify(canonical(this.validate(this.draft)),null,2)+'\n';}
  importJSON(text){this.replace(JSON.parse(text));}
- draftEnvelope(){return{kind:'world-authoring-draft',schemaVersion:1,sourceHash:this.sourceHash,payload:clone(this.draft)};}
- restoreDraft(envelope){if(envelope?.kind!=='world-authoring-draft'||envelope.schemaVersion!==1)throw new Error('world.draft.schemaVersion');if(envelope.sourceHash!==this.sourceHash)throw new Error('world.draft.sourceConflict');this.replace(envelope.payload);}
+ draftEnvelope(){return{kind:'world-authoring-draft',schemaVersion:2,sourceHash:this.sourceHash,catalogHash:this.getCatalogHash(),payload:clone(this.draft)};}
+ restoreDraft(envelope){if(envelope?.kind!=='world-authoring-draft'||![1,2].includes(envelope.schemaVersion))throw new Error('world.draft.schemaVersion');if(envelope.sourceHash!==this.sourceHash)throw new Error('world.draft.sourceConflict');if(envelope.schemaVersion===2&&envelope.catalogHash!==this.getCatalogHash())throw new Error('world.draft.catalogConflict');this.replace(envelope.payload);}
  acceptSource(hash,submittedPayload=this.draft){this.source=this.validate(submittedPayload);this.sourceHash=hash;}
 }

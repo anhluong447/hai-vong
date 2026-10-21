@@ -95,7 +95,7 @@ test('Tile editor: draft/export round trips retain terrain and invalid imports p
 test('Tile editor: source save cancels pending preview and preserves terrain committed while request waits',()=>withEditor(async(e,w,p)=>{
  e.setEditLayer('tiles');p('pointerdown',3,3);p('pointermove',5,3);
  const doc=e.document,original=doc.draft.tiles[3][3],hash=doc.sourceHash;let finishRead,finishSave,submitted;
- e.sourceClient={getResource:()=>new Promise(resolve=>finishRead=resolve),saveResource:(id,request)=>{submitted=request.payload;return new Promise(resolve=>finishSave=resolve);}};
+ e.sourceClient={getResource:()=>new Promise(resolve=>finishRead=resolve),saveScene:(id,request)=>{submitted=request.payload;return new Promise(resolve=>finishSave=resolve);}};
  const saving=e.action('sourceSave');a.ok(e.tileEditor.stroke===null);a.equal(doc.draft.tiles[3][3],original);
  doc.applyTileEdits([{x:3,y:3,tile:4}]);finishRead({hash,payload:doc.source});await new Promise(resolve=>setTimeout(resolve,0));
  a.equal(submitted.tiles[3][3],original);finishSave({hash:'paint-save-fixture',applied:true,sourceSaved:true});await saving;

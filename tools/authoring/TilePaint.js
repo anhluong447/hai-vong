@@ -1,4 +1,5 @@
 import {TILESET,tileDefinition} from '../../content/world/tileset.js';
+import {normalizeTileLayers} from '../../src/shared/tileLayers.js';
 const point=p=>{if(!p||!Number.isInteger(p.x)||!Number.isInteger(p.y))throw new TypeError('world.tile.point');};
 export function lineCells(from,to){
  point(from);point(to);
@@ -24,4 +25,9 @@ export function applyTileEdits(tiles,edits,{catalog=TILESET}={}){
  const next=tiles.map(row=>[...row]);
  for(const edit of edits){point(edit);tileDefinition(edit.tile,catalog);if(edit.x<0||edit.y<0||edit.y>=next.length||edit.x>=next[edit.y].length)throw new RangeError('world.tile.bounds');next[edit.y][edit.x]=edit.tile;}
  return next;
+}
+export function applyLayerEdits(scene,layerId,edits,{catalog=TILESET}={}){
+ if(!Array.isArray(edits))throw new TypeError('world.tile.edits');const layers=normalizeTileLayers(scene),layer=layers.find(l=>l.id===layerId);if(!layer)throw new Error('world.tile.layer');
+ for(const edit of edits){point(edit);if(edit.x<0||edit.y<0||edit.x>=scene.width||edit.y>=scene.height)throw new RangeError('world.tile.bounds');if(edit.tile===null){if(layerId==='layer-1')throw new Error('world.tile.baseEmpty');}else tileDefinition(edit.tile,catalog);layer.tiles[edit.y][edit.x]=edit.tile;}
+ const candidate=structuredClone(scene);delete candidate.tiles;return{...candidate,schemaVersion:2,layers};
 }

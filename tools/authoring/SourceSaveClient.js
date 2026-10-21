@@ -79,4 +79,8 @@ export class SourceSaveClient {
   }
   importTileset(request){return this.tilesetRequest('/__authoring/tilesets/import',request);}
   saveTileset(request){return this.tilesetRequest('/__authoring/tilesets/save',request);}
+  async saveScene(resourceId,{baseHash,catalogHash,payload}){
+    const token=await this.sessionToken(),result=await this.request('/__authoring/scenes/save',{method:'POST',headers:{'Content-Type':'application/json','X-Authoring-Token':token},body:JSON.stringify({resourceId,schemaVersion:1,baseHash,catalogHash,payload})});
+    if(result?.sourceSaved!==true||typeof result.applied!=='boolean'||typeof result.hash!=='string')throw new SourceSaveError('INVALID_RESPONSE');return result;
+  }
 }
