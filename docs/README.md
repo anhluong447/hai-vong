@@ -3,8 +3,9 @@
 Bắt đầu từ [hướng dẫn World Editor](guides/WORLD-EDITOR-GUIDE.md) nếu muốn vẽ
 map, hoặc [quy trình phát triển](engineering/DEVELOPMENT.md) nếu sửa code.
 
-Hướng tiếp theo đang đề xuất: [game 3D hoàn toàn](design/specs/2026-10-21-full-3d-foundation-design.md)
-và [kế hoạch phòng CLB đầu tiên](design/plans/2026-10-21-full-3d-foundation.md).
+Track mới: [game 3D hoàn toàn](design/specs/2026-10-21-full-3d-foundation-design.md).
+M1 đã có [phòng CLB 3D chơi thử](guides/WORLD3D-PROTOTYPE.md);
+[kế hoạch triển khai](design/plans/2026-10-21-full-3d-foundation.md) ghi lại phạm vi từng mốc.
 [Bản lưu sản phẩm 2D](../archive/products/coastal-2d-2026-10-21/README.md) có
 inventory, hash và hướng dẫn chạy lại riêng.
 

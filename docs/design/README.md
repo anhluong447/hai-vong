@@ -3,10 +3,10 @@
 Thiết kế sản phẩm và hành vi đã chạy là hai mốc khác nhau. Đọc trạng thái/phạm vi
 trong từng tài liệu, đối chiếu với hướng dẫn sử dụng và báo cáo triển khai.
 
-Hướng mới đang đề xuất: [nền tảng 3D hoàn toàn](specs/2026-10-21-full-3d-foundation-design.md),
-gồm môi trường và nhân vật mesh. [Kế hoạch M1](plans/2026-10-21-full-3d-foundation.md)
-bắt đầu bằng một phòng CLB chơi được. Các mục pixel/2D dưới đây mô tả sản phẩm
-đã có và được giữ để bảo toàn bản cũ; thiết kế mới chưa phải runtime hiện hành.
+Hướng mới đã được duyệt: [nền tảng 3D hoàn toàn](specs/2026-10-21-full-3d-foundation-design.md),
+gồm môi trường và nhân vật mesh. [M1 đã có phòng CLB chơi thử](../guides/WORLD3D-PROTOTYPE.md);
+[kế hoạch](plans/2026-10-21-full-3d-foundation.md) tách các mốc art, gameplay và editor tiếp theo.
+Các mục pixel/2D dưới đây mô tả sản phẩm cũ vẫn đang được giữ và chạy riêng.
 
 | Nhóm | Tài liệu chính |
 | --- | --- |

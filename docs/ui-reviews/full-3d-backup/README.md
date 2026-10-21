@@ -1,5 +1,9 @@
 # Backup 2D và chuẩn bị chuyển 3D — 2026-10-21
 
+Cập nhật sau M0: người dùng đã duyệt web/Three.js và triển khai trực tiếp.
+[M1 đã có bản chạy và báo cáo riêng](../world3d-foundation/README.md).
+Các mô tả chưa triển khai dưới đây ghi lại trạng thái tại bước backup/plan.
+
 Phạm vi hiện tại: tạo snapshot sản phẩm cũ, kiểm tra phục hồi và viết thiết kế/
 kế hoạch. Chưa cài Three.js, tạo world 3D hoặc thay runtime trong bước này.
 

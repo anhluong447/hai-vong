@@ -33,6 +33,10 @@ import './tilemap-editor.test.js';
 import './tileset-catalog.test.js';import './tile-layers.test.js';
 import './tile-passage.test.js';
 import './tileset-editor.test.js';
+import './world3d-navigation.test.js';
+import './world3d-meshes.test.js';
+import './world3d-runtime.test.js';
+import './world3d-ui.test.js';
 import {runAll} from './harness.js';
 const results = await runAll({onProgress:name=>document.querySelector('#results').textContent=name}); const root = document.querySelector('#results'); root.replaceChildren();
 for(const r of results) { const p = document.createElement('pre'); p.className=r.ok?'ok':'bad'; p.textContent=`${r.ok?'ok':'FAIL'} ${r.name}${r.error?'\n'+r.error:''}`; root.append(p); }

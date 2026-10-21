@@ -17,6 +17,7 @@ powershell -ExecutionPolicy Bypass -File tools/serve.ps1
 - Sandbox: <http://localhost:8080/sandbox.html>
 - Sandbox vòng chơi theo bible mới: <http://localhost:8080/gameplay.html>
 - Map test 2D pixel: <http://localhost:8080/pixel.html>
+- Phòng CLB 3D M1: <http://localhost:8080/world3d.html> — [điều khiển và giới hạn](docs/guides/WORLD3D-PROTOTYPE.md)
 - Coastal UI có chuyển động: <http://localhost:8080/tools/coastal-ui-preview.html>
 - Replica Stage 4 — motion UI theo lớp, pause/slow/replay và reduced motion: <http://127.0.0.1:8080/tools/coastal-replica-preview.html>
 - Replica Stage 3 — UI thoại tĩnh và lighting A/B: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=3>
@@ -25,7 +26,8 @@ powershell -ExecutionPolicy Bypass -File tools/serve.ps1
 - Thoại 9 nhân vật với component coastal: <http://localhost:8080/interaction.html>
 - Tests: <http://localhost:8080/tests/>
 
-HTML/CSS/JavaScript thuần và Canvas, không cần build hoặc cài dependency.
+HTML/CSS/ES modules, Canvas 2D và WebGL2; không cần bundler hoặc cài dependency.
+Phòng 3D dùng Three.js được vendor local, môi trường và mannequin tạo bằng mesh.
 Di chuyển WASD/mũi tên, E tương tác; cũng có thể bấm vào bàn hoặc tab.
 
 ## Đã có

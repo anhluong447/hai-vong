@@ -2,6 +2,7 @@
 
 | Tài liệu | Khi nào đọc |
 | --- | --- |
+| [WORLD3D-PROTOTYPE.md](WORLD3D-PROTOTYPE.md) | Chơi thử phòng CLB 3D, điều khiển, lỗi WebGL2 và nội dung M1 |
 | [WORLD-EDITOR-GUIDE.md](WORLD-EDITOR-GUIDE.md) | Import PNG, collision, bốn layer, object/NPC, bàn phím, Playtest, lưu và phục hồi map |
 | [DATA-AUTHORING.md](DATA-AUTHORING.md) | Dùng editor menu, HUD, thoại; quy trình JSON → builder → runtime |
 | [GAMEPLAY-SANDBOX.md](GAMEPLAY-SANDBOX.md) | Thử vòng ngày và cơ chế mock trong gameplay.html |

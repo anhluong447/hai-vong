@@ -78,6 +78,18 @@ scene writer lock. The runtime still uses static assets/compiled ES modules only
 See [foundation design](../design/specs/2026-10-21-world-map-foundation-design.md)
 and [verification](../ui-reviews/world-map-foundation/README.md).
 
+Full 3D foundation M1 (2026-10-21) has a separate `world3d.html` entry.
+`content/world3d/` owns meter-scale scene, materials and procedural mesh recipes.
+Pure `src/world3d/navigation.js` owns collision/range/occlusion; `World3D` owns
+local Three.js r180, camera, raycasting and GPU lifecycle. Its controller owns
+localized DOM/input and an independent memory-only GameSession. No save or
+2D map schema changes; domain/application do not import Three.js. Persisted
+history navigation retains a paused scene; final teardown disposes resources.
+Authored local modules and license are hash-inventoried under `vendor/three/`.
+See [usage](../guides/WORLD3D-PROTOTYPE.md) and
+[review](../ui-reviews/world3d-foundation/README.md). M2 character art, full
+gameplay integration, GLB exports and editor migration are separate later work.
+
 Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; runtime has no build
 step. Art authoring uses the offline asset builder described below. Two explicit rulesets remain: the original formula sandbox and the newer
 gameplay/pixel prototype. Their calendars, scores and state schemas are distinct.
