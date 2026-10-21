@@ -1,7 +1,12 @@
 import {t} from '../../src/shared/text.js';
 import {GameSession} from '../../src/application/GameSession.js';
 import {PixelWorld} from '../../src/pixel/PixelWorld.js';
-import {materializeScene} from '../../src/pixel/scene-data.js';
+import {hydrateScene} from '../../content/maps/materialize.js';
+import {validateWorldProject,validateWorldScene} from '../../src/shared/validateWorldScene.js';
+import {normalizeTileset} from '../../src/shared/validateTileset.js';
+import {TILESET as INITIAL_TILESET,TILESET_SOURCE_HASH} from '../../content/maps/scenes-data.js';
+import {TilesetDocument} from './TilesetDocument.js';
+import {TilesetEditor} from './TilesetEditor.js';
 import {SCENES,PREFABS,KNOWN_REFS,SCENE_SOURCE_HASHES} from '../../content/maps/scenes-data.js';
 import {worldMetrics,gridToPixel,actorFoot,clientToGrid,pickHeight} from '../../content/world/metrics.js';
 import {WorldDocument} from './WorldDocument.js';
@@ -12,14 +17,15 @@ const text=id=>t(`authoring.world.${id}`);
 export class WorldEditor{
  constructor(root){
   this.root=root;this.host=root.querySelector('#world-stage');this.status=root.querySelector('#world-status');this.abort=new AbortController();this.documents=new Map();this.mapId=new URLSearchParams(location.search).get('map')||'home';if(!SCENES[this.mapId])this.mapId='home';this.mode='edit';this.selection=null;this.session=new GameSession();this.sourceClient=new SourceSaveClient();
-  for(const [id,source] of Object.entries(SCENES))this.documents.set(id,new WorldDocument({source,prefabs:PREFABS,knownRefs:KNOWN_REFS,sourceHash:SCENE_SOURCE_HASHES[id]}));
+  this.tileCatalog=INITIAL_TILESET;this.localTileImages=new Map();this.localTileImports=new Map();this.tilesetDocument=new TilesetDocument({source:INITIAL_TILESET,sourceHash:TILESET_SOURCE_HASH,validate:c=>this.validateTilesetDraft(c)});
+  for(const [id,source] of Object.entries(SCENES))this.documents.set(id,new WorldDocument({source,prefabs:PREFABS,knownRefs:KNOWN_REFS,sourceHash:SCENE_SOURCE_HASHES[id],getCatalog:()=>this.tileCatalog,validateScene:candidate=>this.documents.size===Object.keys(SCENES).length?validateWorldProject({...this.sceneSources(),[candidate.id]:candidate},PREFABS,KNOWN_REFS,this.tileCatalog)[candidate.id]:validateWorldScene(candidate,PREFABS,KNOWN_REFS,{catalog:this.tileCatalog})}));
   const mapSelect=root.querySelector('#world-map');for(const id of Object.keys(SCENES)){const option=document.createElement('option');option.value=id;option.textContent=text(`map.${id}`);mapSelect.append(option);}mapSelect.value=this.mapId;
   this.listen(mapSelect,'change',()=>this.switchMap(mapSelect.value));this.listen(root.querySelector('#world-entities'),'change',event=>this.select(event.target.value));
   const palette=root.querySelector('#world-palette');for(const [prefab,ids] of [['prop',KNOWN_REFS.assets],['npc',KNOWN_REFS.sprites.filter(id=>id!=='khue')]])for(const id of ids){const option=document.createElement('option');option.value=`${prefab}:${id}`;option.textContent=`${prefab} / ${id}`;palette.append(option);}
   const toolbar=root.querySelector('#world-toolbar');for(const action of ['edit','play','undo','redo','export','import','draftSave','draftRestore','sourceSave']){const button=this.button(action,()=>this.action(action));button.dataset.action=action;toolbar.append(button);}
   root.querySelector('#world-palette-actions').append(this.button('spawn',()=>this.spawn()),this.button('delete',()=>this.remove()));
   this.listen(root.querySelector('#world-import'),'change',async event=>{const file=event.target.files[0],target=this.document;this.cancel();if(file)try{const text=await file.text();if(this.disposed)return;this.cancel();target.importJSON(text);}catch(error){this.reportError(error);}event.target.value='';});
-  this.editLayer='entities';this.tileEditor=new TileMapEditor(this);
+  this.editLayer='entities';this.tilesetEditor=new TilesetEditor(root.querySelector('#tileset-inspector'),{document:this.tilesetDocument,onCatalogChange:catalog=>this.applyTilesetDraft(catalog),onImport:prepared=>this.importTileset(prepared),onSave:()=>this.saveTileset(),onError:error=>this.reportError(error),getImage:atlas=>this.downloadTileImage(atlas)});this.tileEditor=new TileMapEditor(this);
   this.listen(root,'keydown',event=>this.key(event));for(const document of this.documents.values())document.subscribe(()=>this.changed());this.buildWorld();this.refresh();
  }
  get document(){return this.documents.get(this.mapId);}
@@ -28,10 +34,11 @@ export class WorldEditor{
  button(id,action){const button=document.createElement('button');button.type='button';button.textContent=text(id);this.listen(button,'click',()=>{try{action();}catch(error){this.reportError(error);}});return button;}
  notice(id){this.status.textContent=text(id);}
  reportError(error){this.status.textContent=`${text(error?.message?.includes('sourceConflict')||error?.code==='CONFLICT'?'sourceConflict':'invalid')}\n${error.message}`;}
- catalog(){return Object.fromEntries([...this.documents].map(([id,doc])=>[id,materializeScene(doc.draft,PREFABS,KNOWN_REFS,t)]));}
+ sceneSources(){return Object.fromEntries([...this.documents].map(([id,doc])=>[id,doc.draft]));}
+ catalog(){return Object.fromEntries(Object.entries(validateWorldProject(this.sceneSources(),PREFABS,KNOWN_REFS,this.tileCatalog)).map(([id,scene])=>[id,hydrateScene(scene,PREFABS,t)]));}
  buildWorld(){
   const position=this.world?.snapshot();this.world?.dispose();this.host.replaceChildren();const mapCatalog=this.catalog();
-  this.world=new PixelWorld(this.host,{mapId:this.mapId,mapCatalog,authoredNPCs:true,getState:()=>this.session.state,onInteract:()=>this.notice('interactionDisabled'),onNotice:()=>{}});
+  this.world=new PixelWorld(this.host,{mapId:this.mapId,mapCatalog,tileCatalog:this.tileCatalog,authoredNPCs:true,getState:()=>this.session.state,onInteract:()=>this.notice('interactionDisabled'),onNotice:()=>{}});
   this.world.canvas.setAttribute('aria-label',text('canvas'));
   this.world.onBeforeEnter=(id,spawn)=>this.switchMap(id,spawn);if(position?.mapId===this.mapId)this.world.restore(position);this.world.setEditing(this.mode==='edit');
   this.overlay=document.createElement('canvas');this.overlay.className='world-grid-overlay';this.overlay.setAttribute('aria-label',text('selected'));this.overlay.tabIndex=0;this.host.append(this.overlay);this.overlay.hidden=this.mode!=='edit';
@@ -50,6 +57,7 @@ export class WorldEditor{
  up(event){if(this.tileEditor.handlePointerUp(event))return;if(!this.drag||event.pointerId!==this.drag.pointerId)return;const id=this.drag.pointerId;this.drag=null;this.document.commit();if(this.overlay.hasPointerCapture(id))this.overlay.releasePointerCapture(id);}
  cancel(){this.tileEditor?.cancel();const pointerId=this.drag?.pointerId;this.drag=null;this.document.cancel();if(pointerId!==undefined&&this.overlay.hasPointerCapture(pointerId))this.overlay.releasePointerCapture(pointerId);}
  key(event){
+  if(event.target.closest?.('#tileset-inspector'))return;
   if(this.tileEditor.handleKey(event))return;
   if(event.key==='Escape'&&this.drag){event.preventDefault();this.cancel();return;}
   if(this.mode!=='edit'||/INPUT|TEXTAREA|SELECT/.test(event.target.tagName))return;
@@ -86,6 +94,7 @@ export class WorldEditor{
    else if(action==='draftSave'){localStorage.setItem(`clb-bao-chi.authoring.world.v1.${this.mapId}`,JSON.stringify(this.document.draftEnvelope()));this.status.textContent=t('authoring.draftSaved');}
    else if(action==='draftRestore'){const saved=localStorage.getItem(`clb-bao-chi.authoring.world.v1.${this.mapId}`);if(saved)this.document.restoreDraft(JSON.parse(saved));}
    else if(action==='sourceSave'){
+    if(this.tilesetDocument.dirty)throw new Error('world.tileset.unsaved');
     this.saving=true;this.document.commit();this.status.textContent=t('authoring.saving');
     const doc=this.document,resource=`scene/${this.mapId}`,submitted=JSON.parse(doc.exportJSON()),baseHash=doc.sourceHash,current=await this.sourceClient.getResource(resource);
     if(current.hash!==baseHash)throw new Error('world.draft.sourceConflict');
@@ -94,5 +103,39 @@ export class WorldEditor{
    }
   }catch(error){this.reportError(error);}finally{if(action==='sourceSave')this.saving=false;}
  }
- dispose(){this.disposed=true;this.cancel();this.tileEditor.dispose();this.abort.abort();this.overlayAbort?.abort();this.world.dispose();this.host.replaceChildren();}
+ validateTilesetDraft(candidate){
+  if(this.world&&!this.world.ready)throw new Error('world.tileset.loading');
+  const catalog=normalizeTileset(candidate,undefined,{textKeys:KNOWN_REFS.textKeys});
+  for(const old of this.tilesetDocument?.source.tiles||[])if(!catalog.tiles.some(t=>t.id===old.id&&t.atlasId===old.atlasId&&t.atlasIndex===old.atlasIndex))throw new Error('world.tileset.persistedIdentity');
+  validateWorldProject(this.sceneSources(),PREFABS,KNOWN_REFS,catalog);return catalog;
+ }
+ applyTilesetDraft(catalog,images){
+  if(this.disposed||catalog===this.tileCatalog)return;this.cancel();this.tileCatalog=catalog;
+  const available=new Map([...(this.world?.tileImages||[]),...this.localTileImages,...(images||[])]);
+  if(this.world?.ready){this.world.replaceTileCatalog(catalog,available);this.world.replaceMapCatalog(this.catalog());this.world.draw(0);}
+  this.tileEditor?.rebuildPalette();
+ }
+ async importTileset(prepared){
+  this.cancel();if(this.disposed)return;this.localTileImages.set(prepared.atlasId,prepared.image);this.localTileImports.set(prepared.atlasId,prepared);
+  this.tilesetDocument.replace(prepared.payload);this.tileEditor.setPrimaryTile(prepared.payload.tiles.find(t=>t.atlasId===prepared.atlasId).id);
+  await this.saveTileset({allowPreview:true});
+ }
+ async saveTileset({allowPreview=false}={}){
+  if(this.catalogSaving)return;this.cancel();this.catalogSaving=true;
+  const doc=this.tilesetDocument,snapshot=structuredClone(doc.draft),baseHash=doc.sourceHash;
+  try{
+   const current=await this.sourceClient.getResource('tileset-catalog');if(this.disposed)return;if(current.hash!==baseHash)throw Object.assign(new Error('CONFLICT'),{code:'CONFLICT'});
+   let persisted=current;
+   for(const atlas of snapshot.atlases){if(persisted.payload.atlases.some(a=>a.id===atlas.id))continue;const image=this.localTileImports.get(atlas.id);if(!image)throw new Error('world.tileset.image.restore');const {pngBase64,sourceName,tilePixels,margin,spacing}=image;
+    persisted=await this.sourceClient.importTileset({baseHash:persisted.hash,pngBase64,sourceName,tilePixels,margin,spacing});if(this.disposed)return;doc.acceptSource(persisted.hash,persisted.payload);
+   }
+   const result=await this.sourceClient.saveTileset({baseHash:persisted.hash,payload:snapshot});if(this.disposed)return;doc.acceptSource(result.hash,snapshot);this.tilesetEditor.status.textContent=t(doc.dirty?'authoring.savedWithDraft':'authoring.tileset.saved');
+  }catch(error){if(allowPreview&&error.status===404){this.tilesetEditor.status.textContent=t('authoring.tileset.previewOnly');}else{this.tilesetEditor.status.textContent=t('authoring.tileset.saveFailed');this.reportError(error);}}
+  finally{this.catalogSaving=false;}
+ }
+ async downloadTileImage(atlas){
+  const local=this.localTileImports.get(atlas.id);if(local)this.tilesetEditor.download(atlas.imagePath.split('/').at(-1),new Blob([local.bytes],{type:'image/png'}));
+  else{const response=await fetch(atlas.imagePath);if(!response.ok)throw new Error('world.tileset.image.missing');this.tilesetEditor.download(atlas.imagePath.split('/').at(-1),await response.blob());}
+ }
+ dispose(){this.disposed=true;this.cancel();this.tileEditor.dispose();this.tilesetEditor.dispose();this.abort.abort();this.overlayAbort?.abort();this.world.dispose();this.host.replaceChildren();}
 }

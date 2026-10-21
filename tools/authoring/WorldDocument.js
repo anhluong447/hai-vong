@@ -1,14 +1,15 @@
 import {validateWorldScene} from '../../src/shared/validateWorldScene.js';
 import {SCENES} from '../../content/maps/scenes-data.js';
+import {TILESET} from '../../content/world/tileset.js';
 import {applyTileEdits} from './TilePaint.js';
 const clone=value=>structuredClone(value);
 const canonical=value=>typeof value==='number'?Math.round(value*100)/100:Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
 
 export class WorldDocument{
- constructor({source,prefabs,knownRefs,sourceHash}){this.prefabs=prefabs;this.knownRefs=knownRefs;this.sourceHash=sourceHash;this.sceneId=source?.id;this.source=this.validate(source);this.draft=clone(this.source);this.undoStack=[];this.redoStack=[];this.pending=null;this.listeners=new Set();}
- validate(candidate){if(candidate?.id!==this.sceneId)throw new Error('world.document.sceneIdentity');return validateWorldScene(candidate,this.prefabs,this.knownRefs);}
+ constructor({source,prefabs,knownRefs,sourceHash,getCatalog=()=>TILESET,validateScene=null}){this.getCatalog=getCatalog;this.validateScene=validateScene;this.prefabs=prefabs;this.knownRefs=knownRefs;this.sourceHash=sourceHash;this.sceneId=source?.id;this.source=this.validate(source);this.draft=clone(this.source);this.undoStack=[];this.redoStack=[];this.pending=null;this.listeners=new Set();}
+ validate(candidate){if(candidate?.id!==this.sceneId)throw new Error('world.document.sceneIdentity');return this.validateScene?this.validateScene(candidate):validateWorldScene(candidate,this.prefabs,this.knownRefs,{catalog:this.getCatalog()});}
  subscribe(listener){this.listeners.add(listener);return()=>this.listeners.delete(listener);}
- applyTileEdits(edits){if(this.pending)throw new Error('world.tile.pending');const tiles=applyTileEdits(this.draft.tiles,edits);if(tiles.every((row,y)=>row.every((tile,x)=>tile===this.draft.tiles[y][x])))return false;this.replace({...this.draft,tiles});return true;}
+ applyTileEdits(edits){if(this.pending)throw new Error('world.tile.pending');const tiles=applyTileEdits(this.draft.tiles,edits,{catalog:this.getCatalog()});if(tiles.every((row,y)=>row.every((tile,x)=>tile===this.draft.tiles[y][x])))return false;this.replace({...this.draft,tiles});return true;}
  get dirty(){return JSON.stringify(canonical(this.draft))!==JSON.stringify(canonical(this.source));}
  notify(){for(const listener of this.listeners)listener(this.draft);}
  begin(){if(!this.pending)this.pending=clone(this.draft);}

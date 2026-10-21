@@ -1,5 +1,5 @@
 import {TILESET as COMPILED} from '../maps/scenes-data.js';
-export const TILESET={...COMPILED,count:COMPILED.tiles.length,tilePixels:16,columns:8,tiles:COMPILED.tiles.map(t=>({...t,blocked:t.collision==='solid'}))};
+export const TILESET=COMPILED;
 const indexes=new WeakMap();
 export function tileDefinition(id,catalog=TILESET){
  if(!indexes.has(catalog))indexes.set(catalog,new Map(catalog.tiles.map(t=>[t.id,t])));

@@ -1,6 +1,6 @@
 import {test,assert as a} from './harness.js';
 import {walkable} from '../src/pixel/maps.js';
-async function withEditor(run){
+export async function withEditor(run){
  const frame=document.createElement('iframe');frame.src='../tools/world-editor.html';frame.style.cssText='position:relative;left:0;width:1200px;height:850px';document.body.append(frame);
  try{await new Promise((resolve,reject)=>{const start=Date.now(),poll=()=>frame.contentWindow.worldEditor?.world.ready?resolve():Date.now()-start>15000?reject(new Error('Tile editor timeout: '+JSON.stringify({ready:frame.contentDocument.readyState,error:frame.contentWindow.worldEditor?.world.error,body:frame.contentDocument.body?.textContent.slice(0,250)}))):setTimeout(poll,20);poll();});
  const e=frame.contentWindow.worldEditor;e.world.setEditorCamera({x:0,y:0});e.overlay.setPointerCapture=()=>{};e.overlay.hasPointerCapture=()=>false;

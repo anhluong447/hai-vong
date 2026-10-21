@@ -1,4 +1,4 @@
-import {tileDefinition} from '../../content/world/tileset.js';
+import {TILESET,tileDefinition} from '../../content/world/tileset.js';
 const point=p=>{if(!p||!Number.isInteger(p.x)||!Number.isInteger(p.y))throw new TypeError('world.tile.point');};
 export function lineCells(from,to){
  point(from);point(to);
@@ -19,9 +19,9 @@ export function floodCells(tiles,start){
  }
  return cells;
 }
-export function applyTileEdits(tiles,edits){
+export function applyTileEdits(tiles,edits,{catalog=TILESET}={}){
  if(!Array.isArray(edits))throw new TypeError('world.tile.edits');
  const next=tiles.map(row=>[...row]);
- for(const edit of edits){point(edit);tileDefinition(edit.tile);if(edit.x<0||edit.y<0||edit.y>=next.length||edit.x>=next[edit.y].length)throw new RangeError('world.tile.bounds');next[edit.y][edit.x]=edit.tile;}
+ for(const edit of edits){point(edit);tileDefinition(edit.tile,catalog);if(edit.x<0||edit.y<0||edit.y>=next.length||edit.x>=next[edit.y].length)throw new RangeError('world.tile.bounds');next[edit.y][edit.x]=edit.tile;}
  return next;
 }

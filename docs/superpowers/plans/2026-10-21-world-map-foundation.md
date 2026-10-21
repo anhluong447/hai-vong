@@ -211,19 +211,19 @@ world HTML/CSS, locales, tileset-editor tests and source transport tests.
 - `applyTileEdits(tiles,edits,{catalog=TILESET}={})` preserves old call sites and
   validates imported tile IDs against the passed working catalog.
 
-- [ ] Add UI cases: import preview → correct crop count → valid source import;
+- [x] Add UI cases: import preview → correct crop count → valid source import;
   properties single/batch undo; solid change rejected if it blocks any map arrival.
-- [ ] Add static-server case: preview/Playtest works with selected image, export
+- [x] Add static-server case: preview/Playtest works with selected image, export
   references durable hash path and downloads PNG; status never claims source saved.
   Explain unsaved image/draft recovery limit explicitly in UI.
-- [ ] Run red tests; implement atlas selector, grid preview, properties and image
+- [x] Run red tests; implement atlas selector, grid preview, properties and image
   lifecycle. Labels/errors/aria/help come from English authoring locale keys.
-- [ ] Pass working catalog explicitly to renderer, scene documents and helpers;
+- [x] Pass working catalog explicitly to renderer, scene documents and helpers;
   do not mutate compiled TILESET. Text fields retain Ctrl+A/arrows/space.
-- [ ] Verify catalog snapshot save keeps later edits dirty; source save is disabled
+- [x] Verify catalog snapshot save keeps later edits dirty; source save is disabled
   for a scene referencing IDs not in persisted catalog. Draft/Playtest remain usable.
-- [ ] Run focused browser, source transport tests and architecture.
-- [ ] Commit: `feat(authoring): add tileset import and property editor`.
+- [x] Run focused browser, source transport tests and architecture.
+- [x] Commit: `feat(authoring): add tileset import and property editor`.
 
 ## T6 — Layer edits qua document, migration và source roundtrip
 
