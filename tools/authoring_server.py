@@ -16,6 +16,7 @@ else:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from tools.authoring_write import AuthoringError, AuthoringWriter, MAX_BODY
     from tools.serve import DevelopmentHandler
+from tools.authoring_tilesets import TilesetWriter, MAX_IMPORT_BODY, MAX_CATALOG_BODY
 
 
 def _unique_object(pairs):
@@ -67,7 +68,7 @@ class AuthoringHandler(DevelopmentHandler):
         if self.command == 'POST' and not getattr(self, '_body_consumed', False):
             try:
                 length = int(self.headers.get('Content-Length', '-1'))
-                if 0 <= length <= MAX_BODY + 1:
+                if 0 <= length <= MAX_IMPORT_BODY + 1:
                     self.connection.settimeout(2)
                     self.rfile.read(length)
             except (OSError, ValueError):
@@ -93,7 +94,8 @@ class AuthoringHandler(DevelopmentHandler):
                 query = parse_qs(parsed.query, keep_blank_values=True)
                 if set(query) != {'id'} or len(query['id']) != 1:
                     raise AuthoringError('INVALID_REQUEST')
-                self._json(200, self.server.writer.read(query['id'][0]))
+                resource=query['id'][0]
+                self._json(200, self.server.tilesets.read() if resource=='tileset-catalog' else self.server.writer.read(resource))
             else:
                 raise AuthoringError('NOT_FOUND', 404)
         except AuthoringError as error:
@@ -104,8 +106,12 @@ class AuthoringHandler(DevelopmentHandler):
     def do_POST(self):
         try:
             self._policy(writing=True)
-            if self.path != '/__authoring/save':
+            routes={'/__authoring/save':(MAX_BODY,self.server.writer.save),
+                    '/__authoring/tilesets/import':(MAX_IMPORT_BODY,self.server.tilesets.import_png),
+                    '/__authoring/tilesets/save':(MAX_CATALOG_BODY,self.server.tilesets.save_catalog)}
+            if self.path not in routes:
                 raise AuthoringError('NOT_FOUND', 404)
+            limit,handler=routes[self.path]
             if self.headers.get('Content-Type', '').split(';', 1)[0].strip().lower() != 'application/json':
                 raise AuthoringError('CONTENT_TYPE_REJECTED', 415)
             if self.headers.get('Transfer-Encoding') or len(self.headers.get_all('Content-Length', [])) != 1:
@@ -116,7 +122,7 @@ class AuthoringHandler(DevelopmentHandler):
                 raise AuthoringError('INVALID_LENGTH') from None
             if length < 0:
                 raise AuthoringError('INVALID_LENGTH')
-            if length > MAX_BODY:
+            if length > limit:
                 raise AuthoringError('PAYLOAD_TOO_LARGE', 413)
             body = self.rfile.read(length)
             self._body_consumed = True
@@ -127,7 +133,7 @@ class AuthoringHandler(DevelopmentHandler):
                     parse_constant=lambda _value: (_ for _ in ()).throw(ValueError('nonfinite')))
             except (ValueError, UnicodeError, RecursionError):
                 raise AuthoringError('INVALID_JSON') from None
-            self._json(200, self.server.writer.save(request))
+            self._json(200, handler(request))
         except AuthoringError as error:
             self._error(error)
         except (OSError, ValueError, RecursionError):
@@ -143,6 +149,9 @@ def create_server(root, *, enabled=False, host='127.0.0.1', port=0, writer=None)
     server = ThreadingHTTPServer(('127.0.0.1', port), partial(AuthoringHandler, directory=str(root)))
     server.token = secrets.token_urlsafe(32)
     server.writer = writer if writer is not None else AuthoringWriter(root)
+    server.tilesets=TilesetWriter(root,server.writer.lock)
+    try:server.tilesets.recover()
+    except BaseException:server.server_close();raise
     return server
 
 

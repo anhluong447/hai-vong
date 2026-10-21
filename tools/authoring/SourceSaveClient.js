@@ -73,4 +73,10 @@ export class SourceSaveClient {
     }
     return result;
   }
+  async tilesetRequest(path,request){
+    const token=await this.sessionToken(),result=await this.request(path,{method:'POST',headers:{'Content-Type':'application/json','X-Authoring-Token':token},body:JSON.stringify(request)});
+    if(result?.applied!==true||typeof result.hash!=='string'||!result.payload)throw new SourceSaveError('INVALID_RESPONSE');return result;
+  }
+  importTileset(request){return this.tilesetRequest('/__authoring/tilesets/import',request);}
+  saveTileset(request){return this.tilesetRequest('/__authoring/tilesets/save',request);}
 }

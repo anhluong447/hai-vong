@@ -180,20 +180,20 @@ MovementSystem, builder references; passage/world scene/coordinate fixtures/test
 - `GET /__authoring/resource?id=tileset-catalog` reads current source/hash;
   import/properties POST routes use specialized writer.
 
-- [ ] Create disposable-root tests: valid PNG retained byte-for-byte under its hash;
+- [x] Create disposable-root tests: valid PNG retained byte-for-byte under its hash;
   duplicate hash/layout idempotent; 16/24/32/48 crop layouts; dimensions, leftovers,
   APNG, decode error, oversized bytes and >8192 tile catalog rejected.
-- [ ] Test malicious source names/path/symlink, wrong Origin/token, disabled mode,
+- [x] Test malicious source names/path/symlink, wrong Origin/token, disabled mode,
   endpoint-specific body limits and old `/__authoring/save` 1 MiB limit unchanged.
-- [ ] Test stale base hash, two simultaneous imports and IDE change during staging.
+- [x] Test stale base hash, two simultaneous imports and IDE change during staging.
   Inject failure at each catalog/generated replacement; assert restore old bytes.
   Simulate startup recovery from interrupted publish; referenced image always exists.
-- [ ] Run failing Python tests, implement fixed-path import and transaction journal.
+- [x] Run failing Python tests, implement fixed-path import and transaction journal.
   Validate every source map against candidate properties before staging publication.
-- [ ] Recover journal before serving writer API; stale dependency hash returns 409
+- [x] Recover journal before serving writer API; stale dependency hash returns 409
   without overwriting. Keep old menu/scene partial-build response behavior intact.
-- [ ] Run new and existing authoring tests, Python world tests and architecture.
-- [ ] Commit: `feat(authoring): persist tileset imports and properties safely`.
+- [x] Run new and existing authoring tests, Python world tests and architecture.
+- [x] Commit: `feat(authoring): persist tileset imports and properties safely`.
 
 ## T5 — Tileset Editor và working catalog trong preview
 

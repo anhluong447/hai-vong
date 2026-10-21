@@ -88,7 +88,7 @@ Giữ Host/Origin/token policy; không biến writer thành API ghi file tùy ý
 
 - Import request: `{baseHash,pngBase64,sourceName,tilePixels,margin,spacing}`.
   Giới hạn body riêng 12 MiB; route `/__authoring/save` cũ vẫn 1 MiB. Properties save:
-  `{baseHash,payload}` với catalog v2, tối đa 1 MiB.
+  `{baseHash,payload}` với catalog v2, tối đa 4 MiB để đủ catalog 8192 tile.
 - Thành công: `{hash,payload,applied:true}`. Conflict: HTTP 409 cùng hash hiện tại;
   candidate invalid: 422. Không tự retry đè dữ liệu khi conflict.
 - Shared writer lock với scene save. Đọc fresh source, validate toàn project,
