@@ -1364,5 +1364,10 @@ export default {
   "authoring.tileset.previewOnly": "Preview only: source server unavailable. Export JSON and download PNG to its hash path before reloading.",
   "authoring.tileset.atlas": "Tileset image",
   "authoring.tileset.search": "Search tile name or ID",
-  "authoring.tileset.tileId": "Tile {id}"
+  "authoring.tileset.tileId": "Tile {id}",
+  "authoring.tiles.layerName": "Layer {number}",
+  "authoring.tiles.visible": "Show",
+  "authoring.tiles.locked": "Lock",
+  "authoring.tiles.layerLocked": "This layer is locked. Unlock it before painting.",
+  "authoring.tiles.hiddenCollision": "{hint} Collision includes hidden layers."
 };

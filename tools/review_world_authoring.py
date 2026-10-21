@@ -64,7 +64,7 @@ def main():
             assert client.evaluate('worldEditor.document.exportJSON()')==point['before']
             mouse('mouseReleased',point['x']+2*point['step'],point['y'])
             assert client.evaluate('worldEditor.document.undoStack.length')==point['history']+1
-            assert client.evaluate(f'worldEditor.document.draft.tiles[{point["gy"]}].slice({point["gx"]},{point["gx"]+3}).every(t=>t===2)')
+            assert client.evaluate(f'(worldEditor.document.draft.layers?.[0].tiles||worldEditor.document.draft.tiles)[{point["gy"]}].slice({point["gx"]},{point["gx"]+3}).every(t=>t===2)')
             capture(name+'-painted')
             client.evaluate("worldEditor.tileEditor.showCollision=true;worldEditor.world.draw(0)")
             capture(name+'-collision')
@@ -84,6 +84,22 @@ def main():
             for kind in ['keyDown','keyUp']:client.call('Input.dispatchKeyEvent',dict(type=kind,key='Tab',code='Tab',windowsVirtualKeyCode=9))
             assert client.evaluate('worldEditor.tileEditor.stroke===null')
             client.evaluate("worldEditor.tileEditor.setTool('brush');worldEditor.overlay.focus()")
+            for kind in ['keyDown','keyUp']:client.call('Input.dispatchKeyEvent',dict(type=kind,key='2',code='Digit2',windowsVirtualKeyCode=50,modifiers=1))
+            assert client.evaluate('worldEditor.tileEditor.activeLayerId')=='layer-2'
+            client.evaluate('worldEditor.tileEditor.setPrimaryTile(0)')
+            # Tab/focus can scroll the compact page: sample live client geometry.
+            live=client.evaluate(f"(()=>{{const w=worldEditor.world,r=w.canvas.getBoundingClientRect(),s=r.width/w.canvas.width;return{{x:r.left+(({point['gx']}+.5)*16-w.camera.x)*s,y:r.top+(({point['gy']}+.5)*16-w.camera.y)*s}}}})()")
+            point.update(live)
+            mouse('mousePressed',point['x'],point['y']);mouse('mouseReleased',point['x'],point['y'])
+            actual=client.evaluate(f'worldEditor.document.draft.layers[1].tiles[{point["gy"]}][{point["gx"]}]')
+            if actual!=0:raise AssertionError(json.dumps({'actual':actual,'point':{k:v for k,v in point.items() if k!='before'},'geometry':client.evaluate("(()=>{const e=worldEditor,r=e.overlay.getBoundingClientRect();return{rect:{left:r.left,top:r.top,width:r.width,height:r.height},active:document.activeElement?.tagName,layer:e.tileEditor.activeLayerId,stroke:Boolean(e.tileEditor.stroke),camera:e.world.camera,scrollY}})()")},ensure_ascii=True))
+            capture(name+'-layer-two')
+            client.evaluate("worldEditor.tileEditor.setTool('eraser')")
+            mouse('mousePressed',point['x'],point['y']);mouse('mouseReleased',point['x'],point['y'])
+            assert client.evaluate(f'worldEditor.document.draft.layers[1].tiles[{point["gy"]}][{point["gx"]}]') is None
+            client.evaluate("worldEditor.document.undo();worldEditor.document.undo();worldEditor.tileEditor.selectLayer('layer-1');worldEditor.tileEditor.setTool('brush');worldEditor.tileEditor.setPrimaryTile(2);worldEditor.overlay.focus()")
+            assert client.evaluate('worldEditor.document.exportJSON()')==point['before']
+
             client.call('Input.dispatchKeyEvent',dict(type='keyDown',key=' ',code='Space',windowsVirtualKeyCode=32))
             mouse('mousePressed',point['x'],point['y'])
             mouse('mouseMoved',point['x']-point['step'],point['y']-point['step'])
@@ -92,7 +108,7 @@ def main():
             assert client.evaluate('Boolean(worldEditor.world.editorCamera)')
             assert client.evaluate('worldEditor.document.exportJSON()')==point['before']
             assert client.evaluate('JSON.stringify(worldEditor.session.snapshot())')==before
-            return dict(viewport=[width,height],paintedCells=3,previewOnlyUntilRelease=True,oneUndo=True,escapeCancel=True,panWithoutDocumentChange=True)
+            return dict(viewport=[width,height],paintedCells=3,previewOnlyUntilRelease=True,oneUndo=True,escapeCancel=True,panWithoutDocumentChange=True,layerKeyboardSelection=True,overlayZeroVsNull=True)
         def drag(entity_id, dx):
             client.evaluate('new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))',await_promise=True)
             point = client.evaluate("""(()=>{const e=worldEditor; e.select(ID);const o=e.entity(),r=e.world.canvas.getBoundingClientRect(),p=e.world.screenPosition(o.x,o.y);return{x:r.left+p.x,y:r.top+p.y,delta:DELTA*e.world.scale*r.width/(e.world.canvas.width*e.world.scale),oldX:o.x};})()""".replace('ID', json.dumps(entity_id)).replace('DELTA', str(dx * 16)))

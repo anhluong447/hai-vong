@@ -269,19 +269,19 @@ native review script.
 `cancelGesture()` runs before every context transition; document mutations use T6.
 Visibility controls preview only; Play starts with all content and current catalog.
 
-- [ ] Test paint/rectangle/fill/sample affect active layer only; eraser overlays
+- [x] Test paint/rectangle/fill/sample affect active layer only; eraser overlays
   produce null, base eraser uses selected replacement; locked layer rejects edits.
-- [ ] Test hide does not alter JSON/hash/collision and Play includes hidden layer;
+- [x] Test hide does not alter JSON/hash/collision and Play includes hidden layer;
   overlay states explicitly mention hidden-layer collision.
-- [ ] Test context changes mid-pointer stroke: layer/tool/map/mode/import/save,
+- [x] Test context changes mid-pointer stroke: layer/tool/map/mode/import/save,
   capture loss and blur; none commits into the new context. Test Alt+1..4 scope,
   field focus, Tab reachability, Ctrl+Z routing and palette keyboard selection.
-- [ ] Run red tests; implement controls/preference state and cancel integration.
+- [x] Run red tests; implement controls/preference state and cancel integration.
   Preserve brush rasterization, camera transform, edge clipping and fill behavior.
-- [ ] Native CDP exercise pointer and keys at multiple canvas scales and map sizes;
+- [x] Native CDP exercise pointer and keys at multiple canvas scales and map sizes;
   inspect console, selection/focus and resulting draft, not screenshots alone.
-- [ ] Run focused browser and architecture.
-- [ ] Commit: `feat(authoring): add four-layer painting and keyboard controls`.
+- [x] Run focused browser and architecture.
+- [x] Commit: `feat(authoring): add four-layer painting and keyboard controls`.
 
 ## T8 — Persistence và dependency races xuyên toàn workflow
 

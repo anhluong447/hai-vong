@@ -3,13 +3,15 @@ import {TILESET,tileDefinition,tileSourceRect,isTerrainBlocked} from '../../cont
 import {worldMetrics} from '../../content/world/metrics.js';
 import {cellPassage} from '../../src/shared/tilePassage.js';
 import {PREFABS} from '../../content/maps/scenes-data.js';
+import {TILE_LAYER_IDS} from '../../src/shared/tileLayers.js';
 import {lineCells,rectangleCells,floodCells} from './TilePaint.js';
 const copy=key=>t('authoring.tiles.'+key),tools=['brush','rectangle','fill','eyedropper','eraser'];
 export class TileMapEditor{
  constructor(editor){
-  this.editor=editor;this.tool='brush';this.primaryTile=2;this.eraseTile=0;this.stroke=null;this.cursor={...editor.document.draft.spawn};this.active=false;this.showGrid=true;this.showCollision=false;this.abort=new AbortController();this.buttons=new Map();this.tiles=new Map();
+  this.editor=editor;this.activeLayerId='layer-1';this.hiddenLayers=new Set();this.lockedLayers=new Set();this.layerControls=new Map();this.tool='brush';this.primaryTile=2;this.eraseTile=0;this.stroke=null;this.cursor={...editor.document.draft.spawn};this.active=false;this.showGrid=true;this.showCollision=false;this.abort=new AbortController();this.buttons=new Map();this.tiles=new Map();
   const root=editor.root;this.controls=root.querySelector('#tile-controls');
   for(const layer of ['entities','tiles']){const b=this.button(layer,()=>editor.setEditLayer(layer));b.dataset.layer=layer;root.querySelector('#world-layers').append(b);}
+  for(const id of TILE_LAYER_IDS){const row=document.createElement('div'),button=this.button('',()=>this.selectLayer(id));button.textContent=t('authoring.tiles.layerName',{number:TILE_LAYER_IDS.indexOf(id)+1});button.dataset.tileLayerId=id;row.append(button);const controls={button};for(const kind of ['visible','locked']){const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.dataset.tileLayerControl=kind;input.dataset.tileLayerFor=id;input.checked=kind==='visible';label.append(input,document.createTextNode(copy(kind)));row.append(label);input.addEventListener('change',()=>kind==='visible'?this.setLayerVisible(id,input.checked):this.setLayerLocked(id,input.checked),{signal:this.abort.signal});controls[kind]=input;}root.querySelector('#tile-layer-controls').append(row);this.layerControls.set(id,controls);}
   for(const tool of tools){const b=this.button(tool,()=>this.setTool(tool));b.dataset.tileTool=tool;this.buttons.set(tool,b);root.querySelector('#tile-toolbar').append(b);}
   for(const name of ['grid','collision']){const b=this.button(name,()=>{this[name==='grid'?'showGrid':'showCollision']=!this[name==='grid'?'showGrid':'showCollision'];this.refresh();});b.dataset.tileToggle=name;this.buttons.set(name,b);root.querySelector('#tile-toolbar').append(b);}
   this.atlasId=editor.tileCatalog.atlases[0].id;this.rebuildPalette();
@@ -21,6 +23,14 @@ export class TileMapEditor{
   window.addEventListener('blur',()=>{this.space=false;this.cancel();},{signal});
   window.addEventListener('keyup',event=>{if(event.code==='Space'||event.key===' '){this.space=false;if(this.pan)this.cancel();}},{signal});
  }
+ get layerTiles(){const scene=this.editor.document.draft;if(scene.layers)return scene.layers.find(l=>l.id===this.activeLayerId).tiles;if(this.activeLayerId==='layer-1')return scene.tiles;if(this.emptyGrid?.width!==scene.width||this.emptyGrid?.height!==scene.height)this.emptyGrid={width:scene.width,height:scene.height,tiles:Array.from({length:scene.height},()=>Array(scene.width).fill(null))};return this.emptyGrid.tiles;}
+ get paintTile(){return this.tool==='eraser'?(this.activeLayerId==='layer-1'?this.eraseTile:null):this.primaryTile;}
+ selectLayer(id){if(!TILE_LAYER_IDS.includes(id))throw new Error('world.tile.layer');this.cancel();this.activeLayerId=id;this.refresh();}
+ setLayerVisible(id,visible){if(!TILE_LAYER_IDS.includes(id))throw new Error('world.tile.layer');this.cancel();visible?this.hiddenLayers.delete(id):this.hiddenLayers.add(id);this.refresh();}
+ setLayerLocked(id,locked){if(!TILE_LAYER_IDS.includes(id))throw new Error('world.tile.layer');this.cancel();locked?this.lockedLayers.add(id):this.lockedLayers.delete(id);this.refresh();}
+ sample(point){const id=this.layerTiles[point.y][point.x];if(id===null){this.setTool('eraser');return;}this.setPrimaryTile(id);this.setTool('brush');}
+ cancelGesture(){this.cancel();}
+ syncLayers(){for(const [id,controls]of this.layerControls){controls.button.setAttribute('aria-pressed',String(id===this.activeLayerId));controls.button.disabled=!this.active;controls.visible.checked=!this.hiddenLayers.has(id);controls.locked.checked=this.lockedLayers.has(id);controls.visible.disabled=controls.locked.disabled=this.editor.mode!=='edit';}const world=this.editor.world,key=JSON.stringify([this.editor.mode,[...this.hiddenLayers]]);if(world&&key!==this.layerPreviewKey){this.layerPreviewKey=key;world.editorHiddenLayers=[...this.hiddenLayers];if(world.ready){world.rebuildBackgrounds();world.draw(0);}}}
  get catalog(){return this.editor.tileCatalog||TILESET;}
  tileLabel(tile){return tile.editorName|| (tile.labelKey?t(tile.labelKey):t('authoring.tileset.tileId',{id:tile.id}));}
  rebuildPalette(){
@@ -44,7 +54,7 @@ export class TileMapEditor{
  valid(p){const scene=this.editor.document.draft;return p.x>=0&&p.y>=0&&p.x<scene.width&&p.y<scene.height;}
  insideCanvas(event){const r=this.editor.world.canvas.getBoundingClientRect();return event.clientX>=r.left&&event.clientX<r.right&&event.clientY>=r.top&&event.clientY<r.bottom;}
  refresh(){
-  const e=this.editor;this.controls.hidden=e.editLayer!=='tiles';e.root.querySelector('#entity-controls').hidden=e.editLayer==='tiles';e.root.querySelector('#world-inspector').hidden=e.editLayer==='tiles';e.root.querySelector('#tile-help').hidden=e.editLayer!=='tiles';
+  this.syncLayers();const e=this.editor;this.controls.hidden=e.editLayer!=='tiles';e.root.querySelector('#entity-controls').hidden=e.editLayer==='tiles';e.root.querySelector('#world-inspector').hidden=e.editLayer==='tiles';e.root.querySelector('#tile-help').hidden=e.editLayer!=='tiles';
   e.root.querySelector('#tileset-inspector').hidden=e.editLayer!=='tiles'||e.mode!=='edit';
   e.root.querySelector('#world-inspector-heading').textContent=e.editLayer==='tiles'?copy('inspector'):t('authoring.world.inspector');
   for(const b of e.root.querySelectorAll('[data-layer]'))b.setAttribute('aria-pressed',String(b.dataset.layer===e.editLayer));
@@ -52,7 +62,7 @@ export class TileMapEditor{
   for(const [id,{button}]of this.tiles){button.disabled=!this.active;button.setAttribute('aria-pressed',String(id===this.primaryTile));}
   e.root.querySelector('#tile-erase').disabled=!this.active;e.root.querySelector('#tile-erase').value=this.eraseTile;
  }
- hint(){return t('authoring.tiles.canvasHint',{tool:copy(this.tool)});}
+ hint(){const hint=t('authoring.tiles.canvasHint',{tool:copy(this.tool)});return this.hiddenLayers.size&&this.showCollision?t('authoring.tiles.hiddenCollision',{hint}):hint;}
  paintPalette(){const world=this.editor.world;if(!world?.ready||this.paletteRevision===world.tileRevision)return;this.paletteRevision=world.tileRevision;
   for(const [id,{canvas}]of this.tiles){const r=tileSourceRect(id,this.catalog),ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingEnabled=false;ctx.drawImage(world.tileImages.get(r.atlasId),r.x,r.y,r.width,r.height,0,0,canvas.width,canvas.height);}
  }
@@ -61,9 +71,10 @@ export class TileMapEditor{
   if(!this.active)return false;if(event.button!==0||this.stroke||this.pan)return true;event.preventDefault();const e=this.editor,p=e.point(event);e.overlay.focus();
   if(this.space){this.pan={pointerId:event.pointerId,node:e.overlay,x:event.clientX,y:event.clientY,camera:{...e.world.camera}};e.overlay.setPointerCapture(event.pointerId);return true;}
   if(!this.valid(p)||!this.insideCanvas(event))return true;this.cursor=p;
-  if(this.tool==='eyedropper'){this.setPrimaryTile(e.document.draft.tiles[p.y][p.x]);this.setTool('brush');return true;}
-  this.stroke={document:e.document,pointerId:event.pointerId,node:e.overlay,start:p,previous:p,tile:this.tool==='eraser'?this.eraseTile:this.primaryTile,edits:new Map()};
-  if(this.tool==='fill'){if(e.document.draft.tiles[p.y][p.x]!==this.primaryTile)this.add(floodCells(e.document.draft.tiles,p));}else this.add([p]);
+  if(this.tool==='eyedropper'){this.sample(p);return true;}
+  if(this.lockedLayers.has(this.activeLayerId)){e.status.textContent=copy('layerLocked');return true;}
+  this.stroke={document:e.document,layerId:this.activeLayerId,pointerId:event.pointerId,node:e.overlay,start:p,previous:p,tile:this.paintTile,edits:new Map()};
+  if(this.tool==='fill'){if(this.layerTiles[p.y][p.x]!==this.primaryTile)this.add(floodCells(this.layerTiles,p));}else this.add([p]);
   e.overlay.setPointerCapture(event.pointerId);return true;
  }
  handlePointerMove(event){
@@ -80,15 +91,15 @@ export class TileMapEditor{
  release(s){if(s?.node?.hasPointerCapture(s.pointerId))s.node.releasePointerCapture(s.pointerId);}
  cancel(){const s=this.stroke,pan=this.pan;this.stroke=null;this.pan=null;this.release(s);this.release(pan);}
  commit(){const s=this.stroke;if(!s)return;this.stroke=null;this.release(s);if(s.document!==this.editor.document)return;
-  try{s.document.applyTileEdits([...s.edits.values()]);}catch{this.editor.status.textContent=copy('invalid');}
+  try{if(s.layerId!==this.activeLayerId||this.lockedLayers.has(s.layerId))return;s.document.applyLayerEdits(s.layerId,[...s.edits.values()]);}catch{this.editor.status.textContent=copy('invalid');}
  }
  handleKey(event){
   if(!this.active)return false;
   if(event.key==='Escape'&&(this.stroke||this.pan)){event.preventDefault();this.cancel();return true;}
   if(event.target!==this.editor.overlay)return false;
   const key=event.key.toLowerCase();
-  if(event.ctrlKey||event.metaKey){if(key==='z'){event.preventDefault();this.cancel();event.shiftKey?this.editor.document.redo():this.editor.document.undo();return true;}return false;}
-  if(event.altKey)return false;
+  if(event.ctrlKey||event.metaKey){if(key==='z'||key==='y'){event.preventDefault();this.cancel();key==='y'||event.shiftKey?this.editor.document.redo():this.editor.document.undo();return true;}return false;}
+  if(event.altKey){if(['1','2','3','4'].includes(event.key)){event.preventDefault();this.selectLayer(`layer-${event.key}`);return true;}return false;}
   if(event.code==='Space'||event.key===' '){event.preventDefault();this.space=true;return true;}
   const tool={b:'brush',r:'rectangle',f:'fill',i:'eyedropper',e:'eraser'}[key];
   if(tool){event.preventDefault();this.setTool(tool);return true;}
@@ -99,9 +110,10 @@ export class TileMapEditor{
   }
   if(event.key==='Enter'){
    event.preventDefault();if(event.repeat)return true;if(this.stroke){if(this.stroke.pointerId===null)this.commit();return true;}
-   if(this.tool==='eyedropper'){this.setPrimaryTile(this.editor.document.draft.tiles[this.cursor.y][this.cursor.x]);this.setTool('brush');return true;}
-   this.stroke={document:this.editor.document,pointerId:null,node:null,start:{...this.cursor},tile:this.tool==='eraser'?this.eraseTile:this.primaryTile,edits:new Map()};
-   if(this.tool==='fill'){if(this.editor.document.draft.tiles[this.cursor.y][this.cursor.x]!==this.primaryTile)this.add(floodCells(this.editor.document.draft.tiles,this.cursor));}else this.add([this.cursor]);
+   if(this.tool==='eyedropper'){this.sample(this.cursor);return true;}
+   if(this.lockedLayers.has(this.activeLayerId)){this.editor.status.textContent=copy('layerLocked');return true;}
+   this.stroke={document:this.editor.document,layerId:this.activeLayerId,pointerId:null,node:null,start:{...this.cursor},tile:this.paintTile,edits:new Map()};
+   if(this.tool==='fill'){if(this.layerTiles[this.cursor.y][this.cursor.x]!==this.primaryTile)this.add(floodCells(this.layerTiles,this.cursor));}else this.add([this.cursor]);
    if(this.tool!=='rectangle')this.commit();return true;
   }
   return false;
@@ -113,11 +125,11 @@ export class TileMapEditor{
  ensureCursorVisible(){const world=this.editor.world,size=worldMetrics.tilePixels;let {x,y}=world.camera;const left=this.cursor.x*size,top=this.cursor.y*size;if(left<x)x=left;else if(left+size>x+world.canvas.width)x=left+size-world.canvas.width;if(top<y)y=top;else if(top+size>y+world.canvas.height)y=top+size-world.canvas.height;world.setEditorCamera({x,y});}
  draw(ctx,world){
   this.paintPalette();if(!this.active)return;const size=worldMetrics.tilePixels,scene=this.editor.document.draft,left=Math.max(0,Math.floor(world.camera.x/size)),top=Math.max(0,Math.floor(world.camera.y/size)),right=Math.min(scene.width,Math.ceil((world.camera.x+world.canvas.width)/size)),bottom=Math.min(scene.height,Math.ceil((world.camera.y+world.canvas.height)/size));
-  if(this.showCollision){ctx.fillStyle='#ed6f6a77';for(let y=top;y<bottom;y++)for(let x=left;x<right;x++)if(cellPassage(scene,x,y,this.catalog).blocked)ctx.fillRect(x*size-world.camera.x,y*size-world.camera.y,size,size);
+  if(this.showCollision){ctx.fillStyle='#ed6f6a77';for(let y=top;y<bottom;y++)for(let x=left;x<right;x++){const passage=cellPassage(scene,x,y,this.catalog),px=x*size-world.camera.x,py=y*size-world.camera.y;if(passage.blocked)ctx.fillRect(px,py,size,size);ctx.strokeStyle='#ed6f6a';ctx.lineWidth=1;for(const edge of passage.blockedEdges){const [ax,ay,bx,by]={up:[0,0,size,0],right:[size,0,size,size],down:[0,size,size,size],left:[0,0,0,size]}[edge];ctx.beginPath();ctx.moveTo(px+ax,py+ay);ctx.lineTo(px+bx,py+by);ctx.stroke();}}
    for(const instance of [...scene.objects,...scene.npcs]){const o={...PREFABS[instance.prefab],...instance.overrides};if(o.solid)for(const [dx,dy]of o.footprint||[[0,0]])ctx.fillRect((instance.x+dx)*size-world.camera.x,(instance.y+dy)*size-world.camera.y,size,size);}
   }
   ctx.imageSmoothingEnabled=false;ctx.globalAlpha=.78;
-  for(const p of this.stroke?.edits.values()??[]){if(p.x<left||p.x>=right||p.y<top||p.y>=bottom)continue;const r=tileSourceRect(p.tile,this.catalog);ctx.drawImage(world.tileImages.get(r.atlasId),r.x,r.y,r.width,r.height,p.x*size-world.camera.x,p.y*size-world.camera.y,size,size);}
+  for(const p of this.stroke?.edits.values()??[]){if(p.x<left||p.x>=right||p.y<top||p.y>=bottom)continue;if(p.tile===null){ctx.fillStyle='#f5d78666';ctx.fillRect(p.x*size-world.camera.x,p.y*size-world.camera.y,size,size);continue;}const r=tileSourceRect(p.tile,this.catalog);ctx.drawImage(world.tileImages.get(r.atlasId),r.x,r.y,r.width,r.height,p.x*size-world.camera.x,p.y*size-world.camera.y,size,size);}
   ctx.globalAlpha=1;ctx.strokeStyle='#ffe29a';ctx.lineWidth=1;ctx.strokeRect(this.cursor.x*size-world.camera.x+.5,this.cursor.y*size-world.camera.y+.5,size-1,size-1);
  }
  dispose(){this.cancel();this.abort.abort();}
