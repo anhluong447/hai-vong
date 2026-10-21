@@ -1,5 +1,7 @@
 // Independent 3D prototype content. Units are meters, Y is up.
+import {newsroomArt} from './newsroom-art.js';
 export const newsroom3d={
+ art:newsroomArt,
  id:'newsroom-3d',titleKey:'world3d.title',
  bounds:{minX:-6,maxX:6,minZ:-5,maxZ:5},spawn:{x:0,z:2.9,yaw:Math.PI},
  actor:{height:1.65,radius:.22,speed:2.5,stride:9,swing:.48},

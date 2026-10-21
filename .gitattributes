@@ -13,3 +13,6 @@ assets/fonts/coastal-menu/**/METADATA.pb text eol=lf
 assets/fonts/coastal-menu/**/*.ttf binary
 assets/ui/coastal/**/*.svg text eol=lf
 assets/ui/coastal/**/*.png binary
+
+# Preserve verified upstream bytes even on Windows checkouts.
+/vendor/three/r180/* -text
