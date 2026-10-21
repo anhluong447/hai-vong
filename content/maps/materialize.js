@@ -1,4 +1,5 @@
 // Compiled sources are validated offline; runtime hydration retains legacy MAPS shape.
+const emptyLayer=(id,width,height)=>({id,tiles:Array.from({length:height},()=>Array(width).fill(null))});
 export function hydrateScene(scene,prefabs,resolveText){
  const entity=(instance,npc)=>{
   const o={...prefabs[instance.prefab],...instance.overrides};
@@ -7,7 +8,9 @@ export function hydrateScene(scene,prefabs,resolveText){
   if(npc&&o.footprint)result.footprint=o.footprint;
   return result;
  };
- const result={id:scene.id,title:resolveText(scene.titleKey),width:scene.width,height:scene.height,tiles:scene.tiles.map(row=>[...row]),objects:scene.objects.map(i=>entity(i,false)),npcs:scene.npcs.map(i=>entity(i,true)),portals:scene.portals.map(p=>({x:p.x,y:p.y,to:p.to,spawn:{...p.spawn},label:resolveText(p.labelKey)})),spawn:{...scene.spawn}};
+ const layers=scene.layers?structuredClone(scene.layers):[{id:'layer-1',tiles:scene.tiles.map(row=>[...row])},...['layer-2','layer-3','layer-4'].map(id=>emptyLayer(id,scene.width,scene.height))];
+ const result={id:scene.id,title:resolveText(scene.titleKey),width:scene.width,height:scene.height,tiles:layers[0].tiles,objects:scene.objects.map(i=>entity(i,false)),npcs:scene.npcs.map(i=>entity(i,true)),portals:scene.portals.map(p=>({x:p.x,y:p.y,to:p.to,spawn:{...p.spawn},label:resolveText(p.labelKey)})),spawn:{...scene.spawn}};
+ Object.defineProperty(result,'layers',{value:layers,enumerable:scene.schemaVersion===2});
  if(scene.signs)result.signs=scene.signs.map(([x,y,key])=>[x,y,resolveText(key)]);
  return result;
 }

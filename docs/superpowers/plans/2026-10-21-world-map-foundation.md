@@ -101,18 +101,18 @@ scene contract/hydration; catalog/layer/shared fixture tests và harness registr
 - `render_outputs(root=ROOT, overrides=None, tileset_override=None)` compiles
   the working catalog without temporarily writing its JSON source.
 
-- [ ] Add shared fixtures: v1 legacy; v2 IDs 0/27; invalid ID 16 when absent;
+- [x] Add shared fixtures: v1 legacy; v2 IDs 0/27; invalid ID 16 when absent;
   duplicate ID, invalid atlasIndex, malformed grid, null base and null overlays.
   Assert legacy crops `[0,0,16,16]`, `[112,16,16,16]` and exact blocked set.
-- [ ] Run Python world tests and focused browser; confirm failures concern missing
+- [x] Run Python world tests and focused browser; confirm failures concern missing
   contracts. Register tests before relying on a green harness summary.
-- [ ] Implement normalization/membership/crop and four-layer representation;
+- [x] Implement normalization/membership/crop and four-layer representation;
   expose compiled normalized TILESET plus catalog source hash. Keep source JSON v1.
-- [ ] Update hydration to supply layers and a derived layer-1 `tiles` view.
+- [x] Update hydration to supply layers and a derived layer-1 `tiles` view.
   Existing default map data/labels/entities remain equal to old fixtures.
-- [ ] Run fixture parity in Python/JS, builder build/check and architecture.
+- [x] Run fixture parity in Python/JS, builder build/check and architecture.
   Assert normalize and render outputs do not mutate inputs or source bytes.
-- [ ] Commit focused change: `feat(world): define compatible tile catalog and layer contracts`.
+- [x] Commit focused change: `feat(world): define compatible tile catalog and layer contracts`.
 
 ## T2 — Một quy tắc collision cho standing, steps và pathfinding
 
