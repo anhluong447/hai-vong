@@ -6,6 +6,7 @@ test('world3d runtime: actual WebGL scene mounts, projects/picks NPC and resizes
  const {World3D,newsroom3d}=await load(),node=host(),world=new World3D(node,{scene:newsroom3d});
  try{await world.mount();a.ok(world.snapshot().ready);a.equal(node.querySelectorAll('canvas').length,1);const p=world.screenPosition('van');a.ok(p.visible);a.equal(world.pick(p.x,p.y),'van');a.equal(world.pick(-1,-1),null);const snapshot=world.snapshot();snapshot.actor.x=100;a.ok(world.snapshot().actor.x!==100);
  node.style.width='390px';node.style.height='844px';await tick();const small=world.screenPosition('van');a.equal(world.pick(small.x,small.y),'van');a.ok(world.diagnostics().pixelRatio<=1.5);a.ok(world.diagnostics().triangles>0);
+ const {Vector3}=await import('../vendor/three/r180/three.module.js');for(const x of [-5.78,5.78])for(const z of [-4.78,4.78]){const corner=new Vector3(x,.8,z).project(world.camera);a.ok(Math.abs(corner.x)<=1&&Math.abs(corner.y)<=1,'Narrow framing must keep the walkable room visible');}
  }finally{world.dispose();world.dispose();a.equal(node.querySelectorAll('canvas').length,0);a.ok(world.snapshot().disposed);node.remove();}
 });
 test('world3d runtime: pause prevents movement; interactions respect range and callbacks stop after disposal',async()=>{

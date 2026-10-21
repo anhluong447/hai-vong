@@ -30,3 +30,18 @@ test('world3d UI: no persistent storage is read or written',async()=>{
 test('world3d UI: resuming from a clicked pause button returns keyboard control to the canvas',async()=>{
  const {page,root}=await setup();try{const pause=root.querySelector('[data-world3d-action=pause]');pause.focus();pause.click();root.querySelector('[data-world3d-action=resume]').click();a.equal(document.activeElement,page.world.canvas);key('w',document.activeElement);a.ok(page.world.input.z<0);}finally{page.dispose();root.remove();}
 });
+test('world3d UI: changing focus to typing or navigation controls releases already-held movement',async()=>{
+ const {page,root}=await setup();try{
+  for(const kind of ['input','editable','link']){
+   page.world.canvas.focus();key('w',page.world.canvas);a.ok(page.world.input.z<0);
+   const field=document.createElement(kind==='editable'?'div':kind==='link'?'a':'input');if(kind==='editable')field.contentEditable='true';if(kind==='link')field.href='#';root.append(field);field.focus();
+   // Headless/offscreen documents change activeElement without dispatching focus.
+   // Native CDP review separately exercises a trusted Tab transition.
+   if(!document.hasFocus())field.dispatchEvent(new FocusEvent('focusin',{bubbles:true}));
+   a.equal(page.world.input.x,0);a.equal(page.world.input.z,0);field.remove();
+  }
+ }finally{page.dispose();root.remove();}
+});
+test('world3d UI: a persisted history navigation keeps a paused recoverable page and disposal still stops it',async()=>{
+ const {page,root}=await setup();try{page.world.canvas.focus();key('w',page.world.canvas);window.dispatchEvent(new PageTransitionEvent('pagehide',{persisted:true}));a.equal(page.world.disposed,false);a.ok(page.world.paused);a.equal(page.world.input.x,0);window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}));a.ok(root.querySelector('canvas'));a.ok(!root.querySelector('[role=dialog]').hidden);root.querySelector('[data-world3d-action=resume]').click();a.equal(page.world.paused,false);page.dispose();a.ok(page.world.disposed);}finally{page.dispose();root.remove();}
+});

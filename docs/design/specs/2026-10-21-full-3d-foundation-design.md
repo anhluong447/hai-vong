@@ -55,7 +55,9 @@ Không dùng texture pixel, sprite nhân vật hoặc một ảnh phòng làm to
 ### Camera, điều khiển và va chạm
 
 - Perspective FOV **40°**, camera nghiêng cố định ban đầu tại `(11,10,13)`
-  nhìn về tâm phòng. Chưa có orbit tự do, đổi tầng hoặc camera cutscene.
+  nhìn về tâm phòng. Viewport hẹp tăng khoảng cách camera theo cùng hướng để
+  giữ vùng đi lại trong khung; FOV và góc nhìn giữ nguyên. Chưa có orbit tự do,
+  đổi tầng hoặc camera cutscene.
 - WASD/phím mũi tên di chuyển tương đối theo camera trên mặt phẳng X/Z.
   Tốc độ **2,5 m/s**, chuẩn hóa đường chéo, bán kính actor **0,22 m**.
 - Collision circle với AABB trong mặt bằng; trượt dọc cạnh khi có thể.

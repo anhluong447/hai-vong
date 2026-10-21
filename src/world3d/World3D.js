@@ -29,7 +29,9 @@ export class World3D{
  }
  resize(){
   if(!this.ready||this.disposed)return;const rect=this.host.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;
-  this.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));this.renderer.setSize(rect.width,rect.height,false);this.camera.aspect=rect.width/rect.height;this.camera.updateProjectionMatrix();this.render();
+  this.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));this.renderer.setSize(rect.width,rect.height,false);this.camera.aspect=rect.width/rect.height;
+  const authored=this.definition.camera,target=new THREE.Vector3().fromArray(authored.target),offset=new THREE.Vector3().fromArray(authored.position).sub(target);
+  this.camera.position.copy(target).add(offset.multiplyScalar(Math.max(1,authored.framingAspect/this.camera.aspect)));this.camera.lookAt(target);this.camera.updateProjectionMatrix();this.render();
  }
  setMoveInput(input){
   if(!input||!Number.isFinite(input.x)||!Number.isFinite(input.z))throw new TypeError('world3d.movement.input');

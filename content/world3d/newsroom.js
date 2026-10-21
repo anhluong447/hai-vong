@@ -5,7 +5,7 @@ export const newsroom3d={
  id:'newsroom-3d',titleKey:'world3d.title',
  bounds:{minX:-6,maxX:6,minZ:-5,maxZ:5},spawn:{x:0,z:2.9,yaw:Math.PI},
  actor:{height:1.65,radius:.22,speed:2.5,stride:9,swing:.48},
- camera:{fov:40,position:[11,10,13],target:[0,.35,0],near:.1,far:100},
+ camera:{fov:40,position:[11,10,13],target:[0,.35,0],framingAspect:1.2,near:.1,far:100},
  lighting:{background:0xdce7e2,ambient:0xfff0d9,ground:0x73868c,intensity:2.2,sun:0xffe0a3,sunIntensity:3.2,sunPosition:[-3,9,-6],shadowSize:1024},
  materials:{
   wood:{color:0x9a6546},woodLight:{color:0xc48b61},woodDark:{color:0x654839},cream:{color:0xf0e2c7},wall:{color:0xe2d7bd},

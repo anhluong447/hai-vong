@@ -69,11 +69,16 @@ export async function mountWorld3DPage(root,{scene=newsroom3d,worldFactory=(host
  },{signal});
  window.addEventListener('keyup',event=>{keys.delete(event.key.toLowerCase());moveInput();},{signal});
  window.addEventListener('blur',clearInput,{signal});
+ document.addEventListener('focusin',event=>{if(typing(event.target))clearInput();},{signal});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInput();if(!overlayMode)showOverlay('pause',copy('pauseTitle'),copy('pauseText'));}},{signal});
  viewport.addEventListener('pointerdown',event=>{if(event.button!==0||overlayMode)return;world?.canvas?.focus({preventScroll:true});const id=world?.pick(event.clientX,event.clientY);if(id)interact(id);},{signal});
  pause.addEventListener('click',()=>showOverlay('pause',copy('pauseTitle'),copy('pauseText')),{signal});resume.addEventListener('click',closeOverlay,{signal});retry.addEventListener('click',start,{signal});
  function dispose(){if(disposed)return;disposed=true;epoch++;clearInput();abort.abort();world?.dispose();root.replaceChildren();}
- window.addEventListener('pagehide',dispose,{signal});
+ window.addEventListener('pagehide',event=>{
+  if(!event.persisted){dispose();return;}
+  clearInput();world?.setPaused(true);if(!overlayMode)showOverlay('pause',copy('pauseTitle'),copy('pauseText'));
+ },{signal});
+ window.addEventListener('pageshow',event=>{if(event.persisted&&!disposed){clearInput();if(!overlayMode)showOverlay('pause',copy('pauseTitle'),copy('pauseText'));}},{signal});
  await start();
  return {get world(){return world;},session,dispose,snapshot:()=>world?.snapshot(),sessionSnapshot:()=>session.snapshot(),screenPosition:id=>world?.screenPosition(id),diagnostics:()=>world?.diagnostics()};
 }
