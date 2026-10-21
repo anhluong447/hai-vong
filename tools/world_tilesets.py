@@ -75,3 +75,15 @@ def normalize_tile_layers(scene):
         check(keys(layer,('id','tiles')) and layer['id']==LAYER_IDS[i] and isinstance(layer['tiles'],list) and len(layer['tiles'])==scene['height'])
         check(all(isinstance(row,list) and len(row)==scene['width'] and all((i>0 and t is None) or integer(t) for t in row) for row in layer['tiles']))
     return copy.deepcopy(layers)
+
+
+def cell_passage(scene, x, y, catalog):
+    if not integer(x,0,scene['width']-1) or not integer(y,0,scene['height']-1):
+        return {'blocked':True,'blockedEdges':list(EDGES)}
+    tiles={t['id']:t for t in catalog['tiles']}; blocked=False; edges=set()
+    for layer in scene.get('layers',[{'tiles':scene.get('tiles')}]):
+        value=layer['tiles'][y][x]
+        if value is None: continue
+        require(type(value) is int and value in tiles,'unknown'); tile=tiles[value]
+        blocked |= tile['collision']=='solid';edges.update(tile['blockedEdges'])
+    return {'blocked':blocked,'blockedEdges':[e for e in EDGES if e in edges]}

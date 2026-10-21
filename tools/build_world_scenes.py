@@ -55,8 +55,9 @@ def tile_definitions(root=ROOT, override=None):
 
 
 def blocked_cells(scene, prefabs, tileset):
-    blocked = {tile['id'] for tile in tileset['tiles'] if tile['blocked']}
-    cells = {(x, y) for y, row in enumerate(scene['tiles']) for x, tile in enumerate(row) if tile in blocked}
+    normalized=normalize_tileset(tileset)
+    blocked={tile['id'] for tile in normalized['tiles'] if tile['collision']=='solid'}
+    cells={(x,y) for layer in normalize_tile_layers(scene) for y,row in enumerate(layer['tiles']) for x,tile in enumerate(row) if tile in blocked}
     for instance in scene['objects'] + scene['npcs']:
         entity = dict(prefabs[instance['prefab']], **instance['overrides'])
         if entity['solid']:
@@ -64,12 +65,12 @@ def blocked_cells(scene, prefabs, tileset):
     return sorted([list(cell) for cell in cells], key=lambda p: (p[1], p[0]))
 
 
-def validate_scene(payload, resource_id=None, *, root=ROOT):
+def validate_scene(payload, resource_id=None, *, root=ROOT, tileset_override=None, scenes_override=None):
     map_dir = Path(root) / 'content/maps'
     contract = read(map_dir / 'scene-contract.json')
     prefabs = read(map_dir / 'prefabs.json')['prefabs']
     texts = catalog(root)
-    tileset = tile_definitions(root)
+    tileset = tile_definitions(root, tileset_override)
     def require(value, path):
         if not value: raise ValueError(f'world.scene.{path}')
     def integer(value): return type(value) is int
@@ -80,14 +81,15 @@ def validate_scene(payload, resource_id=None, *, root=ROOT):
     require(isinstance(payload, dict), 'object')
     scene = copy.deepcopy(payload)
     require(not set(scene).difference(contract['sceneFields']), 'fields')
-    require(type(scene.get('schemaVersion')) is int and scene['schemaVersion'] == 1, 'schemaVersion')
+    require(type(scene.get('schemaVersion')) is int and scene['schemaVersion'] in (1,2), 'schemaVersion')
     require(scene.get('id') in contract['sceneIds'], 'id')
     require(resource_id is None or resource_id == f"scene/{scene['id']}", 'resourceId')
     require(isinstance(scene.get('titleKey'), str) and scene['titleKey'] in texts, 'titleKey')
     w, h = scene.get('width'), scene.get('height')
     require(integer(w) and integer(h) and 3 <= w <= 256 and 3 <= h <= 256, 'size')
-    require(isinstance(scene.get('tiles'), list) and len(scene['tiles']) == h, 'tiles')
-    require(all(isinstance(row, list) and len(row) == w and all(integer(t) and 0 <= t < tileset['count'] for t in row) for row in scene['tiles']), 'tiles')
+    layers=normalize_tile_layers(scene)
+    tile_ids={tile['id'] for tile in tileset['tiles']}
+    require(all(t is None or (type(t) is int and t in tile_ids) for layer in layers for row in layer['tiles'] for t in row),'tiles')
     point(scene.get('spawn'), 'spawn', w, h)
     ids = set()
     for category in ('objects', 'npcs'):
@@ -125,7 +127,7 @@ def validate_scene(payload, resource_id=None, *, root=ROOT):
         point({'x': p['x'], 'y': p['y']}, 'portal.position', w, h)
         require(p['to'] in contract['sceneIds'] and isinstance(p['labelKey'], str) and p['labelKey'] in texts, 'portal.reference')
         target_path = map_dir / 'scenes' / (p['to'] + '.json')
-        target = read(target_path) if target_path.exists() else {'width': 256, 'height': 256}
+        target = (scenes_override or {}).get(p['to']) or (read(target_path) if target_path.exists() else {'width':256,'height':256})
         point(p['spawn'], 'portal.spawn', target['width'], target['height'])
     if 'signs' in scene:
         require(isinstance(scene['signs'], list), 'signs')
@@ -135,11 +137,11 @@ def validate_scene(payload, resource_id=None, *, root=ROOT):
     require([scene['spawn']['x'], scene['spawn']['y']] not in blocked_cells(scene, prefabs, tileset), 'spawn.blocked')
     for portal in scene['portals']:
         require([portal['x'], portal['y']] not in blocked_cells(scene, prefabs, tileset), 'portal.blocked')
-        target = scene if portal['to'] == scene['id'] else read(map_dir / 'scenes' / (portal['to'] + '.json'))
+        target = scene if portal['to'] == scene['id'] else ((scenes_override or {}).get(portal['to']) or read(map_dir / 'scenes' / (portal['to'] + '.json')))
         require([portal['spawn']['x'], portal['spawn']['y']] not in blocked_cells(target, prefabs, tileset), 'portal.spawn.blocked')
     blocks = blocked_cells(scene, prefabs, tileset)
     for other_id in contract['sceneIds']:
-        other = scene if other_id == scene['id'] else read(map_dir / 'scenes' / (other_id + '.json'))
+        other = scene if other_id == scene['id'] else ((scenes_override or {}).get(other_id) or read(map_dir / 'scenes' / (other_id + '.json')))
         for portal in other['portals']:
             if portal['to'] == scene['id']: require([portal['spawn']['x'], portal['spawn']['y']] not in blocks, 'portalArrival.blocked')
     return scene
@@ -150,7 +152,8 @@ def render_outputs(root=ROOT, overrides=None, tileset_override=None):
     map_dir = root / 'content/maps'
     overrides = overrides or {}
     contract = read(map_dir / 'scene-contract.json')
-    scenes = {sid: validate_scene(overrides[sid] if sid in overrides else read(map_dir / 'scenes' / f'{sid}.json'), root=root) for sid in contract['sceneIds']}
+    candidates={sid:overrides[sid] if sid in overrides else read(map_dir/'scenes'/f'{sid}.json') for sid in contract['sceneIds']}
+    scenes={sid:validate_scene(candidate,root=root,tileset_override=tileset_override,scenes_override=candidates) for sid,candidate in candidates.items()}
     prefabs = read(map_dir / 'prefabs.json')['prefabs']
     tileset = tile_definitions(root, tileset_override)
     blocks = {sid: blocked_cells(s, prefabs, tileset) for sid, s in scenes.items()}

@@ -31,6 +31,7 @@ import './world-assets.test.js';
 import './tile-paint.test.js';
 import './tilemap-editor.test.js';
 import './tileset-catalog.test.js';import './tile-layers.test.js';
+import './tile-passage.test.js';
 import {runAll} from './harness.js';
 const results = await runAll({onProgress:name=>document.querySelector('#results').textContent=name}); const root = document.querySelector('#results'); root.replaceChildren();
 for(const r of results) { const p = document.createElement('pre'); p.className=r.ok?'ok':'bad'; p.textContent=`${r.ok?'ok':'FAIL'} ${r.name}${r.error?'\n'+r.error:''}`; root.append(p); }

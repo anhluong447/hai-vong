@@ -3,7 +3,7 @@ import copy
 import json
 from pathlib import Path
 import unittest
-from tools.world_tilesets import normalize_tileset, normalize_tile_layers, tile_source_rect
+from tools.world_tilesets import normalize_tileset, normalize_tile_layers, tile_source_rect, cell_passage
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +30,14 @@ class TileFoundationTest(unittest.TestCase):
         ):
             source=copy.deepcopy(self.fixture['catalog']); mutate(source)
             with self.assertRaises(ValueError): normalize_tileset(source)
+
+    def test_passage_unions_layers_and_edges(self):
+        scene=copy.deepcopy(self.fixture['scene']); catalog=self.fixture['catalog']
+        scene['layers']=normalize_tile_layers(scene);scene['schemaVersion']=2;del scene['tiles']
+        scene['layers'][0]['tiles'][1][1]=27;scene['layers'][3]['tiles'][1][1]=0
+        self.assertTrue(cell_passage(scene,1,1,catalog)['blocked'])
+        catalog['tiles'][1]['collision']='none';catalog['tiles'][1]['blockedEdges']=['left']
+        self.assertEqual(cell_passage(scene,1,1,catalog),{'blocked':False,'blockedEdges':['left']})
 
     def test_layers_preserve_zero_and_reject_ambiguous_or_empty_base(self):
         scene=self.fixture['scene']; before=copy.deepcopy(scene)

@@ -132,17 +132,17 @@ MovementSystem, builder references; passage/world scene/coordinate fixtures/test
 - Python equivalents live in `world_tilesets.py` and builder; validators never
   rely on stale compiled blocked-cell lists for working catalog changes.
 
-- [ ] Add exact cases: wall+canopy blocked; flower removal keeps grass passable;
+- [x] Add exact cases: wall+canopy blocked; flower removal keeps grass passable;
   source-right or destination-left blocks rightward step; unblocked pair allows;
   reverse-direction checks; diagonal/non-adjacent rejected; null contributes nothing.
-- [ ] Add BFS fixture where direct route crosses a blocked edge and valid detour
+- [x] Add BFS fixture where direct route crosses a blocked edge and valid detour
   is required; assert all resulting steps pass `canStep`. Include source NPC overlap
   escape and invalid source terrain/spawn/arrival checks.
-- [ ] Run red tests, implement pure union rules, project validation and adapters;
+- [x] Run red tests, implement pure union rules, project validation and adapters;
   update MovementSystem.step, BFS and every call site passing working catalog.
-- [ ] Compare JS/Python rejection codes/cells for shared fixtures; run focused
+- [x] Compare JS/Python rejection codes/cells for shared fixtures; run focused
   browser, Python world tests, architecture and builder check.
-- [ ] Commit: `feat(world): unify layered passage and directional movement`.
+- [x] Commit: `feat(world): unify layered passage and directional movement`.
 
 ## T3 — Load nhiều atlas và render dưới/trên actors
 

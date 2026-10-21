@@ -1,4 +1,4 @@
-import {walkable} from '../pixel/maps.js';
+import {canStep} from '../pixel/maps.js';
 import {worldMetrics} from '../../content/world/metrics.js';
 const TILE=worldMetrics.tilePixels,DIRECTIONS={down:[0,1],left:[-1,0],right:[1,0],up:[0,-1]};
 
@@ -6,7 +6,7 @@ export class MovementSystem {
  constructor(world) { this.world=world; }
 step(direction){
  const world=this.world;
-if(world.walk||world.blocked||!world.ready)return;const [dx,dy]=DIRECTIONS[direction];world.player.direction=direction;const to={x:world.player.x+dx,y:world.player.y+dy};if(walkable(world.map,to.x,to.y,world.npcs)){world.walk={from:{x:world.player.x,y:world.player.y},to,elapsed:0};world.setActorMode('khue','walk');}}
+if(world.walk||world.blocked||!world.ready)return;const [dx,dy]=DIRECTIONS[direction];world.player.direction=direction;const to={x:world.player.x+dx,y:world.player.y+dy};if(canStep(world.map,world.player,to,world.npcs,world.tileCatalog)){world.walk={from:{x:world.player.x,y:world.player.y},to,elapsed:0};world.setActorMode('khue','walk');}}
 update(dt){
  const world=this.world;
 if(!world.ready||world.editing)return;for(const clock of world.actorClocks.values())clock.elapsed+=dt*1000;if(world.blocked)return;
