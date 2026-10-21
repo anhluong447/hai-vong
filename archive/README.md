@@ -1,5 +1,10 @@
 # Legacy archive
 
+The complete active 2D product before the full-3D transition is saved in
+[products/coastal-2d-2026-10-21/](products/coastal-2d-2026-10-21/README.md),
+including local art/audio/fonts, editors and generation inputs. Its verified
+payload stays local; the inventory and recovery instructions remain in Git.
+
 The previous coastal menu is copied in
 [menus/coastal-menu-legacy-2026-10-15/](menus/coastal-menu-legacy-2026-10-15/README.md),
 with its own SHA-256 inventory, source inputs and recovery instructions.

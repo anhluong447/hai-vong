@@ -80,6 +80,7 @@ node_modules/
 /plans/
 /plan/
 /docs/plans/
+/docs/design/plans/
 /docs/**/*[pP][lL][aA][nN]*.md
 /docs/**/*[rR][oO][aA][dD][mM][aA][pP]*.md
 /docs/ui-reviews/**
@@ -116,6 +117,9 @@ Thumbs.db
 # Frozen menu payloads stay local; retain inventory, recovery notes and verifier.
 /archive/menus/**/files/
 /archive/menus/**/preview-frozen.*
+
+# Verified product backups keep local payloads separate from tracked inventories.
+/archive/products/**/files/
 
 # Preserve the historical snapshot and its existing backup manifest.
 !/archive/clb-hoi/**
