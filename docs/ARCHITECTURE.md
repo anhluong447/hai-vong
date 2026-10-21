@@ -62,6 +62,22 @@ Invalid strokes never replace the document. Camera overrides apply only during
 editing and do not enter gameplay saves. See the
 [tilemap review](ui-reviews/tilemap-editor/README.md).
 
+World-map foundation (2026-10-21) adds a normalized v2 tile catalog, immutable
+hash-named PNG imports and four explicit placement layers. Source scene v1 stays
+readable; layer editing upgrades only the edited draft to v2. Tile 0 remains a
+real tile; null represents an empty overlay. `tileLayers` and `tilePassage` are
+pure shared queries; movement and BFS check both source/destination edges.
+`TileAssets` loads/validates images and `PixelWorld` caches below/above-character
+batches independently of placement layer. Legacy hydrated layers are derived,
+non-enumerable metadata to preserve existing serialized MAPS fixtures.
+TilesetDocument owns a separate working catalog/history; WorldEditor passes that
+catalog into validators, documents and rendering without mutating generated data.
+The opt-in writer adds fixed tileset routes and a scene route with catalog-hash
+dependencies; image/catalog publication has a recoverable journal and shares the
+scene writer lock. The runtime still uses static assets/compiled ES modules only.
+See [foundation design](superpowers/specs/2026-10-21-world-map-foundation-design.md)
+and [verification](ui-reviews/world-map-foundation/README.md).
+
 Updated 2026-10-09. Plain HTML/CSS, Canvas and ES modules; runtime has no build
 step. Art authoring uses the offline asset builder described below. Two explicit rulesets remain: the original formula sandbox and the newer
 gameplay/pixel prototype. Their calendars, scores and state schemas are distinct.

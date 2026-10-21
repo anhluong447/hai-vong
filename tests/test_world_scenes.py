@@ -37,6 +37,7 @@ class WorldScenesTest(unittest.TestCase):
                 lambda r:r['tiles'][0].update(blocked=1),
                 lambda r:r['tiles'][0].update(labelKey='missing.key'),
                 lambda r:r.update(columns=4),
+                lambda r:r.update(schemaVersion=True),
             ]:
                 candidate = copy.deepcopy(registry)
                 change(candidate)

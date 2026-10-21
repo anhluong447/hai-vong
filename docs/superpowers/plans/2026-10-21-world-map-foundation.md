@@ -74,7 +74,7 @@ Server is a separate background process. Run browser calls sequentially:
 
 ```powershell
 python tools/run_browser_tests.py --url http://127.0.0.1:8096/tests/world-authoring.html --profile-root tmp/browser-tests
-python tools/run_browser_tests.py --url http://127.0.0.1:8096/tests/index.html --profile-root tmp/browser-tests
+python tools/run_browser_tests.py --url http://127.0.0.1:8096/tests/index.html --profile-root tmp/browser-tests --real-time --timeout 240
 python tools/check_baselines.py
 ```
 
@@ -311,19 +311,19 @@ Catalog save revalidates source scenes; scene save validates against fresh catal
 **Files:** docs/review README, asset recovery README, review scripts and tests only
 where remaining observed regressions justify changes.
 
-- [ ] Build acceptance scene in disposable fixture: grass+flower, solid trunk,
+- [x] Build acceptance scene in disposable fixture: grass+flower, solid trunk,
   overhead canopy, wall+roof, directional fence and valid transfer destination.
   Exercise keyboard walking and click-to-move, preview/play, save/reload.
-- [ ] Check 256×256 fill/cache refresh and small-map camera/selection; record actual
+- [x] Check 256×256 fill/cache refresh and small-map camera/selection; record actual
   measurements and failure symptoms. Do not introduce arbitrary performance claims.
-- [ ] Update authoring docs: English controls, empty vs 0, base eraser, independent
+- [x] Update authoring docs: English controls, empty vs 0, base eraser, independent
   collision/priority, hidden-layer collision, binary retention and restore workflow.
-- [ ] Run verification commands above: architecture, Python, builder, focused
+- [x] Run verification commands above: architecture, Python, builder, focused
   browser, main browser, then baselines. No repeated broad reruns after green unless
   later changes/failures justify them. Report skipped/unavailable checks accurately.
-- [ ] Record evidence in review README; PNG captures stay local per ignore policy.
+- [x] Record evidence in review README; PNG captures stay local per ignore policy.
   List acceptance scene steps, exact commands/results and remaining limitations.
-- [ ] Review diff for unintended source maps/art/save changes and commit:
+- [x] Review diff for unintended source maps/art/save changes and commit:
   `docs(authoring): document tileset and layered map workflow`.
 
 ## Handoff and next plans

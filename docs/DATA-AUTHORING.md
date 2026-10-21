@@ -156,3 +156,60 @@ Asset binary vẫn theo chính sách local: registry lưu hash, provenance/licen
 và cách khôi phục, không thay thế bản sao lưu ảnh/font. Xem
 [kết quả triển khai](ui-reviews/data-authoring/README.md) và
 [quyền sở hữu dữ liệu](ui-specs/authoring/ownership.md).
+
+
+## Tileset import v? map b?n layer
+
+Trong World Editor, ch?n `Tiles`. C?t tr?i c? `Layer 1?4`, `Show`, `Lock`,
+`Tileset image` v? t?m tile theo t?n/ID. Alt+1..4 khi canvas c? focus ch?n l?p;
+m?i t?n di cursor, Enter v?, B/R/F/I/E ??i tool, Space+k?o pan. Ctrl+Z/Ctrl+Y
+ho?n t?c scene. Trong panel tileset, Undo/Redo v? shortcut c? history ri?ng.
+Input ?ang nh?p ch? kh?ng b? tool shortcuts chi?m.
+
+C?t ph?i l? `Tileset Properties`: ch?n tile t? palette, Ctrl/Shift-click ??
+ch?n nhi?u tile, ch?nh `Collision`, `Blocked edges`, `Draw priority`, r?i
+`Apply Properties`. `Above characters` d?ng cho t?n c?y/m?i; n? kh?ng x?a block
+c?a n?n/t??ng ? l?p kh?c. C?c c?nh b? ch?n ?p d?ng cho c? b??c ?i b?ng ph?m v?
+click-to-move. Collision overlay t?nh c? layer ?ang ?n; Playtest hi?n m?i layer.
+
+`Import Tileset` nh?n PNG l??i th??ng. Ch?n file, source tile size 16/24/32/48,
+margin/spacing 0?32 v? xem grid preview tr??c khi Import. K?ch th??c source tile
+kh?ng thay world grid 16 px. Kh?ng ??c quy t?c autotile c?a sheet MZ A1?A4.
+?nh t?i ?a 8 MiB, m?i chi?u 4096 px, t?ng catalog t?i ?a 8192 tile.
+
+- Layer 1 lu?n c? tile; Eraser thay b?ng replacement tile ?ang ch?n.
+- Layer 2?4 x?a th?nh null; tile ID 0 v?n l? tile th?t.
+- Brush/Rectangle/Fill/Eyedropper ch? t?c ??ng layer ?ang ch?n. Layer b? Lock
+  kh?ng nh?n n?t v?. Show/Lock l? preference editor, kh?ng v?o source/save game.
+- Map v1 kh?ng dirty khi m?/ch?n l?p; n?t s?a layer ??u ti?n t?o draft v2.
+  Undo c? th? tr? l?i ??ng v1. Map source g?c kh?ng ???c n?ng h?ng lo?t.
+
+Mu?n ghi source t? ??ng, ch?y authoring server opt-in:
+
+```powershell
+python tools/authoring_server.py --enable-authoring --port 8097
+```
+
+M? `http://127.0.0.1:8097/tools/world-editor.html`. Import th? l?u c? PNG/catalog;
+`Save Tileset Source` l?u properties. L?u tileset tr??c `Save Scene to Source`.
+Status ph?n bi?t th?nh c?ng, draft c?n thay ??i v? conflict; kh?ng t? ?? m?t
+phi?n b?n source kh?c. Scene API ki?m tra c? scene hash l?n catalog hash.
+
+V?i server t?nh, import b?o `Preview only`. D?ng `Export Tileset JSON`, ch?p v?o
+`content/world/tileset.json`; ch?n tile trong t?ng ?nh v? `Download Selected PNG`,
+ch?p file v?o ??ng `imagePath` c? hash trong catalog. Sau ?? ch?y builder v?
+reload. Kh?ng s?a t?n hash ho?c ??t blob/data URL v?o source JSON.
+
+```powershell
+python tools/build_world_scenes.py --build
+python tools/check_architecture.py
+```
+
+PNG v?n theo ignore policy c?a project: gi? original asset pack v? metadata/hash.
+Git checkout ri?ng kh?ng ph?c h?i ?nh import. Xem [asset recovery](../assets/tilesets/README.md).
+`Save Scene Draft` kh?ng gi? bytes ?nh ch?a l?u; l?u ?nh/catalog tr??c khi d?a
+v?o reload ?? ph?c h?i draft. Draft m?i c? dependency catalog hash; mismatch gi?
+nguy?n b?n hi?n t?i v? c? th? export ?? ph?c h?i. Kh?ng ??i save game ng??i ch?i.
+
+Xem [verification](ui-reviews/world-map-foundation/README.md) v?
+[ch??ng tr?nh ti?p theo](WORLD-MAP-AUTHORING.md).

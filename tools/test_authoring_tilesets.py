@@ -149,5 +149,21 @@ class TilesetWriterTest(unittest.TestCase):
             with self.assertRaises(AuthoringError) as caught:writer.save_scene(request)
         self.assertEqual(caught.exception.code,'CONFLICT');self.assertEqual((self.root/'content/maps/scenes/home.json').read_bytes(),before)
 
+    def test_large_catalog_properties_fit_specialized_limit(self):
+        result=self.writer.import_png(self.request((4096,496)))
+        payload=result['payload'];payload['tiles'][-1]['editorName']='Large atlas tile'
+        request={'baseHash':result['hash'],'payload':payload}
+        self.assertGreater(len(json.dumps(request)),1024*1024)
+        self.assertTrue(self.writer.save_catalog(request)['applied'])
+
+    def test_scene_route_rejects_nonstring_resource_and_oversized_payload(self):
+        from tools.authoring_write import AuthoringWriter
+        writer=AuthoringWriter(self.root);source=writer.read('scene/home')
+        request={'resourceId':'scene/home','schemaVersion':1,'baseHash':source['hash'],'catalogHash':self.writer.read()['hash'],'payload':source['payload']}
+        with self.assertRaises(AuthoringError):writer.save_scene(dict(request,resourceId=[]))
+        large=copy.deepcopy(request);large['payload']['padding']='x'*(8*1024*1024)
+        with self.assertRaises(AuthoringError) as caught:writer.save_scene(large)
+        self.assertEqual(caught.exception.status,413)
+
 
 if __name__=='__main__':unittest.main()

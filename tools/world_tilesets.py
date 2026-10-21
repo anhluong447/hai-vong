@@ -20,6 +20,7 @@ def keys(value, required, optional=()):
 
 def normalize_tileset(source, legacy_atlas=None, text_keys=None):
     c = copy.deepcopy(source)
+    require(isinstance(c,dict) and type(c.get('schemaVersion')) is int,'schemaVersion')
     if isinstance(c, dict) and c.get('schemaVersion') == 1:
         require(keys(c, ('schemaVersion','assetId','tilePixels','columns','count','tiles')), 'fields')
         require(c['assetId']=='pixel.tiles' and type(c['tilePixels']) is int and c['tilePixels']==16 and c['columns']==8 and c['count']==16, 'atlas')
@@ -65,7 +66,7 @@ def tile_source_rect(tile_id, catalog):
 def normalize_tile_layers(scene):
     def check(value):
         if not value: raise ValueError('world.scene.layers')
-    check(isinstance(scene,dict) and integer(scene.get('width'),1,256) and integer(scene.get('height'),1,256))
+    check(isinstance(scene,dict) and type(scene.get('schemaVersion')) is int and integer(scene.get('width'),1,256) and integer(scene.get('height'),1,256))
     if scene.get('schemaVersion')==1 and 'tiles' in scene and 'layers' not in scene:
         layers=[{'id':lid,'tiles':scene['tiles'] if i==0 else [[None]*scene['width'] for _ in range(scene['height'])]} for i,lid in enumerate(LAYER_IDS)]
     else:

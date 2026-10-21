@@ -102,7 +102,7 @@ class AuthoringWriter:
         if not isinstance(request,dict) or set(request)!={'resourceId','schemaVersion','baseHash','catalogHash','payload'}:raise AuthoringError('INVALID_REQUEST')
         _safe_json(request)
         resource=request['resourceId'];payload=request['payload']
-        if resource not in RESOURCES or not resource.startswith('scene/'):raise AuthoringError('UNKNOWN_RESOURCE',404)
+        if not isinstance(resource,str) or resource not in RESOURCES or not resource.startswith('scene/'):raise AuthoringError('UNKNOWN_RESOURCE',404)
         if type(request['schemaVersion']) is not int or request['schemaVersion']!=1 or not isinstance(payload,dict) or type(payload.get('schemaVersion')) is not int or payload['schemaVersion'] not in (1,2):raise AuthoringError('UNSUPPORTED_SCHEMA',422)
         for key in ('baseHash','catalogHash'):
             if not isinstance(request[key],str) or not re.fullmatch('[0-9a-f]{64}',request[key]):raise AuthoringError('INVALID_BASE_HASH')
