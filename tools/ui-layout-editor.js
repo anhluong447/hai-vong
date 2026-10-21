@@ -8,6 +8,7 @@ import {ReplicaStage} from '../src/ui/replica/ReplicaStage.js';
 import {applyDialogueLayout} from '../src/ui/replica/DialogueLayout.js';
 import {UiPackDocument} from './authoring/UiPackDocument.js';
 import {ReplicaDialogueDocument,replicaDialogueRegions} from './authoring/ReplicaDialogueDocument.js';
+import {ObjectBrowser} from './authoring/ObjectBrowser.js';
 
 applyDocumentText();
 const plane=document.querySelector('#plane'),viewport=document.querySelector('#viewport'),toolbar=document.querySelector('#toolbar'),inspector=document.querySelector('#inspector'),status=document.querySelector('#status'),file=document.querySelector('#import-file');
@@ -21,25 +22,28 @@ const dialogueReady=dialogue.load(new URL('../'+dialogueMotionManifest,import.me
 const gizmo=document.createElement('div');gizmo.className='ui-pack-gizmo';gizmo.lang='en';plane.append(hud.node,dialogueHost,gizmo);
 let scope=new URLSearchParams(location.search).get('screen')==='dialogue'?'dialogue':'hud',selected=scope==='hud'?'hud-date':'dialogue-panel',editing=true,drag=null,disposed=false;
 const outlines=new Map(),inputs=new Map();
+const workspace=(key,params)=>t(`authoring.workspace.${key}`,params),properties=document.querySelector('#ui-properties');
+const objectBrowser=new ObjectBrowser(document.querySelector('#ui-object-browser'),{onSelect:id=>select(id)});
 const activeDocument=()=>scope==='hud'?hudDocument:dialogueDocument;
 const regions=()=>scope==='hud'?screenLayoutRegions.filter(region=>region.scope==='hud'):replicaDialogueRegions;
 const regionFor=id=>regions().find(region=>region.id===id);
 const values=()=>scope==='hud'?hudDocument.draft.regions:dialogueDocument.draft.layout;
-const button=(key,action)=>{const node=document.createElement('button');node.type='button';node.textContent=t(key);node.addEventListener('click',action,{signal});toolbar.append(node);return node;};
+const button=(key,action)=>{const node=document.createElement('button');node.type='button';node.dataset.editorAction=key.split('.').at(-1);node.textContent=t(key);node.addEventListener('click',action,{signal});toolbar.append(node);return node;};
 const screen=document.createElement('select');screen.setAttribute('aria-label',t('authoring.region'));
 for(const id of ['hud','dialogue']){const option=document.createElement('option');option.value=id;option.textContent=t(`authoring.uiPack.${id}`);screen.append(option);}screen.value=scope;toolbar.append(screen);
 const editButton=button('authoring.uiPack.play',()=>{cancelDrag();editing=!editing;render();});
 const logoButton=button('authoring.uiPack.showLogo',()=>{cancelDrag();dialogue.setPresentation({logo:!dialogue.logoVisible});render();});
-button('authoring.undo',()=>{cancelDrag();activeDocument().undo();});button('authoring.redo',()=>{cancelDrag();activeDocument().redo();});button('authoring.reset',()=>{cancelDrag();activeDocument().reset(selected);});
+const undoButton=button('authoring.undo',()=>{cancelDrag();activeDocument().undo();}),redoButton=button('authoring.redo',()=>{cancelDrag();activeDocument().redo();}),resetButton=button('authoring.reset',()=>{cancelDrag();activeDocument().reset(selected);});
 button('authoring.import',()=>{cancelDrag();file.click();});button('authoring.export',()=>{
  cancelDrag();
  const url=URL.createObjectURL(new Blob([activeDocument().export()],{type:'application/json'})),link=document.createElement('a');
  link.href=url;link.download=scope==='hud'?'screen-layout.json':'coastal-dialogue-ui.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent=t('authoring.uiPack.exported');
 });
-const selectLabel=document.createElement('label');selectLabel.textContent=t('authoring.region');
+const fileMenu=document.createElement('details'),fileSummary=document.createElement('summary'),fileActions=document.createElement('div');fileMenu.className='editor-file-menu';fileSummary.textContent=workspace('importExport');fileMenu.append(fileSummary,fileActions);for(const action of ['import','export'])fileActions.append(toolbar.querySelector(`[data-editor-action=${action}]`));toolbar.append(fileMenu);
+const selectLabel=document.createElement('label');selectLabel.textContent=t('authoring.region');selectLabel.hidden=true;
 const regionSelect=document.createElement('select');selectLabel.append(regionSelect);inspector.append(selectLabel);
-const fields=document.createElement('div');inspector.append(fields);
-const note=document.createElement('p');note.textContent=t('authoring.uiPack.note');inspector.append(note);
+const fields=document.createElement('div');fields.className='editor-field-grid';properties.append(fields);
+const help=document.createElement('details'),helpTitle=document.createElement('summary');help.className='editor-disclosure';helpTitle.textContent=workspace('shortcuts');const note=document.createElement('p');note.textContent=t('authoring.uiPack.note');help.append(helpTitle,note);properties.append(help);
 function boundsFor(region){
  if(scope==='hud'){const root=hud.node,target=root.matches(region.selector)?root:root.querySelector(region.selector);return target?.getBoundingClientRect();}
  const boxes=(dialogue.layoutTargets?.get(region.id)??[]).map(target=>target.getBoundingClientRect()).filter(box=>box.width||box.height);
@@ -80,7 +84,7 @@ function rebuildRegions(){
   outline.addEventListener('pointerdown',event=>startDrag(event,region.id),{signal});
   outline.addEventListener('click',()=>select(region.id),{signal});gizmo.append(outline);outlines.set(region.id,outline);
  }
- buildInspector();
+ objectBrowser.setItems(regions().map(region=>({id:region.id,label:t(region.labelKey),depth:depth(region)})),selected);buildInspector();
 }
 plane.addEventListener('pointermove',event=>{
  if(!drag||drag.pointer!==event.pointerId)return;
@@ -105,6 +109,9 @@ function render(){
  dialogue.motion.setPaused(scope!=='dialogue');applyDialogueLayout(dialogue);
  for(const node of dialogue.svg?.querySelectorAll('[aria-disabled]')??[])node.setAttribute('aria-disabled',String(editing));
  editButton.textContent=t(editing?'authoring.uiPack.play':'authoring.uiPack.edit');editButton.setAttribute('aria-pressed',String(!editing));
+ const selectedRegion=regionFor(selected);document.querySelector('#ui-selection-title').textContent=t(selectedRegion.labelKey);document.querySelector('#ui-selection-id').textContent=selected;
+ const dirty=document.querySelector('#ui-dirty-state');dirty.dataset.state=activeDocument().dirty?'dirty':'saved';dirty.textContent=workspace(activeDocument().dirty?'layoutDirty':'layoutSaved');objectBrowser.select(selected);
+ undoButton.disabled=!editing||!activeDocument().history.length;redoButton.disabled=!editing||!activeDocument().future.length;resetButton.disabled=!editing;for(const input of inputs.values())input.disabled=!editing;
  const rect=plane.getBoundingClientRect(),scale=1672/rect.width;
  for(const [id,outline]of outlines){
   const bounds=boundsFor(regionFor(id));outline.hidden=!bounds;
@@ -120,7 +127,7 @@ file.addEventListener('change',async()=>{const imported=file.files?.[0];if(!impo
 window.addEventListener('keydown',event=>{
  if(event.key==='Escape'){cancelDrag();return;}
  if(event.target.matches('input,select,textarea')||!editing)return;
- if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='z'){event.preventDefault();cancelDrag();event.shiftKey?activeDocument().redo():activeDocument().undo();return;}
+ if((event.ctrlKey||event.metaKey)&&['z','y'].includes(event.key.toLowerCase())){event.preventDefault();cancelDrag();event.key.toLowerCase()==='y'||event.shiftKey?activeDocument().redo():activeDocument().undo();return;}
  if(drag)return;
  const delta={ArrowLeft:['x',-1],ArrowRight:['x',1],ArrowUp:['y',-1],ArrowDown:['y',1]}[event.key];
  if(delta){event.preventDefault();const [field,direction]=delta,descriptor=regionFor(selected).fields[field],value=values()[selected][field]+direction*(event.shiftKey?10:1);activeDocument().set(selected,field,Math.max(descriptor.min,Math.min(descriptor.max,value)));}
@@ -130,4 +137,4 @@ const unsubscribeHud=hudDocument.subscribe(render),unsubscribeDialogue=dialogueD
 await dialogueReady;await document.fonts.ready;
 rebuildRegions();resize();status.textContent=t('authoring.uiPack.ready');
 window.uiPackEditor={get document(){return activeDocument();},hudDocument,dialogueDocument,hud,dialogue,select,render,setScreen(value){screen.value=value;screen.dispatchEvent(new Event('change'));},setEditing(value){if(editing!==value)editButton.click();}};
-window.addEventListener('pagehide',()=>{cancelDrag();disposed=true;unsubscribeHud();unsubscribeDialogue();observer.disconnect();abort.abort();hud.dispose();dialogue.dispose();},{once:true});
+window.addEventListener('pagehide',()=>{cancelDrag();disposed=true;objectBrowser.dispose();unsubscribeHud();unsubscribeDialogue();observer.disconnect();abort.abort();hud.dispose();dialogue.dispose();},{once:true});

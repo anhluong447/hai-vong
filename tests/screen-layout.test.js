@@ -66,6 +66,11 @@ test('screen layout: standalone authoring uses actual components and aligned sca
   const w=frame.contentWindow;
   await new Promise((resolve,reject)=>{const started=Date.now();const poll=()=>w.uiPackEditor?resolve():Date.now()-started>20000?reject(new Error('UI pack editor readiness timeout')):setTimeout(poll,40);poll();});
   const editor=w.uiPackEditor,d=w.document;
+  const search=d.querySelector('#ui-object-browser input[type=search]');a.ok(search,'A searchable object list must be available');
+  editor.setScreen('dialogue');search.value='Flowers';search.dispatchEvent(new w.Event('input',{bubbles:true}));
+  const flowerButton=d.querySelector('#ui-object-browser [data-object-id="dialogue-flowers"]');a.ok(flowerButton);flowerButton.click();
+  a.equal(d.querySelector('#ui-selection-title').textContent,'Flowers');a.equal(flowerButton.getAttribute('aria-pressed'),'true');
+  search.value='';search.dispatchEvent(new w.Event('input',{bubbles:true}));editor.setScreen('hud');
   a.ok(editor.hud.node.classList.contains('coastal-hud'));
   a.ok(editor.dialogue.svg?.classList.contains('replica-stage'),'Dialogue editor must use the actual SVG replica, not the old DOM dialogue');
   a.ok(editor.dialogue.scene.motion,'Dialogue editor must use the Stage 4 composition');
@@ -86,6 +91,8 @@ test('screen layout: standalone authoring uses actual components and aligned sca
   a.ok(editor.document.pending,'Pointer movement must remain one pending transaction');
   outline.dispatchEvent(new w.KeyboardEvent('keydown',{key:'z',ctrlKey:true,bubbles:true,cancelable:true}));
   a.equal(editor.document.pending,null);a.equal(editor.document.value.regions['hud-resources'].x,0);
+  outline.dispatchEvent(new w.KeyboardEvent('keydown',{key:'y',ctrlKey:true,bubbles:true,cancelable:true}));a.equal(editor.document.value.regions['hud-resources'].x,-40);
+  outline.dispatchEvent(new w.KeyboardEvent('keydown',{key:'z',ctrlKey:true,bubbles:true,cancelable:true}));a.equal(editor.document.value.regions['hud-resources'].x,0);
   outline.dispatchEvent(new w.PointerEvent('pointermove',{pointerId:7,clientX:140,clientY:100,bubbles:true}));
   a.equal(editor.document.value.regions['hud-resources'].x,0);a.equal(editor.document.history.length,0);
   editor.setScreen('dialogue');editor.select('dialogue-panel');
@@ -129,5 +136,7 @@ test('screen layout: standalone authoring uses actual components and aligned sca
    while(parent){const id=parent.dataset.dialogueLayout;if(id){a.ok(!seen.has(id),`Duplicate transform ancestor: ${id}`);seen.add(id);}parent=parent.parentElement;}
   }
   editor.setEditing(false);a.equal(editor.dialogue.host.inert,false);a.equal(editor.dialogue.captureLocked,false);
+  frame.style.width='390px';frame.style.height='600px';editor.setScreen('hud');search.value='hud-resources';search.dispatchEvent(new w.Event('input',{bubbles:true}));await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  const mobileObject=d.querySelector('#ui-object-browser [data-object-id=hud-resources]');mobileObject.scrollIntoView({block:'nearest'});await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));const mobileBounds=mobileObject.getBoundingClientRect();a.equal(d.elementFromPoint(mobileBounds.x+mobileBounds.width/2,mobileBounds.y+mobileBounds.height/2),mobileObject,'Status must not cover mobile object selection');
  }finally{frame.contentWindow.dispatchEvent(new frame.contentWindow.Event('pagehide'));frame.remove();}
 });

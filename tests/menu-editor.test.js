@@ -11,7 +11,12 @@ test('menu editor: edit locks commands, transaction updates geometry, undo/expor
  const frame=document.createElement('iframe');frame.src='../tools/coastal-menu-v2-preview.html?edit=1';frame.style.cssText='width:1280px;height:720px;position:relative;left:0';document.body.append(frame);
  const wait=fn=>new Promise((resolve,reject)=>{const start=Date.now();const tick=()=>fn()?resolve():Date.now()-start>25000?reject(new Error('Authoring preview timeout')):setTimeout(tick,30);tick();});
  try{
-  await wait(()=>frame.contentWindow.menuEditor);const w=frame.contentWindow,e=w.menuEditor,v=w.menuV2Preview.menu;
+  await wait(()=>frame.contentWindow.menuEditor?.css.sheet&&frame.contentWindow.menuEditor?.sharedCss.sheet);const w=frame.contentWindow,e=w.menuEditor,v=w.menuV2Preview.menu;
+  const search=w.document.querySelector('#menu-object-browser input[type=search]');a.ok(search,'Menu authoring needs a searchable object browser');
+  search.value='resources';search.dispatchEvent(new w.Event('input',{bubbles:true}));
+  const resource=w.document.querySelector('#menu-object-browser [data-object-id=resources]');a.ok(resource);resource.click();a.equal(e.selection,'resources');
+  search.value='';search.dispatchEvent(new w.Event('input',{bubbles:true}));
+  const panelStyle=w.getComputedStyle(e.panel);a.equal(panelStyle.overflowY,'auto','Properties must scroll independently');a.ok(parseFloat(panelStyle.paddingLeft)>0);a.ok(panelStyle.backgroundColor!=='rgba(0, 0, 0, 0)');a.equal(w.getComputedStyle(e.header).display,'flex');
   const before=JSON.stringify(w.menuV2Preview.session.state);a.equal(v.node.inert,true);
   v.onAction({type:'job'});v.onSave();v.onLoad();a.equal(JSON.stringify(w.menuV2Preview.session.state),before);
   e.select('resources');const x=v.node.querySelector('.mv-resources').getBoundingClientRect().x;e.document.begin();e.document.set('resources','x',65);e.document.commit();
@@ -41,6 +46,8 @@ test('menu editor: edit locks commands, transaction updates geometry, undo/expor
   outline.dispatchEvent(new w.PointerEvent('pointermove',{pointerId:7,clientX:140,clientY:100}));
   a.equal(e.document.value.regions.resources.x,67);e.setMode('play');
   e.setMode('play');a.equal(v.node.inert,false);e.setMode('edit');a.equal(v.node.inert,true);
+  frame.style.width='390px';frame.style.height='600px';e.select('resources');e.panel.querySelector('details').open=true;await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));a.ok(e.panel.scrollHeight>e.panel.clientHeight);e.panel.scrollTop=100;a.ok(e.panel.scrollTop>0,'Short mobile properties must remain reachable');
+  a.ok(e.toolbar.getBoundingClientRect().bottom<=e.header.getBoundingClientRect().bottom,'Mobile toolbar must fit above the preview');a.ok(e.footer.scrollWidth<=e.footer.clientWidth,'Mobile footer controls must fit the screen');
   e.dispose();a.equal(v.node.inert,false);a.ok(!w.document.querySelector('.authoring-panel'));
  }finally{frame.contentWindow.dispatchEvent(new frame.contentWindow.Event('pagehide'));frame.remove();}
 });

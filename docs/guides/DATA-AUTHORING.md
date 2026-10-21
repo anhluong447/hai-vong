@@ -7,6 +7,28 @@ Giao diện công cụ dùng tiếng Anh; nội dung game trong preview dùng b�
 Để sử dụng công cụ bản đồ theo từng bước, xem
 [hướng dẫn World Editor và Tileset Editor](WORLD-EDITOR-GUIDE.md).
 
+## Bố cục editor
+
+Các editor dùng chung bố cục: danh sách object bên trái, preview ở giữa,
+thuộc tính của object đang chọn bên phải. Tìm theo tên hoặc ID trong danh
+sách; mũi tên lên/xuống và Home/End đổi lựa chọn, Escape trong ô tìm kiếm xóa
+bộ lọc. Chọn object không tạo bước Undo. Trên màn hình hẹp, các panel chuyển
+xuống dưới preview; cuộn panel/trang để tới những trường còn lại.
+
+Menu chọn tab bằng **Menu Tab**, chỉnh thuộc tính ở **Properties**. **Preview
+scale** chỉ phóng preview; **Snap (4 px)** bật/tắt bám lưới khi kéo. Nháp và
+import/export nằm trong **Files & drafts**, lưu source nằm riêng trên thanh
+trên. HUD/thoại chọn màn bằng **HUD / Dialogue**, import/export trong
+**Import & export**; công cụ này tiếp tục dùng export + builder để áp dụng.
+
+Nhãn **Unsaved layout** báo nháp khác dữ liệu nguồn; export không tự xóa nhãn
+này. Undo/Redo bị mờ khi
+không có bước tương ứng. Đổi màn hoặc Playtest không tự lưu dữ liệu.
+Ctrl+Y hoặc Ctrl+Shift+Z làm lại; thao tác chỉnh bằng phím mũi tên áp dụng
+khi focus ra khỏi ô nhập/danh sách đang dùng phím để điều hướng.
+
+Xem [bằng chứng kiểm tra UI editor](../ui-reviews/editor-usability/README.md).
+
 ## Mở công cụ
 
 Từ thư mục dự án, chạy server tĩnh hiện có:

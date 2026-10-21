@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title data-text="authoring.uiPack.title"></title>
-<link rel="stylesheet" href="../styles/replica.css"><link rel="stylesheet" href="../styles/main.css"><link rel="stylesheet" href="../styles/gameplay.css"><link rel="stylesheet" href="../styles/coastal.css"><link rel="stylesheet" href="./authoring/ui-pack-editor.css"></head>
-<body class="ui-pack-editor"><header class="ui-pack-toolbar"><h1 data-text="authoring.uiPack.title"></h1><nav id="toolbar"></nav></header>
-<main class="ui-pack-workspace"><aside id="inspector"></aside><section class="ui-pack-viewport" id="viewport"><div class="single-screen coastal-app ui-pack-stage" id="plane" lang="vi"></div></section></main>
+<link rel="stylesheet" href="../styles/replica.css"><link rel="stylesheet" href="../styles/main.css"><link rel="stylesheet" href="../styles/gameplay.css"><link rel="stylesheet" href="../styles/coastal.css"><link rel="stylesheet" href="./authoring/editor-shell.css"><link rel="stylesheet" href="./authoring/ui-pack-editor.css"></head>
+<body class="ui-pack-editor editor-surface"><header class="ui-pack-toolbar editor-header"><div class="editor-brand"><div><h1 data-text="authoring.uiPack.title"></h1><p class="editor-muted" data-text="authoring.workspace.layoutSubtitle"></p></div></div><nav id="toolbar" class="editor-toolbar"></nav></header>
+<main class="ui-pack-workspace"><aside id="inspector" class="editor-panel"><h2 data-text="authoring.workspace.objects"></h2><div id="ui-object-browser"></div></aside><section class="ui-pack-viewport editor-viewport" id="viewport"><div class="single-screen coastal-app ui-pack-stage" id="plane" lang="vi"></div></section><aside id="ui-properties" class="editor-panel"><p class="editor-eyebrow" data-text="authoring.workspace.selection"></p><h2 id="ui-selection-title" class="editor-selected-name"></h2><p id="ui-selection-id" class="editor-selection-id"></p><output id="ui-dirty-state" class="editor-badge"></output></aside></main>
 <p id="status" role="status"></p><input id="import-file" type="file" accept="application/json,.json" hidden>
 <script type="module" src="./ui-layout-editor.js"></script></body></html>
