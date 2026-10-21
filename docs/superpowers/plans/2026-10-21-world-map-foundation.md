@@ -156,15 +156,15 @@ MovementSystem, builder references; passage/world scene/coordinate fixtures/test
 - `rebuildBackgrounds()` generates lower/upper caches using all layers and catalog
   revision. Asynchronous image completion has a generation guard against stale swaps.
 
-- [ ] Add render fixture with tile 27 sourced from a second atlas, below/above
+- [x] Add render fixture with tile 27 sourced from a second atlas, below/above
   placements on each layer and actor overlap. Verify draw order and source crops.
-- [ ] Add missing/decode-failed image and out-of-order catalog load tests; the last
+- [x] Add missing/decode-failed image and out-of-order catalog load tests; the last
   selected project remains current, partial loads do not replace the active catalog.
-- [ ] Run red tests; implement loader, two caches and revision invalidation.
+- [x] Run red tests; implement loader, two caches and revision invalidation.
   Preserve actor y/x ordering, pivots, signs and current overlays.
-- [ ] Compare legacy fixture pixels and map data before/after; change a property,
+- [x] Compare legacy fixture pixels and map data before/after; change a property,
   undo and ensure both caches update. Run focused tests and architecture.
-- [ ] Commit: `feat(world): render multiple atlases across tile layers`.
+- [x] Commit: `feat(world): render multiple atlases across tile layers`.
 
 ## T4 — Import/source save có validation, conflict và recovery
 

@@ -14,7 +14,7 @@ export default {
   "authoring.tiles.eraseTile": "Erase Tile",
   "authoring.tiles.blocked": "Blocked",
   "authoring.tiles.walkable": "Walkable",
-  "authoring.tiles.tileLabel": "{name} \u00b7 Tile {id} \u00b7 {kind}",
+  "authoring.tiles.tileLabel": "{name} · Tile {id} · {kind}",
   "authoring.tiles.invalid": "This stroke cannot be applied: it blocks a spawn or portal, or contains an invalid tile.",
   "authoring.tiles.help": "B/R/F/I/E: tool. Arrow keys: cursor; Shift: 5 cells. Enter: paint; Rectangle: Enter twice. G: grid, C: collision. Space + drag: pan. Esc: cancel. Ctrl+Z / Ctrl+Shift+Z: undo/redo. Eraser replaces with the Erase Tile.",
   "authoring.tiles.tile.0": "Grass",
@@ -1327,5 +1327,6 @@ export default {
   "authoring.world.map.interaction": "Interaction Lab",
   "authoring.world.canvas": "Map preview / WASD or arrow keys to move, E or Enter to interact",
   "authoring.world.editHint": "Edit mode: drag objects, use arrow keys to nudge, Ctrl+Z to undo, Esc to cancel.",
-  "authoring.world.playHint": "Playtest: WASD or arrows to move; E or Enter to interact. Select Edit Map to resume editing."
+  "authoring.world.playHint": "Playtest: WASD or arrows to move; E or Enter to interact. Select Edit Map to resume editing.",
+  "error.tilesetImage": "Kh?ng t?i ???c tileset {path}: {code}"
 };
