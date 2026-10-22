@@ -10,6 +10,7 @@ This workspace currently contains retained design sources, a recovery skill and
 the legacy archive. No replacement runtime or editor has been created.
 
 - [Current state and stopping point](PROJECT-STATE.md)
+- [Phase 0: skeleton and tools plan](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md)
 - [Mandatory coding and post-compaction rules](docs/engineering/CODING-RULES.md)
 - [Project recovery skill](skills/hoi-am-engine-free-development/SKILL.md)
 - [Protected narrative/gameplay documents](docs/README.md)
@@ -19,5 +20,6 @@ The skill is also installed in the user's Codex skills directory. Its source cop
 is retained here so it remains available when moving the repository or recovering
 conversation context.
 
-Skill creation and archiving do not authorize further implementation. Await the
-user's next instruction after preservation verification completes.
+The Phase 0 plan audits the eight preparation areas and defines implementation
+tasks and acceptance gates. It is a proposal for review; writing the plan does
+not authorize runtime or editor implementation.

@@ -2,16 +2,42 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Current status: complete; awaiting the next user instruction
+## Current status: Phase 0 implementation authorized
 
-The requested recovery skill, verified legacy archive and mandatory post-compaction
-coding/resource rules are complete. The latest task is Git hygiene and committing
-this archived-reset workspace; the checkpoint is included in that cleanup commit.
-Use `git log -1` and `git status --short` to verify the resulting commit and tree.
-No replacement runtime, skeleton, manager, editor or game content has been created.
-No push or further implementation is authorized by the Git-cleanup task.
+The user approved the Phase 0 plan and requested committing it and starting
+implementation. Commit the reviewed plan first, then execute T01–T14 sequentially
+in an isolated worktree, with tests and focused commits. This authorization covers
+the planned skeleton/tools and development chapter, not production expansion to
+12 weeks, edits to protected sources, pushing or publication. The previous
+archive/rules cleanup is committed as `04b24c7`.
 
-## Latest task and handoff
+## Current task and handoff
+
+- Plan: [Phase 0 skeleton and tools](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md).
+  It maps all eight areas to 14 implementation tasks and six acceptance gates.
+- Proposed contracts cover JSON scripts/typed flags, shared validation, atomic
+  checkpoints, content/schema migrations, slots/autosave, browser/text/audio,
+  resource lifetimes, isolated authoring, hot reload, traversal bots and web CI/release.
+- Browser delivery remains the target. Gamepad/gallery and native/Steam/cloud
+  integrations are explicitly deferred. A development-only chapter validates
+  workflows before production expansion to 12 weeks; no canonical lore is added.
+- README entry points link the plan. Protected documents, archive payload and
+  repository/installed skill sources are unchanged by this task.
+- Self-review corrected pack creation order, browser test lifecycle, test-data
+  isolation, workspace file paths and resource/animation ownership.
+- Verification: all 34 local Markdown links in the four changed documents resolve;
+  the eight protected documents match their original SHA-256, and the archive
+  inventory hash still matches its verification report. Four repository skill
+  files and four installed skill files match the recorded hashes. Plan numbering
+  is T01–T14/G0–G5; it is not ignored by Git; `git diff --check` passes.
+  No `src`, `content`, `tools`, `tests`, `assets` or `package.json` was created.
+  Full archive payload rehash and runtime/browser suites were not run for this
+  documentation task; future commands in the plan do not exist yet.
+- Execution is now authorized by the latest user instruction. Start at T01; record
+  real evidence and task progress here and in the plan-specific execution ledger.
+  `.worktrees/` is ignored for the isolated implementation workspace.
+
+## Previous Git cleanup handoff
 
 - Authorized scope: fix `.gitignore` and commit the completed archive/rules/skill
   reset so the working tree is clean. Preserve the local archive payload and the

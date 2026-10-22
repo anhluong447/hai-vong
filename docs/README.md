@@ -3,6 +3,10 @@
 [Coding and post-compaction rules](engineering/CODING-RULES.md) govern future code,
 managed resources and recovery of the current task after context compaction.
 
+[Phase 0: skeleton and tools plan](superpowers/plans/2026-10-22-phase-0-skeleton-tools.md)
+audits the eight preparation areas and proposes contracts, implementation tasks
+and acceptance gates. It does not change the approved sources below.
+
 Approved narrative/gameplay documents remain at their original paths and keep
 their original bytes. Their legacy copies are also included in the verified archive.
 
