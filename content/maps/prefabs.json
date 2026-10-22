@@ -1,7 +1,0 @@
-{
-  "schemaVersion": 1,
-  "prefabs": {
-    "prop": {"solid": true, "footprint": [[0, 0]]},
-    "npc": {"solid": true}
-  }
-}

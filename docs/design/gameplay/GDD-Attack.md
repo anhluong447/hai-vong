@@ -2,11 +2,11 @@
 
 * **Dự án:** CLB Báo Chí (Tập San Tĩnh Tâm)
 * **Phân hệ:** Hệ thống Tranh luận / Phiên họp Giao ban (Debate & Hearing System)
-* **Phiên bản tài liệu:** v2.0 (Chuẩn hóa toàn diện & Mở rộng cấu trúc hệ thống)
+* **Phiên bản tài liệu:** v2.1 (Đồng bộ Boss với tuyến Main Quest và nguồn Bằng chứng)
 * **Người phê duyệt cốt lõi:** Nel (Lead Designer)
-* **Ngày cập nhật:** 2026-10-08
+* **Ngày cập nhật:** 2026-10-22
 * **Phạm vi tài liệu:** Đặc tả chi tiết cơ chế **Giai đoạn CÔNG (Offense State - Cao trào Vạch trần)** trong phiên giao ban định kỳ. Tài liệu đóng vai trò mảnh ghép hoàn thiện nối tiếp trực tiếp sau **Giai đoạn THỦ (Defense State)**.
-* **Tình trạng dữ liệu:** Phần nội dung kịch bản cụ thể (chỉ số $HP$ từng boss, lời thoại, danh mục sai phạm chi tiết) hiện ở dạng khung mẫu (framework) và sẽ được hoàn thiện khi đội Narrative chốt kịch bản.
+* **Tình trạng dữ liệu:** Trục Main Quest và mốc Boss ở mục 9.2 được đồng bộ với [Story Bible v2, mục 12.1.1](../narrative/game_story_bible_v2.md#1211-boss-theo-hồi-và-tuyến-main-bắt-buộc) ngày 2026-10-22. Chỉ số $HP$, lời thoại và từng mắt xích đối chất vẫn cần hoàn thiện khi viết kịch bản; tài liệu chưa thay đổi runtime/save/baseline.
 
 ---
 
@@ -26,6 +26,8 @@ Mọi điều khoản và thông số trong tài liệu được gán nhãn nghi
 
 ### 2.1 Bối cảnh tự sự (Narrative Context)
 Sau khi bảo vệ thành công các bài viết thường kỳ (*General Articles*) ở giai đoạn THỦ, CLB Báo chí đã giữ vững vị thế chính danh trước toàn trường. Bị dồn vào thế bí, Hội Học Sinh (HHS) quyết định tung đòn mạo hiểm: lôi bài báo điều tra ngầm nhắm vào chính họ ra nghị trường nhằm quy chụp CLB tội vu khống, bôi nhọ uy tín ban cán sự. 
+
+**Đồng bộ nguồn Bằng chứng ngày 2026-10-22:** General Articles ở THỦ gồm bài thường từ **Side Quest và General Quest**, không phải chỉ General Quest. Side cấp thẻ THỦ quality cao nhất, General cấp quality thường; cơ chế điểm nằm ở [GDD-Defense, mục 5.1](GDD-Defense.md#51-hệ-thống-bằng-chứng-evidence-system). **Kho điều tra ngầm của CÔNG vẫn tách biệt hoàn toàn**: Main và các tư liệu điều tra ngầm riêng được chỉ định trong Side phục vụ CÔNG; không lấy thẻ THỦ, quality THỦ hoặc điểm phát hành để tự mở đáp án CÔNG. Nếu Side có tư liệu cho cả hai pha, phải khai báo đầu ra riêng, khác ID/mục đích, không sao chép cùng bằng chứng sang hai kho. Lợi thế điểm cuối THỦ vẫn chỉ chuyển thành Buff Tim theo quy tắc hiện hành. `[CHỐT]`
 
 Tình thế lập tức đảo chiều: Khuê chuyển từ thế bị động giải trình sang **chủ động thuật lại sự thật**. Phiên điều trần trở thành sàn diễn để Khuê bóc trần từng lớp ngụy tạo của đối thủ trước sự chứng kiến của Ban Giám hiệu (BGH) và đại diện các CLB.
 
@@ -223,7 +225,7 @@ Mỗi phân đoạn vạch trần diễn ra tuần tự theo chuỗi 6 bước k
 ### 6.4 Mối quan hệ giữa Bằng chứng và Câu hỏi
 Trong giai đoạn CÔNG, người chơi không phải mở kho túi đồ để chọn thẻ bằng chứng thủ công như giai đoạn THỦ. **Toàn bộ bằng chứng điều tra thu thập trong tuần đã được tích hợp trực tiếp vào nội dung các câu hỏi chất vấn** `[ĐỀ XUẤT]`. Điều này giúp nhịp độ đối chất liền mạch, biến màn chơi thành cuộc đấu khẩu trí tuệ mượt mà thay vì màn so khớp thẻ bài cơ học.
 
-> `[MỞ]` Hệ quả cần quyết: vì bằng chứng đã nằm sẵn trong câu hỏi, công sức thu thập trong tuần **không có vai trò cơ chế riêng** ở CÔNG (chỉ có vai trò ở THỦ). Hướng xem xét: bằng chứng thu được/bỏ lỡ trong tuần quyết định việc một phương án đúng có xuất hiện hay có gợi ý đi kèm, hoặc giữ nguyên như hiện tại nếu muốn CÔNG thuần tự sự.
+> `[MỞ]` Hệ quả cần quyết: vì bằng chứng điều tra đã nằm sẵn trong câu hỏi, công sức thu thập **tư liệu điều tra ngầm** trong tuần chưa có vai trò cơ chế riêng ở CÔNG. Hướng xem xét: tư liệu điều tra thu được/bỏ lỡ quyết định việc một phương án đúng có xuất hiện hay có gợi ý đi kèm, hoặc giữ nguyên như hiện tại nếu muốn CÔNG thuần tự sự. Đây là quyết định riêng của kho CÔNG, không dùng thẻ hoặc quality THỦ để thay thế.
 
 ---
 
@@ -310,13 +312,22 @@ Khi $HP_{\text{Sanity}} = 0$, phòng tuyến lý lẽ của đối thủ sụp �
 
 ### 9.2 Danh mục Boss & Đặc trưng Chiến đấu theo Hồi
 
-*Lưu ý: Tên, chức danh và chủ đề vụ việc là **placeholder `[MỞ]`** — chờ kịch bản Narrative (đặc biệt Hồi 3). Chỉ cột Đặc tính Đạn là hướng thiết kế đã thống nhất (`[CHỐT TẠM]`).*
+**Trục truyện và lịch đối đầu `[CHỐT]`:** Boss phải kết tinh từ các Main Quest bắt buộc trong Hồi, đồng bộ với Bible mục 12.1.1. Thay chủ đề căng tin/quỹ ngoại khóa cũ bằng các tuyến Main dưới đây; không nâng Side Quest thành điều kiện ngầm. Tên/chức danh Khoa và Linh được giữ làm nhãn nhân vật phát triển `[MỞ]`; Huy là đối trọng chính đã có trong Bible. Chi tiết lời thoại, mức liên đới và chứng cứ quy trách nhiệm từng nhân vật còn phải viết trong Main, không mặc định mọi sai phạm đều do Boss trực tiếp thực hiện. Đặc tính đạn giữ `[CHỐT TẠM]`.
 
-| Hồi | Đối thủ & Chức danh | Chủ đề Vụ việc Điều tra | Phong cách Crash Out | Đặc tính Đạn Ngôn Từ (Mini-game) |
-| :---: | :--- | :--- | :--- | :--- |
-| **1** | **Trần Đình Khoa**<br>*(Trưởng ban Phong trào & CSVC)* | Nghi vấn nhận hoa hồng, móc nối nâng khống giá suất ăn căng tin. | Quát tháo thô lỗ, đập bàn chỉ tay, đổ lỗi cho tiểu thương. | **Đạn To & Dồn dập:** Chữ to, bay thẳng, tốc độ trung bình, mật độ dày đặc `[CHỐT TẠM]`. |
-| **2** | **Vũ Thảo Linh**<br>*(Phó Chủ tịch kiêm Trưởng ban Tài chính)* | Làm giả chứng từ, rút ruột quỹ hoạt động ngoại khóa của các CLB. | Run rẩy, cắn móng tay, khóc lóc đổ lỗi cho cấp dưới và hoàn cảnh. | **Đạn Tản Mác:** Đạn chữ nhỏ, quỹ đạo bay uốn lượn, đổi làn đột ngột `[CHỐT TẠM]`. |
-| **3** | **Phan Gia Huy**<br>*(Chủ tịch Hội học sinh - Trùm Cuối)* | Thao túng hồ sơ thi đua, bao che sai phạm có hệ thống để bảo vệ di sản cá nhân. | Im lặng đáng sợ, ánh mắt lạnh băng, nụ cười méo mó, sụp đổ trong câm lặng. | **Đạn Nặng & Biến tốc:** Số lượng đạn ít nhưng kích thước khổng lồ, bay chậm tạo áp lực nghẹt thở `[CHỐT TẠM]`. |
+| Hồi / Mốc Boss | Đối thủ & Chức danh | Main Quest bắt buộc dẫn vào trận | Trục đối chất CÔNG | Phong cách Crash Out | Đặc tính Đạn Ngôn Từ (Mini-game) |
+| :---: | :--- | :--- | :--- | :--- | :--- |
+| **1 — Tuần 3** | **Trần Đình Khoa**<br>*(Trưởng ban Phong trào & CSVC)* | T1: Căn phòng số 3 và Thời hạn 7 ngày → T2: Sân bóng bị khóa trái → T3: Hồ sơ thư viện bị xé và Trang sử 2011. | Đối chiếu lý do thu hồi không gian CLB, lý do khóa sân với hợp đồng cho thuê thực tế, rồi chất vấn phần giải trình của HHS trước hồ sơ lưu trữ bị khuyết. Làm rõ trách nhiệm báo cáo/che giấu của đầu mối CSVC; trang sử 2011 chỉ mở manh mối cho Hồi sau. | Quát tháo thô lỗ, đập bàn chỉ tay, đổ lỗi cho bộ phận quản lý tài sản. | **Đạn To & Dồn dập:** Chữ to, bay thẳng, tốc độ trung bình, mật độ dày đặc `[CHỐT TẠM]`. |
+| **2 — Cuối Tuần 7** | **Vũ Thảo Linh**<br>*(Phó Chủ tịch kiêm Trưởng ban Tài chính)* | T4: Bảng vàng danh dự và Danh sách điểm ảo → T5: Sự cố sập phông sân khấu → T6: Dự án Nhà thể chất, dấu hiệu thầu sân sau → T7: Báo cáo kiểm toán và Các con số dị biệt. | Đặt báo cáo thành tích cạnh sai lệch hiện trường và chi phí; trọng tâm là chứng từ, dòng tiền tài trợ và biên bản nghiệm thu khống phòng lab trong Main T7. Xác minh phần trách nhiệm tài chính của Linh; chưa kết luận toàn bộ mạng lưới phía sau. | Run rẩy, cắn móng tay, khóc lóc đổ lỗi cho cấp dưới và hoàn cảnh. | **Đạn Tản Mác:** Đạn chữ nhỏ, quỹ đạo bay uốn lượn, đổi làn đột ngột `[CHỐT TẠM]`. |
+| **3 — Tuần 12** | **Phan Gia Huy**<br>*(Chủ tịch Hội học sinh - Trùm Cuối)* | T8: Lệnh cấm phát hành và đối đầu Huy → T9: Hồ sơ 2011 của Thầy Diệp → T10: Hải Vọng Corp và BGH → T11: Bản nghiệm thu gốc → T12: Số Đặc Biệt & Điều trần. | Đối chất việc Huy tham gia che giấu sai phạm để giữ thành tích, ngăn công bố và bảo vệ mạng lưới lợi ích giữa Hải Vọng Corp với nhà trường. Đối chiếu hồ sơ 2011/2026 để minh oan Thầy Diệp và phơi bày nguy cơ an toàn; phân biệt trách nhiệm của Huy với người lớn và nhà thầu. | Im lặng đáng sợ, ánh mắt lạnh băng, nụ cười méo mó, sụp đổ trong câm lặng. | **Đạn Nặng & Biến tốc:** Số lượng đạn ít nhưng kích thước khổng lồ, bay chậm tạo áp lực nghẹt thở `[CHỐT TẠM]`. |
+
+**Ranh giới Tuần 7/8:** Trận Linh khép Hồi 2 ở cuối Tuần 7. Tuần 8 mở Hồi 3 bằng lệnh đình bản sau bài điều tra tài chính và cuộc chạm trán Huy; đây là hệ quả/mở xung đột, chưa phải trận Boss cuối với Huy. Không thêm một trận Linh lần hai ở Tuần 8.
+
+**Hợp đồng tự sự cho mỗi Boss:**
+
+* Main phải giới thiệu Boss, vai trò HHS và lý do đối đầu trước phiên; cung cấp tư liệu đối chiếu và xác minh trách nhiệm cần cho mọi mắt xích đối chất bắt buộc ngay trong Main. Không biến hợp đồng có chữ ký cán bộ quản trị thành chữ ký Khoa hoặc xem hồ sơ bị xé là bằng chứng Khoa tự tay xé nếu Main chưa xác minh.
+* Bỏ Side căng tin T1 hoặc Side chênh lệch kinh phí sự kiện T7 không làm thiếu ngữ cảnh, tư liệu hay đáp án bắt buộc của Boss. Side chỉ có thể thêm chiều sâu/lời thoại tùy chọn; mọi nhánh bổ sung phải kiểm tra nội dung người chơi thực sự đã trải qua.
+* Trận Huy T12 không được yêu cầu hoàn thành Side đối thoại riêng T10, Side kiểm định sàn tập, Side bảo vệ người tố giác hoặc Side in ngầm. Main T8–12 phải có đường tự thân cho phần hiểu Huy, hồ sơ an toàn, bảo vệ nguồn tin thiết yếu và xuất bản bắt buộc.
+* Các đầu ra Main nói trên thuộc tuyến điều tra CÔNG. Quy tắc thẻ THỦ Side/General và quality tại GDD-Defense vẫn tách biệt; hiểu/hoàn tất tuyến đối chất không đồng nghĩa được cấp thẻ THỦ từ Main.
 
 ---
 
@@ -373,3 +384,5 @@ Khi $HP_{\text{Sanity}} = 0$, phòng tuyến lý lẽ của đối thủ sụp �
 * [ ] **Độ rõ ràng của Diễn hoạt:** Biểu cảm biến chuyển của boss và sắc thái âm nhạc có truyền tải được mức sụp đổ tâm lý mà không cần nhìn vào thanh $HP$ hay không?
 * [ ] **Khả năng tiếp cận Mini-game:** Người chơi không quen thể loại hành động có thể vượt qua mức Easy/Normal của mini-game Chặn Đạn mà không gặp ức chế thao tác không?
 * [ ] **Độ thỏa mãn của Final Shot:** Cú nổ kết liễu sau chuỗi tap liên hoàn có mang lại cảm giác xả stress và giải tỏa cảm xúc trọn vẹn hay không?
+* [ ] **Ngữ cảnh Boss khi bỏ Side:** Rà tuyến Main T1–3, T4–7 và T8–12 khi không hoàn thành Side nào. Mỗi Boss đã được giới thiệu; mọi luận điểm, tư liệu và đáp án bắt buộc đều có nguồn trong Main. Đặc biệt kiểm tra bỏ Side căng tin T1, kinh phí sự kiện T7, đối thoại Huy T10 và in ngầm T11.
+* [ ] **Mốc chuyển Hồi:** Boss lần lượt ở T3, cuối T7 và T12; T8 là hậu quả trận Linh và mở xung đột Huy. Không lấy dữ kiện 2011/2026 chỉ mở ở Main T9–11 để yêu cầu giải thích đầy đủ ở trận T3.

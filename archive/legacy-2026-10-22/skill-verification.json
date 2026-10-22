@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "checks": [
+    "frontmatter and naming",
+    "local reference links",
+    "UI metadata",
+    "installed/source SHA-256 equality"
+  ],
+  "bundledValidator": "Unavailable: PyYAML is not installed; no dependencies installed for this reference-only task.",
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "d9698e8fa7a65c401a3618b9f1cbf610e22e61bccae3f044adbdd982bfbccb0a"
+    },
+    {
+      "path": "references/foundation.md",
+      "sha256": "ec24e1bd58d79ba044c746f2bf859e4697148c0a1fa211912ae27bf40a2aa381"
+    },
+    {
+      "path": "references/research-sources.md",
+      "sha256": "08f3c196411e4f693a3c1a98528c6e8b2e1224656947d5361b5cd8576fc22d7f"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "46dc23c3062a621a3828966e74005dd233d710bb6b67d1554c6a0524704c4459"
+    }
+  ]
+}

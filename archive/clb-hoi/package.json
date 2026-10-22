@@ -1,9 +1,0 @@
-{
-  "name": "cau-lac-bo-hoi",
-  "private": true,
-  "type": "module",
-  "description": "Câu Lạc Bộ Hỏi — story-driven 3D visual novel in plain HTML/ES modules.",
-  "scripts": {
-    "test": "node tests/run-node.mjs"
-  }
-}

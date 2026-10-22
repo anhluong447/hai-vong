@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "verifiedDate": "2026-10-22",
+  "timezone": "Asia/Bangkok",
+  "status": "failed",
+  "filesVerified": 35171,
+  "totalBytes": 5105177266,
+  "protectedDocumentsVerified": 8,
+  "inventorySha256": "3962b62c8ff13fc30617322fde4b2ea83be9cc9e38c78a161f8c3490d53b8f3b",
+  "errors": [
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/128.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/192.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/256.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/32.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/48.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/64.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/96.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/128.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/192.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/256.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/32.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/48.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/64.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/96.png",
+      "error": "archived file missing"
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/OptimizationGuideModelsManifest/1.20261018.2/speech_recognition_small_expert_model_solution_config.binarypb",
+      "error": "archived file missing"
+    }
+  ]
+}

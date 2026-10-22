@@ -1,9 +1,0 @@
-Use case: precise-object-edit. Edit image 1 into ONE intermediate closing pose of this same walk.
-Image 1 is the approved-for-this-test WIDE B contact frame 4. Preserve its head, torso, camera, size, canvas registration, palette and outfit exactly; change ONLY the legs and swinging forearms.
-Image 2 is the exact desired intermediate pose guide for frame 5. Image 3 is the original Khue identity reference.
-The character faces screen LEFT. Current legs in image 1 span roughly 20 native pixels. This intermediate pose should span around 13-15 pixels, NOT the 8-10 pixel passing pose.
-Near/light LEFT leg still TRAILS behind towards screen RIGHT: knee BEHIND the hip, shin bent, heel lifted. Near knee at logical x19 y37, ankle x21 y41, shoe extends left to x18 y41. Do NOT swing this knee forward yet.
-Far/dark RIGHT leg SUPPORTS in FRONT/left: knee x14 y39, ankle x12 y45, planted toe extends left to x9 y45. Keep the far support shoe clearly LEFT of the lifted near shoe, NOT directly under center.
-Hip stays logical x17 y32. Follow guide 2 for these intermediate limbs. Near leg lighter navy and layered in front, far leg darker navy. Do NOT turn both legs into a curled passing pose.
-Arms contract from their wide swing to half swing: near hand approaches x12 y32, far hand x20 y33; not fully neutral.
-Same full-body 2:3 canvas, same head/torso position, opaque hard square pixel blocks, transparent background. No soft halo, shadow, diagram, labels, extra frames, new costume or recentering.

@@ -1,125 +1,31 @@
-# Local browser test and preview output
-/tools/*.log
-/tools/edge-test-profile/
-/tools/preview-profile/
-/tools/.single-screen-profiles/
+# Complete local legacy payload, including ignored art, drafts and test profiles.
+# The inventory, verification reports and recovery procedures remain trackable.
+/archive/**/payload/
+/archive/**/files/
 
-# Python bytecode cache
-__pycache__/
-*.py[cod]
-
-# Local Node dependencies
-node_modules/
-
-# Local drafts, review captures and temporary commit artifacts
+# Local machine/session state and future disposable outputs.
+/.codex/
+/.agents/
+/.idea/
+/.vscode/
+/.superpowers/
 /drafts/
-
-# Local binary art, music, font packs and authoring project files.
-# Keep SVG, JSON, prompts, licenses and reusable generators in Git.
-*.[pP][nN][gG]
-*.[jJ][pP][gG]
-*.[jJ][pP][eE][gG]
-*.[wW][eE][bB][pP]
-*.[gG][iI][fF]
-*.bmp
-*.tif
-*.tiff
-*.ico
-*.avif
-*.wav
-*.mp3
-*.ogg
-*.oga
-*.flac
-*.aac
-*.m4a
-*.aiff
-*.aif
-*.mid
-*.midi
-*.sf2
-*.sf3
-*.dls
-*.mp4
-*.webm
-*.mov
-*.avi
-*.ttf
-*.otf
-*.woff
-*.woff2
-*.psd
-*.psb
-*.kra
-*.ase
-*.aseprite
-*.blend
-*.blend1
-*.fbx
-*.glb
-*.gltf
-*.unitypackage
-*.zip
-*.7z
-*.rar
-*.tar
-*.gz
-*.pdf
-*.exe
-*.dll
-*.apk
-*.aab
-/assets/audio/**
-!/assets/audio/**/
-!/assets/audio/**/*.json
-!/assets/audio/**/*.md
-!/assets/audio/**/*.txt
-!/assets/audio/**/LICENSE*
-
-# Local plans and generated review evidence; retain review explanations.
-/plans/
-/plan/
-/docs/plans/
-/docs/design/plans/
-/docs/**/*[pP][lL][aA][nN]*.md
-/docs/**/*[rR][oO][aA][dD][mM][aA][pP]*.md
-/docs/ui-reviews/**
-!/docs/ui-reviews/**/
-!/docs/ui-reviews/**/README.md
-/parent_step_*.json
-/patch_*.diff
-
-# Build products, editor state, credentials and disposable work directories.
+/captures/
+/tmp/
+/temp/
+node_modules/
 /build/
 /dist/
 /out/
-/tmp/
-/temp/
-/captures/
 /coverage/
-/.idea/
-/.vscode/
-/.codex/
-/.agents/
+.cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*.log
 .env
 .env.*
 !.env.example
 !.env.sample
-*.log
-*.tmp
-*.bak
-*.swp
-*.swo
 .DS_Store
 Thumbs.db
-/tools/.repo-cleanup/
-
-# Frozen menu payloads stay local; retain inventory, recovery notes and verifier.
-/archive/menus/**/files/
-/archive/menus/**/preview-frozen.*
-
-# Verified product backups keep local payloads separate from tracked inventories.
-/archive/products/**/files/
-
-# Preserve the historical snapshot and its existing backup manifest.
-!/archive/clb-hoi/**

@@ -1,10 +1,10 @@
 # CLB BÁO CHÍ (HỒI ÂM) — GAME & STORY BIBLE
 
-**Phiên bản:** 2.0 (Gameplay tối giản, kế thừa narrative v1.0) · **Ngày cập nhật:** 2026-10-14.
+**Phiên bản:** 2.2 (Bằng chứng THỦ, quality quest và Boss theo tuyến Main) · **Ngày cập nhật:** 2026-10-22.
 
 **Nguồn:** Bản sao phát triển từ [game_story_bible.md](../../history/narrative/game_story_bible.md), phiên bản 1.0 ngày 2026-10-12. Bản nguồn và [bible proposal](../../history/narrative/BIBLE-CLB-BAO-CHI-PROPOSAL.md) được giữ nguyên.
 
-**Tình trạng tài liệu:** Bản thiết kế cập nhật theo các quyết định gameplay người dùng chốt trong phiên thảo luận ngày 2026-10-14. Lore, nhân vật, tuyến quan hệ và khung truyện 12 tuần được kế thừa; cơ chế ngày, energy, loại quest, phân công và xuất bản được sửa để chuẩn bị thiết kế menu tối giản. Tài liệu không tự thay đổi runtime, schema save, content hoặc baseline đang chạy.
+**Tình trạng tài liệu:** Bản thiết kế cập nhật theo các quyết định gameplay người dùng chốt ngày 2026-10-14, bổ sung nguồn Bằng chứng THỦ/quality quest và đồng bộ Boss theo Main Quest ngày 2026-10-22. Lore, nhân vật, tuyến quan hệ và khung truyện 12 tuần được kế thừa; cơ chế ngày, energy, loại quest, phân công và xuất bản được sửa để chuẩn bị thiết kế menu tối giản. Tài liệu không tự thay đổi runtime, schema save, content hoặc baseline đang chạy.
 
 **Các thay đổi đã chốt:**
 
@@ -13,12 +13,14 @@
 * Thêm **Đêm (23:00–02:00)**. Không gán chi phí phút hoặc số slot cố định cho từng hành động; energy là ngân sách hoạt động.
 * Người chơi chủ động chuyển buổi. Chọn di chuyển nhanh về trọ hoặc tự chạy vào trọ đều phải hiện thông báo và xác nhận trước khi chuyển buổi.
 * Quest có ba loại: **main**, **side**, **general**. Main/side do Khuê trực tiếp chơi; general chủ yếu giao đồng đội, Khuê tự làm cũng được với chi phí energy thấp hơn.
-* General quest có rất ít story hoặc không có, không cần chi tiết đáng nhớ; mục tiêu là tạo nội dung tăng hưởng ứng sau xuất bản và một ít kinh nghiệm kỹ năng. Chỉ một số quest cho thêm item.
+* General quest có rất ít story hoặc không có, không cần chi tiết đáng nhớ; tạo nội dung tăng hưởng ứng sau xuất bản, một ít kinh nghiệm kỹ năng và **thẻ Bằng chứng THỦ quality thường**. Thẻ Bằng chứng là đầu ra bắt buộc khi quest hoàn thành, kể cả do đồng đội tự chạy; item thưởng khác vẫn chỉ có ở một số quest.
+* **Hai nguồn Bằng chứng THỦ:** Side Quest quality cao nhất, General Quest quality thường. Side được nhiều điểm hơn khi chọn đúng loại chất vấn; quality không cứu lựa chọn sai. Main và tư liệu điều tra ngầm thuộc CÔNG, không dùng chéo hai kho. General Articles là nhóm bài thường được bảo vệ, không phải tên riêng của loại General Quest.
+* **Boss theo tuyến Main:** Hồi 1 gặp Khoa ở Tuần 3, Hồi 2 gặp Linh cuối Tuần 7, Hồi 3 gặp Huy ở Tuần 12. Tuần 8 là hậu quả trận Linh và mở xung đột với Huy. Ngữ cảnh và tư liệu đối chất bắt buộc đến từ Main, không phụ thuộc Side căng tin/quỹ sự kiện hay bất kỳ Side nào khác; xem bảng 12.1.1.
 * Phân công theo luồng **chọn quest → nghe ngóng → chọn người → xác nhận**; hiện energy, phí vận hành khi có và ngày dự kiến hoàn thành. Đồng đội feedback hàng ngày.
 * Thu thập đủ thông tin/tài nguyên thì quest hoàn thành và tự bàn giao tài liệu sang xuất bản. Người chơi không phải phân công viết, biên tập, chọn bài vào số báo hay bấm phát hành.
 * Tăng bond cả đội chỉ qua **main quest hoặc special event**; không có general event tăng bond tập thể.
 
-**Phạm vi chưa chốt:** Chi phí cụ thể từng hành động, phí vận hành nhân sự, thời lượng general quest, thưởng kỹ năng/item và lịch xử lý tự động của xuất bản cần cân bằng sau. Các con số khác được kế thừa từ v1.0 để giữ nội dung tham chiếu; không coi chúng đã được kiểm chứng với energy 10/5.
+**Phạm vi chưa chốt:** Chi phí cụ thể từng hành động, phí vận hành nhân sự, thời lượng general quest, thưởng kỹ năng/item, số thẻ mỗi quest, bảng điểm quality THỦ và lịch xử lý tự động của xuất bản cần cân bằng sau. Thứ bậc quality Side > General đã chốt; mốc +50/+20 là giả định playtest. Các con số khác được kế thừa từ v1.0 để giữ nội dung tham chiếu; không coi chúng đã được kiểm chứng với energy 10/5.
 
 ---
 
@@ -145,8 +147,8 @@ Học kỳ giữ **12 tuần lịch = 84 ngày**, gồm 60 ngày đi học:
 | Loại | Người thực hiện | Story & Mục đích | Chi phí/Thành quả |
 | :--- | :--- | :--- | :--- |
 | **Main quest** | Khuê trực tiếp chơi; đồng đội có thể xuất hiện theo kịch bản. | Bắt buộc để advance cốt truyện; có các bước điều tra và quyết định trọng yếu. | Tốn nhiều energy hơn general quest; mở mốc truyện và các bài điều tra chính. |
-| **Side quest** | Khuê trực tiếp chơi; nhân vật liên quan là vai trò trong truyện, không phải assignee tự chạy. | Không bắt buộc; có câu chuyện, diễn biến và kết quả riêng. | Tốn nhiều energy hơn general quest; thêm trải nghiệm và nội dung báo tùy tuyến. |
-| **General quest** | Chủ yếu giao đồng đội; Khuê có quyền tự làm. | Story ngắn hoặc không có; công việc tin bài thường xuyên. Không cần một chi tiết đáng nhớ, cảnh riêng hoặc nhánh truyện theo assignee. | Khuê tự làm thì cost energy thấp; tăng hưởng ứng sau xuất bản và một ít kinh nghiệm kỹ năng cho người làm. Chỉ một số quest cho thêm item. |
+| **Side quest** | Khuê trực tiếp chơi; nhân vật liên quan là vai trò trong truyện, không phải assignee tự chạy. | Không bắt buộc; có câu chuyện, diễn biến và kết quả riêng. | Tốn nhiều energy hơn general quest; thêm trải nghiệm, nội dung báo và thẻ Bằng chứng THỦ quality cao nhất, lấy nhiều điểm nhất khi chọn đúng loại chất vấn. |
+| **General quest** | Chủ yếu giao đồng đội; Khuê có quyền tự làm. | Story ngắn hoặc không có; công việc tin bài thường xuyên. Không cần một chi tiết đáng nhớ, cảnh riêng hoặc nhánh truyện theo assignee. | Khuê tự làm thì cost energy thấp; tăng hưởng ứng sau xuất bản, một ít kinh nghiệm kỹ năng cho người làm và thẻ Bằng chứng THỦ quality thường. Chỉ một số quest cho thêm item thưởng khác. |
 
 Các main/side có thể có đồng đội tham gia trong kịch bản, nhưng người chơi không giao chúng cho một nhân vật khác tự giải quyết. General quest là nhóm công việc dùng để duy trì phân công và sản lượng của đội.
 
@@ -163,6 +165,11 @@ General → Chọn quest → Nghe ngóng → Chọn người → Xác nhận
 
 ĐỘI XUẤT BẢN
 Nhận tài liệu → Tự viết/biên tập/xử lý phát hành → Độc giả phản ứng
+
+KHO BẰNG CHỨNG THỦ
+Side completed → Tự lưu thẻ quality cao nhất
+General completed (Khuê/đồng đội) → Tự lưu thẻ quality thường
+→ Bài thường liên quan đã xuất bản → Thẻ hợp lệ cho phiên THỦ tương ứng
 ```
 
 ### 5.2. Phân công general quest và feedback
@@ -172,17 +179,37 @@ Nhận tài liệu → Tự viết/biên tập/xử lý phát hành → Độc g
 * Một số đồng đội stat cao xuất hiện về sau có phí vận hành. Chưa chốt mức phí hoặc thu một lần/theo ngày; cần hiển thị cách thu trước khi giao, không tự áp đặt một công thức trong bible.
 * Sau xác nhận, đồng đội tự thực hiện trọn general quest; người chơi không giao lại từng bước hoặc có nghĩa vụ ghé CLB mỗi chiều.
 * **Feedback hàng ngày:** Tóm tắt tình trạng, kết quả/thiếu hụt và dự kiến hoàn thành. Không bắt buộc tạo story riêng hay lựa chọn hàng ngày cho mọi general quest.
+* **Feedback hoàn thành:** Nêu rõ thẻ Bằng chứng THỦ đã tự lưu, loại thẻ, quality thường và bài báo liên quan; người chơi không phải nhận thưởng thủ công hoặc tự thu thập lại phần việc đồng đội đã làm.
 * Khi có trở ngại thật sự cần quyết định, người chơi có thể hỗ trợ, đổi người hoặc đổi hướng nếu quest cho phép. Chi phí và ảnh hưởng tiến độ phải rõ; bỏ quy tắc cũ cố định giao 1 energy, đổi người luôn mất đúng 1 ngày và can thiệp miễn phí.
 * Không bắt người chơi duyệt hết feedback bình thường mới được chuyển ngày. Nhân vật tham gia main/side theo kịch bản không có luồng phân công thay thế Khuê.
 
 ### 5.3. Hoàn thành quest và xuất bản tự động
 
 * Người chơi tập trung thu thập **đủ thông tin/tài nguyên theo yêu cầu quest**. Khi đạt điều kiện, quest completed và **toàn bộ tài liệu tự chuyển sang đội xuất bản**.
+* Với Side/General, đồng thời tự lưu các thẻ Bằng chứng THỦ cụ thể từ tư liệu đã thu được. Bàn giao xuất bản không lấy mất thẻ lưu trữ; xem lại feedback hoặc phát hành không cấp thẻ lần nữa. Chỉ thẻ gắn với bài thường đã xuất bản thuộc phạm vi phiên mới được dùng trong THỦ.
 * Viết, biên tập, chế bản và phát hành là quy trình đội xuất bản tự xử lý. Người chơi không phải chọn người viết/biên tập, chọn bài vào slot số báo, duyệt hàng đợi, chốt số báo hoặc bấm phát hành.
 * Chất lượng đầu vào vẫn quyết định bài. Tự động hóa không bịa chứng cứ, không tự hoàn thành yêu cầu điều tra còn thiếu và không làm mọi bài có chất lượng như nhau.
 * Giữ mốc phát hành chiều thứ Sáu từ v1.0 làm lịch tham chiếu. Các hạn chuẩn bị nội bộ thuộc đội xuất bản; người chơi chỉ cần biết hạn bàn giao liên quan khi cần. Thời gian từ quest completed tới xuất bản và xử lý tài liệu đến muộn cần cân bằng.
 * Các lựa chọn công bố/bảo vệ nguồn tin có ý nghĩa cốt truyện được đặt trong main/side trước khi completed; không tạo thêm thủ tục viết bài sau quest. General quest không mặc định có màn chọn tone.
-* Hưởng ứng được ghi nhận **sau xuất bản**. Kinh nghiệm kỹ năng đi vào người thực hiện; thời điểm nhận XP/item cụ thể cần đặc tả. Item chỉ có ở quest được thiết kế có phần thưởng đó.
+* Hưởng ứng được ghi nhận **sau xuất bản**. Kinh nghiệm kỹ năng đi vào người thực hiện; thời điểm nhận XP/item cụ thể cần đặc tả. Item thưởng khác chỉ có ở quest được thiết kế có phần thưởng đó; thẻ Bằng chứng THỦ của Side/General là đầu ra tác nghiệp bắt buộc khi completed.
+
+### 5.4. Bằng chứng cho THỦ và quality của quest
+
+**Quyết định ngày 2026-10-22:** Hai loại quest cấp thẻ cho pha THỦ là **Side Quest** và **General Quest**. General Articles trong [GDD-Defense](../gameplay/GDD-Defense.md) chỉ nhóm bài thường được đem ra chất vấn, có thể được tạo từ cả hai loại quest; không giới hạn ở General Quest.
+
+| Nguồn | Quality của thẻ THỦ | Đúng cặp Win | Chỉ phù hợp một phần (Normal) | Sai/lạc đề (Lose) |
+| :--- | :--- | :---: | :---: | :---: |
+| **Side Quest** | **Cao nhất** (`high`) | **+50** | +20 | -20 đến 0 theo cặp |
+| **General Quest** | **Thường** (`standard`) | **+20** | +20 | -20 đến 0 theo cặp |
+
+Thứ bậc quality và lợi thế của Side khi đúng cặp Win là **đã chốt**; các số +50/+20 là **giả định để playtest**, chưa phải balance cuối. Win/Normal/Lose do cặp cáo buộc và loại/nội dung Bằng chứng quyết định trước, sau đó mới tra quality. Cùng loại thẻ nhưng không liên quan tới luận điểm vẫn có thể Lose. Câu hỏi chỉ cho Normal hoặc toàn Lose không được quality nâng thành Win. Bảng điểm và quy trình chi tiết nằm ở [GDD-Defense, mục 5.1](../gameplay/GDD-Defense.md#51-hệ-thống-bằng-chứng-evidence-system).
+
+* **Đầu ra bắt buộc:** Mỗi Side/General completed tự lưu ít nhất một thẻ THỦ có ID ổn định, quest nguồn, bài báo liên quan, loại Bằng chứng, quality và kho THỦ. General do đồng đội tự chạy vẫn có đầu ra này; ít/không story không đồng nghĩa với không có tư liệu. Khuê tự làm General không nâng quality lên Side.
+* **Tách kho:** Main và tài liệu điều tra ngầm dành cho CÔNG. Nếu một Side có đầu mối CÔNG, phải khai báo tư liệu riêng với ID/mục đích khác; không sao chép hoặc dùng lại cùng bằng chứng ở cả hai pha. Thẻ THỦ bảo vệ bài thường, không tự mở nội dung hay đáp án điều tra CÔNG.
+* **Quality THỦ tách khỏi điểm phát hành:** Bậc `high`/`standard` là giá trị chuẩn bị cho phiên THỦ, không thay thế $Q_{\text{hồ sơ}}$, hệ số bài hoặc thưởng đóng gói tại mục 6. Không tự suy ra Side đạt điểm xuất bản tối đa.
+* **Động lực chơi:** General duy trì nguồn thẻ và sản lượng đội; Side là khoản đầu tư energy/thời gian để có thẻ mạnh, đặc biệt trước cáo buộc Nặng. Khuyến khích làm thêm Side và chuẩn bị nhiều loại tư liệu; không đặt quota Side hoặc buộc làm mọi Side. Không mặc định kho chỉ General đủ thắng mọi phiên; mức đầu tư cần thiết phải được cân bằng theo lịch tuần.
+
+Đây là đặc tả content/gameplay cho lần triển khai sau; ID và field mô tả không phải schema runtime/save mới. Khi triển khai phải review validator/migration và giữ ruleset sandbox riêng.
 
 ---
 
@@ -290,10 +317,16 @@ $$
 
 ### 7.2. Tuyến nhân vật đối trọng và Người lớn
 
+* **Trần Đình Khoa — Trưởng ban Phong trào & CSVC (nhãn phát triển, tên/chức danh còn mở):**
+  * Đầu mối HHS đối đầu ở Hồi 1, được giới thiệu trong Main Tuần 1–3 trước trận Tuần 3. Trục đối chất là quyền sử dụng không gian CLB/sân bóng và phần giải trình của HHS trước hồ sơ thư viện bị khuyết; không lấy Side căng tin làm vụ án Boss bắt buộc.
+  * Phải xác minh phần trách nhiệm báo cáo/che giấu trong Main; không thay vai trò quản lý tài sản, thu hồi phòng hoặc ký hợp đồng của người lớn bằng quyền hành của một học sinh.
+* **Vũ Thảo Linh — Phó Chủ tịch kiêm Trưởng ban Tài chính (nhãn phát triển, tên/chức danh còn mở):**
+  * Đầu mối HHS về tài chính, được giới thiệu trong Main Tuần 4–7 trước trận cuối Tuần 7. Trọng tâm là báo cáo kiểm toán, dòng tiền tài trợ và nghiệm thu khống phòng lab; Side chênh lệch kinh phí sự kiện chỉ bổ sung chiều sâu.
 * **Phan Gia Huy — Chủ tịch Hội học sinh:**
   * Nhân vật đối trọng trung tâm. Học sinh xuất sắc toàn diện, ngoại giao khéo léo, mang tham vọng nhận học bổng du học danh giá.
   * Huy tin rằng trật tự kỷ cương và danh tiếng không tì vết của trường Tĩnh Tâm là điều quan trọng nhất để bảo vệ tương lai của hàng ngàn học sinh. Cậu xem những bài điều tra của Hồi Âm là hành vi phá hoại liều lĩnh.
   * Mối quan hệ giữa Khuê và Huy không phải kẻ thù đơn thuần, mà là cuộc va chạm nảy lửa giữa hai triết lý: "Bảo vệ trật tự bằng sự che đậy" đối đầu với "Tìm kiếm sự thật để chữa lành".
+  * Cuộc chạm trán Tuần 8 mở khủng hoảng Hồi 3; trận Boss cuối ở Tuần 12 tổng kết Main Tuần 8–12 về đình bản, hồ sơ 2011/2026 và mạng lưới Hải Vọng Corp. Main phải cung cấp đủ ngữ cảnh Huy và tư liệu đối chất dù bỏ Side đối thoại riêng Tuần 10.
 * **Thầy Giám thị Trần:**
   * Người thực thi nội quy cứng nhắc, kiểm soát từng tờ giấy dán bảng tin, luôn tìm cớ thu hồi căn phòng sinh hoạt của CLB vì "gây mất ổn định kỷ cương".
 * **Thầy Nguyễn — Giáo viên Thư viện & Cố vấn lâm thời:**
@@ -527,21 +560,22 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
 │                                                                        │
 │ ┌────────────────────────────────────────────────────────────────────┐ │
 │ │ HỒI 1: CĂN PHÒNG CHƯA ĐÓNG CỬA (Tuần 1 – Tuần 3)                    │ │
-│ │ T1: Căn phòng số 3 & Căng tin  ──► T2: Sân bóng & Cúp gỉ sét       │ │
-│ │                                ──► T3: Thư viện & Nhi gia nhập     │ │
+│ │ T1: Căn phòng số 3            ──► T2: Sân bóng bị khóa trái          │ │
+│ │ T3: Thư viện & Nhi gia nhập  ──► BOSS KHOA (Tuần 3)                 │ │
 │ └──────────────────────────────────┬─────────────────────────────────┘ │
 │                                    ▼                                   │
 │ ┌────────────────────────────────────────────────────────────────────┐ │
 │ │ HỒI 2: TỜ BÁO BẮT ĐẦU CÓ TIẾNG NÓI (Tuần 4 – Tuần 7)                │ │
 │ │ T4: Bảng vàng điểm ảo         ──► T5: Sân khấu & Ngọc gia nhập     │ │
 │ │ T6: Nhà thầu sân sau          ──► T7: Kiểm toán & Ân gia nhập      │ │
+│ │                              ──► BOSS LINH (Cuối Tuần 7)            │ │
 │ └──────────────────────────────────┬─────────────────────────────────┘ │
 │                                    ▼                                   │
 │ ┌────────────────────────────────────────────────────────────────────┐ │
 │ │ HỒI 3: TỰ CHỌN TỜ BÁO MÌNH MUỐN GIỮ (Tuần 8 – Tuần 12)             │ │
 │ │ T8: Khủng hoảng & Lệnh cấm    ──► T9: Hồ sơ 2011 của Thầy Diệp     │ │
 │ │ T10: Liên minh Hải Vọng Corp   ──► T11: Đêm trước thẩm định         │ │
-│ │                                ──► T12: ĐẠI KẾT CỤC XUẤT BẢN       │ │
+│ │                              ──► T12: XUẤT BẢN & BOSS HUY           │ │
 │ └────────────────────────────────────────────────────────────────────┘ │
 └────────────────────────────────────────────────────────────────────────┘
 ```
@@ -563,6 +597,20 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
 | **11** | Đêm trước thẩm định: Đột nhập kho lưu trữ cũ | Điều tra đêm / Bằng chứng | ★★★★★ | Bảo vệ an toàn người tố giác (Vân/Long) | Chiến dịch in ngầm ngoài phố (Ngọc/Ân) | — |
 | **12** | ĐẠI KẾT CỤC: Xuất bản Hồi Âm Số Đặc Biệt & Điều trần | Tổng lực / Xuất bản | ★★★★★ | — (Toàn đội tập trung sự kiện lớn) — | — (Toàn đội tập trung sự kiện lớn) — | **Toàn đội** |
 
+#### 12.1.1. Boss theo Hồi và tuyến Main bắt buộc
+
+**Đồng bộ với [GDD-Attack, mục 9.2](../gameplay/GDD-Attack.md#92-danh-mục-boss--đặc-trưng-chiến-đấu-theo-hồi) ngày 2026-10-22:** Trục Main và lịch đối đầu dưới đây là quyết định thiết kế; tên/chức danh Khoa và Linh giữ nhãn phát triển còn mở từ GDD. Chi tiết thoại, chứng cứ quy trách nhiệm và HP chưa chốt. Không dùng chủ đề placeholder căng tin/quỹ ngoại khóa cũ để thay các Main Quest hiện có.
+
+| Hồi / Mốc Boss | Boss | Chuỗi Main bắt buộc | Trục đối chất CÔNG | Giới hạn phụ thuộc Side |
+| :--- | :--- | :--- | :--- | :--- |
+| **Hồi 1 — Tuần 3** | **Trần Đình Khoa — Trưởng ban Phong trào & CSVC** | T1: Căn phòng số 3 và Thời hạn 7 ngày → T2: Sân bóng bị khóa trái → T3: Hồ sơ thư viện bị xé và Trang sử 2011. | Quyền sử dụng không gian CLB/sân bóng; đối chiếu lý do khóa sân với hợp đồng cho thuê, làm rõ trách nhiệm báo cáo/che giấu của đầu mối HHS trước hồ sơ lưu trữ bị khuyết. Chỉ mở manh mối 2011, chưa giải toàn bộ vụ cũ. | Không yêu cầu Side Suất cơm căng tin T1, khoản phụ thu T3 hoặc người bảo vệ ca đêm. |
+| **Hồi 2 — Cuối Tuần 7** | **Vũ Thảo Linh — Phó Chủ tịch kiêm Trưởng ban Tài chính** | T4: Bảng vàng danh dự và Danh sách điểm ảo → T5: Sự cố sập phông sân khấu → T6: Dự án Nhà thể chất, dấu hiệu thầu sân sau → T7: Báo cáo kiểm toán và Các con số dị biệt. | Đối chiếu thành tích báo cáo với sai lệch thực tế, chi phí và dòng tiền tài trợ. Trọng tâm nghiệm thu khống phòng lab trong Main T7 và phần trách nhiệm tài chính của Linh; mở đường tới mạng lưới phía sau. | Không yêu cầu Side chênh lệch kinh phí sự kiện T7 hoặc các Side tài chính khác. |
+| **Hồi 3 — Tuần 12** | **Phan Gia Huy — Chủ tịch Hội học sinh** | T8: Lệnh cấm phát hành và đối đầu Huy → T9: Hồ sơ 2011 của Thầy Diệp → T10: Hải Vọng Corp và BGH → T11: Bản nghiệm thu gốc → T12: Số Đặc Biệt & Điều trần. | Đối chất việc Huy tham gia che giấu sai phạm, ngăn công bố và bảo vệ mạng lưới lợi ích. Nối hồ sơ 2011/2026 để minh oan Thầy Diệp và phơi bày nguy cơ an toàn; tách trách nhiệm của Huy khỏi người lớn/nhà thầu. | Không yêu cầu Side đối thoại Huy T10, kiểm định sàn tập, bảo vệ người tố giác hoặc in ngầm. |
+
+**Mốc Tuần 7/8:** Trận Linh kết thúc Hồi 2 ở cuối Tuần 7. Lệnh đình bản đầu Tuần 8 là phản ứng sau bài điều tra tài chính, mở Hồi 3 và xung đột trực tiếp với Huy; không phải một trận Boss Linh bổ sung hoặc trận Huy cuối cùng. Trận Huy quyết định vẫn ở Tuần 12 trước Đoàn Thẩm định.
+
+**Điều kiện biên kịch:** Mỗi chuỗi Main phải giới thiệu Boss trước phiên, cung cấp tư liệu và xác minh trách nhiệm cần cho mọi luận điểm/đáp án bắt buộc. Side chỉ thêm chiều sâu hoặc nhánh thoại tùy chọn, không giữ mảnh ghép độc quyền để đánh Boss. Đối thoại riêng, hồ sơ an toàn, bảo vệ nguồn tin thiết yếu và đường xuất bản bắt buộc ở Hồi 3 đều phải có đường trong Main. Đây là quy tắc cho nội dung CÔNG; tài nguyên thẻ THỦ vẫn chỉ đến từ Side/General theo mục 5.4.
+
 ---
 
 ### 12.2. Chi tiết từng tuần tác nghiệp
@@ -574,6 +622,7 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
   * *Hiện trường:* Phòng sinh hoạt cũ cuối dãy nhà C.
   * *Nội dung:* Ban Giám thị ra tối hậu thư thu hồi phòng trong vòng 7 ngày do CLB không có hoạt động trong 6 tháng. Khuê phải thuyết phục để xin gia hạn thử thách bằng một số báo chất lượng.
   * *Manh mối thu được:* Tìm thấy chiếc tủ khóa gỉ sét chứa sổ lưu niệm cũ và một góc tài liệu bị niêm phong từ năm 2011 của thầy Diệp.
+  * *Dẫn tuyến Boss Hồi 1:* Giới thiệu Khoa trong vai trò đầu mối HHS về tình trạng hoạt động/không gian CLB. Quyền ra quyết định thu hồi vẫn thuộc người lớn; không cần chơi Side căng tin để biết Khoa là ai.
 * **Side Quest A (Khuê; gắn với Long):** *Suất cơm căng tin và Bảng giá mới.*
   * *Nghiệp vụ:* Phỏng vấn học sinh, Hiểu chuyện với người bán cơm.
   * *Độ khó:* 1 sao.
@@ -589,6 +638,7 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
   * *Độ khó:* 2 sao.
   * *Nội dung:* Sân bóng đá duy nhất bị khóa xích với lý do "bảo dưỡng phục vụ kiểm định", nhưng thực chất bị cho một đơn vị bên ngoài thuê kinh doanh ban đêm.
   * *Manh mối thu được:* Hợp đồng cho thuê viết tay có chữ ký của cán bộ quản trị thiết bị trường.
+  * *Dẫn tuyến Boss Hồi 1:* Thu thập phần giải trình của đầu mối HHS/Khoa về lý do khóa sân để đối chiếu với hợp đồng; Main phải xác minh trách nhiệm báo cáo hoặc che giấu, không tự đổi người ký hợp đồng thành Khoa.
 * **Side Quest A (Khuê; gắn với Long):** *Bí ẩn Chiếc cúp Truyền thống bị gỉ sét trong Phòng lưu niệm.*
   * *Nghiệp vụ:* Hiểu chuyện, Phỏng vấn cựu vận động viên.
   * *Độ khó:* 2 sao.
@@ -602,6 +652,7 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
   * *Độ khó:* 2 sao.
   * *Nội dung:* Một tập báo lưu trữ niên khóa 2010–2011 bị xé mất 4 trang bài viết về vụ tai nạn sập giàn giáo. Nhi phát hiện ra vết xé và cùng Khuê truy tìm bản sao lưu bí mật.
   * *Hệ quả:* Nhi chính thức gia nhập CLB Báo chí với tư cách Trưởng ban Thẩm tra Tài liệu.
+  * *Mốc Boss Hồi 1 — Tuần 3:* Sau các bước điều tra bắt buộc, phiên THỦ → CÔNG đối đầu Khoa tổng kết Main Tuần 1–3 theo bảng 12.1.1. Main cung cấp phần đối chiếu hồ sơ và giải trình HHS cần để quy trách nhiệm; không mặc định Khoa tự tay xé hồ sơ. Vụ 2011 chỉ được hé mở, chưa cần dữ kiện Main Tuần 9–11.
 * **Side Quest A (Khuê; gắn với Nhi):** *Khoản phụ thu số hóa đầu năm học.*
   * *Nghiệp vụ:* Tài liệu, So sánh biểu phí các trường công lập trong thành phố.
   * *Độ khó:* 2 sao.
@@ -615,6 +666,7 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
   * *Độ khó:* 3 sao.
   * *Nội dung:* Nhằm làm đẹp hồ sơ chuẩn bị đón đoàn thẩm định, điểm số của kỳ thi khảo sát khối 12 bị nâng đồng loạt 1,5 điểm trên hệ thống điện tử.
   * *Manh mối thu được:* Ảnh chụp màn hình cơ sở dữ liệu nội bộ trước khi bị chỉnh sửa.
+  * *Dẫn tuyến Boss Hồi 2:* Giới thiệu Linh và vai trò giải trình tài chính của HHS trong tuyến báo cáo thành tích/kiểm định; Main Tuần 5–7 tiếp tục đối chiếu chi phí, hiện trường và chứng từ trước trận Boss.
 * **Side Quest A (Khuê; gắn với Nhi):** *Đường dây rao bán đề thi chuyên đề trên mạng xã hội trường.*
   * *Nghiệp vụ:* Tài liệu số, Lần theo tài khoản ảo, Đối chiếu đề cương.
   * *Độ khó:* 3 sao.
@@ -653,6 +705,7 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
   * *Độ khó:* 4 sao.
   * *Nội dung:* Ân phát hiện các khoản chênh lệch lên đến hàng trăm triệu đồng được "hợp thức hóa" qua các biên bản nghiệm thu khống thiết bị thực hành phòng lab.
   * *Hệ quả:* Ân gia nhập CLB Báo chí với tư cách Chuyên viên Phân tích Số liệu & Thống kê.
+  * *Mốc Boss Hồi 2 — Cuối Tuần 7:* Phiên THỦ → CÔNG đối đầu Linh tổng kết Main Tuần 4–7, trọng tâm chứng từ nghiệm thu khống phòng lab và dòng tiền tài trợ. Main phải xác minh phần trách nhiệm của Linh; bỏ Side kinh phí sự kiện vẫn đủ ngữ cảnh và tư liệu đối chất bắt buộc. Bài điều tra tài chính dẫn tới phản ứng đình bản Tuần 8.
 * **Side Quest A (Khuê; gắn với Ân):** *Chênh lệch kinh phí tổ chức sự kiện của Hội Học Sinh.*
   * *Nghiệp vụ:* Phân tích sổ sách thu chi hội nghị, Đối chiếu chi phí thực tế.
   * *Độ khó:* 3 sao.
@@ -665,6 +718,7 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
   * *Nghiệp vụ:* Bản lĩnh chất vấn, Đối mặt Hội đồng Kỷ luật, Tranh luận quyền tự do báo chí.
   * *Độ khó:* 4 sao.
   * *Nội dung:* Phan Gia Huy và Ban Giám hiệu ra quyết định đình bản khẩn cấp số báo 7 vì bài điều tra tài chính. Huy đe dọa sẽ kỷ luật đuổi học nếu nhóm tiếp tục điều tra. Khuê phải đứng vững bảo vệ danh dự đồng đội và tìm phương án đưa sự thật đến với học sinh.
+  * *Vai trò chuyển Hồi:* Khủng hoảng sau trận Linh cuối Tuần 7; cuộc chạm trán Huy mở tuyến đối trọng Hồi 3, chưa phải trận Boss cuối. Các điều kiện công bố và hiểu động cơ Huy cần thiết cho Main Tuần 12 phải có đường trong Main, dù bỏ Side đối thoại riêng Tuần 10.
 * **Side Quest A (Khuê; gắn với Long & Vân):** *Bác lao công bị sa thải oan ức.*
   * *Nghiệp vụ:* Hiểu chuyện, Ghi âm lời kể của nhân chứng trực tiếp nhìn thấy việc phi tang chứng từ.
   * *Độ khó:* 3 sao.
@@ -713,6 +767,7 @@ Main quest bắt buộc để advance truyện. Side quest tùy chọn; các m�
   * *Nghiệp vụ:* Chấp bút tổng lực, Phát hành số báo rộng khắp toàn trường và thành phố, Đối chất trực tiếp tại Hội trường trước Đoàn Thẩm định của Sở Giáo dục.
   * *Độ khó:* 5 sao.
   * *Nội dung:* Ngày thẩm định chính thức, hàng ngàn bản tập san Hồi Âm Số Đặc Biệt được phát tận tay học sinh, phụ huynh và các chuyên gia thanh tra. Khuê bước lên bục điều trần trình bày toàn bộ sự thật, giải oan cho người ông và bảo vệ an toàn cho trường học.
+  * *Mốc Boss Hồi 3 — Tuần 12:* Phiên THỦ → CÔNG đối đầu Huy tổng kết Main Tuần 8–12 theo bảng 12.1.1. Main tự cung cấp đủ hồ sơ 2011/2026, dữ kiện về Huy và đường bảo vệ nguồn tin/xuất bản thiết yếu; không yêu cầu Side đối thoại Huy, kiểm định sàn tập, bảo vệ người tố giác hoặc in ngầm. Huy chịu đối chất về phần tham gia che giấu/ngăn công bố; không bị gán thay toàn bộ trách nhiệm của BGH và nhà thầu.
 
 ---
 
@@ -726,7 +781,7 @@ General quest không dùng danh mục side quest có truyện ở trên làm b�
 | Chụp ảnh sự kiện trường | Ảnh | Ảnh và chú thích ngắn. |
 | Giới thiệu sách mới ở phòng đọc | Tài liệu | Mẩu tin góc báo. |
 
-Các mẫu là dạng công việc để phát triển content, không chốt số lượng hoặc phần thưởng. Mỗi general quest chỉ cần đầu vào nghe ngóng ngắn, điều kiện/nghiệp vụ, cost, thời gian dự kiến và kết quả. Story có thể rất ít hoặc không có; không bắt buộc cảnh riêng, vật lưu niệm hoặc chi tiết đáng nhớ. Hưởng ứng tăng sau xuất bản; thưởng kỹ năng nhỏ cho người làm; item chỉ được định nghĩa ở một số quest. Khuê có thể tự làm thay vì phân công, với cost energy thấp hơn main/side.
+Các mẫu là dạng công việc để phát triển content, chưa chốt số lượng quest hoặc mức thưởng. Mỗi general quest cần đầu vào nghe ngóng ngắn, điều kiện/nghiệp vụ, cost, thời gian dự kiến, kết quả và **ít nhất một thẻ Bằng chứng THỦ quality thường** được tự lưu khi completed. Ví dụ: tin giao hữu có biên bản kết quả (Tài liệu), tin sự kiện có ảnh hiện trường (Ảnh), tin giới thiệu sách có phiếu thư mục (Tài liệu); mỗi thẻ phải gắn với bài tương ứng và loại chất vấn có thể giải đáp, không phải đáp án vạn năng. Story có thể rất ít hoặc không có; không bắt buộc cảnh riêng, vật lưu niệm hoặc chi tiết đáng nhớ. Hưởng ứng tăng sau xuất bản; thưởng kỹ năng nhỏ cho người làm; item thưởng khác chỉ được định nghĩa ở một số quest. Khuê có thể tự làm thay vì phân công, với cost energy thấp hơn main/side nhưng vẫn giữ quality thường.
 
 ---
 
@@ -734,7 +789,7 @@ Các mẫu là dạng công việc để phát triển content, không chốt s�
 
 Ví dụ này là **side quest Khuê trực tiếp làm**, không giao cho Long tự giải quyết. Các giá trị cost chỉ minh họa việc mọi tác vụ có cost, chưa phải balance được chốt. ID hồ sơ, bước và tư liệu được giữ ổn định; schema dưới đây là minh họa thiết kế, không phải hợp đồng runtime/save hiện hành.
 
-Các lựa chọn tone thuộc diễn tiến side quest. Đủ thông tin/tài nguyên theo điều kiện completed thì toàn bộ tài liệu tự bàn giao xuất bản. Không có bước người chơi phân công viết/biên tập/phát hành:
+Các lựa chọn tone thuộc diễn tiến side quest. Đủ thông tin/tài nguyên theo điều kiện completed thì toàn bộ tài liệu tự bàn giao xuất bản, đồng thời bộ tư liệu khai báo dưới đây được lưu thành thẻ THỦ quality cao nhất. Không có bước người chơi phân công viết/biên tập/phát hành:
 
 ```json
 {
@@ -805,6 +860,19 @@ Các lựa chọn tone thuộc diễn tiến side quest. Đủ thông tin/tài n
   },
   "player_character": "khue",
   "assignable": false,
+  "defense_evidence": {
+    "article_id": "article_canteen_portion",
+    "pool": "defense",
+    "quality": "high",
+    "cards": [
+      { "id": "loi_ke_hoc_sinh_khau_phan_doi", "evidence_type": "witness" },
+      { "id": "anh_khay_com_thuc_te_va_bang_gia", "evidence_type": "photo" },
+      { "id": "loi_ke_nhan_vien_doi_nha_cung_cap", "evidence_type": "witness" },
+      { "id": "thong_bao_dieu_chinh_gia_ban_giam_thi", "evidence_type": "document" }
+    ],
+    "archive_on": "quest_completed",
+    "usable_when": "linked_article_published_for_hearing"
+  },
   "completion": {
     "required_evidence": [
       "loi_ke_hoc_sinh_khau_phan_doi",
@@ -906,6 +974,8 @@ Lát cắt thiết kế tiếp theo giữ 2 tuần đầu, Khuê/Vân/Long, và 
 * Một main quest bắt buộc tiến truyện, một side quest tùy chọn do Khuê trực tiếp chơi và một general quest ngắn không cần story riêng.
 * Luồng chọn general quest → nghe ngóng → chọn người → xác nhận; hiển thị cost và ngày dự kiến; feedback mỗi ngày và tự thực hiện sau khi giao.
 * Khuê tự làm general quest với cost thấp hơn main/side; XP đúng người thực hiện; item chỉ có ở quest được thiết kế có item.
+* General đồng đội tự chạy hoàn thành phải tự lưu thẻ THỦ quality thường; Side tự lưu thẻ quality cao nhất. Bàn giao/xuất bản không xóa hoặc cấp trùng thẻ; chỉ thẻ của bài đã xuất bản thuộc phiên mới hợp lệ. Thẻ này độc lập với item thưởng tùy chọn.
+* Đối chiếu cùng một cặp Win bằng thẻ Side và General để xác nhận Side được nhiều điểm hơn; Side chọn sai vẫn Lose. Giữ nguyên giới hạn câu hỏi chỉ Normal/toàn Lose; không lấy thẻ Main hoặc kho CÔNG vào THỦ. Đo kho chỉ General so với kho hỗn hợp trước khi chốt balance.
 * Chiều tự do: làm báo và hangout dùng chung energy; tiêu nhiều chiều làm giảm khả năng hoạt động tối. Không có quỹ energy hoặc slot riêng.
 * Ngủ đặt ngày mới 10/10; thức học/cày game đặt ngày mới 5/10 khi ngày trước còn 0, 2, 6 hoặc 10. Không hồi khi chuyển buổi, không cộng dồn phần còn lại.
 * Di chuyển nhanh và chạy vào trọ đều thông báo/chờ xác nhận chuyển buổi; hủy giữ nguyên buổi. Người chơi ở lâu không bị ép chuyển, và có thể về nghỉ khi energy bằng 0.
@@ -934,6 +1004,9 @@ Lát cắt thiết kế tiếp theo giữ 2 tuần đầu, Khuê/Vân/Long, và 
 13. **Phân công & Feedback:** Chọn quest → nghe ngóng → chọn người → xác nhận; hiện cost, phí vận hành khi có, ngày dự kiến. Đồng đội tự làm và feedback hàng ngày.
 14. **Xuất bản tự động:** Quest completed khi đủ thông tin/tài nguyên; toàn bộ tài liệu tự chuyển sang xuất bản. Người chơi không quản lý các bước viết, biên tập, chọn bài hoặc phát hành.
 15. **Bond toàn đội:** Chỉ qua main quest hoặc special event; không có general event tăng bond tập thể.
+16. **Bằng chứng THỦ:** Side và General completed bắt buộc tự lưu thẻ cụ thể từ tư liệu tác nghiệp; Side quality cao nhất, General quality thường kể cả khi đồng đội tự chạy. Dùng thẻ khi bài thường liên quan đã xuất bản trong phạm vi phiên; bàn giao không làm mất thẻ.
+17. **Quality & Loại chất vấn:** Side đúng cặp Win được nhiều điểm hơn General; chọn sai vẫn Lose. Không dùng chéo Bằng chứng THỦ/CÔNG; không biến Side tùy chọn thành quota tiến truyện. +50/+20 là mốc playtest, chưa chốt balance.
+18. **Boss & Main Quest:** Khoa — Tuần 3, Linh — cuối Tuần 7, Huy — Tuần 12, theo bảng 12.1.1 đồng bộ GDD-Attack. Tuần 8 là hậu quả trận Linh/mở xung đột Huy. Mọi ngữ cảnh, tư liệu và đáp án Boss bắt buộc phải có trong Main; Side vẫn tùy chọn.
 
 ### 16.1. Các chi tiết còn cần chốt/cân bằng
 
@@ -942,6 +1015,8 @@ Lát cắt thiết kế tiếp theo giữ 2 tuần đầu, Khuê/Vân/Long, và 
 * Mức phí vận hành nhân sự stat cao và thu một lần hay theo ngày.
 * Số general quest mỗi người nhận đồng thời, thời lượng thực hiện, phản hồi sai sở trường và ảnh hưởng khi đổi người.
 * Thời điểm nhận XP/item, mức hưởng ứng và cách kết hợp bài general với bài main/side.
+* Số thẻ THỦ cụ thể mỗi Side/General (tối thiểu một), cơ cấu nhóm tư liệu, bảng điểm quality và khả năng thu thập theo lịch/energy. Cần mô phỏng kho chỉ General, kho hỗn hợp và kho thiên Side; số liệu GDD cũ chưa xác nhận balance quality mới.
 * Độ trễ xử lý tự động, hạn bàn giao và xử lý bài đến muộn quanh lịch thứ Sáu.
+* Tên/chức danh cuối của Khoa/Linh, thoại, chứng cứ quy trách nhiệm và HP từng Boss. Rà tuyến Main khi bỏ toàn bộ Side để xác nhận không thiếu mắt xích đối chất; giữ các mốc T3/cuối T7/T12 và không dùng dữ kiện chưa mở ở T3.
 * Balance điểm số, fatigue, thưởng skill và ngưỡng ending kế thừa từ v1.0 cần kiểm thử lại với nhịp ngày mới; chưa tái cân bằng trong bản cập nhật tài liệu này.
 * Menu đang ở bước concept với sáu tab: Hồ sơ, Kỹ năng, Trang bị, Đồng đội, Bản đồ, Cài đặt. Mỗi lần mở menu vào thẳng tab Hồ sơ; không có màn menu tổng trung gian. Giữ nguyên tắc ít chữ, thông tin mở khi cần và cost rõ trước lựa chọn.

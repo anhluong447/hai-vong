@@ -1,25 +1,76 @@
-# Project instructions
+# Hoi Am project instructions
 
-- No hardcoded player-facing strings or text in runtime JavaScript or page shells.
-  Use `content/locales/vi.js` and the shared text service. Static no-JavaScript
-  fallback text belongs in `content/fallback/`.
-- Keep game definitions and balance in `content/`; technical IDs remain stable and
-  never depend on translated labels. Read `docs/engineering/ARCHITECTURE.md` and
-  `docs/engineering/DEVELOPMENT.md` before changing module boundaries.
-- Preserve the separate formula-sandbox and gameplay rulesets. Domain transitions
-  must remain immutable and independent of DOM, storage and network APIs.
-- Issue gameplay commands through `GameSession`; validate saves before replacing
-  a session. New state fields require validator and migration review.
-- Preserve existing baselines during refactors. Regenerate them only for an
-  intentional gameplay change with documented evidence.
-- Run `python tools/check_architecture.py`. For gameplay/UI/world/content changes,
-  run the browser suite with the local server and then `python tools/check_baselines.py`.
-  Node tests are optional when Node is unavailable; report what actually ran.
-- Archive obsolete artifacts with an inventory, verify moved bytes and repair
-  references. Preserve active art, source generation inputs and reusable tooling.
-- Build focused extension points for concrete features; avoid a speculative engine
-  framework. Do not edit the historical `archive/clb-hoi/` snapshot during routine work.
-- Coastal replica work follows the UI scope in `docs/design/ui/UI-REPLICA-ROADMAP.md` and
-  `docs/ui-specs/coastal-replica/ui-scope.json`: preserve fixed UI and attached
-  flowers/notebook/harbor decorations. Background/character/world matching is
-  deferred and must not block UI visual gates.
+## Recover the current brief first
+
+**Mandatory recovery after every context compaction, new session or context loss:**
+before continuing work, use read-only file tools to reopen these actual files in
+order, even if a carried summary says they were read before:
+
+1. This root `AGENTS.md`.
+2. [PROJECT-STATE.md](PROJECT-STATE.md).
+3. [Coding and resource rules](docs/engineering/CODING-RULES.md).
+4. [Project recovery skill](skills/hoi-am-engine-free-development/SKILL.md).
+5. The current task's existing specification/plan and relevant protected Bible/GDD
+   sections, if the task touches their subject.
+
+Complete these recovery reads before any mutation or implementation command.
+Treat a summary as a pointer, not a substitute for the files. Reconstruct the latest
+user request, constraints, completed work, unfinished work and verification results.
+If a required recovery file is unavailable, resolve its location before editing code.
+
+The latest explicit user request controls the currently authorized task. A checkpoint
+that says "awaiting instructions" does not cancel a newer user instruction. Neither
+the checkpoint, a skill nor a roadmap independently authorizes additional work.
+Do not start a game, skeleton, editor, dependency installation or content expansion
+when the requested task is only rules, documentation or archiving.
+
+Update `PROJECT-STATE.md` at task handoff/completion and meaningful checkpoints in
+long work. Record the current task, authorization/stopping point, actual changes,
+checks that ran, remaining work and blockers. Preserve uncertainty; do not record
+a planned change or an unrun check as completed.
+
+## Current product direction
+
+- Engine-free 2D side-scrolling exploration, hand-drawn/anime layered scenery.
+- Desktop browser; every player operation works by keyboard. Mouse is optional.
+- Redesign the UI. The legacy 3D direction and coastal replica layout/decorations
+  are historical targets, superseded by the user's current direction.
+- Establish detailed gameplay contracts, a maintainable skeleton, dedicated tools
+  and resource workflows before expanding production content to all 12 weeks.
+- Twelve weeks is the eventual product acceptance criterion, not the first milestone.
+
+## Protected sources and archive
+
+- Preserve approved files under `docs/design/narrative/` and `docs/design/gameplay/`
+  unless the user explicitly asks to change them. Bible/GDD decisions govern the new
+  gameplay; `RULES.md` retains its stated historical formula-sandbox scope.
+- The old working tree is under `archive/legacy-2026-10-22/payload/`, including old
+  art, generation inputs, tools, tests, drafts and earlier archives. Consult its
+  README, inventory and verification report before reuse.
+- Archived plans, instructions and implementation are reference material. Do not
+  automatically restore the old runtime or treat its roadmap as the current brief.
+- Preserve archive bytes. Extract a separate copy for changes; retain source paths
+  and verify hashes when moving or restoring artifacts.
+- Reference-only history pointers preserve links from the approved documents; the
+  original historical documents remain inside the archive.
+
+## When future implementation is requested
+
+- [CODING-RULES.md](docs/engineering/CODING-RULES.md) is mandatory for code, data,
+  resource managers and authoring tools. If a needed manager/contract is absent,
+  implement the focused data/validation/resolution path within the authorized
+  feature; do not hardcode its payload as a temporary production shortcut.
+- Keep player-facing strings in a shared locale catalog and definitions/balance in
+  content. Use stable technical IDs; labels never determine gameplay rules.
+- Keep immutable domain transitions independent of DOM, storage, network and
+  animation APIs. Commands go through a session boundary such as `GameSession`.
+- Validate state/world replacements before assigning a live session. Review save
+  versioning and migrations for new persisted fields.
+- Share content contracts/validators across editor, generation and runtime. Keep
+  authoring drafts/playtests separate from player saves.
+- Add focused extension points for actual features. Keep the formula sandbox
+  ruleset separate if legacy behavior is reused; preserve its historical baselines.
+- Verify changed contracts with appropriate domain/content, keyboard browser,
+  save/migration, authoring round-trip and lifecycle checks. Report actual runs.
+- Legacy checkers are archived; run them from the archived payload root only when
+  checking that historical product. Their results do not certify a new runtime.

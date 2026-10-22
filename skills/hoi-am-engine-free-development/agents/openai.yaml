@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hoi Am engine-free 2D"
+  short_description: "Resume Hoi Am architecture, tools and resource work"
+  default_prompt: "Use $hoi-am-engine-free-development to recover the Hoi Am project decisions and carry out only the currently requested task."
+policy:
+  allow_implicit_invocation: true

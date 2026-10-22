@@ -1,0 +1,122 @@
+﻿[
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\README.md",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\archive\\README.md"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\clb-hoi",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\archive\\clb-hoi"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\development",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\archive\\development"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\menus",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\archive\\menus"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\products",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\archive\\products"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\.gitattributes",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\.gitattributes"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\.gitignore",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\.gitignore"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\.superpowers",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\.superpowers"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\AGENTS.md",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\AGENTS.md"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\README.md",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\README.md"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\assets",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\assets"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\content",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\content"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\docs",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\docs"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\drafts",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\drafts"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\gameplay.html",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\gameplay.html"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\index.html",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\index.html"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\interaction.html",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\interaction.html"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\package.json",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\package.json"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\parent_step_830.json",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\parent_step_830.json"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\parent_step_834.json",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\parent_step_834.json"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\patch_vi.diff",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\patch_vi.diff"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\pixel.html",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\pixel.html"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\sandbox.html",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\sandbox.html"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\src",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\src"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\styles",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\styles"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\tests",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\tests"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\tmp",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\tmp"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\tools",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\tools"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\vendor",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\vendor"
+    },
+    {
+        "Source":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\world3d.html",
+        "Destination":  "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\archive\\legacy-2026-10-22\\payload\\world3d.html"
+    }
+]

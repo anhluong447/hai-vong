@@ -1,10 +1,11 @@
 # TÀI LIỆU THIẾT KẾ CƠ CHẾ: GIAI ĐOẠN THỦ (PHIÊN ĐIỀU TRẦN GIAO BAN)
 * **Dự án:** CLB Báo Chí (Tập San Tĩnh Tâm)
 * **Phân hệ:** Hệ thống Tranh luận / Phiên họp Giao ban (Debate & Hearing System)
-* **Phiên bản tài liệu:** v2.0 (Chuẩn hóa toàn diện & Mở rộng cấu trúc hệ thống)
+* **Phiên bản tài liệu:** v2.1 (Nguồn Bằng chứng Side/General & quality trong THỦ)
 * **Người phê duyệt cốt lõi:** Nel (Lead Designer)
-* **Ngày cập nhật:** 2026-10-08
+* **Ngày cập nhật:** 2026-10-22
 * **Phạm vi tài liệu:** Đặc tả chi tiết cơ chế **Giai đoạn THỦ (Defense State)** trong phiên giao ban định kỳ. Giai đoạn **CÔNG (Offense State - Cao trào vạch trần)** được quy hoạch ở tài liệu thiết kế riêng biệt.
+* **Đồng bộ thiết kế:** [Story Bible v2, mục 5.4](../narrative/game_story_bible_v2.md#54-bằng-chứng-cho-thủ-và-quality-của-quest). Bản cập nhật này sửa đặc tả; runtime, save và baseline hiện hành chưa thay đổi.
 
 ---
 
@@ -26,14 +27,16 @@ Mọi điều khoản và thông số trong tài liệu được gán nhãn nghi
 * **Tiến trình đối đầu theo Hồi:**
   * Mỗi hồi kết thúc bằng một phiên giao ban nảy lửa với một ủy viên cốt cán của HHS (các "tay chân" dưới quyền Hội trưởng Huy).
   * Phiên điều trần ở Hồi cuối cùng là màn đối đầu trực diện với Trùm cuối: **Hội trưởng Huy**. `[CHỐT]`
+  * **Lịch đồng bộ với [Bible, mục 12.1.1](../narrative/game_story_bible_v2.md#1211-boss-theo-hồi-và-tuyến-main-bắt-buộc) và [GDD-Attack, mục 9.2](GDD-Attack.md#92-danh-mục-boss--đặc-trưng-chiến-đấu-theo-hồi):** Hồi 1 — Khoa, Tuần 3; Hồi 2 — Linh, cuối Tuần 7; Hồi 3 — Huy, Tuần 12. Tuần 8 là khủng hoảng sau trận Linh và mở xung đột với Huy. Tuyến CÔNG của mỗi Boss bám Main bắt buộc; bài thường/thẻ THỦ vẫn theo nguồn Side/General bên dưới. `[CHỐT]`
 * **Ranh giới tài nguyên giữa THỦ và CÔNG:**
-  * **Tính độc lập tuyệt đối:** Bằng chứng dùng trong THỦ là tư liệu minh oan cho các bài báo thường (*General*). Bằng chứng dùng trong CÔNG là các tài liệu điều tra đặc biệt nhắm thẳng vào sai phạm nội bộ của HHS. Hai kho bằng chứng này hoạt động độc lập, tuyệt đối không dùng chéo. `[CHỐT]`
+  * **Tính độc lập tuyệt đối:** Bằng chứng dùng trong THỦ là tư liệu minh oan cho các bài báo thường (*General Articles*) đến từ **Side Quest và General Quest**. General Articles là nhóm bài được bảo vệ, không đồng nghĩa với riêng loại General Quest. Bằng chứng dùng trong CÔNG là tài liệu điều tra ngầm đặc biệt; hai kho hoạt động độc lập, tuyệt đối không dùng chéo. Main Quest không cấp thẻ THỦ. `[CHỐT]`
   * **Cầu nối giai đoạn:** THỦ đóng vai trò "cửa ải sinh tồn". Người chơi phải bảo vệ thành công vị thế chính danh của CLB thì mới đủ tư cách kích hoạt CÔNG để lật ngược tình thế.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                          VÒNG LẶP TUẦN CHƠI                            │
-│  [Thu thập thông tin] ──> [Viết bài General] ──> [Lưu trữ Bằng chứng]  │
+│  [Side/General completed] ──> [Lưu thẻ THỦ + Bàn giao tự động]          │
+│                          ──> [Xuất bản bài thường] ──> [Mang thẻ THỦ]  │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │ (Tài nguyên mang vào)
                                     ▼
@@ -61,8 +64,8 @@ Mọi điều khoản và thông số trong tài liệu được gán nhãn nghi
 | :---: | :--- | :---: | :--- |
 | **R01** | HHS công kích trước bằng Cáo buộc mang lượng Sát thương ($Dmg$) cố định. | `[CHỐT]` | $Dmg$ trừ trực tiếp vào Thanh Phán Quyết ngay khi xuất hiện. Đòn đánh luôn trúng, không phụ thuộc vào bằng chứng đối phó sau đó. |
 | **R02** | Người chơi phản hồi bằng $01$ Bằng chứng duy nhất từ kho lưu trữ. | `[CHỐT]` | Mỗi Cáo buộc chỉ được đối đầu bằng một bằng chứng; không hỗ trợ cộng dồn thẻ. |
-| **R03** | Khắc chế cố định theo cặp `(Cáo buộc - Loại bằng chứng)`. | `[CHỐT]` | Phân cấp 3 mức: **Win (+50)**, **Normal (+20)**, **Lose (-20 đến 0)**. Tuyệt đối không sinh giá trị ngẫu nhiên (RNG). |
-| **R04** | Điểm ròng mỗi lượt: $\Delta = Điểm_{\text{Bằng chứng}} - Dmg_{\text{Cáo buộc}}$. | `[CHỐT]` | Chọn bằng chứng Win để đảo ngược tình thế lấy điểm dương; Normal để giảm thiểu thiệt hại; Lose khiến thanh sụt giảm nghiêm trọng. |
+| **R03** | Khắc chế cố định theo cặp `(Cáo buộc - Loại bằng chứng)`, rồi tính điểm theo quality. | `[CHỐT]` | Vẫn có **Win / Normal / Lose**, không RNG. Side quality cao được nhiều điểm hơn General khi chọn đúng cặp Win; quality không biến chọn sai thành đúng. Bảng điểm tạm ở mục 5.1.2. |
+| **R04** | Điểm ròng mỗi lượt: $\Delta = Điểm_{\text{Bằng chứng}} - Dmg_{\text{Cáo buộc}}$. | `[CHỐT]` | Điểm ròng dương khi điểm thẻ vượt Dmg. Win quality cao có thể đảo thế; General đúng cặp Win vẫn có thể lỗ trước cáo buộc Nặng. Normal giảm thiệt hại; Lose khiến thanh sụt giảm nghiêm trọng. |
 | **R05** | Phân tầng Cáo buộc thành hai cấp độ: **Nhẹ** và **Nặng**. | `[CHỐT]` | Cáo buộc Nặng sở hữu $Dmg$ vượt trội, tạo biến động nhịp độ bất ngờ trong phiên họp. |
 | **R06** | Biên độ Thanh Phán Quyết cố định trong đoạn $[-100, +100]$. | `[CHỐT]` | Giá trị mặc định khi bắt đầu phiên là $0$ `[GIẢ ĐỊNH]`. |
 | **R07** | **Trần cứng (Hard Cap) $+100$:** Mọi điểm số vượt trần đều bị hủy bỏ. | `[CHỐT]` | Triệt tiêu khả năng "farm" tích lũy điểm an toàn quá sớm để chủ quan ở giai đoạn cuối. |
@@ -72,6 +75,7 @@ Mọi điều khoản và thông số trong tài liệu được gán nhãn nghi
 | **R11** | Chuyển đổi buff sang CÔNG: Điểm dương cuối THỦ chuyển hóa thành **Thêm Tim**. | `[CHỐT]` | Tim dùng để đỡ sai sót trong CÔNG; chia theo bậc định sẵn, có ngưỡng trần tối đa. |
 | **R12** | Phản ứng đám đông (Atmosphere): Phản hồi qua Audio/Visual theo thời gian thực. | `[CHỐT]` | Hoàn toàn đóng vai trò không khí thị giác/thính giác, không tác động trực tiếp lên cơ chế điểm số. |
 | **R13** | Chuyển giao thế trận tự động: Hoàn thành bảo vệ bài General $\rightarrow$ Tự động vào CÔNG. | `[CHỐT]` | HHS đuối lý chuyển sang công kích điều tra ngầm $\rightarrow$ Mở màn giai đoạn CÔNG. |
+| **R14** | Hai nguồn thẻ THỦ: Side Quest quality cao nhất; General Quest quality thường. | `[CHỐT]` | Quest completed tự lưu thẻ cụ thể, kể cả khi đồng đội tự chạy General. Thẻ dùng để bảo vệ bài thường đã xuất bản; không lấy thẻ điều tra ngầm thay thế. |
 
 ---
 
@@ -106,10 +110,11 @@ Mỗi Cáo buộc từ Hội Học Sinh được thực thi nghiêm ngặt theo 
                                  ▼
              [BƯỚC 4: TÍNH ĐIỂM HIỆU LỰC & CẬP NHẬT THANH]
                                  │
-                   Hệ thống đối chiếu logic cặp:
-                     ├─ WIN    : +50 điểm
-                     ├─ NORMAL : +20 điểm
+                   Đối chiếu cặp, sau đó áp quality:
+                     ├─ WIN    : Side +50 / General +20
+                     ├─ NORMAL : +20 cho cả hai quality
                      └─ LOSE   : -20 đến 0 điểm
+                   (Điểm tạm theo bảng 5.1.2; không RNG)
                    Cộng dồn và kẹp trần/đáy:
                    Thanh = Clamp(Thanh + Điểm_Thẻ, -100, 100)
                                  │
@@ -139,7 +144,38 @@ Mỗi Cáo buộc từ Hội Học Sinh được thực thi nghiêm ngặt theo 
 ## 5. HỆ THỐNG DỮ LIỆU & CƠ CHẾ THÀNH PHẦN
 
 ### 5.1 Hệ thống Bằng chứng (Evidence System)
-Bằng chứng là tài nguyên hữu hạn được chuyển hóa trực tiếp từ kết quả tác nghiệp trong tuần tự do của người chơi.
+Bằng chứng là tài nguyên hữu hạn được chuyển hóa trực tiếp từ kết quả tác nghiệp trong tuần tự do của Khuê và đồng đội. **Quality ở đây là bậc chất lượng Bằng chứng của quest**, tách biệt với điểm chất lượng bài báo khi phát hành.
+
+#### 5.1.1 Nguồn thẻ, bàn giao và điều kiện mang vào THỦ `[CHỐT]`
+
+| Nguồn quest | Quality Bằng chứng THỦ | Vai trò |
+| :--- | :--- | :--- |
+| **Side Quest** | **Cao nhất** (`high`) | Khuê trực tiếp tác nghiệp; tạo bộ tư liệu bảo vệ bài thường. Đúng loại chất vấn có thể lấy điểm cao nhất, bù cho cost và thời gian đầu tư lớn hơn. |
+| **General Quest** | **Thường** (`standard`) | Tin bài ngắn, chủ yếu giao đồng đội tự làm; tạo thẻ THỦ cụ thể ở mức điểm thông thường, bên cạnh hưởng ứng và XP. Khuê tự làm vẫn giữ quality thường. |
+
+* Mỗi Side/General hoàn thành phải tự lưu **ít nhất một thẻ THỦ cụ thể** từ tư liệu quest thực sự thu được. Đầu ra này là bắt buộc, độc lập với item thưởng tùy chọn; không cần thêm story riêng cho General.
+* Mỗi thẻ có ID ổn định, quest nguồn, bài báo liên quan, loại Bằng chứng, quality và kho THỦ. Content phải khai báo các đầu ra này; bản thiết kế không tự bổ sung field vào save.
+* Khi quest completed, lưu thẻ và tự bàn giao tư liệu sang đội xuất bản. Bàn giao không xóa thẻ lưu trữ; feedback hoàn thành cho biết các thẻ đã nhận. Không có bước người chơi duyệt hoặc nhặt thẻ thủ công, không cấp trùng khi xem lại feedback hay khi phát hành.
+* Khi mở phiên THỦ, chỉ lấy thẻ gắn với **bài thường đã xuất bản thuộc phạm vi phiên**. Quest đang làm, chưa đủ tư liệu hoặc bài chưa xuất bản không tự sinh thẻ dùng ngay trong phiên.
+* Side có đầu mối điều tra ngầm phải định nghĩa tư liệu CÔNG riêng, tách ID và mục đích khỏi bộ thẻ THỦ; không tự sao chép một bằng chứng sang cả hai kho. Main Quest và kho CÔNG không phải nguồn thẻ THỦ.
+
+#### 5.1.2 Quality và khắc chế là hai bước riêng
+
+1. Xác định **Win / Normal / Lose** bằng cặp cáo buộc và loại/nội dung tư liệu phù hợp. Cùng là Ảnh hoặc Nhân chứng không có nghĩa mọi thẻ đều liên quan tới cáo buộc.
+2. Tra điểm theo quality; sau đó áp R04. **Side đúng cặp Win phải có điểm cao hơn General đúng cùng cặp** `[CHỐT]`.
+
+| Kết quả đối chiếu | Side — quality cao nhất | General — quality thường |
+| :--- | :---: | :---: |
+| **Win** — đúng loại chất vấn, đủ sức phản bác | **+50** | **+20** |
+| **Normal** — chỉ giảm thiểu, chưa phản bác trọn vẹn | **+20** | **+20** |
+| **Lose** — sai loại, lạc đề hoặc không giải đáp được cáo buộc | **-20 đến 0**, cố định theo cặp | **-20 đến 0**, cố định theo cặp |
+
+Các con số trong bảng là **`[GIẢ ĐỊNH]` để playtest**, thay cho cách áp +50 cho mọi thẻ Win trước ngày 2026-10-22. Win/Normal là mức phù hợp, không phải tên quality. Không nhân quality lên điểm Lose; không cộng thưởng Side cho câu hỏi Mitigation Only hoặc Unavoidable Hit. Các bảng/ví dụ +50 bên dưới dùng thẻ Side quality cao; General đúng cặp Win chỉ nhận +20 theo bảng này.
+
+Mục tiêu là tạo động lực mạnh để chơi thêm Side Quest và chuẩn bị đa dạng loại Bằng chứng. General cung cấp tài nguyên thường xuyên, nhưng cày số lượng General không mặc nhiên đủ thắng mọi phiên, nhất là khi có nhiều cáo buộc Nặng. Không áp quota Side hoặc khóa tiến truyện theo số Side hoàn thành; khả năng vượt THỦ và mức đầu tư cần thiết phải được kiểm chứng khi cân bằng.
+
+#### 5.1.3 Nhóm Bằng chứng và tiêu hao
+
 * **Phân loại 5 nhóm Bằng chứng `[GIẢ ĐỊNH]`:**
   1. **Số liệu (Data / Metric):** Thống kê khảo sát, biên bản kiểm kê số lượng, bảng biểu phân tích sai lệch.
   2. **Nhân chứng (Witness):** Lời khai trực tiếp, phát biểu ghi âm của học sinh, nhân viên lao công, cán sự lớp.
@@ -158,11 +194,13 @@ Bằng chứng là tài nguyên hữu hạn được chuyển hóa trực tiếp
 
 * **Phân bổ cấu trúc phản biện (Logic Depth):**
   Để loại bỏ tình trạng giải đố một màu, hệ thống cáo buộc được thiết kế theo 3 cấu trúc phản biện:
-  1. **Cáo buộc Tiêu chuẩn (Standard - $\approx 65\%$):** Tồn tại ít nhất 1 phương án Win (+50), 1-2 phương án Normal (+20), còn lại là Lose.
+  1. **Cáo buộc Tiêu chuẩn (Standard - $\approx 65\%$):** Tồn tại ít nhất 1 cặp loại Bằng chứng đạt Win (Side +50 / General +20), 1-2 cặp Normal (+20), còn lại là Lose. Đây là cấu trúc câu hỏi, không đảm bảo kho người chơi có sẵn thẻ đúng.
   2. **Cáo buộc Giảm thiểu thiệt hại (Mitigation Only - $\approx 25\%$):** `[CHỐT]` Hoàn toàn **không có phương án Win** (tối đa là Normal +20). Người chơi buộc phải chọn hy sinh một bằng chứng phù hợp để chịu lỗ nhẹ thay vì mất điểm nặng.
   3. **Cáo buộc Đòn hiểm / Bất khả kháng (Unavoidable Hit - $\approx 10\%$):** `[CHỐT]` Toàn bộ các lựa chọn đều dẫn đến kết quả **Lose ($-20$ đến $0$)**. Mô phỏng những điểm yếu không thể chối cãi của bài báo. Thử thách khả năng "chịu đòn" và tích lũy điểm thặng dư từ trước để bù đắp.
 
 * **Bảng ma trận đối chiếu mẫu (Accusation-Evidence Mapping Matrix):**
+
+Bảng dưới minh họa thẻ **Side quality cao nhất**. Giữ kết quả Win/Normal/Lose khi xét thẻ General cùng nội dung, nhưng đổi điểm Win thành +20 theo mục 5.1.2; không mặc định mọi thẻ cùng loại đều giải đáp được câu hỏi.
 
 | Cáo buộc từ Hội Học Sinh | Bằng chứng: Số liệu | Bằng chứng: Nhân chứng | Bằng chứng: Tài liệu | Bằng chứng: Ảnh chụp |
 | :--- | :---: | :---: | :---: | :---: |
@@ -264,9 +302,12 @@ Giai đoạn THỦ chính thức khép lại khi Hội Học Sinh sử dụng h�
 
 *Lưu ý: Các số liệu mô phỏng đóng vai trò định hướng thuật toán, không thay thế việc kiểm thử người chơi thực tế (Blind Playtest).*
 
+**Phạm vi số liệu cũ:** Các tỷ lệ trong mục 6.2, 9.2–9.3 và tiêu chí tham chiếu mục 12 được giữ từ mô hình trước ngày 2026-10-22, khi mọi thẻ Win đều +50. Chúng **chưa kiểm chứng** phân tầng Side/General ở mục 5.1.2; không dùng để khẳng định balance mới đã đạt mục tiêu. Cần mô phỏng lại theo cơ cấu quality và nhóm Bằng chứng thực tế.
+
 ### 9.1 Tham số mô phỏng tiêu chuẩn
 * Kịch bản mô phỏng chuẩn: **10 Cáo buộc**, kho gồm **5 loại Bằng chứng**, mỗi bằng chứng chỉ dùng 1 lần.
 * Sát thương áp dụng: Nhẹ ($10 - 20$), Nặng ($35 - 40$).
+* Khi kiểm chứng quality mới, so sánh kho chỉ General, kho hỗn hợp và kho thiên Side với cùng số thẻ, cùng chuỗi cáo buộc; đo riêng tỷ lệ đúng loại, điểm cuối phiên, dùng Lượt Vớt và Tim chuyển CÔNG. Sau đó kiểm tra cost/thời gian kiếm từng kho trong lịch tuần thực tế.
 * Mô hình hành vi: Người chơi theo thuật toán "Tham lam" (Greedy Algorithm) — luôn chọn bằng chứng đạt điểm cao nhất cho câu hỏi hiện tại mà không có khả năng nhìn thấu tương lai.
 
 ### 9.2 Tương quan giữa Tỷ lệ Tài nguyên và Tỷ lệ Sống sót
@@ -297,13 +338,15 @@ $$\text{Tỷ lệ Tài nguyên} = \frac{\text{Tổng số Bằng chứng thu th�
 
 ## 10. KỊCH BẢN CHƠI MINH HỌA (SCRIPTED PLAYTHROUGH)
 
-* **Thiết lập:** Khuê đối đầu với Trưởng ban Kiểm tra HHS tại Phiên Giao ban Hồi 1.
+* **Thiết lập:** Khuê đối đầu với Khoa — đầu mối Phong trào & CSVC của HHS tại Phiên Giao ban Hồi 1, Tuần 3. Bài bàn ghế dưới đây chỉ minh họa các lượt bảo vệ bài thường trong THỦ; tuyến điều tra CÔNG tiếp sau tổng kết Main Tuần 1–3 theo GDD-Attack mục 9.2.
 * **Thanh Phán Quyết khởi điểm:** $0$.
 * **Kho Bằng chứng khởi điểm của Khuê:**
-  1. `[SỐ LIỆU]`: Bảng tổng hợp khảo sát 200 mẫu phiếu về tình trạng bàn ghế khu B.
-  2. `[ẢNH CHỤP]`: Ảnh chụp cận cảnh thanh xà nứt gãy và trần dột lớp học B3.
-  3. `[NHÂN CHỨNG]`: Đoạn băng ghi âm phỏng vấn bác bảo vệ phụ trách kho bảo trì.
-  4. `[TÀI LIỆU]`: Bản sao đơn đề nghị cấp kinh phí sửa chữa đã nộp BGH tuần trước.
+  1. `[SỐ LIỆU / SIDE / HIGH]`: Bảng tổng hợp khảo sát 200 mẫu phiếu về tình trạng bàn ghế khu B.
+  2. `[ẢNH CHỤP / SIDE / HIGH]`: Ảnh chụp cận cảnh thanh xà nứt gãy và trần dột lớp học B3.
+  3. `[NHÂN CHỨNG / GENERAL / STANDARD]`: Đoạn băng ghi âm phỏng vấn bác bảo vệ phụ trách kho bảo trì.
+  4. `[TÀI LIỆU / SIDE / HIGH]`: Bản sao đơn đề nghị cấp kinh phí sửa chữa đã nộp BGH tuần trước.
+
+Các thẻ đã tự lưu khi quest hoàn thành và liên kết với bài thường đã xuất bản trong phạm vi phiên. Ví dụ dùng bảng điểm tạm ở mục 5.1.2.
 
 ---
 
@@ -314,36 +357,36 @@ $$\text{Tỷ lệ Tài nguyên} = \frac{\text{Tổng số Bằng chứng thu th�
 * **Cập nhật thanh:** $0 - 10 = -10$. *(Hội trường xì xào, ánh mắt nghi hoặc hướng về Khuê)*
 * **Lựa chọn của Khuê:** Xuất trình thẻ `[SỐ LIỆU]` (Bảng khảo sát 200 phiếu).
 * **Khắc chế:** **WIN (+50 điểm)**.
-* **Tính toán:** $\Delta = +50 - 10 = +40 \rightarrow \text{Thanh hiện tại} = +30$.
+* **Tính toán:** $\Delta = +50 - 10 = +40 \rightarrow \text{Thanh hiện tại} = 0 + 40 = +40$.
 * **UX/UI:** Đám đông ồ lên tán thành; đại diện HHS khẽ nhíu mày.
 
 #### LƯỢT 2: CÁO BUỘC NẶNG (Sát thương: 35 Dmg)
 * **Hội Học Sinh:** *"Bức ảnh chụp trần phòng B3 dột nát được chụp vào giờ tự học buổi tối. Các cậu tự ý đột nhập khu vực cấm mà không có sự cho phép của giám thị!"*
-* **Cập nhật thanh:** $+30 - 35 = -5$. *(Thanh tụt về âm, hội trường xôn xao chỉ trích)*
+* **Cập nhật thanh:** $+40 - 35 = +5$. *(Hội trường xôn xao chỉ trích)*
 * **Lựa chọn của Khuê:** Xuất trình thẻ `[NHÂN CHỨNG]` (Băng ghi âm bác bảo vệ cho phép vào chụp).
 * **Khắc chế:** **NORMAL (+20 điểm)**.
-* **Tính toán:** $\Delta = +20 - 35 = -15 \rightarrow \text{Thanh hiện tại} = +15$.
+* **Tính toán:** $\Delta = +20 - 35 = -15 \rightarrow \text{Thanh hiện tại} = +40 - 15 = +25$.
 * **UX/UI:** Hội trường hạ nhiệt; Ban Giám hiệu gật đầu ghi nhận tính hợp lệ.
 
 #### LƯỢT 3: CÁO BUỘC BẤT KHẢ KHÁNG / TOÀN LOSE (Sát thương: 20 Dmg)
 * **Hội Học Sinh:** *"Cho dù có người mở cửa, bài viết dùng từ ngữ 'nguy hiểm chết người' đã gieo rắc sự hoang mang cực độ cho phụ huynh học sinh!"*
-* **Cập nhật thanh:** $+15 - 20 = -5$.
+* **Cập nhật thanh:** $+25 - 20 = +5$.
 * **Lựa chọn của Khuê:** Xuất trình thẻ `[ẢNH CHỤP]` (Cố gắng đưa ảnh trần nứt ra thanh minh mức độ nguy hiểm).
 * **Khắc chế:** **LOSE (-10 điểm)** *(Vì hình ảnh không thể thanh minh cho lỗi dùng từ giật gân)*.
-* **Tính toán:** $\Delta = -10 - 20 = -30 \rightarrow \text{Thanh hiện tại} = -15$.
+* **Tính toán:** $\Delta = -10 - 20 = -30 \rightarrow \text{Thanh hiện tại} = +25 - 30 = -5$.
 * **UX/UI:** Khán giả lắc đầu chê bai; đại diện HHS mỉm cười đắc thắng.
 
 #### LƯỢT 4: CÁO BUỘC NHẸ (Sát thương: 20 Dmg)
 * **Hội Học Sinh:** *"Các cậu chỉ trích nhà trường chậm trễ, nhưng các cậu hoàn toàn không nắm được quy trình phê duyệt ngân sách công cộng!"*
-* **Cập nhật thanh:** $-15 - 20 = -35$. *(Thanh rớt sâu, nhạc nền căng thẳng dồn dập)*
+* **Cập nhật thanh:** $-5 - 20 = -25$. *(Thanh rớt sâu, nhạc nền căng thẳng dồn dập)*
 * **Lựa chọn của Khuê:** Xuất trình thẻ `[TÀI LIỆU]` (Bản sao đơn đề nghị kinh phí đã được BGH đóng dấu tiếp nhận).
 * **Khắc chế:** **WIN (+50 điểm)**.
-* **Tính toán:** $\Delta = +50 - 20 = +30 \rightarrow \text{Thanh kết thúc} = -15 + 30 = +15$.
+* **Tính toán:** $\Delta = +50 - 20 = +30 \rightarrow \text{Thanh kết thúc} = -5 + 30 = +25$.
 
 #### KẾT QUẢ CHUNG CUỘC PHIÊN THỦ:
 * Hết danh sách Cáo buộc bài viết General.
-* Thanh Phán Quyết dừng ở mức: **$+15\ (> 0)$** $\rightarrow$ **VƯỢT QUA GIAI ĐOẠN THỦ THÀNH CÔNG!**
-* **Chuyển giao:** Kích hoạt Buff **Bậc 1** mang sang CÔNG: Cấp thêm **$+0$ Tim** (Khởi đầu tiêu chuẩn). Không khí đám đông giữ nguyên trạng thái cân bằng.
+* Thanh Phán Quyết dừng ở mức: **$+25\ (> 0)$** $\rightarrow$ **VƯỢT QUA GIAI ĐOẠN THỦ THÀNH CÔNG!**
+* **Chuyển giao:** Kích hoạt Buff **Bậc 1** mang sang CÔNG: Cấp thêm **$+0$ Tim** (Khởi đầu tiêu chuẩn). Không khí đám đông giữ trạng thái Khuê lấy lại quyền chủ động.
 
 ---
 
@@ -351,6 +394,7 @@ $$\text{Tỷ lệ Tài nguyên} = \frac{\text{Tổng số Bằng chứng thu th�
 
 | Hạng mục | Thuộc tính | Trạng thái | Hướng giải quyết đề xuất |
 | :--- | :---: | :---: | :--- |
+| **Balance quality Side/General** | Tài nguyên / Điểm | `[MỞ]` | Kiểm chứng bảng điểm tạm mục 5.1.2, số thẻ mỗi quest, cơ cấu loại thẻ và cost/thời gian kiếm thẻ. Chốt mức khuyến khích làm Side mà không áp quota hoặc buộc hoàn thành mọi Side. |
 | **Cơ chế Nhìn trước Cáo buộc (Telegraphing)** | Hệ thống | `[MỞ]` | Nghiên cứu cho phép người chơi nhìn trước $1 - 2$ Cáo buộc tiếp theo trong hàng đợi. Mô phỏng hiện chỉ so được người chơi "tham lam" với người chơi "biết trước toàn bộ" (oracle), cho thấy khoảng cách điểm thanh trung bình đáng kể; việc nhìn trước 1–2 cáo buộc chưa được mô phỏng. Rủi ro: biến trò chơi thành bàn cờ tính toán sâu thay vì ứng biến. |
 | **Hậu quả khi THỦ thất bại (Game Over)** | Hệ thống | `[MỞ]` | Chưa chốt: thua THỦ thì chơi lại từ điểm lưu nào (đầu phiên điều trần hay đầu tuần), có giữ Bằng chứng đã thu thập không. |
 | **Kỹ năng Đặc thù của Hội Học Sinh (Boss Skills)** | Gameplay | `[MỞ]` | Bổ sung Skill kích hoạt theo lượt của Boss HHS: Cấm dùng nhóm thẻ Số liệu trong 1 lượt; hoặc gán hiệu ứng Sát thương duy trì (DoT - rút 5 điểm mỗi lượt). |
@@ -370,3 +414,9 @@ $$\text{Tỷ lệ Tài nguyên} = \frac{\text{Tổng số Bằng chứng thu th�
    * Đánh giá mức độ chấp nhận của người chơi khi gặp đòn đánh không thể đỡ. Xác định xem người chơi nhìn nhận đây là thử thách chiến thuật chấp nhận lỗ hay xem đó là lỗi thiết kế bất công.
 4. **Kiểm định Tỷ lệ Thắng Mù (Blind Playtest Benchmark):**
    * Tổ chức kiểm thử với nhóm người chơi mới ở Hồi 1, ghi nhận tỷ lệ thắng thực tế có rơi đúng khoảng mục tiêu **$60\% - 75\%$** hay không để kịp thời cân chỉnh bảng Sát thương.
+5. **Khép kín vòng lặp Quest → Bằng chứng → THỦ:**
+   * General do đồng đội tự chạy vẫn tự lưu ít nhất một thẻ quality thường khi completed; xuất bản không xóa hoặc cấp trùng thẻ. Item thưởng không quyết định việc có thẻ hay không.
+   * Side cho thẻ quality cao nhất; thẻ đúng cặp Win nhận nhiều điểm hơn General cùng cặp. Side chọn sai vẫn Lose; Mitigation Only không có Win và Unavoidable Hit không được quality cứu thành đúng.
+   * Chỉ thẻ của bài thường đã xuất bản trong phạm vi phiên được mang vào THỦ. Main/kho điều tra CÔNG bị loại; tư liệu THỦ không tự chuyển sang CÔNG sau phiên.
+   * UI cho thấy nguồn quest, quality, loại thẻ và liên kết bài báo; người chơi hiểu vì sao thẻ Side có lợi khi chọn đúng và vì sao cần chuẩn bị nhiều loại.
+   * So sánh kho General và kho hỗn hợp trong điều kiện cùng số thẻ, rồi tính khả năng thu thập theo energy/lịch tuần. Đo động lực làm thêm Side, tránh biến Side tùy chọn thành yêu cầu ngầm để chơi tiếp.

@@ -1,0 +1,96 @@
+{
+  "status": "passed",
+  "inventoryChanged": false,
+  "checks": [
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/128.png",
+      "ordinaryPathLength": 263,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/192.png",
+      "ordinaryPathLength": 263,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/256.png",
+      "ordinaryPathLength": 263,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/32.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/48.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/64.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-69397e7cae754dd98058da3087cc9e5a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/96.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/128.png",
+      "ordinaryPathLength": 263,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/192.png",
+      "ordinaryPathLength": 263,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/256.png",
+      "ordinaryPathLength": 263,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/32.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/48.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/64.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/Default/Web Applications/Manifest Resources/pommaclcbfghclhalboakcipcmmndhcj/Trusted Icons/Icons/96.png",
+      "ordinaryPathLength": 262,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    },
+    {
+      "path": "tmp/world-map-foundation/tmp/source-save-browser-94028bfa7a554249b25c3ae734dac83a/OptimizationGuideModelsManifest/1.20261018.2/speech_recognition_small_expert_model_solution_config.binarypb",
+      "ordinaryPathLength": 266,
+      "extendedPathExists": true,
+      "sha256Matches": true
+    }
+  ]
+}
