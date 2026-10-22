@@ -37,6 +37,16 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual(result['passed'], 1, result)
 
 class NativeKeyboardTests(unittest.TestCase):
+    def test_native_screenshot_is_saved_inside_the_project(self):
+        sys.path.insert(0,str(ROOT/'tools/pipeline'))
+        from browser_runner import run_browser
+        report=run_browser(ROOT,['/tests/fixtures/harness/screenshot.js'])
+        self.assertTrue(report['ok'],report)
+        path=ROOT/report['results'][0].get('artifact','missing')
+        self.assertTrue(path.is_relative_to(ROOT/'.cache/test/screenshots'))
+        from PIL import Image
+        with Image.open(path) as image:self.assertEqual(image.size,(960,720))
+
     def test_real_keyboard_defaults_reach_native_controls(self):
         sys.path.insert(0,str(ROOT/'tools/pipeline'))
         from browser_runner import run_browser

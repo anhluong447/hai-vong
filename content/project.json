@@ -6,7 +6,12 @@
     "packs/foundation-demo.json"
   ],
   "defaultLocale": "vi",
+  "runtimeConfigId": "runtime.foundation",
   "schemas": {
+    "sequences": "../src/contracts/schemas/sequences.json",
+    "scenes": "../src/contracts/schemas/scenes.json",
+    "actors": "../src/contracts/schemas/actors.json",
+    "input": "../src/contracts/schemas/input.json",
     "story": "../src/contracts/schemas/story.json",
     "flags": "../src/contracts/schemas/flags.json",
     "events": "../src/contracts/schemas/events.json",

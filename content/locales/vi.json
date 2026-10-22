@@ -1,86 +1,86 @@
 {
   "foundation.begin": {
-    "value": "Ch??ng th? nghi?m n?n t?ng.",
+    "value": "Chương thử nghiệm nền tảng.",
     "params": []
   },
   "foundation.choice": {
-    "value": "Gh? ph?ng c?u l?c b?",
+    "value": "Ghé phòng câu lạc bộ",
     "params": []
   },
   "foundation.end": {
-    "value": "?? ho?n t?t ch??ng th? nghi?m.",
+    "value": "Đã hoàn tất chương thử nghiệm.",
     "params": []
   },
   "workspace.title": {
-    "value": "H?i ?m ? Kh?ng gian ph?t tri?n",
+    "value": "Hồi Âm — Không gian phát triển",
     "params": []
   },
   "workspace.explorer": {
-    "value": "T?i li?u d? ?n",
+    "value": "Tài liệu dự án",
     "params": []
   },
   "workspace.source": {
-    "value": "N?i dung JSON",
+    "value": "Nội dung JSON",
     "params": []
   },
   "workspace.apply": {
-    "value": "?p d?ng",
+    "value": "Áp dụng",
     "params": []
   },
   "workspace.undo": {
-    "value": "Ho?n t?c",
+    "value": "Hoàn tác",
     "params": []
   },
   "workspace.redo": {
-    "value": "L?m l?i",
+    "value": "Làm lại",
     "params": []
   },
   "workspace.save": {
-    "value": "L?u ngu?n",
+    "value": "Lưu nguồn",
     "params": []
   },
   "workspace.recover": {
-    "value": "Ph?c h?i b?n nh?p",
+    "value": "Phục hồi bản nháp",
     "params": []
   },
   "workspace.preview": {
-    "value": "Ch?i th? ??c l?p",
+    "value": "Chơi thử độc lập",
     "params": []
   },
   "workspace.start": {
-    "value": "B?t ??u ch?i th?",
+    "value": "Bắt đầu chơi thử",
     "params": []
   },
   "workspace.stop": {
-    "value": "D?ng ch?i th?",
+    "value": "Dừng chơi thử",
     "params": []
   },
   "workspace.advance": {
-    "value": "Ti?p t?c",
+    "value": "Tiếp tục",
     "params": []
   },
   "workspace.writable": {
-    "value": "?ang b?t ghi ngu?n c?c b?",
+    "value": "Đang bật ghi nguồn cục bộ",
     "params": []
   },
   "workspace.readonly": {
-    "value": "Ch? ?? ch? ??c ngu?n; thay ??i ch? ? b?n nh?p",
+    "value": "Chế độ chỉ đọc nguồn; thay đổi chỉ ở bản nháp",
     "params": []
   },
   "workspace.unsaved": {
-    "value": "C? thay ??i ch?a l?u ngu?n",
+    "value": "Có thay đổi chưa lưu nguồn",
     "params": []
   },
   "workspace.clean": {
-    "value": "T?i li?u kh?p ngu?n ?? m?",
+    "value": "Tài liệu khớp nguồn đã mở",
     "params": []
   },
   "workspace.previewEnd": {
-    "value": "?? k?t th?c ch?i th?",
+    "value": "Đã kết thúc chơi thử",
     "params": []
   },
   "workspace.previewStopped": {
-    "value": "Ch?a ch?y ch?i th?",
+    "value": "Chưa chạy chơi thử",
     "params": []
   },
   "workspace.document": {
@@ -90,17 +90,107 @@
     ]
   },
   "workspace.documentDirty": {
-    "value": "{path} ? ch?a l?u",
+    "value": "{path} — chưa lưu",
     "params": [
       "path"
     ]
   },
   "workspace.diagnostic": {
-    "value": "{code} ? {source}{pointer}",
+    "value": "{code} — {source}{pointer}",
     "params": [
       "code",
       "source",
       "pointer"
     ]
+  },
+  "world.title": {
+    "value": "Hồi Âm · Phòng thử nghiệm 2D",
+    "params": []
+  },
+  "world.fixture": {
+    "value": "Bản thử nền tảng · hình ảnh tạm",
+    "params": []
+  },
+  "world.courtyard": {
+    "value": "Sân trường thử nghiệm",
+    "params": []
+  },
+  "world.club": {
+    "value": "Phòng câu lạc bộ thử nghiệm",
+    "params": []
+  },
+  "world.player": {
+    "value": "Người chơi thử nghiệm",
+    "params": []
+  },
+  "world.npc": {
+    "value": "Đồng đội thử nghiệm",
+    "params": []
+  },
+  "world.talk": {
+    "value": "Trò chuyện",
+    "params": []
+  },
+  "world.enterClub": {
+    "value": "Vào phòng câu lạc bộ",
+    "params": []
+  },
+  "world.exitClub": {
+    "value": "Ra sân trường",
+    "params": []
+  },
+  "world.controls": {
+    "value": "← → / A D: di chuyển · E / Enter: tương tác · Esc: tạm dừng · F: toàn màn hình",
+    "params": []
+  },
+  "world.interact": {
+    "value": "Tương tác",
+    "params": []
+  },
+  "world.continue": {
+    "value": "Tiếp tục",
+    "params": []
+  },
+  "world.pause": {
+    "value": "Tạm dừng",
+    "params": []
+  },
+  "world.resume": {
+    "value": "Trở lại",
+    "params": []
+  },
+  "world.paused": {
+    "value": "Đang tạm dừng",
+    "params": []
+  },
+  "world.loading": {
+    "value": "Đang chuẩn bị cảnh…",
+    "params": []
+  },
+  "world.ready": {
+    "value": "Sẵn sàng khám phá",
+    "params": []
+  },
+  "world.retry": {
+    "value": "Thử lại",
+    "params": []
+  },
+  "world.error": {
+    "value": "Không thể tiếp tục: {code}",
+    "params": [
+      "code"
+    ]
+  },
+  "world.audio": {
+    "value": "Bật âm thanh",
+    "params": []
+  },
+  "world.fullscreen": {
+    "value": "Toàn màn hình",
+    "params": []
+  },
+  "world.viewport": {
+    "value": "Thế giới khám phá hai chiều",
+    "params": []
   }
 }

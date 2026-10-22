@@ -19,10 +19,10 @@ test('choice checkpoint resumes the selected branch with no duplicate effect',as
  const other=new GameSession({bundle,effects,initialState:decoded.value});new StoryRunner(other).step({type:'choose',choiceId:'visit'});equal(other.snapshot().gameplay.flags['flag.count'],1);
 });
 test('pending scene and partially progressed sequence survive codec without platform objects',async()=>{
- const {session,checkpoints}=setup();const state=structuredClone(session.snapshot());state.world={sceneId:'old',position:12};state.sequence={id:'fade',stepId:'fade.in',elapsed:0.4,paused:true};state.audio={cueId:'bgm',offset:12,gain:0.5};
- state.story.pending={sceneId:'new',continuation:'load'};assert(session.replace(state).ok);
+ const {session,checkpoints}=setup();const state=structuredClone(session.snapshot());state.world={sceneId:'scene.courtyard',position:120,facing:1,pending:{sceneId:'scene.club',spawnId:'entry',requestId:'resume'}};state.sequence={id:'fade',stepId:'fade.in',elapsed:0.4,paused:true};state.audio={cueId:'bgm',offset:12,gain:0.5};
+ assert(session.replace(state).ok);
  const envelope=await SaveCodec.encode(checkpoints.capture().value,{buildId:'test',contentVersion:bundle.revision});const decoded=await SaveCodec.decode(envelope.value);assert(decoded.ok);
- equal(decoded.value.world,{sceneId:'old',position:12});equal(decoded.value.sequence.elapsed,0.4);equal(decoded.value.story.pending.sceneId,'new');equal(decoded.value.audio.offset,12);
+ equal(decoded.value.world,state.world);equal(decoded.value.sequence.elapsed,0.4);equal(decoded.value.world.pending.sceneId,'scene.club');equal(decoded.value.audio.offset,12);
 });
 test('corrupt checksum and unsupported envelope cannot replace a valid checkpoint',async()=>{
  const {session,checkpoints}=setup();const good=checkpoints.capture().value;
@@ -33,7 +33,7 @@ test('corrupt checksum and unsupported envelope cannot replace a valid checkpoin
 
 test('capture while scene preparation is pending resumes only its declared continuation',async()=>{
  const loading=await runtimeBundle(source=>{
-  source.documents.push({sourceId:'scenes.json',kind:'scenes',data:[{id:'scene.next'}]});
+  const scenes=source.documents.find(d=>d.kind==='scenes').data;scenes.push({...structuredClone(scenes[1]),id:'scene.next'});
   source.documents.find(d=>d.kind==='story').data.nodes[0].commands.unshift({id:'travel',op:'transition',sceneId:'scene.next'});
  });
  const session=new GameSession({bundle:loading,effects}),runner=new StoryRunner(session);runner.step({type:'start',chapterId:'foundation.chapter'});

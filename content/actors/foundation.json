@@ -1,0 +1,4 @@
+[
+ {"id":"actor.player","nameKey":"world.player","idleClipId":"clip.fixture.idle","walkClipId":"clip.fixture.walk","scale":2},
+ {"id":"actor.npc","nameKey":"world.npc","idleClipId":"clip.fixture.idle","walkClipId":"clip.fixture.walk","scale":2}
+]

@@ -1,5 +1,7 @@
 """Run ES-module tests in a real isolated Chromium, collecting a tokened JSON result."""
 import json
+import base64
+import hashlib
 from pathlib import Path
 import secrets
 import subprocess
@@ -56,6 +58,19 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/i
                 try:
                     if not event.wait(timeout):
                         return {'ok':False,'passed':0,'failed':1,'errors':[{'code':'test.browser.timeout','sourceId':url,'pointer':'','relatedIds':modules}]}
+                    for result in received.get('results',[]):
+                        detail=result.get('detail')
+                        if not isinstance(detail,dict) or 'screenshot' not in detail:continue
+                        try:
+                            raw=base64.b64decode(detail.pop('screenshot'),validate=True)
+                            if not raw.startswith(b'\x89PNG\r\n\x1a\n'):raise ValueError('png')
+                            destination=local_path('.cache/test/screenshots')
+                            destination.mkdir(parents=True,exist_ok=True)
+                            path=destination/(hashlib.sha256(result['name'].encode()).hexdigest()[:16]+'.png')
+                            path.write_bytes(raw);result['artifact']=path.relative_to(local_path('.')).as_posix()
+                        except (ValueError,TypeError,OSError):
+                            result.update(ok=False,error='test.screenshot.invalid');received['ok']=False
+                            received['passed']-=1;received['failed']+=1
                     return received
                 finally:
                     if proc.poll() is None: proc.terminate()

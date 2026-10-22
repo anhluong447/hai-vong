@@ -10,7 +10,7 @@ async function main() {
     try { await import(path); } catch(error) { results.push({name:path,ok:false,error:String(error.stack||error)}); }
   }
   for(const {name,run} of cases) {
-    try { await run(); results.push({name,ok:true}); } catch(error) { results.push({name,ok:false,error:String(error.stack||error)}); }
+    try { const detail=await run();results.push({name,ok:true,...(detail===undefined?{}:{detail})}); } catch(error) { results.push({name,ok:false,error:String(error.stack||error)}); }
   }
   if(!results.length) results.push({name:'harness.empty',ok:false,error:'No tests registered'});
   closeDriver();

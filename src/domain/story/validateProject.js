@@ -5,6 +5,8 @@ import {validateSchema} from '../../contracts/validateSchema.js';
 import {validateResources} from '../../contracts/validateResources.js';
 import {FlagStore} from './FlagStore.js';
 import {ContentCatalog} from './ContentCatalog.js';
+import {validateWorld} from '../../contracts/validateWorld.js';
+import {validTextEntry} from '../../contracts/TextTokens.js';
 
 export function validateProject({project,schemas,documents,capabilities=[]}) {
  const errors=[]; const entries=Object.create(null); const locations=new Map(); const locales=Object.create(null);
@@ -18,17 +20,18 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
    if(Object.hasOwn(locales,doc.locale)) {add('content.id.duplicate',doc,'/locale',[doc.locale]);continue;}
    locales[doc.locale]=doc.data;
    for(const [key,item] of Object.entries(doc.data)) {
-    const tokens=typeof item?.value==='string'?[...item.value.matchAll(/\{([\w.]+)\}/g)].map(m=>m[1]):[];
-    if(typeof item?.value!=='string'||!Array.isArray(item.params)||item.params.some(k=>typeof k!=='string')||new Set(item.params).size!==item.params.length||tokens.some(k=>!item.params.includes(k))||item.params.some(k=>!tokens.includes(k))) add('text.params.invalid',doc,'/'+key,[key]);
+    if(!validTextEntry(item)) add('text.params.invalid',doc,'/'+key,[key]);
    }
    continue;
   }
   const schemaKey=doc.kind==='assets'?'resources':doc.kind;
   const schema=Object.hasOwn(schemas,schemaKey)?schemas[schemaKey]:null;
   if(schema) {const found=validateSchema(schema,doc.data,doc.sourceId,'');errors.push(...found);if(found.length)continue;}
-  else if(!['scenes','animations','audio','quests','config','actors','hearing'].includes(doc.kind)) {add('content.kind.unknown',doc,'/kind');continue;}
+  else if(['scenes','actors','input','sequences'].includes(doc.kind)){add('schema.missing',doc,'/kind');continue;}
+  else if(!['animations','audio','quests','config','hearing'].includes(doc.kind)) {add('content.kind.unknown',doc,'/kind');continue;}
   const defs=Array.isArray(doc.data)?doc.data:[doc.data];entries[doc.kind]??=[];
   for(const [i,def] of defs.entries()) {
+   if(!def||typeof def!=='object'||Array.isArray(def)||typeof def.id!=='string'||!def.id){add('content.definition.invalid',doc,Array.isArray(doc.data)?`/${i}`:'/');continue;}
    const key=`${doc.kind}:${def?.id}`;
    if(locations.has(key)) add('content.id.duplicate',doc,Array.isArray(doc.data)?`/${i}/id`:'/id',[def?.id]);
    locations.set(key,doc);entries[doc.kind].push(def);
@@ -39,6 +42,7 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  const flags=entries.flags??[];const flagMap=new Map(flags.map(d=>[d.id,d]));
  for(const flag of flags) if(!FlagStore.accepts(flag,flag.default)) add('flag.default.invalid',locations.get(`flags:${flag.id}`),'/default',[flag.id]);
  const catalog=new ContentCatalog(entries);
+ errors.push(...validateWorld({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  for(const error of validateResources(entries.assets??[])){
   const id=error.relatedIds[0],doc=locations.get(`assets:${id}`);
   if(doc){error.sourceId=doc.sourceId;error.pointer='/'+doc.data.findIndex(d=>d.id===id);}
@@ -64,11 +68,9 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  };
  const text=(key,params,doc,pointer)=>{
   const item=locales[project.defaultLocale]?.[key];
-  if(!item||typeof item.value!=='string'||!Array.isArray(item.params)) {add('text.key.missing',doc,pointer,[key]);return;}
+  if(!item||!validTextEntry(item)) {add('text.key.missing',doc,pointer,[key]);return;}
   const names=Object.keys(params??{}).sort();
   if(JSON.stringify(names)!==JSON.stringify([...item.params].sort())) add('text.params.invalid',doc,pointer,[key]);
-  const tokens=[...item.value.matchAll(/\{([\w.]+)\}/g)].map(m=>m[1]);
-  if(tokens.some(k=>!item.params.includes(k))||item.params.some(k=>!tokens.includes(k))) add('text.params.invalid',doc,pointer,[key]);
  };
  for(const event of entries.events??[]) if(!capabilities.includes(event.handlerId)) add('event.handler.unknown',locations.get(`events:${event.id}`),'/handlerId',[event.handlerId]);
  for(const story of entries.story??[]) {

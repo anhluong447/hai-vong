@@ -1,6 +1,7 @@
 {
   "type": "object",
   "properties": {
+    "runtimeConfigId": {"type":"string","minLength":1},
     "schemaVersion": {
       "enum": [
         1

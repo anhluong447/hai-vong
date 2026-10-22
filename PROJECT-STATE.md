@@ -2,7 +2,7 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Latest user requirement: project containment
+## Mandatory project containment
 
 The entire project, plans, skills, dependencies, worktrees, portable toolchains,
 caches, logs, temporary files and test browser profiles must stay inside the
@@ -16,13 +16,37 @@ or synchronize it externally.
 
 Original project: `C:/Users/anhlh52/AndroidStudioProjects/Ask`.
 Implementation: `.worktrees/phase-0`, branch `feat/phase-0-skeleton-tools`.
-Plan commit: `e9a4d83`; latest prior implementation commit: `6c09905`.
+Plan commit: `e9a4d83`; containment commit: `ade0461`.
 T01 through T05 are implemented and committed: contracts/checks, content/flags,
 story session/checkpoints, JSON authoring workspace and resource pipeline/recovery.
-T06 has only the native keyboard test driver. No playable 2D world exists yet.
-T06 world/adapters and T07 through T14 remain; no 12-week production expansion.
-The user authorized Phase 0 execution; the current priority was applying the new
-containment requirement before continuing T06. No push, publication or merge.
+T06 is implemented: keyboard-driven 2D fixture scenes, NPC dialogue, doors, camera,
+DPR/viewport, focus, text, animation, audio and presentation timeline.
+T07 through T14 remain; no 12-week production expansion.
+The latest user instruction resumes the approved plan after containment remediation.
+Continue at T07 in the active worktree without another permission prompt.
+No push, publication or merge is authorized.
+
+## Latest implementation evidence (T06)
+
+- Real keyboard journey: walk, NPC dialogue/choice, pause/resume and door to a second
+  scene. Geometry/tone remain labelled development fixtures, not production art.
+- Shared scene/actor/input/sequence contracts and validation; pure world commands
+  through GameSession. Stale/failed scene requests cannot commit old candidates.
+- Browser gates passed: 45 JS unit tests, 28 Python tests, 13 platform/journey/display
+  tests, 8 authoring tests, real-pack content and architecture. Full reports are in
+  implementation `.cache/test/t06-final-*.json`. Browser/authoring used the live
+  loopback server with `--base-url http://127.0.0.1:8080`.
+- Actual headless browser viewport 1280x1000 at DPR 2: canvas CSS 1068x600.75,
+  backing 2136x1202. Readiness was awaited before capturing the actual rendered PNG
+  at `.cache/test/screenshots/8fdb99069a1ca48e.png`; a virtual-time-only screenshot
+  captured loading and is not acceptance evidence. No physical FPS claim.
+- Development locale encoding corruption was fixed; independent Unicode escape
+  tests verify real Vietnamese/graphemes and workspace labels.
+- RunSnapshot 1 review: optional pending/moving fields remain additive; validate
+  real scene IDs/bounds/facing/spawns. T07 still must integrate adapter snapshots,
+  transactional persistent save/restore and schema/content migration policy.
+- Platform details: docs/engineering/BROWSER-PLATFORM.md. The read-only dev host
+  is running on port 8080 for review; authoring writes are not enabled.
 
 ## Containment implementation and recovery
 
@@ -60,7 +84,8 @@ containment requirement before continuing T06. No push, publication or merge.
 - Browser/Python tests require sandbox escalation on this machine due temporary
   directory ACLs. Escalation does not authorize an external installation and does
   not change Chrome's own sandbox. All project-managed output paths stay local.
-- No running dev server is assumed. Production art/UI design and the remaining
+- Containment-stage host was stopped; the current T06 host is recorded above.
+  Production art/UI design and the remaining
   gameplay/editor/hot-reload/release work have not been completed by this change.
 
 ## Protected sources and historical evidence

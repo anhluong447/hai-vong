@@ -1,0 +1,8 @@
+{"id":"input.default","actions":["moveLeft","moveRight","interact","advance","menu","back","fullscreen"],"bindings":[
+ {"code":"ArrowLeft","action":"moveLeft","contexts":["world"]},{"code":"KeyA","action":"moveLeft","contexts":["world"]},
+ {"code":"ArrowRight","action":"moveRight","contexts":["world"]},{"code":"KeyD","action":"moveRight","contexts":["world"]},
+ {"code":"KeyE","action":"interact","contexts":["world"]},{"code":"Enter","action":"interact","contexts":["world"]},
+ {"code":"Enter","action":"advance","contexts":["dialogue"]},{"code":"Space","action":"advance","contexts":["dialogue"]},
+ {"code":"Escape","action":"menu","contexts":["world","dialogue"]},{"code":"Escape","action":"back","contexts":["menu"]},
+ {"code":"KeyF","action":"fullscreen","contexts":["world"]}
+]}

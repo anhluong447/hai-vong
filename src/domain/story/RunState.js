@@ -1,6 +1,7 @@
 import {RUN_SCHEMA_VERSION} from '../../contracts/RunSnapshot.js';
 import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
 import {FlagStore} from './FlagStore.js';
+import {validateWorldState} from '../world/worldState.js';
 export function createRunState(bundle) {
  return {schemaVersion:RUN_SCHEMA_VERSION,contentRevision:bundle.revision,gameplay:{flags:FlagStore.defaults(bundle.catalog.list('flags'))},story:{cursor:null,waiting:'idle',pending:null},world:{sceneId:null,position:0,facing:1},presentation:{dialogue:null},audio:{},sequence:{},executionLedger:[]};
 }
@@ -12,6 +13,7 @@ export function validateRunState(state,bundle) {
  for(const key of ['gameplay','story','world','presentation','audio','sequence']) if(!state[key]||typeof state[key]!=='object'||Array.isArray(state[key])) add('state.field.invalid','/'+key);
  if(!Array.isArray(state.executionLedger)||state.executionLedger.some(k=>typeof k!=='string')||new Set(state.executionLedger).size!==state.executionLedger.length) add('state.ledger.invalid','/executionLedger');
  if(errors.length)return failure(errors);
+ errors.push(...validateWorldState(state.world,bundle));
  const flags=FlagStore.validate(bundle.catalog.list('flags'),state.gameplay.flags??{},'snapshot','/gameplay/flags');if(!flags.ok)errors.push(...flags.errors);
  const defs=bundle.catalog.list('flags');for(const def of defs)if(!Object.hasOwn(state.gameplay.flags??{},def.id))add('state.flag.missing','/gameplay/flags/'+def.id);
  const cursor=state.story.cursor;

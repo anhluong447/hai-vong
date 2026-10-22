@@ -10,7 +10,7 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T05 đã triển khai và kiểm chứng; T06 mới có test bàn phím, chưa có world 2D. T06–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
+**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T06 đã triển khai và kiểm chứng; có bản thử 2D dùng bàn phím. T07–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
 
 ## Global Constraints
 
@@ -269,13 +269,13 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes resource leases and StoryRunner ports; produces scene load/pause/snapshot/restore/dispose, semantic input intents, TextView reveal state, audio cue state and the `SequencePlayer` contract in §4.
 
-- [ ] Write red browser tests for walk/door/range/camera bounds, resize/DPR coordinate agreement, key repeat, hidden-tab pause, nested-modal focus, IME input and cancellation of an outdated scene load.
-- [ ] Add text/audio tests: Vietnamese combining marks stay intact, wrap/reflow after fonts load, safe rich-text tokens only, configurable reveal speed; loop start/end, bus mute/gain/crossfade and autoplay-denied resume retain cue state.
-- [ ] Implement Canvas2D scenery/actors/foreground, DOM controls, authored camera/parallax and event-driven effects. No walking cost/calendar tick; pause/restore uses injected clocks and clears held input.
-- [ ] Separate input sampling, movement/presentation updates and render scheduling. Clamp catch-up after stalls and test equivalent movement at different frame cadences; world units, actor baseline/pivot, interaction bounds and world-to-screen conversion have one shared coordinate contract.
-- [ ] Implement `AnimationPlayer.update(delta)`, `snapshot()` and `restore(state)` against validated clip IDs/frame durations/pivots. Test pause/resume, loop/completion, clip replacement and disposal; frame timing and actor/UI/ambient clips stay in managed definitions.
-- [ ] Implement serializable tween/timeline steps with complete/skip/cancel and audio/scene coordination. Choose target viewport/tokens through a reviewable UI mock before production art; do not reinstate coastal layout gates.
-- [ ] Run browser/unit checks and repeated scene entry/disposal tests; record real display/DPR results separately from simulated-time tests. Commit `feat: add keyboard-first browser world and presentation adapters`.
+- [x] Write red browser tests for walk/door/range/camera bounds, resize/DPR coordinate agreement, key repeat, hidden-tab pause, nested-modal focus, IME input and cancellation of an outdated scene load.
+- [x] Add text/audio tests: Vietnamese combining marks stay intact, wrap/reflow after fonts load, safe rich-text tokens only, configurable reveal speed; loop start/end, bus mute/gain/crossfade and autoplay-denied resume retain cue state.
+- [x] Implement Canvas2D scenery/actors/foreground, DOM controls, authored camera/parallax and event-driven effects. No walking cost/calendar tick; pause/restore uses injected clocks and clears held input.
+- [x] Separate input sampling, movement/presentation updates and render scheduling. Clamp catch-up after stalls and test equivalent movement at different frame cadences; world units, actor baseline/pivot, interaction bounds and world-to-screen conversion have one shared coordinate contract.
+- [x] Implement `AnimationPlayer.update(delta)`, `snapshot()` and `restore(state)` against validated clip IDs/frame durations/pivots. Test pause/resume, loop/completion, clip replacement and disposal; frame timing and actor/UI/ambient clips stay in managed definitions.
+- [x] Implement serializable tween/timeline steps with complete/skip/cancel and audio/scene coordination. Choose target viewport/tokens through a reviewable UI mock before production art; do not reinstate coastal layout gates.
+- [x] Run browser/unit checks and repeated scene entry/disposal tests; record real display/DPR results separately from simulated-time tests. Commit `feat: add keyboard-first browser world and presentation adapters`.
 
 ### T07 — Player shell, full save/load, backlog, settings và accessibility
 

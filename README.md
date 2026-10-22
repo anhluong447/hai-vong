@@ -7,10 +7,12 @@ foundation, resource management and dedicated authoring tools; all 12 weeks are
 the eventual product goal.
 
 The Phase 0 foundation is being implemented: validated content, an immutable story
-session, checkpoint saves and the first authoring workspace. The full game and
-2D world are still under development. See PROJECT-STATE.md for actual task evidence.
+session, checkpoint saves, the first authoring workspace and a keyboard-driven 2D
+fixture world with NPC dialogue/doors. Persistent player menus and the remaining
+gameplay/tools are next. See PROJECT-STATE.md for actual task evidence.
 
 - [Current state and stopping point](PROJECT-STATE.md)
+- [Play the 2D fixture / browser contract](docs/engineering/BROWSER-PLATFORM.md)
 - [Asset toolchain and recovery](docs/guides/ASSETS.md)
 - [Authoring workspace setup](docs/guides/AUTHORING.md)
 - [Phase 0: skeleton and tools plan](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md)
