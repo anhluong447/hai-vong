@@ -2,7 +2,7 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Current status: executing Phase 0; T01?T04 verified, T05 next
+## Current status: executing Phase 0; T01?T05 verified, T06 next
 
 The user approved committing the plan and implementing it sequentially. Plan commit:
 `e9a4d83` on the original branch. Implementation worktree: `.worktrees/phase-0`,
@@ -43,9 +43,21 @@ original root. T01?T14 execution is authorized; no push or publication is author
   passes. UI bootstrap and history invalidation have browser checks; writer conflict,
   interrupted validator, path traversal, Host/Origin/token and Windows junction escape
   have actual HTTP/filesystem checks. Dedicated visual editors remain T10/T11.
-- Next: T05 resource/asset pipeline and binary recovery, then T06?T14 sequentially.
-  Pillow 12.3.0 and git-lfs exist locally; ffmpeg and magick not in PATH. Dependency
-  selection/pinning and reproducible binary recovery still need implementation.
+- T05: shared asset/animation/audio contracts, AssetCatalog/AssetService/ResourceScope,
+  real browser PNG/Vorbis decoder with hashes, deterministic PNG/atlas/audio build,
+  import/audit and versioned source ZIP recovery are implemented. Generated documents
+  are read-only in editor/model/backend. Restore refuses edited-master overwrite.
+  Evidence: unit 40 browser + 20 Python, authoring 8, content 1, architecture pass;
+  actual ZIP restored 6 masters/inputs in an empty directory and rebuilt all 6 rendition
+  definitions identically. No legacy art copied. Geometric art/tone are explicit internal
+  development fixtures, not production art approval or distribution rights.
+- Toolchain: existing Pillow 12.3.0 (metadata MIT-CMU); imageio-ffmpeg 0.6.0 installed
+  into this worktree's ignored `.cache/python` only. Wrapped FFmpeg 7.1 binary hash
+  is pinned; Vorbis repeat build hash verified. Current offline asset worker pin is
+  Windows x64. See ASSETS.md/requirements-tools.txt for fresh-checkout setup.
+- Next: T06 browser world, keyboard/text/audio/timeline adapters, then T07?T14.
+  Authoring dev server was stopped after T05 validation; restart explicitly for
+  `--base-url` browser/authoring checks. No ongoing test server is assumed.
   Continue without another permission prompt under the user's implementation order.
 - Plan-specific ledger/briefs live under `.superpowers/sdd/2026-10-22-phase-0-skeleton-tools/`
   in the implementation worktree; recorded rulings and test evidence survive compaction.

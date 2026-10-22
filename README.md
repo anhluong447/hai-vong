@@ -11,6 +11,7 @@ session, checkpoint saves and the first authoring workspace. The full game and
 2D world are still under development. See PROJECT-STATE.md for actual task evidence.
 
 - [Current state and stopping point](PROJECT-STATE.md)
+- [Asset toolchain and recovery](docs/guides/ASSETS.md)
 - [Authoring workspace setup](docs/guides/AUTHORING.md)
 - [Phase 0: skeleton and tools plan](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md)
 - [Mandatory coding and post-compaction rules](docs/engineering/CODING-RULES.md)

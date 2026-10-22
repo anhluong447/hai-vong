@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "exportRoot": "assets/exports",
+  "maxImageDimension": 4096,
+  "licenses": {
+    "LicenseRef-ProjectFixture": {
+      "provenance": "tools/pipeline/generate_fixtures.py + assets/sources/fixture-inputs.json",
+      "usage": "internal-development",
+      "productionApproved": false
+    }
+  },
+  "entries": [
+    {
+      "id": "image.fixture.scene",
+      "kind": "image",
+      "source": "assets/sources/scene.png",
+      "required": true,
+      "license": "LicenseRef-ProjectFixture"
+    },
+    {
+      "id": "image.fixture.placeholder",
+      "kind": "image",
+      "source": "assets/sources/placeholder.png",
+      "required": true,
+      "license": "LicenseRef-ProjectFixture"
+    },
+    {
+      "id": "image.fixture.actor0",
+      "kind": "image",
+      "source": "assets/sources/actor-0.png",
+      "required": true,
+      "license": "LicenseRef-ProjectFixture"
+    },
+    {
+      "id": "image.fixture.actor1",
+      "kind": "image",
+      "source": "assets/sources/actor-1.png",
+      "required": true,
+      "license": "LicenseRef-ProjectFixture"
+    },
+    {
+      "id": "audio.fixture.tone",
+      "kind": "audio",
+      "source": "assets/sources/tone.wav",
+      "required": true,
+      "license": "LicenseRef-ProjectFixture",
+      "quality": 4,
+      "sampleRate": 44100,
+      "channels": 1
+    }
+  ],
+  "generationInputs": [
+    "assets/sources/fixture-inputs.json"
+  ],
+  "atlases": [
+    {
+      "id": "atlas.fixture.actor",
+      "members": [
+        "image.fixture.actor0",
+        "image.fixture.actor1"
+      ],
+      "padding": 1,
+      "maxSize": 256
+    }
+  ],
+  "bundlePath": "assets/bundles/foundation-v1.zip",
+  "bundleVersion": 1
+}

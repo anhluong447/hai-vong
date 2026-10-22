@@ -30,3 +30,10 @@ __pycache__/
 !.env.sample
 .DS_Store
 Thumbs.db
+
+# Reproducible new masters/renditions are restored/generated from versioned bundles.
+/.venv/
+/assets/sources/*
+!/assets/sources/README.md
+/assets/exports/*
+!/assets/exports/README.md

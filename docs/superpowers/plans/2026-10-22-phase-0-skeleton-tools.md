@@ -253,11 +253,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes catalog/resource schemas; produces `AssetService.acquire(ids,{revision,signal})` and `AssetLease.release()`. Manifest entries include kind, source/export, hash, required/optional, dependencies, dimensions/duration and license/provenance.
 
-- [ ] Write red tests: duplicate/missing IDs, invalid atlas bounds, absent required source, optional placeholder policy, async cancellation/stale revision, shared resource leases and deterministic manifest output.
-- [ ] Probe image/audio conversion tools using small inputs; select and pin tools with license/source attribution. Record exactly which image/audio inputs and outputs are supported; no custom codec or hidden online conversion service.
-- [ ] Implement naming/import validation, image optimization/atlas/pack generation, audio conversion, dimension/duration checks and versioned manifests. Same input/tool versions produce matching content hashes; processing a changed source rebuilds only affected renditions.
-- [ ] Decide and demonstrate binary storage: Git LFS or versioned resource bundle with hash inventory and restore command. Repository currently ignores old binaries in archive payload; this is not a recovery solution for new production assets.
-- [ ] Run `python tools/check.py content`, resource unit tests and asset pipeline tests. Restore a source pack in an empty temp workspace and verify hashes. Commit `feat: add deterministic resources and asset recovery workflow`.
+- [x] Write red tests: duplicate/missing IDs, invalid atlas bounds, absent required source, optional placeholder policy, async cancellation/stale revision, shared resource leases and deterministic manifest output.
+- [x] Probe image/audio conversion tools using small inputs; select and pin tools with license/source attribution. Record exactly which image/audio inputs and outputs are supported; no custom codec or hidden online conversion service.
+- [x] Implement naming/import validation, image optimization/atlas/pack generation, audio conversion, dimension/duration checks and versioned manifests. Same input/tool versions produce matching content hashes; processing a changed source rebuilds only affected renditions.
+- [x] Decide and demonstrate binary storage: Git LFS or versioned resource bundle with hash inventory and restore command. Repository currently ignores old binaries in archive payload; this is not a recovery solution for new production assets.
+- [x] Run `python tools/check.py content`, resource unit tests and asset pipeline tests. Restore a source pack in an empty temp workspace and verify hashes. Commit `feat: add deterministic resources and asset recovery workflow`.
 
 ### T06 — Browser world, keyboard, text/audio và presentation timeline
 
@@ -347,7 +347,7 @@ python tools/build.py --profile foundation-demo --output dist
 
 ### T13 — Web release, CI, licenses, performance và recovery
 
-**Files:** Create `tools/{build.py,pipeline/release.py,pipeline/restore_assets.py}`, `content/pipeline/{release,licenses,performance-targets}.json`, `.github/workflows/phase-0.yml`, `tests/python/test_release.py`, `docs/guides/{SETUP,RELEASE-RESTORE}.md`, `docs/testing/PHASE-0-EVIDENCE.md`.
+**Files:** Create `tools/{build.py,pipeline/release.py}`; modify `tools/pipeline/restore_assets.py` (introduced in T05 for its recovery gate), `content/pipeline/{release,licenses,performance-targets}.json`, `.github/workflows/phase-0.yml`, `tests/python/test_release.py`, `docs/guides/{SETUP,RELEASE-RESTORE}.md`, `docs/testing/PHASE-0-EVIDENCE.md`.
 
 **Interfaces:** Consumes toolchain/asset inventories, checks and pack manifests; produces versioned static web export, third-party notices, content hashes, setup/restore procedure and machine-readable release diagnostics.
 

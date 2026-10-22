@@ -11,6 +11,8 @@
     "flags": "../src/contracts/schemas/flags.json",
     "events": "../src/contracts/schemas/events.json",
     "resources": "../src/contracts/schemas/resources.json",
-    "project": "../src/contracts/schemas/project.json"
+    "project": "../src/contracts/schemas/project.json",
+    "animations": "../src/contracts/schemas/animations.json",
+    "audio": "../src/contracts/schemas/audio.json"
   }
 }

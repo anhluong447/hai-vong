@@ -29,7 +29,7 @@ def load_sources(root,candidate_name=None,candidate=None):
 
 def create_authoring_server(root,port=8080):
     root=Path(root).resolve();token=secrets.token_urlsafe(32)
-    allowed=[d['sourceId'].lstrip('/') for d in load_sources(root)['documents']]
+    allowed=[d['sourceId'].lstrip('/') for d in load_sources(root)['documents'] if not d.get('generated')]
     def validate(name,data):
         try:sources=load_sources(root,name,data)
         except (ValueError,OSError):return failed('authoring.project.invalid',name)

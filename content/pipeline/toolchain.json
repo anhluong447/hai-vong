@@ -1,1 +1,29 @@
-{"schemaVersion":1,"python":{"minimum":"3.12"},"browser":{"family":"chromium","minimumMajor":120},"nodeRequired":false,"assetTools":[]}
+{
+  "schemaVersion": 1,
+  "python": {
+    "minimum": "3.12"
+  },
+  "browser": {
+    "family": "chromium",
+    "minimumMajor": 120
+  },
+  "nodeRequired": false,
+  "assetTools": [
+    {
+      "name": "Pillow",
+      "version": "12.3.0",
+      "license": "MIT-CMU",
+      "source": "https://pillow.readthedocs.io/en/12.3.0/"
+    },
+    {
+      "name": "imageio-ffmpeg",
+      "version": "0.6.0",
+      "license": "BSD-2-Clause",
+      "source": "https://pypi.org/project/imageio-ffmpeg/0.6.0/",
+      "binaryVersion": "7.1-essentials_build-www.gyan.dev",
+      "binarySha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+      "binaryLicense": "GPL-3.0-or-later",
+      "usage": "offline-build-only"
+    }
+  ]
+}

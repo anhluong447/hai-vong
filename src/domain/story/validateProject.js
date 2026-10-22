@@ -2,6 +2,7 @@ import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
 import {immutableCopy} from '../../contracts/Content.js';
 import {STORY_OPCODES} from '../../contracts/Commands.js';
 import {validateSchema} from '../../contracts/validateSchema.js';
+import {validateResources} from '../../contracts/validateResources.js';
 import {FlagStore} from './FlagStore.js';
 import {ContentCatalog} from './ContentCatalog.js';
 
@@ -38,6 +39,23 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  const flags=entries.flags??[];const flagMap=new Map(flags.map(d=>[d.id,d]));
  for(const flag of flags) if(!FlagStore.accepts(flag,flag.default)) add('flag.default.invalid',locations.get(`flags:${flag.id}`),'/default',[flag.id]);
  const catalog=new ContentCatalog(entries);
+ for(const error of validateResources(entries.assets??[])){
+  const id=error.relatedIds[0],doc=locations.get(`assets:${id}`);
+  if(doc){error.sourceId=doc.sourceId;error.pointer='/'+doc.data.findIndex(d=>d.id===id);}
+  errors.push(error);
+ }
+ for(const clip of entries.animations??[]){
+  const doc=locations.get(`animations:${clip.id}`);
+  for(const [i,frame]of clip.frames.entries()){
+   const asset=catalog.get('assets',frame.assetId);
+   if(!asset.ok||asset.value.kind!=='image'||frame.frameId&&!asset.value.frames?.some(f=>f.id===frame.frameId))add('animation.frame.invalid',doc,`/${clip.id}/frames/${i}`,[frame.assetId]);
+  }
+ }
+ for(const cue of entries.audio??[]){
+  const asset=catalog.get('assets',cue.assetId);
+  if(!asset.ok||asset.value.kind!=='audio'||cue.loop&&!(cue.loopEnd>cue.loopStart&&cue.loopEnd<=asset.value.duration))add('audio.cue.invalid',locations.get(`audio:${cue.id}`),'/'+cue.id,[cue.assetId]);
+ }
+
  const ref=(kind,id,doc,pointer)=>{ if(!id||!catalog.get(kind,id).ok)add('content.reference.missing',doc,pointer,[id]); };
  const checkFlag=(id,value,doc,pointer)=>{
   const def=flagMap.get(id);

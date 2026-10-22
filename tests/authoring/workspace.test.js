@@ -29,3 +29,9 @@ test('preview never changes player state or authoring working documents',()=>{
  assert(preview.start(workspace.bundle,{chapterId:'foundation.chapter'}).ok);preview.step({type:'advance'});preview.step({type:'choose',choiceId:'visit'});equal(preview.snapshot().gameplay.flags['flag.foundation.visited'],true);
  equal(player.snapshot(),playerBefore);equal(workspace.get(storyId),before);preview.stop();equal(preview.snapshot(),null);
 });
+
+test('generated documents can be inspected but never edited as authored source',()=>{
+ const sources=structuredClone(source);sources.documents.find(d=>d.sourceId===storyId).generated=true;
+ const workspace=new Workspace({sources,drafts:memory()});const before=workspace.get(storyId);
+ assert(!workspace.applyChange(storyId,{type:'replace',path:'/nodes/0/commands/0/textKey',value:'foundation.end'},before.revision).ok);equal(workspace.get(storyId),before);
+});

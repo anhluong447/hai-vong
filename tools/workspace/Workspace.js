@@ -26,6 +26,7 @@ export class Workspace {
  list(){return [...this.#docs.values()].map(d=>d.view());}
  #commit(id,data,mode='edit'){
   const doc=this.#docs.get(id);if(!doc)return bad('authoring.document.missing',id);
+  if(doc.readOnly)return bad('authoring.document.readonly',id);
   const next={...this.#sources,documents:this.#sources.documents.map(d=>d.sourceId===id?{...d,data}:d)};
   const checked=validateProject(next);if(!checked.ok)return checked;
   this.#sources=next;this.bundle=checked.value;return success(doc.commit(data,mode));
@@ -47,6 +48,7 @@ export class Workspace {
  }
  async save(id){
   const doc=this.#docs.get(id);if(!doc||!this.#writer)return bad('authoring.writer.unavailable',id);
+  if(doc.readOnly)return bad('authoring.document.readonly',id);
   const revision=doc.revision,data=doc.data;
   const result=await this.#writer.save(id,data,doc.hash);if(!result.ok)return result;
   doc.base=data;doc.hash=result.value; // A newer edit remains dirty against the saved revision.

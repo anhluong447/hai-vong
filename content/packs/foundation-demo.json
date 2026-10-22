@@ -23,6 +23,19 @@
     {
       "kind": "config",
       "path": "../ui/workspace.json"
+    },
+    {
+      "kind": "assets",
+      "path": "../assets/manifest.json",
+      "generated": true
+    },
+    {
+      "kind": "animations",
+      "path": "../animations/clips.json"
+    },
+    {
+      "kind": "audio",
+      "path": "../audio/cues.json"
     }
   ]
 }

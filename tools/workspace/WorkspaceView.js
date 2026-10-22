@@ -23,7 +23,8 @@ export class WorkspaceView {
    this.query('explorer').append(button);if(focused===doc.id)button.focus();
   }
   const doc=this.workspace.get(this.id);if(!doc)return;
-  this.query('document-name').textContent=this.label('workspace.document',{path:doc.id});this.query('source').value=JSON.stringify(doc.data,null,2);
+  this.query('document-name').textContent=this.label('workspace.document',{path:doc.id});this.query('source').value=JSON.stringify(doc.data,null,2);this.query('source').readOnly=doc.readOnly;
+  for(const action of ['apply','undo','redo','recover'])this.root.querySelector(`[data-action=${action}]`).disabled=doc.readOnly;
   this.query('status').textContent=this.label(doc.dirty?'workspace.unsaved':'workspace.clean');
   this.root.querySelector('[data-action=save]').disabled=!this.canWrite||!doc.dirty;
  }
