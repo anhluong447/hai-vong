@@ -2,7 +2,7 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Current status: executing Phase 0; T01?T03 verified, T04 next
+## Current status: executing Phase 0; T01?T04 verified, T05 next
 
 The user approved committing the plan and implementing it sequentially. Plan commit:
 `e9a4d83` on the original branch. Implementation worktree: `.worktrees/phase-0`,
@@ -36,7 +36,16 @@ original root. T01?T14 execution is authorized; no push or publication is author
   envelopes, interrupted effect rollback and zero-yield loops are covered.
   Real timed sequence/audio playback resume remains T06/T07/T09; T03 checks
   serializable adapter state with in-memory fixtures. Profile-slot merge remains T07.
-- Next: T04 isolated authoring workspace/history/drafts and safe source writer.
+- T04: real JSON workspace UI, shared validation, history/drafts, isolated preview,
+  loopback opt-in writer with Host/Origin/token, exact source hashes, atomic replace
+  and server-side JavaScript revalidation implemented. Commands in AUTHORING.md.
+  Verified: 33 JS + 14 Python (zero skips), 7 authoring, 1 real content; architecture
+  passes. UI bootstrap and history invalidation have browser checks; writer conflict,
+  interrupted validator, path traversal, Host/Origin/token and Windows junction escape
+  have actual HTTP/filesystem checks. Dedicated visual editors remain T10/T11.
+- Next: T05 resource/asset pipeline and binary recovery, then T06?T14 sequentially.
+  Pillow 12.3.0 and git-lfs exist locally; ffmpeg and magick not in PATH. Dependency
+  selection/pinning and reproducible binary recovery still need implementation.
   Continue without another permission prompt under the user's implementation order.
 - Plan-specific ledger/briefs live under `.superpowers/sdd/2026-10-22-phase-0-skeleton-tools/`
   in the implementation worktree; recorded rulings and test evidence survive compaction.

@@ -6,10 +6,12 @@ UI and complete keyboard operation. The immediate priority is a sound gameplay
 foundation, resource management and dedicated authoring tools; all 12 weeks are
 the eventual product goal.
 
-This workspace currently contains retained design sources, a recovery skill and
-the legacy archive. No replacement runtime or editor has been created.
+The Phase 0 foundation is being implemented: validated content, an immutable story
+session, checkpoint saves and the first authoring workspace. The full game and
+2D world are still under development. See PROJECT-STATE.md for actual task evidence.
 
 - [Current state and stopping point](PROJECT-STATE.md)
+- [Authoring workspace setup](docs/guides/AUTHORING.md)
 - [Phase 0: skeleton and tools plan](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md)
 - [Mandatory coding and post-compaction rules](docs/engineering/CODING-RULES.md)
 - [Project recovery skill](skills/hoi-am-engine-free-development/SKILL.md)
@@ -20,6 +22,6 @@ The skill is also installed in the user's Codex skills directory. Its source cop
 is retained here so it remains available when moving the repository or recovering
 conversation context.
 
-The Phase 0 plan audits the eight preparation areas and defines implementation
-tasks and acceptance gates. It is a proposal for review; writing the plan does
-not authorize runtime or editor implementation.
+The user approved Phase 0 execution on 2026-10-22. Protected design sources and the
+legacy archive remain unchanged. The development chapter is a technical fixture,
+not an expansion or rewrite of the finalized story.

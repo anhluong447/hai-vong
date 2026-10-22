@@ -11,11 +11,15 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from preflight import detect_browser
 from server import StaticHandler,create_server
 
-def run_browser(root,modules,params=None,timeout=40,base_url=None):
+def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/index.html',payload=None):
     detected=detect_browser()
     if not detected['ok']: return detected
     received={}; event=threading.Event(); token=secrets.token_urlsafe(24)
     class Handler(StaticHandler):
+        def do_GET(self):
+            if urlsplit(self.path).path=='/_input/'+token and payload is not None:
+                data=json.dumps(payload,ensure_ascii=False).encode('utf-8');self.send_response(200);self.send_header('Content-Type','application/json');self.end_headers();self.wfile.write(data);return
+            super().do_GET()
         def do_POST(self):
             if urlsplit(self.path).path!='/_test/'+token:
                 self.send_error(403); return
@@ -31,7 +35,8 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None):
     query=[('module',m) for m in modules]+list((params or {}).items())+[('result',origin+'/_test/'+token)]
     # Harness is always on its own isolated server; application under test may be on base_url.
     if base_url: query.append(('base',base_url))
-    url=origin+'/tests/index.html?'+urlencode(query)
+    if payload is not None:query.append(('input',origin+'/_input/'+token))
+    url=origin+page+'?'+urlencode(query)
     try:
         with tempfile.TemporaryDirectory(prefix='hoi-am-browser-') as profile:
             with tempfile.TemporaryFile() as stderr:

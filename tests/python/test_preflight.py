@@ -19,7 +19,7 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual(result['errors'][0]['code'], 'tool.browser.missing')
 
     def test_unimplemented_suite_never_succeeds(self):
-        run = subprocess.run([sys.executable, 'tools/check.py', 'release'], cwd=ROOT, capture_output=True, text=True)
+        run = subprocess.run([sys.executable, 'tools/check.py', 'unregistered-fixture-suite'], cwd=ROOT, capture_output=True, text=True)
         self.assertNotEqual(run.returncode, 0)
         self.assertIn('not-implemented', run.stdout)
 
@@ -38,3 +38,9 @@ class PreflightTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class RequestedServerTests(unittest.TestCase):
+    def test_requested_browser_base_url_must_be_reachable(self):
+        run=subprocess.run([sys.executable,'-X','utf8','tools/check.py','authoring','--base-url','http://127.0.0.1:1'],cwd=ROOT,capture_output=True,text=True)
+        self.assertNotEqual(run.returncode,0)
+        self.assertIn('test.server.unreachable',run.stdout)

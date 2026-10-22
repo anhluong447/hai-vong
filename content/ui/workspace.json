@@ -1,0 +1,21 @@
+{
+  "id": "ui.workspace",
+  "theme": {
+    "spacing": "16px",
+    "gap": "8px",
+    "control-padding": "8px 12px",
+    "font-family": "system-ui, sans-serif",
+    "mono-family": "ui-monospace, monospace",
+    "font-size": "16px",
+    "background": "#171d29",
+    "foreground": "#ecf0f5",
+    "surface": "#222c3d",
+    "border": "#546175",
+    "accent": "#f3c77d",
+    "columns": "minmax(180px, 1fr) minmax(360px, 3fr) minmax(240px, 2fr)",
+    "source-height": "52vh",
+    "disabled-opacity": ".5",
+    "focus-width": "3px",
+    "focus-offset": "2px"
+  }
+}

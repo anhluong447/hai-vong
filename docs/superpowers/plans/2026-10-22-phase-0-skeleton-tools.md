@@ -240,12 +240,12 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes T02 validator and T03 runner; produces `Workspace.applyChange`, `SourceWriter.save`, `PreviewSession.start/stop/snapshot` from §4. Dev server binds loopback; runtime static export has no write API.
 
-- [ ] Write red tests for edit/undo/redo, invalid edit preserving the document, dirty draft recovery, two writers with stale expected hash, traversal/outside-root write rejection and preview isolation from player state.
-- [ ] Run `python tools/check.py authoring --base-url http://127.0.0.1:8080` and Python writer tests; confirm missing behavior fails.
-- [ ] Implement explorer/inspector/diagnostics plus the common operation journal and draft store. Source writes are allowlisted, conflict-aware and atomic; generated outputs are not direct editing targets.
-- [ ] Bind the writer to loopback, check Host/Origin and a per-session token, and reject requests from unrelated web pages. Only explicitly enabled authoring sessions expose writes; the regular player server and release never expose this route. Test cross-origin rejection and symlink/path escape alongside normal writes.
-- [ ] Let an author edit a story node and declared flag, validate, preview choices, stop and return to the same working document. No player save keys are read/written.
-- [ ] Run authoring/unit/content checks and writer tests; commit `feat: add isolated authoring workspace and safe source writes`.
+- [x] Write red tests for edit/undo/redo, invalid edit preserving the document, dirty draft recovery, two writers with stale expected hash, traversal/outside-root write rejection and preview isolation from player state.
+- [x] Run `python tools/check.py authoring --base-url http://127.0.0.1:8080` and Python writer tests; confirm missing behavior fails.
+- [x] Implement explorer/inspector/diagnostics plus the common operation journal and draft store. Source writes are allowlisted, conflict-aware and atomic; generated outputs are not direct editing targets.
+- [x] Bind the writer to loopback, check Host/Origin and a per-session token, and reject requests from unrelated web pages. Only explicitly enabled authoring sessions expose writes; the regular player server and release never expose this route. Test cross-origin rejection and symlink/path escape alongside normal writes.
+- [x] Let an author edit a story node and declared flag, validate, preview choices, stop and return to the same working document. No player save keys are read/written.
+- [x] Run authoring/unit/content checks and writer tests; commit `feat: add isolated authoring workspace and safe source writes`.
 
 ### T05 — Asset/resource pipeline và binary recovery policy
 

@@ -19,6 +19,10 @@
     {
       "kind": "story",
       "path": "../dev/foundation/chapter.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/workspace.json"
     }
   ]
 }

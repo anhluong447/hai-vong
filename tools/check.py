@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from urllib.request import urlopen
+from urllib.parse import urlsplit
 from pipeline.check_architecture import check
 from pipeline.browser_runner import run_browser
 
@@ -22,11 +24,19 @@ def suite(name,args):
     folder={'content':'content','browser':'browser','authoring':'authoring','bot':'bot'}.get(name)
     if folder:
         modules=['/'+p.relative_to(ROOT).as_posix() for p in sorted((ROOT/'tests'/folder).glob('*.test.js'))]
-        if modules: return {'suite':name,**run_browser(ROOT,modules,base_url=args.base_url)}
+        if modules:
+            if args.base_url:
+                try:
+                    parsed=urlsplit(args.base_url)
+                    if parsed.scheme!='http' or parsed.hostname not in {'localhost','127.0.0.1'}:raise ValueError('loopback required')
+                    with urlopen(args.base_url.rstrip('/')+'/content/project.json',timeout=3) as response:
+                        if response.status!=200:raise ValueError('not ready')
+                except (OSError,ValueError):return {'suite':name,'ok':False,'errors':[{'code':'test.server.unreachable','sourceId':args.base_url,'pointer':'','relatedIds':[]}]}
+            return {'suite':name,**run_browser(ROOT,modules,base_url=args.base_url)}
     return {'suite':name,'ok':False,'errors':[{'code':'not-implemented','sourceId':name,'pointer':'','relatedIds':[]}]}
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument('suite',choices=(*SUITES,'all')); parser.add_argument('--base-url'); parser.add_argument('--profile'); parser.add_argument('--pack'); args=parser.parse_args()
+    parser=argparse.ArgumentParser(); parser.add_argument('suite'); parser.add_argument('--base-url'); parser.add_argument('--profile'); parser.add_argument('--pack'); args=parser.parse_args()
     reports=[suite(name,args) for name in (SUITES if args.suite=='all' else [args.suite])]
     print(json.dumps({'ok':all(r['ok'] for r in reports),'reports':reports},ensure_ascii=False,indent=2))
     return 0 if all(r['ok'] for r in reports) else 1
