@@ -8,7 +8,7 @@ import sys
 import tempfile
 import threading
 import unittest
-ROOT=Path(__file__).resolve().parents[2]
+from project_environment import ROOT
 sys.path.insert(0,str(ROOT/'tools/pipeline'))
 
 class AuthoringServerTests(unittest.TestCase):

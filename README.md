@@ -19,9 +19,10 @@ session, checkpoint saves and the first authoring workspace. The full game and
 - [Protected narrative/gameplay documents](docs/README.md)
 - [Legacy snapshot, inventory and recovery](archive/legacy-2026-10-22/README.md)
 
-The skill is also installed in the user's Codex skills directory. Its source copy
-is retained here so it remains available when moving the repository or recovering
-conversation context.
+The project skill stays in this repository and is loaded through root AGENTS.md.
+Do not install or synchronize it into a user/global Codex directory. Project tools,
+dependencies, caches and temporary files also stay inside the project folder;
+Python packages use a private `.venv` without system site packages.
 
 The user approved Phase 0 execution on 2026-10-22. Protected design sources and the
 legacy archive remain unchanged. The development chapter is a technical fixture,

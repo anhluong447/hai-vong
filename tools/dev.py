@@ -1,6 +1,8 @@
 """Start read-only loopback development hosting; Ctrl+C closes cleanly."""
 import argparse
 from pathlib import Path
+from pipeline.local_environment import configure
+configure()
 from pipeline.server import create_server
 
 def main():

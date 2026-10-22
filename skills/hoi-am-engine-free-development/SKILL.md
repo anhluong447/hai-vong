@@ -9,12 +9,29 @@ Recover the user's actual product decisions before interpreting legacy code as t
 
 ## Recover context
 
-1. Read root `AGENTS.md` and `PROJECT-STATE.md`. Project paths such as `docs/` and `archive/` resolve from the repository root. Markdown links to this skill's `references/` resolve relative to `SKILL.md`, including in the installed copy.
+1. Read root `AGENTS.md` and `PROJECT-STATE.md`. Project paths such as `docs/` and `archive/` resolve from the repository root. Markdown links to this skill's `references/` resolve relative to this repository's `SKILL.md`.
 2. Read [the foundation reference](references/foundation.md) for the relevant system; consult [research sources](references/research-sources.md) when verifying a browser limitation or evaluating an implementation choice.
 3. Read the protected Bible/GDD sections for the feature being changed. Follow the latest user request and its stopping point.
 4. Consult the archive inventory before retrieving reusable legacy modules or art. Archived architecture, UI targets, plans and code are historical evidence, not the current product brief.
 
 The task that created this skill ends after skill creation and verified archiving. When `PROJECT-STATE.md` says awaiting instructions, wait for a subsequent user task; do not start a skeleton, install dependencies, scaffold a game, or produce new gameplay content just because this skill describes them.
+
+## Project-local execution only
+
+Keep this project and its plans, skills, dependencies, worktrees, portable tools,
+caches, temporary files and test browser profiles inside the project folder.
+Read this repository copy through root AGENTS.md; do not install or synchronize
+it into an external Codex skills directory.
+
+Python dependencies must be installed into the checkout's isolated `.venv`,
+never global/user Python or a `.cache/python` import path. Use
+`python -B tools/setup.py` to bootstrap and the venv interpreter thereafter.
+Other tools must have a project-local/portable installation with local caches.
+Do not alter Windows, AppData, user/machine PATH, registry or global tool settings.
+Existing interpreters/browsers may be invoked without modification; give automated
+browsers disposable profiles under project `.cache/tmp`. Resolve paths and reject
+symlink/junction escapes. If local execution is impossible, report it rather than
+installing elsewhere. These user constraints override skill installation defaults.
 
 ## Decisions confirmed by the user
 

@@ -5,6 +5,7 @@ import os
 from pathlib import Path,PurePosixPath
 import tempfile
 import threading
+from local_environment import require_project_path
 
 WRITE_LOCK=threading.RLock()
 def failed(code,source=''):return {'ok':False,'errors':[{'code':code,'sourceId':source,'pointer':'','relatedIds':[]}]}
@@ -16,7 +17,7 @@ def safe_path(root,name):
     return target
 
 class SourceWriter:
-    def __init__(self,root,allowed,validator):self.root=Path(root).resolve();self.allowed=set(allowed);self.validator=validator
+    def __init__(self,root,allowed,validator):self.root=require_project_path(root);self.allowed=set(allowed);self.validator=validator
     def read(self,name):
         if name not in self.allowed:return failed('authoring.path.denied',name)
         try:

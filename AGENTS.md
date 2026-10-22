@@ -29,6 +29,26 @@ long work. Record the current task, authorization/stopping point, actual changes
 checks that ran, remaining work and blockers. Preserve uncertainty; do not record
 a planned change or an unrun check as completed.
 
+## Project containment (mandatory)
+
+- All project code, plans, skills, dependencies, toolchains, worktrees, caches,
+  logs, temporary files and automated browser profiles stay inside this project.
+  Resolve paths first; symlinks/junctions must not escape the project.
+- Install no project tool or package globally, into a user profile, AppData,
+  Windows directories, or an external Codex skill directory. Do not change
+  machine/user PATH, registry, global package configuration or system services.
+- Python packages belong only in this checkout's isolated `.venv`, with system
+  site packages disabled. Bootstrap with `python -B tools/setup.py`; thereafter
+  use `.venv/Scripts/python.exe` (Windows) or `.venv/bin/python`.
+  Do not use global packages, `pip --user`, or `.cache/python` import injection.
+- Other required tools use pinned portable/project-local distributions and local
+  caches. Existing Python/browser executables may be invoked without installing
+  or modifying them; tests use disposable profiles under project `.cache/tmp`.
+  If a tool cannot comply, report the limitation; do not install outside.
+- The repository skill is authoritative and is read through this file. Do not
+  install or synchronize it outside the project. Any skill/workflow suggesting
+  external installation is superseded by this user requirement.
+
 ## Current product direction
 
 - Engine-free 2D side-scrolling exploration, hand-drawn/anime layered scenery.

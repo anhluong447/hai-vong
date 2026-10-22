@@ -3,6 +3,8 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from local_environment import configure
+configure()
 from PIL import Image
 from build_assets import local
 

@@ -23,6 +23,28 @@ an upcoming compaction is visible, update the checkpoint before handing off. Do 
 assume the application exposes a compaction hook; this is a mandatory agent recovery
 procedure anchored in root instructions.
 
+## 1.1. Keep the project inside its folder
+
+Code, plans, recovery skills, dependencies, portable tools, worktrees, caches,
+temporary workspaces, browser profiles and generated artifacts must remain inside
+the resolved project folder. Reject symlink/junction escapes before writing.
+Never install project dependencies globally or into user/AppData/Windows folders,
+register a service, edit registry/PATH or write external tool configuration.
+
+Python third-party imports come only from a private `.venv` with
+`include-system-site-packages = false`. Bootstrap through `tools/setup.py`,
+then invoke that venv's Python for every check, server and pipeline command.
+No `pip --user`, global package reuse, or `.cache/python` path injection.
+Pip caches/build temporaries and subprocess temporary files use project `.cache/`.
+Other toolchains must be portable/local, versioned and documented; inability to
+keep a tool local is a reported limitation, not permission to install externally.
+
+Existing system interpreters and browsers are execution prerequisites; do not
+install or modify them for the project. Browser automation receives a new profile
+under `.cache/tmp` and must never use the person's normal browser profile.
+Keep project skills in `skills/`; the root recovery rule loads them directly.
+Do not publish/sync a project skill into an external Codex directory.
+
 ## 2. Dependencies point toward gameplay contracts
 
 | Boundary | Owns | Must not own |

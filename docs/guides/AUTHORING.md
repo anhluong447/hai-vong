@@ -2,9 +2,12 @@
 
 Run from the implementation worktree, currently `.worktrees/phase-0` in the original
 checkout. Python 3.12+ and local Chrome/Edge/Chromium are required. No Node required.
+Bootstrap dependencies inside the project only; all caches, temporary projects and
+automated browser profiles stay under project `.cache/`. No external installation.
 
 ```powershell
-python tools/dev.py --authoring --port 8080
+python -B tools/setup.py
+.venv/Scripts/python.exe -B tools/dev.py --authoring --port 8080
 ```
 
 Open `http://127.0.0.1:8080/tools/workspace/index.html`. The server binds loopback.
@@ -36,10 +39,10 @@ external edits during validation; source control is still required for historica
 Checks:
 
 ```powershell
-python tools/check.py architecture
-python tools/check.py content
-python tools/check.py unit
-python tools/check.py authoring --base-url http://127.0.0.1:8080
+.venv/Scripts/python.exe -B tools/check.py architecture
+.venv/Scripts/python.exe -B tools/check.py content
+.venv/Scripts/python.exe -B tools/check.py unit
+.venv/Scripts/python.exe -B tools/check.py authoring --base-url http://127.0.0.1:8080
 ```
 
 The `--base-url` readiness check fails if the requested server is unavailable. Browser

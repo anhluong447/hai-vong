@@ -10,9 +10,13 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** Bản kế hoạch để review ngày 2026-10-22. Chưa triển khai task nào; chưa cài dependency, tạo runtime, editor, CI hoặc nội dung game mới. Base commit: `04b24c7`.
+**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T05 đã triển khai và kiểm chứng; T06 mới có test bàn phím, chưa có world 2D. T06–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
 
 ## Global Constraints
+
+- **Project containment:** toàn bộ code, plan, skill, worktree, dependency, portable toolchain, cache, log, file tạm và browser profile kiểm thử phải nằm trong folder project. Không cài global/user, không ghi AppData/Windows, không sửa PATH/registry/service. Resolve path để chặn symlink/junction trỏ ra ngoài.
+- Python dùng riêng `.venv`, không bật system site packages và không dùng global packages hay `.cache/python`. Bootstrap bằng `python -B tools/setup.py`; các lệnh `python` bên dưới được hiểu là interpreter của `.venv`. Pip cache/temp đặt trong `.cache/`.
+- Các tool khác dùng bản portable/project-local có version/hash; browser/Python có sẵn chỉ được gọi thực thi, không cài/sửa. Profile browser tạm nằm trong `.cache/tmp`. Skill của dự án được đọc từ repo, không cài ra thư mục Codex bên ngoài. Nếu tool không thể đáp ứng, báo giới hạn và chọn giải pháp trong project.
 
 - Engine-free 2D side-scrolling exploration, hand-drawn/anime layered scenery.
 - Desktop browser; every player operation works by keyboard. Mouse is optional.

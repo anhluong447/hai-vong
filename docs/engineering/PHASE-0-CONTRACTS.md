@@ -22,6 +22,13 @@ Details and save cursor anchors follow the Phase 0 plan section 3.
 
 ## Running checks
 
+First bootstrap with `python -B tools/setup.py`. Every `python` command below means
+the private `.venv/Scripts/python.exe` (Windows) or `.venv/bin/python` (POSIX).
+Global/user package imports are forbidden. Temporary files, pip/tool caches and
+test browser profiles live inside this checkout's `.cache/`, never system TEMP or
+the person's browser profile. Do not install project tools or skills outside the
+project, change PATH/registry, or rely on an external package install.
+
 `python tools/check.py architecture` scans layer imports/cycles, inner browser APIs,
 obvious literal UI copy/asset URLs and direct view mutation. This is a conservative
 lexical guardrail, not proof of purity or completeness; behavioral tests and review

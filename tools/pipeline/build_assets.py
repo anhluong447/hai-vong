@@ -10,7 +10,10 @@ import subprocess
 import sys
 import wave
 import zipfile
+from local_environment import configure, require_venv_path, require_project_path
+configure()
 import PIL
+require_venv_path(PIL.__file__, 'tool.pillow.outside_venv')
 from PIL import Image
 
 CODE_ROOT=Path(__file__).resolve().parents[2]
@@ -23,6 +26,7 @@ def local(root,name):
     target=(root/name).resolve();target.relative_to(root.resolve());return target
 
 def write_changed(path,data):
+    path=require_project_path(path)
     path.parent.mkdir(parents=True,exist_ok=True)
     if path.exists() and path.read_bytes()==data:return
     temp=path.with_name('.'+path.name+'.tmp')
@@ -31,9 +35,9 @@ def write_changed(path,data):
         if temp.exists():temp.unlink()
 
 def ffmpeg_tool():
-    sys.path.insert(0,str(CODE_ROOT/'.cache/python'))
     import imageio_ffmpeg
-    path=Path(imageio_ffmpeg.get_ffmpeg_exe())
+    require_venv_path(imageio_ffmpeg.__file__, 'tool.imageio.outside_venv')
+    path=require_venv_path(imageio_ffmpeg.get_ffmpeg_exe(), 'tool.ffmpeg.outside_venv')
     return path,imageio_ffmpeg.__version__,digest(path.read_bytes())
 
 def png_bytes(image):
@@ -42,6 +46,7 @@ def png_bytes(image):
 def build(root,spec):
     root=Path(root).resolve()
     try:
+        require_project_path(root)
         toolchain=json.loads((CODE_ROOT/'content/pipeline/toolchain.json').read_text(encoding='utf-8'))
         pinned={t['name']:t for t in toolchain['assetTools']}
         if pinned.get('Pillow',{}).get('version')!=PIL.__version__:return failure('tool.pillow.version')
@@ -116,6 +121,9 @@ def build(root,spec):
 def bundle_sources(root,spec,destination):
     root=Path(root).resolve();files=[]
     try:
+        require_project_path(root)
+        destination=require_project_path(destination)
+        destination.relative_to(root)
         paths=sorted(set(e['source'] for e in spec['entries'])|set(spec.get('generationInputs',[])))
         Path(destination).parent.mkdir(parents=True,exist_ok=True)
         with zipfile.ZipFile(destination,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as archive:

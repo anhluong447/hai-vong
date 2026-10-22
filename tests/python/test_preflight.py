@@ -5,7 +5,7 @@ import subprocess
 import sys
 import unittest
 
-ROOT = Path(__file__).resolve().parents[2]
+from project_environment import ROOT
 
 class PreflightTests(unittest.TestCase):
     def test_missing_browser_returns_diagnostic(self):

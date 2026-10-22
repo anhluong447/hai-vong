@@ -4,6 +4,9 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+sys.dont_write_bytecode = True
+from pipeline.local_environment import configure
+configure()
 from urllib.request import urlopen
 from urllib.parse import urlsplit
 from pipeline.check_architecture import check

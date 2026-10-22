@@ -3,6 +3,8 @@ import argparse
 import json
 from pathlib import Path
 import wave
+from local_environment import configure
+configure()
 from PIL import Image
 from build_assets import ID,local,digest,failure
 

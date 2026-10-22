@@ -5,10 +5,12 @@ import json
 from pathlib import Path,PurePosixPath
 import zipfile
 from build_assets import write_changed,failure
+from local_environment import require_project_path
 
 def restore(root,bundle,inventory):
     root=Path(root).resolve()
     try:
+        require_project_path(root)
         if hashlib.sha256(Path(bundle).read_bytes()).hexdigest()!=inventory['bundleSha256']:return failure('asset.bundle.hash')
         pending=[]
         with zipfile.ZipFile(bundle) as archive:

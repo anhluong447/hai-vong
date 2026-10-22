@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-ROOT=Path(__file__).resolve().parents[2]
+from project_environment import ROOT
 
 class ArchitectureTests(unittest.TestCase):
     def check(self, files):
