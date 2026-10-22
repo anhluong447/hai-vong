@@ -228,11 +228,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes validated `ContentBundle`; produces `GameSession.execute`, `StoryRunner.step`, `CheckpointService.capture(): Result<RunSnapshot>` and `SaveCodec.encode/decode` for the envelope in §3.3. Browser/save repository is injected later; T03 uses in-memory ports.
 
-- [ ] Write red tests: branch → flag → resumed cursor chooses the same node; command/effect commits once after replay; interrupted effect never exposes half-state; capture during pending work resumes from a committed checkpoint.
-- [ ] Run `python tools/check.py unit`; verify the new invariants fail before implementation.
-- [ ] Implement runner state machine, bounded registered effects and ledger. Store stable anchors and serializable values; dependencies for clock/audio/scene/effect are explicit ports.
-- [ ] Capture/decode/restore a mid-line reveal, choice and partially progressed sequence with fake ports; compare meaningful state and remaining effects, not only serialized equality.
-- [ ] Run content/unit suites; commit `feat: add story execution and atomic resumable checkpoints`.
+- [x] Write red tests: branch → flag → resumed cursor chooses the same node; command/effect commits once after replay; interrupted effect never exposes half-state; capture during pending work resumes from a committed checkpoint.
+- [x] Run `python tools/check.py unit`; verify the new invariants fail before implementation.
+- [x] Implement runner state machine, bounded registered effects and ledger. Store stable anchors and serializable values; dependencies for clock/audio/scene/effect are explicit ports.
+- [x] Capture/decode/restore a mid-line reveal, choice and partially progressed sequence with fake ports; compare meaningful state and remaining effects, not only serialized equality.
+- [x] Run content/unit suites; commit `feat: add story execution and atomic resumable checkpoints`.
 
 ### T04 — Workspace core, document history và source writer
 

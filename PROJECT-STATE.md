@@ -2,7 +2,7 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Current status: executing Phase 0; T01?T02 verified, T03 next
+## Current status: executing Phase 0; T01?T03 verified, T04 next
 
 The user approved committing the plan and implementing it sequentially. Plan commit:
 `e9a4d83` on the original branch. Implementation worktree: `.worktrees/phase-0`,
@@ -29,7 +29,14 @@ original root. T01?T14 execution is authorized; no push or publication is author
   Unit gate: 21 browser tests + 8 Python tests pass; content gate validates the real
   pack; architecture passes. Added RED?GREEN malformed-document/unused-locale
   tests and a regression for scanner false positives. No external library installed.
-- Next: T03 immutable GameSession, StoryRunner and atomic save checkpoints.
+- T03: immutable GameSession/StoryRunner/checkpoints, effect idempotency ledger,
+  content-anchor validation and SHA-256 envelope codec implemented. Unit gate: 33
+  browser tests + 8 Python tests; real pack content and architecture gates pass.
+  Pending scene continuation/stale receipts, mid-reveal and choice resume, corrupt
+  envelopes, interrupted effect rollback and zero-yield loops are covered.
+  Real timed sequence/audio playback resume remains T06/T07/T09; T03 checks
+  serializable adapter state with in-memory fixtures. Profile-slot merge remains T07.
+- Next: T04 isolated authoring workspace/history/drafts and safe source writer.
   Continue without another permission prompt under the user's implementation order.
 - Plan-specific ledger/briefs live under `.superpowers/sdd/2026-10-22-phase-0-skeleton-tools/`
   in the implementation worktree; recorded rulings and test evidence survive compaction.
