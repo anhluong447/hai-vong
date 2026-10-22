@@ -2,7 +2,7 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Current status: executing Phase 0; T01?T05 verified, T06 next
+## Current status: executing Phase 0; T01?T05 verified; T06 in progress
 
 The user approved committing the plan and implementing it sequentially. Plan commit:
 `e9a4d83` on the original branch. Implementation worktree: `.worktrees/phase-0`,
@@ -55,7 +55,13 @@ original root. T01?T14 execution is authorized; no push or publication is author
   into this worktree's ignored `.cache/python` only. Wrapped FFmpeg 7.1 binary hash
   is pinned; Vorbis repeat build hash verified. Current offline asset worker pin is
   Windows x64. See ASSETS.md/requirements-tools.txt for fresh-checkout setup.
-- Next: T06 browser world, keyboard/text/audio/timeline adapters, then T07?T14.
+- T06 started: browser harness now has a test-only CDP bridge on its isolated
+  loopback profile, using native browser WebSocket with no new dependency. A real
+  Tab/Enter test proves default focus/button activation with trusted events; initial
+  RED found missing CDP character payload, fixed and 5 preflight tests pass. It does
+  not disable Chrome's sandbox; allowed origin is only the ephemeral test host.
+  World/input/text/audio/timeline modules have not yet been implemented.
+- Next: write T06 platform tests/data and implement browser world/adapters, then T07?T14.
   Authoring dev server was stopped after T05 validation; restart explicitly for
   `--base-url` browser/authoring checks. No ongoing test server is assumed.
   Continue without another permission prompt under the user's implementation order.

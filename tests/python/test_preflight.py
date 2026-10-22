@@ -36,6 +36,14 @@ class PreflightTests(unittest.TestCase):
         self.assertTrue(result['ok'], result)
         self.assertEqual(result['passed'], 1, result)
 
+class NativeKeyboardTests(unittest.TestCase):
+    def test_real_keyboard_defaults_reach_native_controls(self):
+        sys.path.insert(0,str(ROOT/'tools/pipeline'))
+        from browser_runner import run_browser
+        report=run_browser(ROOT,['/tests/fixtures/harness/keyboard.js'])
+        self.assertTrue(report['ok'],report)
+        self.assertEqual(report['passed'],1)
+
 if __name__ == '__main__':
     unittest.main()
 
