@@ -1,0 +1,24 @@
+{
+  "id": "foundation-demo",
+  "kind": "development",
+  "version": "0.0.1",
+  "documents": [
+    {
+      "kind": "flags",
+      "path": "../flags/core.json"
+    },
+    {
+      "kind": "events",
+      "path": "../events/foundation.json"
+    },
+    {
+      "kind": "locale",
+      "locale": "vi",
+      "path": "../locales/vi.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/foundation/chapter.json"
+    }
+  ]
+}

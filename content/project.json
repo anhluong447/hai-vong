@@ -1,1 +1,16 @@
-{"schemaVersion":1,"id":"hoi-am","contentVersion":"0.0.1","packs":[],"defaultLocale":"vi"}
+{
+  "schemaVersion": 1,
+  "id": "hoi-am",
+  "contentVersion": "0.0.1",
+  "packs": [
+    "packs/foundation-demo.json"
+  ],
+  "defaultLocale": "vi",
+  "schemas": {
+    "story": "../src/contracts/schemas/story.json",
+    "flags": "../src/contracts/schemas/flags.json",
+    "events": "../src/contracts/schemas/events.json",
+    "resources": "../src/contracts/schemas/resources.json",
+    "project": "../src/contracts/schemas/project.json"
+  }
+}

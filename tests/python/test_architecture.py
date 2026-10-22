@@ -34,3 +34,6 @@ class ArchitectureTests(unittest.TestCase):
 
     def test_pure_domain_and_injected_port_are_allowed(self):
         self.assertEqual(self.check({'src/domain/rule.js':'export const apply=(state,value)=>({...state,energy:value});', 'src/application/use.js': 'export const load=(port)=>port.load();'}),[])
+
+    def test_contract_helpers_and_technical_diagnostic_codes_are_allowed(self):
+        self.assertEqual(self.check({'src/contracts/check.js': "import './result.js';", 'src/contracts/result.js':'export const ok=true;', 'src/domain/validate.js':"export const code='content.document.invalid';"}),[])

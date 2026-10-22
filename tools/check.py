@@ -19,7 +19,7 @@ def suite(name,args):
         modules=['/'+p.relative_to(ROOT).as_posix() for p in (ROOT/'tests/unit').glob('*.test.js')]
         result=run_browser(ROOT,modules) if modules else {'ok':True,'passed':0,'failed':0}
         return {'suite':name,**result,'ok':result['ok'] and run.returncode==0,'python':{'exitCode':run.returncode,'output':run.stdout+run.stderr}}
-    folder={'browser':'browser','authoring':'authoring','bot':'bot'}.get(name)
+    folder={'content':'content','browser':'browser','authoring':'authoring','bot':'bot'}.get(name)
     if folder:
         modules=['/'+p.relative_to(ROOT).as_posix() for p in sorted((ROOT/'tests'/folder).glob('*.test.js'))]
         if modules: return {'suite':name,**run_browser(ROOT,modules,base_url=args.base_url)}

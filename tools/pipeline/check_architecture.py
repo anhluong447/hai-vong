@@ -2,7 +2,7 @@
 from pathlib import Path
 import re
 
-LAYERS={'contracts':set(),'domain':{'contracts','domain'},'application':{'contracts','domain','application'},'presentation':{'contracts','application','presentation'},'infrastructure':{'contracts','infrastructure'},'bootstrap':{'contracts','domain','application','presentation','infrastructure','bootstrap'}}
+LAYERS={'contracts':{'contracts'},'domain':{'contracts','domain'},'application':{'contracts','domain','application'},'presentation':{'contracts','application','presentation'},'infrastructure':{'contracts','infrastructure'},'bootstrap':{'contracts','domain','application','presentation','infrastructure','bootstrap'}}
 IMPORT=re.compile(r"(?:import|export)\s+(?:[^;]*?\s+from\s+)?['\"]([^'\"]+)['\"]")
 
 def check(root):
@@ -19,7 +19,8 @@ def check(root):
                 other=parts[1] if parts[0]=='src' else parts[0]
                 if parts[0]!='src' or other not in LAYERS.get(layer,set()): add('architecture.import',file)
             except ValueError: add('architecture.import',file)
-        if layer in {'domain','application','contracts'} and re.search(r'\b(window|document|localStorage|indexedDB|fetch|requestAnimationFrame|AudioContext|Date|performance)\b',re.sub(r'/\*.*?\*/|//[^\n]*','',text,flags=re.S)):
+        code=re.sub(r"'(?:\\.|[^'\\])*'|\"(?:\\.|[^\"\\])*\"|`(?:\\.|[^`\\])*`",'',re.sub(r'/\*.*?\*/|//[^\n]*','',text,flags=re.S))
+        if layer in {'domain','application','contracts'} and re.search(r'\b(window|document|localStorage|indexedDB|fetch|requestAnimationFrame|AudioContext|Date|performance)\b',code):
             add('architecture.browser-api',file)
         if re.search(r"(?:textContent|innerHTML|ariaLabel)\s*=\s*['\"][^'\"]+|['\"](?:/?assets/|https?://)[^'\"]+",text): add('architecture.authored-data',file)
         if layer=='presentation' and re.search(r'\bstate\.(?:gameplay\.)?(?:energy|flags|quests|evidence|day|week)\s*(?:=|\+\+|--|\+=|-=)',text): add('architecture.mutation',file)

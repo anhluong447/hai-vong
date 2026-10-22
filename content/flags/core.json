@@ -1,0 +1,8 @@
+[
+  {
+    "id": "flag.foundation.visited",
+    "type": "boolean",
+    "default": false,
+    "scope": "run"
+  }
+]

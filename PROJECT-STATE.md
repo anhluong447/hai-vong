@@ -2,7 +2,7 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Current status: executing Phase 0; T01 verified, T02 next
+## Current status: executing Phase 0; T01?T02 verified, T03 next
 
 The user approved committing the plan and implementing it sequentially. Plan commit:
 `e9a4d83` on the original branch. Implementation worktree: `.worktrees/phase-0`,
@@ -24,7 +24,12 @@ original root. T01?T14 execution is authorized; no push or publication is author
   not a reason to weaken tests or disable the browser sandbox.
 - No Node or new dependency installed. Chrome/Edge are local. `all` and unfinished
   suites intentionally fail `not-implemented` until their tasks supply real checks.
-- Next: T02 typed catalogs/flags/story validator and minimal development pack.
+- T02: typed flags/catalogs, bounded JSON schema validation, stable story nodes,
+  diagnostics/source pointers, project loader and minimal development pack are implemented.
+  Unit gate: 21 browser tests + 8 Python tests pass; content gate validates the real
+  pack; architecture passes. Added RED?GREEN malformed-document/unused-locale
+  tests and a regression for scanner false positives. No external library installed.
+- Next: T03 immutable GameSession, StoryRunner and atomic save checkpoints.
   Continue without another permission prompt under the user's implementation order.
 - Plan-specific ledger/briefs live under `.superpowers/sdd/2026-10-22-phase-0-skeleton-tools/`
   in the implementation worktree; recorded rulings and test evidence survive compaction.

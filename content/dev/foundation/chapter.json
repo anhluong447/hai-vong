@@ -1,0 +1,47 @@
+{
+  "id": "foundation.chapter",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "greeting",
+          "op": "say",
+          "textKey": "foundation.begin"
+        },
+        {
+          "id": "route",
+          "op": "choose",
+          "choices": [
+            {
+              "id": "visit",
+              "textKey": "foundation.choice",
+              "target": "visited"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "visited",
+      "commands": [
+        {
+          "id": "mark",
+          "op": "setFlag",
+          "flagId": "flag.foundation.visited",
+          "value": true
+        },
+        {
+          "id": "farewell",
+          "op": "say",
+          "textKey": "foundation.end"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

@@ -214,13 +214,13 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes §3.1 and T01 contracts; produces `validateProject(sources)`, `ContentCatalog.get(kind,id)` and `FlagStore.validate(definitions,values): Result<FlagValues>`.
 
-- [ ] Write failing tests for undeclared/wrong-type flags, duplicate node/command IDs, missing entry/jump/assets/text keys, accidental dead ends and an intentional `end`; assert diagnostic source/pointer, not just `ok=false`.
-- [ ] Run `python tools/check.py unit` to establish red for each validator behavior.
-- [ ] Implement the single JSON schema/validator path, typed flag defaults/scopes and immutable catalogs. Register only §3.1 opcodes and known effect capabilities; reject arbitrary executable content.
-- [ ] Use synthetic minimal asset/gameplay registries in validator tests until T05/T08 add real definitions. Production validation still rejects absent required references; schema fixtures never become runtime fallback data. Register the `content` suite with the CLI and exercise its nonzero diagnostic exit.
-- [ ] Create the minimal development pack now, containing the validated text/flag branch only; later tasks extend its declared dependencies. T12 bot and T13 release consume this existing pack, before T14 expands it into the final chapter.
-- [ ] Document exact JSON format with one valid story/choice/effect example and an intentional-terminal example; actual strings live in the locale source.
-- [ ] Run `python tools/check.py content` and `python tools/check.py unit`; round-trip source JSON and assert no data is lost. Commit `feat: add validated story catalogs and typed flags`.
+- [x] Write failing tests for undeclared/wrong-type flags, duplicate node/command IDs, missing entry/jump/assets/text keys, accidental dead ends and an intentional `end`; assert diagnostic source/pointer, not just `ok=false`.
+- [x] Run `python tools/check.py unit` to establish red for each validator behavior.
+- [x] Implement the single JSON schema/validator path, typed flag defaults/scopes and immutable catalogs. Register only §3.1 opcodes and known effect capabilities; reject arbitrary executable content.
+- [x] Use synthetic minimal asset/gameplay registries in validator tests until T05/T08 add real definitions. Production validation still rejects absent required references; schema fixtures never become runtime fallback data. Register the `content` suite with the CLI and exercise its nonzero diagnostic exit.
+- [x] Create the minimal development pack now, containing the validated text/flag branch only; later tasks extend its declared dependencies. T12 bot and T13 release consume this existing pack, before T14 expands it into the final chapter.
+- [x] Document exact JSON format with one valid story/choice/effect example and an intentional-terminal example; actual strings live in the locale source.
+- [x] Run `python tools/check.py content` and `python tools/check.py unit`; round-trip source JSON and assert no data is lost. Commit `feat: add validated story catalogs and typed flags`.
 
 ### T03 — Session, story runner và save checkpoint từ sớm
 

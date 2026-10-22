@@ -1,0 +1,47 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+      },
+      "type": {
+        "enum": [
+          "boolean",
+          "integer",
+          "string",
+          "enum"
+        ]
+      },
+      "default": {},
+      "scope": {
+        "enum": [
+          "run",
+          "profile"
+        ]
+      },
+      "values": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "min": {
+        "type": "integer"
+      },
+      "max": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "default",
+      "scope"
+    ],
+    "additionalProperties": false
+  }
+}
