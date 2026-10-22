@@ -2,40 +2,32 @@
 
 Updated: 2026-10-22 (Asia/Bangkok).
 
-## Current status: Phase 0 implementation authorized
+## Current status: executing Phase 0; T01 verified, T02 next
 
-The user approved the Phase 0 plan and requested committing it and starting
-implementation. Commit the reviewed plan first, then execute T01–T14 sequentially
-in an isolated worktree, with tests and focused commits. This authorization covers
-the planned skeleton/tools and development chapter, not production expansion to
-12 weeks, edits to protected sources, pushing or publication. The previous
-archive/rules cleanup is committed as `04b24c7`.
+The user approved committing the plan and implementing it sequentially. Plan commit:
+`e9a4d83` on the original branch. Implementation worktree: `.worktrees/phase-0`,
+branch `feat/phase-0-skeleton-tools`. Future work continues there, not in the archived
+original root. T01?T14 execution is authorized; no push or publication is authorized.
 
-## Current task and handoff
+## Current task and evidence
 
-- Plan: [Phase 0 skeleton and tools](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md).
-  It maps all eight areas to 14 implementation tasks and six acceptance gates.
-- Proposed contracts cover JSON scripts/typed flags, shared validation, atomic
-  checkpoints, content/schema migrations, slots/autosave, browser/text/audio,
-  resource lifetimes, isolated authoring, hot reload, traversal bots and web CI/release.
-- Browser delivery remains the target. Gamepad/gallery and native/Steam/cloud
-  integrations are explicitly deferred. A development-only chapter validates
-  workflows before production expansion to 12 weeks; no canonical lore is added.
-- README entry points link the plan. Protected documents, archive payload and
-  repository/installed skill sources are unchanged by this task.
-- Self-review corrected pack creation order, browser test lifecycle, test-data
-  isolation, workspace file paths and resource/animation ownership.
-- Verification: all 34 local Markdown links in the four changed documents resolve;
-  the eight protected documents match their original SHA-256, and the archive
-  inventory hash still matches its verification report. Four repository skill
-  files and four installed skill files match the recorded hashes. Plan numbering
-  is T01–T14/G0–G5; it is not ignored by Git; `git diff --check` passes.
-  No `src`, `content`, `tools`, `tests`, `assets` or `package.json` was created.
-  Full archive payload rehash and runtime/browser suites were not run for this
-  documentation task; future commands in the plan do not exist yet.
-- Execution is now authorized by the latest user instruction. Start at T01; record
-  real evidence and task progress here and in the plan-specific execution ledger.
-  `.worktrees/` is ignored for the isolated implementation workspace.
+- [Implementation plan](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md).
+  T01 contracts, read-only dev server, Python CLI, architecture guards and real
+  browser harness are implemented. No playable game or authoring workspace yet.
+- `python -X utf8 tools/check.py unit`: 7 Python tests pass; includes real Chrome
+  probes proving failing and passing assertions reach the runner. Architecture
+  violation fixtures and the current architecture scan pass.
+- RED evidence: three preflight and four architecture tests failed before tools
+  existed. GREEN evidence is from the actual new suite, not legacy results.
+- Windows sandbox prevents access to Python's mode-700 temporary directories;
+  browser/Python suites run with sandbox escalation. This is an environment limit,
+  not a reason to weaken tests or disable the browser sandbox.
+- No Node or new dependency installed. Chrome/Edge are local. `all` and unfinished
+  suites intentionally fail `not-implemented` until their tasks supply real checks.
+- Next: T02 typed catalogs/flags/story validator and minimal development pack.
+  Continue without another permission prompt under the user's implementation order.
+- Plan-specific ledger/briefs live under `.superpowers/sdd/2026-10-22-phase-0-skeleton-tools/`
+  in the implementation worktree; recorded rulings and test evidence survive compaction.
 
 ## Previous Git cleanup handoff
 

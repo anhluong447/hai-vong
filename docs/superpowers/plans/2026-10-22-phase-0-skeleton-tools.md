@@ -202,11 +202,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes protected docs/rules; produces shared types in §4, Python check CLI and a browser ES-module test harness that can return structured results without Node.
 
-- [ ] Write preflight/CLI tests: missing browser/tool → diagnostic + failing exit; requested unregistered suite → `not-implemented`; real browser harness runs one failing then one passing assertion.
-- [ ] Run `python -m unittest discover -s tests/python -p "test_preflight.py"` and harness through `python tools/check.py unit`; confirm red because the new entry points are absent, not because unrelated dependencies are silently skipped.
-- [ ] Implement contracts and capability detection; freeze ports, schema versions and the initial command/action vocabulary in the contracts document. Pin actual tooling/browser used in CI; record setup instructions without requiring Node.
-- [ ] Add architecture checker: reject browser APIs/imports in domain/application, production imports of archive/tests, circular cross-boundary dependencies and hardcoded player copy/resource URLs outside catalogs. Include deliberate violation fixtures; lexical checks are only one gate.
-- [ ] Run `python tools/check.py architecture` and `python tools/check.py unit`; capture actual environment/results. Commit `build: establish phase-zero contracts and executable checks`.
+- [x] Write preflight/CLI tests: missing browser/tool → diagnostic + failing exit; requested unregistered suite → `not-implemented`; real browser harness runs one failing then one passing assertion.
+- [x] Run `python -m unittest discover -s tests/python -p "test_preflight.py"` and harness through `python tools/check.py unit`; confirm red because the new entry points are absent, not because unrelated dependencies are silently skipped.
+- [x] Implement contracts and capability detection; freeze ports, schema versions and the initial command/action vocabulary in the contracts document. Pin actual tooling/browser used in CI; record setup instructions without requiring Node.
+- [x] Add architecture checker: reject browser APIs/imports in domain/application, production imports of archive/tests, circular cross-boundary dependencies and hardcoded player copy/resource URLs outside catalogs. Include deliberate violation fixtures; lexical checks are only one gate.
+- [x] Run `python tools/check.py architecture` and `python tools/check.py unit`; capture actual environment/results. Commit `build: establish phase-zero contracts and executable checks`.
 
 ### T02 — Typed catalogs, flags và script validator
 
