@@ -118,5 +118,8 @@
     "slots": "player.slots",
     "settings": "player.settings",
     "backlog": "player.backlog"
-  }
+  },
+  "legacyBindingCounts": [
+    11
+  ]
 }

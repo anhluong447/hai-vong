@@ -15,7 +15,7 @@ export class SettingsView {
    const label=element(root,'label'),caption=element(root,'span'),control=element(root,'input',{type:'number',min:'0',max:'1',step:'any','data-bus':bus});caption.textContent=format('player.audioBus',{bus:format(actions.buses[bus])});control.value=String(gain);control.addEventListener('change',()=>change('audio',{...value.audio,[bus]:Number(control.value)}));label.append(caption,control);root.append(label);
   }
   for(const [index,binding]of value.bindings.entries()){
-   const node=element(root,'button',{'data-action':'remap','data-remap':String(index)});node.textContent=format('player.remap',{action:format(actions.labels[binding.action]),code:binding.code});node.addEventListener('click',()=>remap(index));root.append(node);
+   const node=element(root,'button',{'data-action':'remap','data-remap':String(index)});node.textContent=format('hearing.ui.binding',{action:format(actions.labels[binding.action]),contexts:binding.contexts.map(context=>format(actions.contexts[context])).join(config.bindingSeparator),code:binding.code});node.addEventListener('click',()=>remap(index));root.append(node);
   }
   root.append(actionButton(root,format,'player.defaults','defaults',defaults),actionButton(root,format,'player.back','back',back));
  }

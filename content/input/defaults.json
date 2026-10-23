@@ -1,8 +1,157 @@
-{"id":"input.default","actions":["moveLeft","moveRight","interact","advance","menu","back","fullscreen"],"bindings":[
- {"code":"ArrowLeft","action":"moveLeft","contexts":["world"]},{"code":"KeyA","action":"moveLeft","contexts":["world"]},
- {"code":"ArrowRight","action":"moveRight","contexts":["world"]},{"code":"KeyD","action":"moveRight","contexts":["world"]},
- {"code":"KeyE","action":"interact","contexts":["world"]},{"code":"Enter","action":"interact","contexts":["world"]},
- {"code":"Enter","action":"advance","contexts":["dialogue"]},{"code":"Space","action":"advance","contexts":["dialogue"]},
- {"code":"Escape","action":"menu","contexts":["world","dialogue"]},{"code":"Escape","action":"back","contexts":["menu"]},
- {"code":"KeyF","action":"fullscreen","contexts":["world"]}
-]}
+{
+  "id": "input.default",
+  "actions": [
+    "moveLeft",
+    "moveRight",
+    "interact",
+    "advance",
+    "menu",
+    "back",
+    "fullscreen",
+    "hearingAdvance",
+    "laneUp",
+    "laneDown",
+    "deflect",
+    "finalTap"
+  ],
+  "bindings": [
+    {
+      "code": "ArrowLeft",
+      "action": "moveLeft",
+      "contexts": [
+        "world"
+      ]
+    },
+    {
+      "code": "KeyA",
+      "action": "moveLeft",
+      "contexts": [
+        "world"
+      ]
+    },
+    {
+      "code": "ArrowRight",
+      "action": "moveRight",
+      "contexts": [
+        "world"
+      ]
+    },
+    {
+      "code": "KeyD",
+      "action": "moveRight",
+      "contexts": [
+        "world"
+      ]
+    },
+    {
+      "code": "KeyE",
+      "action": "interact",
+      "contexts": [
+        "world"
+      ]
+    },
+    {
+      "code": "Enter",
+      "action": "interact",
+      "contexts": [
+        "world"
+      ]
+    },
+    {
+      "code": "Enter",
+      "action": "advance",
+      "contexts": [
+        "dialogue"
+      ]
+    },
+    {
+      "code": "Space",
+      "action": "advance",
+      "contexts": [
+        "dialogue"
+      ]
+    },
+    {
+      "code": "Escape",
+      "action": "menu",
+      "contexts": [
+        "world",
+        "dialogue"
+      ]
+    },
+    {
+      "code": "Escape",
+      "action": "back",
+      "contexts": [
+        "menu"
+      ]
+    },
+    {
+      "code": "KeyF",
+      "action": "fullscreen",
+      "contexts": [
+        "world"
+      ]
+    },
+    {
+      "code": "Enter",
+      "action": "hearingAdvance",
+      "contexts": [
+        "defense",
+        "attack"
+      ]
+    },
+    {
+      "code": "Escape",
+      "action": "menu",
+      "contexts": [
+        "defense",
+        "attack",
+        "minigame",
+        "final-shot"
+      ]
+    },
+    {
+      "code": "ArrowUp",
+      "action": "laneUp",
+      "contexts": [
+        "minigame"
+      ]
+    },
+    {
+      "code": "KeyW",
+      "action": "laneUp",
+      "contexts": [
+        "minigame"
+      ]
+    },
+    {
+      "code": "ArrowDown",
+      "action": "laneDown",
+      "contexts": [
+        "minigame"
+      ]
+    },
+    {
+      "code": "KeyS",
+      "action": "laneDown",
+      "contexts": [
+        "minigame"
+      ]
+    },
+    {
+      "code": "Space",
+      "action": "deflect",
+      "contexts": [
+        "minigame"
+      ]
+    },
+    {
+      "code": "Space",
+      "action": "finalTap",
+      "contexts": [
+        "final-shot"
+      ]
+    }
+  ]
+}

@@ -24,6 +24,8 @@
     "schedules": "../src/contracts/schemas/schedules.json",
     "publication": "../src/contracts/schemas/publication.json",
     "progression": "../src/contracts/schemas/progression.json",
-    "quests": "../src/contracts/schemas/quests.json"
+    "quests": "../src/contracts/schemas/quests.json",
+    "hearings": "../src/contracts/schemas/hearings.json",
+    "hearingBalance": "../src/contracts/schemas/hearing-balance.json"
   }
 }

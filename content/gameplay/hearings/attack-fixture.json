@@ -1,0 +1,256 @@
+{
+  "balanceId": "hearing.balance.fixture",
+  "nameKey": "hearing.fixture.name",
+  "bossKey": "hearing.fixture.boss",
+  "firstDay": 19,
+  "lastDay": 21,
+  "requiredMainRouteId": "route.fixture.main",
+  "id": "hearing.fixture.attack",
+  "mode": "attack",
+  "attack": {
+    "maxHp": 100,
+    "rounds": [
+      {
+        "id": "flaw.fixture.first",
+        "phase": "narration",
+        "narrationKey": "hearing.narration",
+        "recap": [
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.before"
+          },
+          {
+            "kind": "word",
+            "id": "detail",
+            "textKey": "hearing.word.detail"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.middle"
+          },
+          {
+            "kind": "word",
+            "id": "context",
+            "textKey": "hearing.word.context"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.connect"
+          },
+          {
+            "kind": "word",
+            "id": "contradiction",
+            "textKey": "hearing.word.contradiction"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.end"
+          }
+        ],
+        "correctWordId": "contradiction",
+        "questions": [
+          {
+            "id": "question.trapA",
+            "textKey": "hearing.question.trapA"
+          },
+          {
+            "id": "question.correct",
+            "textKey": "hearing.question.correct"
+          },
+          {
+            "id": "question.trapB",
+            "textKey": "hearing.question.trapB"
+          },
+          {
+            "id": "question.trapC",
+            "textKey": "hearing.question.trapC"
+          }
+        ],
+        "correctQuestionId": "question.correct",
+        "damage": 40,
+        "findingIds": [
+          "finding.fixture.statement"
+        ]
+      },
+      {
+        "id": "flaw.fixture.second",
+        "phase": "narration",
+        "narrationKey": "hearing.narration",
+        "recap": [
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.before"
+          },
+          {
+            "kind": "word",
+            "id": "detail",
+            "textKey": "hearing.word.detail"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.middle"
+          },
+          {
+            "kind": "word",
+            "id": "context",
+            "textKey": "hearing.word.context"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.connect"
+          },
+          {
+            "kind": "word",
+            "id": "contradiction",
+            "textKey": "hearing.word.contradiction"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.end"
+          }
+        ],
+        "correctWordId": "contradiction",
+        "questions": [
+          {
+            "id": "question.trapA",
+            "textKey": "hearing.question.trapA"
+          },
+          {
+            "id": "question.correct",
+            "textKey": "hearing.question.correct"
+          },
+          {
+            "id": "question.trapB",
+            "textKey": "hearing.question.trapB"
+          },
+          {
+            "id": "question.trapC",
+            "textKey": "hearing.question.trapC"
+          }
+        ],
+        "correctQuestionId": "question.correct",
+        "damage": 20,
+        "findingIds": [
+          "finding.fixture.document"
+        ]
+      },
+      {
+        "id": "flaw.fixture.final",
+        "phase": "confrontation",
+        "narrationKey": "hearing.narration",
+        "recap": [
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.before"
+          },
+          {
+            "kind": "word",
+            "id": "detail",
+            "textKey": "hearing.word.detail"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.middle"
+          },
+          {
+            "kind": "word",
+            "id": "context",
+            "textKey": "hearing.word.context"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.connect"
+          },
+          {
+            "kind": "word",
+            "id": "contradiction",
+            "textKey": "hearing.word.contradiction"
+          },
+          {
+            "kind": "text",
+            "textKey": "hearing.recap.end"
+          }
+        ],
+        "correctWordId": "contradiction",
+        "questions": [
+          {
+            "id": "question.trapA",
+            "textKey": "hearing.question.trapA"
+          },
+          {
+            "id": "question.correct",
+            "textKey": "hearing.question.correct"
+          },
+          {
+            "id": "question.trapB",
+            "textKey": "hearing.question.trapB"
+          },
+          {
+            "id": "question.trapC",
+            "textKey": "hearing.question.trapC"
+          }
+        ],
+        "correctQuestionId": "question.correct",
+        "damage": 40,
+        "findingIds": [
+          "finding.fixture.statement",
+          "finding.fixture.document"
+        ]
+      }
+    ],
+    "confrontationKey": "hearing.confrontation",
+    "crashKey": "hearing.crash",
+    "finalKey": "hearing.final",
+    "victoryFlagId": "flag.fixture.hearingWon",
+    "projectiles": [
+      {
+        "id": "projectile.fixture.1",
+        "at": 2,
+        "travel": 1,
+        "laneId": "upper",
+        "textKey": "hearing.projectile",
+        "damage": 20
+      },
+      {
+        "id": "projectile.fixture.2",
+        "at": 10,
+        "travel": 1,
+        "laneId": "lower",
+        "textKey": "hearing.projectile",
+        "damage": 20
+      },
+      {
+        "id": "projectile.fixture.3",
+        "at": 16,
+        "travel": 1,
+        "laneId": "upper",
+        "textKey": "hearing.projectile",
+        "damage": 20
+      },
+      {
+        "id": "projectile.fixture.4",
+        "at": 21,
+        "travel": 1,
+        "laneId": "lower",
+        "textKey": "hearing.projectile",
+        "damage": 20
+      },
+      {
+        "id": "projectile.fixture.5",
+        "at": 25,
+        "travel": 1,
+        "laneId": "upper",
+        "textKey": "hearing.projectile",
+        "damage": 20
+      },
+      {
+        "id": "projectile.fixture.6",
+        "at": 27.5,
+        "travel": 1,
+        "laneId": "lower",
+        "textKey": "hearing.projectile",
+        "damage": 20
+      }
+    ]
+  }
+}

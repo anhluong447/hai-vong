@@ -37,6 +37,27 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual(result['passed'], 1, result)
 
 class NativeKeyboardTests(unittest.TestCase):
+    @unittest.skipUnless(sys.platform == 'win32', 'Windows open-file deletion semantics')
+    def test_profile_cleanup_waits_for_a_delayed_browser_file_release(self):
+        import tempfile
+        import threading
+        sys.path.insert(0, str(ROOT/'tools/pipeline'))
+        import browser_runner
+        with tempfile.TemporaryDirectory(dir=ROOT/'.cache/tmp') as directory:
+            profile=tempfile.TemporaryDirectory(dir=directory)
+            path=Path(profile.name)/'browser.log'
+            path.write_bytes(b'fixture')
+            handle=path.open('rb')
+            release=threading.Timer(.25,handle.close)
+            release.start()
+            try:
+                browser_runner.cleanup_profile(profile)
+                self.assertFalse(Path(profile.name).exists())
+            finally:
+                handle.close()
+                release.join()
+                profile.cleanup()
+
     def test_native_screenshot_is_saved_inside_the_project(self):
         sys.path.insert(0,str(ROOT/'tools/pipeline'))
         from browser_runner import run_browser

@@ -5,6 +5,7 @@ import {validateWorldState} from '../world/worldState.js';
 import {formatTokens} from '../../contracts/TextTokens.js';
 import {validSavedPresentation} from '../../contracts/PresentationSnapshot.js';
 import {createGameplayState,validateGameplayState} from '../gameplay/state.js';
+import {validateHearingState} from '../hearings/validateState.js';
 export function createRunState(bundle) {
  return {schemaVersion:RUN_SCHEMA_VERSION,formatTag:'hoi-am.side-scroll',contentRevision:bundle.revision,gameplay:{flags:FlagStore.defaults(bundle.catalog.list('flags')),...createGameplayState(bundle)},story:{cursor:null,waiting:'idle',pending:null},world:{sceneId:null,position:0,facing:1},presentation:{dialogue:null},audio:{},sequence:{},executionLedger:[]};
 }
@@ -42,6 +43,7 @@ export function validateRunState(state,bundle) {
  if(state.story.history!==undefined&&(!Array.isArray(state.story.history)||state.story.history.some(entry=>!entry||anchors.get(entry.anchor)?.textKey!==entry.textKey||!formatTokens(bundle.locales[bundle.project.defaultLocale][entry.textKey],entry.params,entry.textKey).ok)))add('state.history.invalid','/story/history');
  if(state.presentation.dialogue&&(!Number.isInteger(state.presentation.dialogue.revealed)||state.presentation.dialogue.revealed<0)) add('state.reveal.invalid','/presentation/dialogue/revealed');
  if(!validSavedPresentation(state,bundle))add('state.presentation.invalid','/presentation');
+ if(!errors.length)errors.push(...validateHearingState(state,bundle));
  try {
   const visit=(v,active=new Set())=>{
    if(v===null||typeof v==='string'||typeof v==='boolean'||(typeof v==='number'&&Number.isFinite(v)))return;

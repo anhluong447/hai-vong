@@ -97,6 +97,22 @@
     {
       "kind": "quests",
       "path": "../gameplay/quests.json"
+    },
+    {
+      "kind": "hearingBalance",
+      "path": "../gameplay/hearings/balance.json"
+    },
+    {
+      "kind": "hearings",
+      "path": "../gameplay/hearings/defense-fixture.json"
+    },
+    {
+      "kind": "hearings",
+      "path": "../gameplay/hearings/attack-fixture.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/hearing.json"
     }
   ]
 }

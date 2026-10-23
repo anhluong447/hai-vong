@@ -22,3 +22,12 @@ test('managed preferences reject invalid locale tuning bindings and conflicts be
  const moved=remapBinding(value,0,'KeyJ',{config,input,locales:bundle.locales});assert(moved.ok);equal(moved.value.bindings[0].code,'KeyJ');
  for(const change of [{locale:'absent'},{textSpeed:-1},{textScale:99},{bindings:[{code:'KeyJ',action:'invented',contexts:['world']}]}])assert(!validatePreferences({...value,...change},{config,input,locales:bundle.locales}).ok);
 });
+test('known binding prefix extends old profiles while preserving remaps and rejecting ambiguous layouts',async()=>{
+ const {PlayerProfile}=await import('/src/application/PlayerProfile.js'),{defaultPreferences}=await import('/src/contracts/PlayerPreferences.js');
+ const bundle=validateProject(await loadProject('/content/project.json')).value,config=bundle.catalog.get('config','ui.navigation').value,input=bundle.catalog.get('input','input.default').value;
+ const preferences=defaultPreferences(config,input,'vi');preferences.bindings=preferences.bindings.slice(0,11);preferences.bindings[0].code='KeyJ';
+ const record={schemaVersion:1,preferences,profile:{flags:{},readAnchors:[]}};let stored;
+ const repository={get:async()=>({ok:true,value:record}),put:async value=>{stored=value;return {ok:true,value};},close(){}};
+ const profile=new PlayerProfile({repository,bundle,config,input,locales:bundle.locales});assert((await profile.load()).ok);assert(profile.value.preferences.bindings.length>11,'new hearing controls must be appended');equal(profile.value.preferences.bindings[0].code,'KeyJ');assert(stored,'explicit extension must be persisted');
+ record.preferences.bindings[0].contexts=['dialogue'];const invalid=new PlayerProfile({repository,bundle,config,input,locales:bundle.locales});assert(!(await invalid.load()).ok);
+});

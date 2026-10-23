@@ -8,7 +8,12 @@
     "advance": "player.action.advance",
     "menu": "player.action.menu",
     "back": "player.action.back",
-    "fullscreen": "player.action.fullscreen"
+    "fullscreen": "player.action.fullscreen",
+    "hearingAdvance": "hearing.ui.action.hearingAdvance",
+    "laneUp": "hearing.ui.action.laneUp",
+    "laneDown": "hearing.ui.action.laneDown",
+    "deflect": "hearing.ui.action.deflect",
+    "finalTap": "hearing.ui.action.finalTap"
   },
   "locales": {
     "vi": "player.locale.vi",
@@ -19,5 +24,15 @@
     "ambience": "player.bus.ambience",
     "voice": "player.bus.voice",
     "sfx": "player.bus.sfx"
+  },
+  "contexts": {
+    "world": "hearing.ui.context.world",
+    "dialogue": "hearing.ui.context.dialogue",
+    "menu": "hearing.ui.context.menu",
+    "loading": "hearing.ui.context.loading",
+    "defense": "hearing.ui.context.defense",
+    "attack": "hearing.ui.context.attack",
+    "minigame": "hearing.ui.context.minigame",
+    "final-shot": "hearing.ui.context.final-shot"
   }
 }

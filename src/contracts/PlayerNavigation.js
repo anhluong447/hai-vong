@@ -1,5 +1,5 @@
 import {diagnostic} from './Diagnostic.js';
-import {INPUT_ACTIONS} from './InputActions.js';
+import {INPUT_ACTIONS,INPUT_CONTEXTS} from './InputActions.js';
 import {defaultPreferences,validatePreferences} from './PlayerPreferences.js';
 export const PLAYER_SCREENS=Object.freeze(['main','pause','slots','settings','backlog']);
 const actions=new Set(['new','continue','load','save','settings','backlog','main','resume','audio','fullscreen']);
@@ -15,9 +15,10 @@ export function validateNavigation({catalog,project,locales,sourceFor}){
    for(const field of ['main','pause'])if(!Array.isArray(config[field])||!config[field].length||config[field].some(item=>!item||!actions.has(item.action)||!has(item.key)))fail('/'+field);
    if(!Array.isArray(config.textKeys)||config.textKeys.some(key=>!has(key)))fail('/textKeys');
    if(!config.screenTitles||PLAYER_SCREENS.some(screen=>!has(config.screenTitles[screen]))||typeof config.bindingSeparator!=='string')fail('/screenTitles');
+   if(config.legacyBindingCounts!==undefined&&(!Array.isArray(config.legacyBindingCounts)||config.legacyBindingCounts.some(count=>!Number.isInteger(count)||count<1)))fail('/legacyBindingCounts');
   }
   if(config.kind==='input-actions'){
-   if(!config.labels||INPUT_ACTIONS.some(action=>!has(config.labels[action]))||!config.locales||Object.entries(config.locales).some(([locale,key])=>!locales[locale]||!has(key))||!config.buses||Object.values(config.buses).some(key=>!has(key)))add(config.id,'input.labels.invalid','/');
+   if(!config.labels||INPUT_ACTIONS.some(action=>!has(config.labels[action]))||!config.contexts||INPUT_CONTEXTS.some(context=>!has(config.contexts[context]))||!config.locales||Object.entries(config.locales).some(([locale,key])=>!locales[locale]||!has(key))||!config.buses||Object.values(config.buses).some(key=>!has(key)))add(config.id,'input.labels.invalid','/');
   }
   if(config.kind==='runtime'){
    const nav=catalog.get('config',config.navigationId),input=catalog.get('input',config.inputId),labels=catalog.get('config',config.actionLabelsId);

@@ -4,7 +4,7 @@ export function gameplayBalance(bundle){const runtime=bundle.catalog.get('config
 export function gameplayDefinitions(bundle){const balance=gameplayBalance(bundle);return balance?{balance,team:bundle.catalog.get('team',balance.teamId).value,progression:bundle.catalog.get('progression',balance.progressionId).value,publication:bundle.catalog.get('publication',balance.publicationId).value,quests:bundle.catalog.list('quests'),schedules:bundle.catalog.list('schedules')}:null;}
 export function createGameplayState(bundle){
  const definitions=gameplayDefinitions(bundle);if(!definitions)return {};const {balance,team,progression,quests}=definitions;
- return {calendar:{day:balance.calendar.initialDay,period:balance.calendar.initialPeriod,pending:null,finished:false},energy:balance.energy.cap,wallet:progression.initialWallet,audience:0,
+ return {calendar:{day:balance.calendar.initialDay,period:balance.calendar.initialPeriod,pending:null,finished:false},energy:balance.energy.cap,wallet:progression.initialWallet,audience:0,hearing:null,
   members:Object.fromEntries(team.members.map(member=>[member.id,{stats:structuredClone(member.stats),skillXP:Object.fromEntries(progression.skills.map(skill=>[skill.id,0]))}])),
   quests:Object.fromEntries(quests.map(quest=>[quest.id,{status:'available',performerId:null,materialIds:[],proposal:null,completedDay:null}])),
   delegation:{jobs:{},feedback:[]},publication:{queued:[],published:{}},evidence:{defense:{},attack:{}},

@@ -10,6 +10,7 @@ import {validTextEntry} from '../../contracts/TextTokens.js';
 import {validateNavigation} from '../../contracts/PlayerNavigation.js';
 import {validateGameplay} from '../../contracts/validateGameplay.js';
 import {GAMEPLAY_EFFECT_HANDLERS} from '../../contracts/GameplayActions.js';
+import {validateHearings} from '../../contracts/validateHearings.js';
 
 export function validateProject({project,schemas,documents,capabilities=[]}) {
  const errors=[]; const entries=Object.create(null); const locations=new Map(); const locales=Object.create(null);
@@ -30,7 +31,7 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
   const schemaKey=doc.kind==='assets'?'resources':doc.kind;
   const schema=Object.hasOwn(schemas,schemaKey)?schemas[schemaKey]:null;
   if(schema) {const found=validateSchema(schema,doc.data,doc.sourceId,'');errors.push(...found);if(found.length)continue;}
-  else if(['scenes','actors','input','sequences','balance','quests','team','schedules','publication','progression'].includes(doc.kind)){add('schema.missing',doc,'/kind');continue;}
+  else if(['scenes','actors','input','sequences','balance','quests','team','schedules','publication','progression','hearings','hearingBalance'].includes(doc.kind)){add('schema.missing',doc,'/kind');continue;}
   else if(!['animations','audio','quests','config','hearing'].includes(doc.kind)) {add('content.kind.unknown',doc,'/kind');continue;}
   const defs=Array.isArray(doc.data)?doc.data:[doc.data];entries[doc.kind]??=[];
   for(const [i,def] of defs.entries()) {
@@ -48,6 +49,7 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  errors.push(...validateWorld({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateNavigation({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateGameplay({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
+ errors.push(...validateHearings({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
  for(const error of validateResources(entries.assets??[])){
   const id=error.relatedIds[0],doc=locations.get(`assets:${id}`);
   if(doc){error.sourceId=doc.sourceId;error.pointer='/'+doc.data.findIndex(d=>d.id===id);}

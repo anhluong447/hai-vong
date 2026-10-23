@@ -1,6 +1,13 @@
 import {diagnostic,failure,success} from './Diagnostic.js';
 const bad=code=>failure(diagnostic(code,'preferences','/'));
 export function defaultPreferences(config,input,locale){return {...structuredClone(config.defaults),locale,bindings:structuredClone(input.bindings)};}
+/** Only declared append-only definition revisions may extend a previous remap. */
+export function extendPreferences(value,{config,input}){
+ const count=value?.bindings?.length;
+ if(!config.legacyBindingCounts?.includes(count)||count>=input.bindings.length)return value;
+ if(value.bindings.some((binding,index)=>!binding||binding.action!==input.bindings[index].action||JSON.stringify(binding.contexts)!==JSON.stringify(input.bindings[index].contexts)))return value;
+ return {...structuredClone(value),bindings:[...structuredClone(value.bindings),...structuredClone(input.bindings.slice(count))]};
+}
 export function validatePreferences(value,{config,input,locales}){
  if(!value||!Object.hasOwn(locales,value.locale)||!config.textScales.includes(value.textScale)||!config.textSpeeds.includes(value.textSpeed)||typeof value.reducedMotion!=='boolean'||!value.audio||Object.keys(value.audio).length!==Object.keys(config.defaults.audio).length||Object.entries(value.audio).some(([id,gain])=>!Object.hasOwn(config.defaults.audio,id)||!Number.isFinite(gain)||gain<0||gain>1))return bad('preferences.invalid');
  if(!Array.isArray(value.bindings)||value.bindings.length!==input.bindings.length)return bad('input.bindings.invalid');

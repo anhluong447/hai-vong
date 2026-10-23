@@ -7,6 +7,7 @@ const missingDefaults=(defaults,state,depth=0)=>{
  return Object.fromEntries([...new Set([...Object.keys(defaults),...Object.keys(state)])].map(key=>[key,missingDefaults(defaults[key],state[key],depth+1)]));
 };
 const knownV1=state=>state.formatTag===undefined&&object(state.gameplay)&&Object.keys(state.gameplay).every(key=>key==='flags')&&object(state.gameplay.flags)&&object(state.world)&&Number.isFinite(state.world.position)&&[1,-1].includes(state.world.facing)&&Object.keys(state.world).every(key=>['sceneId','position','facing','pending','moving'].includes(key));
+const knownV2=state=>state.formatTag==='hoi-am.side-scroll'&&object(state.gameplay?.calendar)&&object(state.world)&&Number.isFinite(state.world.position)&&[1,-1].includes(state.world.facing);
 /** Bounded, explicit mappings. There is no guessed legacy coordinate conversion. */
 export class MigrationRegistry {
  constructor({schemaVersion,contentVersion,schemaSteps=[],contentSteps=[]}){Object.assign(this,{schemaVersion,contentVersion,schemaSteps,contentSteps});}
@@ -17,7 +18,7 @@ export class MigrationRegistry {
     if(!Number.isInteger(state.schemaVersion)||state.schemaVersion>this.schemaVersion||schemas.has(state.schemaVersion))return bad('save.version.unsupported');schemas.add(state.schemaVersion);
     const candidates=this.schemaSteps.filter(s=>s.from===state.schemaVersion&&s.tag===state.formatTag);
     if(candidates.length!==1)return bad('save.legacy.exportOnly');const step=candidates[0];
-    if(step.guard&&!(step.guard==='phase0-side-scroll-v1'&&knownV1(state)))return bad('save.legacy.exportOnly');
+    if(step.guard&&!(step.guard==='phase0-side-scroll-v1'&&knownV1(state)||step.guard==='phase0-side-scroll-v2'&&knownV2(state)))return bad('save.legacy.exportOnly');
     state={...missingDefaults(step.defaults??{},state),schemaVersion:step.to};
    }
    const seen=new Set();while(state.contentRevision!==this.contentVersion){

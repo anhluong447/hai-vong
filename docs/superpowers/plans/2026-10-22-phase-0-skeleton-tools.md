@@ -10,7 +10,7 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T06 đã triển khai và kiểm chứng; có bản thử 2D dùng bàn phím. T07–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
+**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T09 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T10–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
 
 ## Global Constraints
 
@@ -307,11 +307,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes GDD turn rules, evidence catalog, clock/input/save ports; produces immutable hearing state, structured outcomes and resumable `RunSnapshot.sequence/gameplay` extensions.
 
-- [ ] Write red Defense tests for damage before response, clamp, bailout timing/one-use, discard, quality after relevance, mitigation/all-Lose constraints, ending verdict and heart transfer. Pin fixture values to GDD and mark +50/+20 as provisional tuning.
-- [ ] Write red Attack tests for word/answer selection, wrong-answer locking/heart changes, recovery checkpoint, scripted progress thresholds, minigame/Final Shot and keyboard-only completion. Use authored findings; required answers do not depend on Side evidence.
-- [ ] Implement pure handlers and views with data-driven hearing definitions. Use technical fixture bosses; canonical Khoa/Linh/Huy milestones remain week 3/end 7/12 in production definitions.
-- [ ] Save and resume after accusation damage, before/after card use, during word selection and mid-minigame; compare remaining time/projectiles/outcomes. Hidden-tab pause does not drain a timer or replay effects.
-- [ ] Run content/unit/browser/hearing save checks; commit `feat: add resumable defense and attack foundation hearings`.
+- [x] Write red Defense tests for damage before response, clamp, bailout timing/one-use, discard, quality after relevance, mitigation/all-Lose constraints, ending verdict and heart transfer. Pin fixture values to GDD and mark +50/+20 as provisional tuning.
+- [x] Write red Attack tests for word/answer selection, wrong-answer locking/heart changes, recovery checkpoint, scripted progress thresholds, minigame/Final Shot and keyboard-only completion. Use authored findings; required answers do not depend on Side evidence.
+- [x] Implement pure handlers and views with data-driven hearing definitions. Use technical fixture bosses; canonical Khoa/Linh/Huy milestones remain week 3/end 7/12 in production definitions.
+- [x] Save and resume after accusation damage, before/after card use, during word selection and mid-minigame; compare remaining time/projectiles/outcomes. Hidden-tab pause does not drain a timer or replay effects.
+- [x] Run content/unit/browser/hearing save checks; commit `feat: add resumable defense and attack foundation hearings`.
 
 ### T10 — Resource managers, Scene Editor và UI/input editor
 

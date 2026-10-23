@@ -9,4 +9,5 @@ export class TextService {
   return formatTokens(entry,params,key);
  }
  format(key,params={}){const result=this.runs(key,params);return result.ok?success(result.value.map(r=>r.value).join('')):result;}
+ number(value,options={}){return new Intl.NumberFormat(this.locale,options).format(value);}
 }

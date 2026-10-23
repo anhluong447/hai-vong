@@ -518,5 +518,349 @@
   "gameplay.activity.nightGame": {
     "value": "Chơi game đêm thử nghiệm",
     "params": []
+  },
+  "hearing.fixture.name": {
+    "value": "Phiên điều trần thử nghiệm",
+    "params": []
+  },
+  "hearing.fixture.boss": {
+    "value": "Đối thủ thử nghiệm",
+    "params": []
+  },
+  "hearing.accusation.first": {
+    "value": "Tư liệu nào xác nhận bản tin thử nghiệm?",
+    "params": []
+  },
+  "hearing.accusation.second": {
+    "value": "Căn cứ nào bảo vệ cách mô tả trong bài?",
+    "params": []
+  },
+  "hearing.ethics.question": {
+    "value": "Điều gì định hướng việc tác nghiệp?",
+    "params": []
+  },
+  "hearing.ethics.truth": {
+    "value": "Kiểm chứng sự thật và tôn trọng con người",
+    "params": []
+  },
+  "hearing.ethics.popularity": {
+    "value": "Chỉ cần thu hút sự chú ý",
+    "params": []
+  },
+  "hearing.ethics.power": {
+    "value": "Luôn thuận theo người có quyền",
+    "params": []
+  },
+  "hearing.narration": {
+    "value": "Khuê trình bày dữ kiện của hồ sơ thử nghiệm.",
+    "params": []
+  },
+  "hearing.recap.before": {
+    "value": "Đối thủ viện dẫn ",
+    "params": []
+  },
+  "hearing.word.detail": {
+    "value": "thể thức",
+    "params": []
+  },
+  "hearing.recap.middle": {
+    "value": " và ",
+    "params": []
+  },
+  "hearing.word.context": {
+    "value": "bối cảnh",
+    "params": []
+  },
+  "hearing.recap.connect": {
+    "value": " để khẳng định ",
+    "params": []
+  },
+  "hearing.word.contradiction": {
+    "value": "không có tư liệu",
+    "params": []
+  },
+  "hearing.recap.end": {
+    "value": ".",
+    "params": []
+  },
+  "hearing.question.trapA": {
+    "value": "Chuyển sang nhận xét cá nhân?",
+    "params": []
+  },
+  "hearing.question.correct": {
+    "value": "Đối chiếu phát biểu với tư liệu đã xác minh?",
+    "params": []
+  },
+  "hearing.question.trapB": {
+    "value": "Bỏ qua hồ sơ và đổi chủ đề?",
+    "params": []
+  },
+  "hearing.question.trapC": {
+    "value": "Kết luận từ lời đồn chưa kiểm chứng?",
+    "params": []
+  },
+  "hearing.confrontation": {
+    "value": "Chủ tọa yêu cầu đối chiếu điểm mâu thuẫn còn lại.",
+    "params": []
+  },
+  "hearing.crash": {
+    "value": "Đối thủ mất bình tĩnh. Chuẩn bị chặn đạn ngôn từ.",
+    "params": []
+  },
+  "hearing.final": {
+    "value": "Chốt lại hồ sơ trước hội đồng.",
+    "params": []
+  },
+  "hearing.projectile": {
+    "value": "Lời phủ nhận thử nghiệm",
+    "params": []
+  },
+  "hearing.mood.pressure": {
+    "value": "Áp lực hội trường",
+    "params": []
+  },
+  "hearing.mood.doubt": {
+    "value": "Nghi ngại",
+    "params": []
+  },
+  "hearing.mood.neutral": {
+    "value": "Quan sát",
+    "params": []
+  },
+  "hearing.mood.support": {
+    "value": "Ủng hộ",
+    "params": []
+  },
+  "hearing.mood.triumph": {
+    "value": "Tin tưởng",
+    "params": []
+  },
+  "hearing.ui.title": {
+    "params": [
+      "boss"
+    ],
+    "value": "Phiên điều trần — {boss}"
+  },
+  "hearing.ui.defenseStats": {
+    "params": [
+      "gauge"
+    ],
+    "value": "Phán quyết: {gauge}"
+  },
+  "hearing.ui.attackStats": {
+    "params": [
+      "hearts",
+      "maxHearts",
+      "hp",
+      "maxHp"
+    ],
+    "value": "Tim: {hearts}/{maxHearts} · HP đối thủ: {hp}/{maxHp}"
+  },
+  "hearing.ui.miniStats": {
+    "params": [
+      "hp",
+      "seconds",
+      "blocks"
+    ],
+    "value": "HP chặn đạn: {hp} · Còn {seconds} giây · Đã chặn: {blocks}"
+  },
+  "hearing.ui.finalStats": {
+    "params": [
+      "seconds",
+      "taps"
+    ],
+    "value": "Còn {seconds} giây · Số lần tap: {taps}"
+  },
+  "hearing.ui.card": {
+    "params": [
+      "name",
+      "quality",
+      "type"
+    ],
+    "value": "{name} · {quality} · {type}"
+  },
+  "hearing.ui.result": {
+    "params": [
+      "result",
+      "points"
+    ],
+    "value": "{result}: {points} điểm"
+  },
+  "hearing.ui.continue": {
+    "params": [],
+    "value": "Tiếp tục"
+  },
+  "hearing.ui.pause": {
+    "params": [],
+    "value": "Tạm dừng / Lưu / Tải"
+  },
+  "hearing.ui.defeat": {
+    "params": [],
+    "value": "Phiên THỦ thất bại. Mở menu để tải lại hoặc về màn hình chính."
+  },
+  "hearing.ui.won": {
+    "params": [],
+    "value": "Điều trần hoàn tất"
+  },
+  "hearing.ui.dismiss": {
+    "params": [],
+    "value": "Trở lại khám phá"
+  },
+  "hearing.ui.recovery": {
+    "params": [],
+    "value": "Lấy lại bình tĩnh. Xem lại mắt xích hiện tại trước khi phản biện tiếp."
+  },
+  "hearing.ui.retry": {
+    "params": [],
+    "value": "Thử lại phần chặn đạn"
+  },
+  "hearing.ui.block": {
+    "params": [],
+    "value": "Chặn"
+  },
+  "hearing.ui.tap": {
+    "params": [],
+    "value": "Kết luận"
+  },
+  "hearing.ui.high": {
+    "params": [],
+    "value": "Chất lượng cao"
+  },
+  "hearing.ui.standard": {
+    "params": [],
+    "value": "Chất lượng thường"
+  },
+  "hearing.ui.win": {
+    "params": [],
+    "value": "Thuyết phục"
+  },
+  "hearing.ui.normal": {
+    "params": [],
+    "value": "Trung lập"
+  },
+  "hearing.ui.lose": {
+    "params": [],
+    "value": "Không phù hợp"
+  },
+  "hearing.ui.data": {
+    "params": [],
+    "value": "Số liệu"
+  },
+  "hearing.ui.witness": {
+    "params": [],
+    "value": "Nhân chứng"
+  },
+  "hearing.ui.document": {
+    "params": [],
+    "value": "Tài liệu"
+  },
+  "hearing.ui.photo": {
+    "params": [],
+    "value": "Ảnh"
+  },
+  "hearing.ui.physical": {
+    "params": [],
+    "value": "Vật chứng"
+  },
+  "hearing.ui.upper": {
+    "params": [],
+    "value": "Làn trên"
+  },
+  "hearing.ui.lower": {
+    "params": [],
+    "value": "Làn dưới"
+  },
+  "hearing.ui.normalMode": {
+    "params": [],
+    "value": "Normal — bấm chặn"
+  },
+  "hearing.ui.easyMode": {
+    "params": [],
+    "value": "Easy — tự chặn đúng làn"
+  },
+  "hearing.ui.field": {
+    "params": [],
+    "value": "Khu vực chặn đạn"
+  },
+  "hearing.ui.player": {
+    "params": [],
+    "value": "Khuê"
+  },
+  "hearing.ui.hint": {
+    "params": [
+      "up",
+      "down",
+      "block",
+      "menu"
+    ],
+    "value": "Đổi làn: {up} / {down} · Chặn: {block} · Menu: {menu}"
+  },
+  "hearing.ui.action.hearingAdvance": {
+    "params": [],
+    "value": "Tiếp tục điều trần"
+  },
+  "hearing.ui.action.laneUp": {
+    "params": [],
+    "value": "Lên làn trên"
+  },
+  "hearing.ui.action.laneDown": {
+    "params": [],
+    "value": "Xuống làn dưới"
+  },
+  "hearing.ui.action.deflect": {
+    "params": [],
+    "value": "Chặn đạn"
+  },
+  "hearing.ui.action.finalTap": {
+    "params": [],
+    "value": "Tap kết luận"
+  },
+  "hearing.ui.context.world": {
+    "params": [],
+    "value": "Khám phá"
+  },
+  "hearing.ui.context.dialogue": {
+    "params": [],
+    "value": "Hội thoại"
+  },
+  "hearing.ui.context.menu": {
+    "params": [],
+    "value": "Menu"
+  },
+  "hearing.ui.context.loading": {
+    "params": [],
+    "value": "Đang tải"
+  },
+  "hearing.ui.context.defense": {
+    "params": [],
+    "value": "THỦ"
+  },
+  "hearing.ui.context.attack": {
+    "params": [],
+    "value": "CÔNG"
+  },
+  "hearing.ui.context.minigame": {
+    "params": [],
+    "value": "Chặn đạn"
+  },
+  "hearing.ui.context.final-shot": {
+    "params": [],
+    "value": "Kết luận"
+  },
+  "hearing.ui.binding": {
+    "params": [
+      "action",
+      "contexts",
+      "code"
+    ],
+    "value": "{action} ({contexts}) — {code}"
+  },
+  "hearing.ui.hintEasy": {
+    "value": "Tự chặn khi ở đúng làn · Đổi làn: {up} / {down} · Menu: {menu}",
+    "params": [
+      "up",
+      "down",
+      "menu"
+    ]
   }
 }

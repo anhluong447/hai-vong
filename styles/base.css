@@ -25,3 +25,13 @@ select,input,textarea { font:inherit; max-width:100%; color:var(--ink); backgrou
 textarea { width:100%; min-height:var(--dialogue-height); }
 [data-role=player-message] { position:sticky; bottom:0; background:var(--panel-bg); }
 [data-role=status] { color:var(--muted); }
+[data-role=hearing] { position:fixed; inset:var(--hearing-inset); max-height:var(--hearing-height); z-index:var(--hearing-z); overflow:auto; background:var(--panel-bg); color:var(--ink); padding:var(--panel-padding); border:var(--border-size) solid var(--accent); border-radius:var(--panel-radius); }
+[data-role=hearing-body] { display:flex; flex-direction:column; gap:var(--panel-gap); margin-block:var(--panel-gap); min-width:0; }
+[data-role=hearing] button { white-space:normal; overflow-wrap:anywhere; }
+[data-role=hearing-recap] button { text-decoration:underline; }
+[data-role=hearing-field] { position:relative; height:var(--hearing-field-height); flex-shrink:0; overflow:hidden; background:var(--page-bg); border:var(--border-size) solid var(--muted); }
+[data-role=hearing-field] span { position:absolute; transform:translateY(-50%); }
+[data-role=hearing-lane] { color:var(--hearing-lane-color); }
+[data-role=hearing-player] { background:var(--accent); padding:var(--border-size); border:var(--border-size) solid var(--ink); }
+[data-role=hearing-projectile] { background:var(--panel-bg); border:var(--border-size) solid var(--focus); white-space:nowrap; }
+[data-role=menu] { position:fixed; z-index:var(--menu-z); }

@@ -21,13 +21,34 @@ T01 through T05 are implemented and committed: contracts/checks, content/flags,
 story session/checkpoints, JSON authoring workspace and resource pipeline/recovery.
 T06 is implemented: keyboard-driven 2D fixture scenes, NPC dialogue, doors, camera,
 DPR/viewport, focus, text, animation, audio and presentation timeline.
-T01 through T08 are implemented in the active worktree; T09 through T14 remain.
+T01 through T09 are implemented in the active worktree; T10 through T14 remain.
 No 12-week production expansion.
 The latest user instruction resumes the approved plan after containment remediation.
-Continue at T09 in the active worktree without another permission prompt.
+Continue at T10 in the active worktree without another permission prompt.
 No push, publication or merge is authorized.
 
-## Current checkpoint (T08 complete; T09 next)
+## Current checkpoint (T09 complete; T10 next)
+
+T09 implements immutable Defense/Attack, deterministic two-lane mini/Final Shot,
+managed hearing UI/input, preserved old remaps and deep source/snapshot validation.
+RunSnapshot 3 explicitly upgrades known tagged-v2 saves and retains the v1 chain.
+Native keys complete the whole hearing and resume damage/card/word/locked-question/
+projectile checkpoints. Pause and simulated document visibility stop time; Easy
+ignores the Normal-only deflect key. Defense history replay prevents forged points
+and bailout recovery; projectile ownership/deadlines validate before replacement.
+
+Actual final gates: architecture/content pass; 105 JS + 29 Python unit tests,
+30 browser and 8 authoring pass. Reports: implementation `.cache/test/t09-final-*.json`.
+Screenshot 783f9936dff7a197.png was inspected as fixture UI, not production art.
+Unit deadline is now 120 seconds after measuring a complete 67.9-second diagnostic;
+bounded Windows profile cleanup retries a reproduced delayed file release without
+ignoring persistent failure. Contract: docs/engineering/HEARING-CONTRACT.md.
+
+Decisions remain fixture policy: Defense section 4's explicit pipeline governs the
+conflicting section 6.2 continuation; pre-response bailout resumes that response,
+post-response resumes after committed discard. Mercy restores three hearts at the
+current round. No protected source changed. Continue the authorized plan at T10;
+T10-T14 remain. No push/merge/publication or 12-week production expansion.
 
 - T07 commit `fab9e90` supplies keyboard player menus, full transactional browser
   saves, settings/remaps/profile, backlog/auto-skip and IndexedDB recovery.

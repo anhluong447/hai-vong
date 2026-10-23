@@ -8,12 +8,32 @@ import subprocess
 import sys
 import tempfile
 import threading
+import time
+from contextlib import contextmanager
 from urllib.parse import urlencode,urlsplit
 from urllib.request import urlopen
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from local_environment import configure, local_path
 from preflight import detect_browser
 from server import StaticHandler,create_server
+
+def cleanup_profile(profile):
+    # Chrome children can release Windows handles shortly after the main exit.
+    # Resolve containment before recursive cleanup; persistent failures still fail.
+    local_path(profile.name)
+    for attempt in range(21):
+        try:
+            profile.cleanup()
+            return
+        except PermissionError:
+            if attempt == 20: raise
+            time.sleep(.1)
+
+@contextmanager
+def browser_profile():
+    profile=tempfile.TemporaryDirectory(prefix='hoi-am-browser-',dir=local_path('.cache/tmp'))
+    try: yield profile.name
+    finally: cleanup_profile(profile)
 
 def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/index.html',payload=None):
     environment=configure()
@@ -52,7 +72,7 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/i
     if payload is not None:query.append(('input',origin+'/_input/'+token))
     url=origin+page+'?'+urlencode(query)
     try:
-        with tempfile.TemporaryDirectory(prefix='hoi-am-browser-',dir=local_path('.cache/tmp')) as profile:
+        with browser_profile() as profile:
             with tempfile.TemporaryFile(dir=local_path('.cache/tmp')) as stderr:
                 proc=subprocess.Popen([detected['value'],'--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-extensions','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--remote-allow-origins='+origin,'--user-data-dir='+profile,url],stdout=subprocess.DEVNULL,stderr=stderr,env=environment)
                 try:
