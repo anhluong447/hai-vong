@@ -1,0 +1,122 @@
+{
+  "id": "ui.navigation",
+  "kind": "player-navigation",
+  "manualSlots": 10,
+  "autoSlots": 3,
+  "historyLimit": 200,
+  "autoDelay": 1.5,
+  "textScales": [
+    1,
+    1.25,
+    1.5
+  ],
+  "textSpeeds": [
+    18,
+    36,
+    72
+  ],
+  "reservedCodes": [
+    "Tab"
+  ],
+  "cancelCaptureCodes": [
+    "Escape"
+  ],
+  "defaults": {
+    "textScale": 1,
+    "textSpeed": 36,
+    "reducedMotion": false,
+    "audio": {
+      "bgm": 0.8,
+      "ambience": 0.8,
+      "voice": 1,
+      "sfx": 0.8
+    }
+  },
+  "main": [
+    {
+      "action": "new",
+      "key": "player.new"
+    },
+    {
+      "action": "continue",
+      "key": "player.continue"
+    },
+    {
+      "action": "load",
+      "key": "player.load"
+    },
+    {
+      "action": "settings",
+      "key": "player.settings"
+    }
+  ],
+  "pause": [
+    {
+      "action": "resume",
+      "key": "world.resume"
+    },
+    {
+      "action": "save",
+      "key": "player.save"
+    },
+    {
+      "action": "load",
+      "key": "player.load"
+    },
+    {
+      "action": "settings",
+      "key": "player.settings"
+    },
+    {
+      "action": "backlog",
+      "key": "player.backlog"
+    },
+    {
+      "action": "main",
+      "key": "player.main"
+    },
+    {
+      "action": "audio",
+      "key": "world.audio"
+    },
+    {
+      "action": "fullscreen",
+      "key": "world.fullscreen"
+    }
+  ],
+  "textKeys": [
+    "player.slots",
+    "player.slot",
+    "player.empty",
+    "player.back",
+    "player.settings",
+    "player.textScale",
+    "player.textSpeed",
+    "player.motion",
+    "player.locale",
+    "player.remap",
+    "player.defaults",
+    "player.capture",
+    "player.saved",
+    "player.loaded",
+    "player.transfer",
+    "player.import",
+    "player.export",
+    "player.backup",
+    "player.backlog",
+    "player.auto",
+    "player.skip",
+    "player.stop",
+    "player.audioBus",
+    "player.on",
+    "player.off"
+  ],
+  "bindingSeparator": " / ",
+  "screenTitles": {
+    "main": "world.title",
+    "pause": "world.paused",
+    "slots": "player.slots",
+    "settings": "player.settings",
+    "backlog": "player.backlog"
+  }
+}

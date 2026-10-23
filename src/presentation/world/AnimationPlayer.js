@@ -1,4 +1,5 @@
 import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
+import {validAnimationState} from '../../contracts/PresentationSnapshot.js';
 const bad=()=>failure(diagnostic('animation.state.invalid','animation','/'));
 export class AnimationPlayer {
  constructor(catalog){this.catalog=catalog;this.state=null;this.disposed=false;}
@@ -11,6 +12,6 @@ export class AnimationPlayer {
  pause(){if(this.state)this.state.paused=true;}
  resume(){if(this.state)this.state.paused=false;}
  snapshot(){return structuredClone(this.state);}
- restore(state){const clip=this.catalog.get('animations',state?.id);if(!clip.ok||!Number.isFinite(state.elapsed)||state.elapsed<0||typeof state.paused!=='boolean'||!['playing','complete'].includes(state.status)||this.disposed)return bad();this.clip=clip.value;this.state=structuredClone(state);return success(this.snapshot());}
+ restore(state){if(this.disposed||!validAnimationState(state,this.catalog))return bad();this.clip=this.catalog.get('animations',state.id).value;this.state=structuredClone(state);return success(this.snapshot());}
  dispose(){this.disposed=true;this.state=null;this.clip=null;}
 }

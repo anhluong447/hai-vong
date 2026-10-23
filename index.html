@@ -5,8 +5,8 @@
 <main data-game data-project="/content/project.json" data-failure-page="/content/fallback/load-error.html">
  <header><div><h1 data-text="world.title"></h1><p data-text="world.fixture"></p></div><button data-action="pause" data-text="world.pause"></button></header>
  <section data-role="stage"><canvas tabindex="0" data-label="world.viewport"></canvas><div data-role="curtain" hidden></div><div data-role="scene-name"></div></section>
- <section data-role="exploration"><p data-text="world.controls"></p><button data-action="interact" data-text="world.interact"></button></section>
- <section data-role="dialogue" hidden><div data-role="line" aria-live="polite"></div><div data-role="choices"></div><button data-action="advance" data-text="world.continue"></button></section>
+ <section data-role="exploration"><p data-role="controls"></p><button data-action="interact" data-text="world.interact"></button></section>
+ <section data-role="dialogue" hidden><div data-role="line" aria-live="polite"></div><div data-role="choices"></div><button data-action="advance" data-text="world.continue"></button><button data-action="auto" data-text="player.auto"></button><button data-action="skip" data-text="player.skip"></button><button data-action="stop" data-text="player.stop"></button></section>
  <p data-role="status" role="status"></p><button data-action="retry" data-text="world.retry" hidden></button>
  <section data-role="menu" role="dialog" aria-modal="true" tabindex="-1" hidden><h2 data-text="world.paused"></h2><button data-action="resume" data-text="world.resume"></button><button data-action="audio" data-text="world.audio"></button><button data-action="fullscreen" data-text="world.fullscreen"></button></section>
 </main>

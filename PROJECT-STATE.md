@@ -1,6 +1,6 @@
 # Hoi Am workspace state
 
-Updated: 2026-10-22 (Asia/Bangkok).
+Updated: 2026-10-23 (Asia/Bangkok).
 
 ## Mandatory project containment
 
@@ -21,10 +21,34 @@ T01 through T05 are implemented and committed: contracts/checks, content/flags,
 story session/checkpoints, JSON authoring workspace and resource pipeline/recovery.
 T06 is implemented: keyboard-driven 2D fixture scenes, NPC dialogue, doors, camera,
 DPR/viewport, focus, text, animation, audio and presentation timeline.
-T07 through T14 remain; no 12-week production expansion.
+T01 through T07 are implemented in the active worktree; T08 through T14 remain.
+No 12-week production expansion.
 The latest user instruction resumes the approved plan after containment remediation.
-Continue at T07 in the active worktree without another permission prompt.
+Continue at T08 in the active worktree without another permission prompt.
 No push, publication or merge is authorized.
+
+## Current checkpoint (T07 complete; T08 next)
+
+- T07 implements the persistent keyboard player shell, remap/settings/profile,
+  backlog and safe auto/skip, manual/rotating autosaves, backup/import/export,
+  explicit schema/content migrations and transactional full browser checkpoints.
+- Capture preserves queued input and freezes only the synchronous copy. Restore
+  prepares world/audio/timeline off-screen and rejects stale callbacks before
+  replacing live state. Pending scene and audio decode intents remain resumable.
+- Failed checksum/content/schema/resource preparation, quota and preference writes
+  retain valid state. Renamed anchors migrate history/read markers and once-only
+  effect identities as well as the cursor; a reward regression verifies no repeat.
+- Final gates: architecture/content pass; 61 JS + 28 Python unit tests, 25 native
+  browser tests and 8 authoring tests passed. Reports: implementation
+  `.cache/test/t07-final-*.json`, summary `t07-final-summary.json`.
+- Inspected actual en-XA settings screenshot at 27px, system-font fallback:
+  `.cache/test/screenshots/7648414b9cbd76b7.png`. Development fixture UI/art only;
+  no physical FPS or finished-art claim. Contract: docs/engineering/PLAYER-SAVES.md.
+- Continue with T08 gameplay modules in the same worktree. Read its brief and
+  actual Bible gameplay sections first; no permission prompt required. T09-T14
+  remain. Timed hearing snapshots are extended in T09; revision fingerprints in
+  T12 and production build metadata/release evidence in T13 are not complete yet.
+- No dependencies installed outside the project; protected sources/archive unchanged.
 
 ## Latest implementation evidence (T06)
 
@@ -45,8 +69,8 @@ No push, publication or merge is authorized.
 - RunSnapshot 1 review: optional pending/moving fields remain additive; validate
   real scene IDs/bounds/facing/spawns. T07 still must integrate adapter snapshots,
   transactional persistent save/restore and schema/content migration policy.
-- Platform details: docs/engineering/BROWSER-PLATFORM.md. The read-only dev host
-  is running on port 8080 for review; authoring writes are not enabled.
+- Platform details: docs/engineering/BROWSER-PLATFORM.md. The last recorded read-only dev host
+  used port 8080; current liveness was not checked at this handoff.
 
 ## Containment implementation and recovery
 

@@ -18,11 +18,13 @@ export function stepStory(current,intent,context) {
  if(intent.type==='start') {
   if(!['idle','end'].includes(state.story.waiting))return reject('story.already.started');
   const chapter=bundle.catalog.get('story',intent.chapterId);if(!chapter.ok)return chapter;enter(chapter.value,chapter.value.entryNodeId);
- } else if(intent.type==='reveal') {
+ } else if(intent.type==='reveal'||intent.type==='revealTo') {
   if(state.story.waiting!=='say'||!Number.isInteger(intent.count)||intent.count<0)return reject('story.intent.invalid');
-  state.presentation.dialogue.revealed+=intent.count;return success({state,outcomes});
+  if(intent.type==='revealTo')state.presentation.dialogue.revealed=intent.count;else state.presentation.dialogue.revealed+=intent.count;return success({state,outcomes});
  } else if(intent.type==='advance') {
   if(state.story.waiting!=='say')return reject('story.intent.invalid');
+  const place=locate(),entry={anchor:`${place.chapter.id}/${place.node.id}/${place.command.id}`,textKey:place.command.textKey,params:place.command.params??{}},runtime=bundle.catalog.get('config',bundle.project.runtimeConfigId).value,navigation=bundle.catalog.get('config',runtime.navigationId).value;
+  state.story.history=[...(state.story.history??[]),entry].slice(-navigation.historyLimit);state.story.readAnchors=[...new Set([...(state.story.readAnchors??[]),entry.anchor])];
   if(!next(locate()))return reject('story.terminal.missing');state.presentation.dialogue=null;
  } else if(intent.type==='choose') {
   if(state.story.waiting!=='choose')return reject('story.intent.invalid');
@@ -49,7 +51,7 @@ export function stepStory(current,intent,context) {
    const result=applyEffect(state,{effectId:cmd.effectId,params:cmd.params,identity},context);if(!result.ok)return result;state=result.value.state;outcomes.push(...result.value.outcomes);
   } else if(cmd.op==='setBackdrop') state.presentation={...state.presentation,backdropId:cmd.assetId};
   else if(cmd.op==='showActor') state.presentation={...state.presentation,actorId:cmd.actorId};
-  else if(cmd.op==='playCue'){state.audio={...state.audio,cueId:cmd.cueId,offset:0};outcomes.push({type:'presentation.cue',cueId:cmd.cueId});}
+  else if(cmd.op==='playCue'){state.audio={intent:{cueId:cmd.cueId,offset:0}};outcomes.push({type:'presentation.cue',cueId:cmd.cueId});}
   else return reject('story.opcode.unknown');
   if(!next(place))return reject('story.terminal.missing');
  }

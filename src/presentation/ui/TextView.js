@@ -9,6 +9,7 @@ export class TextView {
  render(){let remaining=Math.floor(this.state.revealed);const nodes=[];for(const run of this.runs){const child=this.node.ownerDocument.createElement(elements[run.kind]);child.textContent=run.graphemes.slice(0,remaining).join('');remaining=Math.max(0,remaining-run.graphemes.length);nodes.push(child);}this.node.replaceChildren(...nodes);}
  snapshot(){return structuredClone(this.state);}
  restore(state){if(!state||!Number.isFinite(state.revealed)||state.revealed<0)return failure(diagnostic('text.state.invalid','text','/'));const result=this.show(state.key,state.params);if(!result.ok)return result;this.state.revealed=Math.min(this.total,state.revealed);this.render();return success(this.snapshot());}
+ configure({speed,locale}){const saved=this.snapshot();this.speed=speed;this.segmenter=new Intl.Segmenter(locale,{granularity:'grapheme'});if(saved)this.restore(saved);}
  async fontsReady(){await this.node.ownerDocument.fonts.ready;return this.node.getBoundingClientRect();}
  dispose(){this.state=null;this.node.replaceChildren();}
 }

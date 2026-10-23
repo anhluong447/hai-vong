@@ -283,11 +283,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes checkpoints plus browser adapter snapshots; produces `SaveService.capture/restore`, slot repository, preference/remap state and keyboard navigable player screens. Configuration owns 10 manual/3 autosave proposal values.
 
-- [ ] Write red tests saving/resuming exploration, mid-reveal, choice, menu, tween and pending load; next input advances exactly the expected step and never repeats a committed reward. Hearing-specific snapshots are extended in T09.
-- [ ] Add corrupt checksum, future schema/content, explicit anchor/flag migration, unknown ID, quota failure, failed prepared world restore and transactional slot backup tests; both current session and previous valid slot survive failure.
-- [ ] Implement IndexedDB transactions, manual/autosave rotation, backup, import/export and content/schema migration registry. Old prototype saves get an explicit legacy policy/export route; never reinterpret them as equivalent new progress.
-- [ ] Implement main menu, settings, text size/speed, reduced motion, remap with conflict/restore-default handling, backlog, auto and skip. Skip stops at unread text by policy, choices, irreversible effects and timed hearings; backlog is read-only unless replay semantics are separately designed.
-- [ ] Run the entire player flow by keyboard with mouse unused. Swap to expanded-string test locale/font fallback and verify layout/labels; run browser/unit suites. Commit `feat: add complete keyboard player flows and resilient saves`.
+- [x] Write red tests saving/resuming exploration, mid-reveal, choice, menu, tween and pending load; next input advances exactly the expected step and never repeats a committed reward. Hearing-specific snapshots are extended in T09.
+- [x] Add corrupt checksum, future schema/content, explicit anchor/flag migration, unknown ID, quota failure, failed prepared world restore and transactional slot backup tests; both current session and previous valid slot survive failure.
+- [x] Implement IndexedDB transactions, manual/autosave rotation, backup, import/export and content/schema migration registry. Old prototype saves get an explicit legacy policy/export route; never reinterpret them as equivalent new progress.
+- [x] Implement main menu, settings, text size/speed, reduced motion, remap with conflict/restore-default handling, backlog, auto and skip. Skip stops at unread text by policy, choices, irreversible effects and timed hearings; backlog is read-only unless replay semantics are separately designed.
+- [x] Run the entire player flow by keyboard with mouse unused. Swap to expanded-string test locale/font fallback and verify layout/labels; run browser/unit suites. Commit `feat: add complete keyboard player flows and resilient saves`.
 
 ### T08 — Gameplay modules đại diện và definitions chỉnh được
 

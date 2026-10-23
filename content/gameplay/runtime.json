@@ -1,1 +1,31 @@
-{"id":"runtime.foundation","kind":"runtime","startSceneId":"scene.courtyard","startSpawnId":"entry","playerActorId":"actor.player","movementSpeed":240,"maxMovementDelta":0.1,"inputId":"input.default","uiId":"ui.foundation","audioBuses":[{"id":"bgm","gain":0.8},{"id":"ambience","gain":0.8},{"id":"voice","gain":1},{"id":"sfx","gain":0.8}]}
+{
+  "id": "runtime.foundation",
+  "kind": "runtime",
+  "startSceneId": "scene.courtyard",
+  "startSpawnId": "entry",
+  "playerActorId": "actor.player",
+  "movementSpeed": 240,
+  "maxMovementDelta": 0.1,
+  "inputId": "input.default",
+  "uiId": "ui.foundation",
+  "audioBuses": [
+    {
+      "id": "bgm",
+      "gain": 0.8
+    },
+    {
+      "id": "ambience",
+      "gain": 0.8
+    },
+    {
+      "id": "voice",
+      "gain": 1
+    },
+    {
+      "id": "sfx",
+      "gain": 0.8
+    }
+  ],
+  "navigationId": "ui.navigation",
+  "actionLabelsId": "input.actions"
+}

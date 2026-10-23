@@ -1,0 +1,426 @@
+{
+  "foundation.begin": {
+    "value": "[ Chương thử nghiệm nền tảng. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "foundation.choice": {
+    "value": "[ Ghé phòng câu lạc bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "foundation.end": {
+    "value": "[ Đã hoàn tất chương thử nghiệm. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.title": {
+    "value": "[ Hồi Âm — Không gian phát triển ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.explorer": {
+    "value": "[ Tài liệu dự án ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.source": {
+    "value": "[ Nội dung JSON ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.apply": {
+    "value": "[ Áp dụng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.undo": {
+    "value": "[ Hoàn tác ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.redo": {
+    "value": "[ Làm lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.save": {
+    "value": "[ Lưu nguồn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.recover": {
+    "value": "[ Phục hồi bản nháp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.preview": {
+    "value": "[ Chơi thử độc lập ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.start": {
+    "value": "[ Bắt đầu chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.stop": {
+    "value": "[ Dừng chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.advance": {
+    "value": "[ Tiếp tục ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.writable": {
+    "value": "[ Đang bật ghi nguồn cục bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.readonly": {
+    "value": "[ Chế độ chỉ đọc nguồn; thay đổi chỉ ở bản nháp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.unsaved": {
+    "value": "[ Có thay đổi chưa lưu nguồn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.clean": {
+    "value": "[ Tài liệu khớp nguồn đã mở ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.previewEnd": {
+    "value": "[ Đã kết thúc chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.previewStopped": {
+    "value": "[ Chưa chạy chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.document": {
+    "value": "[ {path} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "path"
+    ]
+  },
+  "workspace.documentDirty": {
+    "value": "[ {path} — chưa lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "path"
+    ]
+  },
+  "workspace.diagnostic": {
+    "value": "[ {code} — {source}{pointer} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "code",
+      "source",
+      "pointer"
+    ]
+  },
+  "world.title": {
+    "value": "[ Hồi Âm · Phòng thử nghiệm 2D ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.fixture": {
+    "value": "[ Bản thử nền tảng · hình ảnh tạm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.courtyard": {
+    "value": "[ Sân trường thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.club": {
+    "value": "[ Phòng câu lạc bộ thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.player": {
+    "value": "[ Người chơi thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.npc": {
+    "value": "[ Đồng đội thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.talk": {
+    "value": "[ Trò chuyện ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.enterClub": {
+    "value": "[ Vào phòng câu lạc bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.exitClub": {
+    "value": "[ Ra sân trường ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.controls": {
+    "value": "[ {left} / {right}: di chuyển · {interact}: tương tác · {menu}: menu · {fullscreen}: toàn màn hình ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "left",
+      "right",
+      "interact",
+      "menu",
+      "fullscreen"
+    ]
+  },
+  "world.interact": {
+    "value": "[ Tương tác ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.continue": {
+    "value": "[ Tiếp tục ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.pause": {
+    "value": "[ Tạm dừng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.resume": {
+    "value": "[ Trở lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.paused": {
+    "value": "[ Đang tạm dừng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.loading": {
+    "value": "[ Đang chuẩn bị cảnh… ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.ready": {
+    "value": "[ Sẵn sàng khám phá ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.retry": {
+    "value": "[ Thử lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.error": {
+    "value": "[ Không thể tiếp tục: {code} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "code"
+    ]
+  },
+  "world.audio": {
+    "value": "[ Bật âm thanh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.fullscreen": {
+    "value": "[ Toàn màn hình ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.viewport": {
+    "value": "[ Thế giới khám phá hai chiều ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.new": {
+    "value": "[ Bắt đầu lượt chơi mới ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.continue": {
+    "value": "[ Tiếp tục bản lưu gần nhất ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.load": {
+    "value": "[ Tải bản lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.save": {
+    "value": "[ Lưu tiến độ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.main": {
+    "value": "[ Về menu chính ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.slots": {
+    "value": "[ Các ô lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.slot": {
+    "value": "[ {kind} · Ô {index} · {state} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "kind",
+      "index",
+      "state"
+    ]
+  },
+  "player.manual": {
+    "value": "[ Thủ công ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.autoSlot": {
+    "value": "[ Tự động ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.empty": {
+    "value": "[ Trống ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.occupied": {
+    "value": "[ Có bản lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.back": {
+    "value": "[ Trở lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.settings": {
+    "value": "[ Tùy chỉnh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.textScale": {
+    "value": "[ Cỡ chữ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.textSpeed": {
+    "value": "[ Tốc độ hiện chữ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.motion": {
+    "value": "[ Giảm chuyển động ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.locale": {
+    "value": "[ Ngôn ngữ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.remap": {
+    "value": "[ Đổi phím {action} ({code}) ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "action",
+      "code"
+    ]
+  },
+  "player.binding": {
+    "value": "[ {action} · {contexts} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "action",
+      "contexts"
+    ]
+  },
+  "player.defaults": {
+    "value": "[ Khôi phục tùy chỉnh mặc định ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.capture": {
+    "value": "[ Nhấn phím mới; Escape để hủy ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.saved": {
+    "value": "[ Đã lưu tiến độ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.loaded": {
+    "value": "[ Đã tải tiến độ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.updated": {
+    "value": "[ Đã lưu tùy chỉnh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.transfer": {
+    "value": "[ Nội dung JSON để sao chép hoặc nhập bản lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.import": {
+    "value": "[ Nhập JSON vào ô đã chọn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.export": {
+    "value": "[ Xuất JSON ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.backup": {
+    "value": "[ Tải bản dự phòng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.backlog": {
+    "value": "[ Lịch sử hội thoại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.auto": {
+    "value": "[ Tự động đọc ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.skip": {
+    "value": "[ Bỏ qua đoạn đã đọc ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.stop": {
+    "value": "[ Dừng đọc tự động / bỏ qua ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.audioBus": {
+    "value": "[ Âm lượng {bus} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "bus"
+    ]
+  },
+  "player.on": {
+    "value": "[ Bật ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.off": {
+    "value": "[ Tắt ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.value": {
+    "value": "[ {value} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "value"
+    ]
+  },
+  "player.action.moveLeft": {
+    "value": "[ Đi trái ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.moveRight": {
+    "value": "[ Đi phải ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.interact": {
+    "value": "[ Tương tác ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.advance": {
+    "value": "[ Tiếp lời ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.menu": {
+    "value": "[ Mở menu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.back": {
+    "value": "[ Đóng menu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.fullscreen": {
+    "value": "[ Toàn màn hình ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.error": {
+    "value": "[ Thao tác chưa thành công: {code} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "code"
+    ]
+  },
+  "player.unread": {
+    "value": "[ Dừng tại đoạn chưa đọc hoặc ranh giới cần quyết định ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.historyEmpty": {
+    "value": "[ Chưa có lời thoại đã đọc ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.locale.vi": {
+    "value": "[ Tiếng Việt ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.locale.en-XA": {
+    "value": "[ Kiểm thử chuỗi dài ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.bgm": {
+    "value": "[ Nhạc nền ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.ambience": {
+    "value": "[ Môi trường ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.voice": {
+    "value": "[ Giọng nói ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.sfx": {
+    "value": "[ Hiệu ứng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  }
+}

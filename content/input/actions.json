@@ -1,0 +1,23 @@
+{
+  "id": "input.actions",
+  "kind": "input-actions",
+  "labels": {
+    "moveLeft": "player.action.moveLeft",
+    "moveRight": "player.action.moveRight",
+    "interact": "player.action.interact",
+    "advance": "player.action.advance",
+    "menu": "player.action.menu",
+    "back": "player.action.back",
+    "fullscreen": "player.action.fullscreen"
+  },
+  "locales": {
+    "vi": "player.locale.vi",
+    "en-XA": "player.locale.en-XA"
+  },
+  "buses": {
+    "bgm": "player.bus.bgm",
+    "ambience": "player.bus.ambience",
+    "voice": "player.bus.voice",
+    "sfx": "player.bus.sfx"
+  }
+}

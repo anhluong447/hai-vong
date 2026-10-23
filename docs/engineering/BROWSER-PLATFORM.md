@@ -61,7 +61,8 @@ are authored. Cue intent/offset survives an unsuccessful resume; a user gesture 
 retry. The tests inject a NotAllowedError at the resume boundary, then use a trusted
 key event and real AudioContext for loop, mute/gain, crossfade and resource cleanup.
 All save/restore operations on adapters are serialized by their application caller;
-the whole-runtime transactional save service is T07, not supplied by this adapter.
+the whole-runtime transactional save service is supplied by T07; see
+[player saves](PLAYER-SAVES.md) for its prepare/commit, backup and recovery contract.
 
 ## Snapshot review and evidence
 
@@ -71,7 +72,8 @@ now reject undeclared scene IDs, out-of-bounds positions and invalid facing/spaw
 Earlier codec tests using imaginary scene names were replaced with declared fixtures.
 Legacy 3D coordinates are not treated as compatible side-scrolling positions.
 Adapter snapshots contain IDs/numbers/booleans, never Canvas, images or AudioNodes.
-T07 must compose them into atomic capture/restore, migrations and persistent slots.
+T07 composes them into atomic capture/restore, migrations and persistent slots.
+The page now starts in the main menu; choose New Run or Continue before exploring.
 
 Automated browser tests cover keyboard exploration/dialogue/door/pause, stale loads,
 repeated entry/disposal, text, focus, IME, timing, animation, audio and timeline behavior.

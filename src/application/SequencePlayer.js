@@ -1,4 +1,5 @@
 import {diagnostic,failure,success} from '../contracts/Diagnostic.js';
+import {validSequenceState} from '../contracts/PresentationSnapshot.js';
 const bad=()=>failure(diagnostic('sequence.state.invalid','sequence','/'));
 /** A serializable presentation timeline. Signals cannot grant gameplay rewards. */
 export class SequencePlayer {
@@ -20,5 +21,7 @@ export class SequencePlayer {
  skip(){if(!['playing','waiting'].includes(this.state.status))return [];const signals=[];for(let i=this.state.index;i<this.definition.steps.length;i++){const step=this.definition.steps[i];if(step.kind==='tween')this.state.values[step.target]=step.to;else if(['cue','scene'].includes(step.kind)&&!(i===this.state.index&&this.state.status==='waiting'))signals.push({...step});}this.state.index=this.definition.steps.length;this.state.elapsed=0;this.state.status='complete';return signals;}
  cancel(){this.state.status='cancelled';}
  snapshot(){return structuredClone(this.state);}
- restore(state){const def=this.definitions.find(d=>d.id===state?.id);if(!def||!Number.isInteger(state.index)||state.index<0||state.index>def.steps.length||!Number.isFinite(state.elapsed)||state.elapsed<0||!['playing','waiting','complete','cancelled'].includes(state.status)||typeof state.paused!=='boolean'||!state.values||Object.values(state.values).some(v=>!Number.isFinite(v)))return bad();this.definition=def;this.state=structuredClone(state);return success(this.snapshot());}
+ restore(state){
+  if(!validSequenceState(state,this.definitions))return bad();this.definition=this.definitions.find(d=>d.id===state.id)??null;this.state=structuredClone(state);return success(this.snapshot());
+ }
 }

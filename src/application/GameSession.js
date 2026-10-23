@@ -20,7 +20,9 @@ export class GameSession {
    const context={bundle:this.#bundle,effects:this.#effects};
    const result=command.type==='story.step'?stepStory(this.#state,command.intent,context):command.type==='effect.apply'?applyEffect(this.#state,command,context):['scene.request','scene.commit','scene.cancel','world.move','world.interact'].includes(command.type)?worldCommand(this.#state,command,context):failure(diagnostic('command.unknown','command','/type'));
    if(!result.ok)return result;
-   const checked=this.replace(result.value.state);if(!checked.ok)return checked;
+   // Browser projections describe a saved checkpoint, not authoritative live frames.
+   const next={...result.value.state,presentation:{...result.value.state.presentation}};delete next.presentation.view;
+   const checked=this.replace(next);if(!checked.ok)return checked;
    return success({state:this.#state,outcomes:immutableCopy(result.value.outcomes??[])});
   } catch {return failure(diagnostic('command.interrupted','command','/'));}
  }

@@ -19,3 +19,9 @@ test('autoplay denial preserves cue offset and retry starts real looped audio wi
  }finally{await audio.dispose();assets.dispose();}
  equal(assets.stats(),{resources:0,references:0,pending:0});equal(context.state,'closed');
 });
+test('an accepted cue still decoding is part of a resumable checkpoint intent',async()=>{
+ const bundle=await runtimeBundle();let release;const gate=new Promise(resolve=>{release=resolve;}),assets=resourceService(bundle,decode=>async(...args)=>{await gate;return decode(...args);}),audio=new AudioAdapter({catalog:bundle.catalog,assets,revision:bundle.revision,buses:[{id:'bgm',gain:.8}]});
+ let playing;try{
+  playing=audio.play('cue.fixture.bgm',{offset:.2});audio.pause();const saved=audio.snapshot();equal(saved.tracks,[{cueId:'cue.fixture.bgm',offset:.2}]);release();assert((await playing).ok);equal(audio.stats().nodes,0);assert((await audio.restore(saved)).ok);equal(audio.snapshot().tracks,[{cueId:'cue.fixture.bgm',offset:.2}]);
+ }finally{release();await playing;await audio.dispose();assets.dispose();}equal(assets.stats(),{resources:0,references:0,pending:0});
+});

@@ -37,11 +37,42 @@
       "kind": "audio",
       "path": "../audio/cues.json"
     },
-    {"kind":"scenes","path":"../scenes/foundation.json"},
-    {"kind":"sequences","path":"../sequences/foundation.json"},
-    {"kind":"actors","path":"../actors/foundation.json"},
-    {"kind":"input","path":"../input/defaults.json"},
-    {"kind":"config","path":"../gameplay/runtime.json"},
-    {"kind":"config","path":"../ui/foundation.json"}
+    {
+      "kind": "scenes",
+      "path": "../scenes/foundation.json"
+    },
+    {
+      "kind": "sequences",
+      "path": "../sequences/foundation.json"
+    },
+    {
+      "kind": "actors",
+      "path": "../actors/foundation.json"
+    },
+    {
+      "kind": "input",
+      "path": "../input/defaults.json"
+    },
+    {
+      "kind": "config",
+      "path": "../gameplay/runtime.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/foundation.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/navigation.json"
+    },
+    {
+      "kind": "config",
+      "path": "../input/actions.json"
+    },
+    {
+      "kind": "locale",
+      "locale": "en-XA",
+      "path": "../locales/test-expanded.json"
+    }
   ]
 }

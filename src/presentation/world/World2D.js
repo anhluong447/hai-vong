@@ -1,6 +1,7 @@
 import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
 import {Camera2D} from './Camera2D.js';
 import {ActorView} from './ActorView.js';
+import {validWorldView} from '../../contracts/PresentationSnapshot.js';
 const bad=code=>failure(diagnostic(code,'world','/load'));
 /** Prepared scenes own leases until commit; obsolete asynchronous loads cannot win. */
 export class World2D {
@@ -37,7 +38,7 @@ export class World2D {
  snapshot(){return {sceneId:this.current?.scene.id??null,elapsed:this.elapsed,cameraX:this.camera.x,actors:Object.fromEntries([...(this.actors??[])].map(([id,actor])=>[id,actor.animation.snapshot()]))};}
  async restore(state){
   const scene=this.catalog.get('scenes',state?.sceneId);
-  if(!scene.ok||!Number.isFinite(state.elapsed)||state.elapsed<0||!Number.isFinite(state.cameraX)||state.cameraX<0||state.cameraX>Math.max(0,scene.value.width-this.camera.width)||!state.actors||typeof state.actors!=='object')return bad('world.snapshot.invalid');
+  if(!scene.ok||!validWorldView(state,{catalog:this.catalog,playerActorId:this.playerActorId,viewport:this.view.viewport}))return bad('world.snapshot.invalid');
   const actors=new Map([['player',new ActorView(this.catalog.get('actors',this.playerActorId).value,this.catalog)],...scene.value.actors.map(a=>[a.id,new ActorView(this.catalog.get('actors',a.actorId).value,this.catalog)])]);
   for(const [id,saved]of Object.entries(state.actors)){const actor=actors.get(id);if(!actor||saved&&!actor.animation.restore(saved).ok){for(const a of actors.values())a.dispose();return bad('world.snapshot.invalid');}}
   const prepared=await this.prepare(state.sceneId);if(!prepared.ok){for(const a of actors.values())a.dispose();return prepared;}

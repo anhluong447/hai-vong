@@ -6,7 +6,7 @@ test('real game shell supports walking NPC dialogue doors and pause using keyboa
  const html=await(await fetch('/index.html')).text(),page=new DOMParser().parseFromString(html,'text/html');
  const root=document.importNode(page.querySelector('[data-game]'),true);document.body.append(root);let game;
  try{
-  game=await createGame(root,{autoStart:false});equal(game.session.snapshot().world.sceneId,'scene.courtyard');assert(root.textContent.includes('H\u1ed3i \u00c2m'));root.querySelector('canvas').focus();
+  game=await createGame(root,{autoStart:false});root.querySelector('[data-action=new]').focus();await press({key:'Enter',code:'Enter',virtualKey:13});await until(()=>root.querySelector('[data-role=menu]').hidden&&root.dataset.ready==='true');equal(game.session.snapshot().world.sceneId,'scene.courtyard');assert(root.textContent.includes('H\u1ed3i \u00c2m'));root.querySelector('canvas').focus();
   equal(game.sequence.snapshot().id,'sequence.fixture.enter');game.step(0.1);assert(game.sequence.snapshot().values.curtainOpacity>0&&game.sequence.snapshot().values.curtainOpacity<0.6);
   await keyDown({key:'d',code:'KeyD',virtualKey:68});for(let i=0;i<13;i++)game.step(0.1);await keyUp({key:'d',code:'KeyD',virtualKey:68});
   await press({key:'e',code:'KeyE',virtualKey:69});game.step(0);equal(game.session.snapshot().story.waiting,'say');

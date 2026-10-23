@@ -13,16 +13,26 @@ test('mid-line reveal captures and decodes remaining dialogue instead of restart
  const decoded=await SaveCodec.decode(encoded.value);assert(decoded.ok);const other=new GameSession({bundle,effects,initialState:decoded.value});
  equal(other.snapshot().presentation.dialogue.revealed,3);const next=new StoryRunner(other).step({type:'advance'});assert(next.ok);equal(next.value.story.waiting,'choose');
 });
+test('a story audio command commits a declared cue intent before browser decoding',async()=>{
+ const withCue=await runtimeBundle(source=>source.documents.find(d=>d.kind==='story').data.nodes[0].commands.unshift({id:'music',op:'playCue',cueId:'cue.fixture.bgm'})),session=new GameSession({bundle:withCue,effects});
+ const result=session.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}});assert(result.ok,JSON.stringify(result));equal(session.snapshot().audio,{intent:{cueId:'cue.fixture.bgm',offset:0}});equal(result.value.outcomes,[{type:'presentation.cue',cueId:'cue.fixture.bgm'}]);
+});
+test('say and transition snapshots require coherent declared dialogue and continuation payloads',async()=>{
+ const session=new GameSession({bundle,effects});session.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}});const good=session.snapshot();
+ for(const dialogue of [null,{textKey:'absent',params:{},revealed:0},{textKey:'foundation.begin',params:{unknown:1},revealed:0}]){const broken=structuredClone(good);broken.presentation.dialogue=dialogue;assert(!session.validate(broken).ok);}
+ const source=await runtimeBundle(s=>s.documents.find(d=>d.kind==='story').data.nodes[0].commands.unshift({id:'travel',op:'transition',sceneId:'scene.courtyard'})),travel=new GameSession({bundle:source,effects});travel.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}});
+ for(const pending of [null,{sceneId:'missing',continuation:'loaded'},{sceneId:'scene.club',continuation:'loaded'},{sceneId:'scene.courtyard',continuation:'unknown'}]){const broken=structuredClone(travel.snapshot());broken.story.pending=pending;assert(!travel.validate(broken).ok);}
+});
 test('choice checkpoint resumes the selected branch with no duplicate effect',async()=>{
  const {runner,checkpoints}=setup();runner.step({type:'start',chapterId:'foundation.chapter'});runner.step({type:'advance'});
  const encoded=await SaveCodec.encode(checkpoints.capture().value,{buildId:'test',contentVersion:bundle.revision});const decoded=await SaveCodec.decode(encoded.value);
  const other=new GameSession({bundle,effects,initialState:decoded.value});new StoryRunner(other).step({type:'choose',choiceId:'visit'});equal(other.snapshot().gameplay.flags['flag.count'],1);
 });
 test('pending scene and partially progressed sequence survive codec without platform objects',async()=>{
- const {session,checkpoints}=setup();const state=structuredClone(session.snapshot());state.world={sceneId:'scene.courtyard',position:120,facing:1,pending:{sceneId:'scene.club',spawnId:'entry',requestId:'resume'}};state.sequence={id:'fade',stepId:'fade.in',elapsed:0.4,paused:true};state.audio={cueId:'bgm',offset:12,gain:0.5};
+ const {session,checkpoints}=setup();const state=structuredClone(session.snapshot());state.world={sceneId:'scene.courtyard',position:120,facing:1,pending:{sceneId:'scene.club',spawnId:'entry',requestId:'resume'}};state.sequence={id:'sequence.fixture.enter',index:0,elapsed:0.2,values:{curtainOpacity:0.3},paused:true,status:'playing'};state.audio={paused:true,buses:{bgm:{gain:0.5,muted:false}},tracks:[{cueId:'cue.fixture.bgm',offset:0.2}]};
  assert(session.replace(state).ok);
  const envelope=await SaveCodec.encode(checkpoints.capture().value,{buildId:'test',contentVersion:bundle.revision});const decoded=await SaveCodec.decode(envelope.value);assert(decoded.ok);
- equal(decoded.value.world,state.world);equal(decoded.value.sequence.elapsed,0.4);equal(decoded.value.world.pending.sceneId,'scene.club');equal(decoded.value.audio.offset,12);
+ equal(decoded.value.world,state.world);equal(decoded.value.sequence.elapsed,0.2);equal(decoded.value.world.pending.sceneId,'scene.club');equal(decoded.value.audio.tracks[0].offset,0.2);
 });
 test('corrupt checksum and unsupported envelope cannot replace a valid checkpoint',async()=>{
  const {session,checkpoints}=setup();const good=checkpoints.capture().value;

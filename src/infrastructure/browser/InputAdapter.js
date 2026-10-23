@@ -6,6 +6,7 @@ export class InputAdapter {
   target.addEventListener('blur',()=>this.clear(),options);
   target.addEventListener('keyup',event=>this.down.delete(event.code),options);
   target.addEventListener('keydown',event=>{
+   if(this.capture){event.preventDefault();event.stopPropagation();if(event.repeat||event.isComposing)return;const capture=this.capture;this.capture=null;this.clear();capture.callback(capture.cancelCodes.includes(event.code)?null:event.code);return;}
    if(this.composing||event.isComposing||event.repeat||this.down.has(event.code))return;
    const editing=event.target?.closest?.('input,textarea,select,[contenteditable="true"]');if(editing)return;
    const binding=this.definition.bindings.find(b=>b.code===event.code&&b.contexts.includes(this.context));if(!binding)return;
@@ -17,5 +18,8 @@ export class InputAdapter {
  held(action){return [...this.down.values()].includes(action);}
  drain(){const result=this.queue;this.queue=[];return result;}
  clear(){this.down.clear();this.queue=[];}
- dispose(){this.disposed=true;this.controller.abort();this.clear();}
+ captureNext(callback,cancelCodes){this.clear();this.capture={callback,cancelCodes};}
+ cancelCapture(){this.capture=null;this.clear();}
+ configure(definition){this.cancelCapture();this.definition=definition;}
+ dispose(){this.disposed=true;this.cancelCapture();this.controller.abort();}
 }
