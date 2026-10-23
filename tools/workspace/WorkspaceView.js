@@ -17,7 +17,7 @@ export class WorkspaceView {
   this.render();this.renderPreview();
  }
  label(key,params){const result=this.text.format(key,params);if(!result.ok)throw new Error(JSON.stringify(result));return result.value;}
- focusPointer(pointer){const fields=[...this.query('resource-tools').querySelectorAll('[data-field]')].filter(node=>!node.disabled),target=fields.find(node=>node.dataset.field===pointer)??fields.find(node=>pointer===''||node.dataset.field.startsWith(pointer+'/'));if(target)target.focus();else{this.query('raw-source').open=true;this.query('source').dataset.pointer=pointer;this.query('source').focus();}}
+ focusPointer(pointer){if(this.tools.editor.focusPointer?.(pointer))return;const fields=[...this.query('resource-tools').querySelectorAll('[data-field]')].filter(node=>!node.disabled),target=fields.find(node=>node.dataset.field===pointer)??fields.find(node=>pointer===''||node.dataset.field.startsWith(pointer+'/'));if(target)target.focus();else{this.query('raw-source').open=true;this.query('source').dataset.pointer=pointer;this.query('source').focus();}}
  render(){
   this.text.locales=this.workspace.bundle.locales;
   if(this.previousId!==this.id)this.query('raw-source').open=false;this.previousId=this.id;

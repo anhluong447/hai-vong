@@ -13,7 +13,7 @@ export class Inspector {
  render(){
   if(this.disposed)return;this.controller.abort();this.controller=new AbortController();const previous=this.root.ownerDocument.activeElement?.dataset.field,{doc,path,data}=this.selected();this.root.replaceChildren();for(const [key,value]of Object.entries(this.ui.tokens))this.root.style.setProperty(key,value);
   this.message=this.node('p',{role:'status','data-role':'editor-message'});this.root.append(this.message);if(doc.readOnly)this.root.append(this.node('p',{},this.label(this.ui.labels.readonly)));
-  this.fields=this.node('div',{'data-role':'editor-fields'});this.root.append(this.fields);this.renderFields(data,path,doc);
+  this.fields=this.node('div',{'data-role':'editor-fields'});this.root.append(this.fields);this.replaceFields(data,path,doc);
   this.previewRoot=this.node('div',{'data-role':'editor-preview'});this.root.append(this.previewRoot);
   this.transfer=this.node('textarea',{'data-role':'editor-transfer','aria-label':this.label(this.ui.labels.transfer)});this.transfer.value=JSON.stringify(doc.data,null,2);
   this.root.append(this.button(this.ui.labels.export,'export',()=>{this.transfer.value=JSON.stringify(this.workspace.get(this.sourceId).data,null,2);this.transfer.focus();this.transfer.select();}),this.button(this.ui.labels.import,'import',()=>{
@@ -26,8 +26,9 @@ export class Inspector {
   if(value&&typeof value==='object'&&!Array.isArray(value)){for(const [key,item]of Object.entries(value))this.renderFields(item,path+'/'+escape(key),doc);return;}
   const label=this.node('label'),caption=this.node('span',{},this.label(this.ui.labels.property,{path})),complex=Array.isArray(value)||value===null,control=this.node(complex?'textarea':'input',{'data-field':path});label.append(caption,control);this.fields.append(label);control.disabled=doc.readOnly;
   if(complex)control.value=JSON.stringify(value,null,2);else if(typeof value==='boolean'){control.type='checkbox';control.checked=value;}else{control.type=typeof value==='number'?'number':'text';control.value=String(value);if(typeof value==='number')control.step='any';}
-  control.addEventListener('change',()=>{try{const next=complex?JSON.parse(control.value):typeof value==='number'?Number(control.value):typeof value==='boolean'?control.checked:control.value;this.set(path,next,doc.revision);}catch{this.notify(failure(diagnostic('authoring.json.invalid',doc.id,path)));}},{signal:this.controller.signal});
+  control.addEventListener('change',()=>{try{const next=complex?JSON.parse(control.value):typeof value==='number'?Number(control.value):typeof value==='boolean'?control.checked:control.value;this.set(path,next,doc.revision);}catch{this.notify(failure(diagnostic('authoring.json.invalid',doc.id,path)));}},{signal:this.fieldController.signal});
   if(Array.isArray(value))for(const [index,item]of value.entries())if(item&&typeof item==='object')this.renderFields(item,path+'/'+index,doc);
  }
- dispose(){this.disposed=true;this.controller.abort();}
+ replaceFields(value,path,doc){this.fieldController?.abort();this.fieldController=new AbortController();this.fields.replaceChildren();this.renderFields(value,path,doc);}
+ dispose(){this.disposed=true;this.controller.abort();this.fieldController?.abort();}
 }

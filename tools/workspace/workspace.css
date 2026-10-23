@@ -12,3 +12,5 @@
 [data-role=layout-preview] button { color:var(--ink);background:var(--panel-bg); }
 [data-role=layout-preview] [data-state=focused] { outline:var(--focus-width) solid var(--accent); }
 [data-role=layout-preview] [data-state=error] { color:var(--editor-error-color);background:var(--background); }
+[data-role=playtest-result] { white-space:pre-wrap;overflow-wrap:anywhere;max-height:var(--editor-fields-height);overflow:auto; }
+[data-role=hearing-preview],[data-role=story-preview] { display:flex;flex-direction:column;gap:var(--gap); }

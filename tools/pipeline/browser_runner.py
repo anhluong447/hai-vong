@@ -39,9 +39,10 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/i
     environment=configure()
     detected=detect_browser()
     if not detected['ok']: return detected
-    received={}; event=threading.Event(); token=secrets.token_urlsafe(24)
+    received={}; event=threading.Event(); token=secrets.token_urlsafe(24); requests=[]
     class Handler(StaticHandler):
         def do_GET(self):
+            requests.append(urlsplit(self.path).path)
             if urlsplit(self.path).path=='/_driver/'+token:
                 try:
                     port=int((Path(profile)/'DevToolsActivePort').read_text().splitlines()[0])
@@ -77,7 +78,8 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/i
                 proc=subprocess.Popen([detected['value'],'--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-extensions','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--remote-allow-origins='+origin,'--user-data-dir='+profile,url],stdout=subprocess.DEVNULL,stderr=stderr,env=environment)
                 try:
                     if not event.wait(timeout):
-                        return {'ok':False,'passed':0,'failed':1,'errors':[{'code':'test.browser.timeout','sourceId':url,'pointer':'','relatedIds':modules}]}
+                        stderr.flush();stderr.seek(0)
+                        return {'ok':False,'passed':0,'failed':1,'errors':[{'code':'test.browser.timeout','sourceId':url,'pointer':'','relatedIds':modules}],'diagnostics':{'requests':requests[-120:],'processExit':proc.poll(),'stderr':stderr.read().decode('utf-8',errors='replace')[-8000:]}}
                     for result in received.get('results',[]):
                         detail=result.get('detail')
                         if not isinstance(detail,dict) or 'screenshot' not in detail:continue

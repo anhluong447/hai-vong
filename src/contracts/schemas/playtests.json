@@ -1,0 +1,113 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "kind": {
+        "enum": [
+          "playtest-fixture"
+        ]
+      },
+      "nameKey": {
+        "type": "string"
+      },
+      "initial": {
+        "type": "object",
+        "properties": {
+          "calendar": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "period": {
+                "enum": [
+                  "morning",
+                  "afternoon",
+                  "evening",
+                  "night"
+                ]
+              }
+            },
+            "required": [
+              "day",
+              "period"
+            ],
+            "additionalProperties": false
+          },
+          "energy": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sceneId": {
+            "type": "string"
+          },
+          "spawnId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "calendar",
+          "energy",
+          "sceneId",
+          "spawnId"
+        ],
+        "additionalProperties": false
+      },
+      "commands": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      },
+      "checkpoints": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "after": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "hearingId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "after",
+            "hearingId"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "id",
+      "kind",
+      "nameKey",
+      "initial",
+      "commands",
+      "checkpoints"
+    ],
+    "additionalProperties": false
+  }
+}

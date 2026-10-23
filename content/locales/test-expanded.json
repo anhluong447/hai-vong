@@ -1037,5 +1037,86 @@
       "kind",
       "locale"
     ]
+  },
+  "authoring.flow": {
+    "value": "[ Luồng kịch bản ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.node": {
+    "value": "[ Nút {id} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.edge": {
+    "value": "[ {from} → {to} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "from",
+      "to"
+    ]
+  },
+  "authoring.branchSource": {
+    "value": "[ Lựa chọn nguồn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.nodeId": {
+    "value": "[ ID nút mới ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.choiceId": {
+    "value": "[ ID lựa chọn mới ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.textKey": {
+    "value": "[ Khóa văn bản ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.addBranch": {
+    "value": "[ Thêm nút và nối nhánh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.flag": {
+    "value": "[ Khai báo flag có kiểu (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.addFlag": {
+    "value": "[ Thêm flag ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.advance": {
+    "value": "[ Tiếp tục thoại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.fixture": {
+    "value": "[ Tình huống thử độc lập ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.command": {
+    "value": "[ Command thử (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.execute": {
+    "value": "[ Chạy command ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.segment": {
+    "value": "[ Đoạn điều trần ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.previewSegment": {
+    "value": "[ Thử đoạn đã chọn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.renameNode": {
+    "value": "[ Đổi ID nút và xuất ánh xạ save ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.migrationCandidate": {
+    "value": "[ Bản nháp ánh xạ anchor cần review ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.nodeSource": {
+    "value": "[ Nút cần đổi ID ~~~~~~~~~~~~~~~~ ]",
+    "params": []
   }
 }

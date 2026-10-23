@@ -71,7 +71,7 @@ class AuthoringServerTests(unittest.TestCase):
                 invalid=json.loads(raw);invalid['entryNodeId']='absent';payload['content']=invalid
                 status,body=request(payload,headers);self.assertFalse(body['ok']);self.assertTrue(any(e['code']=='story.entry.missing' for e in body['errors']),body);self.assertEqual(path.read_bytes(),raw)
                 payload['content']=data;data['nodes'][0]['commands'][0]['textKey']='foundation.end'
-                status,body=request(payload,headers);self.assertEqual(status,200);self.assertTrue(body['ok'],body)
+                status,body=request(payload,headers);self.assertEqual(status,200,body);self.assertTrue(body['ok'],body)
                 saved=path.read_bytes();self.assertNotEqual(saved,raw)
                 status,body=request(payload,headers);self.assertFalse(body['ok']);self.assertEqual(body['errors'][0]['code'],'authoring.write.conflict');self.assertEqual(path.read_bytes(),saved)
             finally:server.shutdown();server.server_close();thread.join()

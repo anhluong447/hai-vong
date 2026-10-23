@@ -10,7 +10,7 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T10 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T11–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
+**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T11 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T12–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
 
 ## Global Constraints
 
@@ -331,11 +331,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes T02 schema/diagnostics and T08/T09 pure handlers through isolated previews; produces the same JSON definitions and migration mapping candidates used by runtime.
 
-- [ ] Write red tests adding and connecting story nodes, choices, typed flags, condition/effect targets, quest prerequisites, schedules, evidence mappings and hearing segments; errors select the exact node/property.
-- [ ] Implement node/flow editing and inspectors with keyboard paths; gameplay editor handles cost/reward/schedule/progression definitions, Hearing Editor previews a specified accusation/rebuttal or Attack segment.
-- [ ] Demonstrate Main-route dependency diagnostics when a mandatory Boss fact is placed exclusively in Side. Intentional terminal nodes are accepted; accidental broken endings are rejected.
-- [ ] Add authoring recipe: create NPC → dialogue/flag → quest → evidence/hearing reference → validate → play → save → export; include naming conventions and schema/content migration procedure.
-- [ ] Run authoring/content/unit checks; commit `feat: add story gameplay and hearing authoring workflows`.
+- [x] Write red tests adding and connecting story nodes, choices, typed flags, condition/effect targets, quest prerequisites, schedules, evidence mappings and hearing segments; errors select the exact node/property.
+- [x] Implement node/flow editing and inspectors with keyboard paths; gameplay editor handles cost/reward/schedule/progression definitions, Hearing Editor previews a specified accusation/rebuttal or Attack segment.
+- [x] Demonstrate Main-route dependency diagnostics when a mandatory Boss fact is placed exclusively in Side. Intentional terminal nodes are accepted; accidental broken endings are rejected.
+- [x] Add authoring recipe: create NPC → dialogue/flag → quest → evidence/hearing reference → validate → play → save → export; include naming conventions and schema/content migration procedure.
+- [x] Run authoring/content/unit checks; commit `feat: add story gameplay and hearing authoring workflows`.
 
 ### T12 — Hot reload, debug workspace, traversal bot và crash packages
 

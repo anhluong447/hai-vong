@@ -21,13 +21,13 @@ T01 through T05 are implemented and committed: contracts/checks, content/flags,
 story session/checkpoints, JSON authoring workspace and resource pipeline/recovery.
 T06 is implemented: keyboard-driven 2D fixture scenes, NPC dialogue, doors, camera,
 DPR/viewport, focus, text, animation, audio and presentation timeline.
-T01 through T10 are implemented in the active worktree; T11 through T14 remain.
+T01 through T11 are implemented in the active worktree; T12 through T14 remain.
 No 12-week production expansion.
 The latest user instruction resumes the approved plan after containment remediation.
-Continue at T11 in the active worktree without another permission prompt.
+Continue at T12 in the active worktree without another permission prompt.
 No push, publication or merge is authorized.
 
-## Current checkpoint (T09 complete; T10 in progress)
+## Current checkpoint (T11 complete; T12 next)
 
 T09 implements immutable Defense/Attack, deterministic two-lane mini/Final Shot,
 managed hearing UI/input, preserved old remaps and deep source/snapshot validation.
@@ -75,31 +75,32 @@ T10-T14 remain. No push/merge/publication or 12-week production expansion.
   state, timed minigame and interruption semantics. T10-T14 remain afterward.
 - Protected Bible/GDD/archive bytes unchanged; no external installation or push.
 
-## T10 implementation checkpoint (complete; commit pending)
+## T11 complete (commit pending)
 
-T10 implements dedicated resource/scene/layout/input tools, ResourceIndex search/
-usage/safe rename, atomic grouped edits/undo/drafts/source writes with recovery
-journals, authenticated recipe rebuilds and real isolated runtime previews.
-Native keyboard edits, dependency navigation, canvas placement and reopened exports
-are covered. Guide: docs/guides/RESOURCE-WORKFLOW.md.
+T10 committed as bb6f7a1. T11 implements typed story/quest/gameplay/hearing
+inspectors, atomic node/choice/flag operations, exact diagnostic navigation,
+authoringOnly command-replayed fixtures and actual player hearing views. Node
+renames export reviewed anchorMap candidates; real MigrationRegistry save restore
+and native integrated export controls are tested. Source/UI-state, detached-field,
+obsolete-preview and stopped-preview ownership checks pass. No player state field
+was added; existing snapshot v3/content mapping contracts remain intact.
 
-Actual final gates: architecture/content pass; 108 JS + 33 Python unit tests,
-30 browser and 27 authoring tests pass. Reports: .cache/test/t10-final-*.json.
-Screenshot 5378d64c507ef03b.png inspected: readable fixture workspace/actor preview.
-Earlier unit timeout was diagnosed with per-test timings: repeated pack I/O cost
-138 seconds. Domain tests now clone one real fixture source; actual loader/decoder
-and native browser I/O checks remain. Full unit gate passes after this change.
-Earlier intermittent authoring-server failures are retained in diagnostic reports;
-the final suite passes, including 12 repeated denied-Host requests.
+Actual final gates: architecture/content pass; 109 JS + 33 Python unit,
+30 browser and 39 authoring tests pass. Reports: .cache/test/t11-final-*.json.
+Guide: docs/guides/ADDING-CONTENT.md. Managed fixture source starts day 17 and earns
+and publishes evidence before day-19 hearing checkpoints; this is explicit test
+context, not a change to canonical Boss scheduling or production content.
 
-Player loader concurrently reads independent sources in declaration order and skips
-explicit authoringOnly documents. Save-slot restore prepares menu records before
-commit, fixing an actual delayed render that stole keyboard focus from Back.
-No player snapshot field added; snapshot v3/migrations remain intact.
+Earlier authoring-server Chrome validations intermittently timed out; subsequent
+full Python diagnostic and final unit runs passed (33 tests, ~32 seconds each).
+Timeout reports now include requested paths, process exit and Chrome stderr for
+future diagnosis. No root cause or permanent environment fix is claimed.
+The bootstrap test now targets its source textarea explicitly after adding new
+preview forms. Protected Bible/GDD/archive paths have no diff.
 
-Next: commit T10, start T11 dialogue/quest/gameplay/hearing tools from its brief,
-then T12-T14 and one fresh final whole-branch review. No protected source/archive
-changes, external install, push/merge/publication or 12-week content expansion.
+Next: commit T11 and continue T12 hot reload/debug/bot/crash tools, then T13-T14
+and the final fresh whole-branch review. No push/merge/publication, external install
+or 12-week production expansion authorized.
 
 ## Latest implementation evidence (T06)
 

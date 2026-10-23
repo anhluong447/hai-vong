@@ -20,5 +20,13 @@ export function validateGameplayResources({catalog,balance,team,progression:p,pu
  }
  for(const id of Object.values(balance.energy.nightBenefits))if(activities.get(id)?.kind!=='night')add('balance',balance.id,'activity.night.invalid','/energy/nightBenefits');
  if(pub.weekday<1||pub.weekday>c.daysPerWeek||!c.periods.includes(pub.period)||!(pub.baseScore>0)||!(pub.scoreCap>0)||!(pub.attractionCap>0)||pub.packagingBonus>1)add('publication',pub.id,'publication.invalid','/');
- for(const schedule of catalog.list('schedules'))if(!members.has(schedule.memberId)||!catalog.get('scenes',schedule.sceneId).ok||!inTerm(schedule)||schedule.daysOfWeek.some(day=>day<1||day>c.daysPerWeek)||schedule.periods.some(period=>!c.periods.includes(period)))add('schedules',schedule.id,'schedule.invalid','/');
+ for(const schedule of catalog.list('schedules')){
+  const invalid=path=>add('schedules',schedule.id,'schedule.invalid',path);
+  if(!members.has(schedule.memberId))invalid('/memberId');
+  if(!catalog.get('scenes',schedule.sceneId).ok)invalid('/sceneId');
+  if(schedule.firstDay<1)invalid('/firstDay');
+  if(schedule.lastDay<schedule.firstDay||schedule.lastDay>c.totalDays)invalid('/lastDay');
+  if(schedule.daysOfWeek.some(day=>day<1||day>c.daysPerWeek))invalid('/daysOfWeek');
+  if(schedule.periods.some(period=>!c.periods.includes(period)))invalid('/periods');
+ }
 }

@@ -124,6 +124,11 @@
       "kind": "config",
       "path": "../assets/imports.json",
       "authoringOnly": true
+    },
+    {
+      "kind": "playtests",
+      "path": "../dev/foundation/playtests.json",
+      "authoringOnly": true
     }
   ]
 }

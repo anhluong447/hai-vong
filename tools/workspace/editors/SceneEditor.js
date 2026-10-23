@@ -6,7 +6,7 @@ export class SceneEditor extends Inspector {
   this.root.insertBefore(this.button(this.ui.labels.step,'step',()=>this.preview?.step(this.ui.preview.stepSeconds)),this.previewRoot);
   const targets=this.node('div',{'data-role':'scene-targets'});this.root.insertBefore(targets,this.fields);
   for(const [group,values,key]of [['layers',data.layers,'layer'],['actors',data.actors,'actor'],['interactions',data.interactions,'interaction']])for(const [index,item]of values.entries()){
-   const control=this.node('button',{'data-scene-target':path+'/'+group+'/'+index},this.label(this.ui.labels[key],group==='layers'?{index:index+1}:{id:item.id}));control.addEventListener('click',()=>{this.placementPath=path+'/'+group+'/'+index+'/x';this.fields.replaceChildren();this.renderFields(item,path+'/'+group+'/'+index,this.workspace.get(this.sourceId));},{signal:this.controller.signal});targets.append(control);
+   const control=this.node('button',{'data-scene-target':path+'/'+group+'/'+index},this.label(this.ui.labels[key],group==='layers'?{index:index+1}:{id:item.id}));control.addEventListener('click',()=>{this.placementPath=path+'/'+group+'/'+index+'/x';this.replaceFields(item,path+'/'+group+'/'+index,this.workspace.get(this.sourceId));},{signal:this.controller.signal});targets.append(control);
   }
  }
  place(path,value){return this.set(path,value);}
