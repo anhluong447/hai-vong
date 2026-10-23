@@ -422,5 +422,101 @@
   "player.bus.sfx": {
     "value": "[ Hiệu ứng ~~~~~~~~~~~~~~~~ ]",
     "params": []
+  },
+  "gameplay.member.player": {
+    "value": "[ Người tác nghiệp thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.member.reporter": {
+    "value": "[ Đồng đội tài liệu thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.member.photographer": {
+    "value": "[ Đồng đội ảnh thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.member.senior": {
+    "value": "[ Đồng đội chuyên môn thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.quest.main": {
+    "value": "[ Hồ sơ chính thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.quest.side": {
+    "value": "[ Đề tài phụ thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.quest.general": {
+    "value": "[ Tin ngắn thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.finding.statement": {
+    "value": "[ Lời xác nhận thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.finding.document": {
+    "value": "[ Hồ sơ đối chất thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.evidence.side": {
+    "value": "[ Ảnh tư liệu đề tài phụ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.evidence.general": {
+    "value": "[ Biên bản tin ngắn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.resting": {
+    "value": "[ Đang nghỉ cuối tuần ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.working": {
+    "value": "[ Đang tác nghiệp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.completed": {
+    "value": "[ Đã bàn giao và lưu bằng chứng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.blocked": {
+    "value": "[ Cần người có nghiệp vụ phù hợp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.item.recorder": {
+    "value": "[ Máy ghi âm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.item.tea": {
+    "value": "[ Trà hồi phục thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.train": {
+    "value": "[ Luyện tài liệu thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.trainInvestigation": {
+    "value": "[ Luyện điều tra thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.work": {
+    "value": "[ Làm thêm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.hangout": {
+    "value": "[ Gặp đồng đội thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.special": {
+    "value": "[ Sự kiện cả đội thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.nightStudy": {
+    "value": "[ Học đêm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.nightGame": {
+    "value": "[ Chơi game đêm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
   }
 }

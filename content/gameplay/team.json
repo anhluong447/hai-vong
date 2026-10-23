@@ -1,0 +1,83 @@
+{
+  "id": "team.foundation",
+  "members": [
+    {
+      "id": "member.fixture.player",
+      "nameKey": "gameplay.member.player",
+      "stats": {
+        "interview": 2,
+        "investigation": 2,
+        "photo": 2,
+        "documents": 2,
+        "empathy": 2,
+        "courage": 2
+      },
+      "firstDay": 1,
+      "lastDay": 84,
+      "operatingFee": {
+        "mode": "once",
+        "amount": 0
+      }
+    },
+    {
+      "id": "member.fixture.reporter",
+      "nameKey": "gameplay.member.reporter",
+      "stats": {
+        "interview": 2,
+        "investigation": 1,
+        "photo": 1,
+        "documents": 3,
+        "empathy": 2,
+        "courage": 2
+      },
+      "firstDay": 1,
+      "lastDay": 84,
+      "operatingFee": {
+        "mode": "once",
+        "amount": 0
+      }
+    },
+    {
+      "id": "member.fixture.photographer",
+      "nameKey": "gameplay.member.photographer",
+      "stats": {
+        "interview": 1,
+        "investigation": 1,
+        "photo": 5,
+        "documents": 0,
+        "empathy": 1,
+        "courage": 2
+      },
+      "firstDay": 1,
+      "lastDay": 84,
+      "operatingFee": {
+        "mode": "once",
+        "amount": 0
+      }
+    },
+    {
+      "id": "member.fixture.senior",
+      "nameKey": "gameplay.member.senior",
+      "stats": {
+        "interview": 5,
+        "investigation": 5,
+        "photo": 5,
+        "documents": 6,
+        "empathy": 5,
+        "courage": 5
+      },
+      "firstDay": 1,
+      "lastDay": 84,
+      "operatingFee": {
+        "mode": "once",
+        "amount": 50
+      }
+    }
+  ],
+  "feedbackKeys": {
+    "resting": "gameplay.feedback.resting",
+    "working": "gameplay.feedback.working",
+    "completed": "gameplay.feedback.completed",
+    "blocked": "gameplay.feedback.blocked"
+  }
+}

@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "id": "effect.fixture.activity",
+    "handlerId": "gameplay.activity",
+    "paramsSchema": {
+      "type": "object",
+      "properties": {
+        "activityId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memberId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "activityId"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

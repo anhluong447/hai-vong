@@ -18,6 +18,12 @@
     "resources": "../src/contracts/schemas/resources.json",
     "project": "../src/contracts/schemas/project.json",
     "animations": "../src/contracts/schemas/animations.json",
-    "audio": "../src/contracts/schemas/audio.json"
+    "audio": "../src/contracts/schemas/audio.json",
+    "balance": "../src/contracts/schemas/balance.json",
+    "team": "../src/contracts/schemas/team.json",
+    "schedules": "../src/contracts/schemas/schedules.json",
+    "publication": "../src/contracts/schemas/publication.json",
+    "progression": "../src/contracts/schemas/progression.json",
+    "quests": "../src/contracts/schemas/quests.json"
   }
 }

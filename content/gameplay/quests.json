@@ -1,0 +1,166 @@
+[
+  {
+    "id": "quest.fixture.main",
+    "nameKey": "gameplay.quest.main",
+    "type": "main",
+    "prerequisites": [],
+    "firstDay": 1,
+    "lastDay": 84,
+    "steps": [
+      {
+        "id": "interview",
+        "materialId": "material.fixture.main.interview",
+        "energyCost": 3,
+        "scheduleId": "schedule.fixture.source",
+        "skillId": "investigation",
+        "minEnergyCost": 2
+      },
+      {
+        "id": "records",
+        "materialId": "material.fixture.main.records",
+        "energyCost": 3,
+        "scheduleId": "schedule.fixture.source",
+        "skillId": "investigation",
+        "minEnergyCost": 2
+      }
+    ],
+    "article": {
+      "id": "article.fixture.main",
+      "attraction": 6,
+      "exploitation": 1,
+      "verification": 1,
+      "surplusStat": "investigation",
+      "surplusThreshold": 3,
+      "attractionPerSurplus": 0
+    },
+    "rewards": {
+      "skillId": "investigation",
+      "xp": 4,
+      "items": [],
+      "teamBond": 2
+    },
+    "defenseEvidence": [],
+    "attackFindings": [
+      {
+        "id": "finding.fixture.statement",
+        "nameKey": "gameplay.finding.statement",
+        "materialId": "material.fixture.main.interview"
+      },
+      {
+        "id": "finding.fixture.document",
+        "nameKey": "gameplay.finding.document",
+        "materialId": "material.fixture.main.records"
+      }
+    ]
+  },
+  {
+    "id": "quest.fixture.side",
+    "nameKey": "gameplay.quest.side",
+    "type": "side",
+    "prerequisites": [],
+    "firstDay": 1,
+    "lastDay": 84,
+    "steps": [
+      {
+        "id": "photo",
+        "materialId": "material.fixture.side.photo",
+        "energyCost": 3,
+        "scheduleId": "schedule.fixture.source",
+        "skillId": "photo",
+        "minEnergyCost": 2
+      },
+      {
+        "id": "verify",
+        "materialId": "material.fixture.side.verify",
+        "energyCost": 3,
+        "scheduleId": "schedule.fixture.source",
+        "skillId": "photo",
+        "minEnergyCost": 2
+      }
+    ],
+    "article": {
+      "id": "article.fixture.side",
+      "attraction": 5,
+      "exploitation": 1,
+      "verification": 1,
+      "surplusStat": "photo",
+      "surplusThreshold": 3,
+      "attractionPerSurplus": 0
+    },
+    "rewards": {
+      "skillId": "photo",
+      "xp": 3,
+      "items": [],
+      "teamBond": 0
+    },
+    "defenseEvidence": [
+      {
+        "id": "evidence.fixture.side",
+        "nameKey": "gameplay.evidence.side",
+        "materialId": "material.fixture.side.photo",
+        "type": "photo",
+        "quality": "high"
+      }
+    ],
+    "attackFindings": []
+  },
+  {
+    "id": "quest.fixture.general",
+    "nameKey": "gameplay.quest.general",
+    "type": "general",
+    "prerequisites": [],
+    "firstDay": 1,
+    "lastDay": 84,
+    "steps": [
+      {
+        "id": "record",
+        "materialId": "material.fixture.general.record",
+        "energyCost": 1,
+        "scheduleId": "schedule.fixture.source",
+        "skillId": "documents",
+        "minEnergyCost": 1
+      }
+    ],
+    "article": {
+      "id": "article.fixture.general",
+      "attraction": 4,
+      "exploitation": 1,
+      "verification": 1,
+      "surplusStat": "documents",
+      "surplusThreshold": 3,
+      "attractionPerSurplus": 0.1
+    },
+    "rewards": {
+      "skillId": "documents",
+      "xp": 2,
+      "items": [],
+      "teamBond": 0
+    },
+    "defenseEvidence": [
+      {
+        "id": "evidence.fixture.general",
+        "nameKey": "gameplay.evidence.general",
+        "materialId": "material.fixture.general.record",
+        "type": "document",
+        "quality": "standard"
+      }
+    ],
+    "attackFindings": [],
+    "delegation": {
+      "listenCost": 1,
+      "assignmentCost": 1,
+      "requiredWork": 2,
+      "statId": "documents",
+      "speeds": [
+        {
+          "minimum": 1,
+          "work": 1
+        },
+        {
+          "minimum": 5,
+          "work": 2
+        }
+      ]
+    }
+  }
+]

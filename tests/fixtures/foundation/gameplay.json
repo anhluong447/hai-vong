@@ -1,0 +1,7 @@
+{
+ "schemaVersion":1,
+ "id":"fixture.foundation.gameplay",
+ "initial":{"day":1,"period":"afternoon","energy":10},
+ "world":{"sceneId":"scene.courtyard","spawnId":"entry"},
+ "provisional":true
+}

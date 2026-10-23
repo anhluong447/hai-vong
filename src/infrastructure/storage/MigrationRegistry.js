@@ -1,5 +1,12 @@
 import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
 const bad=code=>failure(diagnostic(code,'save','/migration'));
+const object=value=>!!value&&typeof value==='object'&&!Array.isArray(value);
+const missingDefaults=(defaults,state,depth=0)=>{
+ if(depth>100)throw new Error('migration.depth');if(state===undefined)return structuredClone(defaults);
+ if(!object(defaults)||!object(state))return structuredClone(state);
+ return Object.fromEntries([...new Set([...Object.keys(defaults),...Object.keys(state)])].map(key=>[key,missingDefaults(defaults[key],state[key],depth+1)]));
+};
+const knownV1=state=>state.formatTag===undefined&&object(state.gameplay)&&Object.keys(state.gameplay).every(key=>key==='flags')&&object(state.gameplay.flags)&&object(state.world)&&Number.isFinite(state.world.position)&&[1,-1].includes(state.world.facing)&&Object.keys(state.world).every(key=>['sceneId','position','facing','pending','moving'].includes(key));
 /** Bounded, explicit mappings. There is no guessed legacy coordinate conversion. */
 export class MigrationRegistry {
  constructor({schemaVersion,contentVersion,schemaSteps=[],contentSteps=[]}){Object.assign(this,{schemaVersion,contentVersion,schemaSteps,contentSteps});}
@@ -10,7 +17,8 @@ export class MigrationRegistry {
     if(!Number.isInteger(state.schemaVersion)||state.schemaVersion>this.schemaVersion||schemas.has(state.schemaVersion))return bad('save.version.unsupported');schemas.add(state.schemaVersion);
     const candidates=this.schemaSteps.filter(s=>s.from===state.schemaVersion&&s.tag===state.formatTag);
     if(candidates.length!==1)return bad('save.legacy.exportOnly');const step=candidates[0];
-    state={...structuredClone(step.defaults??{}),...state,schemaVersion:step.to};
+    if(step.guard&&!(step.guard==='phase0-side-scroll-v1'&&knownV1(state)))return bad('save.legacy.exportOnly');
+    state={...missingDefaults(step.defaults??{},state),schemaVersion:step.to};
    }
    const seen=new Set();while(state.contentRevision!==this.contentVersion){
     if(seen.has(state.contentRevision))return bad('save.content.cycle');seen.add(state.contentRevision);

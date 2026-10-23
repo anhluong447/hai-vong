@@ -27,5 +27,6 @@
     }
   ],
   "navigationId": "ui.navigation",
-  "actionLabelsId": "input.actions"
+  "actionLabelsId": "input.actions",
+  "gameplayConfigId": "balance.foundation"
 }

@@ -3,6 +3,8 @@ import {GameSession} from '/src/application/GameSession.js';
 import {SaveService} from '/src/application/SaveService.js';
 import {SaveCodec} from '/src/infrastructure/storage/SaveCodec.js';
 import {MigrationRegistry} from '/src/infrastructure/storage/MigrationRegistry.js';
+import {RUN_SCHEMA_VERSION} from '/src/contracts/RunSnapshot.js';
+import {schemaStepsFor} from '/src/application/SaveMigrationPolicy.js';
 import {runtimeBundle,effects} from '/tests/fixtures/runtime.js';
 const ok=value=>({ok:true,value}),bad=()=>({ok:false,errors:[{code:'fixture.failure'}]});
 function runtimePort(){
@@ -16,7 +18,7 @@ function runtimePort(){
 function make(bundle,options={}){
  const session=new GameSession({bundle,effects}),runtime=runtimePort(),records=new Map();
  const repository={async put(id,envelope){records.set(id,structuredClone(envelope));return ok(id);},async get(id){return ok(records.get(id));}};
- const migrations=new MigrationRegistry({schemaVersion:1,contentVersion:bundle.revision,...options});
+ const migrations=new MigrationRegistry({schemaVersion:RUN_SCHEMA_VERSION,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle),...options});
  const saves=new SaveService({session,runtime,repository,codec:SaveCodec,migrations,buildId:'test',contentVersion:bundle.revision});return {session,runtime,saves,records};
 }
 test('save restores mid-reveal and choice exactly without repeating a committed effect',async()=>{
@@ -71,4 +73,11 @@ test('anchor migrations preserve history read markers and effect identities to p
  const old=structuredClone(session.snapshot());old.contentRevision='0.0.0';old.story.cursor={chapterId:'oldstory',nodeId:'visited',commandId:'farewell',stepId:'farewell'};old.story.history[0].anchor='oldstory/entry/greeting';old.story.readAnchors=['oldstory/entry/greeting'];old.executionLedger=['oldstory/visited/mark','oldstory/visited/count'];
  const encoded=(await SaveCodec.encode(old,{contentVersion:'0.0.0',buildId:'old'})).value;const restored=await saves.restore(encoded);assert(restored.ok,JSON.stringify(restored));equal(session.snapshot().story.history[0].anchor,'foundation.chapter/entry/greeting');
  session.execute({type:'story.step',intent:{type:'advance'}});session.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}});session.execute({type:'story.step',intent:{type:'advance'}});session.execute({type:'story.step',intent:{type:'choose',choiceId:'visit'}});equal(session.snapshot().gameplay.flags['flag.count'],1);
+});
+test('RunSnapshot 2 explicitly upgrades the known v1 side-view layout while preserving progress',async()=>{
+ const {schemaStepsFor}=await import('/src/application/SaveMigrationPolicy.js'),bundle=await runtimeBundle(),session=new GameSession({bundle,effects});equal(session.snapshot().schemaVersion,2);
+ session.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}});session.execute({type:'story.step',intent:{type:'reveal',count:3}});
+ const old=structuredClone(session.snapshot());old.schemaVersion=1;delete old.formatTag;old.gameplay={flags:{...old.gameplay.flags,'flag.count':1}};
+ const registry=new MigrationRegistry({schemaVersion:2,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle)}),upgraded=registry.migrate(old,bundle.revision);assert(upgraded.ok,JSON.stringify(upgraded));assert(session.validate(upgraded.value).ok);equal(upgraded.value.gameplay.flags['flag.count'],1);equal(upgraded.value.presentation.dialogue.revealed,3);equal(upgraded.value.gameplay.energy,10);
+ const legacy={...old,formatTag:'legacy-3d'};assert(!registry.migrate(legacy,bundle.revision).ok);const coordinates=structuredClone(old);coordinates.world={sceneId:'scene.courtyard',x:10,y:0,z:5};assert(!registry.migrate(coordinates,bundle.revision).ok);
 });

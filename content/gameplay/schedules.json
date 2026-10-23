@@ -1,0 +1,19 @@
+[
+  {
+    "id": "schedule.fixture.source",
+    "memberId": "member.fixture.reporter",
+    "sceneId": "scene.courtyard",
+    "firstDay": 1,
+    "lastDay": 84,
+    "daysOfWeek": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "periods": [
+      "afternoon"
+    ]
+  }
+]

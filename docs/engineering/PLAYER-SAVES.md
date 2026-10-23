@@ -52,7 +52,7 @@ auto waits for reveal plus the managed delay and never chooses an answer.
 
 ## Compatibility and recovery
 
-RunSnapshot 1 adds optional history/read-anchor/browser-view fields. Missing fields
+T07 RunSnapshot 1 added optional history/read-anchor/browser-view fields. Missing fields
 mean empty history/default presentation for an already valid declared scene. This
 is not an automatic conversion of historical 3D saves. A different schema/layout
 requires an explicitly registered, tagged migration; unsupported data remains
@@ -62,7 +62,9 @@ export-only. Unknown content revisions and removed unmapped anchors are rejected
 cursor, history, read markers and execution ledger; flag rename/type conversions
 are explicit. Authors must map every renamed reward identity as well as cursor
 anchors. An arbitrary story edit is not automatically save-compatible. No production
-release migration is registered yet. T12 adds source-revision fingerprints; T13
+content-release migration is registered yet. T08 now uses RunSnapshot 2 and an explicit
+additive migration for the known Phase-0 v1 shape; see [gameplay](GAMEPLAY-CONTRACT.md).
+T12 adds source-revision fingerprints; T13
 replaces the current development build identifier with release metadata.
 
 Export shows the exact JSON in a selectable textarea. Import parses and validates

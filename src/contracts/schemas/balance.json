@@ -1,0 +1,185 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "provisional",
+        "approved"
+      ]
+    },
+    "calendar": {
+      "type": "object",
+      "properties": {
+        "totalDays": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "daysPerWeek": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "workDays": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "periods": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "initialDay": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "initialPeriod": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "totalDays",
+        "daysPerWeek",
+        "workDays",
+        "periods",
+        "initialDay",
+        "initialPeriod"
+      ],
+      "additionalProperties": false
+    },
+    "energy": {
+      "type": "object",
+      "properties": {
+        "cap": {
+          "type": "number",
+          "minimum": 1
+        },
+        "nextDay": {
+          "type": "object",
+          "properties": {
+            "sleep": {
+              "type": "number"
+            },
+            "study": {
+              "type": "number"
+            },
+            "game": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "sleep",
+            "study",
+            "game"
+          ],
+          "additionalProperties": false
+        },
+        "nightBenefits": {
+          "type": "object",
+          "properties": {
+            "study": {
+              "type": "string",
+              "minLength": 1
+            },
+            "game": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "study",
+            "game"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "cap",
+        "nextDay",
+        "nightBenefits"
+      ],
+      "additionalProperties": false
+    },
+    "teamId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "progressionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publicationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "feedbackLimit": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "minActionCost": {
+      "type": "number",
+      "minimum": 0
+    },
+    "requiredRoutes": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mainQuestIds": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "requiredFindingIds": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "mainQuestIds",
+          "requiredFindingIds"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "status",
+    "calendar",
+    "energy",
+    "teamId",
+    "progressionId",
+    "publicationId",
+    "playerId",
+    "feedbackLimit",
+    "minActionCost",
+    "requiredRoutes"
+  ],
+  "additionalProperties": false
+}

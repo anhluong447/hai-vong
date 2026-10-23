@@ -4,18 +4,21 @@ import {FlagStore} from './FlagStore.js';
 import {validateWorldState} from '../world/worldState.js';
 import {formatTokens} from '../../contracts/TextTokens.js';
 import {validSavedPresentation} from '../../contracts/PresentationSnapshot.js';
+import {createGameplayState,validateGameplayState} from '../gameplay/state.js';
 export function createRunState(bundle) {
- return {schemaVersion:RUN_SCHEMA_VERSION,contentRevision:bundle.revision,gameplay:{flags:FlagStore.defaults(bundle.catalog.list('flags'))},story:{cursor:null,waiting:'idle',pending:null},world:{sceneId:null,position:0,facing:1},presentation:{dialogue:null},audio:{},sequence:{},executionLedger:[]};
+ return {schemaVersion:RUN_SCHEMA_VERSION,formatTag:'hoi-am.side-scroll',contentRevision:bundle.revision,gameplay:{flags:FlagStore.defaults(bundle.catalog.list('flags')),...createGameplayState(bundle)},story:{cursor:null,waiting:'idle',pending:null},world:{sceneId:null,position:0,facing:1},presentation:{dialogue:null},audio:{},sequence:{},executionLedger:[]};
 }
 export function validateRunState(state,bundle) {
  const errors=[]; const add=(code,pointer)=>errors.push(diagnostic(code,'snapshot',pointer));
  if(!state||typeof state!=='object') return failure(diagnostic('state.invalid','snapshot','/'));
  if(state.schemaVersion!==RUN_SCHEMA_VERSION) add('state.version.invalid','/schemaVersion');
+ if(state.formatTag!=='hoi-am.side-scroll')add('state.format.invalid','/formatTag');
  if(state.contentRevision!==bundle.revision) add('state.content.incompatible','/contentRevision');
  for(const key of ['gameplay','story','world','presentation','audio','sequence']) if(!state[key]||typeof state[key]!=='object'||Array.isArray(state[key])) add('state.field.invalid','/'+key);
  if(!Array.isArray(state.executionLedger)||state.executionLedger.some(k=>typeof k!=='string')||new Set(state.executionLedger).size!==state.executionLedger.length) add('state.ledger.invalid','/executionLedger');
  if(errors.length)return failure(errors);
  errors.push(...validateWorldState(state.world,bundle));
+ errors.push(...validateGameplayState(state,bundle));
  const flags=FlagStore.validate(bundle.catalog.list('flags'),state.gameplay.flags??{},'snapshot','/gameplay/flags');if(!flags.ok)errors.push(...flags.errors);
  const defs=bundle.catalog.list('flags');for(const def of defs)if(!Object.hasOwn(state.gameplay.flags??{},def.id))add('state.flag.missing','/gameplay/flags/'+def.id);
  const cursor=state.story.cursor;let activeCommand=null;

@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "weekday": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "period": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseScore": {
+      "type": "number",
+      "minimum": 0
+    },
+    "scoreCap": {
+      "type": "number",
+      "minimum": 0
+    },
+    "attractionCap": {
+      "type": "number",
+      "minimum": 0
+    },
+    "multipliers": {
+      "type": "object",
+      "properties": {
+        "main": {
+          "type": "number",
+          "minimum": 0
+        },
+        "side": {
+          "type": "number",
+          "minimum": 0
+        },
+        "general": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "main",
+        "side",
+        "general"
+      ],
+      "additionalProperties": false
+    },
+    "packagingBonus": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "id",
+    "weekday",
+    "period",
+    "baseScore",
+    "scoreCap",
+    "attractionCap",
+    "multipliers",
+    "packagingBonus"
+  ],
+  "additionalProperties": false
+}

@@ -25,6 +25,9 @@ import {PreferencesRepository} from '../infrastructure/storage/PreferencesReposi
 import {defaultPreferences,remapBinding} from '../contracts/PlayerPreferences.js';
 import {createRunState} from '../domain/story/RunState.js';
 import {DialogueControls} from '../presentation/ui/DialogueControls.js';
+import {RUN_SCHEMA_VERSION} from '../contracts/RunSnapshot.js';
+import {schemaStepsFor} from '../application/SaveMigrationPolicy.js';
+import {diagnostic,failure} from '../contracts/Diagnostic.js';
 
 /** Composition root: browser side effects are wired here, never in the domain. */
 export async function createGame(root,{autoStart=true}={}){
@@ -48,7 +51,7 @@ export async function createGame(root,{autoStart=true}={}){
  const input=new InputAdapter(win,{...inputDefinition,bindings:preferences.bindings},{onGesture:()=>{if(!paused&&!frozen)void audio.unlock();},onAction:intent=>{if(intent.action==='fullscreen')void view.fullscreen();}});
  const resize=()=>{const bounds=stage.getBoundingClientRect();view.resize(bounds.width,bounds.height,win.devicePixelRatio);};const observer=new ResizeObserver(resize);observer.observe(stage);win.addEventListener('resize',resize,options);resize();
  const setError=result=>{if(!result.ok)error=result.errors?.[0]?.code??'runtime.failed';return result;};
- function run(command){const before=session.snapshot(),result=setError(session.execute(command));if(result.ok){for(const outcome of result.value.outcomes)if(outcome.type==='presentation.cue')void audio.play(outcome.cueId);if(command.type==='story.step'&&['advance','choose'].includes(command.intent.type))void profile.remember(session.snapshot()).then(setError);if(before.executionLedger.length!==session.snapshot().executionLedger.length||command.type==='story.step'&&command.intent.type==='choose'||command.type==='world.interact'&&before.story.waiting!==session.snapshot().story.waiting)queueAutosave();}sync();return result;}
+ function run(command){if(disposed||frozen)return failure(diagnostic(disposed?'runtime.disposed':'runtime.busy','runtime','/command'));const before=session.snapshot(),result=setError(session.execute(command));if(result.ok){for(const outcome of result.value.outcomes)if(outcome.type==='presentation.cue')void audio.play(outcome.cueId);if(command.type==='story.step'&&['advance','choose'].includes(command.intent.type))void profile.remember(session.snapshot()).then(setError);if(before.executionLedger.length!==session.snapshot().executionLedger.length||before.gameplay.calendar?.day!==session.snapshot().gameplay.calendar?.day||command.type==='story.step'&&command.intent.type==='choose'||command.type==='world.interact'&&before.story.waiting!==session.snapshot().story.waiting)queueAutosave();}sync();return result;}
  function sync(){
   if(disposed)return;const state=session.snapshot(),waiting=state.story.waiting,dialogue=['say','choose'].includes(waiting),scene=state.world.sceneId?bundle.catalog.get('scenes',state.world.sceneId).value:null;
   input.setContext(loading?'loading':paused?'menu':dialogue?'dialogue':'world');root.dataset.scene=state.world.sceneId??'';root.dataset.story=waiting;
@@ -71,7 +74,7 @@ export async function createGame(root,{autoStart=true}={}){
  function revealState(){const state=session.snapshot();if(state.story.waiting!=='say')return;const count=Math.floor(line.snapshot().revealed)-state.presentation.dialogue.revealed;if(count>0)run({type:'story.step',intent:{type:'reveal',count}});}
  function advance(manual=true){if(manual)controls.stop();if(session.snapshot().story.waiting!=='say')return;if(!line.complete){line.reveal();revealState();}else{run({type:'story.step',intent:{type:'advance'}});canvas.focus();}}
  function interact(){error=null;run({type:'world.interact',requestId:String(++serial)});void loadPending();}
- const migrations=new MigrationRegistry({schemaVersion:1,contentVersion:bundle.revision});
+ const migrations=new MigrationRegistry({schemaVersion:RUN_SCHEMA_VERSION,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle)});
  const validateEnvelope=async envelope=>{const decoded=await SaveCodec.decode(envelope);if(!decoded.ok)return decoded;const migrated=migrations.migrate(decoded.value,envelope.contentVersion);return migrated.ok?session.validate(migrated.value):migrated;};
  const repository=new IndexedSaveRepository({name:bundle.project.id+'.player-saves',manualSlots:navigation.manualSlots,autoSlots:navigation.autoSlots,validate:validateEnvelope,integrity:SaveCodec.decode});
  const runtime=runtimeCheckpoint({
@@ -138,6 +141,6 @@ export async function createGame(root,{autoStart=true}={}){
  async function dispose(){if(disposed)return;disposed=true;for(const done of unfreeze)done();unfreeze=[];controller.abort();observer.disconnect();lifecycle.dispose();input.dispose();shell.dispose();focus.dispose();line.dispose();sequence.cancel();world.dispose();await audio.dispose();await profile.close();repository.close();assets.dispose();view.dispose();}
  win.addEventListener('pagehide',()=>void dispose(),options);
  run({type:'scene.request',sceneId:config.startSceneId,spawnId:config.startSpawnId,requestId:String(++serial)});await loadPending();await shell.open('main');if(autoStart)lifecycle.start(step);
- return {session,get world(){return world;},assets,get audio(){return audio;},get sequence(){return sequence;},get preferences(){return preferences;},input,saves,step,pause,resume,dispose};
+ return {session,execute:run,get world(){return world;},assets,get audio(){return audio;},get sequence(){return sequence;},get preferences(){return preferences;},input,saves,step,pause,resume,dispose};
 }
 const shell=document.querySelector('[data-game]');if(shell)createGame(shell).catch(()=>location.assign(shell.dataset.failurePage));

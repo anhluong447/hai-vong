@@ -9,12 +9,14 @@ the eventual product goal.
 The Phase 0 foundation is being implemented: validated content, an immutable story
 session, checkpoint saves, the first authoring workspace and a keyboard-driven 2D
 fixture world with NPC dialogue/doors, persistent keyboard menus, transactional
-save/load and settings. Gameplay modules and dedicated editors follow next.
+save/load and settings, plus data-driven day/quest/publication/progression modules.
+Hearing foundation and dedicated editors follow next.
 See PROJECT-STATE.md for actual task evidence.
 
 - [Current state and stopping point](PROJECT-STATE.md)
 - [Play the 2D fixture / browser contract](docs/engineering/BROWSER-PLATFORM.md)
 - [Player controls, saves and recovery](docs/engineering/PLAYER-SAVES.md)
+- [Gameplay definitions and state contracts](docs/engineering/GAMEPLAY-CONTRACT.md)
 - [Asset toolchain and recovery](docs/guides/ASSETS.md)
 - [Authoring workspace setup](docs/guides/AUTHORING.md)
 - [Phase 0: skeleton and tools plan](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md)

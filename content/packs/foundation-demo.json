@@ -73,6 +73,30 @@
       "kind": "locale",
       "locale": "en-XA",
       "path": "../locales/test-expanded.json"
+    },
+    {
+      "kind": "balance",
+      "path": "../gameplay/balance.json"
+    },
+    {
+      "kind": "team",
+      "path": "../gameplay/team.json"
+    },
+    {
+      "kind": "schedules",
+      "path": "../gameplay/schedules.json"
+    },
+    {
+      "kind": "publication",
+      "path": "../gameplay/publication.json"
+    },
+    {
+      "kind": "progression",
+      "path": "../gameplay/progression.json"
+    },
+    {
+      "kind": "quests",
+      "path": "../gameplay/quests.json"
     }
   ]
 }

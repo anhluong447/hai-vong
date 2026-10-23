@@ -21,34 +21,38 @@ T01 through T05 are implemented and committed: contracts/checks, content/flags,
 story session/checkpoints, JSON authoring workspace and resource pipeline/recovery.
 T06 is implemented: keyboard-driven 2D fixture scenes, NPC dialogue, doors, camera,
 DPR/viewport, focus, text, animation, audio and presentation timeline.
-T01 through T07 are implemented in the active worktree; T08 through T14 remain.
+T01 through T08 are implemented in the active worktree; T09 through T14 remain.
 No 12-week production expansion.
 The latest user instruction resumes the approved plan after containment remediation.
-Continue at T08 in the active worktree without another permission prompt.
+Continue at T09 in the active worktree without another permission prompt.
 No push, publication or merge is authorized.
 
-## Current checkpoint (T07 complete; T08 next)
+## Current checkpoint (T08 complete; T09 next)
 
-- T07 implements the persistent keyboard player shell, remap/settings/profile,
-  backlog and safe auto/skip, manual/rotating autosaves, backup/import/export,
-  explicit schema/content migrations and transactional full browser checkpoints.
-- Capture preserves queued input and freezes only the synchronous copy. Restore
-  prepares world/audio/timeline off-screen and rejects stale callbacks before
-  replacing live state. Pending scene and audio decode intents remain resumable.
-- Failed checksum/content/schema/resource preparation, quota and preference writes
-  retain valid state. Renamed anchors migrate history/read markers and once-only
-  effect identities as well as the cursor; a reward regression verifies no repeat.
-- Final gates: architecture/content pass; 61 JS + 28 Python unit tests, 25 native
-  browser tests and 8 authoring tests passed. Reports: implementation
-  `.cache/test/t07-final-*.json`, summary `t07-final-summary.json`.
-- Inspected actual en-XA settings screenshot at 27px, system-font fallback:
-  `.cache/test/screenshots/7648414b9cbd76b7.png`. Development fixture UI/art only;
-  no physical FPS or finished-art claim. Contract: docs/engineering/PLAYER-SAVES.md.
-- Continue with T08 gameplay modules in the same worktree. Read its brief and
-  actual Bible gameplay sections first; no permission prompt required. T09-T14
-  remain. Timed hearing snapshots are extended in T09; revision fingerprints in
-  T12 and production build metadata/release evidence in T13 are not complete yet.
-- No dependencies installed outside the project; protected sources/archive unchanged.
+- T07 commit `fab9e90` supplies keyboard player menus, full transactional browser
+  saves, settings/remaps/profile, backlog/auto-skip and IndexedDB recovery.
+- T08 now supplies typed managed gameplay definitions, pure calendar/10-or-5 energy,
+  both return-home confirmations, direct Main/Side and self/delegated General,
+  concrete separate evidence, automatic handoff/publication, honest weekend/blocked
+  feedback and forecasts, one wallet, skills/equipment/consumables and bond scopes.
+- Main-route validation rejects optional quest dependencies and missing required
+  findings. Deep snapshots validate provenance, materials, article/ledger linkage,
+  audience, money, ownership and work state before replacement or saving.
+- RunSnapshot 2 explicitly adds gameplay and upgrades the known v1 side-view shape
+  through nested defaults, preserving existing progress. Unknown tags and 3D
+  coordinate layouts remain export-only. Envelope/profile versions are separate.
+- Actual final gates: architecture/content pass; 82 JS + 28 Python unit tests,
+  28 browser and 8 authoring tests passed. Full reports and summary are under
+  implementation `.cache/test/t08-final-*.json`. Native browser checks resume jobs
+  through weekends/completion/publication without duplicate XP/evidence/audience
+  and verify day-transition autosave through the runtime command boundary.
+- Costs, fees, daily processing timing, scores and rewards remain marked fixture
+  policy/provisional. Per-step floors keep General cheaper despite skill bonuses.
+  No production 12-week expansion or complete gameplay UI is claimed.
+- Contract: docs/engineering/GAMEPLAY-CONTRACT.md. Continue automatically at T09:
+  read its brief and actual Defense/Attack GDD rules before implementing hearing
+  state, timed minigame and interruption semantics. T10-T14 remain afterward.
+- Protected Bible/GDD/archive bytes unchanged; no external installation or push.
 
 ## Latest implementation evidence (T06)
 

@@ -295,11 +295,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes application command/effect registry; produces pure transitions for the fixture chapter and typed state/outcome definitions extending `RunSnapshot.gameplay`. Definitions, costs and provisional values stay in catalogs.
 
-- [ ] Write red tests for 10/5 next-day energy, zero-energy return/rest, both travel-confirm paths, no calendar advance from walking, weekend delegation pause and feedback without fake progress.
-- [ ] Test direct Main/Side and delegated/self General; complete once → archive concrete evidence once → handoff automatically → audience only after publication. Main creates no Defense cards; General quality is not upgraded by performer.
-- [ ] Implement required use cases and a small data fixture. Include representative skill/equipment/stat/bond updates and one wallet; preserve explicit cost/guard validation and generic registered effects rather than story-ID branches.
-- [ ] Validate quest prerequisites, NPC schedules and required Main routes without Side completion. Record which balance values are provisional; keep the finalized docs byte-identical.
-- [ ] Run content/unit suites and save round trips for the new fields; commit `feat: add data-driven gameplay foundation modules`.
+- [x] Write red tests for 10/5 next-day energy, zero-energy return/rest, both travel-confirm paths, no calendar advance from walking, weekend delegation pause and feedback without fake progress.
+- [x] Test direct Main/Side and delegated/self General; complete once → archive concrete evidence once → handoff automatically → audience only after publication. Main creates no Defense cards; General quality is not upgraded by performer.
+- [x] Implement required use cases and a small data fixture. Include representative skill/equipment/stat/bond updates and one wallet; preserve explicit cost/guard validation and generic registered effects rather than story-ID branches.
+- [x] Validate quest prerequisites, NPC schedules and required Main routes without Side completion. Record which balance values are provisional; keep the finalized docs byte-identical.
+- [x] Run content/unit suites and save round trips for the new fields; commit `feat: add data-driven gameplay foundation modules`.
 
 ### T09 — Hearing foundation, timed minigame và interruption semantics
 
