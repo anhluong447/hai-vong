@@ -91,7 +91,7 @@ else:
 
     def test_bundle_rejects_external_destination_before_opening_a_writer(self):
         import build_assets
-        destination = Path(sys.base_prefix) / 'forbidden-project-bundle.zip'
+        destination = ROOT.parent / 'forbidden-project-bundle.zip'
         # Never let this regression test actually write outside the project.
         with patch.object(build_assets.zipfile, 'ZipFile',
                           side_effect=AssertionError('external writer was opened')):
@@ -101,4 +101,4 @@ else:
     def test_source_writer_cannot_be_rooted_outside_the_project(self):
         from source_writer import SourceWriter
         with self.assertRaisesRegex(ValueError, 'tool.path.outside_project'):
-            SourceWriter(Path(sys.base_prefix), [], lambda *_: {'ok': True})
+            SourceWriter(ROOT.parent, [], lambda *_: {'ok': True})
