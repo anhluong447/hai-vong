@@ -1,8 +1,9 @@
 import {PreviewSession} from './PreviewSession.js';
 import {DiagnosticPanel} from './DiagnosticPanel.js';
 import {EditorHost} from './EditorHost.js';
+import {DebugPanel} from './DebugPanel.js';
 export class WorkspaceView {
- constructor(root,workspace,text,canWrite=false){
+ constructor(root,workspace,text,canWrite=false,ports={}){
   this.root=root;this.workspace=workspace;this.text=text;this.canWrite=canWrite;this.preview=new PreviewSession();this.abort=new AbortController();this.id=workspace.list()[0]?.id;
   this.query=role=>root.querySelector(`[data-role="${role}"]`);
   for(const el of root.querySelectorAll('[data-text]'))el.textContent=this.label(el.dataset.text);
@@ -10,6 +11,7 @@ export class WorkspaceView {
   this.query('mode').textContent=this.label(canWrite?'workspace.writable':'workspace.readonly');
   this.panel=new DiagnosticPanel(this.query('diagnostics'),text,error=>{if(this.workspace.get(error.sourceId)){this.id=error.sourceId;this.render();this.focusPointer(error.pointer);}});
   this.tools=new EditorHost(this.query('resource-tools'),{workspace,text,rebuildAssets:canWrite?async()=>{const before=root.inert;root.inert=true;try{return await workspace.rebuildAssets();}finally{root.inert=before;}}:undefined,onResult:result=>this.result(result),onSelect:(id,pointer,resourceId)=>{this.id=id;this.tools.resourceId=resourceId;this.render();this.focusPointer(pointer);}});
+  if(this.query('debug-tools'))this.debug=new DebugPanel(this.query('debug-tools'),{workspace,text,...ports,onResult:result=>this.result(result),onSourceReload:()=>{this.preview.stop();this.renderPreview();this.render();}});
   const actions={apply:()=>this.apply(),undo:()=>this.result(workspace.undo(this.id)),redo:()=>this.result(workspace.redo(this.id)),save:async()=>this.result(await workspace.save(this.id)),recover:async()=>this.result(await workspace.recoverDraft(this.id)),preview:()=>{const chapter=workspace.bundle.catalog.list('story')[0];if(chapter)this.resultPreview(this.preview.start(workspace.bundle,{chapterId:chapter.id}));},stop:()=>{this.preview.stop();this.renderPreview();},advance:()=>this.resultPreview(this.preview.step({type:'advance'}))};
   for(const button of root.querySelectorAll('[data-action]'))button.addEventListener('click',()=>actions[button.dataset.action](),{signal:this.abort.signal});
   this.query('explorer').addEventListener('click',event=>{const button=event.target.closest('[data-document-id]');if(button){this.id=button.dataset.documentId;this.render();}},{signal:this.abort.signal});
@@ -19,6 +21,7 @@ export class WorkspaceView {
  label(key,params){const result=this.text.format(key,params);if(!result.ok)throw new Error(JSON.stringify(result));return result.value;}
  focusPointer(pointer){if(this.tools.editor.focusPointer?.(pointer))return;const fields=[...this.query('resource-tools').querySelectorAll('[data-field]')].filter(node=>!node.disabled),target=fields.find(node=>node.dataset.field===pointer)??fields.find(node=>pointer===''||node.dataset.field.startsWith(pointer+'/'));if(target)target.focus();else{this.query('raw-source').open=true;this.query('source').dataset.pointer=pointer;this.query('source').focus();}}
  render(){
+  if(!this.workspace.get(this.id))this.id=this.workspace.list()[0]?.id;
   this.text.locales=this.workspace.bundle.locales;
   if(this.previousId!==this.id)this.query('raw-source').open=false;this.previousId=this.id;
   const focused=this.root.ownerDocument.activeElement?.dataset.documentId;
@@ -50,5 +53,5 @@ export class WorkspaceView {
    for(const choice of cmd.choices){const button=document.createElement('button');button.textContent=this.label(choice.textKey);button.disabled=!!choice.condition&&state.gameplay.flags[choice.condition.flag]!==choice.condition.equals;button.dataset.choiceId=choice.id;this.query('choices').append(button);}
   }
  }
- dispose(){this.abort.abort();this.preview.stop();return this.tools.dispose();}
+ dispose(){this.abort.abort();this.preview.stop();return Promise.all([this.debug?.dispose(),this.tools.dispose()]);}
 }

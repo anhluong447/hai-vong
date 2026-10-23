@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "playerEntry": "src/bootstrap/main.js",
+  "forbidden": [
+    "src/application/DebugSession.js",
+    "src/application/ReloadService.js",
+    "src/application/TraversalBot.js",
+    "tools/"
+  ]
+}

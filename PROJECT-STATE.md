@@ -21,86 +21,56 @@ T01 through T05 are implemented and committed: contracts/checks, content/flags,
 story session/checkpoints, JSON authoring workspace and resource pipeline/recovery.
 T06 is implemented: keyboard-driven 2D fixture scenes, NPC dialogue, doors, camera,
 DPR/viewport, focus, text, animation, audio and presentation timeline.
-T01 through T11 are implemented in the active worktree; T12 through T14 remain.
+T01 through T12 are implemented in the active worktree; T13 through T14 remain.
 No 12-week production expansion.
 The latest user instruction resumes the approved plan after containment remediation.
-Continue at T12 in the active worktree without another permission prompt.
+Continue at T13 in the active worktree without another permission prompt.
 No push, publication or merge is authorized.
 
-## Current checkpoint (T11 complete; T12 next)
+## Current checkpoint (T12 complete; T13 next)
 
-T09 implements immutable Defense/Attack, deterministic two-lane mini/Final Shot,
-managed hearing UI/input, preserved old remaps and deep source/snapshot validation.
-RunSnapshot 3 explicitly upgrades known tagged-v2 saves and retains the v1 chain.
-Native keys complete the whole hearing and resume damage/card/word/locked-question/
-projectile checkpoints. Pause and simulated document visibility stop time; Easy
-ignores the Normal-only deflect key. Defense history replay prevents forged points
-and bailout recovery; projectile ownership/deadlines validate before replacement.
+T01-T12 are implemented in the isolated worktree. Earlier gameplay/hearing/save
+contracts are documented in docs/engineering/{GAMEPLAY-CONTRACT,HEARING-CONTRACT,
+PLAYER-SAVES}.md, resource/story/debug recipes in docs/guides/, and task decisions
+in the execution ledger. Continue the latest authorized plan; do not restart old
+tasks from historical evidence below. Current details and checks follow.
 
-Actual final gates: architecture/content pass; 105 JS + 29 Python unit tests,
-30 browser and 8 authoring pass. Reports: implementation `.cache/test/t09-final-*.json`.
-Screenshot 783f9936dff7a197.png was inspected as fixture UI, not production art.
-Unit deadline is now 120 seconds after measuring a complete 67.9-second diagnostic;
-bounded Windows profile cleanup retries a reproduced delayed file release without
-ignoring persistent failure. Contract: docs/engineering/HEARING-CONTRACT.md.
+## T12 complete (commit pending)
 
-Decisions remain fixture policy: Defense section 4's explicit pipeline governs the
-conflicting section 6.2 continuation; pre-response bailout resumes that response,
-post-response resumes after committed discard. Mercy restores three hearts at the
-current round. No protected source changed. Continue the authorized plan at T10;
-T10-T14 remain. No push/merge/publication or 12-week production expansion.
+T11 committed as 261fa39. T12 implements safe source/state reload with explicit
+restart/migration, isolated typed debug/jump/skip and bounded trace/replay, local
+crash exports, authenticated revision polling and incremental PNG asset rebuild.
+DebugPanel/TracePanel are integrated in the workspace and use real Canvas/TextView
+owners without player persistence. Dirty/conflicting source work, stale watch/load
+responses and invalid candidate state preserve the last-good session/resources.
+Adopted previews detach preparation cancellation. Source selectors refresh after
+successful working-copy reload; native regression confirms later rejection retains
+that adopted view. No player snapshot field was added.
 
-- T07 commit `fab9e90` supplies keyboard player menus, full transactional browser
-  saves, settings/remaps/profile, backlog/auto-skip and IndexedDB recovery.
-- T08 now supplies typed managed gameplay definitions, pure calendar/10-or-5 energy,
-  both return-home confirmations, direct Main/Side and self/delegated General,
-  concrete separate evidence, automatic handoff/publication, honest weekend/blocked
-  feedback and forecasts, one wallet, skills/equipment/consumables and bond scopes.
-- Main-route validation rejects optional quest dependencies and missing required
-  findings. Deep snapshots validate provenance, materials, article/ledger linkage,
-  audience, money, ownership and work state before replacement or saving.
-- RunSnapshot 2 explicitly adds gameplay and upgrades the known v1 side-view shape
-  through nested defaults, preserving existing progress. Unknown tags and 3D
-  coordinate layouts remain export-only. Envelope/profile versions are separate.
-- Actual final gates: architecture/content pass; 82 JS + 28 Python unit tests,
-  28 browser and 8 authoring tests passed. Full reports and summary are under
-  implementation `.cache/test/t08-final-*.json`. Native browser checks resume jobs
-  through weekends/completion/publication without duplicate XP/evidence/audience
-  and verify day-transition autosave through the runtime command boundary.
-- Costs, fees, daily processing timing, scores and rewards remain marked fixture
-  policy/provisional. Per-step floors keep General cheaper despite skill bonuses.
-  No production 12-week expansion or complete gameplay UI is claimed.
-- Contract: docs/engineering/GAMEPLAY-CONTRACT.md. Continue automatically at T09:
-  read its brief and actual Defense/Attack GDD rules before implementing hearing
-  state, timed minigame and interruption semantics. T10-T14 remain afterward.
-- Protected Bible/GDD/archive bytes unchanged; no external installation or push.
+Actual final gates: architecture/content pass; 119 JS + 42 Python unit,
+35 browser, 40 authoring and 7 bot tests pass. Reports: .cache/test/t12-final-*.json.
+Actual pack traversal: 2/2 nodes, 1/1 choice, 6/6 assets and 2/2 managed fixtures,
+no unexplored branches. Bot behavior tests separately cover two-branch input,
+missing required assets, dead nodes/invalid flags, loops/budgets, unresolved guards
+and declared optional silent-audio degradation. The independent native keyboard
+bot runs the maintained real player journey. Reports: .cache/reports/bot/.
 
-## T11 complete (commit pending)
+Production entry reachability rejects mutation-debug/authoring modules and unknown
+dynamic imports. A reproduced Windows denied-POST reset was fixed by bounded body
+draining before rejection and Content-Length on JSON responses. Earlier intermittent
+Chrome startup timeout remains an environment uncertainty; request/process/stderr
+diagnostics are retained, not retried away. Final six gates are green.
 
-T10 committed as bb6f7a1. T11 implements typed story/quest/gameplay/hearing
-inspectors, atomic node/choice/flag operations, exact diagnostic navigation,
-authoringOnly command-replayed fixtures and actual player hearing views. Node
-renames export reviewed anchorMap candidates; real MigrationRegistry save restore
-and native integrated export controls are tested. Source/UI-state, detached-field,
-obsolete-preview and stopped-preview ownership checks pass. No player state field
-was added; existing snapshot v3/content mapping contracts remain intact.
+Guide: docs/guides/DEBUG-WORKFLOW.md. Live reload targets isolated development
+playtests; audio audition remains in the Audio panel and player profiles are not
+rewritten. A visual debug snapshot with no committed scene and an initial pending
+scene requires explicit restart; pure reload/resource ports and normal player
+save/load remain separate. Full authored chapter/release acceptance is still pending.
 
-Actual final gates: architecture/content pass; 109 JS + 33 Python unit,
-30 browser and 39 authoring tests pass. Reports: .cache/test/t11-final-*.json.
-Guide: docs/guides/ADDING-CONTENT.md. Managed fixture source starts day 17 and earns
-and publishes evidence before day-19 hearing checkpoints; this is explicit test
-context, not a change to canonical Boss scheduling or production content.
-
-Earlier authoring-server Chrome validations intermittently timed out; subsequent
-full Python diagnostic and final unit runs passed (33 tests, ~32 seconds each).
-Timeout reports now include requested paths, process exit and Chrome stderr for
-future diagnosis. No root cause or permanent environment fix is claimed.
-The bootstrap test now targets its source textarea explicitly after adding new
-preview forms. Protected Bible/GDD/archive paths have no diff.
-
-Next: commit T11 and continue T12 hot reload/debug/bot/crash tools, then T13-T14
-and the final fresh whole-branch review. No push/merge/publication, external install
-or 12-week production expansion authorized.
+Next: commit T12, then T13 release/CI/license/performance/restore and T14 authored
+acceptance plus one fresh whole-branch review. Release suite remains unimplemented;
+do not claim full P0 or 12-week game completion. No external install, protected
+Bible/GDD/archive mutation, push/merge/publication or production expansion authorized.
 
 ## Latest implementation evidence (T06)
 

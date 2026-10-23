@@ -18,6 +18,8 @@ export function stepStory(current,intent,context) {
  if(intent.type==='start') {
   if(!['idle','end'].includes(state.story.waiting))return reject('story.already.started');
   const chapter=bundle.catalog.get('story',intent.chapterId);if(!chapter.ok)return chapter;enter(chapter.value,chapter.value.entryNodeId);
+ } else if(intent.type==='resume') {
+  if(state.story.waiting!=='ready')return reject('story.intent.invalid');
  } else if(intent.type==='reveal'||intent.type==='revealTo') {
   if(state.story.waiting!=='say'||!Number.isInteger(intent.count)||intent.count<0)return reject('story.intent.invalid');
   if(intent.type==='revealTo')state.presentation.dialogue.revealed=intent.count;else state.presentation.dialogue.revealed+=intent.count;return success({state,outcomes});

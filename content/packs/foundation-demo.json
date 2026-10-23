@@ -129,6 +129,11 @@
       "kind": "playtests",
       "path": "../dev/foundation/playtests.json",
       "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "../ui/debug.json",
+      "authoringOnly": true
     }
   ]
 }

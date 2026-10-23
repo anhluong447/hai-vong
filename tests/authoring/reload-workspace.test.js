@@ -1,0 +1,8 @@
+import {test,assert,equal} from '/tests/harness.js';
+import {projectSource} from '/tests/fixtures/project.js';
+import {Workspace} from '/tools/workspace/Workspace.js';
+test('external revision adoption rejects dirty or changed work and validates every source before replacement',async()=>{
+ const source=await projectSource(),workspace=new Workspace({sources:source}),locale=workspace.list().find(doc=>doc.kind==='locale'&&doc.locale==='vi'),token=workspace.revisionToken;
+ assert(workspace.applyChange(locale.id,{type:'replace',path:'/foundation.begin/value',value:'Unsaved draft'},locale.revision).ok);const candidate=structuredClone(source);candidate.documents.find(doc=>doc.sourceId===locale.id).data['foundation.begin'].value='External revision';let result=workspace.reloadSources(candidate,token);assert(!result.ok);assert(result.errors.some(error=>error.code==='authoring.reload.dirty'));equal(workspace.get(locale.id).data['foundation.begin'].value,'Unsaved draft');assert(workspace.undo(locale.id).ok);result=workspace.reloadSources(candidate,token);assert(!result.ok);assert(result.errors.some(error=>error.code==='authoring.reload.conflict'));
+ const current=workspace.revisionToken;assert(workspace.reloadSources(candidate,current).ok);equal(workspace.get(locale.id).data['foundation.begin'].value,'External revision');assert(!workspace.get(locale.id).dirty);const broken=structuredClone(candidate);broken.documents.find(doc=>doc.kind==='story').data.entryNodeId='absent';assert(!workspace.reloadSources(broken,workspace.revisionToken).ok);equal(workspace.get(locale.id).data['foundation.begin'].value,'External revision');
+});

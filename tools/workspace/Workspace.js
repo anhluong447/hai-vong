@@ -25,6 +25,12 @@ export class Workspace {
  }
  get(id){return this.#docs.get(id)?.view();}
  list(){return [...this.#docs.values()].map(d=>d.view());}
+ get revisionToken(){return JSON.stringify(this.list().map(doc=>[doc.id,doc.revision,doc.sourceHash]));}
+ reloadSources(sources,expectedToken){
+  if(this.#busy)return bad('authoring.busy','workspace');if(this.list().some(doc=>doc.dirty))return bad('authoring.reload.dirty','workspace');if(this.revisionToken!==expectedToken)return bad('authoring.reload.conflict','workspace');
+  const checked=validateProject(sources);if(!checked.ok)return checked;const next=structuredClone(sources),documents=new Map(next.documents.map(doc=>[doc.sourceId,new WorkingDocument(doc)]));
+  this.#sources=next;this.#docs=documents;this.bundle=checked.value;this.#past=[];this.#future=[];return success(this.bundle);
+ }
  exportSources(){return immutableCopy({...this.#sources,documents:this.#sources.documents.map(doc=>({...doc,sourceHash:this.#docs.get(doc.sourceId).hash}))});}
  #commitMany(values,mode='edit'){
   if(this.#busy)return bad('authoring.busy','workspace');

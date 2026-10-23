@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "maxStates": 5000,
+  "maxSteps": 2000,
+  "timeoutSeconds": 120
+}

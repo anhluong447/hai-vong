@@ -11,5 +11,5 @@ const workspace=new Workspace({sources,drafts,writer}),text=new TextService(work
 const config=workspace.bundle.catalog.get('config','ui.workspace').value;
 for(const [key,value]of Object.entries(config.theme))document.documentElement.style.setProperty('--'+key,value);
 document.title=text.format('workspace.title').value;
-const view=new WorkspaceView(document.body,workspace,text,!!writer);
+const view=new WorkspaceView(document.body,workspace,text,!!writer,{readRevision:writer?()=>writer.revision():undefined,loadSources:()=>loadProject(document.body.dataset.project)});
 window.addEventListener('pagehide',()=>{view.dispose();drafts.close();},{once:true});

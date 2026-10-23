@@ -17,13 +17,19 @@ SUITES=('architecture','content','unit','browser','authoring','bot','release')
 
 def suite(name,args):
     if name=='architecture':
-        errors=check(ROOT)
+        from pipeline.check_development import check as check_development
+        errors=check(ROOT)+check_development(ROOT)
         return {'suite':name,'ok':not errors,'errors':errors}
     if name=='unit':
         run=subprocess.run([sys.executable,'-X','utf8','-m','unittest','discover','-s','tests/python'],cwd=ROOT,capture_output=True,text=True,encoding='utf-8')
         modules=['/'+p.relative_to(ROOT).as_posix() for p in (ROOT/'tests/unit').glob('*.test.js')]
         result=run_browser(ROOT,modules,timeout=120) if modules else {'ok':True,'passed':0,'failed':0}
         return {'suite':name,**result,'ok':result['ok'] and run.returncode==0,'python':{'exitCode':run.returncode,'output':run.stdout+run.stderr}}
+    if name=='bot':
+        from pipeline.bot import run_bot
+        modules=['/'+path.relative_to(ROOT).as_posix() for path in sorted((ROOT/'tests/bot').glob('*.test.js'))]
+        behavior=run_browser(ROOT,modules,timeout=120);pack=run_bot(ROOT,args.pack)
+        return {'suite':name,**behavior,'ok':behavior['ok'] and pack['ok'],'pack':pack}
     folder={'content':'content','browser':'browser','authoring':'authoring','bot':'bot'}.get(name)
     if folder:
         modules=['/'+p.relative_to(ROOT).as_posix() for p in sorted((ROOT/'tests'/folder).glob('*.test.js'))]

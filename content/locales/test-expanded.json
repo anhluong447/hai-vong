@@ -1118,5 +1118,101 @@
   "authoring.nodeSource": {
     "value": "[ Nút cần đổi ID ~~~~~~~~~~~~~~~~ ]",
     "params": []
+  },
+  "debug.title": {
+    "value": "[ Công cụ thử và chẩn đoán ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.start": {
+    "value": "[ Mở tình huống thử độc lập ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.fixture": {
+    "value": "[ Tình huống thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.chapter": {
+    "value": "[ Chương ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.node": {
+    "value": "[ Nút ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.jump": {
+    "value": "[ Nhảy bằng điều kiện của tình huống thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.flag": {
+    "value": "[ Flag ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.flagValue": {
+    "value": "[ Giá trị flag (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.setFlag": {
+    "value": "[ Đặt flag trong bản thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.command": {
+    "value": "[ Command (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.execute": {
+    "value": "[ Chạy command ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.skip": {
+    "value": "[ Skip đến ranh giới kế tiếp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.applyWorking": {
+    "value": "[ Nạp bản đang sửa, giữ tiến độ thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.reloadSaved": {
+    "value": "[ Nạp nguồn đã lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.restart": {
+    "value": "[ Khởi động lại bản thử với nguồn hiện tại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.mapping": {
+    "value": "[ Ánh xạ content migration đã review (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.watch": {
+    "value": "[ Theo dõi nguồn đã lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.exportTrace": {
+    "value": "[ Xuất trace cục bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.replayTrace": {
+    "value": "[ Chạy lại trace ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.trace": {
+    "value": "[ Trace và command/guard log ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.exportCrash": {
+    "value": "[ Xuất gói lỗi cục bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.crash": {
+    "value": "[ Gói lỗi và ảnh nếu chụp được ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.state": {
+    "value": "[ Trạng thái thử và revision ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.stop": {
+    "value": "[ Dừng bản thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
   }
 }

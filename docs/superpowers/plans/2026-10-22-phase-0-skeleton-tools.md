@@ -10,7 +10,7 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T11 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T12–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
+**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T12 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T13–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
 
 ## Global Constraints
 
@@ -343,11 +343,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes immutable revisions, migrations/checkpoints and preview ports; produces `ReloadService.apply`, typed debug intents, local crash/reproduction bundles and coverage reports.
 
-- [ ] Write red tests for valid reload preserving cursor, invalid revision retaining last valid runtime, removed anchor requiring restart/mapping, stale asset load cancellation and concurrent writer conflict. Production build must reject/omit mutation debug capabilities.
-- [ ] Implement loopback file watch/revision notifications and incremental script/browser-asset reload; changing JSON/PNG/cue requires no full-game build. Author chooses explicit restart if incompatible.
-- [ ] Implement jump with fixture/precondition validation, typed set-flag, skip, command/guard logs, trace replay and local crash export with screenshot when available. Failure to capture screenshot must not suppress the error report.
-- [ ] Implement bot with branch/state memo, bounded cycles and explicit coverage/unexplored reporting. Test one valid pack, missing asset, dead branch, incorrect flag, loop and an intentionally unresolved condition. Browser bot separately traverses keyboard UI.
-- [ ] Run bot/dev browser/unit checks; CI receives artifacts. Commit `feat: add safe hot reload traversal bot and debug diagnostics`.
+- [x] Write red tests for valid reload preserving cursor, invalid revision retaining last valid runtime, removed anchor requiring restart/mapping, stale asset load cancellation and concurrent writer conflict. Production build must reject/omit mutation debug capabilities.
+- [x] Implement loopback file watch/revision notifications and incremental script/browser-asset reload; changing JSON/PNG/cue requires no full-game build. Author chooses explicit restart if incompatible.
+- [x] Implement jump with fixture/precondition validation, typed set-flag, skip, command/guard logs, trace replay and local crash export with screenshot when available. Failure to capture screenshot must not suppress the error report.
+- [x] Implement bot with branch/state memo, bounded cycles and explicit coverage/unexplored reporting. Test one valid pack, missing asset, dead branch, incorrect flag, loop and an intentionally unresolved condition. Browser bot separately traverses keyboard UI.
+- [x] Run bot/dev browser/unit checks; CI receives artifacts. Commit `feat: add safe hot reload traversal bot and debug diagnostics`.
 
 ### T13 — Web release, CI, licenses, performance và recovery
 

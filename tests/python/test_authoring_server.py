@@ -12,6 +12,22 @@ from project_environment import ROOT
 sys.path.insert(0,str(ROOT/'tools/pipeline'))
 
 class AuthoringServerTests(unittest.TestCase):
+    def test_revision_poll_rebuilds_changed_png_and_preserves_last_good_manifest_on_invalid_master(self):
+        module=self.load()
+        from PIL import Image
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            for name in ['content','src/contracts/schemas','assets/sources','assets/exports']:shutil.copytree(ROOT/name,root/name)
+            server=module.create_authoring_server(root,0);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start();origin=f'http://127.0.0.1:{server.server_port}'
+            def poll(authorized=True):
+                client=http.client.HTTPConnection('127.0.0.1',server.server_port,timeout=60);client.request('GET','/_authoring/revision',headers={'Origin':origin,**({'X-HoiAm-Token':server.authoring_token} if authorized else {})});response=client.getresponse();result=response.status,json.loads(response.read());client.close();return result
+            try:
+                self.assertEqual(poll(False)[0],403);status,first=poll();self.assertEqual(status,200,first);self.assertTrue(first['ok']);fingerprint=first['value']['fingerprint']
+                master=root/'assets/sources/scene.png';image=Image.open(master).convert('RGBA');image.putpixel((0,0),(255,0,255,255));image.save(master)
+                status,changed=poll();self.assertEqual(status,200,changed);self.assertTrue(changed['ok']);self.assertNotEqual(changed['value']['fingerprint'],fingerprint);self.assertIn('assets/sources/scene.png',changed['value']['changed']);self.assertTrue(changed['value']['assetBuild'])
+                manifest=root/'content/assets/manifest.json';good=manifest.read_bytes();master.write_bytes(b'not an image');status,failed=poll();self.assertEqual(status,422,failed);self.assertFalse(failed['ok']);self.assertEqual(manifest.read_bytes(),good)
+            finally:server.shutdown();server.server_close();thread.join()
+
     def test_asset_rebuild_uses_the_saved_recipe_and_preserves_manifest_when_the_pipeline_fails(self):
         module=self.load()
         with tempfile.TemporaryDirectory() as temp:

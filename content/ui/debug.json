@@ -1,0 +1,46 @@
+{
+  "id": "ui.debug",
+  "kind": "debug-ui",
+  "labels": {
+    "title": "debug.title",
+    "start": "debug.start",
+    "fixture": "debug.fixture",
+    "chapter": "debug.chapter",
+    "node": "debug.node",
+    "jump": "debug.jump",
+    "flag": "debug.flag",
+    "flagValue": "debug.flagValue",
+    "setFlag": "debug.setFlag",
+    "command": "debug.command",
+    "execute": "debug.execute",
+    "skip": "debug.skip",
+    "applyWorking": "debug.applyWorking",
+    "reloadSaved": "debug.reloadSaved",
+    "restart": "debug.restart",
+    "mapping": "debug.mapping",
+    "watch": "debug.watch",
+    "exportTrace": "debug.exportTrace",
+    "replayTrace": "debug.replayTrace",
+    "trace": "debug.trace",
+    "exportCrash": "debug.exportCrash",
+    "crash": "debug.crash",
+    "state": "debug.state",
+    "stop": "debug.stop"
+  },
+  "defaultFixtureId": "playtest.fixture.gameplay",
+  "limits": {
+    "maxStates": 5000,
+    "maxSteps": 2000,
+    "traceEntries": 200,
+    "skipSteps": 100,
+    "crashReports": 5,
+    "pollIntervalMs": 1000
+  },
+  "initialCommand": {
+    "type": "story.step",
+    "intent": {
+      "type": "start",
+      "chapterId": "foundation.chapter"
+    }
+  }
+}

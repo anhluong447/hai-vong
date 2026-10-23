@@ -14,6 +14,7 @@ import {validateHearings} from '../../contracts/validateHearings.js';
 import {validateAuthoringUI} from '../../contracts/validateAuthoringUI.js';
 import {validateAssetImports} from '../../contracts/validateAssetImports.js';
 import {validatePlaytests} from '../../contracts/validatePlaytests.js';
+import {validateDebugUI} from '../../contracts/validateDebugUI.js';
 
 export function validateProject({project,schemas,documents,capabilities=[]}) {
  const errors=[]; const entries=Object.create(null); const locations=new Map(); const locales=Object.create(null);
@@ -53,6 +54,7 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  errors.push(...validateWorld({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateNavigation({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateAuthoringUI({catalog,project,locales,schemas,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
+ errors.push(...validateDebugUI({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateAssetImports({catalog,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validatePlaytests({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
  errors.push(...validateGameplay({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));

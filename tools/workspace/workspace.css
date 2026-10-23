@@ -14,3 +14,8 @@
 [data-role=layout-preview] [data-state=error] { color:var(--editor-error-color);background:var(--background); }
 [data-role=playtest-result] { white-space:pre-wrap;overflow-wrap:anywhere;max-height:var(--editor-fields-height);overflow:auto; }
 [data-role=hearing-preview],[data-role=story-preview] { display:flex;flex-direction:column;gap:var(--gap); }
+[data-role=debug-tools] { grid-column:1/-1;display:flex;flex-direction:column;gap:var(--gap); }
+[data-role=debug-tools] label { display:flex;flex-direction:column;gap:var(--gap); }
+[data-role=debug-tools] textarea { height:var(--editor-transfer-height); }
+[data-role=debug-tools] pre { white-space:pre-wrap;overflow-wrap:anywhere;max-height:var(--editor-fields-height);overflow:auto; }
+[data-role=debug-preview] canvas { max-width:100%;display:block; }

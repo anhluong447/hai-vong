@@ -8,26 +8,12 @@ from urllib.parse import urlsplit,parse_qs
 from browser_runner import run_browser
 from server import StaticHandler,create_server
 from source_writer import SourceWriter,failed,recover_batches,WRITE_LOCK,safe_path,digest
+from watcher import RevisionWatcher,tracked_inputs
 
 CODE_ROOT=Path(__file__).resolve().parents[2]
 MAX_REQUEST_BYTES=4_000_000
 
-def load_sources(root,candidate_name=None,candidate=None,candidates=None):
-    root=Path(root).resolve()
-    def read(path):
-        path=path.resolve();path.relative_to(root)
-        name=path.relative_to(root).as_posix()
-        if candidates is not None and name in candidates:return candidates[name]
-        return candidate if candidate_name==name else json.loads(path.read_text(encoding='utf-8-sig'))
-    path=root/'content/project.json';project=read(path)
-    schemas={key:read(path.parent/ref) for key,ref in project['schemas'].items()}
-    docs=[]
-    for ref in project['packs']:
-        pack_path=(path.parent/ref).resolve();pack=read(pack_path)
-        for entry in pack['documents']:
-            doc_path=(pack_path.parent/entry['path']).resolve();doc_path.relative_to(root)
-            docs.append({**entry,'sourceId':'/'+doc_path.relative_to(root).as_posix(),'data':read(doc_path)})
-    return {'project':project,'schemas':schemas,'documents':docs}
+from project_sources import load_sources
 
 def create_authoring_server(root,port=8080):
     root=Path(root).resolve();token=secrets.token_urlsafe(32)
@@ -43,6 +29,8 @@ def create_authoring_server(root,port=8080):
         except (ValueError,OSError):return failed('authoring.project.invalid')
         return run_browser(CODE_ROOT,modules=[],page='/tools/workspace/validate.html',payload=sources)
     writer=SourceWriter(root,allowed,validate,validator_many=validate_many)
+    watcher=RevisionWatcher(root,lambda:tracked_inputs(root));initial_revision=watcher.scan()
+    if not initial_revision['ok']:raise ValueError(json.dumps(initial_revision))
     def rebuild_assets(name,expected_hash):
         with WRITE_LOCK:
             try:
@@ -62,9 +50,39 @@ def create_authoring_server(root,port=8080):
                 write_changed(path,encoded(manifest))
                 return {'ok':True,'value':{'manifestDocumentId':manifests[0]['sourceId'],'manifest':manifest,'sourceHash':digest(path.read_bytes()),'recipeHash':expected_hash}}
             except (ValueError,KeyError,TypeError,OSError):return failed('authoring.build.failed',name)
+    def revision():
+        with WRITE_LOCK:
+            previous=dict(watcher.previous);fingerprint=watcher.fingerprint;result=watcher.scan()
+            if not result['ok']:return result
+            try:
+                changed=set(result['value']['changed']);recipes=[doc for doc in load_sources(root)['documents'] if doc['kind']=='config' and isinstance(doc['data'],dict) and doc['data'].get('kind')=='asset-imports'];rebuilt=False
+                for recipe in recipes:
+                    name=recipe['sourceId'].lstrip('/');spec=recipe['data'];inputs={name,*[entry['source'] for entry in spec['entries']],*spec.get('generationInputs',[])}
+                    if not changed.intersection(inputs):continue
+                    current=writer.read(name)
+                    if not current['ok']:return current
+                    built=rebuild_assets(name,current['value']['hash'])
+                    if not built['ok']:
+                        watcher.previous=previous;watcher.fingerprint=fingerprint;return built
+                    rebuilt=True
+                if rebuilt:
+                    result=watcher.scan()
+                    if not result['ok']:return result
+                    result['value']['changed']=sorted(changed|set(result['value']['changed']))
+                result['value']['assetBuild']=rebuilt;return result
+            except (ValueError,KeyError,TypeError,OSError):return failed('watch.inputs.invalid')
     class Handler(StaticHandler):
         def reply(self,status,data):
-            encoded=json.dumps(data,ensure_ascii=False).encode('utf-8');self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.end_headers();self.wfile.write(encoded)
+            encoded=json.dumps(data,ensure_ascii=False).encode('utf-8');self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(encoded)));self.end_headers();self.wfile.write(encoded)
+        def deny_post(self):
+            # Closing a socket with unread POST bytes can reset the connection on
+            # Windows before the caller receives its rejection. Drain only a
+            # bounded body with a bounded socket wait; never accept its contents.
+            try:
+                size=int(self.headers.get('Content-Length','0'))
+                if 0<size<=MAX_REQUEST_BYTES:self.connection.settimeout(2);self.rfile.read(size)
+            except (ValueError,OSError):pass
+            self.reply(403,failed('authoring.request.denied'))
         def authorized(self,write=False):
             expected=f'http://127.0.0.1:{self.server.server_port}'
             if self.headers.get('Host')!=f'127.0.0.1:{self.server.server_port}':return False
@@ -79,10 +97,13 @@ def create_authoring_server(root,port=8080):
             if path.path=='/_authoring/document':
                 if not self.authorized() or not secrets.compare_digest(self.headers.get('X-HoiAm-Token',''),token):self.reply(403,failed('authoring.request.denied'));return
                 name=parse_qs(path.query).get('path',[''])[0];result=writer.read(name);self.reply(200 if result['ok'] else 422,result);return
+            if path.path=='/_authoring/revision':
+                if not self.authorized() or not secrets.compare_digest(self.headers.get('X-HoiAm-Token',''),token):self.reply(403,failed('authoring.request.denied'));return
+                result=revision();self.reply(200 if result['ok'] else 422,result);return
             super().do_GET()
         def do_POST(self):
             route=urlsplit(self.path).path
-            if route not in ('/_authoring/write','/_authoring/write-batch','/_authoring/build-assets') or not self.authorized(True) or not secrets.compare_digest(self.headers.get('X-HoiAm-Token',''),token):self.reply(403,failed('authoring.request.denied'));return
+            if route not in ('/_authoring/write','/_authoring/write-batch','/_authoring/build-assets') or not self.authorized(True) or not secrets.compare_digest(self.headers.get('X-HoiAm-Token',''),token):self.deny_post();return
             try:
                 if self.headers.get('Content-Type')!='application/json':raise ValueError('content type')
                 size=int(self.headers.get('Content-Length','0'))

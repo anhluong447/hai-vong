@@ -18,5 +18,6 @@
     "focus-width": "3px",
     "focus-offset": "2px"
   },
-  "authoringId": "ui.authoring"
+  "authoringId": "ui.authoring",
+  "debugId": "ui.debug"
 }
