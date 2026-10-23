@@ -1,6 +1,6 @@
 # Phase 0 evidence
 
-T01–T12 are committed; T13 is in progress. No whole-Phase-0 completion claim yet.
+T01–T13 are implemented; T14 remains. No whole-Phase-0 completion claim yet.
 T12's actual final gates: architecture/content pass, 119 JS + 42 Python unit,
 35 browser, 40 authoring and 7 bot tests pass. See `PROJECT-STATE.md` and its
 per-task `.cache/test/t12-final-*.json` references.
@@ -16,7 +16,20 @@ passed: architecture/content, 119 JS + 55 Python unit, 35 browser, 40 authoring,
 7 bot tests and release. Raw report: `.cache/reports/ci.json`. Gate receipts bind
 fingerprint `8fa1af3191896c7cbca611682df07b5ea` (full value in the report).
 The local artifact is `dist/foundation-demo/8fa1af3191896c7cbca6/` and its ZIP.
-Fresh-source restore/build verification is the next step, not yet claimed.
+Fresh-source restore/build verification also passed on committed source `5714e7c`:
+every tracked byte was checked against `git archive`, its own portable tools and
+empty private venv installed cached pinned wheels, the tracked game bundle restored
+initially absent masters, renditions rebuilt and all seven suites passed again
+(119 JS + 55 Python / 35 browser / 40 authoring / 7 bot / release).
+Recovery summary: `.cache/reports/recovery/summary.json`; full independent gates:
+`.cache/fresh-checkout-5e032a2/.cache/reports/ci.json`. No legacy bytes were consulted.
+
+Retained failed attempts document the network proxy blocking a wheel download and
+pip preferring a remote duplicate over `--find-links`; explicit `--offline` setup
+used the project cache after official PyPI SHA-256 verification. The first full
+portable run also exposed two containment tests assuming the base interpreter was
+external; selecting `ROOT.parent` instead corrected the premise, then focused
+7/7 checks on both interpreters and the full fresh suite passed.
 
 Actual Firefox smoke ran on portable **Nightly 161.0a1**, build
 `20261022214940`. It creates the real styled player, draws Canvas, saves/restores

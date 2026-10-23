@@ -355,12 +355,12 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes toolchain/asset inventories, checks and pack manifests; produces versioned static web export, third-party notices, content hashes, setup/restore procedure and machine-readable release diagnostics.
 
-- [ ] Write red tests for missing binary master/rendition, unknown license, incompatible content versions, accidental dev/test/debug inclusion, absent required suite and incorrect asset hashes; failed build leaves last good release intact.
-- [ ] Implement reproducible export with fingerprint/cache policy, dependency notices and license/provenance audit for all assets/fonts/audio/tools/libraries. Unknown provenance blocks release until resolved or the resource is replaced.
-- [ ] Configure CI to provision pinned Python/browser/asset tools and run architecture/content/unit/browser/authoring/bot/release gates. Do not reuse legacy pass logs as evidence; upload current diagnostics/screenshots/crash packages.
-- [ ] Choose and record reference and lower-spec desktop profiles. Proposed target is smooth 60 Hz presentation; record frame-time distribution, load latency, memory after repeated transitions, startup bytes, text scaling and fullscreen/resize behavior. Virtual-clock tests do not certify device FPS.
-- [ ] Verify Chromium-family full automation plus a documented Firefox compatibility smoke run. A clean checkout restores required resource bundles/LFS bytes, builds and plays without reaching into the local legacy payload. Export runs without authoring server; browser hosting is the P0 deliverable, not an installer or Steam integration.
-- [ ] Run `python tools/check.py release --profile foundation-demo` and the full gate set; publish only the local artifact/evidence unless separately authorized. Commit `build: add reproducible web release and production checks`.
+- [x] Write red tests for missing binary master/rendition, unknown license, incompatible content versions, accidental dev/test/debug inclusion, absent required suite and incorrect asset hashes; failed build leaves last good release intact.
+- [x] Implement reproducible export with fingerprint/cache policy, dependency notices and license/provenance audit for all assets/fonts/audio/tools/libraries. Unknown provenance blocks release until resolved or the resource is replaced.
+- [x] Configure CI to provision pinned Python/browser/asset tools and run architecture/content/unit/browser/authoring/bot/release gates. Do not reuse legacy pass logs as evidence; upload current diagnostics/screenshots/crash packages.
+- [x] Choose and record reference and lower-spec desktop profiles. Proposed target is smooth 60 Hz presentation; record frame-time distribution, load latency, memory after repeated transitions, startup bytes, text scaling and fullscreen/resize behavior. Virtual-clock tests do not certify device FPS.
+- [x] Verify Chromium-family full automation plus a documented Firefox compatibility smoke run. A clean checkout restores required resource bundles/LFS bytes, builds and plays without reaching into the local legacy payload. Export runs without authoring server; browser hosting is the P0 deliverable, not an installer or Steam integration.
+- [x] Run `python tools/check.py release --profile foundation-demo` and the full gate set; publish only the local artifact/evidence unless separately authorized. Commit `build: add reproducible web release and production checks`.
 
 ### T14 — Chương fixture end-to-end và đóng P0
 
