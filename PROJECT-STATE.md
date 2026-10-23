@@ -21,13 +21,13 @@ T01 through T05 are implemented and committed: contracts/checks, content/flags,
 story session/checkpoints, JSON authoring workspace and resource pipeline/recovery.
 T06 is implemented: keyboard-driven 2D fixture scenes, NPC dialogue, doors, camera,
 DPR/viewport, focus, text, animation, audio and presentation timeline.
-T01 through T09 are implemented in the active worktree; T10 through T14 remain.
+T01 through T10 are implemented in the active worktree; T11 through T14 remain.
 No 12-week production expansion.
 The latest user instruction resumes the approved plan after containment remediation.
-Continue at T10 in the active worktree without another permission prompt.
+Continue at T11 in the active worktree without another permission prompt.
 No push, publication or merge is authorized.
 
-## Current checkpoint (T09 complete; T10 next)
+## Current checkpoint (T09 complete; T10 in progress)
 
 T09 implements immutable Defense/Attack, deterministic two-lane mini/Final Shot,
 managed hearing UI/input, preserved old remaps and deep source/snapshot validation.
@@ -74,6 +74,32 @@ T10-T14 remain. No push/merge/publication or 12-week production expansion.
   read its brief and actual Defense/Attack GDD rules before implementing hearing
   state, timed minigame and interruption semantics. T10-T14 remain afterward.
 - Protected Bible/GDD/archive bytes unchanged; no external installation or push.
+
+## T10 implementation checkpoint (complete; commit pending)
+
+T10 implements dedicated resource/scene/layout/input tools, ResourceIndex search/
+usage/safe rename, atomic grouped edits/undo/drafts/source writes with recovery
+journals, authenticated recipe rebuilds and real isolated runtime previews.
+Native keyboard edits, dependency navigation, canvas placement and reopened exports
+are covered. Guide: docs/guides/RESOURCE-WORKFLOW.md.
+
+Actual final gates: architecture/content pass; 108 JS + 33 Python unit tests,
+30 browser and 27 authoring tests pass. Reports: .cache/test/t10-final-*.json.
+Screenshot 5378d64c507ef03b.png inspected: readable fixture workspace/actor preview.
+Earlier unit timeout was diagnosed with per-test timings: repeated pack I/O cost
+138 seconds. Domain tests now clone one real fixture source; actual loader/decoder
+and native browser I/O checks remain. Full unit gate passes after this change.
+Earlier intermittent authoring-server failures are retained in diagnostic reports;
+the final suite passes, including 12 repeated denied-Host requests.
+
+Player loader concurrently reads independent sources in declaration order and skips
+explicit authoringOnly documents. Save-slot restore prepares menu records before
+commit, fixing an actual delayed render that stole keyboard focus from Back.
+No player snapshot field added; snapshot v3/migrations remain intact.
+
+Next: commit T10, start T11 dialogue/quest/gameplay/hearing tools from its brief,
+then T12-T14 and one fresh final whole-branch review. No protected source/archive
+changes, external install, push/merge/publication or 12-week content expansion.
 
 ## Latest implementation evidence (T06)
 

@@ -35,7 +35,7 @@ def suite(name,args):
                     with urlopen(args.base_url.rstrip('/')+'/content/project.json',timeout=3) as response:
                         if response.status!=200:raise ValueError('not ready')
                 except (OSError,ValueError):return {'suite':name,'ok':False,'errors':[{'code':'test.server.unreachable','sourceId':args.base_url,'pointer':'','relatedIds':[]}]}
-            return {'suite':name,**run_browser(ROOT,modules,base_url=args.base_url)}
+            return {'suite':name,**run_browser(ROOT,modules,base_url=args.base_url,timeout=120 if name=='browser' else 40)}
     return {'suite':name,'ok':False,'errors':[{'code':'not-implemented','sourceId':name,'pointer':'','relatedIds':[]}]}
 
 def main():

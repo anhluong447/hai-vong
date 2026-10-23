@@ -26,6 +26,7 @@
     "progression": "../src/contracts/schemas/progression.json",
     "quests": "../src/contracts/schemas/quests.json",
     "hearings": "../src/contracts/schemas/hearings.json",
-    "hearingBalance": "../src/contracts/schemas/hearing-balance.json"
+    "hearingBalance": "../src/contracts/schemas/hearing-balance.json",
+    "assetImports": "../src/contracts/schemas/asset-imports.json"
   }
 }

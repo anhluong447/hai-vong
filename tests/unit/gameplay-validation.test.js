@@ -1,5 +1,5 @@
 import {test,assert,equal} from '/tests/harness.js';
-import {loadProject} from '/src/infrastructure/resources/ProjectLoader.js';
+import {projectSource} from '/tests/fixtures/project.js';
 import {validateProject} from '/src/domain/story/validateProject.js';
 import {gameplaySession,act,completeDirect} from '/tests/fixtures/gameplay.js';
 test('shared content validation rejects broken provenance costs schedules and Main routes',async()=>{
@@ -17,8 +17,8 @@ test('shared content validation rejects broken provenance costs schedules and Ma
   source=>source.documents.find(d=>d.kind==='progression').data.activities.find(a=>a.kind==='work').teamBond=2,
   source=>{const quests=source.documents.find(d=>d.kind==='quests').data;quests[1].attackFindings=quests[0].attackFindings.map(f=>({...f,materialId:quests[1].steps[0].materialId}));quests[0].attackFindings=[];}
  ];
- for(const mutate of mutations){const source=await loadProject('/content/project.json');mutate(source);const checked=validateProject(source);assert(!checked.ok,'invalid gameplay content was accepted');assert(checked.errors.every(error=>error.sourceId&&typeof error.pointer==='string'));}
- const source=await loadProject('/content/project.json');source.documents.find(d=>d.kind==='quests').data[2].defenseEvidence[0].quality='high';const checked=validateProject(source);assert(checked.errors.some(error=>error.sourceId.endsWith('/gameplay/quests.json')&&error.pointer==='/2/defenseEvidence/0/quality'),JSON.stringify(checked));
+ for(const mutate of mutations){const source=await projectSource();mutate(source);const checked=validateProject(source);assert(!checked.ok,'invalid gameplay content was accepted');assert(checked.errors.every(error=>error.sourceId&&typeof error.pointer==='string'));}
+ const source=await projectSource();source.documents.find(d=>d.kind==='quests').data[2].defenseEvidence[0].quality='high';const checked=validateProject(source);assert(checked.errors.some(error=>error.sourceId.endsWith('/gameplay/quests.json')&&error.pointer==='/2/defenseEvidence/0/quality'),JSON.stringify(checked));
 });
 test('gameplay snapshot replacement rejects malformed economy progression and work without changing live state',async()=>{
  const session=await gameplaySession(),before=session.snapshot(),mutations=[

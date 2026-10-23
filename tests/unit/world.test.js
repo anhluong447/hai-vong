@@ -1,7 +1,7 @@
 import {test,assert,equal} from '/tests/harness.js';
 import {runtimeBundle,effects} from '/tests/fixtures/runtime.js';
 import {GameSession} from '/src/application/GameSession.js';
-import {loadProject} from '/src/infrastructure/resources/ProjectLoader.js';
+import {projectSource} from '/tests/fixtures/project.js';
 import {validateProject} from '/src/domain/story/validateProject.js';
 const enter=(session,sceneId='scene.courtyard',spawnId='entry',requestId='test')=>{
  const requested=session.execute({type:'scene.request',sceneId,spawnId,requestId});assert(requested.ok,JSON.stringify(requested));
@@ -38,11 +38,11 @@ test('world replacement validates scene bounds and facing before replacing the s
 });
 test('scene and input validators reject broken authored references before play',async()=>{
  for(const mutate of [source=>source.documents.find(d=>d.kind==='scenes').data[0].actors[0].actorId='missing',source=>source.documents.find(d=>d.kind==='input').data.bindings[0].action='missing',source=>{const input=source.documents.find(d=>d.kind==='input').data;input.actions.push('unregistered');input.bindings[0].action='unregistered';}]){
-  const source=await loadProject('/content/project.json');mutate(source);const result=validateProject(source);assert(!result.ok,JSON.stringify(result));
+  const source=await projectSource();mutate(source);const result=validateProject(source);assert(!result.ok,JSON.stringify(result));
  }
 });
 test('malformed scene collections and actors return source diagnostics instead of throwing',async()=>{
  for(const data of [null,[null],[{id:'broken',actors:'bad',spawns:[null]}]]){
-  const source=await loadProject('/content/project.json');source.documents.find(d=>d.kind==='scenes').data=data;const result=validateProject(source);assert(!result.ok);assert(result.errors.some(e=>e.sourceId.includes('scenes')));
+  const source=await projectSource();source.documents.find(d=>d.kind==='scenes').data=data;const result=validateProject(source);assert(!result.ok);assert(result.errors.some(e=>e.sourceId.includes('scenes')));
  }
 });

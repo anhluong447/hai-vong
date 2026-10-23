@@ -1,5 +1,5 @@
 import {test,assert,equal} from '/tests/harness.js';
-import {loadProject} from '/src/infrastructure/resources/ProjectLoader.js';
+import {projectSource} from '/tests/fixtures/project.js';
 import {validateProject} from '/src/domain/story/validateProject.js';
 import {hearingSession,hear,enterAttack,reachCrashout,tickFor} from '/tests/fixtures/hearings.js';
 test('shared hearing validation rejects impossible question logic scripts facts and projectile schedules',async()=>{
@@ -21,11 +21,11 @@ test('shared hearing validation rejects impossible question logic scripts facts 
   (_,__,balance)=>balance.defense.heartTiers[1].min=35,
   (_,__,balance)=>balance.defense.qualityScores.high.normal=30
  ];
- for(const mutate of mutations){const source=await loadProject('/content/project.json'),defense=source.documents.find(d=>d.kind==='hearings'&&d.data.mode==='defense').data,attack=source.documents.find(d=>d.kind==='hearings'&&d.data.mode==='attack').data,balance=source.documents.find(d=>d.kind==='hearingBalance').data;mutate(defense,attack,balance);assert(!validateProject(source).ok,'invalid hearing source was accepted');}
+ for(const mutate of mutations){const source=await projectSource(),defense=source.documents.find(d=>d.kind==='hearings'&&d.data.mode==='defense').data,attack=source.documents.find(d=>d.kind==='hearings'&&d.data.mode==='attack').data,balance=source.documents.find(d=>d.kind==='hearingBalance').data;mutate(defense,attack,balance);assert(!validateProject(source).ok,'invalid hearing source was accepted');}
 });
 test('hearing UI definitions reject missing labels unsafe geometry and unresolved bindings',async()=>{
  for(const mutate of [ui=>delete ui.labels.pause,ui=>ui.labels.attackStats='hearing.ui.continue',ui=>delete ui.typeKeys.document,ui=>ui.field.sourceX=2,ui=>ui.field=null,ui=>ui.tokens=null]){
-  const source=await loadProject('/content/project.json');mutate(source.documents.find(d=>d.data?.id==='ui.hearing').data);const checked=validateProject(source);assert(!checked.ok,'malformed hearing UI accepted');assert(checked.errors.some(error=>error.sourceId.includes('/ui/hearing.json')),'diagnostic must point to UI source');
+  const source=await projectSource();mutate(source.documents.find(d=>d.data?.id==='ui.hearing').data);const checked=validateProject(source);assert(!checked.ok,'malformed hearing UI accepted');assert(checked.errors.some(error=>error.sourceId.includes('/ui/hearing.json')),'diagnostic must point to UI source');
  }
 });
 test('Defense snapshot replay rejects forged in-range gauge and unearned bailout recovery',async()=>{

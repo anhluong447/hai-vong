@@ -10,7 +10,7 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T09 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T10–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
+**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T10 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T11–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
 
 ## Global Constraints
 
@@ -319,11 +319,11 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes common Workspace operations, content schemas and runtime preview APIs; produces valid authored resource/scene/UI documents. Editors never write generated files or player preferences as source defaults.
 
-- [ ] Write red authoring tests for search/usage, missing translation params, safe ID rename/removal diagnostics, atlas/pivot/clip/audio edits, collision/interaction/camera layout and focus-order/binding validation.
-- [ ] Implement dedicated inspectors and previews, source/import/export controls and dependency navigation. Scene editor supports layers, actor baseline, doors, ranges and camera/parallax; UI editor shows focused/selected/disabled/error states.
-- [ ] Make gestures and keyboard property edits use the same validated operations; undo/redo and reload reproduce the exported state. Changing a text/clip/cue updates preview from managed data.
-- [ ] Export a scene and resource set, reopen in editor and load the same definitions in runtime; assert meaningful rendering/interaction state, not JSON-only equality.
-- [ ] Run authoring/content/browser suites; commit `feat: add resource scene and keyboard-layout authoring tools`.
+- [x] Write red authoring tests for search/usage, missing translation params, safe ID rename/removal diagnostics, atlas/pivot/clip/audio edits, collision/interaction/camera layout and focus-order/binding validation.
+- [x] Implement dedicated inspectors and previews, source/import/export controls and dependency navigation. Scene editor supports layers, actor baseline, doors, ranges and camera/parallax; UI editor shows focused/selected/disabled/error states.
+- [x] Make gestures and keyboard property edits use the same validated operations; undo/redo and reload reproduce the exported state. Changing a text/clip/cue updates preview from managed data.
+- [x] Export a scene and resource set, reopen in editor and load the same definitions in runtime; assert meaningful rendering/interaction state, not JSON-only equality.
+- [x] Run authoring/content/browser suites; commit `feat: add resource scene and keyboard-layout authoring tools`.
 
 ### T11 — Dialogue/Quest, gameplay và Hearing Editor
 

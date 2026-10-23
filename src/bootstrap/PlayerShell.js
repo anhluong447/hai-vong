@@ -3,6 +3,7 @@ import {SettingsView} from '../presentation/ui/SettingsView.js';
 import {SaveSlotsView} from '../presentation/ui/SaveSlotsView.js';
 import {BacklogView} from '../presentation/ui/BacklogView.js';
 import {element} from '../presentation/ui/uiNodes.js';
+import {success} from '../contracts/Diagnostic.js';
 /** Keyboard-native screens share focus ownership and use the same application intents. */
 export class PlayerShell {
  constructor({root,format,navigation,actions,focus,saves,repository,getPreferences,changePreferences,remap,defaults,history,start,resume,audio,fullscreen,onPause}){
@@ -10,7 +11,7 @@ export class PlayerShell {
   this.content=element(root,'div',{'data-role':'screen-content'});this.message=element(root,'p',{'data-role':'player-message',role:'status'});root.replaceChildren(this.content,this.message);this.screen=null;this.generation=0;
  }
  notify(result,key){this.message.dataset.code=result.ok?key:result.errors[0].code;this.message.textContent=result.ok?this.format(key):this.format('player.error',{code:result.errors[0].code});return result;}
- async open(screen,{returnTo=this.screen??'pause',mode='load'}={}){
+ async open(screen,{returnTo=this.screen??'pause',mode='load',records:preparedRecords=null}={}){
   if(this.disposed)return;const generation=++this.generation;this.returnTo=returnTo;this.mode=mode;
   if(this.screen)this.focus.pop();this.screen=screen;this.root.hidden=false;this.onPause();this.message.textContent='';this.message.dataset.code='';this.root.dataset.screen=screen;
   this.root.setAttribute('aria-label',this.format(this.navigation.screenTitles[screen]));
@@ -22,7 +23,7 @@ export class PlayerShell {
   });
   else if(screen==='backlog')new BacklogView(this.content,this.format).render(this.history(),()=>void this.back());
   else if(screen==='slots'){
-   const records=await this.repository.list();if(this.disposed||generation!==this.generation)return;
+   const records=preparedRecords??await this.repository.list();if(this.disposed||generation!==this.generation)return;
    if(!records.ok){this.notify(records,'player.loaded');this.content.replaceChildren();}else new SaveSlotsView(this.content,this.format).render({config:this.navigation,records:records.value,mode,dispatch:(...args)=>void this.slot(...args),back:()=>void this.back()});
   }
   if(this.disposed||generation!==this.generation)return;this.focus.push(this.root);
@@ -48,6 +49,7 @@ export class PlayerShell {
  back(){if(this.screen==='main')return;if(this.screen==='pause'){this.close();this.resume();}else void this.open(this.returnTo??'pause');}
  close(){this.generation++;if(this.screen)this.focus.pop();this.screen=null;this.root.hidden=true;}
  snapshot(){return {screen:this.screen,returnTo:this.returnTo,mode:this.mode};}
- restore(state){if(!state?.screen){this.close();return;}void this.open(state.screen,{returnTo:state.returnTo,mode:state.mode});}
+ async prepare(state){if(state.screen!=='slots')return success({records:null});const records=await this.repository.list();return records.ok?success({records}):records;}
+ restore(state,prepared){if(!state?.screen){this.close();return;}if(state.screen==='slots'&&!prepared?.records?.ok)throw new Error('player.ui.unprepared');void this.open(state.screen,{returnTo:state.returnTo,mode:state.mode,records:prepared?.records});}
  dispose(){this.close();this.disposed=true;}
 }

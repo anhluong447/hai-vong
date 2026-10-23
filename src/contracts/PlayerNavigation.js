@@ -13,6 +13,7 @@ export function validateNavigation({catalog,project,locales,sourceFor}){
    for(const field of ['textScales','textSpeeds'])if(!Array.isArray(config[field])||!config[field].length||config[field].some(v=>!Number.isFinite(v)||v<=0))fail('/'+field);
    for(const field of ['reservedCodes','cancelCaptureCodes'])if(!Array.isArray(config[field])||config[field].some(v=>typeof v!=='string')||!config[field].length)fail('/'+field);
    for(const field of ['main','pause'])if(!Array.isArray(config[field])||!config[field].length||config[field].some(item=>!item||!actions.has(item.action)||!has(item.key)))fail('/'+field);
+   for(const field of ['main','pause'])if(Array.isArray(config[field])&&new Set(config[field].map(item=>item?.action)).size!==config[field].length)fail('/'+field);
    if(!Array.isArray(config.textKeys)||config.textKeys.some(key=>!has(key)))fail('/textKeys');
    if(!config.screenTitles||PLAYER_SCREENS.some(screen=>!has(config.screenTitles[screen]))||typeof config.bindingSeparator!=='string')fail('/screenTitles');
    if(config.legacyBindingCounts!==undefined&&(!Array.isArray(config.legacyBindingCounts)||config.legacyBindingCounts.some(count=>!Number.isInteger(count)||count<1)))fail('/legacyBindingCounts');

@@ -62,8 +62,9 @@ export-only. Unknown content revisions and removed unmapped anchors are rejected
 cursor, history, read markers and execution ledger; flag rename/type conversions
 are explicit. Authors must map every renamed reward identity as well as cursor
 anchors. An arbitrary story edit is not automatically save-compatible. No production
-content-release migration is registered yet. T08 now uses RunSnapshot 2 and an explicit
-additive migration for the known Phase-0 v1 shape; see [gameplay](GAMEPLAY-CONTRACT.md).
+content-release migration is registered yet. RunSnapshot 3 retains T08's explicit
+known-v1 upgrade and adds a tagged-v2 migration for hearings; see
+[gameplay](GAMEPLAY-CONTRACT.md) and [hearings](HEARING-CONTRACT.md).
 T12 adds source-revision fingerprints; T13
 replaces the current development build identifier with release metadata.
 
@@ -74,6 +75,12 @@ saves deliberately: browser storage may be evicted. A corrupt/incompatible curre
 slot is never silently replaced with its backup; choose the explicit backup action.
 
 ## Verification
+
+Slot menu records are prepared during checkpoint preparation, alongside replacement
+browser owners. Commit renders the prepared menu synchronously before reporting
+load success or thawing input. A late asynchronous slot read must not replace that
+menu or steal focus from an immediately activated Back control. Rollback also has
+prepared data for the previous screen.
 
 Use `tools/check.py unit`, `browser`, `authoring`, `content` and `architecture` through
 the project venv. Browser tests use disposable profiles under `.cache/tmp`. The

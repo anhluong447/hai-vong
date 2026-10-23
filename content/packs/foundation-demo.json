@@ -22,7 +22,8 @@
     },
     {
       "kind": "config",
-      "path": "../ui/workspace.json"
+      "path": "../ui/workspace.json",
+      "authoringOnly": true
     },
     {
       "kind": "assets",
@@ -113,6 +114,16 @@
     {
       "kind": "config",
       "path": "../ui/hearing.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/authoring.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "../assets/imports.json",
+      "authoringOnly": true
     }
   ]
 }

@@ -33,7 +33,7 @@ import {TRANSIENT_HEARING_ACTIONS} from '../contracts/HearingActions.js';
 
 /** Composition root: browser side effects are wired here, never in the domain. */
 export async function createGame(root,{autoStart=true}={}){
- const source=await loadProject(root.dataset.project),validated=validateProject(source);if(!validated.ok)throw new Error(JSON.stringify(validated.errors));
+ const source=await loadProject(root.dataset.project,fetch,{includeAuthoring:false}),validated=validateProject(source);if(!validated.ok)throw new Error(JSON.stringify(validated.errors));
  const bundle=validated.value,config=bundle.catalog.get('config',bundle.project.runtimeConfigId).value,ui=bundle.catalog.get('config',config.uiId).value,navigation=bundle.catalog.get('config',config.navigationId).value,actions=bundle.catalog.get('config',config.actionLabelsId).value,inputDefinition=bundle.catalog.get('input',config.inputId).value;
  const text=new TextService(bundle.locales,bundle.project.defaultLocale),format=(key,params={})=>{const value=text.format(key,params);if(!value.ok)throw new Error(JSON.stringify(value.errors));return value.value;};
  const doc=root.ownerDocument,win=doc.defaultView,find=role=>root.querySelector(`[data-role="${role}"]`),button=action=>root.querySelector(`[data-action="${action}"]`),stage=find('stage'),canvas=root.querySelector('canvas');
@@ -93,7 +93,7 @@ export async function createGame(root,{autoStart=true}={}){
    if(guard.kind==='restore'){root.inert=guard.inert;input.clear();if(guard.focused?.isConnected&&!guard.focused.closest('[hidden]'))guard.focused.focus();else if(paused)focus.items(find('menu'))[0]?.focus();else canvas.focus();}
    for(const done of unfreeze)done();unfreeze=[];sync();
   },
-  captureUI:()=>({paused,...shell?.snapshot()}),restoreUI:(state,savedText)=>{shell?.close();hearing.release();paused=state.paused;dialogueSignature=null;choiceSignature=null;hearing.invalidate();sync();if(savedText)line.restore(savedText);else line.dispose();shell?.restore(state.screen?state:{screen:paused?'pause':null});applyPreferences();},
+  captureUI:()=>({paused,...shell?.snapshot()}),prepareUI:state=>shell.prepare(state),restoreUI:(state,savedText,prepared)=>{shell?.close();hearing.release();paused=state.paused;dialogueSignature=null;choiceSignature=null;hearing.invalidate();sync();if(savedText)line.restore(savedText);else line.dispose();shell?.restore(state.screen?state:{screen:paused?'pause':null},prepared);applyPreferences();},
   line,text,speed:ui.textSpeed,document:doc
  });
  const saves=new SaveService({session,runtime,repository,codec:SaveCodec,migrations,buildId:bundle.project.contentVersion,contentVersion:bundle.revision});

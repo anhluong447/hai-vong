@@ -1,7 +1,7 @@
 import {validateProject} from '/src/domain/story/validateProject.js';
-import {loadProject} from '/src/infrastructure/resources/ProjectLoader.js';
+import {projectSource} from './project.js';
 export async function runtimeBundle(change=()=>{}) {
- const source=await loadProject('/content/project.json');
+ const source=await projectSource();
  source.capabilities=['counter.add'];
  source.documents.find(d=>d.kind==='flags').data.push({id:'flag.count',type:'integer',default:0,scope:'run',min:0,max:10});
  source.documents.find(d=>d.kind==='events').data.push({id:'effect.count',handlerId:'counter.add',paramsSchema:{type:'object',properties:{amount:{type:'integer',minimum:1,maximum:2}},required:['amount'],additionalProperties:false}});

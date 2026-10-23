@@ -5,9 +5,55 @@ import tempfile
 import os
 import subprocess
 import unittest
+from unittest.mock import patch
+import json
 from project_environment import ROOT
 
 class WriterTests(unittest.TestCase):
+    def test_interrupted_batch_recovers_on_reopen_and_external_changes_block_recovery(self):
+        mod=self.module()
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);(root/'content').mkdir();names=['content/vi.json','content/en.json']
+            for name in names:(root/name).write_text('{}')
+            before={name:(root/name).read_bytes() for name in names}
+            requests=[{'documentId':name,'content':{'line':name},'expectedHash':hashlib.sha256(before[name]).hexdigest()} for name in names]
+            writer=mod.SourceWriter(root,names,lambda *_:{'ok':True},validator_many=lambda _: {'ok':True})
+            replace=mod.os.replace
+            def crash(source,target):
+                if Path(target)==root/names[1]:raise KeyboardInterrupt('fixture process exit')
+                return replace(source,target)
+            with patch.object(mod.os,'replace',side_effect=crash):
+                with self.assertRaises(KeyboardInterrupt):writer.save_many(requests)
+            self.assertNotEqual((root/names[0]).read_bytes(),before[names[0]])
+            (root/names[1]).write_text('{"external":true}')
+            partial=(root/names[0]).read_bytes();self.assertFalse(mod.recover_batches(root,names)['ok']);self.assertEqual((root/names[0]).read_bytes(),partial)
+            (root/names[1]).write_bytes(before[names[1]])
+            self.assertTrue(mod.recover_batches(root,names)['ok']);self.assertEqual({name:(root/name).read_bytes() for name in names},before)
+
+    def test_batch_validation_conflict_and_interrupted_replace_preserve_all_sources(self):
+        mod=self.module()
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);(root/'content').mkdir()
+            names=['content/vi.json','content/en.json']
+            for name in names:(root/name).write_text('{}')
+            before={name:(root/name).read_bytes() for name in names}
+            requests=[{'documentId':name,'content':{'line':name},'expectedHash':hashlib.sha256(before[name]).hexdigest()} for name in names]
+            def validate_many(values):
+                return {'ok':len(values)==2,'errors':[{'code':'fixture.translation.missing'}]}
+            writer=mod.SourceWriter(root,names,lambda *_:{'ok':True},validator_many=validate_many)
+            self.assertFalse(writer.save_many(requests[:1])['ok'])
+            changed=[{**entry,'expectedHash':'stale'} if i==1 else entry for i,entry in enumerate(requests)]
+            self.assertFalse(writer.save_many(changed)['ok']);self.assertEqual({name:(root/name).read_bytes() for name in names},before)
+            replace=mod.os.replace
+            def interrupted(source,target):
+                if Path(target)==root/names[1] and Path(source).name.startswith('.write-'):raise OSError('fixture interrupted second replacement')
+                return replace(source,target)
+            with patch.object(mod.os,'replace',side_effect=interrupted):
+                self.assertFalse(writer.save_many(requests)['ok'])
+            self.assertEqual({name:(root/name).read_bytes() for name in names},before)
+            result=writer.save_many(requests);self.assertTrue(result['ok'],result)
+            for name in names:self.assertEqual(json.loads((root/name).read_text()),{'line':name})
+
     def module(self):
         path=ROOT/'tools/pipeline/source_writer.py'
         self.assertTrue(path.exists(),'safe source writer not implemented')

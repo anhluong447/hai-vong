@@ -64,5 +64,8 @@
     }
   ],
   "bundlePath": "assets/bundles/foundation-v1.zip",
-  "bundleVersion": 1
+  "bundleVersion": 1,
+  "id": "asset.imports",
+  "kind": "asset-imports",
+  "sourceRoot": "assets/sources"
 }

@@ -1,0 +1,80 @@
+{
+  "id": "ui.authoring",
+  "kind": "authoring-ui",
+  "labels": {
+    "title": "authoring.title",
+    "search": "authoring.search",
+    "resources": "authoring.resources",
+    "usages": "authoring.usages",
+    "source": "authoring.source",
+    "rename": "authoring.rename",
+    "remove": "authoring.remove",
+    "replaceId": "authoring.replaceId",
+    "preview": "authoring.preview",
+    "stop": "authoring.stop",
+    "property": "authoring.property",
+    "readonly": "authoring.readonly",
+    "export": "authoring.export",
+    "import": "authoring.import",
+    "transfer": "authoring.transfer",
+    "selected": "authoring.selected",
+    "disabled": "authoring.disabled",
+    "error": "authoring.error",
+    "focused": "authoring.focused",
+    "step": "authoring.step",
+    "frame": "authoring.frame",
+    "playCue": "authoring.playCue",
+    "params": "authoring.params",
+    "applyParams": "authoring.applyParams",
+    "range": "authoring.range",
+    "recipe": "authoring.recipe",
+    "buildAssets": "authoring.buildAssets",
+    "loaded": "authoring.loaded",
+    "usage": "authoring.usage",
+    "action": "authoring.action",
+    "context": "authoring.context",
+    "result": "authoring.result",
+    "layer": "authoring.layer",
+    "actor": "authoring.actor",
+    "interaction": "authoring.interaction",
+    "scene": "authoring.scene",
+    "saveGroup": "authoring.saveGroup",
+    "resource": "authoring.resource",
+    "previous": "player.back",
+    "next": "world.continue"
+  },
+  "preview": {
+    "width": 480,
+    "height": 270,
+    "stepSeconds": 0.1,
+    "actorX": 240,
+    "actorY": 230,
+    "actorScale": 2
+  },
+  "states": [
+    {
+      "id": "focused",
+      "labelKey": "authoring.focused"
+    },
+    {
+      "id": "selected",
+      "labelKey": "authoring.selected"
+    },
+    {
+      "id": "disabled",
+      "labelKey": "authoring.disabled"
+    },
+    {
+      "id": "error",
+      "labelKey": "authoring.error"
+    }
+  ],
+  "tokens": {
+    "--editor-preview-height": "270px",
+    "--editor-transfer-height": "10rem",
+    "--editor-error-color": "#ffc6b5",
+    "--editor-list-height": "12rem",
+    "--editor-fields-height": "32vh"
+  },
+  "browserPageSize": 20
+}

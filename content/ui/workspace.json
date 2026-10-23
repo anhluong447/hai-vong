@@ -17,5 +17,6 @@
     "disabled-opacity": ".5",
     "focus-width": "3px",
     "focus-offset": "2px"
-  }
+  },
+  "authoringId": "ui.authoring"
 }

@@ -19,8 +19,8 @@ test('skip stops at unread text choices and side-effect boundaries while auto wa
  auto.toggle('auto');auto.update(5);equal(normal.snapshot().story.waiting,'say');complete=true;auto.update(.5);equal(normal.snapshot().story.waiting,'say');auto.update(.5);equal(normal.snapshot().story.waiting,'choose');auto.update(1);equal(auto.mode,null);
 });
 test('shared project validation rejects invalid navigation resources and translated action labels',async()=>{
- const {loadProject}=await import('/src/infrastructure/resources/ProjectLoader.js'),{validateProject}=await import('/src/domain/story/validateProject.js');
+ const {projectSource}=await import('/tests/fixtures/project.js'),{validateProject}=await import('/src/domain/story/validateProject.js');
  for(const mutate of [data=>data.manualSlots=0,data=>data.defaults.textSpeed=-1,data=>data.pause[0].action='unknown',data=>data.main[0].key='absent']){
-  const source=await loadProject('/content/project.json');mutate(source.documents.find(d=>d.data.id==='ui.navigation').data);assert(!validateProject(source).ok);
+  const source=await projectSource();mutate(source.documents.find(d=>d.data.id==='ui.navigation').data);assert(!validateProject(source).ok);
  }
 });

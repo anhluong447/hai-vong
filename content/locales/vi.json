@@ -862,5 +862,180 @@
       "down",
       "menu"
     ]
+  },
+  "authoring.title": {
+    "value": "Trình biên tập tài nguyên",
+    "params": []
+  },
+  "authoring.search": {
+    "value": "Tìm ID, nội dung hoặc đường dẫn",
+    "params": []
+  },
+  "authoring.resources": {
+    "value": "Tài nguyên",
+    "params": []
+  },
+  "authoring.usages": {
+    "value": "Nơi sử dụng",
+    "params": []
+  },
+  "authoring.source": {
+    "value": "Mở nguồn",
+    "params": []
+  },
+  "authoring.rename": {
+    "value": "Đổi ID và các tham chiếu",
+    "params": []
+  },
+  "authoring.remove": {
+    "value": "Xóa tài nguyên",
+    "params": []
+  },
+  "authoring.replaceId": {
+    "value": "ID mới",
+    "params": []
+  },
+  "authoring.preview": {
+    "value": "Chạy xem trước",
+    "params": []
+  },
+  "authoring.stop": {
+    "value": "Dừng xem trước",
+    "params": []
+  },
+  "authoring.property": {
+    "value": "Thuộc tính {path}",
+    "params": [
+      "path"
+    ]
+  },
+  "authoring.readonly": {
+    "value": "Dữ liệu được sinh tự động. Sửa recipe nguồn rồi build lại.",
+    "params": []
+  },
+  "authoring.export": {
+    "value": "Xuất nguồn JSON",
+    "params": []
+  },
+  "authoring.import": {
+    "value": "Nhập nguồn JSON",
+    "params": []
+  },
+  "authoring.transfer": {
+    "value": "Nguồn JSON để sao chép / nhập",
+    "params": []
+  },
+  "authoring.selected": {
+    "value": "Đã chọn",
+    "params": []
+  },
+  "authoring.disabled": {
+    "value": "Bị vô hiệu hóa",
+    "params": []
+  },
+  "authoring.error": {
+    "value": "Ví dụ trạng thái lỗi",
+    "params": []
+  },
+  "authoring.focused": {
+    "value": "Điều khiển có thể nhận focus",
+    "params": []
+  },
+  "authoring.step": {
+    "value": "Chạy thêm một bước",
+    "params": []
+  },
+  "authoring.frame": {
+    "value": "Khung hình: {id}",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.playCue": {
+    "value": "Nghe cue",
+    "params": []
+  },
+  "authoring.params": {
+    "value": "Tham số thử nghiệm JSON",
+    "params": []
+  },
+  "authoring.applyParams": {
+    "value": "Thử event trong session riêng",
+    "params": []
+  },
+  "authoring.range": {
+    "value": "Đặt vị trí trên canvas cho {path}",
+    "params": [
+      "path"
+    ]
+  },
+  "authoring.recipe": {
+    "value": "Recipe nguồn của asset / atlas",
+    "params": []
+  },
+  "authoring.buildAssets": {
+    "value": "Build lại asset đã lưu",
+    "params": []
+  },
+  "authoring.loaded": {
+    "value": "Đã tải bản xem trước",
+    "params": []
+  },
+  "authoring.usage": {
+    "value": "{source} — {pointer}",
+    "params": [
+      "source",
+      "pointer"
+    ]
+  },
+  "authoring.action": {
+    "value": "Action: {action}",
+    "params": [
+      "action"
+    ]
+  },
+  "authoring.context": {
+    "value": "Ngữ cảnh bàn phím",
+    "params": []
+  },
+  "authoring.result": {
+    "value": "Kết quả: {value}",
+    "params": [
+      "value"
+    ]
+  },
+  "authoring.layer": {
+    "value": "Lớp {index}",
+    "params": [
+      "index"
+    ]
+  },
+  "authoring.actor": {
+    "value": "Nhân vật {id}",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.interaction": {
+    "value": "Tương tác {id}",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.scene": {
+    "value": "Toàn cảnh",
+    "params": []
+  },
+  "authoring.saveGroup": {
+    "value": "Lưu toàn bộ nhóm thay đổi",
+    "params": []
+  },
+  "authoring.resource": {
+    "value": "{id} / {kind} {locale}",
+    "params": [
+      "id",
+      "kind",
+      "locale"
+    ]
   }
 }

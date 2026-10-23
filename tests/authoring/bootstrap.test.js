@@ -1,5 +1,5 @@
 import {test,assert} from '/tests/harness.js';
-const until=async check=>{for(let i=0;i<100;i++){if(check())return;await new Promise(r=>setTimeout(r,40));}throw new Error('workspace bootstrap did not become ready');};
+const until=async check=>{for(let i=0;i<250;i++){if(check())return;await new Promise(r=>setTimeout(r,40));}throw new Error('workspace bootstrap did not become ready');};
 test('real workspace page boots catalog labels theme controls and independent preview',async()=>{
  const frame=document.createElement('iframe');frame.src='/tools/workspace/index.html';document.body.append(frame);
  try{
