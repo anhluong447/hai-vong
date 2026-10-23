@@ -13,7 +13,7 @@ from contextlib import contextmanager
 from urllib.parse import urlencode,urlsplit
 from urllib.request import urlopen
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from local_environment import configure, local_path
+from local_environment import configure, local_path, browser_environment
 from preflight import detect_browser
 from server import StaticHandler,create_server
 
@@ -35,9 +35,14 @@ def browser_profile():
     try: yield profile.name
     finally: cleanup_profile(profile)
 
-def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/index.html',payload=None):
-    environment=configure()
+def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/index.html',payload=None,engine='chromium'):
+    environment=browser_environment()
     detected=detect_browser()
+    if engine=='firefox':
+        configuration=json.loads((local_path('content/pipeline/portable-tools.json')).read_bytes())['tools']['firefox']
+        executable=local_path(configuration['destination']+'/'+configuration['executable'])
+        detected={'ok':True,'value':str(executable)} if executable.is_file() else {'ok':False,'errors':[{'code':'tool.firefox.missing','sourceId':str(executable),'pointer':'/','relatedIds':[]}]}
+    elif engine!='chromium':raise ValueError('test.browser.engine.unknown')
     if not detected['ok']: return detected
     received={}; event=threading.Event(); token=secrets.token_urlsafe(24); requests=[]
     class Handler(StaticHandler):
@@ -75,7 +80,8 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/i
     try:
         with browser_profile() as profile:
             with tempfile.TemporaryFile(dir=local_path('.cache/tmp')) as stderr:
-                proc=subprocess.Popen([detected['value'],'--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-extensions','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--remote-allow-origins='+origin,'--user-data-dir='+profile,url],stdout=subprocess.DEVNULL,stderr=stderr,env=environment)
+                arguments=([detected['value'],'--headless','--no-remote','--profile',profile,url] if engine=='firefox' else [detected['value'],'--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-extensions','--remote-debugging-address=127.0.0.1','--remote-debugging-port=0','--remote-allow-origins='+origin,'--user-data-dir='+profile,url])
+                proc=subprocess.Popen(arguments,stdout=subprocess.DEVNULL,stderr=stderr,env=environment)
                 try:
                     if not event.wait(timeout):
                         stderr.flush();stderr.seek(0)
@@ -88,7 +94,8 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/i
                             if not raw.startswith(b'\x89PNG\r\n\x1a\n'):raise ValueError('png')
                             destination=local_path('.cache/test/screenshots')
                             destination.mkdir(parents=True,exist_ok=True)
-                            path=destination/(hashlib.sha256(result['name'].encode()).hexdigest()[:16]+'.png')
+                            label=result['name']+str((params or {}).get('profile',''))
+                            path=destination/(hashlib.sha256(label.encode()).hexdigest()[:16]+'.png')
                             path.write_bytes(raw);result['artifact']=path.relative_to(local_path('.')).as_posix()
                         except (ValueError,TypeError,OSError):
                             result.update(ok=False,error='test.screenshot.invalid');received['ok']=False

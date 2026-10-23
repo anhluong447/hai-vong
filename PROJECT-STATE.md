@@ -35,7 +35,7 @@ PLAYER-SAVES}.md, resource/story/debug recipes in docs/guides/, and task decisio
 in the execution ledger. Continue the latest authorized plan; do not restart old
 tasks from historical evidence below. Current details and checks follow.
 
-## T12 complete (commit pending)
+## T12 complete; T13 in progress
 
 T11 committed as 261fa39. T12 implements safe source/state reload with explicit
 restart/migration, isolated typed debug/jump/skip and bounded trace/replay, local
@@ -67,10 +67,68 @@ rewritten. A visual debug snapshot with no committed scene and an initial pendin
 scene requires explicit restart; pure reload/resource ports and normal player
 save/load remain separate. Full authored chapter/release acceptance is still pending.
 
-Next: commit T12, then T13 release/CI/license/performance/restore and T14 authored
+T12 committed as f91ee19. T13 is active; read task-13-brief.md in the execution
+ledger and existing toolchain/asset recovery contracts. Next: release/CI/license/
+performance/restore, then T14 authored
 acceptance plus one fresh whole-branch review. Release suite remains unimplemented;
 do not claim full P0 or 12-week game completion. No external install, protected
 Bible/GDD/archive mutation, push/merge/publication or production expansion authorized.
+
+
+## T13 packaging/toolchain checkpoint
+
+T13 remains uncommitted and incomplete. Deterministic filtered assembly has
+packaging tests for missing gates/inputs, hashes/licenses/versions/debug inclusion,
+byte-identical ZIPs and contaminated existing artifacts. Gate receipt work binds
+reports to current source/master fingerprints; public release orchestration,
+actual export play/smoke/performance, CI and fresh-checkout recovery remain pending.
+
+Pinned official CPython NuGet 3.12.10, Chrome for Testing 156.0.8078.47 and Firefox
+Nightly 161.0a1 ZIPs were downloaded/hash-verified and extracted ONLY into this
+worktree's .cache/toolchain and .tools. Portable CPython actually created an isolated
+.cache/portable-python-probe/.venv with working pip. No installer, global package,
+PATH, registry or service change occurred. Firefox policy disables updates/studies/
+telemetry; browser child AppData/cache/profile paths are project-local.
+Firefox has not yet run; Nightly smoke will not certify stable/ESR compatibility.
+
+Actual focused checks so far: initial 4 packaging tests passed; new contaminated
+artifact regression RED→GREEN; gate report tamper/failure receipt test RED→GREEN;
+portable extraction initial 2 tests passed, new case-collision/policy tests exposed
+the missing guards (currently being implemented). Full T13 gates have NOT run.
+
+
+## Latest user steering: T14 narrative source
+
+User explicitly directed T14 level/story design to use
+`docs/history/narrative/First3Days.md`. Actual file currently exists in the original
+checkout (not this implementation worktree), SHA-256 `f55787d3363ee2fb9a82e4ca171a67cf713b6dc2475924005d1d548aae3b2d30`. Read it there;
+do not overwrite or silently omit it from recovery. This source informs authored
+scenes/dialogue, subject to finalized Bible/GDD gameplay contracts. T13 continues
+first; T14 is not complete. No protected design rewrite is authorized.
+
+
+## T13 verified build checkpoint (fresh restore pending)
+
+Actual complete `tools/ci.py` seven-suite run passed on portable Chromium 156:
+architecture/content; 119 JS + 55 Python unit; 35 browser; 40 authoring; 7 bot;
+release. Raw evidence .cache/reports/ci.json. Local static artifact/ZIP at
+dist/foundation-demo/8fa1af3191896c7cbca6. Public CLI uses actual current-fingerprint
+gate receipts; assembly removes authoring/debug data, audits bundle/assets/licenses,
+revalidates the derived pack and verifies staged static-host keyboard play before
+updating latest.json. Portable setup command actually passed with no global install.
+
+Firefox Nightly 161.0a1 styled Canvas/IndexedDB/audio/disposal smoke actually passed.
+Static export keyboard/save/load/150% text/DPR resize + six scene/runtime replacements
+passed in both reference and 4x CPU simulation. Reference ready 659.5ms, startup
+390083 bytes, RAF p95 16.7ms, normalized heap growth 120496 bytes. 4x CPU profile
+ready 1434.5ms, RAF p95 150.1ms: proposed smoothness target NOT met; physical lower-
+spec performance and stable/ESR Firefox remain unverified. Do not call that target
+passed. Screenshots/reports in .cache/reports/release and .cache/test/screenshots.
+
+T13 source/tooling is ready for an intermediate commit so a fresh git source export
+can test contained bootstrap/restore/build/play without legacy bytes. That recovery
+test and T13 completion bookkeeping remain; T14 then uses the user's First3Days.md
+direction above. No hosted Actions run/push/merge/publication/12-week expansion.
 
 ## Latest implementation evidence (T06)
 

@@ -53,3 +53,10 @@ def require_venv_path(path, code):
     if not resolved.is_relative_to(local_path('.venv')):
         raise ValueError(code)
     return resolved
+
+def browser_environment():
+    environment=configure()
+    for key,name in [('APPDATA','roaming'),('LOCALAPPDATA','local')]:
+        path=local_path('.cache/browser-platform/'+name);path.mkdir(parents=True,exist_ok=True);environment[key]=str(path)
+    environment.update(MOZ_CRASHREPORTER_DISABLE='1',MOZ_CRASHREPORTER_NO_REPORT='1')
+    return environment

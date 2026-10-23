@@ -16,6 +16,9 @@ ROOT=Path(__file__).resolve().parents[1]
 SUITES=('architecture','content','unit','browser','authoring','bot','release')
 
 def suite(name,args):
+    if name=='release':
+        from pipeline.release import run_release
+        return {'suite':name,**run_release(ROOT,profile=args.profile or 'production')}
     if name=='architecture':
         from pipeline.check_development import check as check_development
         errors=check(ROOT)+check_development(ROOT)
@@ -46,7 +49,17 @@ def suite(name,args):
 
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument('suite'); parser.add_argument('--base-url'); parser.add_argument('--profile'); parser.add_argument('--pack'); args=parser.parse_args()
-    reports=[suite(name,args) for name in (SUITES if args.suite=='all' else [args.suite])]
+    from pipeline.gates import store_receipt
+    from pipeline.release import input_fingerprint,read
+    required=read(ROOT,'content/pipeline/release.json')['requiredSuites'];reports=[]
+    for name in (SUITES if args.suite=='all' else [args.suite]):
+        if name=='release' and any(not report['ok'] for report in reports):
+            reports.append({'suite':'release','ok':False,'errors':[{'code':'release.prior-gate.failed','sourceId':'release','pointer':'/','relatedIds':[]}]});continue
+        fingerprint=input_fingerprint(ROOT) if name in required else None
+        report=suite(name,args);reports.append(report)
+        if fingerprint:
+            receipt=store_receipt(ROOT,name,report,fingerprint)
+            if not receipt['ok']:report['ok']=False
     print(json.dumps({'ok':all(r['ok'] for r in reports),'reports':reports},ensure_ascii=False,indent=2))
     return 0 if all(r['ok'] for r in reports) else 1
 if __name__=='__main__': raise SystemExit(main())

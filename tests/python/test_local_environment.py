@@ -12,6 +12,10 @@ from project_environment import ROOT
 
 
 class LocalEnvironmentTests(unittest.TestCase):
+    def test_browser_child_appdata_is_local_without_changing_parent_locations(self):
+        module=self.module();before={name:os.environ.get(name) for name in ['APPDATA','LOCALAPPDATA']};environment=module.browser_environment()
+        for name in before:
+            self.assertTrue(Path(environment[name]).resolve().is_relative_to(ROOT/'.cache'),environment[name]);self.assertEqual(os.environ.get(name),before[name])
     def module(self):
         path = ROOT / 'tools/pipeline/local_environment.py'
         self.assertTrue(path.is_file(), 'project-local environment boundary missing')

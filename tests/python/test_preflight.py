@@ -8,6 +8,15 @@ import unittest
 from project_environment import ROOT
 
 class PreflightTests(unittest.TestCase):
+    def test_project_portable_browser_is_preferred_over_machine_discovery(self):
+        import tempfile
+        from preflight import detect_browser
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);(root/'content/pipeline').mkdir(parents=True);(root/'.tools/browser').mkdir(parents=True)
+            executable=root/'.tools/browser/chrome.exe';executable.write_bytes(b'fixture')
+            (root/'content/pipeline/portable-tools.json').write_text(json.dumps({'tools':{'chromium':{'destination':'.tools/browser','executable':'chrome.exe'}}}))
+            result=detect_browser(project_root=root)
+            self.assertTrue(result['ok'],result);self.assertEqual(Path(result['value']),executable)
     def test_missing_browser_returns_diagnostic(self):
         path = ROOT / 'tools/pipeline/preflight.py'
         self.assertTrue(path.exists(), 'browser capability detector not implemented')
