@@ -31,6 +31,12 @@ provisioning ZIP tools; Firefox release smoke still requires the pinned ZIP.
 This override is reported through the actual user agent; it does not certify the
 pinned browser. Portable provisioning currently supports Windows AMD64 only.
 
+If network access to wheel files is blocked, cache the exact verified wheels in
+`.cache/toolchain` and run `python -B tools/setup.py --portable --offline`.
+This makes pip ignore remote indexes rather than prefer an unreachable duplicate
+over a local wheel. Portable archives must already be cached for a fully offline
+run. Missing cached inputs fail; do not import packages from another venv.
+
 See [authoring setup](AUTHORING.md), [asset workflow](ASSETS.md),
 [debugging](DEBUG-WORKFLOW.md) and [release/restore](RELEASE-RESTORE.md).
 

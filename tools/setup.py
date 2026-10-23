@@ -10,7 +10,7 @@ from pipeline.local_environment import ROOT, configure, local_path
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--portable',action='store_true',help='Provision pinned ZIP tools inside this checkout');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--portable',action='store_true',help='Provision pinned ZIP tools inside this checkout');parser.add_argument('--offline',action='store_true',help='Install Python packages only from project-local cached wheels');args=parser.parse_args()
     env = configure(require_venv=False)
     interpreter=sys.executable
     if args.portable:
@@ -29,7 +29,7 @@ def main():
         raise SystemExit('tool.python.system_site_packages.forbidden')
     wheels = local_path('.cache/toolchain')
     wheels.mkdir(parents=True, exist_ok=True)
-    subprocess.run([str(executable), '-I', '-B', '-m', 'pip', 'install', '--no-user',
+    subprocess.run([str(executable), '-I', '-B', '-m', 'pip', 'install', '--no-user',*(['--no-index'] if args.offline else []),
                     '--only-binary=:all:', '--cache-dir', str(local_path('.cache/pip')),
                     '--find-links', str(wheels), '-r', str(ROOT / 'requirements-tools.txt')],
                    cwd=ROOT, env=env, check=True)

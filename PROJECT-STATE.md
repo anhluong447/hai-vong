@@ -130,6 +130,24 @@ can test contained bootstrap/restore/build/play without legacy bytes. That recov
 test and T13 completion bookkeeping remain; T14 then uses the user's First3Days.md
 direction above. No hosted Actions run/push/merge/publication/12-week expansion.
 
+
+## T13 recovery interruption and offline fix
+
+Intermediate commit 5e032a2 contains the verified build/tooling. A fresh git archive
+at .cache/fresh-checkout-5e032a2 provisioned its own portable tools and empty private
+venv, with masters/renditions absent as expected. Remote Pillow wheel download was
+rejected by proxy MediaTypeBlocked (0.log); pip still preferred the remote duplicate
+after --find-links cache was supplied (resumed-0.log). No external install occurred.
+
+The project pip cache contained the exact Pillow wheel; official PyPI metadata
+verified SHA-256 a2b55dd6b2a4c4b7d87ffa56bdb33fdc5fdb9a462173861a7bc097f17d91cb09.
+It is now named in .cache/toolchain. Added explicit tools/setup.py --offline mode
+(Python wheel index disabled); actual CLI RED unrecognized option → GREEN cache-
+only execution. Full current tools/ci.py re-verification is running (session 17062).
+After that, commit the offline fix, update the fresh Git source bytes from that
+commit and run --portable --offline, restore/build and all gates in that separate
+checkout. Retain the first failed logs. Fresh recovery is NOT passed yet.
+
 ## Latest implementation evidence (T06)
 
 - Real keyboard journey: walk, NPC dialogue/choice, pause/resume and door to a second
