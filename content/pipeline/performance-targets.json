@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sampleFrames": 180,
+  "transitionCount": 6,
+  "profiles": [
+    {"id":"reference","width":1280,"height":900,"dpr":1,"cpuRate":1},
+    {"id":"constrained-simulation","width":1280,"height":900,"dpr":1,"cpuRate":4}
+  ],
+  "targets": {"refreshHz":60,"loadMs":5000,"startupBytes":3000000,"frameP95Ms":33.34,"retainedHeapGrowthBytes":10000000},
+  "interpretation":"Headless measurements on the recorded host; CPU slowdown is a simulation, never certification of physical lower-spec desktop FPS. Frame target failures remain visible."
+}

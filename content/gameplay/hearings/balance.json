@@ -1,0 +1,107 @@
+{
+  "id": "hearing.balance.fixture",
+  "status": "provisional",
+  "evidenceTypes": [
+    "data",
+    "witness",
+    "document",
+    "photo",
+    "physical"
+  ],
+  "defense": {
+    "minGauge": -100,
+    "maxGauge": 100,
+    "startGauge": 0,
+    "bailoutRecovery": 50,
+    "emptyLose": -20,
+    "qualityScores": {
+      "high": {
+        "win": 50,
+        "normal": 20
+      },
+      "standard": {
+        "win": 20,
+        "normal": 20
+      }
+    },
+    "heartTiers": [
+      {
+        "min": 1,
+        "max": 33,
+        "bonus": 0
+      },
+      {
+        "min": 34,
+        "max": 66,
+        "bonus": 1
+      },
+      {
+        "min": 67,
+        "max": 100,
+        "bonus": 2
+      }
+    ]
+  },
+  "attack": {
+    "baseHearts": 5,
+    "wrongWord": 0.5,
+    "wrongQuestion": 0.5,
+    "mercyHearts": 3,
+    "confrontationRatio": 0.5
+  },
+  "minigame": {
+    "duration": 30,
+    "finalDuration": 3,
+    "hpMax": 100,
+    "hitWindow": 0.3,
+    "maxDelta": 0.1,
+    "lanes": [
+      "upper",
+      "lower"
+    ],
+    "defaultMode": "normal",
+    "modes": [
+      "normal",
+      "easy"
+    ],
+    "blockCapacity": 1
+  },
+  "atmosphere": [
+    {
+      "id": "atmosphere.pressure",
+      "min": -100,
+      "max": -60,
+      "textKey": "hearing.mood.pressure",
+      "cueId": "cue.fixture.sfx"
+    },
+    {
+      "id": "atmosphere.doubt",
+      "min": -59,
+      "max": -1,
+      "textKey": "hearing.mood.doubt",
+      "cueId": "cue.fixture.sfx"
+    },
+    {
+      "id": "atmosphere.neutral",
+      "min": 0,
+      "max": 0,
+      "textKey": "hearing.mood.neutral",
+      "cueId": "cue.fixture.sfx"
+    },
+    {
+      "id": "atmosphere.support",
+      "min": 1,
+      "max": 59,
+      "textKey": "hearing.mood.support",
+      "cueId": "cue.fixture.sfx"
+    },
+    {
+      "id": "atmosphere.triumph",
+      "min": 60,
+      "max": 100,
+      "textKey": "hearing.mood.triumph",
+      "cueId": "cue.fixture.sfx"
+    }
+  ],
+  "uiId": "ui.hearing"
+}

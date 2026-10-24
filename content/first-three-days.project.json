@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "hoi-am.first3",
+  "contentVersion": "0.0.2",
+  "packs": [
+    "packs/foundation-demo.json"
+  ],
+  "defaultLocale": "vi",
+  "runtimeConfigId": "runtime.first3",
+  "schemas": {
+    "sequences": "../src/contracts/schemas/sequences.json",
+    "scenes": "../src/contracts/schemas/scenes.json",
+    "actors": "../src/contracts/schemas/actors.json",
+    "input": "../src/contracts/schemas/input.json",
+    "story": "../src/contracts/schemas/story.json",
+    "flags": "../src/contracts/schemas/flags.json",
+    "events": "../src/contracts/schemas/events.json",
+    "resources": "../src/contracts/schemas/resources.json",
+    "project": "../src/contracts/schemas/project.json",
+    "animations": "../src/contracts/schemas/animations.json",
+    "audio": "../src/contracts/schemas/audio.json",
+    "balance": "../src/contracts/schemas/balance.json",
+    "team": "../src/contracts/schemas/team.json",
+    "schedules": "../src/contracts/schemas/schedules.json",
+    "publication": "../src/contracts/schemas/publication.json",
+    "progression": "../src/contracts/schemas/progression.json",
+    "quests": "../src/contracts/schemas/quests.json",
+    "hearings": "../src/contracts/schemas/hearings.json",
+    "hearingBalance": "../src/contracts/schemas/hearing-balance.json",
+    "assetImports": "../src/contracts/schemas/asset-imports.json",
+    "playtests": "../src/contracts/schemas/playtests.json"
+  }
+}

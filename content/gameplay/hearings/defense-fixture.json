@@ -1,0 +1,91 @@
+{
+  "balanceId": "hearing.balance.fixture",
+  "nameKey": "hearing.fixture.name",
+  "bossKey": "hearing.fixture.boss",
+  "firstDay": 19,
+  "lastDay": 21,
+  "requiredMainRouteId": "route.fixture.main",
+  "id": "hearing.fixture.defense",
+  "mode": "defense",
+  "defense": {
+    "attackId": "hearing.fixture.attack",
+    "articleWindow": {
+      "fromDay": 1,
+      "toDay": 21
+    },
+    "questions": [
+      {
+        "id": "accusation.fixture.first",
+        "textKey": "hearing.accusation.first",
+        "kind": "standard",
+        "grade": "light",
+        "damage": 15,
+        "defaultLosePoints": -20,
+        "matches": [
+          {
+            "type": "document",
+            "result": "win",
+            "losePoints": 0,
+            "evidenceId": "evidence.fixture.general"
+          },
+          {
+            "type": "photo",
+            "result": "win",
+            "losePoints": 0,
+            "evidenceId": "evidence.fixture.side"
+          },
+          {
+            "type": "witness",
+            "result": "normal",
+            "losePoints": 0
+          }
+        ]
+      },
+      {
+        "id": "accusation.fixture.second",
+        "textKey": "hearing.accusation.second",
+        "kind": "standard",
+        "grade": "heavy",
+        "damage": 35,
+        "defaultLosePoints": -20,
+        "matches": [
+          {
+            "type": "photo",
+            "result": "win",
+            "losePoints": 0,
+            "evidenceId": "evidence.fixture.side"
+          },
+          {
+            "type": "document",
+            "result": "normal",
+            "losePoints": 0,
+            "evidenceId": "evidence.fixture.general"
+          },
+          {
+            "type": "witness",
+            "result": "lose",
+            "losePoints": -20
+          }
+        ]
+      }
+    ],
+    "bailout": {
+      "questionKey": "hearing.ethics.question",
+      "choices": [
+        {
+          "id": "ethics.truth",
+          "textKey": "hearing.ethics.truth"
+        },
+        {
+          "id": "ethics.popularity",
+          "textKey": "hearing.ethics.popularity"
+        },
+        {
+          "id": "ethics.power",
+          "textKey": "hearing.ethics.power"
+        }
+      ],
+      "correctChoiceId": "ethics.truth"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "bundlePath": "assets/bundles/foundation-v1.zip",
+  "bundleSha256": "63f6e1018fbdc464c1c2fb52ab7ca14cdffe936f4f11ea28d0345c26f2742c75",
+  "bundleVersion": 1,
+  "files": [
+    {
+      "bytes": 274,
+      "path": "assets/sources/actor-0.png",
+      "sha256": "f02fc1e5f6af7ab632921d1ca3abd6610aeb553462f4ef26f2e5d03e8f3d712b"
+    },
+    {
+      "bytes": 276,
+      "path": "assets/sources/actor-1.png",
+      "sha256": "8ee0ea4f2f9f8912fe71e464d919a1646c8660e2c4493bf1c81154961303a52b"
+    },
+    {
+      "bytes": 3460,
+      "path": "assets/sources/fixture-inputs.json",
+      "sha256": "4cda95a3220bb41bffc411839920cf616fc5ced832b4cf39c25f5bd6345faada"
+    },
+    {
+      "bytes": 192,
+      "path": "assets/sources/placeholder.png",
+      "sha256": "2520375f56d829a36f671ae1dd7855cfaea47a207382c55ec8b9948aeed2760a"
+    },
+    {
+      "bytes": 3885,
+      "path": "assets/sources/scene.png",
+      "sha256": "fe69acce30180a5828211647a87bacc1a92e2337d99146e5e39ece2deed2656b"
+    },
+    {
+      "bytes": 44144,
+      "path": "assets/sources/tone.wav",
+      "sha256": "40c77a2c95667783b50a16c25e946c9aca27d1a687e65a7347608ab97d8e0f29"
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,15 +1,11 @@
-# Source/licensing hashes and generated exports retain canonical LF on Windows.
-assets/fonts/coastal-replica/**/OFL.txt text eol=lf
-assets/fonts/coastal-replica/**/METADATA.pb text eol=lf
-assets/ui/coastal-replica/**/*.svg text eol=lf
-assets/ui/coastal-replica/**/*.png binary
-assets/fonts/coastal-replica/**/*.ttf binary
-content/ui/coastal-replica-pilot.json text eol=lf
-content/ui/coastal-dialogue.json text eol=lf
-content/ui/coastal-dialogue-ui.json text eol=lf
-content/ui/coastal-dialogue-motion.json text eol=lf
-assets/fonts/coastal-menu/**/OFL.txt text eol=lf
-assets/fonts/coastal-menu/**/METADATA.pb text eol=lf
-assets/fonts/coastal-menu/**/*.ttf binary
-assets/ui/coastal/**/*.svg text eol=lf
-assets/ui/coastal/**/*.png binary
+# Current sources use canonical LF; legacy payload bytes are kept local and frozen.
+* text=auto eol=lf
+/archive/legacy-2026-10-22/payload/** -text
+
+# These files participate in the recorded SHA-256 preservation contract.
+/archive/legacy-2026-10-22/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/design/narrative/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/design/gameplay/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/history/narrative/First3Days.md -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/history/narrative/characters_profile.md -text -eol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+/docs/history/narrative/master_narrative_bible.md -text -eol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

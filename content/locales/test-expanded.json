@@ -1,0 +1,1725 @@
+{
+  "foundation.begin": {
+    "value": "[ Chương thử nghiệm nền tảng. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "foundation.choice": {
+    "value": "[ Ghé phòng câu lạc bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "foundation.end": {
+    "value": "[ Đã hoàn tất chương thử nghiệm. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.title": {
+    "value": "[ Hồi Âm — Không gian phát triển ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.explorer": {
+    "value": "[ Tài liệu dự án ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.source": {
+    "value": "[ Nội dung JSON ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.apply": {
+    "value": "[ Áp dụng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.undo": {
+    "value": "[ Hoàn tác ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.redo": {
+    "value": "[ Làm lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.save": {
+    "value": "[ Lưu nguồn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.recover": {
+    "value": "[ Phục hồi bản nháp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.preview": {
+    "value": "[ Chơi thử độc lập ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.start": {
+    "value": "[ Bắt đầu chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.stop": {
+    "value": "[ Dừng chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.advance": {
+    "value": "[ Tiếp tục ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.writable": {
+    "value": "[ Đang bật ghi nguồn cục bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.readonly": {
+    "value": "[ Chế độ chỉ đọc nguồn; thay đổi chỉ ở bản nháp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.unsaved": {
+    "value": "[ Có thay đổi chưa lưu nguồn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.clean": {
+    "value": "[ Tài liệu khớp nguồn đã mở ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.previewEnd": {
+    "value": "[ Đã kết thúc chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.previewStopped": {
+    "value": "[ Chưa chạy chơi thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "workspace.document": {
+    "value": "[ {path} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "path"
+    ]
+  },
+  "workspace.documentDirty": {
+    "value": "[ {path} — chưa lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "path"
+    ]
+  },
+  "workspace.diagnostic": {
+    "value": "[ {code} — {source}{pointer} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "code",
+      "source",
+      "pointer"
+    ]
+  },
+  "world.title": {
+    "value": "[ Hồi Âm · Phòng thử nghiệm 2D ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.fixture": {
+    "value": "[ Bản thử nền tảng · hình ảnh tạm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.courtyard": {
+    "value": "[ Sân trường thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.club": {
+    "value": "[ Phòng câu lạc bộ thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.player": {
+    "value": "[ Người chơi thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.npc": {
+    "value": "[ Đồng đội thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.talk": {
+    "value": "[ Trò chuyện ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.enterClub": {
+    "value": "[ Vào phòng câu lạc bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.exitClub": {
+    "value": "[ Ra sân trường ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.controls": {
+    "value": "[ {left} / {right}: di chuyển · {interact}: tương tác · {menu}: menu · {fullscreen}: toàn màn hình ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "left",
+      "right",
+      "interact",
+      "menu",
+      "fullscreen"
+    ]
+  },
+  "world.interact": {
+    "value": "[ Tương tác ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.continue": {
+    "value": "[ Tiếp tục ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.pause": {
+    "value": "[ Tạm dừng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.resume": {
+    "value": "[ Trở lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.paused": {
+    "value": "[ Đang tạm dừng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.loading": {
+    "value": "[ Đang chuẩn bị cảnh… ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.ready": {
+    "value": "[ Sẵn sàng khám phá ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.retry": {
+    "value": "[ Thử lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.error": {
+    "value": "[ Không thể tiếp tục: {code} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "code"
+    ]
+  },
+  "world.audio": {
+    "value": "[ Bật âm thanh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.fullscreen": {
+    "value": "[ Toàn màn hình ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "world.viewport": {
+    "value": "[ Thế giới khám phá hai chiều ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.new": {
+    "value": "[ Bắt đầu lượt chơi mới ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.continue": {
+    "value": "[ Tiếp tục bản lưu gần nhất ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.load": {
+    "value": "[ Tải bản lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.save": {
+    "value": "[ Lưu tiến độ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.main": {
+    "value": "[ Về menu chính ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.slots": {
+    "value": "[ Các ô lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.slot": {
+    "value": "[ {kind} · Ô {index} · {state} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "kind",
+      "index",
+      "state"
+    ]
+  },
+  "player.manual": {
+    "value": "[ Thủ công ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.autoSlot": {
+    "value": "[ Tự động ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.empty": {
+    "value": "[ Trống ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.occupied": {
+    "value": "[ Có bản lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.back": {
+    "value": "[ Trở lại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.settings": {
+    "value": "[ Tùy chỉnh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.textScale": {
+    "value": "[ Cỡ chữ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.textSpeed": {
+    "value": "[ Tốc độ hiện chữ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.motion": {
+    "value": "[ Giảm chuyển động ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.locale": {
+    "value": "[ Ngôn ngữ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.remap": {
+    "value": "[ Đổi phím {action} ({code}) ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "action",
+      "code"
+    ]
+  },
+  "player.binding": {
+    "value": "[ {action} · {contexts} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "action",
+      "contexts"
+    ]
+  },
+  "player.defaults": {
+    "value": "[ Khôi phục tùy chỉnh mặc định ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.capture": {
+    "value": "[ Nhấn phím mới; Escape để hủy ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.saved": {
+    "value": "[ Đã lưu tiến độ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.loaded": {
+    "value": "[ Đã tải tiến độ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.updated": {
+    "value": "[ Đã lưu tùy chỉnh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.transfer": {
+    "value": "[ Nội dung JSON để sao chép hoặc nhập bản lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.import": {
+    "value": "[ Nhập JSON vào ô đã chọn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.export": {
+    "value": "[ Xuất JSON ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.backup": {
+    "value": "[ Tải bản dự phòng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.backlog": {
+    "value": "[ Lịch sử hội thoại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.auto": {
+    "value": "[ Tự động đọc ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.skip": {
+    "value": "[ Bỏ qua đoạn đã đọc ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.stop": {
+    "value": "[ Dừng đọc tự động / bỏ qua ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.audioBus": {
+    "value": "[ Âm lượng {bus} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "bus"
+    ]
+  },
+  "player.on": {
+    "value": "[ Bật ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.off": {
+    "value": "[ Tắt ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.value": {
+    "value": "[ {value} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "value"
+    ]
+  },
+  "player.action.moveLeft": {
+    "value": "[ Đi trái ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.moveRight": {
+    "value": "[ Đi phải ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.interact": {
+    "value": "[ Tương tác ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.advance": {
+    "value": "[ Tiếp lời ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.menu": {
+    "value": "[ Mở menu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.back": {
+    "value": "[ Đóng menu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.action.fullscreen": {
+    "value": "[ Toàn màn hình ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.error": {
+    "value": "[ Thao tác chưa thành công: {code} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "code"
+    ]
+  },
+  "player.unread": {
+    "value": "[ Dừng tại đoạn chưa đọc hoặc ranh giới cần quyết định ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.historyEmpty": {
+    "value": "[ Chưa có lời thoại đã đọc ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.locale.vi": {
+    "value": "[ Tiếng Việt ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.locale.en-XA": {
+    "value": "[ Kiểm thử chuỗi dài ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.bgm": {
+    "value": "[ Nhạc nền ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.ambience": {
+    "value": "[ Môi trường ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.voice": {
+    "value": "[ Giọng nói ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "player.bus.sfx": {
+    "value": "[ Hiệu ứng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.member.player": {
+    "value": "[ Người tác nghiệp thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.member.reporter": {
+    "value": "[ Đồng đội tài liệu thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.member.photographer": {
+    "value": "[ Đồng đội ảnh thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.member.senior": {
+    "value": "[ Đồng đội chuyên môn thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.quest.main": {
+    "value": "[ Hồ sơ chính thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.quest.side": {
+    "value": "[ Đề tài phụ thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.quest.general": {
+    "value": "[ Tin ngắn thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.finding.statement": {
+    "value": "[ Lời xác nhận thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.finding.document": {
+    "value": "[ Hồ sơ đối chất thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.evidence.side": {
+    "value": "[ Ảnh tư liệu đề tài phụ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.evidence.general": {
+    "value": "[ Biên bản tin ngắn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.resting": {
+    "value": "[ Đang nghỉ cuối tuần ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.working": {
+    "value": "[ Đang tác nghiệp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.completed": {
+    "value": "[ Đã bàn giao và lưu bằng chứng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.feedback.blocked": {
+    "value": "[ Cần người có nghiệp vụ phù hợp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.item.recorder": {
+    "value": "[ Máy ghi âm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.item.tea": {
+    "value": "[ Trà hồi phục thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.train": {
+    "value": "[ Luyện tài liệu thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.trainInvestigation": {
+    "value": "[ Luyện điều tra thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.work": {
+    "value": "[ Làm thêm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.hangout": {
+    "value": "[ Gặp đồng đội thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.special": {
+    "value": "[ Sự kiện cả đội thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.nightStudy": {
+    "value": "[ Học đêm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "gameplay.activity.nightGame": {
+    "value": "[ Chơi game đêm thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.fixture.name": {
+    "value": "[ Phiên điều trần thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.fixture.boss": {
+    "value": "[ Đối thủ thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.accusation.first": {
+    "value": "[ Tư liệu nào xác nhận bản tin thử nghiệm? ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.accusation.second": {
+    "value": "[ Căn cứ nào bảo vệ cách mô tả trong bài? ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.ethics.question": {
+    "value": "[ Điều gì định hướng việc tác nghiệp? ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.ethics.truth": {
+    "value": "[ Kiểm chứng sự thật và tôn trọng con người ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.ethics.popularity": {
+    "value": "[ Chỉ cần thu hút sự chú ý ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.ethics.power": {
+    "value": "[ Luôn thuận theo người có quyền ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.narration": {
+    "value": "[ Khuê trình bày dữ kiện của hồ sơ thử nghiệm. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.recap.before": {
+    "value": "[ Đối thủ viện dẫn  ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.word.detail": {
+    "value": "[ thể thức ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.recap.middle": {
+    "value": "[  và  ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.word.context": {
+    "value": "[ bối cảnh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.recap.connect": {
+    "value": "[  để khẳng định  ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.word.contradiction": {
+    "value": "[ không có tư liệu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.recap.end": {
+    "value": "[ . ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.question.trapA": {
+    "value": "[ Chuyển sang nhận xét cá nhân? ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.question.correct": {
+    "value": "[ Đối chiếu phát biểu với tư liệu đã xác minh? ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.question.trapB": {
+    "value": "[ Bỏ qua hồ sơ và đổi chủ đề? ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.question.trapC": {
+    "value": "[ Kết luận từ lời đồn chưa kiểm chứng? ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.confrontation": {
+    "value": "[ Chủ tọa yêu cầu đối chiếu điểm mâu thuẫn còn lại. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.crash": {
+    "value": "[ Đối thủ mất bình tĩnh. Chuẩn bị chặn đạn ngôn từ. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.final": {
+    "value": "[ Chốt lại hồ sơ trước hội đồng. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.projectile": {
+    "value": "[ Lời phủ nhận thử nghiệm ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.mood.pressure": {
+    "value": "[ Áp lực hội trường ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.mood.doubt": {
+    "value": "[ Nghi ngại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.mood.neutral": {
+    "value": "[ Quan sát ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.mood.support": {
+    "value": "[ Ủng hộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.mood.triumph": {
+    "value": "[ Tin tưởng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "hearing.ui.title": {
+    "params": [
+      "boss"
+    ],
+    "value": "[ Phiên điều trần — {boss} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.defenseStats": {
+    "params": [
+      "gauge"
+    ],
+    "value": "[ Phán quyết: {gauge} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.attackStats": {
+    "params": [
+      "hearts",
+      "maxHearts",
+      "hp",
+      "maxHp"
+    ],
+    "value": "[ Tim: {hearts}/{maxHearts} · HP đối thủ: {hp}/{maxHp} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.miniStats": {
+    "params": [
+      "hp",
+      "seconds",
+      "blocks"
+    ],
+    "value": "[ HP chặn đạn: {hp} · Còn {seconds} giây · Đã chặn: {blocks} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.finalStats": {
+    "params": [
+      "seconds",
+      "taps"
+    ],
+    "value": "[ Còn {seconds} giây · Số lần tap: {taps} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.card": {
+    "params": [
+      "name",
+      "quality",
+      "type"
+    ],
+    "value": "[ {name} · {quality} · {type} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.result": {
+    "params": [
+      "result",
+      "points"
+    ],
+    "value": "[ {result}: {points} điểm ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.continue": {
+    "params": [],
+    "value": "[ Tiếp tục ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.pause": {
+    "params": [],
+    "value": "[ Tạm dừng / Lưu / Tải ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.defeat": {
+    "params": [],
+    "value": "[ Phiên THỦ thất bại. Mở menu để tải lại hoặc về màn hình chính. ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.won": {
+    "params": [],
+    "value": "[ Điều trần hoàn tất ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.dismiss": {
+    "params": [],
+    "value": "[ Trở lại khám phá ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.recovery": {
+    "params": [],
+    "value": "[ Lấy lại bình tĩnh. Xem lại mắt xích hiện tại trước khi phản biện tiếp. ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.retry": {
+    "params": [],
+    "value": "[ Thử lại phần chặn đạn ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.block": {
+    "params": [],
+    "value": "[ Chặn ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.tap": {
+    "params": [],
+    "value": "[ Kết luận ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.high": {
+    "params": [],
+    "value": "[ Chất lượng cao ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.standard": {
+    "params": [],
+    "value": "[ Chất lượng thường ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.win": {
+    "params": [],
+    "value": "[ Thuyết phục ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.normal": {
+    "params": [],
+    "value": "[ Trung lập ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.lose": {
+    "params": [],
+    "value": "[ Không phù hợp ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.data": {
+    "params": [],
+    "value": "[ Số liệu ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.witness": {
+    "params": [],
+    "value": "[ Nhân chứng ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.document": {
+    "params": [],
+    "value": "[ Tài liệu ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.photo": {
+    "params": [],
+    "value": "[ Ảnh ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.physical": {
+    "params": [],
+    "value": "[ Vật chứng ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.upper": {
+    "params": [],
+    "value": "[ Làn trên ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.lower": {
+    "params": [],
+    "value": "[ Làn dưới ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.normalMode": {
+    "params": [],
+    "value": "[ Normal — bấm chặn ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.easyMode": {
+    "params": [],
+    "value": "[ Easy — tự chặn đúng làn ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.field": {
+    "params": [],
+    "value": "[ Khu vực chặn đạn ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.player": {
+    "params": [],
+    "value": "[ Khuê ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.hint": {
+    "params": [
+      "up",
+      "down",
+      "block",
+      "menu"
+    ],
+    "value": "[ Đổi làn: {up} / {down} · Chặn: {block} · Menu: {menu} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.action.hearingAdvance": {
+    "params": [],
+    "value": "[ Tiếp tục điều trần ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.action.laneUp": {
+    "params": [],
+    "value": "[ Lên làn trên ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.action.laneDown": {
+    "params": [],
+    "value": "[ Xuống làn dưới ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.action.deflect": {
+    "params": [],
+    "value": "[ Chặn đạn ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.action.finalTap": {
+    "params": [],
+    "value": "[ Tap kết luận ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.world": {
+    "params": [],
+    "value": "[ Khám phá ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.dialogue": {
+    "params": [],
+    "value": "[ Hội thoại ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.menu": {
+    "params": [],
+    "value": "[ Menu ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.loading": {
+    "params": [],
+    "value": "[ Đang tải ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.defense": {
+    "params": [],
+    "value": "[ THỦ ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.attack": {
+    "params": [],
+    "value": "[ CÔNG ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.minigame": {
+    "params": [],
+    "value": "[ Chặn đạn ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.context.final-shot": {
+    "params": [],
+    "value": "[ Kết luận ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.binding": {
+    "params": [
+      "action",
+      "contexts",
+      "code"
+    ],
+    "value": "[ {action} ({contexts}) — {code} ~~~~~~~~~~~~~~~~ ]"
+  },
+  "hearing.ui.hintEasy": {
+    "value": "[ Tự chặn khi ở đúng làn · Đổi làn: {up} / {down} · Menu: {menu} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "up",
+      "down",
+      "menu"
+    ]
+  },
+  "authoring.title": {
+    "value": "[ Trình biên tập tài nguyên ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.search": {
+    "value": "[ Tìm ID, nội dung hoặc đường dẫn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.resources": {
+    "value": "[ Tài nguyên ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.usages": {
+    "value": "[ Nơi sử dụng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.source": {
+    "value": "[ Mở nguồn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.rename": {
+    "value": "[ Đổi ID và các tham chiếu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.remove": {
+    "value": "[ Xóa tài nguyên ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.replaceId": {
+    "value": "[ ID mới ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.preview": {
+    "value": "[ Chạy xem trước ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.stop": {
+    "value": "[ Dừng xem trước ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.property": {
+    "value": "[ Thuộc tính {path} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "path"
+    ]
+  },
+  "authoring.readonly": {
+    "value": "[ Dữ liệu được sinh tự động. Sửa recipe nguồn rồi build lại. ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.export": {
+    "value": "[ Xuất nguồn JSON ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.import": {
+    "value": "[ Nhập nguồn JSON ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.transfer": {
+    "value": "[ Nguồn JSON để sao chép / nhập ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.selected": {
+    "value": "[ Đã chọn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.disabled": {
+    "value": "[ Bị vô hiệu hóa ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.error": {
+    "value": "[ Ví dụ trạng thái lỗi ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.focused": {
+    "value": "[ Điều khiển có thể nhận focus ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.step": {
+    "value": "[ Chạy thêm một bước ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.frame": {
+    "value": "[ Khung hình: {id} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.playCue": {
+    "value": "[ Nghe cue ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.params": {
+    "value": "[ Tham số thử nghiệm JSON ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.applyParams": {
+    "value": "[ Thử event trong session riêng ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.range": {
+    "value": "[ Đặt vị trí trên canvas cho {path} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "path"
+    ]
+  },
+  "authoring.recipe": {
+    "value": "[ Recipe nguồn của asset / atlas ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.buildAssets": {
+    "value": "[ Build lại asset đã lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.loaded": {
+    "value": "[ Đã tải bản xem trước ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.usage": {
+    "value": "[ {source} — {pointer} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "source",
+      "pointer"
+    ]
+  },
+  "authoring.action": {
+    "value": "[ Action: {action} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "action"
+    ]
+  },
+  "authoring.context": {
+    "value": "[ Ngữ cảnh bàn phím ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.result": {
+    "value": "[ Kết quả: {value} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "value"
+    ]
+  },
+  "authoring.layer": {
+    "value": "[ Lớp {index} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "index"
+    ]
+  },
+  "authoring.actor": {
+    "value": "[ Nhân vật {id} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.interaction": {
+    "value": "[ Tương tác {id} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.scene": {
+    "value": "[ Toàn cảnh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.saveGroup": {
+    "value": "[ Lưu toàn bộ nhóm thay đổi ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.resource": {
+    "value": "[ {id} / {kind} {locale} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "id",
+      "kind",
+      "locale"
+    ]
+  },
+  "authoring.flow": {
+    "value": "[ Luồng kịch bản ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.node": {
+    "value": "[ Nút {id} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.edge": {
+    "value": "[ {from} → {to} ~~~~~~~~~~~~~~~~ ]",
+    "params": [
+      "from",
+      "to"
+    ]
+  },
+  "authoring.branchSource": {
+    "value": "[ Lựa chọn nguồn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.nodeId": {
+    "value": "[ ID nút mới ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.choiceId": {
+    "value": "[ ID lựa chọn mới ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.textKey": {
+    "value": "[ Khóa văn bản ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.addBranch": {
+    "value": "[ Thêm nút và nối nhánh ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.flag": {
+    "value": "[ Khai báo flag có kiểu (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.addFlag": {
+    "value": "[ Thêm flag ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.advance": {
+    "value": "[ Tiếp tục thoại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.fixture": {
+    "value": "[ Tình huống thử độc lập ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.command": {
+    "value": "[ Command thử (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.execute": {
+    "value": "[ Chạy command ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.segment": {
+    "value": "[ Đoạn điều trần ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.previewSegment": {
+    "value": "[ Thử đoạn đã chọn ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.renameNode": {
+    "value": "[ Đổi ID nút và xuất ánh xạ save ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.migrationCandidate": {
+    "value": "[ Bản nháp ánh xạ anchor cần review ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "authoring.nodeSource": {
+    "value": "[ Nút cần đổi ID ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.title": {
+    "value": "[ Công cụ thử và chẩn đoán ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.start": {
+    "value": "[ Mở tình huống thử độc lập ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.fixture": {
+    "value": "[ Tình huống thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.chapter": {
+    "value": "[ Chương ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.node": {
+    "value": "[ Nút ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.jump": {
+    "value": "[ Nhảy bằng điều kiện của tình huống thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.flag": {
+    "value": "[ Flag ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.flagValue": {
+    "value": "[ Giá trị flag (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.setFlag": {
+    "value": "[ Đặt flag trong bản thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.command": {
+    "value": "[ Command (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.execute": {
+    "value": "[ Chạy command ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.skip": {
+    "value": "[ Skip đến ranh giới kế tiếp ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.applyWorking": {
+    "value": "[ Nạp bản đang sửa, giữ tiến độ thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.reloadSaved": {
+    "value": "[ Nạp nguồn đã lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.restart": {
+    "value": "[ Khởi động lại bản thử với nguồn hiện tại ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.mapping": {
+    "value": "[ Ánh xạ content migration đã review (JSON) ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.watch": {
+    "value": "[ Theo dõi nguồn đã lưu ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.exportTrace": {
+    "value": "[ Xuất trace cục bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.replayTrace": {
+    "value": "[ Chạy lại trace ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.trace": {
+    "value": "[ Trace và command/guard log ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.exportCrash": {
+    "value": "[ Xuất gói lỗi cục bộ ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.crash": {
+    "value": "[ Gói lỗi và ảnh nếu chụp được ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.state": {
+    "value": "[ Trạng thái thử và revision ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "debug.stop": {
+    "value": "[ Dừng bản thử ~~~~~~~~~~~~~~~~ ]",
+    "params": []
+  },
+  "first3.line.gate": {
+    "value": "[!! 07:15, thứ Hai. Gió biển Hải Vọng lùa qua cổng trường Tĩnh Tâm. Khuê giữ chặt tập hồ sơ chuyển trường và cuốn sổ tay của ông nội. !!]",
+    "params": []
+  },
+  "first3.line.map": {
+    "value": "[!! Phòng Giám thị nằm ở dãy hiệu bộ. Khuê gõ cửa, chờ tiếng “Vào đi” rồi bước vào. !!]",
+    "params": []
+  },
+  "first3.line.tran-file": {
+    "value": "[!! Thầy Trần: Diệp Khuê, lớp mười một. Điểm học tập khá, nhưng hạnh kiểm ghi “thường xuyên tranh luận với ban quản lý học sinh”. !!]",
+    "params": []
+  },
+  "first3.line.tran-grandfather": {
+    "value": "[!! Thầy Trần: Người giám hộ lúc nhỏ… Diệp Văn Trí. Trò là cháu nội của thầy Diệp? !!]",
+    "params": []
+  },
+  "first3.line.khue-grandfather": {
+    "value": "[!! Khuê: Vâng. Ông nội em từng dạy Ngữ văn ở đây mười lăm năm trước. !!]",
+    "params": []
+  },
+  "first3.line.tran-warning": {
+    "value": "[!! Thầy Trần: Cuối học kỳ, đoàn thẩm định sẽ về. Ở Tĩnh Tâm, kỷ cương và thành tích luôn được đặt lên trước. Đừng làm xáo trộn ngôi trường này. !!]",
+    "params": []
+  },
+  "first3.line.khue-truth": {
+    "value": "[!! Khuê: Ông chỉ dặn em: làm người phải nhìn thẳng và nói thật. Em xin nhận giấy phân lớp. !!]",
+    "params": []
+  },
+  "first3.line.class-direction": {
+    "value": "[!! Thầy Trần: 11A3, tầng hai dãy B. Đi đi. Cửa sang lớp ở bên phải. !!]",
+    "params": []
+  },
+  "first3.line.long-intro": {
+    "value": "[!! 11:30. Ở bàn cuối lớp 11A3, Khuê cất sách và nhìn tấm thẻ hội viên số 001 của Hồi Âm. !!]",
+    "params": []
+  },
+  "first3.line.long-card": {
+    "value": "[!! Bảo Long: Này ma mới! Cậu đang xem bùa hộ mệnh gì đấy… Hồi Âm? Vừa chuyển tới đã muốn tìm xuống nhà C à? !!]",
+    "params": []
+  },
+  "first3.line.khue-room": {
+    "value": "[!! Khuê: Câu lạc bộ Báo chí ở đó phải không? !!]",
+    "params": []
+  },
+  "first3.line.long-van": {
+    "value": "[!! Long: Căn phòng số 3, cuối hành lang tầng trệt. Còn Lục Thanh Vân lớp 11A1 bám trụ. Ban Cơ sở vật chất của Khoa đang muốn dọn nó đi. !!]",
+    "params": []
+  },
+  "first3.line.khue-long": {
+    "value": "[!! Khuê: Vẫn còn người ở đó nghĩa là căn phòng chưa đóng cửa. Cảm ơn cậu, Long. !!]",
+    "params": []
+  },
+  "first3.line.after-school": {
+    "value": "[!! Sau giờ học, hãy sang hành lang nhà C bằng cửa bên phải, rồi tìm Phòng số 3. !!]",
+    "params": []
+  },
+  "first3.line.room3-first": {
+    "value": "[!! 16:45. Bụi bay trong nắng cuối ngày. Báo cũ buộc thành từng chồng, một chiếc dập ghim nằm cạnh bản thảo đầy nét mực đỏ. !!]",
+    "params": []
+  },
+  "first3.line.van-warning": {
+    "value": "[!! Vân: Nếu cậu là người đến kiểm kê, hãy ra ngoài. Trước 16:30 thứ Sáu, không ai có quyền chạm vào căn phòng này. !!]",
+    "params": []
+  },
+  "first3.line.khue-membership": {
+    "value": "[!! Khuê: Mình tên Diệp Khuê. Mình đến xin gia nhập Hồi Âm. Đây là thẻ hội viên và sổ tay ông nội mình để lại. !!]",
+    "params": []
+  },
+  "first3.line.van-memory": {
+    "value": "[!! Vân: Thẻ số 001… sổ tay của cố vấn sáng lập? Cậu là cháu thầy Diệp? Nhưng cậu đến muộn mất rồi. !!]",
+    "params": []
+  },
+  "first3.line.notice": {
+    "value": "[!! Vân đưa tối hậu thư: nếu đến chiều thứ Sáu vẫn không có ấn phẩm hợp lệ, phòng sẽ bị thu hồi. Khuê ghi lại nguyên văn và giữ bản đối chiếu. !!]",
+    "params": []
+  },
+  "first3.line.notice-cost": {
+    "value": "[!! Đối chiếu thông báo, nơi lưu hồ sơ và thời hạn bàn giao: {cost} năng lượng. !!]",
+    "params": [
+      "cost"
+    ]
+  },
+  "first3.line.van-alone": {
+    "value": "[!! Vân: Bản thảo vẫn ở đây, nhưng người thì đi hết. Mình không thể vừa điều tra, vừa giữ tòa soạn một mình. !!]",
+    "params": []
+  },
+  "first3.line.khue-recruit": {
+    "value": "[!! Khuê đặt lại chiếc dập ghim ngay ngắn: Cậu giữ nhịp cho tờ báo. Mình ra hiện trường. Từ hôm nay cậu không còn một mình. !!]",
+    "params": []
+  },
+  "first3.line.handshake": {
+    "value": "[!! Vân chạm vào bàn tay Khuê, giấu đôi mắt đỏ: Nếu thất bại vào thứ Sáu, mình không trả tiền công chạy việc đâu đấy. !!]",
+    "params": []
+  },
+  "first3.line.day1-close": {
+    "value": "[!! Ngày đầu khép lại. Cửa bên trái đưa Khuê về nhà để nghỉ; công việc xuất bản thuộc về đội tòa soạn. !!]",
+    "params": []
+  },
+  "first3.line.rest1-home": {
+    "value": "[!! Khuê cất sổ tay, kiểm tra vật dụng rồi chọn ngủ. Việc đi bộ không tiêu hao năng lượng hay tự đổi ngày. !!]",
+    "params": []
+  },
+  "first3.line.rest1-next": {
+    "value": "[!! Sau buổi học ngày mới, Khuê trở lại trường. Ra cửa bên phải để tiếp tục. !!]",
+    "params": []
+  },
+  "first3.line.rest2-home": {
+    "value": "[!! Khuê cất sổ tay, kiểm tra vật dụng rồi chọn ngủ. Việc đi bộ không tiêu hao năng lượng hay tự đổi ngày. !!]",
+    "params": []
+  },
+  "first3.line.rest2-next": {
+    "value": "[!! Sau buổi học ngày mới, Khuê trở lại trường. Ra cửa bên phải để tiếp tục. !!]",
+    "params": []
+  },
+  "first3.line.cabinet": {
+    "value": "[!! Trong lúc dọn Phòng số 3, Khuê thấy hộc tủ sắt cũ dưới bàn. Vân giữ chiếc đèn, Khuê mở phần chốt đã rỉ. !!]",
+    "params": []
+  },
+  "first3.line.cassette": {
+    "value": "[!! Bên trong là kỷ yếu 2009–2011, phong bì hồ sơ rách và chiếc máy ghi âm của thầy Diệp. Một cuộn cassette vẫn nằm trong máy. !!]",
+    "params": []
+  },
+  "first3.line.tape-witness": {
+    "value": "[!! Băng cũ rè lên. Một người thợ nói giàn giáo và dầm trục D đã bị rút vật tư; anh đã cảnh báo không nên đổ bê tông trong đêm giông. !!]",
+    "params": []
+  },
+  "first3.line.tape-collapse": {
+    "value": "[!! Giọng thầy Diệp hỏi về phiếu xuất kho. Rồi tiếng đổ sập, tiếng gọi cứu người… Cuộn băng kết thúc giữa tiếng rè. !!]",
+    "params": []
+  },
+  "first3.line.tape-custody": {
+    "value": "[!! Khuê ghi nhận nơi tìm thấy và tình trạng cuộn băng: {cost} năng lượng. Đây là đầu mối cần kiểm chứng, chưa phải kết luận vụ năm 2011. !!]",
+    "params": [
+      "cost"
+    ]
+  },
+  "first3.line.van-fear": {
+    "value": "[!! Vân: Nếu thầy Diệp cũng bị nghiền nát, hai học sinh như chúng ta làm sao chống lại họ? Mình sợ mọi người lại bỏ đi hết. !!]",
+    "params": []
+  },
+  "first3.line.khue-stay": {
+    "value": "[!! Khuê: Mình không hứa suông. Nhưng mình đã về Hải Vọng vì di vật này, và mình không bỏ đồng đội ở lại. !!]",
+    "params": []
+  },
+  "first3.line.tape-unresolved": {
+    "value": "[!! Trước mắt phải giữ Phòng số 3. Chuyện năm 2011 cần nhân chứng và hồ sơ khác, không thể kết luận chỉ từ một cuộn băng. !!]",
+    "params": []
+  },
+  "first3.line.long-arrives": {
+    "value": "[!! Long đang chờ ở bàn bên trái với ba ly trà tắc và một tin từ căng tin. !!]",
+    "params": []
+  },
+  "first3.line.long-canteen": {
+    "value": "[!! Long: Bảng giá cơm tăng từ 25.000 lên 35.000 đồng, nhưng khay cơm lại ít đi. Có học sinh phải bỏ bữa. !!]",
+    "params": []
+  },
+  "first3.line.van-verify": {
+    "value": "[!! Vân: Phải phân biệt phản ánh với kết luận. Muốn làm bài này, cần ảnh đối chứng, nguồn tin bếp và văn bản duyệt giá. !!]",
+    "params": []
+  },
+  "first3.line.side-optional": {
+    "value": "[!! Khuê có thể theo đầu mối căng tin hoặc tập trung hồ sơ Phòng số 3. Đây là Side tùy chọn; quyền giữ phòng không phụ thuộc vào nó. !!]",
+    "params": []
+  },
+  "first3.line.side-plan": {
+    "value": "[!! Khuê sẽ tự tới căng tin. Long chỉ hỗ trợ tin tức, không thay Khuê hoàn thành Side. !!]",
+    "params": []
+  },
+  "first3.line.main-only-plan": {
+    "value": "[!! Khuê: Mình sẽ giữ bản thông báo, kiểm tra hồ sơ phòng và tìm cố vấn. Chưa xác minh căng tin thì không dùng nó để buộc tội ai. !!]",
+    "params": []
+  },
+  "first3.line.general-small": {
+    "value": "[!! Long: Tin ngắn về lịch sinh hoạt câu lạc bộ thì để mình ghi nhận. Không phải điều tra căng tin, chỉ là thông báo thường có nguồn xác nhận. !!]",
+    "params": []
+  },
+  "first3.line.general-quote": {
+    "value": "[!! Giao Long tin ngắn: nghe ngóng {listen} NL, phân công {assignment} NL, phí {fee}; dự kiến hoàn tất ngày {day}. !!]",
+    "params": [
+      "assignment",
+      "day",
+      "fee",
+      "listen"
+    ]
+  },
+  "first3.line.day2-close": {
+    "value": "[!! Đã ghi nhận phân công. Về nhà bằng cửa trái để ngủ; tin sẽ tự có phản hồi khi Long hoàn tất. !!]",
+    "params": []
+  },
+  "first3.line.tray": {
+    "value": "[!! Tại căng tin, Khuê đặt khay ăn cạnh bảng giá mới, ghi thời gian và bối cảnh trước khi chụp. !!]",
+    "params": []
+  },
+  "first3.line.tray-cost": {
+    "value": "[!! Thu ảnh đối chiếu và ghi chú hiện trường: {cost} năng lượng. !!]",
+    "params": [
+      "cost"
+    ]
+  },
+  "first3.line.find-lan": {
+    "value": "[!! Nguồn tin bếp và sổ duyệt giá ở phía phải. Ảnh một mình chưa đủ để kết luận. !!]",
+    "params": []
+  },
+  "first3.line.lan": {
+    "value": "[!! Cô Lan xin giữ kín danh tính khi nói về việc đổi nguồn hàng. Khuê ghi rõ phần nào là lời kể và phần nào cần tài liệu đối chiếu. !!]",
+    "params": []
+  },
+  "first3.line.approval": {
+    "value": "[!! Khuê đối chiếu bản duyệt giá, chữ ký nháy và mốc thời gian với bảng giá, ảnh khay cơm. Thông tin chưa được kiểm chứng không đi vào kết luận. !!]",
+    "params": []
+  },
+  "first3.line.source-cost": {
+    "value": "[!! Phỏng vấn kín và đối chiếu hồ sơ: {cost} năng lượng. !!]",
+    "params": [
+      "cost"
+    ]
+  },
+  "first3.line.side-handoff": {
+    "value": "[!! Tư liệu đã tự bàn giao cho đội xuất bản. Thẻ THỦ chất lượng cao được lưu riêng; chưa có hưởng ứng trước ngày phát hành. Trở lại hành lang bằng cửa trái. !!]",
+    "params": []
+  },
+  "first3.line.khoa-entry": {
+    "value": "[!! 14:15, thứ Tư. Cửa Phòng số 3 bị đẩy bật. Khoa gác giày lên bàn, tờ bàn giao sớm nằm dưới chân Vân. !!]",
+    "params": []
+  },
+  "first3.line.van-rights": {
+    "value": "[!! Vân: Chưa đến hạn thứ Sáu. Anh không có quyền tự ý niêm phong phòng. !!]",
+    "params": []
+  },
+  "first3.line.khoa-pressure": {
+    "value": "[!! Khoa: Ký bàn giao sớm thì còn giữ được hạnh kiểm. Ở dãy C này, Ban Cơ sở vật chất quyết định! !!]",
+    "params": []
+  },
+  "first3.line.canteen-leverage": {
+    "value": "[!! Khuê: Thông báo vẫn còn hiệu lực. Hồ sơ duyệt giá và ảnh đối chứng đã được lưu; đe dọa người làm báo không xóa được những tài liệu ấy. !!]",
+    "params": []
+  },
+  "first3.line.main-leverage": {
+    "value": "[!! Khuê: Chính thông báo của trường ghi rõ 16:30 thứ Sáu. Anh đòi ký sớm trước mặt nhân chứng là tự phủ nhận văn bản của mình. Tư liệu phòng vẫn được lưu ở đây. !!]",
+    "params": []
+  },
+  "first3.line.camera-bluff": {
+    "value": "[!! Khoa túm cổ áo Khuê. Một tiếng màn trập và ánh flash làm hắn khựng lại. Không có ảnh mới nào được lưu làm bằng chứng. !!]",
+    "params": []
+  },
+  "first3.line.long-witness": {
+    "value": "[!! Long đứng ngoài cửa cùng vài học sinh. Cuộc đe dọa đã có người chứng kiến; Khoa nhìn đám đông rồi buông tay. !!]",
+    "params": []
+  },
+  "first3.line.khoa-friday": {
+    "value": "[!! Khoa: Để xem thứ Sáu các cậu có được ấn phẩm hợp lệ và cố vấn ký tên không! Hắn bỏ đi, để lại cánh cửa bật mở. !!]",
+    "params": []
+  },
+  "first3.line.nguyen-door": {
+    "value": "[!! Tiếng gõ cửa khẽ vang lên bên phải. Thầy Nguyễn đứng ngoài ngưỡng cửa với một chiếc đèn bàn. !!]",
+    "params": []
+  },
+  "first3.line.empty-camera": {
+    "value": "[!! Vân: Máy ảnh của cậu lúc nãy… không còn phim, đúng không? !!]",
+    "params": []
+  },
+  "first3.line.no-fake-proof": {
+    "value": "[!! Khuê: Chỉ có flash. Nó làm hắn chột dạ, nhưng không thể thay tư liệu thật. Ta không có bức ảnh mới để đem ra làm chứng. !!]",
+    "params": []
+  },
+  "first3.line.nguyen-witness": {
+    "value": "[!! Thầy Nguyễn: Từ thư viện, thầy đã thấy cuộc tranh cãi. Ngày xưa thầy đã im lặng vì sợ. Lần này thầy không muốn lặp lại. !!]",
+    "params": []
+  },
+  "first3.line.nguyen-advisor": {
+    "value": "[!! Thầy đặt đèn xuống bàn, đưa giấy nhận nhiệm vụ cố vấn tạm thời và nơi lưu bản đối chiếu đăng ký ấn phẩm. Học sinh có thể xác minh chữ ký của thầy. !!]",
+    "params": []
+  },
+  "first3.line.advisor-cost": {
+    "value": "[!! Đối chiếu tư cách cố vấn và hồ sơ sử dụng phòng: {cost} năng lượng. !!]",
+    "params": [
+      "cost"
+    ]
+  },
+  "first3.line.van-light": {
+    "value": "[!! Vân: Em cảm ơn thầy. Dưới ánh đèn mới, căn phòng không còn giống một nơi sắp bị bỏ quên. !!]",
+    "params": []
+  },
+  "first3.line.chapter-ending": {
+    "value": "[!! Ba ngày đầu kết thúc. Phòng số 3 có người ở lại, có hồ sơ và người bảo trợ. Cuộn băng vẫn là câu hỏi cần theo đuổi. Thứ Sáu còn ở phía trước. !!]",
+    "params": []
+  },
+  "first3.line.automatic-newsroom": {
+    "value": "[!! Tư liệu quest hoàn tất đã tự chuyển vào quy trình xuất bản. Không cần bấm viết, biên tập hay phát hành; hưởng ứng chỉ được tính sau kỳ xuất bản. !!]",
+    "params": []
+  },
+  "first3.interact.school-map": {
+    "value": "[!! Xem sơ đồ và đến Phòng Giám thị !!]",
+    "params": []
+  },
+  "first3.interact.class-door": {
+    "value": "[!! Đến lớp 11A3 !!]",
+    "params": []
+  },
+  "first3.interact.long-class": {
+    "value": "[!! Trò chuyện với Bảo Long !!]",
+    "params": []
+  },
+  "first3.interact.corridor-door": {
+    "value": "[!! Sang nhà C sau giờ học !!]",
+    "params": []
+  },
+  "first3.interact.room3-door": {
+    "value": "[!! Vào Phòng số 3 !!]",
+    "params": []
+  },
+  "first3.interact.canteen-door": {
+    "value": "[!! Đến căng tin xác minh !!]",
+    "params": []
+  },
+  "first3.interact.van-recruit": {
+    "value": "[!! Làm quen với Thanh Vân !!]",
+    "params": []
+  },
+  "first3.interact.cabinet": {
+    "value": "[!! Xem hộc tủ sắt !!]",
+    "params": []
+  },
+  "first3.interact.long-plan": {
+    "value": "[!! Nghe đầu mối từ Long !!]",
+    "params": []
+  },
+  "first3.interact.khoa": {
+    "value": "[!! Đối diện Khoa !!]",
+    "params": []
+  },
+  "first3.interact.nguyen": {
+    "value": "[!! Đón thầy Nguyễn !!]",
+    "params": []
+  },
+  "first3.interact.home-door": {
+    "value": "[!! Trở về nhà nghỉ ngơi !!]",
+    "params": []
+  },
+  "first3.interact.rest-one": {
+    "value": "[!! Cất đồ và ngủ — hết ngày 1 !!]",
+    "params": []
+  },
+  "first3.interact.rest-two": {
+    "value": "[!! Cất đồ và ngủ — hết ngày 2 !!]",
+    "params": []
+  },
+  "first3.interact.school-day2": {
+    "value": "[!! Trở lại Phòng số 3 !!]",
+    "params": []
+  },
+  "first3.interact.school-day3": {
+    "value": "[!! Trở lại hành lang nhà C !!]",
+    "params": []
+  },
+  "first3.interact.tray": {
+    "value": "[!! Ghi ảnh khay cơm và bảng giá !!]",
+    "params": []
+  },
+  "first3.interact.kitchen": {
+    "value": "[!! Xác minh nguồn tin và duyệt giá !!]",
+    "params": []
+  },
+  "first3.interact.back-corridor": {
+    "value": "[!! Trở lại nhà C !!]",
+    "params": []
+  },
+  "first3.scene.gate": {
+    "value": "[!! Cổng trường Tĩnh Tâm !!]",
+    "params": []
+  },
+  "first3.scene.office": {
+    "value": "[!! Phòng Giám thị !!]",
+    "params": []
+  },
+  "first3.scene.classroom": {
+    "value": "[!! Lớp 11A3 !!]",
+    "params": []
+  },
+  "first3.scene.corridor": {
+    "value": "[!! Hành lang nhà C !!]",
+    "params": []
+  },
+  "first3.scene.room3": {
+    "value": "[!! Phòng số 3 — Hồi Âm !!]",
+    "params": []
+  },
+  "first3.scene.home": {
+    "value": "[!! Nhà Khuê !!]",
+    "params": []
+  },
+  "first3.scene.canteen": {
+    "value": "[!! Căng tin Tĩnh Tâm !!]",
+    "params": []
+  },
+  "first3.quest.room3": {
+    "value": "[!! Phòng số 3 và thời hạn thứ Sáu !!]",
+    "params": []
+  },
+  "first3.finding.notice": {
+    "value": "[!! Bản thông báo thu hồi phòng !!]",
+    "params": []
+  },
+  "first3.finding.custody": {
+    "value": "[!! Biên nhận hiện trạng tủ tư liệu !!]",
+    "params": []
+  },
+  "first3.finding.advisor": {
+    "value": "[!! Giấy bảo trợ và hồ sơ phòng !!]",
+    "params": []
+  },
+  "first3.quest.canteen": {
+    "value": "[!! Suất cơm căng tin và bảng giá mới !!]",
+    "params": []
+  },
+  "first3.evidence.canteen": {
+    "value": "[!! Ảnh và hồ sơ đối chiếu suất cơm !!]",
+    "params": []
+  },
+  "first3.quest.general": {
+    "value": "[!! Tin ngắn: lịch sinh hoạt câu lạc bộ !!]",
+    "params": []
+  },
+  "first3.evidence.general": {
+    "value": "[!! Nguồn xác nhận lịch sinh hoạt CLB !!]",
+    "params": []
+  },
+  "first3.member.player": {
+    "value": "[!! Diệp Khuê !!]",
+    "params": []
+  },
+  "first3.member.reporter": {
+    "value": "[!! Đoàn Bảo Long !!]",
+    "params": []
+  },
+  "first3.member.photographer": {
+    "value": "[!! Lục Thanh Vân !!]",
+    "params": []
+  },
+  "first3.choice.accept.investigate": {
+    "value": "[!! Nhận điều tra căng tin; tự đi xác minh ngày mai !!]",
+    "params": []
+  },
+  "first3.choice.skip.defer": {
+    "value": "[!! Tạm bỏ qua căng tin; giữ trọng tâm Phòng số 3 !!]",
+    "params": []
+  },
+  "first3.choice.delegate.assignLong": {
+    "value": "[!! Xác nhận giao Long tin ngắn lịch câu lạc bộ !!]",
+    "params": []
+  },
+  "first3.choice.canteen.investigate": {
+    "value": "[!! Dẫn quyền sử dụng phòng và tư liệu căng tin đã xác minh !!]",
+    "params": []
+  },
+  "first3.choice.main.defer": {
+    "value": "[!! Dẫn thông báo, thời hạn và quyền giữ Phòng số 3 !!]",
+    "params": []
+  },
+  "first3.preview.arrival": {
+    "value": "[!! Ngày 1 — trước cổng trường !!]",
+    "params": []
+  },
+  "first3.preview.class": {
+    "value": "[!! Ngày 1 — gặp Bảo Long !!]",
+    "params": []
+  },
+  "first3.preview.recruit": {
+    "value": "[!! Ngày 1 — gặp Thanh Vân !!]",
+    "params": []
+  },
+  "first3.preview.home1": {
+    "value": "[!! Ngày 1 — trước khi ngủ !!]",
+    "params": []
+  },
+  "first3.preview.tape": {
+    "value": "[!! Ngày 2 — tủ tư liệu !!]",
+    "params": []
+  },
+  "first3.preview.plan": {
+    "value": "[!! Ngày 2 — chọn đầu mối căng tin !!]",
+    "params": []
+  },
+  "first3.preview.home2": {
+    "value": "[!! Ngày 2 — có tin ngắn đang giao !!]",
+    "params": []
+  },
+  "first3.preview.photo": {
+    "value": "[!! Ngày 3 — trước ảnh đối chứng !!]",
+    "params": []
+  },
+  "first3.preview.source": {
+    "value": "[!! Ngày 3 — trước đối chiếu nguồn !!]",
+    "params": []
+  },
+  "first3.preview.pressure-main": {
+    "value": "[!! Ngày 3 — đối diện Khoa, không làm Side !!]",
+    "params": []
+  },
+  "first3.preview.pressure-side": {
+    "value": "[!! Ngày 3 — đối diện Khoa, Side đã xác minh !!]",
+    "params": []
+  },
+  "first3.preview.advisor": {
+    "value": "[!! Ngày 3 — hồ sơ cố vấn và kết chương !!]",
+    "params": []
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "balance.first3",
+  "status": "provisional",
+  "calendar": {
+    "totalDays": 84,
+    "daysPerWeek": 7,
+    "workDays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "periods": [
+      "morning",
+      "afternoon",
+      "evening",
+      "night"
+    ],
+    "initialDay": 1,
+    "initialPeriod": "morning"
+  },
+  "energy": {
+    "cap": 10,
+    "nextDay": {
+      "sleep": 10,
+      "study": 5,
+      "game": 5
+    },
+    "nightBenefits": {
+      "study": "activity.fixture.nightStudy",
+      "game": "activity.fixture.nightGame"
+    }
+  },
+  "teamId": "team.first3",
+  "progressionId": "progression.foundation",
+  "publicationId": "publication.foundation",
+  "playerId": "member.fixture.player",
+  "feedbackLimit": 100,
+  "minActionCost": 1,
+  "requiredRoutes": [
+    {
+      "id": "route.fixture.main",
+      "mainQuestIds": [
+        "quest.fixture.main"
+      ],
+      "requiredFindingIds": [
+        "finding.fixture.statement",
+        "finding.fixture.document"
+      ]
+    },
+    {
+      "id": "route.first3.room3",
+      "mainQuestIds": [
+        "quest.first3.room3"
+      ],
+      "requiredFindingIds": [
+        "finding.first3.notice",
+        "finding.first3.advisor"
+      ]
+    }
+  ]
+}

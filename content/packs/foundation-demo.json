@@ -1,0 +1,229 @@
+{
+  "id": "foundation-demo",
+  "kind": "development",
+  "version": "0.0.2",
+  "documents": [
+    {
+      "kind": "flags",
+      "path": "../flags/core.json"
+    },
+    {
+      "kind": "events",
+      "path": "../events/foundation.json"
+    },
+    {
+      "kind": "locale",
+      "locale": "vi",
+      "path": "../locales/vi.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/foundation/chapter.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/workspace.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "assets",
+      "path": "../assets/manifest.json",
+      "generated": true
+    },
+    {
+      "kind": "animations",
+      "path": "../animations/clips.json"
+    },
+    {
+      "kind": "audio",
+      "path": "../audio/cues.json"
+    },
+    {
+      "kind": "scenes",
+      "path": "../scenes/foundation.json"
+    },
+    {
+      "kind": "sequences",
+      "path": "../sequences/foundation.json"
+    },
+    {
+      "kind": "actors",
+      "path": "../actors/foundation.json"
+    },
+    {
+      "kind": "input",
+      "path": "../input/defaults.json"
+    },
+    {
+      "kind": "config",
+      "path": "../gameplay/runtime.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/foundation.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/navigation.json"
+    },
+    {
+      "kind": "config",
+      "path": "../input/actions.json"
+    },
+    {
+      "kind": "locale",
+      "locale": "en-XA",
+      "path": "../locales/test-expanded.json"
+    },
+    {
+      "kind": "balance",
+      "path": "../gameplay/balance.json"
+    },
+    {
+      "kind": "team",
+      "path": "../gameplay/team.json"
+    },
+    {
+      "kind": "schedules",
+      "path": "../gameplay/schedules.json"
+    },
+    {
+      "kind": "publication",
+      "path": "../gameplay/publication.json"
+    },
+    {
+      "kind": "progression",
+      "path": "../gameplay/progression.json"
+    },
+    {
+      "kind": "quests",
+      "path": "../gameplay/quests.json"
+    },
+    {
+      "kind": "hearingBalance",
+      "path": "../gameplay/hearings/balance.json"
+    },
+    {
+      "kind": "hearings",
+      "path": "../gameplay/hearings/defense-fixture.json"
+    },
+    {
+      "kind": "hearings",
+      "path": "../gameplay/hearings/attack-fixture.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/hearing.json"
+    },
+    {
+      "kind": "config",
+      "path": "../ui/authoring.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "../assets/imports.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "playtests",
+      "path": "../dev/foundation/playtests.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "../ui/debug.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "flags",
+      "path": "../dev/first-three-days/flags.json"
+    },
+    {
+      "kind": "scenes",
+      "path": "../dev/first-three-days/scenes.json"
+    },
+    {
+      "kind": "quests",
+      "path": "../dev/first-three-days/quests.json"
+    },
+    {
+      "kind": "schedules",
+      "path": "../dev/first-three-days/schedules.json"
+    },
+    {
+      "kind": "config",
+      "path": "../dev/first-three-days/runtime.json"
+    },
+    {
+      "kind": "balance",
+      "path": "../dev/first-three-days/balance.json"
+    },
+    {
+      "kind": "team",
+      "path": "../dev/first-three-days/team.json"
+    },
+    {
+      "kind": "events",
+      "path": "../dev/first-three-days/events.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/arrival.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/long.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/recruit.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/rest1.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/rest2.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/tape.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/plan.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/side-photo.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/side-source.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/pressure.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/advisor.json"
+    },
+    {
+      "kind": "config",
+      "path": "../gameplay/migrations.json"
+    },
+    {
+      "kind": "playtests",
+      "path": "../dev/first-three-days/playtests.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "../dev/first-three-days/traversal.json",
+      "authoringOnly": true
+    }
+  ]
+}

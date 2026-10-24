@@ -1,0 +1,65 @@
+{
+  "id": "chapter.first3.long",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "long-intro",
+          "op": "say",
+          "textKey": "first3.line.long-intro"
+        },
+        {
+          "id": "long-card",
+          "op": "say",
+          "textKey": "first3.line.long-card"
+        },
+        {
+          "id": "khue-room",
+          "op": "say",
+          "textKey": "first3.line.khue-room"
+        },
+        {
+          "id": "long-van",
+          "op": "say",
+          "textKey": "first3.line.long-van"
+        },
+        {
+          "id": "khue-long",
+          "op": "say",
+          "textKey": "first3.line.khue-long"
+        },
+        {
+          "id": "finish-school",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "calendar.finishSchool"
+          }
+        },
+        {
+          "id": "flag-classDone-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.classDone",
+          "value": true
+        },
+        {
+          "id": "flag-recruit-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.recruit",
+          "value": true
+        },
+        {
+          "id": "after-school",
+          "op": "say",
+          "textKey": "first3.line.after-school"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

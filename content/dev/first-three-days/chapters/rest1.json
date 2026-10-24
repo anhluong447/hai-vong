@@ -1,0 +1,104 @@
+{
+  "id": "chapter.first3.rest1",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "rest1-home",
+          "op": "say",
+          "textKey": "first3.line.rest1-home"
+        },
+        {
+          "id": "rest1-afternoon-request",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "calendar.requestHome",
+            "route": "fast",
+            "requestId": "first3.rest1.afternoon"
+          }
+        },
+        {
+          "id": "rest1-afternoon-confirm",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "calendar.confirmHome",
+            "requestId": "first3.rest1.afternoon"
+          }
+        },
+        {
+          "id": "rest1-evening-request",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "calendar.requestHome",
+            "route": "fast",
+            "requestId": "first3.rest1.evening"
+          }
+        },
+        {
+          "id": "rest1-evening-confirm",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "calendar.confirmHome",
+            "requestId": "first3.rest1.evening"
+          }
+        },
+        {
+          "id": "rest1-sleep",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "calendar.endNight",
+            "choice": "sleep"
+          }
+        },
+        {
+          "id": "rest1-school",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "calendar.finishSchool"
+          }
+        },
+        {
+          "id": "flag-rest1-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.rest1",
+          "value": false
+        },
+        {
+          "id": "flag-day2-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.day2",
+          "value": true
+        },
+        {
+          "id": "flag-day3-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.day3",
+          "value": false
+        },
+        {
+          "id": "flag-tape-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.tape",
+          "value": true
+        },
+        {
+          "id": "rest1-next",
+          "op": "say",
+          "textKey": "first3.line.rest1-next"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

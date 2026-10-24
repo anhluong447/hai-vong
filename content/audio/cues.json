@@ -1,0 +1,24 @@
+[
+  {
+    "id": "cue.fixture.bgm",
+    "assetId": "audio.fixture.tone",
+    "bus": "bgm",
+    "loop": true,
+    "loopStart": 0,
+    "loopEnd": 0.5,
+    "gain": 0.15,
+    "fadeIn": 0.3,
+    "fadeOut": 0.3
+  },
+  {
+    "id": "cue.fixture.sfx",
+    "assetId": "audio.fixture.tone",
+    "bus": "sfx",
+    "loop": false,
+    "loopStart": 0,
+    "loopEnd": 0.5,
+    "gain": 0.1,
+    "fadeIn": 0,
+    "fadeOut": 0.1
+  }
+]

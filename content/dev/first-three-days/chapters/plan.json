@@ -1,0 +1,170 @@
+{
+  "id": "chapter.first3.plan",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "long-canteen",
+          "op": "say",
+          "textKey": "first3.line.long-canteen"
+        },
+        {
+          "id": "van-verify",
+          "op": "say",
+          "textKey": "first3.line.van-verify"
+        },
+        {
+          "id": "side-optional",
+          "op": "say",
+          "textKey": "first3.line.side-optional"
+        },
+        {
+          "id": "canteen-route",
+          "op": "choose",
+          "choices": [
+            {
+              "id": "investigate",
+              "textKey": "first3.choice.accept.investigate",
+              "target": "accept"
+            },
+            {
+              "id": "defer",
+              "textKey": "first3.choice.skip.defer",
+              "target": "skip"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accept",
+      "commands": [
+        {
+          "id": "side-start",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.start",
+            "questId": "quest.first3.canteen",
+            "performerId": "member.fixture.player"
+          }
+        },
+        {
+          "id": "flag-canteenAccepted-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.canteenAccepted",
+          "value": true
+        },
+        {
+          "id": "flag-photo-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.photo",
+          "value": true
+        },
+        {
+          "id": "side-plan",
+          "op": "say",
+          "textKey": "first3.line.side-plan"
+        },
+        {
+          "id": "accept-join-general",
+          "op": "jump",
+          "target": "general"
+        }
+      ]
+    },
+    {
+      "id": "skip",
+      "commands": [
+        {
+          "id": "main-only-plan",
+          "op": "say",
+          "textKey": "first3.line.main-only-plan"
+        },
+        {
+          "id": "skip-join-general",
+          "op": "jump",
+          "target": "general"
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "commands": [
+        {
+          "id": "general-small",
+          "op": "say",
+          "textKey": "first3.line.general-small"
+        },
+        {
+          "id": "general-quote",
+          "op": "say",
+          "textKey": "first3.line.general-quote",
+          "params": {
+            "listen": 1,
+            "assignment": 1,
+            "fee": 0,
+            "day": 3
+          }
+        },
+        {
+          "id": "general-confirm",
+          "op": "choose",
+          "choices": [
+            {
+              "id": "assignLong",
+              "textKey": "first3.choice.delegate.assignLong",
+              "target": "delegate"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "delegate",
+      "commands": [
+        {
+          "id": "general-listen",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.listen",
+            "questId": "quest.first3.general"
+          }
+        },
+        {
+          "id": "general-assign",
+          "op": "emitEffect",
+          "effectId": "effect.first3.assign",
+          "params": {
+            "questId": "quest.first3.general",
+            "memberId": "member.fixture.reporter"
+          }
+        },
+        {
+          "id": "flag-plan-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.plan",
+          "value": false
+        },
+        {
+          "id": "flag-rest2-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.rest2",
+          "value": true
+        },
+        {
+          "id": "day2-close",
+          "op": "say",
+          "textKey": "first3.line.day2-close"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

@@ -1,89 +1,47 @@
-﻿# CLB Báo Chí
+# Hoi Am — engine-free 2D preparation
 
-Map debug và sandbox cho game quản lý CLB báo chí trường Tĩnh Tâm.
-Giai đoạn hiện tại: thử cơ chế trước khi viết câu chuyện thật.
+The old implementation is archived. The intended game is a hand-drawn/anime 2D
+side-scrolling narrative exploration game for desktop browsers, with a redesigned
+UI and complete keyboard operation. The immediate priority is a sound gameplay
+foundation, resource management and dedicated authoring tools; all 12 weeks are
+the eventual product goal.
 
-## Chạy
+Phase 0 T01–T14 implementation and local acceptance are complete, including
+resource pipelines, dedicated editors, saves/migrations, both hearing phases and
+the playable First3Days chapter. The chapter's art and audio remain development
+fixtures. Hosted CI was explicitly deferred; see PROJECT-STATE.md and
+[acceptance evidence](docs/testing/PHASE-0-ACCEPTANCE.md) for results and limits.
 
-Git chỉ giữ mã nguồn và các đầu vào nhỏ. Asset nhị phân, BGM, font, plan và
-ảnh review được giữ riêng trên máy; clone mới cần bổ sung gói asset trước khi
-chạy giao diện và browser test. Xem [quy tắc Git và khôi phục asset](docs/REPOSITORY.md).
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools/serve.ps1
-```
-
-- Map debug: <http://localhost:8080/>
-- Sandbox: <http://localhost:8080/sandbox.html>
-- Sandbox vòng chơi theo bible mới: <http://localhost:8080/gameplay.html>
-- Map test 2D pixel: <http://localhost:8080/pixel.html>
-- Coastal UI có chuyển động: <http://localhost:8080/tools/coastal-ui-preview.html>
-- Replica Stage 4 — motion UI theo lớp, pause/slow/replay và reduced motion: <http://127.0.0.1:8080/tools/coastal-replica-preview.html>
-- Replica Stage 3 — UI thoại tĩnh và lighting A/B: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=3>
-- Replica Stage 2 lịch sử: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=2>
-- Replica Stage 1 — pilot được giữ lại: <http://127.0.0.1:8080/tools/coastal-replica-preview.html?version=1>
-- Thoại 9 nhân vật với component coastal: <http://localhost:8080/interaction.html>
-- Tests: <http://localhost:8080/tests/>
-
-HTML/CSS/JavaScript thuần và Canvas, không cần build hoặc cài dependency.
-Di chuyển WASD/mũi tên, E tương tác; cũng có thể bấm vào bàn hoặc tab.
-
-## Đã có
-
-- 12 tuần × 5 ngày; energy, nhân sự, mệt, đề tài, thăm dò, phỏng vấn.
-- Năng lực nhóm, Q, trang bị, gai góc, bốn slot báo và phạt Vân.
-- Uy tín, áp lực, bằng chứng, đòn Huy, đình bản và kết cục.
-- Save/load riêng, xuất JSON, nhật ký và báo cáo phép tính.
-- Sandbox chỉnh tham số/trạng thái/lịch gia nhập, preset S04, tự chơi và so sánh tám chiến thuật.
-
-Sandbox công thức dùng 96 đề tài thử. Bản vòng chơi mới có lịch đủ 7 ngày,
-hồ sơ nhiều ngày, feedback trước khi ngủ, đồng đội nghỉ cuối tuần, quest Khuê,
-đội soạn, hangout/romance, tiền, công cụ và suất nâng cấp ở mức mock.
-Xem [hướng dẫn và giới hạn](docs/GAMEPLAY-SANDBOX.md). Map truyện thật chưa triển khai.
-
-## Tài liệu
-
-- [Bible đề xuất journalism + dating sim](docs/BIBLE-CLB-BAO-CHI-PROPOSAL.md)
-- [Bible đang dùng](docs/game_story_bible.md)
-- [Sandbox vòng chơi](docs/GAMEPLAY-SANDBOX.md)
-- [Map test pixel và điều khiển](docs/PIXEL-MAP.md)
-- [Kế hoạch triển khai map pixel](docs/PIXEL-MAP-PLAN.md)
-- [Hướng dẫn sandbox](docs/SANDBOX.md)
-- [Bộ luật và quyết định chuẩn hóa](docs/RULES.md)
-- [Kiến trúc](docs/ARCHITECTURE.md)
-- [Component và chuyển động coastal](docs/UI-COMPONENTS-PLAN.md), [review bản chạy v1](docs/ui-reviews/coastal-v1/README.md)
-- [Roadmap replica UI — 45 bước, background/nhân vật làm sau](docs/UI-REPLICA-ROADMAP.md)
-- [Stage 0 đã triển khai — layout sheets, asset inventory, native capture và overlay/diff](docs/ui-specs/coastal-replica/README.md)
-- [Stage 1 — pipeline art/font, mẫu 7 lớp và review sai lệch](docs/ui-reviews/coastal-replica-stage1/README.md)
-- [Stage 2 — UI thoại, evidence lịch sử và backlog G2 theo scope UI](docs/ui-reviews/coastal-replica-stage2/README.md)
-- [Stage 3 — ánh sáng/chiều sâu UI, scoped comparison và backlog G2](docs/ui-reviews/coastal-replica-stage3/README.md)
-- [Stage 4 — motion sheet, clips native, interruption/reduced motion và review G3](docs/ui-reviews/coastal-replica-stage4/README.md)
-- [Quy trình phát triển và quy tắc nội dung](docs/DEVELOPMENT.md)
-- [Nội dung, văn bản và balance](content/README.md)
-- [Kết quả kiểm chứng và baseline](docs/VALIDATION.md)
-- [Playtest cơ chế qua UI và các chiến thuật bổ sung](docs/PLAYTEST-2026-10-05.md)
-- [Thiết kế v2 gốc](docs/v0.1/Draft.md), [mô phỏng Python gốc](docs/v0.1/sym.py)
-- [Backup CLB Hỏi](archive/README.md)
-
-## Kiểm thử
+For a fresh Windows x64 clone of `feat/phase-0-skeleton-tools`, follow
+[contained setup](docs/guides/SETUP.md) to provision local tools, restore bundled
+assets and rebuild renditions. Then start the player from the clone root:
 
 ```powershell
-# Server phải đang chạy:
-powershell -ExecutionPolicy Bypass -File tools/test_unit_tests.ps1
-# Hoặc Python + Chrome:
-python tools/run_browser_tests.py
-# Khi có Node (core tests):
-npm test
-# Kiểm tra ranh giới kiến trúc và text:
-python tools/check_architecture.py
-# Sau browser tests, đối chiếu hai baseline đã lưu:
-python tools/check_baselines.py
+.\.venv\Scripts\python.exe -B tools/dev.py --port 8080
 ```
 
-Dự án CLB Hỏi cũ nằm trong `archive/clb-hoi/`, có manifest SHA-256 đã kiểm tra
-trước khi dọn bản đang chạy. Save cũ không bị đọc hoặc ghi đè.
+Open http://127.0.0.1:8080/. A fresh clone does not require the original machine's
+`.worktrees/phase-0` path. Browser saves and uncommitted authoring drafts are local
+data and are not transferred by Git.
 
-Refactor 2026-10-09 tách gameplay domain, session, panels, saves và content.
-Văn bản hiển thị nằm trong `content/locales/vi.js`; không thêm prose trực tiếp
-vào runtime. Ảnh review lịch sử và script di cư đã hoàn tất nằm trong
-[`archive/development/`](archive/development/README.md).
+- [Current state and stopping point](PROJECT-STATE.md)
+- [Play the 2D fixture / browser contract](docs/engineering/BROWSER-PLATFORM.md)
+- [Player controls, saves and recovery](docs/engineering/PLAYER-SAVES.md)
+- [Gameplay definitions and state contracts](docs/engineering/GAMEPLAY-CONTRACT.md)
+- [Asset toolchain and recovery](docs/guides/ASSETS.md)
+- [Authoring workspace setup](docs/guides/AUTHORING.md)
+- [Phase 0: skeleton and tools plan](docs/superpowers/plans/2026-10-22-phase-0-skeleton-tools.md)
+- [Mandatory coding and post-compaction rules](docs/engineering/CODING-RULES.md)
+- [Project recovery skill](skills/hoi-am-engine-free-development/SKILL.md)
+- [Protected narrative/gameplay documents](docs/README.md)
+- [Legacy snapshot, inventory and recovery](archive/legacy-2026-10-22/README.md)
+
+The project skill stays in this repository and is loaded through root AGENTS.md.
+Do not install or synchronize it into a user/global Codex directory. Project tools,
+dependencies, caches and temporary files also stay inside the project folder;
+Python packages use a private `.venv` without system site packages.
+
+The user approved Phase 0 execution on 2026-10-22 and selected First3Days as the
+T14 narrative source. Protected design sources and the legacy archive remain
+unchanged. Narrative source documents are retained in `docs/history/narrative/`;
+adding them to Git does not authorize further gameplay or story expansion.

@@ -1,0 +1,60 @@
+{
+  "id": "chapter.first3.side-source",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "lan",
+          "op": "say",
+          "textKey": "first3.line.lan"
+        },
+        {
+          "id": "approval",
+          "op": "say",
+          "textKey": "first3.line.approval"
+        },
+        {
+          "id": "source-cost",
+          "op": "say",
+          "textKey": "first3.line.source-cost",
+          "params": {
+            "cost": 3
+          }
+        },
+        {
+          "id": "side-verify",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.collect",
+            "questId": "quest.first3.canteen",
+            "stepId": "verify"
+          }
+        },
+        {
+          "id": "flag-source-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.source",
+          "value": false
+        },
+        {
+          "id": "flag-canteenComplete-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.canteenComplete",
+          "value": true
+        },
+        {
+          "id": "side-handoff",
+          "op": "say",
+          "textKey": "first3.line.side-handoff"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

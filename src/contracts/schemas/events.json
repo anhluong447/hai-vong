@@ -1,0 +1,25 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+      },
+      "handlerId": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+      },
+      "paramsSchema": {
+        "type": "object"
+      }
+    },
+    "required": [
+      "id",
+      "handlerId",
+      "paramsSchema"
+    ],
+    "additionalProperties": false
+  }
+}

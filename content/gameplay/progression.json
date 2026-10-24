@@ -1,0 +1,217 @@
+{
+  "id": "progression.foundation",
+  "statIds": [
+    "interview",
+    "investigation",
+    "photo",
+    "documents",
+    "empathy",
+    "courage"
+  ],
+  "statCap": 10,
+  "bondCap": 100,
+  "initialWallet": 1000,
+  "skills": [
+    {
+      "id": "interview",
+      "thresholds": [
+        0,
+        5,
+        15
+      ],
+      "statBonusPerLevel": 1,
+      "statId": "interview",
+      "costDiscountPerLevel": 1
+    },
+    {
+      "id": "investigation",
+      "thresholds": [
+        0,
+        5,
+        15
+      ],
+      "statBonusPerLevel": 1,
+      "statId": "investigation",
+      "costDiscountPerLevel": 1
+    },
+    {
+      "id": "photo",
+      "thresholds": [
+        0,
+        5,
+        15
+      ],
+      "statBonusPerLevel": 1,
+      "statId": "photo",
+      "costDiscountPerLevel": 1
+    },
+    {
+      "id": "documents",
+      "thresholds": [
+        0,
+        5,
+        15
+      ],
+      "statBonusPerLevel": 1,
+      "statId": "documents",
+      "costDiscountPerLevel": 1
+    },
+    {
+      "id": "empathy",
+      "thresholds": [
+        0,
+        5,
+        15
+      ],
+      "statBonusPerLevel": 1,
+      "statId": "empathy",
+      "costDiscountPerLevel": 1
+    },
+    {
+      "id": "courage",
+      "thresholds": [
+        0,
+        5,
+        15
+      ],
+      "statBonusPerLevel": 1,
+      "statId": "courage",
+      "costDiscountPerLevel": 1
+    }
+  ],
+  "items": [
+    {
+      "id": "item.fixture.recorder",
+      "nameKey": "gameplay.item.recorder",
+      "kind": "equipment",
+      "price": 200,
+      "buyEnergyCost": 1,
+      "useEnergyCost": 1,
+      "equipEnergyCost": 1,
+      "statModifiers": {
+        "documents": 1
+      },
+      "energyRestore": 0
+    },
+    {
+      "id": "item.fixture.tea",
+      "nameKey": "gameplay.item.tea",
+      "kind": "consumable",
+      "price": 50,
+      "buyEnergyCost": 1,
+      "useEnergyCost": 1,
+      "equipEnergyCost": 1,
+      "statModifiers": {},
+      "energyRestore": 2
+    }
+  ],
+  "activities": [
+    {
+      "id": "activity.fixture.train",
+      "nameKey": "gameplay.activity.train",
+      "kind": "training",
+      "target": "player",
+      "energyCost": 2,
+      "walletCost": 0,
+      "walletGain": 0,
+      "stats": {
+        "documents": 1
+      },
+      "xp": {
+        "documents": 5
+      },
+      "bond": 0,
+      "teamBond": 0
+    },
+    {
+      "id": "activity.fixture.trainInvestigation",
+      "nameKey": "gameplay.activity.trainInvestigation",
+      "kind": "training",
+      "target": "player",
+      "energyCost": 2,
+      "walletCost": 0,
+      "walletGain": 0,
+      "stats": {
+        "investigation": 1
+      },
+      "xp": {
+        "investigation": 5
+      },
+      "bond": 0,
+      "teamBond": 0
+    },
+    {
+      "id": "activity.fixture.work",
+      "nameKey": "gameplay.activity.work",
+      "kind": "work",
+      "target": "player",
+      "energyCost": 2,
+      "walletCost": 0,
+      "walletGain": 100,
+      "stats": {},
+      "xp": {},
+      "bond": 0,
+      "teamBond": 0
+    },
+    {
+      "id": "activity.fixture.hangout",
+      "nameKey": "gameplay.activity.hangout",
+      "kind": "hangout",
+      "target": "member",
+      "energyCost": 2,
+      "walletCost": 0,
+      "walletGain": 0,
+      "stats": {},
+      "xp": {},
+      "bond": 3,
+      "teamBond": 0
+    },
+    {
+      "id": "activity.fixture.special",
+      "nameKey": "gameplay.activity.special",
+      "kind": "special",
+      "target": "player",
+      "energyCost": 2,
+      "walletCost": 0,
+      "walletGain": 0,
+      "stats": {},
+      "xp": {},
+      "bond": 0,
+      "teamBond": 2
+    },
+    {
+      "id": "activity.fixture.nightStudy",
+      "nameKey": "gameplay.activity.nightStudy",
+      "kind": "night",
+      "target": "player",
+      "energyCost": 0,
+      "walletCost": 0,
+      "walletGain": 0,
+      "stats": {
+        "documents": 1
+      },
+      "xp": {
+        "documents": 2
+      },
+      "bond": 0,
+      "teamBond": 0
+    },
+    {
+      "id": "activity.fixture.nightGame",
+      "nameKey": "gameplay.activity.nightGame",
+      "kind": "night",
+      "target": "player",
+      "energyCost": 0,
+      "walletCost": 0,
+      "walletGain": 0,
+      "stats": {
+        "courage": 1
+      },
+      "xp": {
+        "courage": 2
+      },
+      "bond": 0,
+      "teamBond": 0
+    }
+  ]
+}

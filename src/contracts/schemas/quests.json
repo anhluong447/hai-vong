@@ -1,0 +1,288 @@
+{
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "nameKey": {
+        "type": "string",
+        "minLength": 1
+      },
+      "type": {
+        "enum": [
+          "main",
+          "side",
+          "general"
+        ]
+      },
+      "prerequisites": {
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "firstDay": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "lastDay": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "steps": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "materialId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "energyCost": {
+              "type": "number",
+              "minimum": 0
+            },
+            "scheduleId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "skillId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minEnergyCost": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "id",
+            "materialId",
+            "energyCost",
+            "scheduleId",
+            "skillId",
+            "minEnergyCost"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "article": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "attraction": {
+            "type": "number",
+            "minimum": 0
+          },
+          "exploitation": {
+            "type": "number",
+            "minimum": 0
+          },
+          "verification": {
+            "type": "number",
+            "minimum": 0
+          },
+          "surplusStat": {
+            "type": "string",
+            "minLength": 1
+          },
+          "surplusThreshold": {
+            "type": "number",
+            "minimum": 0
+          },
+          "attractionPerSurplus": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "attraction",
+          "exploitation",
+          "verification",
+          "surplusStat",
+          "surplusThreshold",
+          "attractionPerSurplus"
+        ],
+        "additionalProperties": false
+      },
+      "rewards": {
+        "type": "object",
+        "properties": {
+          "skillId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "xp": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "items": {
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "teamBond": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "skillId",
+          "xp",
+          "items",
+          "teamBond"
+        ],
+        "additionalProperties": false
+      },
+      "defenseEvidence": {
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "nameKey": {
+              "type": "string",
+              "minLength": 1
+            },
+            "materialId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "quality": {
+              "enum": [
+                "high",
+                "standard"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "nameKey",
+            "materialId",
+            "type",
+            "quality"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "attackFindings": {
+        "type": "array",
+        "minItems": 0,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "nameKey": {
+              "type": "string",
+              "minLength": 1
+            },
+            "materialId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "id",
+            "nameKey",
+            "materialId"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "delegation": {
+        "type": "object",
+        "properties": {
+          "listenCost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "assignmentCost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "requiredWork": {
+            "type": "number",
+            "minimum": 0
+          },
+          "statId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "speeds": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "minimum": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "work": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "minimum",
+                "work"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "listenCost",
+          "assignmentCost",
+          "requiredWork",
+          "statId",
+          "speeds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "id",
+      "nameKey",
+      "type",
+      "prerequisites",
+      "firstDay",
+      "lastDay",
+      "steps",
+      "article",
+      "rewards",
+      "defenseEvidence",
+      "attackFindings"
+    ],
+    "additionalProperties": false
+  }
+}

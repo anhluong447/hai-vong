@@ -1,0 +1,2 @@
+export function element(root,tag,attributes={}){const node=root.ownerDocument.createElement(tag);for(const [key,value]of Object.entries(attributes))node.setAttribute(key,value);return node;}
+export function actionButton(root,format,key,action,onClick,attributes={}){const node=element(root,'button',{'data-action':action,...attributes});node.textContent=format(key);node.addEventListener('click',()=>onClick(action));return node;}

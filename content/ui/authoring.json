@@ -1,0 +1,185 @@
+{
+  "id": "ui.authoring",
+  "kind": "authoring-ui",
+  "labels": {
+    "title": "authoring.title",
+    "search": "authoring.search",
+    "resources": "authoring.resources",
+    "usages": "authoring.usages",
+    "source": "authoring.source",
+    "rename": "authoring.rename",
+    "remove": "authoring.remove",
+    "replaceId": "authoring.replaceId",
+    "preview": "authoring.preview",
+    "stop": "authoring.stop",
+    "property": "authoring.property",
+    "readonly": "authoring.readonly",
+    "export": "authoring.export",
+    "import": "authoring.import",
+    "transfer": "authoring.transfer",
+    "selected": "authoring.selected",
+    "disabled": "authoring.disabled",
+    "error": "authoring.error",
+    "focused": "authoring.focused",
+    "step": "authoring.step",
+    "frame": "authoring.frame",
+    "playCue": "authoring.playCue",
+    "params": "authoring.params",
+    "applyParams": "authoring.applyParams",
+    "range": "authoring.range",
+    "recipe": "authoring.recipe",
+    "buildAssets": "authoring.buildAssets",
+    "loaded": "authoring.loaded",
+    "usage": "authoring.usage",
+    "action": "authoring.action",
+    "context": "authoring.context",
+    "result": "authoring.result",
+    "layer": "authoring.layer",
+    "actor": "authoring.actor",
+    "interaction": "authoring.interaction",
+    "scene": "authoring.scene",
+    "saveGroup": "authoring.saveGroup",
+    "resource": "authoring.resource",
+    "previous": "player.back",
+    "next": "world.continue",
+    "flow": "authoring.flow",
+    "node": "authoring.node",
+    "edge": "authoring.edge",
+    "branchSource": "authoring.branchSource",
+    "nodeId": "authoring.nodeId",
+    "choiceId": "authoring.choiceId",
+    "textKey": "authoring.textKey",
+    "addBranch": "authoring.addBranch",
+    "flag": "authoring.flag",
+    "addFlag": "authoring.addFlag",
+    "advance": "authoring.advance",
+    "fixture": "authoring.fixture",
+    "command": "authoring.command",
+    "execute": "authoring.execute",
+    "segment": "authoring.segment",
+    "previewSegment": "authoring.previewSegment",
+    "renameNode": "authoring.renameNode",
+    "migrationCandidate": "authoring.migrationCandidate",
+    "nodeSource": "authoring.nodeSource"
+  },
+  "preview": {
+    "width": 480,
+    "height": 270,
+    "stepSeconds": 0.1,
+    "actorX": 240,
+    "actorY": 230,
+    "actorScale": 2
+  },
+  "states": [
+    {
+      "id": "focused",
+      "labelKey": "authoring.focused"
+    },
+    {
+      "id": "selected",
+      "labelKey": "authoring.selected"
+    },
+    {
+      "id": "disabled",
+      "labelKey": "authoring.disabled"
+    },
+    {
+      "id": "error",
+      "labelKey": "authoring.error"
+    }
+  ],
+  "tokens": {
+    "--editor-preview-height": "270px",
+    "--editor-transfer-height": "10rem",
+    "--editor-error-color": "#ffc6b5",
+    "--editor-list-height": "12rem",
+    "--editor-fields-height": "32vh"
+  },
+  "browserPageSize": 20,
+  "references": [
+    {
+      "field": "textKey",
+      "kind": "locale"
+    },
+    {
+      "field": "nameKey",
+      "kind": "locale"
+    },
+    {
+      "field": "flagId",
+      "kind": "flags"
+    },
+    {
+      "field": "flag",
+      "kind": "flags"
+    },
+    {
+      "field": "effectId",
+      "kind": "events"
+    },
+    {
+      "field": "scheduleId",
+      "kind": "schedules"
+    },
+    {
+      "field": "sceneId",
+      "kind": "scenes"
+    },
+    {
+      "field": "actorId",
+      "kind": "actors"
+    },
+    {
+      "field": "cueId",
+      "kind": "audio"
+    },
+    {
+      "field": "prerequisites",
+      "kind": "quests"
+    },
+    {
+      "field": "mainQuestIds",
+      "kind": "quests"
+    },
+    {
+      "field": "requiredFindingIds",
+      "kind": "quests",
+      "nested": "attackFindings"
+    },
+    {
+      "field": "findingIds",
+      "kind": "quests",
+      "nested": "attackFindings"
+    },
+    {
+      "field": "evidenceId",
+      "kind": "quests",
+      "nested": "defenseEvidence"
+    },
+    {
+      "field": "attackId",
+      "kind": "hearings"
+    }
+  ],
+  "templates": {
+    "terminalNode": {
+      "id": "node.new",
+      "commands": [
+        {
+          "id": "node.new.end",
+          "op": "end"
+        }
+      ]
+    },
+    "flag": {
+      "id": "flag.new",
+      "type": "boolean",
+      "default": false,
+      "scope": "run"
+    },
+    "previewCommand": {
+      "type": "gameplay.command",
+      "action": "calendar.finishSchool"
+    }
+  }
+}

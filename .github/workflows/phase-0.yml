@@ -1,0 +1,39 @@
+name: Phase 0 local toolchain and web gates
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  windows-web:
+    runs-on: windows-2025
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          set-safe-directory: false
+      - name: Bootstrap contained portable tools and private venv
+        shell: pwsh
+        run: python -B tools/setup.py --portable
+      - name: Restore tracked binary masters
+        shell: pwsh
+        run: .venv/Scripts/python.exe -B -X utf8 tools/pipeline/restore_assets.py
+      - name: Build pinned renditions
+        shell: pwsh
+        run: .venv/Scripts/python.exe -B -X utf8 tools/pipeline/build_assets.py
+      - name: Run current gates and build the internal static artifact
+        shell: pwsh
+        run: .venv/Scripts/python.exe -B -X utf8 tools/ci.py
+      - name: Retain current evidence and local artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        env:
+          TEMP: ${{ github.workspace }}/.cache/tmp
+          TMP: ${{ github.workspace }}/.cache/tmp
+        with:
+          name: phase-0-web-evidence
+          path: |
+            .cache/reports/
+            .cache/test/screenshots/
+            dist/foundation-demo/
+          if-no-files-found: error
+          retention-days: 7

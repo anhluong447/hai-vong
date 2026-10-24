@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "generatedFromCommit": "1dfce841e8447a20ccfe55e31096c8ccce3382f8",
+  "fromContentVersion": "0.0.1",
+  "toContentVersion": "0.0.2",
+  "envelope": {
+    "schemaVersion": 1,
+    "contentVersion": "0.0.1",
+    "buildId": "0.0.1",
+    "payload": {
+      "schemaVersion": 3,
+      "formatTag": "hoi-am.side-scroll",
+      "contentRevision": "0.0.1",
+      "gameplay": {
+        "flags": {
+          "flag.foundation.visited": true,
+          "flag.fixture.hearingWon": false
+        },
+        "calendar": {
+          "day": 1,
+          "period": "afternoon",
+          "pending": null,
+          "finished": false
+        },
+        "energy": 4,
+        "wallet": 1000,
+        "audience": 0,
+        "hearing": null,
+        "members": {
+          "member.fixture.player": {
+            "stats": {
+              "interview": 2,
+              "investigation": 2,
+              "photo": 2,
+              "documents": 2,
+              "empathy": 2,
+              "courage": 2
+            },
+            "skillXP": {
+              "interview": 0,
+              "investigation": 4,
+              "photo": 0,
+              "documents": 0,
+              "empathy": 0,
+              "courage": 0
+            }
+          },
+          "member.fixture.reporter": {
+            "stats": {
+              "interview": 2,
+              "investigation": 1,
+              "photo": 1,
+              "documents": 3,
+              "empathy": 2,
+              "courage": 2
+            },
+            "skillXP": {
+              "interview": 0,
+              "investigation": 0,
+              "photo": 0,
+              "documents": 0,
+              "empathy": 0,
+              "courage": 0
+            }
+          },
+          "member.fixture.photographer": {
+            "stats": {
+              "interview": 1,
+              "investigation": 1,
+              "photo": 5,
+              "documents": 0,
+              "empathy": 1,
+              "courage": 2
+            },
+            "skillXP": {
+              "interview": 0,
+              "investigation": 0,
+              "photo": 0,
+              "documents": 0,
+              "empathy": 0,
+              "courage": 0
+            }
+          },
+          "member.fixture.senior": {
+            "stats": {
+              "interview": 5,
+              "investigation": 5,
+              "photo": 5,
+              "documents": 6,
+              "empathy": 5,
+              "courage": 5
+            },
+            "skillXP": {
+              "interview": 0,
+              "investigation": 0,
+              "photo": 0,
+              "documents": 0,
+              "empathy": 0,
+              "courage": 0
+            }
+          }
+        },
+        "quests": {
+          "quest.fixture.main": {
+            "status": "completed",
+            "performerId": "member.fixture.player",
+            "materialIds": [
+              "material.fixture.main.interview",
+              "material.fixture.main.records"
+            ],
+            "proposal": null,
+            "completedDay": 1
+          },
+          "quest.fixture.side": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          },
+          "quest.fixture.general": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          }
+        },
+        "delegation": {
+          "jobs": {},
+          "feedback": []
+        },
+        "publication": {
+          "queued": [
+            {
+              "id": "article.fixture.main",
+              "questId": "quest.fixture.main",
+              "performerId": "member.fixture.player",
+              "handedOffDay": 1,
+              "handedOffPeriod": "afternoon",
+              "attraction": 6,
+              "quality": 1
+            }
+          ],
+          "published": {}
+        },
+        "evidence": {
+          "defense": {},
+          "attack": {
+            "finding.fixture.statement": {
+              "id": "finding.fixture.statement",
+              "nameKey": "gameplay.finding.statement",
+              "materialId": "material.fixture.main.interview",
+              "sourceQuestId": "quest.fixture.main",
+              "articleId": "article.fixture.main",
+              "phase": "attack",
+              "acquiredDay": 1,
+              "used": false
+            },
+            "finding.fixture.document": {
+              "id": "finding.fixture.document",
+              "nameKey": "gameplay.finding.document",
+              "materialId": "material.fixture.main.records",
+              "sourceQuestId": "quest.fixture.main",
+              "articleId": "article.fixture.main",
+              "phase": "attack",
+              "acquiredDay": 1,
+              "used": false
+            }
+          }
+        },
+        "progression": {
+          "inventory": {},
+          "equipment": {},
+          "bonds": {
+            "member.fixture.reporter": 0,
+            "member.fixture.photographer": 0,
+            "member.fixture.senior": 0
+          },
+          "teamBond": 2
+        }
+      },
+      "story": {
+        "cursor": {
+          "chapterId": "foundation.chapter",
+          "nodeId": "visited",
+          "commandId": "farewell",
+          "stepId": "farewell"
+        },
+        "waiting": "say",
+        "pending": null,
+        "history": [
+          {
+            "anchor": "foundation.chapter/entry/greeting",
+            "textKey": "foundation.begin",
+            "params": {}
+          }
+        ],
+        "readAnchors": [
+          "foundation.chapter/entry/greeting"
+        ]
+      },
+      "world": {
+        "sceneId": "scene.courtyard",
+        "position": 120,
+        "facing": 1,
+        "pending": null,
+        "moving": false
+      },
+      "presentation": {
+        "dialogue": {
+          "textKey": "foundation.end",
+          "params": {},
+          "revealed": 1
+        },
+        "view": {
+          "world": {
+            "sceneId": "scene.courtyard",
+            "elapsed": 0.05,
+            "cameraX": 0,
+            "actors": {
+              "player": {
+                "id": "clip.fixture.idle",
+                "elapsed": 0.05,
+                "paused": false,
+                "status": "playing"
+              },
+              "reporter": {
+                "id": "clip.fixture.idle",
+                "elapsed": 0.05,
+                "paused": false,
+                "status": "playing"
+              }
+            }
+          },
+          "text": {
+            "key": "foundation.end",
+            "params": {},
+            "revealed": 1.8
+          },
+          "ui": {
+            "paused": false,
+            "screen": null,
+            "returnTo": "pause",
+            "mode": "load"
+          }
+        }
+      },
+      "audio": {
+        "paused": true,
+        "buses": {
+          "bgm": {
+            "gain": 0.8,
+            "muted": false
+          },
+          "ambience": {
+            "gain": 0.8,
+            "muted": false
+          },
+          "voice": {
+            "gain": 1,
+            "muted": false
+          },
+          "sfx": {
+            "gain": 0.8,
+            "muted": false
+          }
+        },
+        "tracks": [
+          {
+            "cueId": "cue.fixture.bgm",
+            "offset": 0
+          }
+        ]
+      },
+      "sequence": {
+        "id": "sequence.fixture.enter",
+        "index": 0,
+        "elapsed": 0.05,
+        "values": {
+          "curtainOpacity": 0.525
+        },
+        "paused": false,
+        "status": "playing"
+      },
+      "executionLedger": [
+        "quest.complete/quest.fixture.main",
+        "foundation.chapter/visited/mark"
+      ]
+    },
+    "checksum": "a7d8b25d57c0f3ee6a4bdcdfee414410fcefd2a260a2ba0c5d65731cf9e81485"
+  },
+  "expected": {
+    "sceneId": "scene.courtyard",
+    "cursor": {
+      "chapterId": "foundation.chapter",
+      "nodeId": "visited",
+      "commandId": "farewell",
+      "stepId": "farewell"
+    },
+    "energy": 4,
+    "wallet": 1000,
+    "ledger": [
+      "quest.complete/quest.fixture.main",
+      "foundation.chapter/visited/mark"
+    ],
+    "main": {
+      "status": "completed",
+      "performerId": "member.fixture.player",
+      "materialIds": [
+        "material.fixture.main.interview",
+        "material.fixture.main.records"
+      ],
+      "proposal": null,
+      "completedDay": 1
+    }
+  }
+}

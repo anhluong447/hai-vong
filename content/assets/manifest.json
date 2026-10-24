@@ -1,0 +1,93 @@
+[
+  {
+    "bytes": 328,
+    "frames": [
+      {
+        "height": 64,
+        "id": "image.fixture.actor0",
+        "width": 32,
+        "x": 1,
+        "y": 1
+      },
+      {
+        "height": 64,
+        "id": "image.fixture.actor1",
+        "width": 32,
+        "x": 34,
+        "y": 1
+      }
+    ],
+    "hash": "a57e9f6b9be1cb284b5ab0508c15883bfbcefcd38b810197e91cbb40a61879bf",
+    "height": 66,
+    "id": "atlas.fixture.actor",
+    "kind": "image",
+    "license": "LicenseRef-ProjectFixture",
+    "path": "/assets/exports/atlas.fixture.actor.a57e9f6b9be1cb28.png",
+    "required": true,
+    "width": 67
+  },
+  {
+    "bytes": 5260,
+    "duration": 0.5,
+    "hash": "b3c415ce706041ce38f4eb944bbc21793f0441f4dd4b120da57b94c330d4961e",
+    "id": "audio.fixture.tone",
+    "kind": "audio",
+    "license": "LicenseRef-ProjectFixture",
+    "path": "/assets/exports/audio.fixture.tone.b3c415ce706041ce.ogg",
+    "required": true,
+    "source": "assets/sources/tone.wav",
+    "sourceHash": "40c77a2c95667783b50a16c25e946c9aca27d1a687e65a7347608ab97d8e0f29"
+  },
+  {
+    "bytes": 247,
+    "hash": "d8d0394a27daca385a16c160dee67929a5d6d2e2f3fed3d4164163525d754a55",
+    "height": 64,
+    "id": "image.fixture.actor0",
+    "kind": "image",
+    "license": "LicenseRef-ProjectFixture",
+    "path": "/assets/exports/image.fixture.actor0.d8d0394a27daca38.png",
+    "required": true,
+    "source": "assets/sources/actor-0.png",
+    "sourceHash": "f02fc1e5f6af7ab632921d1ca3abd6610aeb553462f4ef26f2e5d03e8f3d712b",
+    "width": 32
+  },
+  {
+    "bytes": 246,
+    "hash": "defd4e2842e4b656b29e6b772200c600194c92525df81d0f0bd9784ed797546b",
+    "height": 64,
+    "id": "image.fixture.actor1",
+    "kind": "image",
+    "license": "LicenseRef-ProjectFixture",
+    "path": "/assets/exports/image.fixture.actor1.defd4e2842e4b656.png",
+    "required": true,
+    "source": "assets/sources/actor-1.png",
+    "sourceHash": "8ee0ea4f2f9f8912fe71e464d919a1646c8660e2c4493bf1c81154961303a52b",
+    "width": 32
+  },
+  {
+    "bytes": 160,
+    "hash": "195a1e1d5cc7525865a3fc8e3c2d3be36213cb7e39081296c2368ddad3278aea",
+    "height": 48,
+    "id": "image.fixture.placeholder",
+    "kind": "image",
+    "license": "LicenseRef-ProjectFixture",
+    "path": "/assets/exports/image.fixture.placeholder.195a1e1d5cc75258.png",
+    "required": true,
+    "source": "assets/sources/placeholder.png",
+    "sourceHash": "2520375f56d829a36f671ae1dd7855cfaea47a207382c55ec8b9948aeed2760a",
+    "width": 48
+  },
+  {
+    "bytes": 3218,
+    "hash": "beb1cb49835b1e6c392f4d80d3e355f405f757222df118e541258715ce715e58",
+    "height": 540,
+    "id": "image.fixture.scene",
+    "kind": "image",
+    "license": "LicenseRef-ProjectFixture",
+    "path": "/assets/exports/image.fixture.scene.beb1cb49835b1e6c.png",
+    "required": true,
+    "source": "assets/sources/scene.png",
+    "sourceHash": "fe69acce30180a5828211647a87bacc1a92e2337d99146e5e39ece2deed2656b",
+    "width": 960
+  }
+]

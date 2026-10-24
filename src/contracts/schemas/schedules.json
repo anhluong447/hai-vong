@@ -1,0 +1,55 @@
+{
+  "type": "array",
+  "minItems": 0,
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "memberId": {
+        "type": "string",
+        "minLength": 1
+      },
+      "sceneId": {
+        "type": "string",
+        "minLength": 1
+      },
+      "firstDay": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "lastDay": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "daysOfWeek": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "periods": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "required": [
+      "id",
+      "memberId",
+      "sceneId",
+      "firstDay",
+      "lastDay",
+      "daysOfWeek",
+      "periods"
+    ],
+    "additionalProperties": false
+  }
+}

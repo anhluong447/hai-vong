@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "verifiedDate": "2026-10-22",
+  "timezone": "Asia/Bangkok",
+  "status": "passed",
+  "filesVerified": 35171,
+  "totalBytes": 5105177266,
+  "protectedDocumentsVerified": 8,
+  "inventorySha256": "3962b62c8ff13fc30617322fde4b2ea83be9cc9e38c78a161f8c3490d53b8f3b",
+  "windowsExtendedLengthPaths": true,
+  "errors": []
+}

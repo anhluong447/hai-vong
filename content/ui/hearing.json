@@ -1,0 +1,82 @@
+{
+  "id": "ui.hearing",
+  "kind": "hearing-ui",
+  "tokens": {
+    "--hearing-inset": "2vh 3vw",
+    "--hearing-height": "96vh",
+    "--hearing-field-height": "13rem",
+    "--hearing-marker-size": "1.5rem",
+    "--hearing-z": "2",
+    "--menu-z": "3",
+    "--hearing-lane-color": "#d9e4ed"
+  },
+  "labels": {
+    "title": "hearing.ui.title",
+    "defenseStats": "hearing.ui.defenseStats",
+    "attackStats": "hearing.ui.attackStats",
+    "miniStats": "hearing.ui.miniStats",
+    "finalStats": "hearing.ui.finalStats",
+    "card": "hearing.ui.card",
+    "result": "hearing.ui.result",
+    "continue": "hearing.ui.continue",
+    "pause": "hearing.ui.pause",
+    "defeat": "hearing.ui.defeat",
+    "won": "hearing.ui.won",
+    "dismiss": "hearing.ui.dismiss",
+    "recovery": "hearing.ui.recovery",
+    "retry": "hearing.ui.retry",
+    "block": "hearing.ui.block",
+    "tap": "hearing.ui.tap",
+    "high": "hearing.ui.high",
+    "standard": "hearing.ui.standard",
+    "win": "hearing.ui.win",
+    "normal": "hearing.ui.normal",
+    "lose": "hearing.ui.lose",
+    "data": "hearing.ui.data",
+    "witness": "hearing.ui.witness",
+    "document": "hearing.ui.document",
+    "photo": "hearing.ui.photo",
+    "physical": "hearing.ui.physical",
+    "upper": "hearing.ui.upper",
+    "lower": "hearing.ui.lower",
+    "normalMode": "hearing.ui.normalMode",
+    "easyMode": "hearing.ui.easyMode",
+    "field": "hearing.ui.field",
+    "player": "hearing.ui.player",
+    "hint": "hearing.ui.hint",
+    "binding": "hearing.ui.binding",
+    "hintEasy": "hearing.ui.hintEasy"
+  },
+  "qualityKeys": {
+    "high": "hearing.ui.high",
+    "standard": "hearing.ui.standard"
+  },
+  "typeKeys": {
+    "data": "hearing.ui.data",
+    "witness": "hearing.ui.witness",
+    "document": "hearing.ui.document",
+    "photo": "hearing.ui.photo",
+    "physical": "hearing.ui.physical"
+  },
+  "resultKeys": {
+    "win": "hearing.ui.win",
+    "normal": "hearing.ui.normal",
+    "lose": "hearing.ui.lose"
+  },
+  "laneKeys": {
+    "upper": "hearing.ui.upper",
+    "lower": "hearing.ui.lower"
+  },
+  "modeKeys": {
+    "normal": "hearing.ui.normalMode",
+    "easy": "hearing.ui.easyMode"
+  },
+  "field": {
+    "sourceX": 0.92,
+    "targetX": 0.15,
+    "laneY": {
+      "upper": 0.28,
+      "lower": 0.72
+    }
+  }
+}

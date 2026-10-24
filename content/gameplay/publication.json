@@ -1,0 +1,14 @@
+{
+  "id": "publication.foundation",
+  "weekday": 5,
+  "period": "afternoon",
+  "baseScore": 100000,
+  "scoreCap": 100000,
+  "attractionCap": 10,
+  "multipliers": {
+    "main": 1.5,
+    "side": 1.5,
+    "general": 1
+  },
+  "packagingBonus": 0
+}

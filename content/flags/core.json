@@ -1,0 +1,14 @@
+[
+  {
+    "id": "flag.foundation.visited",
+    "type": "boolean",
+    "default": false,
+    "scope": "run"
+  },
+  {
+    "id": "flag.fixture.hearingWon",
+    "type": "boolean",
+    "default": false,
+    "scope": "run"
+  }
+]

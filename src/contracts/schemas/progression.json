@@ -1,0 +1,211 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "statCap": {
+      "type": "number",
+      "minimum": 0
+    },
+    "bondCap": {
+      "type": "number",
+      "minimum": 0
+    },
+    "initialWallet": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "thresholds": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "statBonusPerLevel": {
+            "type": "number",
+            "minimum": 0
+          },
+          "statId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "costDiscountPerLevel": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "thresholds",
+          "statBonusPerLevel",
+          "statId",
+          "costDiscountPerLevel"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "nameKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "equipment",
+              "consumable"
+            ]
+          },
+          "price": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "buyEnergyCost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "useEnergyCost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "equipEnergyCost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "statModifiers": {
+            "type": "object"
+          },
+          "energyRestore": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "nameKey",
+          "kind",
+          "price",
+          "buyEnergyCost",
+          "useEnergyCost",
+          "equipEnergyCost",
+          "statModifiers",
+          "energyRestore"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "activities": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "nameKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "training",
+              "work",
+              "hangout",
+              "special",
+              "night"
+            ]
+          },
+          "target": {
+            "enum": [
+              "player",
+              "member"
+            ]
+          },
+          "energyCost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "walletCost": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "walletGain": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "stats": {
+            "type": "object"
+          },
+          "xp": {
+            "type": "object"
+          },
+          "bond": {
+            "type": "number",
+            "minimum": 0
+          },
+          "teamBond": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "nameKey",
+          "kind",
+          "target",
+          "energyCost",
+          "walletCost",
+          "walletGain",
+          "stats",
+          "xp",
+          "bond",
+          "teamBond"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "statIds",
+    "statCap",
+    "bondCap",
+    "initialWallet",
+    "skills",
+    "items",
+    "activities"
+  ],
+  "additionalProperties": false
+}

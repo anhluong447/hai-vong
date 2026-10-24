@@ -1,13 +1,23 @@
-const tests = [];
-export function test(name,run) { tests.push({name,run}); }
-export const assert = {
-  ok(value,message = 'Expected truthy value') { if (!value) throw new Error(message); },
-  equal(actual,expected) { if (!Object.is(actual,expected)) throw new Error(`Expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`); },
-  near(actual,expected,tolerance = 1e-8) { if (!Number.isFinite(actual) || Math.abs(actual - expected) > tolerance) throw new Error(`Expected ${expected}, got ${actual}`); },
-  throws(fn,pattern) { try { fn(); } catch(error) { if (pattern && !pattern.test(error.message)) throw error; return; } throw new Error('Expected exception'); },
-};
-export async function runAll() {
-  const results = [];
-  for (const test of tests) { try { await test.run(); results.push({ name:test.name,ok:true }); } catch(error) { results.push({ name:test.name,ok:false,error:error.stack }); } }
-  return results;
+import {closeDriver} from './driver.js';
+const cases=[];
+export function test(name,run) { cases.push({name,run}); }
+export function assert(value,message='assertion failed') { if (!value) throw new Error(message); }
+export function equal(actual,expected) { if(JSON.stringify(actual)!==JSON.stringify(expected)) throw new Error(`expected ${JSON.stringify(expected)} received ${JSON.stringify(actual)}`); }
+export const params=new URLSearchParams(location.search);
+async function main() {
+  const results=[];
+  for(const path of params.getAll('module')) {
+    try { await import(path); } catch(error) { results.push({name:path,ok:false,error:String(error.stack||error)}); }
+  }
+  for(const {name,run} of cases) {
+    const started=performance.now();
+    try { const detail=await run();results.push({name,ok:true,...(detail===undefined?{}:{detail})}); } catch(error) { results.push({name,ok:false,error:String(error.stack||error)}); }
+    results.at(-1).durationMs=Math.round(performance.now()-started);
+  }
+  if(!results.length) results.push({name:'harness.empty',ok:false,error:'No tests registered'});
+  closeDriver();
+  const report={ok:results.every(r=>r.ok),passed:results.filter(r=>r.ok).length,failed:results.filter(r=>!r.ok).length,results};
+  document.querySelector('#results').textContent=JSON.stringify(report);
+  await fetch(params.get('result'),{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(report)});
 }
+main();

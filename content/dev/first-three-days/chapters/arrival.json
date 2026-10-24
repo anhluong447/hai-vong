@@ -1,0 +1,66 @@
+{
+  "id": "chapter.first3.arrival",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "gate",
+          "op": "say",
+          "textKey": "first3.line.gate"
+        },
+        {
+          "id": "map",
+          "op": "say",
+          "textKey": "first3.line.map"
+        },
+        {
+          "id": "enter-office",
+          "op": "transition",
+          "sceneId": "scene.first3.office"
+        },
+        {
+          "id": "tran-file",
+          "op": "say",
+          "textKey": "first3.line.tran-file"
+        },
+        {
+          "id": "tran-grandfather",
+          "op": "say",
+          "textKey": "first3.line.tran-grandfather"
+        },
+        {
+          "id": "khue-grandfather",
+          "op": "say",
+          "textKey": "first3.line.khue-grandfather"
+        },
+        {
+          "id": "tran-warning",
+          "op": "say",
+          "textKey": "first3.line.tran-warning"
+        },
+        {
+          "id": "khue-truth",
+          "op": "say",
+          "textKey": "first3.line.khue-truth"
+        },
+        {
+          "id": "class-direction",
+          "op": "say",
+          "textKey": "first3.line.class-direction"
+        },
+        {
+          "id": "flag-officeDone-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.officeDone",
+          "value": true
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

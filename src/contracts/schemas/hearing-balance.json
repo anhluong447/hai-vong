@@ -1,0 +1,289 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "provisional",
+        "approved"
+      ]
+    },
+    "evidenceTypes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "defense": {
+      "type": "object",
+      "properties": {
+        "minGauge": {
+          "enum": [
+            -100
+          ]
+        },
+        "maxGauge": {
+          "enum": [
+            100
+          ]
+        },
+        "startGauge": {
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
+        },
+        "bailoutRecovery": {
+          "enum": [
+            50
+          ]
+        },
+        "emptyLose": {
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 0
+        },
+        "qualityScores": {
+          "type": "object",
+          "properties": {
+            "high": {
+              "type": "object",
+              "properties": {
+                "win": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "normal": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "win",
+                "normal"
+              ],
+              "additionalProperties": false
+            },
+            "standard": {
+              "type": "object",
+              "properties": {
+                "win": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "normal": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "win",
+                "normal"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "high",
+            "standard"
+          ],
+          "additionalProperties": false
+        },
+        "heartTiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer"
+              },
+              "max": {
+                "type": "integer"
+              },
+              "bonus": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2
+              }
+            },
+            "required": [
+              "min",
+              "max",
+              "bonus"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "minGauge",
+        "maxGauge",
+        "startGauge",
+        "bailoutRecovery",
+        "emptyLose",
+        "qualityScores",
+        "heartTiers"
+      ],
+      "additionalProperties": false
+    },
+    "attack": {
+      "type": "object",
+      "properties": {
+        "baseHearts": {
+          "type": "number",
+          "minimum": 0.001
+        },
+        "wrongWord": {
+          "enum": [
+            0.5
+          ]
+        },
+        "wrongQuestion": {
+          "enum": [
+            0.5
+          ]
+        },
+        "mercyHearts": {
+          "type": "number",
+          "minimum": 0.001
+        },
+        "confrontationRatio": {
+          "enum": [
+            0.5
+          ]
+        }
+      },
+      "required": [
+        "baseHearts",
+        "wrongWord",
+        "wrongQuestion",
+        "mercyHearts",
+        "confrontationRatio"
+      ],
+      "additionalProperties": false
+    },
+    "minigame": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "number",
+          "minimum": 30,
+          "maximum": 50
+        },
+        "finalDuration": {
+          "type": "number",
+          "minimum": 3,
+          "maximum": 5
+        },
+        "hpMax": {
+          "enum": [
+            100
+          ]
+        },
+        "hitWindow": {
+          "type": "number",
+          "minimum": 0.001
+        },
+        "maxDelta": {
+          "type": "number",
+          "minimum": 0.001
+        },
+        "lanes": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "defaultMode": {
+          "enum": [
+            "normal",
+            "easy"
+          ]
+        },
+        "modes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "normal",
+              "easy"
+            ]
+          }
+        },
+        "blockCapacity": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "duration",
+        "finalDuration",
+        "hpMax",
+        "hitWindow",
+        "maxDelta",
+        "lanes",
+        "defaultMode",
+        "modes",
+        "blockCapacity"
+      ],
+      "additionalProperties": false
+    },
+    "atmosphere": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "min": {
+            "type": "integer"
+          },
+          "max": {
+            "type": "integer"
+          },
+          "textKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cueId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "min",
+          "max",
+          "textKey",
+          "cueId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "uiId": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "status",
+    "evidenceTypes",
+    "defense",
+    "attack",
+    "minigame",
+    "atmosphere",
+    "uiId"
+  ],
+  "additionalProperties": false
+}

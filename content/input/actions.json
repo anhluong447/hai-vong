@@ -1,0 +1,38 @@
+{
+  "id": "input.actions",
+  "kind": "input-actions",
+  "labels": {
+    "moveLeft": "player.action.moveLeft",
+    "moveRight": "player.action.moveRight",
+    "interact": "player.action.interact",
+    "advance": "player.action.advance",
+    "menu": "player.action.menu",
+    "back": "player.action.back",
+    "fullscreen": "player.action.fullscreen",
+    "hearingAdvance": "hearing.ui.action.hearingAdvance",
+    "laneUp": "hearing.ui.action.laneUp",
+    "laneDown": "hearing.ui.action.laneDown",
+    "deflect": "hearing.ui.action.deflect",
+    "finalTap": "hearing.ui.action.finalTap"
+  },
+  "locales": {
+    "vi": "player.locale.vi",
+    "en-XA": "player.locale.en-XA"
+  },
+  "buses": {
+    "bgm": "player.bus.bgm",
+    "ambience": "player.bus.ambience",
+    "voice": "player.bus.voice",
+    "sfx": "player.bus.sfx"
+  },
+  "contexts": {
+    "world": "hearing.ui.context.world",
+    "dialogue": "hearing.ui.context.dialogue",
+    "menu": "hearing.ui.context.menu",
+    "loading": "hearing.ui.context.loading",
+    "defense": "hearing.ui.context.defense",
+    "attack": "hearing.ui.context.attack",
+    "minigame": "hearing.ui.context.minigame",
+    "final-shot": "hearing.ui.context.final-shot"
+  }
+}

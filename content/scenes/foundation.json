@@ -1,0 +1,155 @@
+[
+  {
+    "id": "scene.courtyard",
+    "nameKey": "world.courtyard",
+    "width": 1920,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1872
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      },
+      {
+        "id": "club",
+        "x": 1660
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 540,
+        "parallax": 0.25,
+        "motion": {
+          "amplitude": 2,
+          "period": 8
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 980,
+        "y": 120,
+        "width": 960,
+        "height": 540,
+        "parallax": 1,
+        "opacity": 0.15
+      }
+    ],
+    "actors": [
+      {
+        "id": "reporter",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "talk",
+        "nameKey": "world.talk",
+        "x": 430,
+        "radius": 90,
+        "kind": "story",
+        "chapterId": "foundation.chapter"
+      },
+      {
+        "id": "club",
+        "nameKey": "world.enterClub",
+        "x": 1750,
+        "radius": 100,
+        "kind": "door",
+        "sceneId": "scene.club",
+        "spawnId": "entry"
+      }
+    ],
+    "decorations": [
+      {
+        "x": 1700,
+        "y": 280,
+        "width": 100,
+        "height": 140,
+        "fill": "#425666",
+        "opacity": 0.9
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  },
+  {
+    "id": "scene.club",
+    "nameKey": "world.club",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.6,
+        "motion": {
+          "amplitude": 2,
+          "period": 8
+        }
+      }
+    ],
+    "actors": [
+      {
+        "id": "editor",
+        "actorId": "actor.npc",
+        "x": 550
+      }
+    ],
+    "interactions": [
+      {
+        "id": "courtyard",
+        "nameKey": "world.exitClub",
+        "x": 80,
+        "radius": 90,
+        "kind": "door",
+        "sceneId": "scene.courtyard",
+        "spawnId": "club"
+      },
+      {
+        "id": "talk",
+        "nameKey": "world.talk",
+        "x": 550,
+        "radius": 90,
+        "kind": "story",
+        "chapterId": "foundation.chapter"
+      }
+    ],
+    "decorations": [
+      {
+        "x": 40,
+        "y": 280,
+        "width": 80,
+        "height": 140,
+        "fill": "#425666",
+        "opacity": 0.9
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  }
+]

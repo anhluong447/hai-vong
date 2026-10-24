@@ -1,0 +1,16 @@
+import {test,assert,equal} from '/tests/harness.js';
+import {projectSource} from '/tests/fixtures/project.js';
+import {validateProject} from '/src/domain/story/validateProject.js';
+import {GameSession} from '/src/application/GameSession.js';
+test('disabled debug capabilities reject every mutation and typed flags never replace invalid state',async()=>{
+ const {DebugSession}=await import('/src/application/DebugSession.js'),bundle=validateProject(await projectSource()).value,session=new GameSession({bundle}),off=new DebugSession({session,enabled:false,limit:10}),before=session.snapshot();assert(!off.setFlag('flag.foundation.visited',true).ok);assert(!off.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}}).ok);equal(session.snapshot(),before);
+ const debug=new DebugSession({session,enabled:true,limit:10});assert(!debug.setFlag('flag.foundation.visited','true').ok);equal(session.snapshot(),before);assert(debug.setFlag('flag.foundation.visited',true).ok);equal(session.snapshot().gameplay.flags['flag.foundation.visited'],true);assert(!debug.setFlag('absent',true).ok);
+});
+test('jump validates explicit preconditions and bounded skip stops at choices without fabricating quest progress',async()=>{
+ const {DebugSession}=await import('/src/application/DebugSession.js'),bundle=validateProject(await projectSource()).value,session=new GameSession({bundle}),debug=new DebugSession({session,enabled:true,limit:20}),initial=session.snapshot();assert(!debug.jump({chapterId:'foundation.chapter',nodeId:'visited'}).ok);assert(debug.jump({chapterId:'foundation.chapter',nodeId:'visited',fixture:initial}).ok);equal(session.snapshot().story.waiting,'say');equal(session.snapshot().gameplay.flags['flag.foundation.visited'],true);equal(Object.keys(session.snapshot().gameplay.evidence.attack).length,0);
+ assert(debug.jump({chapterId:'foundation.chapter',nodeId:'entry',fixture:initial}).ok);const skipped=debug.skip(10);assert(skipped.ok);equal(skipped.value.stopped,'choose');equal(session.snapshot().story.cursor.commandId,'route');
+});
+test('bounded command and guard trace replays from its retained checkpoint and detects divergent results',async()=>{
+ const {DebugSession}=await import('/src/application/DebugSession.js'),bundle=validateProject(await projectSource()).value,session=new GameSession({bundle}),debug=new DebugSession({session,enabled:true,limit:2});assert(debug.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}}).ok);assert(debug.execute({type:'story.step',intent:{type:'reveal',count:2}}).ok);assert(!debug.execute({type:'story.step',intent:{type:'choose',choiceId:'visit'}}).ok);const trace=debug.exportTrace();equal(trace.entries.length,2);assert(trace.truncated);const replay=DebugSession.replay(bundle,trace);assert(replay.ok);equal(replay.value,session.snapshot());const broken=structuredClone(trace);broken.entries[0].after.presentation.dialogue.revealed=99;assert(!DebugSession.replay(bundle,broken).ok);
+ const reordered=structuredClone(trace);reordered.entries[0].after=Object.fromEntries(Object.entries(reordered.entries[0].after).reverse());assert(DebugSession.replay(bundle,reordered).ok,'JSON key order changed valid trace replay');
+});

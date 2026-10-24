@@ -1,0 +1,270 @@
+[
+  {
+    "id": "playtest.fixture.gameplay",
+    "kind": "playtest-fixture",
+    "nameKey": "gameplay.quest.main",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.courtyard",
+      "spawnId": "entry"
+    },
+    "commands": [],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.fixture.hearing",
+    "kind": "playtest-fixture",
+    "nameKey": "hearing.fixture.name",
+    "initial": {
+      "calendar": {
+        "day": 17,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.courtyard",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.fixture.main",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.fixture.main",
+        "stepId": "interview"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.fixture.main",
+        "stepId": "records"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "playtest.home.17.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "playtest.home.17.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "playtest.home.17.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "playtest.home.17.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.endNight",
+        "choice": "sleep"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.finishSchool"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.fixture.side",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.fixture.side",
+        "stepId": "photo"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.fixture.side",
+        "stepId": "verify"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.listen",
+        "questId": "quest.fixture.general"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.fixture.general",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.fixture.general",
+        "stepId": "record"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "playtest.home.18.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "playtest.home.18.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "playtest.home.18.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "playtest.home.18.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.endNight",
+        "choice": "sleep"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.finishSchool"
+      },
+      {
+        "type": "hearing.command",
+        "action": "defense.start",
+        "hearingId": "hearing.fixture.defense"
+      },
+      {
+        "type": "hearing.command",
+        "action": "defense.respond",
+        "evidenceId": "evidence.fixture.general"
+      },
+      {
+        "type": "hearing.command",
+        "action": "advance"
+      },
+      {
+        "type": "hearing.command",
+        "action": "defense.respond",
+        "evidenceId": "evidence.fixture.side"
+      },
+      {
+        "type": "hearing.command",
+        "action": "advance"
+      },
+      {
+        "type": "hearing.command",
+        "action": "attack.word",
+        "wordId": "contradiction"
+      },
+      {
+        "type": "hearing.command",
+        "action": "attack.question",
+        "questionId": "question.correct"
+      },
+      {
+        "type": "hearing.command",
+        "action": "advance"
+      },
+      {
+        "type": "hearing.command",
+        "action": "advance"
+      },
+      {
+        "type": "hearing.command",
+        "action": "attack.word",
+        "wordId": "contradiction"
+      },
+      {
+        "type": "hearing.command",
+        "action": "attack.question",
+        "questionId": "question.correct"
+      },
+      {
+        "type": "hearing.command",
+        "action": "advance"
+      },
+      {
+        "type": "hearing.command",
+        "action": "advance"
+      },
+      {
+        "type": "hearing.command",
+        "action": "attack.word",
+        "wordId": "contradiction"
+      },
+      {
+        "type": "hearing.command",
+        "action": "attack.question",
+        "questionId": "question.correct"
+      }
+    ],
+    "checkpoints": [
+      {
+        "id": "defense.first",
+        "after": 22,
+        "hearingId": "hearing.fixture.defense"
+      },
+      {
+        "id": "defense.first.response",
+        "after": 23,
+        "hearingId": "hearing.fixture.defense"
+      },
+      {
+        "id": "defense.second",
+        "after": 24,
+        "hearingId": "hearing.fixture.defense"
+      },
+      {
+        "id": "attack.intro",
+        "after": 25,
+        "hearingId": "hearing.fixture.attack"
+      },
+      {
+        "id": "attack.first",
+        "after": 26,
+        "hearingId": "hearing.fixture.attack"
+      },
+      {
+        "id": "attack.first.question",
+        "after": 27,
+        "hearingId": "hearing.fixture.attack"
+      },
+      {
+        "id": "attack.second",
+        "after": 30,
+        "hearingId": "hearing.fixture.attack"
+      },
+      {
+        "id": "attack.second.question",
+        "after": 31,
+        "hearingId": "hearing.fixture.attack"
+      },
+      {
+        "id": "attack.third",
+        "after": 34,
+        "hearingId": "hearing.fixture.attack"
+      },
+      {
+        "id": "attack.third.question",
+        "after": 35,
+        "hearingId": "hearing.fixture.attack"
+      }
+    ]
+  }
+]
