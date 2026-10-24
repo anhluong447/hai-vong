@@ -50,7 +50,7 @@ export async function createGame(root,{autoStart=true}={}){
  const view=new CanvasAdapter(canvas,ui.viewport),createPorts=()=>({world:new World2D({view,catalog:bundle.catalog,assets,revision:bundle.revision,playerActorId:config.playerActorId,reducedMotion:win.matchMedia('(prefers-reduced-motion: reduce)').matches}),audio:new AudioAdapter({catalog:bundle.catalog,assets,revision:bundle.revision,buses:config.audioBuses}),sequence:new SequencePlayer(bundle.catalog.list('sequences'))});
  let {world,audio,sequence}=createPorts();
  const line=new TextView(find('line'),{text,speed:ui.textSpeed}),focus=new FocusRouter(win),lifecycle=new BrowserLifecycle({window:win,document:doc,maxDelta:ui.maxDelta});
- const controller=new AbortController(),options={signal:controller.signal};let paused=false,loading=false,disposed=false,error=profileLoaded.ok?null:profileLoaded.errors[0].code,serial=0,dialogueSignature=null,choiceSignature=null,sequenceSceneStep=null,frozen=false,loadEpoch=0,unfreeze=[],shell,playing=false,autoQueued=false;
+ const controller=new AbortController(),options={signal:controller.signal};let paused=false,loading=false,disposed=false,error=profileLoaded.ok?null:profileLoaded.errors[0].code,serial=0,dialogueSignature=null,choiceSignature=null,frozen=false,loadEpoch=0,unfreeze=[],shell,playing=false,autoQueued=false;
  const input=new InputAdapter(win,{...inputDefinition,bindings:preferences.bindings},{onGesture:()=>{if(!paused&&!frozen)void audio.unlock();},onAction:intent=>{if(intent.action==='fullscreen')void view.fullscreen();}});
  const hearing=new HearingPresenter({root:find('hearing'),catalog:bundle.catalog,format,number:(value,options)=>text.number(value,options),focus,dispatch:(action,id)=>run({type:'hearing.command',action,...(action==='defense.respond'?{evidenceId:id}:action==='defense.bailout'?{choiceId:id}:action==='attack.word'?{wordId:id}:action==='attack.question'?{questionId:id}:action==='mini.mode'?{modeId:id}:action==='mini.move'?{laneId:id}:{})}),pause,bindings:()=>preferences.bindings,separator:navigation.bindingSeparator});
  const resize=()=>{const bounds=stage.getBoundingClientRect();view.resize(bounds.width,bounds.height,win.devicePixelRatio);};const observer=new ResizeObserver(resize);observer.observe(stage);win.addEventListener('resize',resize,options);resize();
@@ -118,13 +118,16 @@ export async function createGame(root,{autoStart=true}={}){
   history:()=>session.snapshot().story.history??[],start,resume,audio:()=>audio.unlock(),fullscreen:()=>view.fullscreen(),onPause:suspend
  });
  applyPreferences();
+ function dispatchSequence(signals){for(const signal of signals){if(signal.kind==='cue')void audio.play(signal.cueId);else if(signal.kind==='scene')run({type:'scene.request',sceneId:signal.sceneId,requestId:String(++serial)});}}
  async function loadPending(){
   if(loading||disposed||frozen)return;const state=session.snapshot(),pending=state.world.pending,storyPending=state.story.waiting==='transition'?state.story.pending:null;if(!pending&&!storyPending)return;
   const owner=world,epoch=++loadEpoch;loading=true;error=null;sync();const prepared=await owner.prepare((pending??storyPending).sceneId);
   if(frozen)await new Promise(resolve=>unfreeze.push(resolve));
   if(disposed||epoch!==loadEpoch||owner!==world)return;if(prepared.ok){const result=session.execute(pending?{type:'scene.commit',requestId:pending.requestId}:{type:'story.step',intent:{type:'loaded',sceneId:storyPending.sceneId}});
    if(result.ok){setError(world.commit(prepared.value));const scene=prepared.value.scene;
-    if(sequenceSceneStep){if(sequence.snapshot().status==='waiting')sequence.ack(sequenceSceneStep);sequenceSceneStep=null;}else if(scene.sequenceId){sequence.play(scene.sequenceId);sequence.update(0);}
+    const continuation=sequence.waitingScene();
+    if(pending&&continuation?.sceneId===pending.sceneId)setError(sequence.ack(continuation.id));
+    else if(scene.sequenceId){const played=sequence.play(scene.sequenceId);setError(played);if(played.ok)dispatchSequence(sequence.update(0));}
     if(scene.cueId&&!audio.snapshot().tracks.some(t=>t.cueId===scene.cueId))setError(await audio.play(scene.cueId));}else setError(result);
   }else setError(prepared);
   if(disposed||epoch!==loadEpoch)return;loading=false;sync();if(!paused)canvas.focus();world.render(session.snapshot().world,0);queueAutosave();
@@ -141,7 +144,7 @@ export async function createGame(root,{autoStart=true}={}){
   if(active&&!h&&['idle','end'].includes(state.story.waiting)){const axis=Number(input.held('moveRight'))-Number(input.held('moveLeft'));if(axis||state.world.moving)run({type:'world.move',axis,delta:elapsed});}
   if(active&&!h&&state.story.waiting==='say'){line.update(elapsed);revealState();}
   if(active&&!h)controls.update(elapsed);
-  if(active&&!h)for(const signal of sequence.update(elapsed)){if(signal.kind==='cue')void audio.play(signal.cueId);else if(signal.kind==='scene'){sequenceSceneStep=signal.id;run({type:'scene.request',sceneId:signal.sceneId,requestId:String(++serial)});}}
+  if(active&&!h)dispatchSequence(sequence.update(elapsed));
   world.render(session.snapshot().world,h?0:elapsed);sync();void loadPending();
  }
  button('pause').addEventListener('click',pause,options);button('advance').addEventListener('click',advance,options);button('interact').addEventListener('click',interact,options);button('retry').addEventListener('click',()=>{error=null;void loadPending();},options);

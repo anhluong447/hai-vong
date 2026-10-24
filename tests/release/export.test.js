@@ -38,8 +38,12 @@ test('static artifact supports native keyboard play and records real-time presen
   await command('Emulation.setDeviceMetricsOverride',{width:960,height:720,deviceScaleFactor:2,mobile:false});await delay(80);
   const canvas=await evaluate("(()=>{const c=document.querySelector('canvas'),r=c.getBoundingClientRect();return {width:c.width,height:c.height,cssWidth:r.width,cssHeight:r.height,dpr:devicePixelRatio};})()");assert(canvas.width===Math.round(canvas.cssWidth*canvas.dpr),'DPR resize');
   await command('Emulation.setDeviceMetricsOverride',{width:profile.width,height:profile.height,deviceScaleFactor:profile.dpr,mobile:false});
-  // driver commands have a six-second deadline: gather bounded batches of RAFs.
-  const frames=[];for(let batch=0;batch<3;batch++)frames.push(...await evaluate(`new Promise(resolve=>{const values=[];let previous;function sample(now){if(previous!==undefined)values.push(now-previous);previous=now;if(values.length>=${Math.ceil(targets.sampleFrames/3)})resolve(values);else requestAnimationFrame(sample);}requestAnimationFrame(sample);})`));
+  // Collect one continuous real-RAF sample. A slow profile can take longer than
+  // a driver's six-second RPC deadline; each status read still returns promptly.
+  await evaluate(`(()=>{const probe={values:[],done:false};globalThis.releaseFrameProbe=probe;let previous;function sample(now){if(previous!==undefined)probe.values.push(now-previous);previous=now;if(probe.values.length>=${targets.sampleFrames})probe.done=true;else requestAnimationFrame(sample);}requestAnimationFrame(sample);})()`);
+  const sampleDeadline=performance.now()+90000;
+  while(!await evaluate('globalThis.releaseFrameProbe.done')){assert(performance.now()<sampleDeadline,'release.raf.timeout');await delay(100);}
+  const frames=await evaluate('globalThis.releaseFrameProbe.values');await evaluate('delete globalThis.releaseFrameProbe');
   const resources=await evaluate("performance.getEntriesByType('resource').map(r=>({name:r.name,bytes:r.encodedBodySize,duration:r.duration}))"),sorted=frames.toSorted((a,b)=>a-b),percentile=q=>sorted[Math.min(sorted.length-1,Math.floor(sorted.length*q))];
   const detail={profile,userAgent:await evaluate('navigator.userAgent'),loadMs,frames:{count:frames.length,p50Ms:percentile(.5),p95Ms:percentile(.95),maxMs:sorted.at(-1)},heap:{before:before.usedSize,after:after.usedSize,growth:after.usedSize-before.usedSize},startupBytes,journeyResourceBytes:resources.reduce((n,r)=>n+r.bytes,0),resources,canvas,textScale:1.5,screenshot:(await screenshot()).data};
   detail.targets={load:loadMs<=targets.targets.loadMs,bytes:detail.startupBytes<=targets.targets.startupBytes,frameP95:detail.frames.p95Ms<=targets.targets.frameP95Ms,heapGrowth:detail.heap.growth<=targets.targets.retainedHeapGrowthBytes};

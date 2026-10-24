@@ -16,6 +16,7 @@ export class SequencePlayer {
   }return output;
  }
  ack(stepId){if(this.state.status!=='waiting'||this.definition.steps[this.state.index]?.id!==stepId)return bad();this.state.index++;this.state.status='playing';return success(this.snapshot());}
+ waitingScene(){const step=this.definition?.steps[this.state.index];return this.state.status==='waiting'&&step?.kind==='scene'?structuredClone(step):null;}
  pause(){this.state.paused=true;}
  resume(){this.state.paused=false;}
  skip(){if(!['playing','waiting'].includes(this.state.status))return [];const signals=[];for(let i=this.state.index;i<this.definition.steps.length;i++){const step=this.definition.steps[i];if(step.kind==='tween')this.state.values[step.target]=step.to;else if(['cue','scene'].includes(step.kind)&&!(i===this.state.index&&this.state.status==='waiting'))signals.push({...step});}this.state.index=this.definition.steps.length;this.state.elapsed=0;this.state.status='complete';return signals;}
