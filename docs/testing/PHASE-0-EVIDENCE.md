@@ -132,3 +132,8 @@ Raw fresh gates: `.cache/fresh-t14-ac6e818/.cache/reports/ci.json`.
 Post-review narrow runtime changes have their own full current-source proof above.
 Physical lowend/stableFirefox/production art remain unverified. Hosted CI status
 will be recorded after the authorized feature-branch push; no public game deployment.
+
+Latest scope change2026-10-24: user explicitly says no CI setup is needed, only
+push. Stop hosted investigation/monitoring; no CI success is claimed. All seven
+local gates above remain valid. Scratch-ledger cleanup was automatically rejected
+for recovery-history risk; ledger remains intact, with tracked history preserved.

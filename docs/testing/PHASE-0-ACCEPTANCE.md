@@ -9,8 +9,9 @@ The later focused timeline fixes passed the complete current-source gates. No cl
 is made that the older fresh artifact contains those fixes. See
 [review disposition](PHASE-0-REVIEW.md) and [all decisions](PHASE-0-DECISIONS.md).
 
-Hosted Actions confirmation remains open until an actual run is observed. This is
-not an unqualified whole-P0/platform/art or twelve-week completion claim.
+The latest user explicitly deferred CI setup/confirmation and requested only the
+push. Hosted CI is not an acceptance blocker; no hosted-CI success is claimed.
+This remains a local foundation milestone, not platform/art or twelve-week acceptance.
 
 ## What the foundation exercises
 
@@ -53,8 +54,8 @@ full gate/release path provides release proof.
 - The constrained browser profile is a 4x CPU simulation on the recorded host.
   It missed the proposed smoothness target in T13. Physical lower-spec hardware
   testing remains unverified; a functional journey is not a 60-FPS claim.
-- Hosted Actions is configured but has not yet been observed for the final revision.
-  Local checks do not prove a hosted run. No public game publication is authorized.
+- The existing hosted Actions workflow is historical T13 setup; further CI work
+  was explicitly deferred by the user. Local checks do not prove hosted success. No public game publication is authorized.
 - This milestone does not fill all twelve weeks, finalize provisional balance,
   add gamepad/gallery/Steam/native installers, or guarantee filesystem-wide
   power-loss atomicity for source writing.

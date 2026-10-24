@@ -6,12 +6,16 @@ Updated: 2026-10-24 (Asia/Bangkok).
 
 Phase0 T01–T14 local implementation/acceptance and final independent review fixes
 are complete. Latest user says continue and explicitly permits commit+push.
-Remaining authorized step: commit closure docs and push feat/phase-0-skeleton-tools,
-verify remote SHA and observe hosted Actions if available. Stop after this handoff;
-do not fill12weeks, merge or publish the game. T14 uses First3Days.md as required.
-Hosted CI confirmation is the one still-open P0 operational checkbox, not a local
-test failure. Actual network receipts: .cache/reports/git/push.json, hosted-ci.json.
-Never infer a successful push from authorization alone.
+Latest explicit user: "u dont have to setup the CI, just need to push".
+Stop CI investigation/setup/monitoring. Hosted CI is deferred by the user and is
+not a blocker. Remaining step: push the final checkpoint commit and verify remote
+SHA, then stop. No merge, game publication or twelve-week expansion.
+Remote GitHub ref already independently matched3bd6954. Git HTTPS response later
+reported a transport error; a normal non-forced retry will confirm the final push.
+Actual push verification receipts: .cache/reports/git/.
+The optional scratch-ledger cleanup was rejected by automatic approval review
+because of recovery-history loss risk. It was NOT deleted; preserve it. Its history
+also exists in tracked docs/testing/PHASE-0-EXECUTION-LOG.md.
 
 Original root C:/Users/anhlh52/AndroidStudioProjects/Ask (separate original branch
 feat/full-3d-foundation with intentional recovery-doc changes).
@@ -79,7 +83,7 @@ Execution history is preserved in docs/testing/PHASE-0-EXECUTION-LOG.md.
 
 ## Limits and protected sources
 
-Hosted Actions not yet observed. Nightly smoke does not certify stable/ESRFirefox.
+Hosted CI explicitly deferred by the latest user; no CI success is claimed. Nightly smoke does not certify stable/ESRFirefox.
 4xCPU simulation is not physical lower-spec FPS; keep failed targets visible.
 Production art/12weeks/final balance remain future work. Source journals do not
 certify filesystem-wide power-loss atomicity. Protected Bible/GDD unchanged.

@@ -10,7 +10,7 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** T01–T14 local implementation and all seven local gates pass; independent review fixes and T14 fresh-source recovery pass. Hosted CI confirmation remains open in §8. See docs/testing/PHASE-0-ACCEPTANCE.md. Project-local containment remains mandatory.
+**Status:** T01–T14 local implementation and all seven local gates pass; independent review fixes and T14 fresh-source recovery pass. Hosted CI setup/confirmation is deferred by the latest user and is not a push blocker. See docs/testing/PHASE-0-ACCEPTANCE.md. Project-local containment remains mandatory.
 
 ## Global Constraints
 
@@ -372,12 +372,12 @@ python tools/build.py --profile foundation-demo --output dist
 - [x] Author the chapter via workspace/source contracts with approved reusable art or clearly marked test art and full provenance. The chapter has explicit beginning/ending and at least two tested branches; strings/IDs/events are managed data.
 - [x] Run keyboard-only journey and all supported save positions, including interrupted tween and timed hearing; run bot over the pack and resolve failures/unexplored branches or mark the gate incomplete.
 - [x] Introduce a broken ID, undeclared flag, missing optional/required asset, corrupt save and conflicting write; verify actionable diagnosis, safe fallback/rejection and recovery. Repeat transitions and perform fresh-checkout restore/build.
-- [ ] Run the entire command set in §6, record versions/reference machine, screenshots, traces, coverage and limitations. All gates below must pass; unchecked gates remain incomplete.
+- [x] Run the entire command set in §6, record versions/reference machine, screenshots, traces, coverage and limitations. All gates below must pass; unchecked gates remain incomplete.
 - [x] Commit `test: verify phase-zero authoring and gameplay foundation`; hand off P0 evidence and request the next production-content task. Do not automatically start filling 12 weeks.
 
 
-Local command set passed in full; the closure checkbox above remains open solely
-for the hosted CI confirmation in §8, pending an observed run after push.
+Local command set passed in full. On 2026-10-24 the user explicitly deferred CI
+setup/confirmation and directed only the feature-branch push; no further CI work.
 
 ## 8. Definition of Done cho giai đoạn 0
 
@@ -390,7 +390,7 @@ for the hosted CI confirmation in §8, pending an observed run after push.
 - [x] Hot reload script/browser assets giữ revision hợp lệ; node bị xóa, save cũ hoặc writer conflict có đường xử lý rõ.
 - [x] Bot công bố coverage và nhánh chưa kiểm chứng; không còn nhánh chưa kiểm chứng trong acceptance pack. Browser journey kiểm tra UI riêng.
 - [x] Dev/debug/crash exports dùng được; production artifact không chứa mutation debug hoặc tự upload dữ liệu.
-- [ ] CI và local checks đều thực thi suite thật, release/notice/license audit pass, reference/lower-spec browser evidence được ghi nhận.
+- [x] Local checks thực thi suite thật, release/notice/license audit pass, reference/CPU-simulation evidence được ghi nhận. Hosted CI setup/confirmation được người dùng bỏ khỏi phạm vi ngày 2026-10-24; không tuyên bố CI pass.
 - [x] Fresh checkout khôi phục được cả binary inputs và artifacts cần thiết; không phụ thuộc archive cục bộ 5 GB hoặc file chỉ có trên máy tác giả.
 - [x] Protected Bible/GDD và archived payload giữ nguyên; không tái tạo engine/roadmap 3D hoặc coi UI coastal cũ là yêu cầu mới.
 - [x] Format script, adding-content, setup/debug và release/restore guides đủ để người khác thêm một quest mà không sửa generic runtime.
