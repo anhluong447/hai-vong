@@ -6,12 +6,23 @@ UI and complete keyboard operation. The immediate priority is a sound gameplay
 foundation, resource management and dedicated authoring tools; all 12 weeks are
 the eventual product goal.
 
-The Phase 0 foundation is being implemented: validated content, an immutable story
-session, checkpoint saves, the first authoring workspace and a keyboard-driven 2D
-fixture world with NPC dialogue/doors, persistent keyboard menus, transactional
-save/load and settings, plus data-driven day/quest/publication/progression modules.
-Hearing foundation and dedicated editors follow next.
-See PROJECT-STATE.md for actual task evidence.
+Phase 0 T01–T14 implementation and local acceptance are complete, including
+resource pipelines, dedicated editors, saves/migrations, both hearing phases and
+the playable First3Days chapter. The chapter's art and audio remain development
+fixtures. Hosted CI was explicitly deferred; see PROJECT-STATE.md and
+[acceptance evidence](docs/testing/PHASE-0-ACCEPTANCE.md) for results and limits.
+
+For a fresh Windows x64 clone of `feat/phase-0-skeleton-tools`, follow
+[contained setup](docs/guides/SETUP.md) to provision local tools, restore bundled
+assets and rebuild renditions. Then start the player from the clone root:
+
+```powershell
+.\.venv\Scripts\python.exe -B tools/dev.py --port 8080
+```
+
+Open http://127.0.0.1:8080/. A fresh clone does not require the original machine's
+`.worktrees/phase-0` path. Browser saves and uncommitted authoring drafts are local
+data and are not transferred by Git.
 
 - [Current state and stopping point](PROJECT-STATE.md)
 - [Play the 2D fixture / browser contract](docs/engineering/BROWSER-PLATFORM.md)
@@ -30,6 +41,7 @@ Do not install or synchronize it into a user/global Codex directory. Project too
 dependencies, caches and temporary files also stay inside the project folder;
 Python packages use a private `.venv` without system site packages.
 
-The user approved Phase 0 execution on 2026-10-22. Protected design sources and the
-legacy archive remain unchanged. The development chapter is a technical fixture,
-not an expansion or rewrite of the finalized story.
+The user approved Phase 0 execution on 2026-10-22 and selected First3Days as the
+T14 narrative source. Protected design sources and the legacy archive remain
+unchanged. Narrative source documents are retained in `docs/history/narrative/`;
+adding them to Git does not authorize further gameplay or story expansion.

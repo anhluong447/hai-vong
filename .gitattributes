@@ -7,3 +7,5 @@
 /docs/design/narrative/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /docs/design/gameplay/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /docs/history/narrative/First3Days.md -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/history/narrative/characters_profile.md -text -eol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+/docs/history/narrative/master_narrative_bible.md -text -eol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

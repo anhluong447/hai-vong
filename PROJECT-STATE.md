@@ -5,22 +5,28 @@ Updated: 2026-10-24 (Asia/Bangkok).
 ## Current task and stopping point
 
 Phase0 T01–T14 local implementation/acceptance and final independent review fixes
-are complete. Latest user says continue and explicitly permits commit+push.
-Latest explicit user: "u dont have to setup the CI, just need to push".
-Stop CI investigation/setup/monitoring. Hosted CI is deferred by the user and is
-not a blocker. Remaining step: push the final checkpoint commit and verify remote
-SHA, then stop. No merge, game publication or twelve-week expansion.
-Remote GitHub ref already independently matched3bd6954. Git HTTPS response later
-reported a transport error; a normal non-forced retry will confirm the final push.
-Actual push verification receipts: .cache/reports/git/.
-The optional scratch-ledger cleanup was rejected by automatic approval review
-because of recovery-history loss risk. It was NOT deleted; preserve it. Its history
-also exists in tracked docs/testing/PHASE-0-EXECUTION-LOG.md.
+are complete. Latest user asks to check cleanliness and push any remaining docs
+to feat/phase-0-skeleton-tools. This is a documentation-only handoff; no runtime,
+CI, merge, game publication or twelve-week expansion is authorized by this task.
 
-Original root C:/Users/anhlh52/AndroidStudioProjects/Ask (separate original branch
-feat/full-3d-foundation with intentional recovery-doc changes).
-Implementation .worktrees/phase-0, branch feat/phase-0-skeleton-tools. Do not merge
-or claim the original tree clean. T14 commit ac6e818; source fix commit c599d0fea67f27929b7f03aa764f910b95ddf39e.
+Prior push exit0 and git ls-remote confirmed4058c45fb6c45b745ae5947b5f32461f420b16d7.
+The new docs handoff preserves characters_profile.md and master_narrative_bible.md
+under docs/history/narrative, byte-identical to the original root sources.
+First3Days was already tracked and is byte-identical across both checkouts.
+Raw narrative-source Git attributes preserve bytes. README/checkpoint now describe
+the completed foundation and fresh-clone setup rather than an earlier milestone.
+Root-only containment/recovery changes already exist here; the root snapshot is
+committed separately without merging its historical plan over this implementation.
+Verify final status and remote SHA after the docs commits/push. Git verification
+receipts from the prior handoff remain .cache/reports/git/.
+Optional scratch-ledger deletion was auto-review rejected; preserve the ledger.
+Its history also exists in tracked docs/testing/PHASE-0-EXECUTION-LOG.md.
+
+Original root C:/Users/anhlh52/AndroidStudioProjects/Ask is the separate historical
+branch feat/full-3d-foundation. Active implementation is .worktrees/phase-0, branch
+feat/phase-0-skeleton-tools. A fresh clone uses this feature branch as its root;
+the .worktrees/phase-0 path is specific to the original machine, not a prerequisite.
+T14 commit ac6e818; source fix c599d0fea67f27929b7f03aa764f910b95ddf39e.
 
 ## Mandatory recovery and containment
 
