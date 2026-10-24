@@ -1,0 +1,106 @@
+{
+  "id": "chapter.first3.recruit",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "room3-first",
+          "op": "say",
+          "textKey": "first3.line.room3-first"
+        },
+        {
+          "id": "van-warning",
+          "op": "say",
+          "textKey": "first3.line.van-warning"
+        },
+        {
+          "id": "khue-membership",
+          "op": "say",
+          "textKey": "first3.line.khue-membership"
+        },
+        {
+          "id": "van-memory",
+          "op": "say",
+          "textKey": "first3.line.van-memory"
+        },
+        {
+          "id": "notice",
+          "op": "say",
+          "textKey": "first3.line.notice"
+        },
+        {
+          "id": "main-start",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.start",
+            "questId": "quest.first3.room3",
+            "performerId": "member.fixture.player"
+          }
+        },
+        {
+          "id": "notice-cost",
+          "op": "say",
+          "textKey": "first3.line.notice-cost",
+          "params": {
+            "cost": 2
+          }
+        },
+        {
+          "id": "main-notice",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.collect",
+            "questId": "quest.first3.room3",
+            "stepId": "notice"
+          }
+        },
+        {
+          "id": "van-alone",
+          "op": "say",
+          "textKey": "first3.line.van-alone"
+        },
+        {
+          "id": "khue-recruit",
+          "op": "say",
+          "textKey": "first3.line.khue-recruit"
+        },
+        {
+          "id": "handshake",
+          "op": "say",
+          "textKey": "first3.line.handshake"
+        },
+        {
+          "id": "flag-recruit-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.recruit",
+          "value": false
+        },
+        {
+          "id": "flag-recruited-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.recruited",
+          "value": true
+        },
+        {
+          "id": "flag-rest1-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.rest1",
+          "value": true
+        },
+        {
+          "id": "day1-close",
+          "op": "say",
+          "textKey": "first3.line.day1-close"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

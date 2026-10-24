@@ -1,7 +1,7 @@
 {
   "id": "foundation-demo",
   "kind": "development",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "documents": [
     {
       "kind": "flags",
@@ -133,6 +133,96 @@
     {
       "kind": "config",
       "path": "../ui/debug.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "flags",
+      "path": "../dev/first-three-days/flags.json"
+    },
+    {
+      "kind": "scenes",
+      "path": "../dev/first-three-days/scenes.json"
+    },
+    {
+      "kind": "quests",
+      "path": "../dev/first-three-days/quests.json"
+    },
+    {
+      "kind": "schedules",
+      "path": "../dev/first-three-days/schedules.json"
+    },
+    {
+      "kind": "config",
+      "path": "../dev/first-three-days/runtime.json"
+    },
+    {
+      "kind": "balance",
+      "path": "../dev/first-three-days/balance.json"
+    },
+    {
+      "kind": "team",
+      "path": "../dev/first-three-days/team.json"
+    },
+    {
+      "kind": "events",
+      "path": "../dev/first-three-days/events.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/arrival.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/long.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/recruit.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/rest1.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/rest2.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/tape.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/plan.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/side-photo.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/side-source.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/pressure.json"
+    },
+    {
+      "kind": "story",
+      "path": "../dev/first-three-days/chapters/advisor.json"
+    },
+    {
+      "kind": "config",
+      "path": "../gameplay/migrations.json"
+    },
+    {
+      "kind": "playtests",
+      "path": "../dev/first-three-days/playtests.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "../dev/first-three-days/traversal.json",
       "authoringOnly": true
     }
   ]

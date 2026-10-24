@@ -2,21 +2,56 @@
   "schemaVersion": 1,
   "projectSchemaVersion": 1,
   "saveSchemaVersion": 3,
-  "requiredSuites": ["architecture", "content", "unit", "browser", "authoring", "bot"],
-  "inputRoots": ["src", "content", "styles", "assets", "tools", "tests"],
-  "inputFiles": ["index.html", "requirements-tools.txt", "tools/check.py", "tools/build.py"],
+  "requiredSuites": [
+    "architecture",
+    "content",
+    "unit",
+    "browser",
+    "authoring",
+    "bot"
+  ],
+  "inputRoots": [
+    "src",
+    "content",
+    "styles",
+    "assets",
+    "tools",
+    "tests"
+  ],
+  "inputFiles": [
+    "index.html",
+    "requirements-tools.txt",
+    "tools/check.py",
+    "tools/build.py"
+  ],
   "playerEntry": "src/bootstrap/main.js",
-  "staticFiles": ["index.html", "content/fallback/load-error.html", "content/fallback/no-javascript.html"],
+  "additionalProjectFiles": ["content/first-three-days.project.json"],
+  "staticFiles": [
+    "index.html",
+    "content/fallback/load-error.html",
+    "content/fallback/no-javascript.html"
+  ],
   "styleRoot": "styles",
   "assetRoot": "assets/exports",
   "immutableMaxAgeSeconds": 31536000,
-  "authoringSchemaKeys": ["assetImports", "playtests"],
+  "authoringSchemaKeys": [
+    "assetImports",
+    "playtests"
+  ],
   "profiles": {
     "foundation-demo": {
       "development": true,
-      "allowedDevelopmentPacks": ["foundation-demo"],
-      "allowedDevelopmentRoots": ["content/dev/foundation/"],
-      "allowedInternalLicenses": ["LicenseRef-ProjectCode", "LicenseRef-ProjectFixture"]
+      "allowedDevelopmentPacks": [
+        "foundation-demo"
+      ],
+      "allowedDevelopmentRoots": [
+        "content/dev/foundation/",
+        "content/dev/first-three-days/"
+      ],
+      "allowedInternalLicenses": [
+        "LicenseRef-ProjectCode",
+        "LicenseRef-ProjectFixture"
+      ]
     },
     "production": {
       "development": false,

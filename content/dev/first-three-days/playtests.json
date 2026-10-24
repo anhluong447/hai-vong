@@ -1,0 +1,533 @@
+[
+  {
+    "id": "playtest.first3.arrival",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.arrival",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "morning"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.gate",
+      "spawnId": "entry"
+    },
+    "commands": [],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.class",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.class",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "morning"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.classroom",
+      "spawnId": "entry"
+    },
+    "commands": [],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.recruit",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.recruit",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.room3",
+      "spawnId": "entry"
+    },
+    "commands": [],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.home1",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.home1",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.home",
+      "spawnId": "entry"
+    },
+    "commands": [],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.tape",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.tape",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.room3",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.room3",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "notice"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.endNight",
+        "choice": "sleep"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.finishSchool"
+      }
+    ],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.plan",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.plan",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.room3",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.room3",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "notice"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.endNight",
+        "choice": "sleep"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.finishSchool"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "custody"
+      }
+    ],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.home2",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.home2",
+    "initial": {
+      "calendar": {
+        "day": 1,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.room3",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.room3",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "notice"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.endNight",
+        "choice": "sleep"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.finishSchool"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "custody"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.listen",
+        "questId": "quest.first3.general"
+      },
+      {
+        "type": "effect.apply",
+        "effectId": "effect.first3.assign",
+        "params": {
+          "questId": "quest.first3.general",
+          "memberId": "member.fixture.reporter"
+        },
+        "identity": "seed.first3.assignment"
+      },
+      {
+        "type": "scene.request",
+        "sceneId": "scene.first3.home",
+        "spawnId": "entry",
+        "requestId": "seed.scene.home"
+      },
+      {
+        "type": "scene.commit",
+        "requestId": "seed.scene.home"
+      }
+    ],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.photo",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.photo",
+    "initial": {
+      "calendar": {
+        "day": 3,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.canteen",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.canteen",
+        "performerId": "member.fixture.player"
+      }
+    ],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.source",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.source",
+    "initial": {
+      "calendar": {
+        "day": 3,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.canteen",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.canteen",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.canteen",
+        "stepId": "photo"
+      }
+    ],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.pressure-main",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.pressure-main",
+    "initial": {
+      "calendar": {
+        "day": 3,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.room3",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.room3",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "notice"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "custody"
+      }
+    ],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.pressure-side",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.pressure-side",
+    "initial": {
+      "calendar": {
+        "day": 2,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.room3",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.room3",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "notice"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "custody"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.afternoon"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.requestHome",
+        "route": "fast",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.confirmHome",
+        "requestId": "seed.home.evening"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.endNight",
+        "choice": "sleep"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "calendar.finishSchool"
+      },
+      {
+        "type": "scene.request",
+        "sceneId": "scene.first3.canteen",
+        "spawnId": "entry",
+        "requestId": "seed.scene.canteen"
+      },
+      {
+        "type": "scene.commit",
+        "requestId": "seed.scene.canteen"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.canteen",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.canteen",
+        "stepId": "photo"
+      },
+      {
+        "type": "story.step",
+        "intent": {
+          "type": "start",
+          "chapterId": "chapter.first3.side-source"
+        }
+      },
+      {
+        "type": "story.step",
+        "intent": {
+          "type": "advance"
+        }
+      },
+      {
+        "type": "story.step",
+        "intent": {
+          "type": "advance"
+        }
+      },
+      {
+        "type": "story.step",
+        "intent": {
+          "type": "advance"
+        }
+      },
+      {
+        "type": "story.step",
+        "intent": {
+          "type": "advance"
+        }
+      },
+      {
+        "type": "scene.request",
+        "sceneId": "scene.first3.room3",
+        "spawnId": "entry",
+        "requestId": "seed.scene.room3"
+      },
+      {
+        "type": "scene.commit",
+        "requestId": "seed.scene.room3"
+      }
+    ],
+    "checkpoints": []
+  },
+  {
+    "id": "playtest.first3.advisor",
+    "kind": "playtest-fixture",
+    "nameKey": "first3.preview.advisor",
+    "initial": {
+      "calendar": {
+        "day": 3,
+        "period": "afternoon"
+      },
+      "energy": 10,
+      "sceneId": "scene.first3.room3",
+      "spawnId": "entry"
+    },
+    "commands": [
+      {
+        "type": "gameplay.command",
+        "action": "quest.start",
+        "questId": "quest.first3.room3",
+        "performerId": "member.fixture.player"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "notice"
+      },
+      {
+        "type": "gameplay.command",
+        "action": "quest.collect",
+        "questId": "quest.first3.room3",
+        "stepId": "custody"
+      }
+    ],
+    "checkpoints": []
+  }
+]

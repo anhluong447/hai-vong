@@ -1,6 +1,8 @@
 # Phase 0 evidence
 
-T01–T13 are implemented; T14 remains. No whole-Phase-0 completion claim yet.
+T01–T14 implementation is present. T14 final fresh-source recovery and whole-branch
+review remain pending. See [current acceptance](PHASE-0-ACCEPTANCE.md). The T13
+numbers below are historical evidence, followed by the current T14 run.
 T12's actual final gates: architecture/content pass, 119 JS + 42 Python unit,
 35 browser, 40 authoring and 7 bot tests pass. See `PROJECT-STATE.md` and its
 per-task `.cache/test/t12-final-*.json` references.
@@ -59,3 +61,45 @@ journey passes, but it does not establish lower-spec smoothness acceptance.
 
 No hosted CI run, public release, production art approval, 12-week game completion,
 stable Firefox certification or physical low-end 60-FPS result is claimed.
+
+## T14 current local evidence — 2026-10-24
+
+All seven gates passed through the private venv `tools/ci.py`: architecture/content,
+126 JS + 57 Python unit, 38 native browser, 42 authoring, 8 bot and release.
+Fingerprint `b10946e7504aff81912bfe1ccf9c4900be002a5f14c547b5b0fda1612f5efe6f`;
+raw `.cache/reports/ci.json`, versioned directory/ZIP
+`dist/foundation-demo/b10946e7504aff81912b`.
+
+The actual chapter's two complete source routes and two complete static artifact
+routes passed. Artifact routes used trusted keyboard input, saved/loaded at day 2
+and ending, and preserved execution receipts. Both finished Main and delegated
+General on day 3; Side completed only on the investigate route. Materials queued
+3/2, audience remained 0, no fake bluff card. Artifact route screenshots:
+`6f8e325c24715464.png`, `92823c8da85a6651.png` under `.cache/test/screenshots/`.
+
+Actual First3 workspace edits produced eight dirty documents, survived undo/redo
+and IndexedDB draft recovery, rendered the new scene/NPC, hot-reloaded at a stable
+anchor, and round-tripped through the authenticated batch source writer. Invalid
+references/flags and stale writes preserved the last good revision. A real old
+runtime save from `1dfce84` imported through native UI, preserved old progress and
+receipts and added only explicit defaults. Corruption preserved the good slot.
+The editor's single-flags-document assumption failed in the expanded project;
+explicit source selection fixed it, RED 2 failures → GREEN 7 focused checks.
+Two older assertions hardcoded old content versions/pack counts; corrected to
+exercise a genuinely new revision and the declared six-choice/fourteen-fixture pack.
+
+Bot reports 20/20 nodes, 6/6 choices, 6/6 assets, 14/14 fixtures, 14 terminal paths,
+103 states / 92 steps and no unexplored branches. Managed entry fixtures replay
+ordinary commands for prerequisite state. Player export excludes these fixtures.
+
+Raw exported index measurements still use real RAF, separately from controlled
+correctness clocks. Both sampled 180 frames and six runtime replacements:
+
+| Profile | Ready | Startup bytes | RAF p50 / p95 / maximum | Retained heap growth |
+| --- | --- | --- | --- | --- |
+| Reference | 1259.2 ms | 489,863 | 16.7 / 16.7 / 16.8 ms | 115,664 bytes |
+| 4x CPU simulation | 1805.7 ms | 489,863 | 50 / 133.3 / 183.4 ms | 142,272 bytes |
+
+The constrained frame target is **false** in the raw report; functional release
+success does not convert this measurement into a smoothness pass. Physical low-end,
+stable/ESR Firefox, production art and hosted Actions remain unverified.

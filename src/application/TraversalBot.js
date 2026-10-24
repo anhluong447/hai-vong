@@ -8,6 +8,10 @@ export class TraversalBot {
   const checked=validateProject(sources),errors=[],unexplored=[],nodes=new Set(),choices=new Set(),coveredNodes=new Set(),coveredChoices=new Set(),blocked=new Set(),degradedAssets=[];let states=0,steps=0,terminals=0,assetsSeen=0,fixturesSeen=0;
   if(!checked.ok)return {ok:false,errors:checked.errors,unexplored:[{reason:'validation'}],coverage:{},states,steps};
   const bundle=checked.value,stories=bundle.catalog.list('story'),assets=bundle.catalog.list('assets'),fixtures=bundle.catalog.list('playtests');
+  const fixtureResults=new Map(),probeFixture=fixture=>{
+   if(!fixtureResults.has(fixture.id))fixtureResults.set(fixture.id,Promise.resolve().then(()=>this.probeFixture(fixture,bundle)));
+   return fixtureResults.get(fixture.id);
+  };
   const locate=(kind,id)=>{const doc=sources.documents.find(doc=>doc.kind===kind&&(Array.isArray(doc.data)?doc.data.some(def=>def.id===id):doc.data.id===id));return {sourceId:doc?.sourceId??kind,pointer:Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):''};};
   const error=(code,kind,id,pointer='',related=[])=>{const location=locate(kind,id);errors.push(diagnostic(code,location.sourceId,location.pointer+pointer,[id,...related]));};
   for(const chapter of stories)for(const node of chapter.nodes){nodes.add(chapter.id+'/'+node.id);for(const command of node.commands)for(const choice of command.choices??[])choices.add([chapter.id,node.id,command.id,choice.id].join('/'));}
@@ -16,8 +20,16 @@ export class TraversalBot {
    catch{error(asset.required?'bot.asset.required':'bot.asset.unavailable','assets',asset.id);unexplored.push({kind:'asset',id:asset.id,reason:'load'});}
   }
   if(!errors.length)for(const chapter of stories){
-   const initial=new GameSession({bundle}),started=initial.execute({type:'story.step',intent:{type:'start',chapterId:chapter.id}});if(!started.ok){error('bot.command.failed','story',chapter.id,'/entryNodeId',started.errors.map(error=>error.code));continue;}
-   const queue=[{snapshot:initial.snapshot(),path:new Set()}],seen=new Set();
+   const declared=bundle.catalog.list('config').filter(config=>config.kind==='traversal-seeds').flatMap(config=>config.chapters).find(entry=>entry.chapterId===chapter.id),entries=declared?[]:[{snapshot:undefined}],queue=[],seen=new Set();
+   if(declared)for(const id of declared.fixtureIds){
+    if(!this.probeFixture){error('bot.seed.unchecked','story',chapter.id,'/entryNodeId',[id]);continue;}
+    try{const fixture=bundle.catalog.get('playtests',id),prepared=await probeFixture(fixture.value);if(!prepared?.ok||!prepared.value){error('bot.seed.failed','story',chapter.id,'/entryNodeId',[id,...(prepared?.errors??[]).map(error=>error.code)]);continue;}entries.push({snapshot:prepared.value,fixtureId:id});}
+    catch{error('bot.seed.failed','story',chapter.id,'/entryNodeId',[id]);}
+   }
+   for(const entry of entries){
+    try{const initial=new GameSession({bundle,initialState:entry.snapshot}),started=initial.execute({type:'story.step',intent:{type:'start',chapterId:chapter.id}});if(!started.ok){error('bot.command.failed','story',chapter.id,'/entryNodeId',started.errors.map(error=>error.code));continue;}queue.push({snapshot:initial.snapshot(),path:new Set()});}
+    catch{error('bot.seed.invalid','story',chapter.id,'/entryNodeId',entry.fixtureId?[entry.fixtureId]:[]);}
+   }
    while(queue.length){
     if(states>=this.maxStates||steps>=this.maxSteps){error('bot.limit','story',chapter.id);break;}
     const item=queue.shift(),state=item.snapshot,cursor=state.story.cursor,key=JSON.stringify({story:state.story.cursor,waiting:state.story.waiting,gameplay:state.gameplay,world:state.world,ledger:state.executionLedger});
@@ -38,7 +50,7 @@ export class TraversalBot {
   }
   for(const fixture of fixtures){
    if(fixture.commands.length>this.maxSteps||!this.probeFixture){unexplored.push({kind:'fixture',id:fixture.id,reason:'unchecked'});continue;}
-   try{const result=await this.probeFixture(fixture,bundle);if(!result.ok){error('bot.fixture.failed','playtests',fixture.id,'/commands',result.errors.map(error=>error.code));unexplored.push({kind:'fixture',id:fixture.id,reason:'guard'});}else fixturesSeen++;}
+   try{const result=await probeFixture(fixture);if(!result.ok){error('bot.fixture.failed','playtests',fixture.id,'/commands',result.errors.map(error=>error.code));unexplored.push({kind:'fixture',id:fixture.id,reason:'guard'});}else fixturesSeen++;}
    catch{error('bot.fixture.failed','playtests',fixture.id);unexplored.push({kind:'fixture',id:fixture.id,reason:'failed'});}
   }
   for(const id of nodes)if(!coveredNodes.has(id))unexplored.push({kind:'node',id,reason:'not-reached'});

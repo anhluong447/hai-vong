@@ -1,5 +1,5 @@
 import {test,assert,equal} from '/tests/harness.js';
-import {projectSource} from '/tests/fixtures/project.js';
+import {mechanicsSource as projectSource} from '/tests/fixtures/project.js';
 import {AssetService} from '/src/infrastructure/resources/AssetService.js';
 import {AssetCatalog} from '/src/infrastructure/resources/AssetCatalog.js';
 import {BrowserResourceDecoder} from '/src/infrastructure/resources/BrowserResourceDecoder.js';
@@ -26,4 +26,13 @@ test('a condition never established by reachable state is reported explicitly as
 });
 test('declared missing optional audio degrades to silence and remains an explicit successful probe',async()=>{
  const {runBot}=await import('/tools/workspace/BotRunner.js'),source=await projectSource();source.documents.find(doc=>doc.kind==='assets').data.push({id:'audio.optional',kind:'audio',path:'/assets/exports/optional-missing.ogg',required:false,missingPolicy:'silence'});const result=await runBot(source,{maxStates:100,maxSteps:100});assert(result.ok,JSON.stringify(result));assert(result.degradedAssets.includes('audio.optional'));
+});
+
+test('declared chapter seeds replay real fixture commands before guarded traversal and retain complete branch coverage',async()=>{
+ const source=await projectSource(),story=source.documents.find(doc=>doc.kind==='story').data;
+ story.nodes[0].commands[1].choices[0].condition={flag:'flag.foundation.visited',equals:true};
+ source.documents.push({kind:'story',sourceId:'/content/seed-bootstrap.json',data:{id:'seed.bootstrap',entryNodeId:'entry',nodes:[{id:'entry',commands:[{id:'set',op:'setFlag',flagId:'flag.foundation.visited',value:true},{id:'end',op:'end'}]}]}});
+ source.documents.push({kind:'playtests',authoringOnly:true,sourceId:'/content/seed-fixture.json',data:[{id:'playtest.seed.visited',kind:'playtest-fixture',nameKey:'foundation.begin',initial:{calendar:{day:1,period:'afternoon'},energy:10,sceneId:'scene.courtyard',spawnId:'entry'},commands:[{type:'story.step',intent:{type:'start',chapterId:'seed.bootstrap'}}],checkpoints:[]}]});
+ source.documents.push({kind:'config',authoringOnly:true,sourceId:'/content/seed-config.json',data:{id:'traversal.test',kind:'traversal-seeds',chapters:[{chapterId:'foundation.chapter',fixtureIds:['playtest.seed.visited']}]}});
+ const result=await run(source);assert(result.ok,JSON.stringify(result));equal(result.coverage.choices,{seen:1,total:1});equal(result.coverage.nodes,{seen:3,total:3});equal(result.unexplored,[]);
 });

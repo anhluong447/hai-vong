@@ -29,5 +29,6 @@
   "navigationId": "ui.navigation",
   "actionLabelsId": "input.actions",
   "gameplayConfigId": "balance.foundation",
-  "hearingBalanceId": "hearing.balance.fixture"
+  "hearingBalanceId": "hearing.balance.fixture",
+  "migrationConfigId": "migration.phase0"
 }

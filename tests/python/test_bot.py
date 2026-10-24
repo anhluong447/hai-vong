@@ -5,7 +5,7 @@ sys.path.insert(0,str(ROOT/'tools/pipeline'))
 class BotPipelineTests(unittest.TestCase):
     def test_real_project_bot_writes_current_coverage_artifact(self):
         from bot import run_bot
-        result=run_bot(ROOT,pack='foundation-demo');self.assertTrue(result['ok'],result);self.assertEqual(result['coverage']['choices'],{'seen':1,'total':1});self.assertEqual(result['coverage']['fixtures'],{'seen':2,'total':2});self.assertTrue((ROOT/result['artifact']).is_file())
+        result=run_bot(ROOT,pack='foundation-demo');self.assertTrue(result['ok'],result);self.assertEqual(result['coverage']['choices'],{'seen':6,'total':6});self.assertEqual(result['coverage']['fixtures'],{'seen':14,'total':14});self.assertTrue((ROOT/result['artifact']).is_file())
     def test_pack_missing_a_required_binary_returns_non_success_and_a_local_report(self):
         from bot import run_bot
         with tempfile.TemporaryDirectory() as temp:

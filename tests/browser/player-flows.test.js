@@ -6,7 +6,7 @@ const enter=()=>press({key:'Enter',code:'Enter',virtualKey:13});
 const until=async check=>{for(let i=0;i<150;i++){if(await check())return;await new Promise(r=>setTimeout(r,20));}throw new Error('player flow timed out');};
 async function mount(){
  if(!document.querySelector('link[data-player-style]'))await new Promise((resolve,reject)=>{const link=document.createElement('link');link.rel='stylesheet';link.href='/styles/base.css';link.dataset.playerStyle='true';link.onload=resolve;link.onerror=reject;document.head.append(link);});
- const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);document.body.append(root);return {root,game:await createGame(root,{autoStart:false})};
+ const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);root.dataset.project='/content/project.json';document.body.append(root);return {root,game:await createGame(root,{autoStart:false})};
 }
 test('real runtime saves and restores tween menu and pending scene with old views retained on failure',async()=>{
  const {root,game}=await mount();

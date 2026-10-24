@@ -1,0 +1,73 @@
+{
+  "id": "traversal.first3",
+  "kind": "traversal-seeds",
+  "chapters": [
+    {
+      "chapterId": "chapter.first3.arrival",
+      "fixtureIds": [
+        "playtest.first3.arrival"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.long",
+      "fixtureIds": [
+        "playtest.first3.class"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.recruit",
+      "fixtureIds": [
+        "playtest.first3.recruit"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.rest1",
+      "fixtureIds": [
+        "playtest.first3.home1"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.tape",
+      "fixtureIds": [
+        "playtest.first3.tape"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.plan",
+      "fixtureIds": [
+        "playtest.first3.plan"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.rest2",
+      "fixtureIds": [
+        "playtest.first3.home2"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.side-photo",
+      "fixtureIds": [
+        "playtest.first3.photo"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.side-source",
+      "fixtureIds": [
+        "playtest.first3.source"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.pressure",
+      "fixtureIds": [
+        "playtest.first3.pressure-main",
+        "playtest.first3.pressure-side"
+      ]
+    },
+    {
+      "chapterId": "chapter.first3.advisor",
+      "fixtureIds": [
+        "playtest.first3.advisor"
+      ]
+    }
+  ]
+}

@@ -30,7 +30,8 @@ the complete format fallback and uses the same validation.
    fields. `say` requires a text key and matching parameters. `choose` needs stable
    choice IDs, existing targets and optional typed flag conditions. `jump` points
    to a node. Every intentional terminal ends with `end`.
-3. Use **Add flag** with a full declaration: type, default, run/profile scope and
+3. Select the target flag source and use **Add flag** with a full declaration:
+   type, default, run/profile scope and
    enum values or integer bounds when appropriate. A reference to an undeclared
    flag or a value of the wrong type is rejected. To change several mutually
    dependent fields, import a complete valid candidate or use a Workspace group.
@@ -110,5 +111,25 @@ references atomically; they do not create save migrations automatically.
 .venv/Scripts/python.exe -B tools/check.py browser
 ```
 
-Hot reload, whole-pack traversal and release acceptance are subsequent Phase 0
-tasks. These inspectors do not certify a complete chapter or the 12-week game.
+See [FIRST-THREE-DAYS.md](FIRST-THREE-DAYS.md) for the real authored acceptance
+chapter, workspace-to-source round trip, native routes, traversal and export tests.
+The 12-week game remains outside Phase 0.
+
+## Typed gameplay effects and content defaults
+
+Story `emitEffect` can select `gameplay.command` with an `action` and its registered
+fields (calendar/home/rest, quest listen/start/collect). `gameplay.assign` takes
+`questId` and `memberId`; it obtains a fresh assignment quote
+and confirms atomically. These capabilities use the ordinary guards, costs and
+transitions, preserving the exact story continuation. Give each effect a stable
+`executeOnce` anchor. Failed guards grant no outcome; reload cannot replay a reward.
+`src/contracts/GameplayActions.js` is the bounded technical capability contract;
+quest IDs, costs, schedule and outcome payloads belong in content.
+
+For additive content revisions, the runtime's `migrationConfigId` selects a
+`config.kind = save-migrations` definition. Each `steps` entry declares `from`,
+`to`, `addFlags` and `addQuests`; shared validation checks references and a chain
+to the current version. The resolver obtains defaults from the new catalogs and
+adds only missing entries. Renames/removals require reviewed mappings through the
+existing migration interfaces; additive defaults cannot repair removed anchors.
+Test an actual old slot, not just a newly fabricated current snapshot.

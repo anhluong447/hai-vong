@@ -33,7 +33,7 @@ export class MigrationRegistry {
      if(from!==to&&Object.hasOwn(state.gameplay.flags,to))return bad('save.migration.flagConflict');state.gameplay.flags[to]=state.gameplay.flags[from];if(from!==to)delete state.gameplay.flags[from];
     }
     for(const [flag,values]of Object.entries(step.flagValues??{})){const value=state.gameplay.flags[flag];if(Object.hasOwn(values,String(value)))state.gameplay.flags[flag]=structuredClone(values[String(value)]);}
-    state.contentRevision=step.to;
+    state={...missingDefaults(step.defaults??{},state),contentRevision:step.to};
    }
    return success(state);
   }catch{return bad('save.migration.invalid');}

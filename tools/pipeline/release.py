@@ -141,6 +141,11 @@ def assemble(root,*,profile,output,receipts,verify=None):
         for doc in documents:add(doc['name'],encoded({key:value for key,value in doc['data'].items() if key in used} if doc['kind']=='locale' else doc['data']))
         runtime_project={**project,'schemas':{key:path for key,path in project['schemas'].items() if key not in policy['authoringSchemaKeys']}}
         add('content/project.json',encoded(runtime_project))
+        additional=policy.get('additionalProjectFiles',[])
+        for name in additional:
+            metadata=read(root,name)
+            if any(metadata.get(key)!=project.get(key) for key in ['schemaVersion','contentVersion','packs','schemas','defaultLocale']):return failed('release.project.incompatible',name)
+            add(name,encoded({**metadata,'schemas':runtime_project['schemas']}))
         for ref in runtime_project['schemas'].values():
             path=(root/'content'/ref).resolve();path.relative_to(root);add(path.relative_to(root).as_posix(),path.read_bytes())
         for asset in manifest:
@@ -153,6 +158,9 @@ def assemble(root,*,profile,output,receipts,verify=None):
         for name,raw in payload.items():path=local(stage,name);path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(raw)
         validated=run_browser(CODE_ROOT,modules=[],page='/tools/workspace/validate.html',payload=load_sources(stage))
         if not validated['ok']:return validated
+        for name in additional:
+            validated=run_browser(CODE_ROOT,modules=[],page='/tools/workspace/validate.html',payload=load_sources(stage,project_path=name))
+            if not validated['ok']:return validated
         evidence=verify(stage) if verify else None
         if evidence and not evidence['ok']:return {'ok':False,'errors':[{'code':'release.browser.failed','sourceId':'release','pointer':'/','relatedIds':[]}],'evidence':evidence}
         destination=local(output,profile+'/'+fingerprint[:20]);destination.parent.mkdir(parents=True,exist_ok=True)

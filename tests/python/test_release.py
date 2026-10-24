@@ -55,3 +55,12 @@ class ReleaseTests(unittest.TestCase):
             before=(output/'foundation-demo/latest.json').read_bytes()
             again=assemble(root,profile='foundation-demo',output=output,receipts=self.receipts(root))
             self.assertFalse(again['ok'],again);self.assertEqual((output/'foundation-demo/latest.json').read_bytes(),before)
+
+    def test_managed_additional_player_project_is_validated_and_exported_without_authoring_schemas(self):
+        from release import assemble
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);self.fixture(root)
+            self.mutate(root/'content/pipeline/release.json',lambda data:data.update(additionalProjectFiles=['content/first-three-days.project.json']))
+            result=assemble(root,profile='foundation-demo',output=root/'dist',receipts=self.receipts(root));self.assertTrue(result['ok'],result)
+            path=Path(result['value']['directory'])/'content/first-three-days.project.json';self.assertTrue(path.is_file(),'runtime project referenced by the real player entry is absent')
+            metadata=json.loads(path.read_bytes());self.assertEqual(metadata['runtimeConfigId'],'runtime.first3');self.assertNotIn('playtests',metadata['schemas']);self.assertNotIn('assetImports',metadata['schemas'])

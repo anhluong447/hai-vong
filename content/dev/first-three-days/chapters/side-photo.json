@@ -1,0 +1,55 @@
+{
+  "id": "chapter.first3.side-photo",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "tray",
+          "op": "say",
+          "textKey": "first3.line.tray"
+        },
+        {
+          "id": "tray-cost",
+          "op": "say",
+          "textKey": "first3.line.tray-cost",
+          "params": {
+            "cost": 3
+          }
+        },
+        {
+          "id": "side-photo",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.collect",
+            "questId": "quest.first3.canteen",
+            "stepId": "photo"
+          }
+        },
+        {
+          "id": "flag-photo-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.photo",
+          "value": false
+        },
+        {
+          "id": "flag-source-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.source",
+          "value": true
+        },
+        {
+          "id": "find-lan",
+          "op": "say",
+          "textKey": "first3.line.find-lan"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

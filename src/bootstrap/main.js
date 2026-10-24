@@ -26,7 +26,7 @@ import {defaultPreferences,remapBinding} from '../contracts/PlayerPreferences.js
 import {createRunState} from '../domain/story/RunState.js';
 import {DialogueControls} from '../presentation/ui/DialogueControls.js';
 import {RUN_SCHEMA_VERSION} from '../contracts/RunSnapshot.js';
-import {schemaStepsFor} from '../application/SaveMigrationPolicy.js';
+import {schemaStepsFor,contentStepsFor} from '../application/SaveMigrationPolicy.js';
 import {diagnostic,failure} from '../contracts/Diagnostic.js';
 import {HearingPresenter} from './HearingPresenter.js';
 import {TRANSIENT_HEARING_ACTIONS} from '../contracts/HearingActions.js';
@@ -79,7 +79,7 @@ export async function createGame(root,{autoStart=true}={}){
  function revealState(){const state=session.snapshot();if(state.story.waiting!=='say')return;const count=Math.floor(line.snapshot().revealed)-state.presentation.dialogue.revealed;if(count>0)run({type:'story.step',intent:{type:'reveal',count}});}
  function advance(manual=true){if(manual)controls.stop();if(session.snapshot().story.waiting!=='say')return;if(!line.complete){line.reveal();revealState();}else{run({type:'story.step',intent:{type:'advance'}});canvas.focus();}}
  function interact(){error=null;run({type:'world.interact',requestId:String(++serial)});void loadPending();}
- const migrations=new MigrationRegistry({schemaVersion:RUN_SCHEMA_VERSION,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle)});
+ const migrations=new MigrationRegistry({schemaVersion:RUN_SCHEMA_VERSION,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle),contentSteps:contentStepsFor(bundle)});
  const validateEnvelope=async envelope=>{const decoded=await SaveCodec.decode(envelope);if(!decoded.ok)return decoded;const migrated=migrations.migrate(decoded.value,envelope.contentVersion);return migrated.ok?session.validate(migrated.value):migrated;};
  const repository=new IndexedSaveRepository({name:bundle.project.id+'.player-saves',manualSlots:navigation.manualSlots,autoSlots:navigation.autoSlots,validate:validateEnvelope,integrity:SaveCodec.decode});
  const runtime=runtimeCheckpoint({

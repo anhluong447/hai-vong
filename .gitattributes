@@ -6,3 +6,4 @@
 /archive/legacy-2026-10-22/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /docs/design/narrative/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /docs/design/gameplay/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/history/narrative/First3Days.md -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

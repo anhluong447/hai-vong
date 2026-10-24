@@ -1,0 +1,65 @@
+[
+  {
+    "id": "effect.first3.command",
+    "handlerId": "gameplay.command",
+    "paramsSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "performerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stepId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "route": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requestId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "choice": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "id": "effect.first3.assign",
+    "handlerId": "gameplay.assign",
+    "paramsSchema": {
+      "type": "object",
+      "properties": {
+        "questId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memberId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "questId",
+        "memberId"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

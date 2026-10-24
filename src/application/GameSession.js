@@ -5,7 +5,7 @@ import {stepStory} from '../domain/story/stepStory.js';
 import {applyEffect} from '../domain/story/applyEffect.js';
 import {worldCommand} from '../domain/world/worldCommands.js';
 import {gameplayCommand} from '../domain/gameplay/commands.js';
-import {gameplayEffects} from '../domain/gameplay/progression.js';
+import {gameplayEffects} from '../domain/gameplay/effects.js';
 import {hearingCommand} from '../domain/hearings/commands.js';
 /** One owner of committed state. Failed transitions never assign a partial result. */
 export class GameSession {

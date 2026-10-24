@@ -1,0 +1,36 @@
+[
+  {
+    "id": "schedule.first3.room3",
+    "memberId": "member.fixture.reporter",
+    "sceneId": "scene.first3.room3",
+    "firstDay": 1,
+    "lastDay": 5,
+    "daysOfWeek": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "periods": [
+      "afternoon"
+    ]
+  },
+  {
+    "id": "schedule.first3.canteen",
+    "memberId": "member.fixture.reporter",
+    "sceneId": "scene.first3.canteen",
+    "firstDay": 1,
+    "lastDay": 5,
+    "daysOfWeek": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "periods": [
+      "afternoon"
+    ]
+  }
+]

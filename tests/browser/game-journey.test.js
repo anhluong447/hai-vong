@@ -4,7 +4,7 @@ import {press,keyDown,keyUp} from '/tests/driver.js';
 const until=async check=>{for(let i=0;i<120;i++){if(check())return;await new Promise(r=>setTimeout(r,20));}throw new Error('game did not settle');};
 test('real game shell supports walking NPC dialogue doors and pause using keyboard only',async()=>{
  const html=await(await fetch('/index.html')).text(),page=new DOMParser().parseFromString(html,'text/html');
- const root=document.importNode(page.querySelector('[data-game]'),true);document.body.append(root);let game;
+ const root=document.importNode(page.querySelector('[data-game]'),true);root.dataset.project='/content/project.json';document.body.append(root);let game;
  try{
   game=await createGame(root,{autoStart:false});root.querySelector('[data-action=new]').focus();await press({key:'Enter',code:'Enter',virtualKey:13});await until(()=>root.querySelector('[data-role=menu]').hidden&&root.dataset.ready==='true');equal(game.session.snapshot().world.sceneId,'scene.courtyard');assert(root.textContent.includes('H\u1ed3i \u00c2m'));root.querySelector('canvas').focus();
   equal(game.sequence.snapshot().id,'sequence.fixture.enter');game.step(0.1);assert(game.sequence.snapshot().values.curtainOpacity>0&&game.sequence.snapshot().values.curtainOpacity<0.6);

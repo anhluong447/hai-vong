@@ -1,0 +1,80 @@
+{
+  "id": "chapter.first3.advisor",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "empty-camera",
+          "op": "say",
+          "textKey": "first3.line.empty-camera"
+        },
+        {
+          "id": "no-fake-proof",
+          "op": "say",
+          "textKey": "first3.line.no-fake-proof"
+        },
+        {
+          "id": "nguyen-witness",
+          "op": "say",
+          "textKey": "first3.line.nguyen-witness"
+        },
+        {
+          "id": "nguyen-advisor",
+          "op": "say",
+          "textKey": "first3.line.nguyen-advisor"
+        },
+        {
+          "id": "advisor-cost",
+          "op": "say",
+          "textKey": "first3.line.advisor-cost",
+          "params": {
+            "cost": 2
+          }
+        },
+        {
+          "id": "main-advisor",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.collect",
+            "questId": "quest.first3.room3",
+            "stepId": "advisor"
+          }
+        },
+        {
+          "id": "van-light",
+          "op": "say",
+          "textKey": "first3.line.van-light"
+        },
+        {
+          "id": "flag-advisor-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.advisor",
+          "value": false
+        },
+        {
+          "id": "flag-complete-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.complete",
+          "value": true
+        },
+        {
+          "id": "chapter-ending",
+          "op": "say",
+          "textKey": "first3.line.chapter-ending"
+        },
+        {
+          "id": "automatic-newsroom",
+          "op": "say",
+          "textKey": "first3.line.automatic-newsroom"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,720 @@
+[
+  {
+    "id": "scene.first3.gate",
+    "nameKey": "first3.scene.gate",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "school-map",
+        "nameKey": "first3.interact.school-map",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.arrival"
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  },
+  {
+    "id": "scene.first3.office",
+    "nameKey": "first3.scene.office",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "class-door",
+        "nameKey": "first3.interact.class-door",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.classroom",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.officeDone",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  },
+  {
+    "id": "scene.first3.classroom",
+    "nameKey": "first3.scene.classroom",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "long-class",
+        "nameKey": "first3.interact.long-class",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.long",
+        "condition": {
+          "flag": "flag.first3.classDone",
+          "equals": false
+        }
+      },
+      {
+        "id": "corridor-door",
+        "nameKey": "first3.interact.corridor-door",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.corridor",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.classDone",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  },
+  {
+    "id": "scene.first3.corridor",
+    "nameKey": "first3.scene.corridor",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "room3-door",
+        "nameKey": "first3.interact.room3-door",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.room3",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.classDone",
+          "equals": true
+        }
+      },
+      {
+        "id": "canteen-door",
+        "nameKey": "first3.interact.canteen-door",
+        "x": 720,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.canteen",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.canteenAccepted",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  },
+  {
+    "id": "scene.first3.room3",
+    "nameKey": "first3.scene.room3",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "van-recruit",
+        "nameKey": "first3.interact.van-recruit",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.recruit",
+        "condition": {
+          "flag": "flag.first3.recruit",
+          "equals": true
+        }
+      },
+      {
+        "id": "cabinet",
+        "nameKey": "first3.interact.cabinet",
+        "x": 720,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.tape",
+        "condition": {
+          "flag": "flag.first3.tape",
+          "equals": true
+        }
+      },
+      {
+        "id": "long-plan",
+        "nameKey": "first3.interact.long-plan",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.plan",
+        "condition": {
+          "flag": "flag.first3.plan",
+          "equals": true
+        }
+      },
+      {
+        "id": "khoa",
+        "nameKey": "first3.interact.khoa",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.pressure",
+        "condition": {
+          "flag": "flag.first3.pressure",
+          "equals": true
+        }
+      },
+      {
+        "id": "nguyen",
+        "nameKey": "first3.interact.nguyen",
+        "x": 720,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.advisor",
+        "condition": {
+          "flag": "flag.first3.advisor",
+          "equals": true
+        }
+      },
+      {
+        "id": "home-door",
+        "nameKey": "first3.interact.home-door",
+        "x": 80,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.home",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.recruited",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  },
+  {
+    "id": "scene.first3.home",
+    "nameKey": "first3.scene.home",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "rest-one",
+        "nameKey": "first3.interact.rest-one",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.rest1",
+        "condition": {
+          "flag": "flag.first3.rest1",
+          "equals": true
+        }
+      },
+      {
+        "id": "rest-two",
+        "nameKey": "first3.interact.rest-two",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.rest2",
+        "condition": {
+          "flag": "flag.first3.rest2",
+          "equals": true
+        }
+      },
+      {
+        "id": "school-day2",
+        "nameKey": "first3.interact.school-day2",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.room3",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.day2",
+          "equals": true
+        }
+      },
+      {
+        "id": "school-day3",
+        "nameKey": "first3.interact.school-day3",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.corridor",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.day3",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  },
+  {
+    "id": "scene.first3.canteen",
+    "nameKey": "first3.scene.canteen",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "tray",
+        "nameKey": "first3.interact.tray",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.side-photo",
+        "condition": {
+          "flag": "flag.first3.photo",
+          "equals": true
+        }
+      },
+      {
+        "id": "kitchen",
+        "nameKey": "first3.interact.kitchen",
+        "x": 850,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.side-source",
+        "condition": {
+          "flag": "flag.first3.source",
+          "equals": true
+        }
+      },
+      {
+        "id": "back-corridor",
+        "nameKey": "first3.interact.back-corridor",
+        "x": 80,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.corridor",
+        "spawnId": "entry"
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "cueId": "cue.fixture.bgm",
+    "sequenceId": "sequence.fixture.enter"
+  }
+]

@@ -62,7 +62,12 @@ export-only. Unknown content revisions and removed unmapped anchors are rejected
 cursor, history, read markers and execution ledger; flag rename/type conversions
 are explicit. Authors must map every renamed reward identity as well as cursor
 anchors. An arbitrary story edit is not automatically save-compatible. No production
-content-release migration is registered yet. RunSnapshot 3 retains T08's explicit
+production content-release migration is registered yet. The Phase 0 development
+revision `0.0.1 → 0.0.2` is registered through managed `migration.phase0` defaults:
+17 new flags and 3 quest records, preserving every existing value and receipt.
+The resolver derives these entries from the validated catalogs, never from UI copy.
+A genuine old-runtime slot and native import/corruption regression verify the path;
+see [First3Days](../guides/FIRST-THREE-DAYS.md). RunSnapshot 3 retains T08's explicit
 known-v1 upgrade and adds a tagged-v2 migration for hearings; see
 [gameplay](GAMEPLAY-CONTRACT.md) and [hearings](HEARING-CONTRACT.md).
 T12 adds source-revision fingerprints; T13

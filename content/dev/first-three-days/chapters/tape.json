@@ -1,0 +1,85 @@
+{
+  "id": "chapter.first3.tape",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "cabinet",
+          "op": "say",
+          "textKey": "first3.line.cabinet"
+        },
+        {
+          "id": "cassette",
+          "op": "say",
+          "textKey": "first3.line.cassette"
+        },
+        {
+          "id": "tape-witness",
+          "op": "say",
+          "textKey": "first3.line.tape-witness"
+        },
+        {
+          "id": "tape-collapse",
+          "op": "say",
+          "textKey": "first3.line.tape-collapse"
+        },
+        {
+          "id": "tape-custody",
+          "op": "say",
+          "textKey": "first3.line.tape-custody",
+          "params": {
+            "cost": 2
+          }
+        },
+        {
+          "id": "main-custody",
+          "op": "emitEffect",
+          "effectId": "effect.first3.command",
+          "params": {
+            "action": "quest.collect",
+            "questId": "quest.first3.room3",
+            "stepId": "custody"
+          }
+        },
+        {
+          "id": "van-fear",
+          "op": "say",
+          "textKey": "first3.line.van-fear"
+        },
+        {
+          "id": "khue-stay",
+          "op": "say",
+          "textKey": "first3.line.khue-stay"
+        },
+        {
+          "id": "tape-unresolved",
+          "op": "say",
+          "textKey": "first3.line.tape-unresolved"
+        },
+        {
+          "id": "flag-tape-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.tape",
+          "value": false
+        },
+        {
+          "id": "flag-plan-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.plan",
+          "value": true
+        },
+        {
+          "id": "long-arrives",
+          "op": "say",
+          "textKey": "first3.line.long-arrives"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

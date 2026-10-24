@@ -1,0 +1,179 @@
+[
+  {
+    "id": "quest.first3.room3",
+    "nameKey": "first3.quest.room3",
+    "type": "main",
+    "prerequisites": [],
+    "firstDay": 1,
+    "lastDay": 5,
+    "steps": [
+      {
+        "id": "notice",
+        "materialId": "material.first3.notice",
+        "energyCost": 2,
+        "scheduleId": "schedule.first3.room3",
+        "skillId": "investigation",
+        "minEnergyCost": 2
+      },
+      {
+        "id": "custody",
+        "materialId": "material.first3.custody",
+        "energyCost": 2,
+        "scheduleId": "schedule.first3.room3",
+        "skillId": "investigation",
+        "minEnergyCost": 2
+      },
+      {
+        "id": "advisor",
+        "materialId": "material.first3.advisor",
+        "energyCost": 2,
+        "scheduleId": "schedule.first3.room3",
+        "skillId": "investigation",
+        "minEnergyCost": 2
+      }
+    ],
+    "article": {
+      "id": "article.first3.room3",
+      "attraction": 6,
+      "exploitation": 1,
+      "verification": 1,
+      "surplusStat": "investigation",
+      "surplusThreshold": 3,
+      "attractionPerSurplus": 0
+    },
+    "rewards": {
+      "skillId": "investigation",
+      "xp": 4,
+      "items": [],
+      "teamBond": 2
+    },
+    "defenseEvidence": [],
+    "attackFindings": [
+      {
+        "id": "finding.first3.notice",
+        "nameKey": "first3.finding.notice",
+        "materialId": "material.first3.notice"
+      },
+      {
+        "id": "finding.first3.custody",
+        "nameKey": "first3.finding.custody",
+        "materialId": "material.first3.custody"
+      },
+      {
+        "id": "finding.first3.advisor",
+        "nameKey": "first3.finding.advisor",
+        "materialId": "material.first3.advisor"
+      }
+    ]
+  },
+  {
+    "id": "quest.first3.canteen",
+    "nameKey": "first3.quest.canteen",
+    "type": "side",
+    "prerequisites": [],
+    "firstDay": 1,
+    "lastDay": 5,
+    "steps": [
+      {
+        "id": "photo",
+        "materialId": "material.first3.canteen.photo",
+        "energyCost": 3,
+        "scheduleId": "schedule.first3.canteen",
+        "skillId": "photo",
+        "minEnergyCost": 2
+      },
+      {
+        "id": "verify",
+        "materialId": "material.first3.canteen.verify",
+        "energyCost": 3,
+        "scheduleId": "schedule.first3.canteen",
+        "skillId": "photo",
+        "minEnergyCost": 2
+      }
+    ],
+    "article": {
+      "id": "article.first3.canteen",
+      "attraction": 5,
+      "exploitation": 1,
+      "verification": 1,
+      "surplusStat": "photo",
+      "surplusThreshold": 3,
+      "attractionPerSurplus": 0
+    },
+    "rewards": {
+      "skillId": "photo",
+      "xp": 3,
+      "items": [],
+      "teamBond": 0
+    },
+    "defenseEvidence": [
+      {
+        "id": "evidence.first3.canteen",
+        "nameKey": "first3.evidence.canteen",
+        "materialId": "material.first3.canteen.photo",
+        "type": "photo",
+        "quality": "high"
+      }
+    ],
+    "attackFindings": []
+  },
+  {
+    "id": "quest.first3.general",
+    "nameKey": "first3.quest.general",
+    "type": "general",
+    "prerequisites": [],
+    "firstDay": 1,
+    "lastDay": 5,
+    "steps": [
+      {
+        "id": "record",
+        "materialId": "material.first3.general.record",
+        "energyCost": 1,
+        "scheduleId": "schedule.first3.room3",
+        "skillId": "documents",
+        "minEnergyCost": 1
+      }
+    ],
+    "article": {
+      "id": "article.first3.general",
+      "attraction": 4,
+      "exploitation": 1,
+      "verification": 1,
+      "surplusStat": "documents",
+      "surplusThreshold": 3,
+      "attractionPerSurplus": 0.1
+    },
+    "rewards": {
+      "skillId": "documents",
+      "xp": 2,
+      "items": [],
+      "teamBond": 0
+    },
+    "defenseEvidence": [
+      {
+        "id": "evidence.first3.general",
+        "nameKey": "first3.evidence.general",
+        "materialId": "material.first3.general.record",
+        "type": "document",
+        "quality": "standard"
+      }
+    ],
+    "attackFindings": [],
+    "delegation": {
+      "listenCost": 1,
+      "assignmentCost": 1,
+      "requiredWork": 1,
+      "statId": "documents",
+      "speeds": [
+        {
+          "minimum": 1,
+          "work": 1
+        },
+        {
+          "minimum": 5,
+          "work": 2
+        }
+      ]
+    }
+  }
+]

@@ -2,7 +2,7 @@ import {test,assert,equal} from '/tests/harness.js';
 import {createGame} from '/src/bootstrap/main.js';
 import {act,nextDay} from '/tests/fixtures/gameplay.js';
 test('real browser checkpoints resume delegated work through weekend completion and publication once',async()=>{
- const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);document.body.append(root);let game;
+ const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);root.dataset.project='/content/project.json';document.body.append(root);let game;
  try{
   game=await createGame(root,{autoStart:false});game.resume();const initial=structuredClone(game.session.snapshot());Object.assign(initial.gameplay.calendar,{day:5,period:'afternoon'});assert(game.session.replace(initial).ok);
   const session=game.session;assert(act(session,'quest.listen',{questId:'quest.fixture.general'}).ok);assert(act(session,'quest.selectAssignee',{questId:'quest.fixture.general',memberId:'member.fixture.reporter'}).ok);const quote=session.snapshot().gameplay.quests['quest.fixture.general'].proposal;assert(act(session,'quest.confirmAssignment',{questId:'quest.fixture.general',quoteId:quote.id}).ok);
@@ -13,7 +13,7 @@ test('real browser checkpoints resume delegated work through weekend completion 
  }finally{await game?.dispose();root.remove();}equal(game.assets.stats(),{resources:0,references:0,pending:0});
 });
 test('runtime gameplay command boundary autosaves a committed day transition',async()=>{
- const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);document.body.append(root);let game;
+ const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);root.dataset.project='/content/project.json';document.body.append(root);let game;
  try{
   game=await createGame(root,{autoStart:false});game.resume();await game.saves.capture();const runtimeSession={snapshot:()=>game.session.snapshot(),execute:command=>game.execute(command)};
   nextDay(runtimeSession);equal(game.session.snapshot().gameplay.calendar.day,2);let found=false;
@@ -21,7 +21,7 @@ test('runtime gameplay command boundary autosaves a committed day transition',as
  }finally{await game?.dispose();root.remove();}
 });
 test('runtime command boundary rejects mutations while checkpoint restore is preparing replacement views',async()=>{
- const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);document.body.append(root);let game,release,restoring;
+ const page=new DOMParser().parseFromString(await(await fetch('/index.html')).text(),'text/html'),root=document.importNode(page.querySelector('[data-game]'),true);root.dataset.project='/content/project.json';document.body.append(root);let game,release,restoring;
  try{
   game=await createGame(root,{autoStart:false});game.resume();const saved=(await game.saves.capture()).value,acquire=game.assets.acquire.bind(game.assets);let entered;const preparing=new Promise(resolve=>{entered=resolve;}),gate=new Promise(resolve=>{release=resolve;});
   game.assets.acquire=async(...args)=>{const result=await acquire(...args);entered();await gate;return result;};restoring=game.saves.restore(saved);await preparing;const before=game.session.snapshot(),result=game.execute({type:'gameplay.command',action:'calendar.finishSchool'});assert(!result.ok,'runtime accepted a mutation during restore');equal(game.session.snapshot(),before);release();assert((await restoring).ok);

@@ -10,6 +10,9 @@ import {validTextEntry} from '../../contracts/TextTokens.js';
 import {validateNavigation} from '../../contracts/PlayerNavigation.js';
 import {validateGameplay} from '../../contracts/validateGameplay.js';
 import {GAMEPLAY_EFFECT_HANDLERS} from '../../contracts/GameplayActions.js';
+import {validateGameplayEffects} from '../../contracts/validateGameplayEffects.js';
+import {validateSaveMigrations} from '../../contracts/validateSaveMigrations.js';
+import {validateTraversalSeeds} from '../../contracts/validateTraversalSeeds.js';
 import {validateHearings} from '../../contracts/validateHearings.js';
 import {validateAuthoringUI} from '../../contracts/validateAuthoringUI.js';
 import {validateAssetImports} from '../../contracts/validateAssetImports.js';
@@ -41,6 +44,7 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
   const defs=Array.isArray(doc.data)?doc.data:[doc.data];entries[doc.kind]??=[];
   for(const [i,def] of defs.entries()) {
    if(!def||typeof def!=='object'||Array.isArray(def)||typeof def.id!=='string'||!def.id){add('content.definition.invalid',doc,Array.isArray(doc.data)?`/${i}`:'/');continue;}
+   if(doc.kind==='config'&&def.kind==='traversal-seeds'&&doc.authoringOnly!==true)add('bot.seed.authoring-only',doc,'/authoringOnly');
    const key=`${doc.kind}:${def?.id}`;
    if(locations.has(key)) add('content.id.duplicate',doc,Array.isArray(doc.data)?`/${i}/id`:'/id',[def?.id]);
    locations.set(key,doc);entries[doc.kind].push(def);
@@ -58,6 +62,8 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  errors.push(...validateAssetImports({catalog,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validatePlaytests({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
  errors.push(...validateGameplay({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
+ errors.push(...validateSaveMigrations({catalog,project,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
+ errors.push(...validateTraversalSeeds({catalog,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateHearings({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
  for(const error of validateResources(entries.assets??[])){
   const id=error.relatedIds[0],doc=locations.get(`assets:${id}`);
@@ -121,7 +127,10 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
    if(command.op==='emitEffect') {
     const event=catalog.get('events',command.effectId);
     if(!event.ok) add('event.effect.unknown',doc,p+'/effectId',[command.effectId]);
-    else errors.push(...validateSchema(event.value.paramsSchema,command.params??{},doc.sourceId,p+'/params'));
+    else{
+     errors.push(...validateSchema(event.value.paramsSchema,command.params??{},doc.sourceId,p+'/params'));
+     errors.push(...validateGameplayEffects(event.value.handlerId,command.params??{},catalog,doc.sourceId,p+'/params'));
+    }
    }
    if(j===node.commands.length-1&&!['end','jump','choose'].includes(command.op)) add('story.terminal.missing',doc,p);
   }));
