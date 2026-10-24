@@ -1,7 +1,7 @@
 # Phase 0 evidence
 
-T01–T14 implementation is present. T14 final fresh-source recovery and whole-branch
-review remain pending. See [current acceptance](PHASE-0-ACCEPTANCE.md). The T13
+T01–T14 local implementation/acceptance, fresh-source recovery and the single
+whole-branch review/fix pass are complete. Hosted Actions confirmation remains open. See [current acceptance](PHASE-0-ACCEPTANCE.md). The T13
 numbers below are historical evidence, followed by the current T14 run.
 T12's actual final gates: architecture/content pass, 119 JS + 42 Python unit,
 35 browser, 40 authoring and 7 bot tests pass. See `PROJECT-STATE.md` and its
@@ -103,3 +103,32 @@ correctness clocks. Both sampled 180 frames and six runtime replacements:
 The constrained frame target is **false** in the raw report; functional release
 success does not convert this measurement into a smoothness pass. Physical low-end,
 stable/ESR Firefox, production art and hosted Actions remain unverified.
+
+## Final review fix pass and continuous measurements
+
+Source fix commit `c599d0fea67f27929b7f03aa764f910b95ddf39e`. All seven local gates PASS; 126 JS + 57 Python / 46 browser / 42 authoring / 8 bot; fingerprint 4cef4485da8e977089ff7b7c131936b44b2bd1fa5c3699fe23f939971e03fb2f.
+Two Important review findings fixed with eight real-browser regressions RED8→GREEN8:
+pending timeline scene continuation and discarded initial cue/scene signals. One
+Minor negative-test diagnostic weakness is deferred; full disposition in
+[PHASE-0-REVIEW.md](PHASE-0-REVIEW.md).
+
+The first after-fix run passed six gates but constrained profiling exceeded a
+six-second RPC while waiting for60frames; retained raw failure
+`.cache/test/final-before-measurement-fix.json`. Continuous real-RAF collection with
+short status reads fixed the harness: focused staged checks then the full seven
+gates passed. No frame count/performance target was relaxed. Current measurements:
+
+| Profile | Ready | Startup | Continuous RAF samples | RAF p95 | Retained heap growth | Frame target met |
+| --- | --- | --- | --- | --- | --- | --- |
+| reference | 1845.3 ms | 490116 | 180 | 16.8 ms | 125604 bytes | True |
+| constrained-simulation | 4051.9 ms | 490116 | 180 | 166.6 ms | 143096 bytes | False |
+
+Current local static artifact: `dist/foundation-demo/4cef4485da8e977089ff` and ZIP.
+Fresh source verification: `.cache/reports/recovery-t14/summary.json`, commit
+`ac6e818f94c860ff4f5505d6a6164ce9515635df`, 394 tracked files byte-verified, own empty
+private venv/portable offline tools, initially absent masters restored only from
+tracked bundle, regenerated renditions, all seven gates passed. No legacy bytes.
+Raw fresh gates: `.cache/fresh-t14-ac6e818/.cache/reports/ci.json`.
+Post-review narrow runtime changes have their own full current-source proof above.
+Physical lowend/stableFirefox/production art remain unverified. Hosted CI status
+will be recorded after the authorized feature-branch push; no public game deployment.

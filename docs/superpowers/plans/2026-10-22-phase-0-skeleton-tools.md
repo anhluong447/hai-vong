@@ -10,7 +10,7 @@
 
 **Spec:** Yêu cầu và quyết định đề xuất trong mục 1–6 của chính tài liệu này; [coding rules](../../engineering/CODING-RULES.md); [project skill](../../../skills/hoi-am-engine-free-development/SKILL.md); [Bible v2](../../design/narrative/game_story_bible_v2.md); [GDD THỦ](../../design/gameplay/GDD-Defense.md); [GDD CÔNG](../../design/gameplay/GDD-Attack.md).
 
-**Status:** Đã duyệt và commit plan tại `e9a4d83`. T01–T12 đã triển khai và kiểm chứng; có bản thử 2D và điều trần dùng bàn phím. T13–T14 còn lại tiếp tục theo checkpoint. Ràng buộc project-local được bổ sung theo lệnh người dùng ngày 2026-10-22: dependency Python trong `.venv`; mọi tool/cache/temp/profile nằm trong project.
+**Status:** T01–T14 local implementation and all seven local gates pass; independent review fixes and T14 fresh-source recovery pass. Hosted CI confirmation remains open in §8. See docs/testing/PHASE-0-ACCEPTANCE.md. Project-local containment remains mandatory.
 
 ## Global Constraints
 
@@ -368,28 +368,32 @@ python tools/build.py --profile foundation-demo --output dist
 
 **Interfaces:** Consumes all previous deliverables; produces a tested authored chapter/pack and a gate report. No production story expansion or canonical document edit is part of this task.
 
-- [ ] Write a failing end-to-end acceptance journey before assembling the pack. It must require creation through the tools, branch/flag validation, exploration, dialogue, all quest types, publication/evidence, hearing fixtures, save/reload, authoring edits, hot reload and exported play.
-- [ ] Author the chapter via workspace/source contracts with approved reusable art or clearly marked test art and full provenance. The chapter has explicit beginning/ending and at least two tested branches; strings/IDs/events are managed data.
-- [ ] Run keyboard-only journey and all supported save positions, including interrupted tween and timed hearing; run bot over the pack and resolve failures/unexplored branches or mark the gate incomplete.
-- [ ] Introduce a broken ID, undeclared flag, missing optional/required asset, corrupt save and conflicting write; verify actionable diagnosis, safe fallback/rejection and recovery. Repeat transitions and perform fresh-checkout restore/build.
+- [x] Write a failing end-to-end acceptance journey before assembling the pack. It must require creation through the tools, branch/flag validation, exploration, dialogue, all quest types, publication/evidence, hearing fixtures, save/reload, authoring edits, hot reload and exported play.
+- [x] Author the chapter via workspace/source contracts with approved reusable art or clearly marked test art and full provenance. The chapter has explicit beginning/ending and at least two tested branches; strings/IDs/events are managed data.
+- [x] Run keyboard-only journey and all supported save positions, including interrupted tween and timed hearing; run bot over the pack and resolve failures/unexplored branches or mark the gate incomplete.
+- [x] Introduce a broken ID, undeclared flag, missing optional/required asset, corrupt save and conflicting write; verify actionable diagnosis, safe fallback/rejection and recovery. Repeat transitions and perform fresh-checkout restore/build.
 - [ ] Run the entire command set in §6, record versions/reference machine, screenshots, traces, coverage and limitations. All gates below must pass; unchecked gates remain incomplete.
-- [ ] Commit `test: verify phase-zero authoring and gameplay foundation`; hand off P0 evidence and request the next production-content task. Do not automatically start filling 12 weeks.
+- [x] Commit `test: verify phase-zero authoring and gameplay foundation`; hand off P0 evidence and request the next production-content task. Do not automatically start filling 12 weeks.
+
+
+Local command set passed in full; the closure checkbox above remains open solely
+for the hosted CI confirmation in §8, pending an observed run after push.
 
 ## 8. Definition of Done cho giai đoạn 0
 
-- [ ] Contracts và JSON script/flag format được tài liệu hóa; unknown opcode/ID/type không lọt vào runtime.
-- [ ] Author tạo và sửa được scene/NPC/dialogue/quest/resource/hearing qua workspace, có undo/redo, dirty recovery và diagnostics đúng source.
-- [ ] Một chương mẫu hoàn chỉnh đi qua toàn bộ pipeline; ít nhất hai nhánh được kiểm chứng, không chỉ một phòng demo.
-- [ ] Mọi đường chơi dùng bàn phím; backlog, auto/skip, settings, remap, text size/speed, locale expansion và reduced motion có kiểm thử.
-- [ ] Save/resume ở mọi trạng thái người chơi được hỗ trợ, including timed hearing; transactions/ledger không lặp thưởng. Autosave/slots/backup và content/schema migration có bằng chứng.
-- [ ] Resource import/build/atlas/audio/manifest hoạt động, optional fallback và required-failure policy đúng; load/cancel/release không tích lũy tài nguyên.
-- [ ] Hot reload script/browser assets giữ revision hợp lệ; node bị xóa, save cũ hoặc writer conflict có đường xử lý rõ.
-- [ ] Bot công bố coverage và nhánh chưa kiểm chứng; không còn nhánh chưa kiểm chứng trong acceptance pack. Browser journey kiểm tra UI riêng.
-- [ ] Dev/debug/crash exports dùng được; production artifact không chứa mutation debug hoặc tự upload dữ liệu.
+- [x] Contracts và JSON script/flag format được tài liệu hóa; unknown opcode/ID/type không lọt vào runtime.
+- [x] Author tạo và sửa được scene/NPC/dialogue/quest/resource/hearing qua workspace, có undo/redo, dirty recovery và diagnostics đúng source.
+- [x] Một chương mẫu hoàn chỉnh đi qua toàn bộ pipeline; ít nhất hai nhánh được kiểm chứng, không chỉ một phòng demo.
+- [x] Mọi đường chơi dùng bàn phím; backlog, auto/skip, settings, remap, text size/speed, locale expansion và reduced motion có kiểm thử.
+- [x] Save/resume ở mọi trạng thái người chơi được hỗ trợ, including timed hearing; transactions/ledger không lặp thưởng. Autosave/slots/backup và content/schema migration có bằng chứng.
+- [x] Resource import/build/atlas/audio/manifest hoạt động, optional fallback và required-failure policy đúng; load/cancel/release không tích lũy tài nguyên.
+- [x] Hot reload script/browser assets giữ revision hợp lệ; node bị xóa, save cũ hoặc writer conflict có đường xử lý rõ.
+- [x] Bot công bố coverage và nhánh chưa kiểm chứng; không còn nhánh chưa kiểm chứng trong acceptance pack. Browser journey kiểm tra UI riêng.
+- [x] Dev/debug/crash exports dùng được; production artifact không chứa mutation debug hoặc tự upload dữ liệu.
 - [ ] CI và local checks đều thực thi suite thật, release/notice/license audit pass, reference/lower-spec browser evidence được ghi nhận.
-- [ ] Fresh checkout khôi phục được cả binary inputs và artifacts cần thiết; không phụ thuộc archive cục bộ 5 GB hoặc file chỉ có trên máy tác giả.
-- [ ] Protected Bible/GDD và archived payload giữ nguyên; không tái tạo engine/roadmap 3D hoặc coi UI coastal cũ là yêu cầu mới.
-- [ ] Format script, adding-content, setup/debug và release/restore guides đủ để người khác thêm một quest mà không sửa generic runtime.
+- [x] Fresh checkout khôi phục được cả binary inputs và artifacts cần thiết; không phụ thuộc archive cục bộ 5 GB hoặc file chỉ có trên máy tác giả.
+- [x] Protected Bible/GDD và archived payload giữ nguyên; không tái tạo engine/roadmap 3D hoặc coi UI coastal cũ là yêu cầu mới.
+- [x] Format script, adding-content, setup/debug và release/restore guides đủ để người khác thêm một quest mà không sửa generic runtime.
 
 ## 9. Cách review và thực thi tiếp
 

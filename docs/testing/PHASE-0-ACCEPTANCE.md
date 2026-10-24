@@ -1,15 +1,16 @@
 # Phase 0 acceptance record
 
-Status: all seven current-source local gates passed on 2026-10-24. Current T14
-fresh-source recovery and whole-branch review remain pending. No twelve-week or
-finished-art acceptance is implied. Branch: `feat/phase-0-skeleton-tools`.
+Status: local functional acceptance and the single independent review/fix pass are
+complete. All seven final local gates passed: 126 JS + 57 Python / 46 browser / 42 authoring / 8 bot.
+Final source fix commit `c599d0fea67f27929b7f03aa764f910b95ddf39e`; fingerprint `4cef4485da8e977089ff7b7c131936b44b2bd1fa5c3699fe23f939971e03fb2f`.
+Static directory/ZIP: `dist/foundation-demo/4cef4485da8e977089ff`.
+Fresh source `ac6e818` independently passed bootstrap/restore/build/all seven gates.
+The later focused timeline fixes passed the complete current-source gates. No claim
+is made that the older fresh artifact contains those fixes. See
+[review disposition](PHASE-0-REVIEW.md) and [all decisions](PHASE-0-DECISIONS.md).
 
-The final local run passed architecture/content, 126 JS + 57 Python unit tests,
-38 browser, 42 authoring, 8 bot and release. Fingerprint:
-`b10946e7504aff81912bfe1ccf9c4900be002a5f14c547b5b0fda1612f5efe6f`.
-The static directory and ZIP are under `dist/foundation-demo/b10946e7504aff81912b`.
-Both complete exported routes, Firefox smoke and both real-time profiles passed
-functional checks. Performance targets remain separately visible below.
+Hosted Actions confirmation remains open until an actual run is observed. This is
+not an unqualified whole-P0/platform/art or twelve-week completion claim.
 
 ## What the foundation exercises
 
@@ -26,7 +27,7 @@ functional checks. Performance targets remain separately visible below.
 | Development diagnostics | Validated reload/restart, source diagnostics, typed debug/trace/replay and local crash exports; debug modules unreachable from player export |
 | Whole-pack traversal | 20/20 nodes, 6/6 choices, 6/6 assets, 14/14 fixtures; no unexplored branch at the recorded T14 run |
 | Static delivery | Deterministic fingerprinted export, license/provenance audits, read-only manifest host, native two-route artifact play; raw-entry real-RAF evidence separate |
-| Recovery from source | T13 fresh git archive restore/build/all gates passed; current T14 fresh-source verification remains pending |
+| Recovery from source | T14 ac6e818 fresh git archive byte verification/offline bootstrap/restore/build/all gates passed; post-review source verified by final full gates |
 
 ## Verification artifacts
 

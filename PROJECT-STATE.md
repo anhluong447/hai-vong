@@ -2,107 +2,87 @@
 
 Updated: 2026-10-24 (Asia/Bangkok).
 
-## Current task and authorization
+## Current task and stopping point
 
-Continue approved Phase 0 T01–T14 inline. T01–T13 committed; T14 implemented but
-uncommitted, final verification/recovery/review/push remain. The latest user says
-"Please continue" and explicitly permits commit and push this time. Do not ask
-again. Push only feat/phase-0-skeleton-tools; no merge, public game publication or
-12-week expansion. T14 level/story MUST use docs/history/narrative/First3Days.md.
+Phase0 T01–T14 local implementation/acceptance and final independent review fixes
+are complete. Latest user says continue and explicitly permits commit+push.
+Remaining authorized step: commit closure docs and push feat/phase-0-skeleton-tools,
+verify remote SHA and observe hosted Actions if available. Stop after this handoff;
+do not fill12weeks, merge or publish the game. T14 uses First3Days.md as required.
+Hosted CI confirmation is the one still-open P0 operational checkbox, not a local
+test failure. Actual network receipts: .cache/reports/git/push.json, hosted-ci.json.
+Never infer a successful push from authorization alone.
 
-Original root: C:/Users/anhlh52/AndroidStudioProjects/Ask.
-Implementation: .worktrees/phase-0, branch feat/phase-0-skeleton-tools.
-Original branch feat/full-3d-foundation remains separate with intentional recovery
-doc edits. Run implementation commands from the worktree; do not claim root clean.
+Original root C:/Users/anhlh52/AndroidStudioProjects/Ask (separate original branch
+feat/full-3d-foundation with intentional recovery-doc changes).
+Implementation .worktrees/phase-0, branch feat/phase-0-skeleton-tools. Do not merge
+or claim the original tree clean. T14 commit ac6e818; source fix commit c599d0fea67f27929b7f03aa764f910b95ddf39e.
 
 ## Mandatory recovery and containment
 
-Reopen actual root AGENTS.md → this file → docs/engineering/CODING-RULES.md →
-skills/hoi-am-engine-free-development/SKILL.md → active task brief/contract/plan
-after every compaction/new session/context loss. Summaries are pointers only.
-All code/tools/dependencies/worktrees/caches/logs/temp/browser data stay inside
-the project. No global/user/AppData/Windows installation or PATH/registry/service
-change. Use .venv/Scripts/python.exe -B -X utf8. Windows ACLs require sandbox
-escalation for native browser/temp tests and Git writes; browser sandbox stays on.
+Read actual root AGENTS.md → this file → docs/engineering/CODING-RULES.md →
+skills/hoi-am-engine-free-development/SKILL.md → relevant current plan/design after
+every compaction/new session/context loss. Summary is only a pointer.
+All dependencies/tools/worktrees/caches/logs/temp/browser data remain in project.
+No global/user/AppData/Windows installation or PATH/registry/service changes.
+Use .venv/Scripts/python.exe -B -X utf8. Browser/temp/Git writes require sandbox
+escalation on this machine; browser sandbox remains enabled.
 
-## Completed foundation
+## What exists
 
-T01–T13: shared content contracts/catalogs; immutable story/gameplay/hearing state
-and GameSession; resource/import/atlas/audio/bundle pipeline; keyboard Canvas/DOM
-world/UI; transactional saves/settings; calendar/Main/Side/General/delegation/
-publication/evidence/progression; timed Defense/Attack; dedicated resource/scene/
-layout/input/story/quest/gameplay/hearing editors; undo/drafts/atomic source writes;
-safe reload/debug/trace/crash/bot; contained portable tools/reproducible static
-export/license/CI/read-only host/performance/recovery. HEAD before T14: 1dfce84.
-Earlier task commits and Rulings: ignored .superpowers/sdd/2026-10-22-phase-0-skeleton-tools/progress.md.
-T13 fresh source 5714e7c restored tracked bundles, built and passed all seven gates
-in .cache/fresh-checkout-5e032a2, no legacy consultation. Evidence/limits in
-docs/testing/PHASE-0-EVIDENCE.md. No hosted Actions claim.
+Engine-free JS modules/Canvas2D/DOM browser exploration and keyboard UI; immutable
+GameSession/story/flags/calendar/energy/quest/delegation/publication/progression/
+Defense/Attack/timed hearings; managed strings/assets/animation/audio/events/tuning;
+shared schema/semantic validation; transactional saves/preferences/migrations;
+dedicated resource/scene/layout/input/story/quest/gameplay/hearing editors, atomic
+source groups, undo/redo/drafts, safe reload/debug/trace/crash/bot; contained portable
+toolchain, asset bundle restore/build and deterministic static export/license/CI.
 
-## T14 current implementation
+First3Days:11story docs/7physical scenes/3quests/17flags under content/dev/first-three-days.
+Player index selects content/first-three-days.project.json/runtime.first3; original
+mechanics fixtures remain content/project.json/runtime.foundation. Both share pack,
+content0.0.2. Two routes finish Main on day3; canteen Side stays optional; separate
+routine General delegated to Long. Main Attack findings, Side high/General standard
+Defense cards separated. No fabricated camera-bluff evidence. Cassette2011 unresolved.
+Friday publication/week3 hearings use isolated fixtures, not chronological day3.
+Geometry/tone are labelled temporary fixtures, not production anime art approval.
 
-Read task-14-brief.md and task-14-contract.md in the execution ledger, plus the
-plan T14/DoD. First3Days.md is an exact raw-byte copy, SHA-256
-f55787d3363ee2fb9a82e4ca171a67cf713b6dc2475924005d1d548aae3b2d30.
-Source unchanged; .gitattributes preserves raw bytes. Protected Bible/GDD unchanged.
+Explicit additive0.0.1→0.0.2 migration adds only missing flags/quests and preserves
+progress/receipts. Genuine old-runtime slot provenance captured from1dfce84. RunSnapshot3.
+Registered story gameplay capabilities reuse pure guarded commands/executeOnce.
+Multiple flag source files are selectable in Story Editor. Bot seeds replay earned
+state via ordinary commands, never forged rewards or silently omitted branches.
+Sequence fixes derive waiting scene from saved ID/index + pending target and share
+initial/frame signal dispatch. No new persisted field or schema version.
 
-Player index selects content/first-three-days.project.json / runtime.first3;
-content/project.json / runtime.foundation remains mechanics fixture. Same pack,
-version 0.0.2, contains 11 First3 story docs, 7 physical scenes, 3 quests, 17 flags,
-events/schedules/team/balance/runtime, shared locale keys and authoring-only seeds.
-Main-only and optional-canteen routes both finish on day3. General is a separate
-routine news task delegated to Long. Side high / General standard Defense cards;
-Main Attack findings stay separate. Camera bluff grants no fake evidence. Tape
-2011 remains unresolved. Friday publication/week3 hearing use isolated fixtures,
-not calendar compression. Art/tone are labelled geometric development fixtures.
+## Actual final local evidence
 
-Typed gameplay.command/gameplay.assign effects reuse guarded gameplay transitions,
-preserve story continuation and executeOnce receipts; shared semantic validator.
-Additive content migration 0.0.1→0.0.2 adds only missing flag/quest defaults, preserves
-old progress/receipts; managed resolver and validation before session replacement.
-RunSnapshot remains 3. Genuine old save generated from git archive 1dfce84 using
-its actual runtime; tracked tests/fixtures/foundation/migrations.json has provenance.
-Export includes/revalidates new project metadata and strips authoring-only seeds.
+All seven local gates PASS; 126 JS + 57 Python / 46 browser / 42 authoring / 8 bot; fingerprint 4cef4485da8e977089ff7b7c131936b44b2bd1fa5c3699fe23f939971e03fb2f.
+Raw .cache/reports/ci.json + bound receipts; static artifact dist/foundation-demo/4cef4485da8e977089ff.
+Both full native-keyboard source/static routes pass, save/load day2/end, Main-only
+and Side paths, queued2/3/audience0. Actual First3 Workspace→8doc authenticated writer
+round trip, undo/recovery/hot reload/rendering/conflict diagnostics pass.
+Bot20/20nodes,6/6choices,6/6assets,14/14fixtures, no unexplored.
 
-Real First3 Workspace pipeline creates scene/NPC/quest/branch/flags/strings, does
-grouped undo/redo, actual IndexedDB draft recovery, reload/World2D, then sends its
-8 dirty docs to authenticated atomic source writer and reopens them; stale/invalid
-writes preserve bytes. Bot seeds replay ordinary commands, no injected rewards.
-Discovered/fixed editor single-flags-file assumption: explicit managed source select
-now supports multiple flag docs; regression RED 2 failures → GREEN 7/7.
+Fresh git archive ac6e818:394tracked files byte-verified; own portable offline tools,
+empty private venv; absent game masters restored ONLY from tracked bundle; rebuilt
+and all seven gates PASS. .cache/reports/recovery-t14/summary.json. No legacy reuse.
+Subsequent focused sequence fixes have final full current-source gate proof above;
+older fresh artifact is not claimed to contain those later changes.
 
-## Actual checks and remaining work
+One fresh whole-branch review, no Critical,2Important both fixed RED8→GREEN8 plus
+full gates green.1Minor stale-negative-test revision deferred. No second review.
+Measurement timeout diagnosed: awaited60RAF RPC exceeded6s on4xCPU profile; now
+continuous180realRAF samples + short polls; targets unchanged. Failure log retained.
+Detailed evidence/review/all Rulings: docs/testing/PHASE-0-{ACCEPTANCE,EVIDENCE,REVIEW,DECISIONS}.md.
+Execution history is preserved in docs/testing/PHASE-0-EXECUTION-LOG.md.
 
-Focused genuine native old-save import/corruption guard 1/1 passed. Full suites
-individually passed 126 JS +57 Python, 38 browser, 42 authoring, 8 bot. Pack coverage
-20/20 nodes,6/6 choices,6/6 assets,14/14 fixtures, no unexplored.
-Both full static artifact native routes passed (.cache/test/t14-staged-routes.json):
-Main complete, Side completed/available as chosen, queued3/2, day3, audience0;
-native slot save/load at day2/end preserved receipts. Uses a controlled correctness
-clock, separate from raw-index real-RAF export/performance test.
+## Limits and protected sources
 
-Full consistent gate run was interrupted before completion overnight; its ci.json
-was empty, no success claimed. New tools/ci.py run active in session 78025 started
-09:04 Oct24. Collect output/report before editing runtime/content/tests. Prior run
-had passing test bodies but correctly rejected unit receipt when test inputs changed
-mid-run; old report .cache/test/t14-ci-second.json. Do not reuse as release proof.
-
-Next: collect/fix full current gates; update acceptance/evidence/plan with real
-results; commit T14; run .cache/tasks/t14-fresh.py to git-archive current commit,
-byte-verify/portable-offline bootstrap/private venv/restore/build/full gates. Then
-ONE fresh whole-branch reviewer (executing-plans skill explicitly requires it),
-fix Critical/Important findings RED→GREEN + full suite; preserve Rulings/deferred
-minors in tracked record; commit and normal feature-branch push. No final review
-or T14 commit/push yet. No permission prompt needed.
-
-## Limitations and protected material
-
-Portable CPython3.12.10, Chromium156.0.8078.47, FirefoxNightly161.0a1 build20261022214940,
-Pillow12.3.0/imageio-ffmpeg0.6.0/FFmpeg7.1 are local/pinned. Firefox stable/ESR,
-physical lower-spec FPS and hosted Actions remain unverified. T13 4x CPU profile
-missed smoothness proposal; retain failure in reports. No final anime art approval.
-Original ignored archive remains 35171files/5105177266bytes; no new full rehash.
-Never edit archived bytes or protected design docs without explicit user request.
-Guides: FIRST-THREE-DAYS.md, ADDING-CONTENT.md, SETUP.md, RELEASE-RESTORE.md.
-Authoritative emitted JSON is editable source; ignored one-time bootstrap scripts
-must not overwrite later edits. Preserve last-good owners on invalid/stale loads.
+Hosted Actions not yet observed. Nightly smoke does not certify stable/ESRFirefox.
+4xCPU simulation is not physical lower-spec FPS; keep failed targets visible.
+Production art/12weeks/final balance remain future work. Source journals do not
+certify filesystem-wide power-loss atomicity. Protected Bible/GDD unchanged.
+User First3Days raw SHA256 f55787d3363ee2fb9a82e4ca171a67cf713b6dc2475924005d1d548aae3b2d30.
+Archive untouched, prior35171files/5105177266bytes; no new full rehash claimed.
+Do not rerun ignored one-time content bootstrap helpers over edited source.
