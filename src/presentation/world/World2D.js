@@ -26,13 +26,13 @@ export class World2D {
   for(const actor of candidate.scene.actors)this.actors.set(actor.id,new ActorView(this.catalog.get('actors',actor.actorId).value,this.catalog));
   return success(candidate.scene.id);
  }
- render(world,delta){
+ render(world,delta,{day=null}={}){
   if(!this.current||world.sceneId!==this.current.scene.id||this.disposed)return;
   const {scene,lease}=this.current,c=this.view.begin();this.elapsed+=Math.max(0,delta);this.camera.follow(world.position,scene.width);
-  const layer=l=>{const image=lease.get(l.assetId);if(!image)return;const motion=l.motion&&!this.reducedMotion?Math.sin(this.elapsed*Math.PI*2/l.motion.period)*l.motion.amplitude:0;c.save();c.globalAlpha=l.opacity??1;c.drawImage(image,l.x-this.camera.x*l.parallax+motion,l.y,l.width,l.height);c.restore();};
+  const layer=l=>{const image=lease.get(l.assetId);if(!image)return;const motion=l.motion&&!this.reducedMotion?Math.sin(this.elapsed*Math.PI*2/l.motion.period)*l.motion.amplitude:0;c.save();c.imageSmoothingEnabled=true;c.globalAlpha=l.opacity??1;c.drawImage(image,l.x-this.camera.x*l.parallax+motion,l.y,l.width,l.height);c.restore();};
   scene.layers.filter(l=>!l.foreground).forEach(layer);
   c.save();c.translate(-this.camera.x,0);for(const shape of scene.decorations){c.globalAlpha=shape.opacity;c.fillStyle=shape.fill;c.fillRect(shape.x,shape.y,shape.width,shape.height);}c.globalAlpha=1;
-  for(const actor of scene.actors)this.actors.get(actor.id).draw(c,lease,{x:actor.x,y:scene.groundY,facing:1,moving:false},delta);
+  for(const actor of scene.actors)if(!actor.visibleDays||actor.visibleDays.includes(day))this.actors.get(actor.id).draw(c,lease,{x:actor.x,y:scene.groundY,facing:actor.facing??1,moving:false},delta);
   this.actors.get('player').draw(c,lease,{x:world.position,y:scene.groundY,facing:world.facing,moving:world.moving},delta);c.restore();scene.layers.filter(l=>l.foreground).forEach(layer);
  }
  snapshot(){return {sceneId:this.current?.scene.id??null,elapsed:this.elapsed,cameraX:this.camera.x,actors:Object.fromEntries([...(this.actors??[])].map(([id,actor])=>[id,actor.animation.snapshot()]))};}

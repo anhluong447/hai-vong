@@ -212,8 +212,8 @@ tạo `src/application/DialoguePresentation.js`,
 **Consumes:** interfaces ở mục 2 và patterns Diagnostic/Result/ContentCatalog.
 **Produces:** dữ liệu optional mới validate được; pure resolver dùng chung.
 
-- [ ] Viết RED `presentation metadata rejects invalid references`: unknown speaker/portrait, expression không thuộc actor, expression thiếu speaker, sampling lạ, NPC facing=0 hoặc visibleDays có 0/trùng/sai kiểu đều trả diagnostic có source/pointer; dữ liệu foundation không field mới vẫn hợp lệ.
-- [ ] Viết RED resolver: câu Vân guarded → actor Vân/portrait guarded; chuyển narration → null; cursor câu Khuê → actor Khuê. Clone state trước/sau phải bằng nhau; label locale thay đổi không đổi speaker selection.
+- [x] Viết RED `presentation metadata rejects invalid references`: unknown speaker/portrait, expression không thuộc actor, expression thiếu speaker, sampling lạ, NPC facing=0 hoặc visibleDays có 0/trùng/sai kiểu đều trả diagnostic có source/pointer; dữ liệu foundation không field mới vẫn hợp lệ.
+- [x] Viết RED resolver: câu Vân guarded → actor Vân/portrait guarded; chuyển narration → null; cursor câu Khuê → actor Khuê. Clone state trước/sau phải bằng nhau; label locale thay đổi không đổi speaker selection.
 
   Assertions cốt lõi trong test `guarded portrait follows cursor while locale text changes`
   (fixture khai báo actor nameKey `first3.character.van` và metadata theo mục 2):
@@ -227,9 +227,9 @@ tạo `src/application/DialoguePresentation.js`,
   equal(state, before);
   ```
 
-- [ ] Thêm optional fields và semantic validation đúng mục 2; `resolveDialoguePresentation(state,bundle)` đọc cursor, trả Result, không thêm mutation hoặc snapshot fields. Dùng `neutral` chỉ theo rule đã validate, không che missing asset bằng inline fallback.
-- [ ] Chạy focused tests đến GREEN rồi `architecture`, `content`, `unit`; invalid data không throw ra ngoài validator.
-- [ ] Commit: `feat: define managed dialogue and character presentation contracts`.
+- [x] Thêm optional fields và semantic validation đúng mục 2; `resolveDialoguePresentation(state,bundle)` đọc cursor, trả Result, không thêm mutation hoặc snapshot fields. Dùng `neutral` chỉ theo rule đã validate, không che missing asset bằng inline fallback.
+- [x] Chạy focused tests đến GREEN rồi `architecture`, `content`, `unit`; invalid data không throw ra ngoài validator.
+- [x] Commit `8679f4d`: `feat: define managed G1 character presentation contracts`. Focused RED 14 failures/8 existing rejections → GREEN 22/22; full unit lúc đóng T03: 148 JS + 57 Python pass.
 
 ### T04 — Renderer phối background high-res và sprite pixel
 
@@ -238,6 +238,12 @@ tạo `src/application/DialoguePresentation.js`,
 
 **Consumes:** Actor sampling/NPC fields T03, master/asset IDs T02.
 **Produces:** cùng renderer cho runtime/editor, render đúng filter/calendar/facing.
+
+**Execution checkpoint:** Code renderer đã triển khai và kiểm chứng bằng fixture;
+focused renderer/lifecycle/display 9/9, full browser 53/53, authoring 42/42 và
+full unit 149 JS + 57 Python pass. T04 chưa đóng phần kiểm tra visual art thật:
+background/sprite sản xuất và Review A vẫn pending. Không dùng fixture để nhận
+đã đạt chất lượng art hoặc coverage của bộ lớp G1 chưa tồn tại.
 
 - [ ] Viết RED trên canvas thật: sprite `sampling=pixel` giữ cạnh pixel, nền smooth vẫn smooth sau actor draw; test context sampling được khôi phục để actor không làm bẩn lớp kế tiếp.
 - [ ] Viết RED `NPC day visibility changes only drawing`: days 1/2/3 chọn đúng actors, không đổi interactions, energy hoặc world position; facing -1 render đúng. Context không có day phải chặn/hide actors có visibleDays, không coi là luôn hiện. Prepare/reload vẫn nạp/release tài nguyên cho actors ẩn và chặn late decode.

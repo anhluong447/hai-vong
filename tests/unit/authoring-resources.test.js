@@ -13,3 +13,12 @@ test('asset recipe and cue edits must be consumable by the pipeline and actual a
  ];
  for(const mutate of cases){const source=structuredClone(sources);mutate(source);assert(!validateProject(source).ok,'unconsumable resource edit was accepted');}
 });
+
+test('animation preview sampling is validated before the editor consumes it',()=>{
+ for(const sampling of ['pixel','smooth','blurred']){
+  const source=structuredClone(sources),doc=source.documents.find(item=>item.data?.kind==='authoring-ui');doc.data.preview.actorSampling=sampling;
+  const checked=validateProject(source);
+  if(sampling==='blurred')assert(!checked.ok&&checked.errors.some(error=>error.sourceId===doc.sourceId&&error.pointer==='/preview/actorSampling'),'unknown preview sampling was accepted');
+  else assert(checked.ok,JSON.stringify(checked));
+ }
+});

@@ -16,7 +16,7 @@ export class RuntimePreview {
   const canvas=this.root.ownerDocument.createElement('canvas');canvas.tabIndex=0;this.root.append(canvas);this.canvas=canvas;
   const view=new CanvasAdapter(canvas,ui.viewport),assets=new AssetService({catalog:AssetCatalog.create(bundle.catalog.list('assets')).value,revision:bundle.revision,decode:(...args)=>decoder.decode(...args)}),world=new World2D({view,catalog:bundle.catalog,assets,revision:bundle.revision,playerActorId:config.playerActorId,reducedMotion:true});
   Object.assign(this,{view,assets,world,session:session??new GameSession({bundle}),config,interactive});this.width=null;
-  const resize=()=>{const width=Math.min(this.settings.width,this.root.clientWidth||this.settings.width),dpr=this.root.ownerDocument.defaultView.devicePixelRatio;if(width===this.width&&dpr===view.dpr)return;this.width=width;view.resize(width,width*this.settings.height/this.settings.width,dpr);world.render(this.session.snapshot().world,0);};resize();this.observer=new ResizeObserver(resize);this.observer.observe(this.root);
+  const resize=()=>{const width=Math.min(this.settings.width,this.root.clientWidth||this.settings.width),dpr=this.root.ownerDocument.defaultView.devicePixelRatio;if(width===this.width&&dpr===view.dpr)return;this.width=width;view.resize(width,width*this.settings.height/this.settings.width,dpr);world.render(this.session.snapshot().world,0,{day:this.session.snapshot().gameplay.calendar.day});};resize();this.observer=new ResizeObserver(resize);this.observer.observe(this.root);
   if(interactive){this.input=new InputAdapter(canvas,bundle.catalog.get('input',config.inputId).value);this.input.setContext('world');}
   if(session&&session.snapshot().world.sceneId!==sceneId){this.release();return failure(diagnostic('preview.scene.mismatch','preview','/world/sceneId'));}
   const requested=session?success(session.snapshot()):this.session.execute({type:'scene.request',sceneId,requestId:'authoring-preview'});if(!requested.ok){this.release();return requested;}
@@ -28,7 +28,7 @@ export class RuntimePreview {
  step(delta){
   if(this.disposed||!this.world?.current)return;const elapsed=Math.min(Math.max(0,delta),this.config.maxMovementDelta);for(const intent of this.input?.drain()??[])if(intent.action==='interact')this.session.execute({type:'world.interact',requestId:'authoring-interaction'});
   if(this.interactive&&['idle','end'].includes(this.session.snapshot().story.waiting)){const axis=Number(this.input.held('moveRight'))-Number(this.input.held('moveLeft'));this.session.execute({type:'world.move',axis,delta:elapsed});}
-  this.world.render(this.session.snapshot().world,elapsed);
+  this.world.render(this.session.snapshot().world,elapsed,{day:this.session.snapshot().gameplay.calendar.day});
  }
  dispose(){this.disposed=true;this.generation++;this.release();}
 }

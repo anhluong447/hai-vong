@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "purpose": "G1 unchanged reference provenance",
+  "capturedDate": "2026-10-26",
+  "referenceCommit": "d684512",
+  "files": [
+    {
+      "path": "docs/design/concept/locations/bao-chi-hoang-hon.png",
+      "bytes": 2087502,
+      "sha256": "72cb4c6ece528ffffa8ff18979254a3a9ad01b0c2dd7f72eef44ac2bb33a8166"
+    },
+    {
+      "path": "docs/design/concept/locations/Sunset_Corridor.png",
+      "bytes": 2039529,
+      "sha256": "486ce436b656c7db3758c37c9c29542c49c7263128b093684bb9a5c89cf549bb"
+    },
+    {
+      "path": "docs/design/concept/characters/Diệp Khuê Character Design Sheet.png",
+      "bytes": 2713151,
+      "sha256": "2a2b74d6981f3696d0c761b58151011d84919d5bef20b06bf05f2faabff29e3b"
+    },
+    {
+      "path": "docs/design/concept/characters/Lục Thanh Vân Character Design Sheet.png",
+      "bytes": 2743939,
+      "sha256": "79b8ed3126c31367b98286336fffe3b56f242a67c8da67ee73b024c5e809dc30"
+    }
+  ]
+}

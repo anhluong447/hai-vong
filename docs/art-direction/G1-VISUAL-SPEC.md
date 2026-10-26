@@ -11,6 +11,9 @@ bằng chứng đã có background sạch hay animation hoàn chỉnh.
 - [Khuê](../design/concept/characters/Diệp%20Khuê%20Character%20Design%20Sheet.png), [Vân](../design/concept/characters/Lục%20Thanh%20Vân%20Character%20Design%20Sheet.png): ngoại hình, trang phục, tóc, phụ kiện và biểu cảm.
 - [Plan G1](../superpowers/plans/2026-10-26-g1-room3-art-direction.md) và [roadmap](../superpowers/plans/2026-10-26-first3-art-roadmap.md).
 
+Đường dẫn, kích thước byte và SHA-256 của bốn ảnh tham chiếu được ghi trong
+[g1-reference-hashes.json](g1-reference-hashes.json). Ảnh gốc giữ nguyên.
+
 Nostalgic Coastal Anime, sắc thái biển miền Trung, cũ kỹ và hoài niệm; background
 độ phân giải cao nhiều lớp. Nhân vật là sprite pixel nhiều chi tiết, tỉ lệ không
 quá chibi. Sprite minh họa trong sheet không định nghĩa tỉ lệ runtime cuối.

@@ -130,7 +130,7 @@ export async function createGame(root,{autoStart=true}={}){
     else if(scene.sequenceId){const played=sequence.play(scene.sequenceId);setError(played);if(played.ok)dispatchSequence(sequence.update(0));}
     if(scene.cueId&&!audio.snapshot().tracks.some(t=>t.cueId===scene.cueId))setError(await audio.play(scene.cueId));}else setError(result);
   }else setError(prepared);
-  if(disposed||epoch!==loadEpoch)return;loading=false;sync();if(!paused)canvas.focus();world.render(session.snapshot().world,0);queueAutosave();
+  if(disposed||epoch!==loadEpoch)return;loading=false;sync();if(!paused)canvas.focus();world.render(session.snapshot().world,0,{day:session.snapshot().gameplay.calendar.day});queueAutosave();
  }
  function step(delta){
   if(disposed||frozen)return;sync();for(const intent of input.drain()){
@@ -145,7 +145,7 @@ export async function createGame(root,{autoStart=true}={}){
   if(active&&!h&&state.story.waiting==='say'){line.update(elapsed);revealState();}
   if(active&&!h)controls.update(elapsed);
   if(active&&!h)dispatchSequence(sequence.update(elapsed));
-  world.render(session.snapshot().world,h?0:elapsed);sync();void loadPending();
+  world.render(session.snapshot().world,h?0:elapsed,{day:session.snapshot().gameplay.calendar.day});sync();void loadPending();
  }
  button('pause').addEventListener('click',pause,options);button('advance').addEventListener('click',advance,options);button('interact').addEventListener('click',interact,options);button('retry').addEventListener('click',()=>{error=null;void loadPending();},options);
  for(const mode of ['auto','skip'])button(mode).addEventListener('click',()=>controls.toggle(mode),options);button('stop').addEventListener('click',()=>controls.stop(),options);

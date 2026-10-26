@@ -20,7 +20,7 @@ export class ResourcePreview {
  }
  async clip(id){
   const clip=this.bundle.catalog.get('animations',id);if(!clip.ok)return clip;this.drawing();const result=await this.acquire([...new Set(clip.value.frames.map(frame=>frame.assetId))]);if(!result.ok)return result;
-  this.actor=new ActorView({idleClipId:id,walkClipId:id,scale:this.settings.actorScale},this.bundle.catalog);this.step(0);return success(id);
+  this.actor=new ActorView({idleClipId:id,walkClipId:id,scale:this.settings.actorScale,sampling:this.settings.actorSampling??'smooth'},this.bundle.catalog);this.step(0);return success(id);
  }
  step(delta){if(!this.disposed&&this.actor&&this.lease)this.actor.draw(this.view.begin(),this.lease,{x:this.settings.actorX,y:this.settings.actorY,facing:1,moving:false},delta);}
  async cue(id){

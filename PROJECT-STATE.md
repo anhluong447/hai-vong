@@ -8,9 +8,9 @@ Latest user authorizes committing the plans first, then implementing G1 inline.
 Stay on feat/first3-art-direction in .worktrees/phase-0. Start T01 visual review
 preparation; retain the user's Review A/B choices before mass asset production.
 Independent contracts/tests may proceed while those choices are pending. G2-G8,
-merge, push and publication remain outside this assignment. No G1 task is yet
-complete. The preceding plan handoff is historical; it does not block this newer
-implementation authorization.
+merge, push and publication remain outside this assignment. T03 is complete;
+G1 overall remains open. The preceding plan handoff is historical; it does not
+block this newer implementation authorization.
 
 Plans committed as 3fafb2f. T01 visual spec and acceptance record prepared, but
 clean composition/boards and Review A remain pending. Read imagegen skill: its
@@ -24,7 +24,15 @@ focused run RED 14 failures/8 pre-existing rejections -> GREEN 22/22; architectu
 and content pass; full unit PASS 148 JS + 57 Python. First sandbox browser attempt
 failed profile cleanup (WinError 5); escalated contained-profile retry succeeded.
 No production art/content version changed. Raw evidence/ledger is scoped to
-.superpowers/sdd/2026-10-26-g1-room3-art-direction/; T03 commit pending.
+.superpowers/sdd/2026-10-26-g1-room3-art-direction/. T03 committed as 8679f4d;
+review/spec preparation as 5db8d55. T04 renderer code is prepared and focused
+checks pass 9/9, full browser 53/53, authoring 42/42; follow-up preview-sampling
+validation RED->GREEN. Final full unit PASS 149 JS + 57 Python; final browser
+53/53, authoring 42/42, architecture/content PASS. T04 visual checks still pending
+actual art/board/Review A and the user's image-output-location decision. G1 is
+not complete. No bot/release/static-build or final independent G1 review claimed.
+Reference SHA-256 records are docs/art-direction/g1-reference-hashes.json; source
+PNGs, protected narrative/gameplay and raw First3Days were not changed.
 
 ### Previous planning handoff
 
