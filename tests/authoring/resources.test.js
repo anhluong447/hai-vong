@@ -5,6 +5,13 @@ import {validateProject} from '/src/domain/story/validateProject.js';
 const sources=await loadProject('/content/project.json');
 const make=()=>new Workspace({sources,drafts:{put:async()=>{},get:async()=>null,remove:async()=>{}}});
 const sourceId=locale=>sources.documents.find(doc=>doc.kind==='locale'&&doc.locale===locale).sourceId;
+test('new presentation editor labels reject absent missing and parameterized copy before editors open',()=>{
+ for(const field of ['speaker','expression','narration','day'])for(const kind of ['absent','missing','params']){
+  const source=structuredClone(sources),ui=source.documents.find(d=>d.data?.id==='ui.authoring').data;
+  if(kind==='absent')delete ui.labels[field];else ui.labels[field]=kind==='missing'?'authoring.absent':'authoring.property';
+  const result=validateProject(source);assert(!result.ok,'accepted invalid '+field+'/'+kind);assert(result.errors.some(e=>e.code==='authoring.ui.invalid'&&e.pointer==='/labels/'+field));
+ }
+});
 test('resource browser finds definitions and exact used-by paths while unsafe removal preserves sources',async()=>{
  const workspace=make(),{ResourceIndex}=await import('/tools/workspace/resources/ResourceIndex.js'),index=new ResourceIndex(workspace);
  assert(index.search('clip.fixture.walk').some(item=>item.kind==='animations'&&item.id==='clip.fixture.walk'));

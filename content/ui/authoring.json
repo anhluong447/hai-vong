@@ -72,7 +72,8 @@
     "stepSeconds": 0.1,
     "actorX": 240,
     "actorY": 230,
-    "actorScale": 2
+    "actorScale": 1,
+    "actorSampling": "pixel"
   },
   "states": [
     {

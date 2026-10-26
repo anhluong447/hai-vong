@@ -15,6 +15,7 @@ import {resolveInteraction} from '../presentation/world/InteractionResolver.js';
 import {TextView} from '../presentation/ui/TextView.js';
 import {DialoguePresentationView} from '../presentation/ui/DialoguePresentationView.js';
 import {resolveDialoguePresentation} from '../application/DialoguePresentation.js';
+import {resolveWorldPresentation} from '../application/WorldPresentation.js';
 import {FocusRouter} from '../presentation/ui/FocusRouter.js';
 import {SaveService} from '../application/SaveService.js';
 import {SaveCodec} from '../infrastructure/storage/SaveCodec.js';
@@ -149,7 +150,7 @@ export async function createGame(root,{autoStart=true}={}){
   if(active&&!h&&state.story.waiting==='say'){line.update(elapsed);revealState();}
   if(active&&!h)controls.update(elapsed);
   if(active&&!h)dispatchSequence(sequence.update(elapsed));
-  world.render(session.snapshot().world,h?0:elapsed,{day:session.snapshot().gameplay.calendar.day});sync();void loadPending();
+  world.render(resolveWorldPresentation(session.snapshot()),h?0:elapsed,{day:session.snapshot().gameplay.calendar.day});sync();void loadPending();
  }
  button('pause').addEventListener('click',pause,options);button('advance').addEventListener('click',advance,options);button('interact').addEventListener('click',interact,options);button('retry').addEventListener('click',()=>{error=null;speakerSignature=null;sync();void loadPending();},options);
  for(const mode of ['auto','skip'])button(mode).addEventListener('click',()=>controls.toggle(mode),options);button('stop').addEventListener('click',()=>controls.stop(),options);

@@ -248,12 +248,13 @@ full unit 149 JS + 57 Python pass. T04 chưa đóng phần kiểm tra visual art
 background/sprite sản xuất và Review A vẫn pending. Không dùng fixture để nhận
 đã đạt chất lượng art hoặc coverage của bộ lớp G1 chưa tồn tại.
 
-- [ ] Viết RED trên canvas thật: sprite `sampling=pixel` giữ cạnh pixel, nền smooth vẫn smooth sau actor draw; test context sampling được khôi phục để actor không làm bẩn lớp kế tiếp.
-- [ ] Viết RED `NPC day visibility changes only drawing`: days 1/2/3 chọn đúng actors, không đổi interactions, energy hoặc world position; facing -1 render đúng. Context không có day phải chặn/hide actors có visibleDays, không coi là luôn hiện. Prepare/reload vẫn nạp/release tài nguyên cho actors ẩn và chặn late decode.
-- [ ] Thực hiện `World2D.render(world,delta,{day}={})`, render NPC theo visibleDays/facing; cập nhật main và RuntimePreview call sites truyền `session.snapshot().gameplay.calendar.day`. ResourcePreview clip không có ActorDefinition: bổ sung sampling theo lựa chọn preview trong authoring config để clip pixel được preview đúng, không dùng smooth mặc định cho mọi clip. Sampling của sprite dùng context save/restore, không pixel hóa canvas toàn cục.
-- [ ] Không đổi domain coordinates để sửa jitter. Kiểm tra DPR 1/1.25/2, CSS width 960/1280/1920, camera tại giữa và hai mép, chuyển frame khi đi. Ghi giới hạn ở fractional scale; không hứa pixel-perfect trên mọi zoom.
+- [x] Viết RED trên canvas thật: sprite `sampling=pixel` giữ cạnh pixel, nền smooth vẫn smooth sau actor draw; test context sampling được khôi phục để actor không làm bẩn lớp kế tiếp.
+- [x] Viết RED `NPC day visibility changes only drawing`: days 1/2/3 chọn đúng actors, không đổi interactions, energy hoặc world position; facing -1 render đúng. Context không có day phải chặn/hide actors có visibleDays, không coi là luôn hiện. Prepare/reload vẫn nạp/release tài nguyên cho actors ẩn và chặn late decode.
+- [x] Thực hiện `World2D.render(world,delta,{day}={})`, render NPC theo visibleDays/facing; cập nhật main và RuntimePreview call sites truyền `session.snapshot().gameplay.calendar.day`. ResourcePreview clip không có ActorDefinition: bổ sung sampling theo lựa chọn preview trong authoring config để clip pixel được preview đúng, không dùng smooth mặc định cho mọi clip. Sampling của sprite dùng context save/restore, không pixel hóa canvas toàn cục.
+- [x] Không đổi domain coordinates để sửa jitter. Kiểm tra DPR 1/1.25/2, CSS width 960/1280/1920, camera tại giữa và hai mép, chuyển frame khi đi. Ghi giới hạn ở fractional scale; không hứa pixel-perfect trên mọi zoom.
 - [ ] Kiểm tra coverage lớp: không lộ khoảng trống lúc camera chạy hết bounds, chân không trượt và foreground không che mất tương tác. Background tĩnh không bị motion sinusoidal của fixture làm rung cả căn phòng.
-- [ ] Chạy focused module + existing `world-lifecycle`/`display` tests; commit `feat: render detailed pixel actors over layered scenery`.
+- [x] Chạy focused module + existing `world-lifecycle`/`display` tests; commit `feat: render detailed pixel actors over layered scenery`.
+
 
 ### T05 — Hộp thoại và portrait đúng concept trên UI thật
 
@@ -332,14 +333,15 @@ nếu contract mới cần hướng dẫn. Sửa `ResourceIndex` chỉ nếu tes
 **Consumes:** đoạn tích hợp T01–T07, existing keyboard/static artifact harness.
 **Produces:** kết quả thật, lựa chọn Review B, mẫu đủ dùng cho G2–G6.
 
-- [ ] Native keyboard journey từ New Game đi qua route thật đến Room 3; kiểm tra có Khuê/Vân, hướng nhìn, tương tác, portrait đúng câu/narration, nhận Main/notice đúng một lần rồi trở lại world. Không dùng debug setFlag để gọi đó là route thật.
-- [ ] Save/load exploration và giữa reveal; menu/hidden tab/focus return; đổi câu khi asset pending; vào/rời phòng lặp lại và dispose. Theo dõi assets/listeners/loops theo baseline ownership, không chỉ đếm screenshot.
-- [ ] Chạy hai tuyến 3 ngày hiện có để phát hiện regression dù G1 chỉ phủ art một đoạn; các phần chưa phủ vẫn được ghi rõ là fixture. Raw First3Days và protected narrative/gameplay/concept hashes giữ nguyên.
-- [ ] Full local gate cuối dùng `tools/ci.py`; sau đó chạy bản static export từ `dist/foundation-demo/<fingerprint>/` bằng native keyboard G1 test. Fingerprint lấy từ output thực tế, không viết sẵn đường giả. Không thêm publish hoặc hosted-CI work.
+- [x] Native keyboard journey từ New Game đi qua route thật đến Room 3; kiểm tra có Khuê/Vân, hướng nhìn, tương tác, portrait đúng câu/narration, nhận Main/notice đúng một lần rồi trở lại world. Không dùng debug setFlag để gọi đó là route thật.
+- [x] Save/load exploration và giữa reveal; menu/hidden tab/focus return; đổi câu khi asset pending; vào/rời phòng lặp lại và dispose. Theo dõi assets/listeners/loops theo baseline ownership, không chỉ đếm screenshot.
+- [x] Chạy hai tuyến 3 ngày hiện có để phát hiện regression dù G1 chỉ phủ art một đoạn; các phần chưa phủ vẫn được ghi rõ là fixture. Raw First3Days và protected narrative/gameplay/concept hashes giữ nguyên.
+- [x] Full local gate cuối dùng `tools/ci.py`; sau đó chạy bản static export từ `dist/foundation-demo/<fingerprint>/` bằng native keyboard G1 test. Fingerprint lấy từ output thực tế, không viết sẵn đường giả. Không thêm publish hoặc hosted-CI work.
 - [ ] Chụp cùng trạng thái ở window/fullscreen và cỡ chữ lớn; đo tải cảnh/decoded assets/frame time trên máy/browser đã ghi. Chưa có đủ bằng chứng thì ghi unverified, không tuyên bố 60 FPS hoặc máy yếu đạt chuẩn.
 - [ ] Review B cùng người dùng: cảnh có đúng chất biển miền Trung/hoài niệm, sprite đủ nhiều pixel và không quá chibi, đọc rõ mặt/đồ vật/UI, chuyển động không trượt. Kết quả kỹ thuật pass không thay thế lựa chọn thẩm mỹ.
-- [ ] Ghi chuẩn đã chọn, ảnh/video/artifact paths, checks thực chạy, lỗi còn lại và phạm vi fixture. Đóng G1 chỉ khi phần kỹ thuật đạt và người dùng duyệt bản chơi; nếu chưa duyệt thì trạng thái `awaiting visual review`, không tự đóng.
-- [ ] Commit `test: verify room-three art-direction slice`; dừng ở bàn giao G1. Chỉ bắt đầu G khác khi người dùng giao việc tiếp.
+- [x] Ghi chuẩn đã chọn, ảnh/video/artifact paths, checks thực chạy, lỗi còn lại và phạm vi fixture. Đóng G1 chỉ khi phần kỹ thuật đạt và người dùng duyệt bản chơi; nếu chưa duyệt thì trạng thái `awaiting visual review`, không tự đóng.
+- [x] Commit `test: verify room-three art-direction slice`; dừng ở bàn giao G1. Chỉ bắt đầu G khác khi người dùng giao việc tiếp.
+
 
 ## 5. Điều kiện nghiệm thu G1
 

@@ -4,7 +4,7 @@ const record=value=>!!value&&typeof value==='object'&&!Array.isArray(value);
 /** Shared source validation; editor-only capabilities remain outside player state. */
 export function validateAuthoringUI({catalog,locales,project,sourceFor,schemas}){
  const errors=[],locale=locales[project.defaultLocale]??{},templateParams={property:['path'],frame:['id'],range:['path'],usage:['source','pointer'],action:['action'],result:['value'],layer:['index'],actor:['id'],interaction:['id'],resource:['id','kind','locale'],node:['id'],edge:['from','to']};
- const fields=['title','search','resources','usages','source','rename','remove','replaceId','preview','stop','property','readonly','export','import','transfer','selected','disabled','error','focused','step','frame','playCue','params','applyParams','range','recipe','buildAssets','loaded','usage','action','context','result','layer','actor','interaction','scene','saveGroup','resource','next','previous'];
+ const fields=['title','search','resources','usages','source','rename','remove','replaceId','preview','stop','property','readonly','export','import','transfer','selected','disabled','error','focused','step','frame','playCue','params','applyParams','range','recipe','buildAssets','loaded','usage','action','context','result','layer','actor','interaction','scene','saveGroup','resource','next','previous','speaker','expression','narration','day'];
  for(const config of catalog.list('config')){
   const add=pointer=>errors.push(diagnostic('authoring.ui.invalid',sourceFor('config',config.id),pointer,[config.id]));
   if(config.authoringId&&catalog.get('config',config.authoringId).value?.kind!=='authoring-ui')add('/authoringId');

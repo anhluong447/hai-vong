@@ -2,8 +2,9 @@
 
 Status: Review A đã chọn mật độ **A2 — 192 px**, cỡ hiển thị **B3 — 152 logical
 units**, ngày 2026-10-26. [Mẫu và prompts](review-a/README.md) đã có; palette và
-toàn cảnh vẫn kiểm chứng ở Review B. Nền hiện là composition sạch một ảnh phẳng,
-chưa phải bộ layer hay animation hoàn chỉnh.
+toàn cảnh vẫn kiểm chứng ở Review B. Ba lớp nền, sprite idle/walk, portrait và UI
+đã ghép vào cuộc gặp thật. [Bản chơi và ảnh Review B](review-b/README.md) chờ duyệt;
+kiểm tra kỹ thuật không thay thế quyết định hình ảnh của người dùng.
 
 ## Nguồn và hướng đã chốt
 
@@ -86,4 +87,4 @@ cuối vẫn được đánh giá trong Review B; build thành công không thay
 | Điểm duyệt | Trạng thái | Lựa chọn |
 | --- | --- | --- |
 | Review A — density/scale/composition | Đã xem board và trả lời rõ; palette/cảnh kiểm chứng tiếp khi chơi | A2 — 192 px; B3 — cao 152; Vân thấp hơn một chút |
-| Review B — đoạn chơi thật | Chưa tích hợp | Chưa duyệt |
+| Review B — đoạn chơi thật | Đã tích hợp; native journey và ảnh window/chữ lớn có bằng chứng | Chờ người dùng chơi và duyệt |

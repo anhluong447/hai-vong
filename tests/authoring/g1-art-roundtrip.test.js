@@ -5,8 +5,19 @@ import {TextService} from '/src/domain/story/TextService.js';
 import {StoryEditor} from '/tools/workspace/editors/StoryEditor.js';
 import {SceneEditor} from '/tools/workspace/editors/SceneEditor.js';
 import {ResourceIndex} from '/tools/workspace/resources/ResourceIndex.js';
+import {AnimationPanel} from '/tools/workspace/resources/AnimationPanel.js';
 const sources=await loadProject('/content/first-three-days.project.json');
 function setup(resourceId){const workspace=new Workspace({sources}),root=document.createElement('section');document.body.append(root);return {root,workspace,resourceId,sourceId:new ResourceIndex(workspace).definitions().find(d=>d.id===resourceId).sourceId,text:new TextService(workspace.bundle.locales,'vi'),ui:workspace.bundle.catalog.get('config','ui.authoring').value};}
+test('actual G1 resource clip panels keep pixel sampling and the complete sprite inside preview',async()=>{
+ for(const id of ['clip.first3.khue.idle','clip.first3.khue.walk','clip.first3.van.idle','clip.first3.van.walk']){
+  const o=setup(id),panel=new AnimationPanel(o.root,o);try{
+   panel.render();assert((await panel.previewClip()).ok);const preview=panel.preview,context=preview.view.context??preview.canvas.getContext('2d'),draw=context.drawImage;let sampling;
+   context.drawImage=function(...args){sampling=this.imageSmoothingEnabled;return draw.apply(this,args);};preview.step(.12);equal(sampling,false);
+   const clip=preview.actor.animation.clip,frame=preview.actor.animation.frame(),rect=o.workspace.bundle.catalog.get('assets',frame.assetId).value.frames.find(f=>f.id===frame.frameId),p=preview.settings,s=preview.actor.definition.scale;
+   assert(p.actorX-clip.pivot.x*s>=0&&p.actorY-clip.pivot.y*s>=0&&p.actorX+(rect.width-clip.pivot.x)*s<=p.width&&p.actorY+(rect.height-clip.pivot.y)*s<=p.height,'G1 sprite cropped in actual preview');
+  }finally{await panel.dispose();o.root.remove();}
+ }
+});
 test('story author creates speaker metadata with actor-filtered expression controls and preserves round-trip history',async()=>{
  const o=setup('chapter.first3.recruit'),editor=new StoryEditor(o.root,o);
  try{

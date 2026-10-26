@@ -1,4 +1,5 @@
 import {GameSession} from '../../src/application/GameSession.js';
+import {resolveWorldPresentation} from '../../src/application/WorldPresentation.js';
 import {AssetCatalog} from '../../src/infrastructure/resources/AssetCatalog.js';
 import {AssetService} from '../../src/infrastructure/resources/AssetService.js';
 import {BrowserResourceDecoder} from '../../src/infrastructure/resources/BrowserResourceDecoder.js';
@@ -28,7 +29,7 @@ export class RuntimePreview {
  step(delta){
   if(this.disposed||!this.world?.current)return;const elapsed=Math.min(Math.max(0,delta),this.config.maxMovementDelta);for(const intent of this.input?.drain()??[])if(intent.action==='interact')this.session.execute({type:'world.interact',requestId:'authoring-interaction'});
   if(this.interactive&&['idle','end'].includes(this.session.snapshot().story.waiting)){const axis=Number(this.input.held('moveRight'))-Number(this.input.held('moveLeft'));this.session.execute({type:'world.move',axis,delta:elapsed});}
-  this.world.render(this.session.snapshot().world,elapsed,{day:this.session.snapshot().gameplay.calendar.day});
+  this.world.render(resolveWorldPresentation(this.session.snapshot()),elapsed,{day:this.session.snapshot().gameplay.calendar.day});
  }
  dispose(){this.disposed=true;this.generation++;this.release();}
 }

@@ -4,98 +4,59 @@ Updated: 2026-10-26 (Asia/Bangkok).
 
 ## Current task and stopping point
 
-Latest user authorizes G1 implementation inline on feat/first3-art-direction
-in .worktrees/phase-0, including the explicit generated-image staging exception
-under CODEX_HOME/generated_images. All project-bound images are copied inside
-this project. No G2-G8, merge, push or publication authorization.
+Latest user authorizes continuing G1 inline on feat/first3-art-direction in
+.worktrees/phase-0, with the explicit generated-image staging exception under
+CODEX_HOME/generated_images. Implementation and local/static verification are
+ready for user playable Review B; G1 is NOT aesthetically accepted/closed. Stop
+at visual handoff; no G2-G8, merge, push or publication authorization.
 
-Review A is explicit: A2 density 192 px, B3 display height 152; Van is 0.92 of
-Khue. Samples/prompts/selection committed as b76e2eb. Prior plan 3fafb2f, T03
-contracts 8679f4d and T04 renderer c99aad1 remain the earlier code checkpoints.
+Review A: user selected A2 native visible192px, B3 display152 logical units;
+Van0.92. Room3 has3 real layers, Khue/Van2idle+6walk frames each, six portraits,
+managed speaker metadata/theme, shared runtime/editor previews and source recovery.
+Actual background masters about1930x814; canvas160x208/pivot80,200. Other locations,
+later-day generic cast/audio and broad HUD/menu remain fixtures. No dynamic lighting.
 
-T02 asset preparation is verified and committed as 871d08b. Three independent room
-layers (exterior, interior with furniture/props, foreground), 16 native sprite
-frames, six 512px portraits and two atlases are imported through managed recipes.
-The five proposed layer groups were merged to three useful groups as permitted
-by the plan. Actual background sources are about 1930x814, not the proposed
-2560x1080. Native frame canvas 160x208, visible height192, pivot80/200; idle1.1s,
-walk0.12s are prototype timing, final motion quality still belongs to Review B.
+Commits: plans3fafb2f; T03 contracts8679f4d; T04renderer c99aad1; T01samples b76e2eb;
+T02assets871d08b; T05portraits/UI db4c0f8; T06integration55614d2; T07authoring8ad1243.
+T08 changes include pure standing-during-dialogue projection, native/static tests,
+review captures and two independently reviewed authoring fixes. T08 is committed as the final
+verified-slice checkpoint (see branch log). No persisted field added; RunSnapshot3, content0.0.3.
+Genuine pre-art d684512 exploration/reveal saves and provenance in tests/fixtures/g1.
+Migration validates old animations before bounded reset and preserves gameplay,
+text/UI/cursor; unknown/corrupt state rejects before live replacement.
 
-All raw sources, reference copies and exact prompts are recoverable in the new
-assets/bundles/first3-art-g1-v1.zip (24,449,500 bytes; SHA256
-9fc33cd4b7f737a43194ee65d271ba0457bdfe03ba57a5f106d20122553d9cdb).
-Fresh contained .cache/tmp/g1-recovery-t02 used its own offline-installed private
-venv; before restore27 sources/exports were absent, then27 restored sources and
-33 rebuilt renditions matched exactly, audit PASS. Repeat build rebuilt none;
-repeat ZIP hash equal. Original foundation-v1.zip Git blob unchanged.
+Final current-source fingerprint:
+cfc80e3d34c2d84bdc4f4c2e2cfa2fb531f86acf4da4d80c6c7c2a399d8ad7d1.
+Architecture/content PASS; unit154JS+61Python PASS; browser67/67; authoring47/47;
+bot8/8+pack PASS. All6 bound receipts match source (g1-current-gates.json).
+Release PASS; actual artifact dist/foundation-demo/cfc80e3d34c2d84bdc4f/. Static
+both3day routes2/2 and additional G1 journey1/1 PASS; Firefox smoke1/1. CI attempts
+had intermittent browser import/fetch/bootstrap failures; failed gates rerun on
+unchanged source. Instrumented fullauthoring/content24loads did not reproduce
+fault. No speculative loader/server fix; retain failed logs/tooling uncertainty.
+Do not describe this as one uninterrupted green tools/ci.py invocation.
 
-Generic crop/resize/canvas contracts, source-path diagnostics and recipe-sensitive
-atlas cache implemented test-first. Final architecture/content/audit PASS;
-full unit PASS150 JS +60 Python. Initial full unit had5 packaging failures for
-unregistered G1 provenance; added the explicit registry record/development-profile
-entry, preserving productionApproved=false; final full unit passes. Focused
-schema3/3, pipeline3new+6existing, asset preview1/1 per capture pass. Reports in
-.superpowers/sdd/2026-10-26-g1-room3-art-direction/t02-*. Four concept reference
-hashes unchanged. No current full browser/authoring/bot/release/static rerun for
-T02 (prior T04 browser53/authoring42 remain earlier evidence).
+Reference entry-page realRAF p95 16.8ms; CPU4x simulation33.4ms misses33.34ms budget.
+Physical lower-spec FPS and actual fullscreen are unverified. Window/large-text
+captures, controlled Room3 CPU/image accounting and limits in docs/art-direction/
+review-b/. Assets stable7resources/8refs/0pending across4day2 room trips; dispose0.
+20 protected Bible/GDD/concept/raw files bytechecked againstd684512 unchanged.
 
-Real-renderer asset preview and captures are docs/art-direction/production-preview/.
-It is isolated art inspection, not a playable story acceptance. No live scene,
-actor, locale dialogue or content version has changed. Proceed T05 portraits/UI,
-then T06 genuine pre-change saves, integration/migration; T07 authoring and T08
-journeys/gates/Review B remain required. G1 is not complete.
+One fresh independent review: no Critical,2Important fixed RED->GREEN (new editor
+label contracts; cropped/smooth actual resource clip previews). Deferred1Minor:
+restarting Scene Preview resetsday1 while day field retains oldvalue; changing
+field reapplies, no player save impact. Review and limits: docs/testing/G1-REVIEW.md
+and G1-ART-ACCEPTANCE.md. User ReviewB pending; game playable at read-only local
+http://127.0.0.1:8765/ (PID27856, HTTP200 verified). A/D walk, E interact, Enter
+reveal/advance, Escape menu. Source/progress reports retained in this plan's own
+.superpowers/sdd/2026-10-26-g1-room3-art-direction, never touch sibling ledger.
 
-### T05 verified implementation checkpoint
-
-DialoguePresentationView is wired to main.js and RuntimeCheckpoint; cursor/locale
-signatures avoid per-frame acquisitions and ignore stale errors. Prepared portrait
-leases commit synchronously, abort on later failure, and retain previous view on
-failed restore. Live line changes hide the previous face while loading. Narration,
-name-only mode, locale refresh, retry and disposal are covered. No persisted field.
-Structural speaker nodes and token-driven First3 navy/cream theme are registered;
-First3 theme activation and real actor/story metadata remain T06.
-
-Focused new portrait/checkpoint/layout tests RED then GREEN11/11; combined existing
-player/save flows22/22. Full browser64/64 PASS; architecture/content PASS. Authoring
-initial41/42 exposed an old negative test mutating manifest[0], now an unreferenced
-G1 atlas. Targeting the referenced atlas.fixture.actor restores the intended check;
-focused8/8 and full authoring42/42 PASS. Raw t05-*.json in scoped ledger. Maximum
-text scale1.5/en-XA keyboard layout passes without horizontal clipping or foot overlap.
-T06 genuine old saves and integration/migration, T07 authoring and T08 remain.
-
-
-### T06 integration checkpoint
-
-Managed Khue/Van actors, four clips, Room3 layers and day1 Van are integrated;
-First3 player/theme selected, foundation fixture retained. Four unambiguous recruit
-lines carry speaker/expression metadata. Both projects/pack now content0.0.3;
-RunSnapshot remains3. Genuine exploration/reveal saves captured from d684512 in
-contained private-venv copy, with hashes and capture source in tests/fixtures/g1.
-Explicit0.0.2->0.0.3 policy resets only validated declared fixture animations in
-seven First3 scenes. Unknown clips/keys/corruption reject; domain/reveal/UI preserved.
-Migration RED3 -> GREEN5; integrated focused6/6, old0.0.1 chain and both3day native
-routes3/3 PASS. Full browser66/66 PASS. Unit153 JS +60 Python PASS, but its bound
-receipt rejected a source edit made while suite ran; do not claim valid unit gate.
-Final frozen-source CI must rerun it. Architecture/content shared checks PASS.
-T07 RED2 identifies missing optional speaker selectors and day-preview control.
-T07 implementation and T08 final gates/static/Review B remain. No G1 acceptance.
-
-
-### T07 authoring checkpoint
-
-Story Editor creates/removes optional speaker metadata, filters expression choices
-by actor, and previews through the shared resolver/DialoguePresentationView with
-managed leases. Scene Editor changes validated isolated preview day without touching
-player saves. Speaker reference catalog entry and localized editor labels added.
-RED2 -> GREEN2; missing portrait preview RED1 -> GREEN; actual day-control RED1
-caught preview destruction, fixed without rerendering. Focused story regressions9/9.
-Grouped actor sampling/clip pivot/scene layer-NPC/story metadata export-reopen test
-and real authenticated batch-writer Python test PASS1 (11.4s), including stale hash
-and invalid expression preserving saved bytes. Full authoring45/45 and architecture/
-content PASS. Source bundles/recipes/manifest unchanged since T02 fresh private-venv
-restore27/build33 proof; reuse that unchanged-byte recovery evidence rather than
-claiming a second restore. T08 native/static journey, measurements, final frozen
-source gates and whole-branch review remain; user Review B still pending.
+T02 recovery remains verified: tracked first3-art-g1-v1.zip24449500bytes/SHA256
+9fc33cd4b7f737a43194ee65d271ba0457bdfe03ba57a5f106d20122553d9cdb; fresh own
+private offline venv restored27 sources/build33 identical outputs, deterministic
+ZIP/build/audit PASS. No source recipe/manifest/pipeline change since this proof;
+T07 reuses unchanged-byte evidence rather than claiming another restore. Original
+foundation bundle unchanged. Production license approval remainsfalse.
 
 ### Previous planning handoff
 
