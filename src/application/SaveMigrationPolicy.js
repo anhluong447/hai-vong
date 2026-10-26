@@ -5,7 +5,7 @@ export function schemaStepsFor(bundle){return [{from:1,to:2,guard:'phase0-side-s
 export function contentStepsFor(bundle){
  const runtime=bundle.catalog.get('config',bundle.project.runtimeConfigId).value;if(!runtime.migrationConfigId)return [];
  const definition=bundle.catalog.get('config',runtime.migrationConfigId).value,initial=createGameplayState(bundle);
- return definition.steps.map(step=>({from:step.from,to:step.to,defaults:{gameplay:{
+ return definition.steps.map(step=>({from:step.from,to:step.to,...(step.resetActorAnimations?{resetActorAnimations:structuredClone(step.resetActorAnimations)}:{}),defaults:{gameplay:{
   flags:Object.fromEntries(step.addFlags.map(id=>[id,bundle.catalog.get('flags',id).value.default])),
   quests:Object.fromEntries(step.addQuests.map(id=>[id,initial.quests[id]]))
  }}}));

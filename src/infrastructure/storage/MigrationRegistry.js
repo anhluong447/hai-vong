@@ -1,4 +1,5 @@
 import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
+import {validAnimationState} from '../../contracts/PresentationSnapshot.js';
 const bad=code=>failure(diagnostic(code,'save','/migration'));
 const object=value=>!!value&&typeof value==='object'&&!Array.isArray(value);
 const missingDefaults=(defaults,state,depth=0)=>{
@@ -10,7 +11,7 @@ const knownV1=state=>state.formatTag===undefined&&object(state.gameplay)&&Object
 const knownV2=state=>state.formatTag==='hoi-am.side-scroll'&&object(state.gameplay?.calendar)&&object(state.world)&&Number.isFinite(state.world.position)&&[1,-1].includes(state.world.facing);
 /** Bounded, explicit mappings. There is no guessed legacy coordinate conversion. */
 export class MigrationRegistry {
- constructor({schemaVersion,contentVersion,schemaSteps=[],contentSteps=[]}){Object.assign(this,{schemaVersion,contentVersion,schemaSteps,contentSteps});}
+ constructor({schemaVersion,contentVersion,schemaSteps=[],contentSteps=[],catalog}){Object.assign(this,{schemaVersion,contentVersion,schemaSteps,contentSteps,catalog});}
  migrate(snapshot,contentVersion){
   try{
    let state=structuredClone(snapshot);if(!state||state.contentRevision!==contentVersion)return bad('save.content.mismatch');
@@ -24,6 +25,17 @@ export class MigrationRegistry {
    const seen=new Set();while(state.contentRevision!==this.contentVersion){
     if(seen.has(state.contentRevision))return bad('save.content.cycle');seen.add(state.contentRevision);
     const candidates=this.contentSteps.filter(s=>s.from===state.contentRevision);if(candidates.length!==1)return bad('save.content.unsupported');const step=candidates[0];
+    const policy=step.resetActorAnimations,world=state.presentation?.view?.world;
+    if(policy&&world&&policy.sceneIds.includes(state.world?.sceneId)){
+     const scene=this.catalog?.get('scenes',world.sceneId);if(world.sceneId!==state.world.sceneId||!scene?.ok||!object(world.actors))return bad('save.migration.animationInvalid');
+     const keys=new Set(['player',...scene.value.actors.map(actor=>actor.id)]);
+     for(const [id,animation]of Object.entries(world.actors)){
+      if(!keys.has(id))return bad('save.migration.animationInvalid');
+      if(animation===null)continue;
+      if(!validAnimationState(animation,this.catalog)||Object.keys(animation).some(key=>!['id','elapsed','paused','status'].includes(key))||!policy.clipIds.includes(animation.id))return bad('save.migration.animationInvalid');
+      world.actors[id]=null;
+     }
+    }
     if(state.story?.cursor){const cursor=state.story.cursor,key=[cursor.chapterId,cursor.nodeId,cursor.commandId].join('/');if(step.anchorMap?.[key])state.story.cursor=structuredClone(step.anchorMap[key]);}
     const anchor=id=>{const mapped=step.anchorMap?.[id];return mapped?[mapped.chapterId,mapped.nodeId,mapped.commandId].join('/'):id;};
     if(state.story?.history)state.story.history=state.story.history.map(entry=>({...entry,anchor:anchor(entry.anchor)}));

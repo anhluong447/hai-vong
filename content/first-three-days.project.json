@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "hoi-am.first3",
-  "contentVersion": "0.0.2",
+  "contentVersion": "0.0.3",
   "packs": [
     "packs/foundation-demo.json"
   ],

@@ -29,6 +29,27 @@
         "quest.first3.canteen",
         "quest.first3.general"
       ]
+    },
+    {
+      "from": "0.0.2",
+      "to": "0.0.3",
+      "addFlags": [],
+      "addQuests": [],
+      "resetActorAnimations": {
+        "sceneIds": [
+          "scene.first3.gate",
+          "scene.first3.office",
+          "scene.first3.classroom",
+          "scene.first3.corridor",
+          "scene.first3.room3",
+          "scene.first3.home",
+          "scene.first3.canteen"
+        ],
+        "clipIds": [
+          "clip.fixture.idle",
+          "clip.fixture.walk"
+        ]
+      }
     }
   ]
 }

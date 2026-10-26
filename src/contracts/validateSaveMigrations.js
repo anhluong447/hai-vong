@@ -11,11 +11,19 @@ export function validateSaveMigrations({catalog,project,sourceFor}){
   const from=new Map();
   definition.steps.forEach((step,index)=>{
    const path='/steps/'+index;
-   if(!object(step)||typeof step.from!=='string'||!step.from||typeof step.to!=='string'||!step.to||step.from===step.to||step.from===project.contentVersion||from.has(step.from)||Object.keys(step).some(key=>!['from','to','addFlags','addQuests'].includes(key))){add(definition.id,'migration.definition.invalid',path);return;}
+   if(!object(step)||typeof step.from!=='string'||!step.from||typeof step.to!=='string'||!step.to||step.from===step.to||step.from===project.contentVersion||from.has(step.from)||Object.keys(step).some(key=>!['from','to','addFlags','addQuests','resetActorAnimations'].includes(key))){add(definition.id,'migration.definition.invalid',path);return;}
    from.set(step.from,step.to);
    for(const [field,kind]of [['addFlags','flags'],['addQuests','quests']]){
     const ids=step[field];if(!Array.isArray(ids)||new Set(ids).size!==ids.length){add(definition.id,'migration.definition.invalid',path+'/'+field);continue;}
     ids.forEach((id,i)=>{if(typeof id!=='string'||!catalog.get(kind,id).ok)add(definition.id,'migration.reference.invalid',path+'/'+field+'/'+i,[id]);});
+   }
+   if(step.resetActorAnimations!==undefined){
+    const policy=step.resetActorAnimations,p=path+'/resetActorAnimations';
+    if(!object(policy)||Object.keys(policy).some(key=>!['sceneIds','clipIds'].includes(key)))add(definition.id,'migration.definition.invalid',p);
+    else for(const [field,kind]of [['sceneIds','scenes'],['clipIds','animations']]){
+     const ids=policy[field];if(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length){add(definition.id,'migration.definition.invalid',p+'/'+field);continue;}
+     ids.forEach((id,i)=>{if(typeof id!=='string'||!catalog.get(kind,id).ok)add(definition.id,'migration.reference.invalid',p+'/'+field+'/'+i,[id]);});
+    }
    }
   });
   definition.steps.forEach((step,index)=>{

@@ -283,8 +283,8 @@ tạo fixture save G1 trong `tests/fixtures/g1/` cùng provenance.
 **Consumes:** T02–T05; chapter/scene IDs, effects/flags từ Phase 0.
 **Produces:** player entry bình thường chơi được đoạn G1; save trước đổi art load được.
 
-- [ ] **Trước khi thay live content**, tạo save thật bằng runtime base `d684512` trong isolated project-local copy: đứng tại Room 3 và giữa câu `van-warning`; giữ envelope/provenance. Không giả gọi snapshot sau thay đổi là save cũ.
-- [ ] Viết RED migration: load save 0.0.2 giữ cursor, reveal count, position, camera, UI, calendar, flags, quests, receipts; metadata portrait dựng lại đúng từ cursor; advance không lặp `main-start`/`main-notice`.
+- [x] **Trước khi thay live content**, tạo save thật bằng runtime base `d684512` trong isolated project-local copy: đứng tại Room 3 và giữa câu `van-warning`; giữ envelope/provenance. Không giả gọi snapshot sau thay đổi là save cũ.
+- [x] Viết RED migration: load save 0.0.2 giữ cursor, reveal count, position, camera, UI, calendar, flags, quests, receipts; metadata portrait dựng lại đúng từ cursor; advance không lặp `main-start`/`main-notice`.
 
   Assertions cốt lõi trong test `old room-three reveal resumes without repeating notice`:
 
@@ -299,13 +299,13 @@ tạo fixture save G1 trong `tests/fixtures/g1/` cùng provenance.
   equal(migrated.presentation.view.world.actors.player, null);
   ```
 
-- [ ] Viết RED hỏng: actor clip không nằm trong danh sách old clip đã khai báo, actor key lạ, hoặc scene lạ không được migration "sửa cho qua"; session và slot tốt giữ nguyên khi restore bị từ chối.
-- [ ] Thêm actors/clips/art UI vào pack. `runtime.first3.playerActorId` dùng Khuê mới; foundation runtime giữ fixture. Room 3 có actor Vân (ID instance `van`, facing -1, visibleDays `[1]`); giữ instance `speaker` generic cho ngày sau với visibleDays `[2,3]` đến G3/G4. Không biến Vân thành người đại diện mọi cuộc gặp; các maps/ngày chưa làm vẫn có nhãn chưa hoàn thiện.
-- [ ] Chỉ metadata thoại đơn nghĩa: `van-warning=Vân/guarded`, `van-memory=Vân/neutral`, `van-alone=Vân/sad`, `khue-membership=Khuê/neutral`; các câu mô tả/mixed narration không speaker. `id`, `textKey`, params, effects và flag commands không đổi. Dùng tên nhân vật qua locale keys trong actor definition.
-- [ ] Bump cả hai project và pack từ `0.0.2` sang **`0.0.3`**, giữ route `0.0.1→0.0.2`; thêm bước `0.0.2→0.0.3` với `addFlags:[]`, `addQuests:[]`. Không bump RunSnapshot 3 vì không thêm persisted field; nếu triển khai thay cấu trúc thì phải sửa quyết định và migration trước.
-- [ ] Mở rộng có giới hạn migration step bằng optional `resetActorAnimations:{sceneIds,clipIds}`. `sceneIds` là bảy First3 scene IDs hiện có; `clipIds` là hai fixture idle/walk cũ. Trong đúng saved scene, chỉ các animation snapshot mang clip đã khai báo và pass `validAnimationState` được thay bằng `null` (giữ actor keys); animation null giữ null. Unknown clip, elapsed/paused/status hỏng hoặc snapshot shape sai phải reject trước khi reset; không xóa dấu vết corruption. Giữ toàn bộ `presentation.view.text/ui`, world camera/elapsed, domain state và audio/sequence; không xóa cả presentation view. World restore đã biết dựng lại actor từ null; không reset story hoặc reward.
-- [ ] Cập nhật shared migration validator + `contentStepsFor` để chuyển policy data vào MigrationRegistry. Validating actor keys/range/flags vẫn chạy trước live assignment. Test cả chain 0.0.1→0.0.2→0.0.3 và foundation save không bị reset visual ngoài scope.
-- [ ] Chạy content/unit và browser migration; commit `feat: integrate room-three art with explicit save compatibility`.
+- [x] Viết RED hỏng: actor clip không nằm trong danh sách old clip đã khai báo, actor key lạ, hoặc scene lạ không được migration "sửa cho qua"; session và slot tốt giữ nguyên khi restore bị từ chối.
+- [x] Thêm actors/clips/art UI vào pack. `runtime.first3.playerActorId` dùng Khuê mới; foundation runtime giữ fixture. Room 3 có actor Vân (ID instance `van`, facing -1, visibleDays `[1]`); giữ instance `speaker` generic cho ngày sau với visibleDays `[2,3]` đến G3/G4. Không biến Vân thành người đại diện mọi cuộc gặp; các maps/ngày chưa làm vẫn có nhãn chưa hoàn thiện.
+- [x] Chỉ metadata thoại đơn nghĩa: `van-warning=Vân/guarded`, `van-memory=Vân/neutral`, `van-alone=Vân/sad`, `khue-membership=Khuê/neutral`; các câu mô tả/mixed narration không speaker. `id`, `textKey`, params, effects và flag commands không đổi. Dùng tên nhân vật qua locale keys trong actor definition.
+- [x] Bump cả hai project và pack từ `0.0.2` sang **`0.0.3`**, giữ route `0.0.1→0.0.2`; thêm bước `0.0.2→0.0.3` với `addFlags:[]`, `addQuests:[]`. Không bump RunSnapshot 3 vì không thêm persisted field; nếu triển khai thay cấu trúc thì phải sửa quyết định và migration trước.
+- [x] Mở rộng có giới hạn migration step bằng optional `resetActorAnimations:{sceneIds,clipIds}`. `sceneIds` là bảy First3 scene IDs hiện có; `clipIds` là hai fixture idle/walk cũ. Trong đúng saved scene, chỉ các animation snapshot mang clip đã khai báo và pass `validAnimationState` được thay bằng `null` (giữ actor keys); animation null giữ null. Unknown clip, elapsed/paused/status hỏng hoặc snapshot shape sai phải reject trước khi reset; không xóa dấu vết corruption. Giữ toàn bộ `presentation.view.text/ui`, world camera/elapsed, domain state và audio/sequence; không xóa cả presentation view. World restore đã biết dựng lại actor từ null; không reset story hoặc reward.
+- [x] Cập nhật shared migration validator + `contentStepsFor` để chuyển policy data vào MigrationRegistry. Validating actor keys/range/flags vẫn chạy trước live assignment. Test cả chain 0.0.1→0.0.2→0.0.3 và foundation save không bị reset visual ngoài scope.
+- [x] Chạy content/unit và browser migration; commit `feat: integrate room-three art with explicit save compatibility`.
 
 ### T07 — Authoring thực tế và tài nguyên phục hồi được
 

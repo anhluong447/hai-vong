@@ -9,7 +9,7 @@ Plan commit: `3fafb2f`. Active branch: `feat/first3-art-direction`.
 - T02: assets and recoverable bundle prepared; 3 real layers, 16 sprite frames, 6 portraits, 2 atlases. Native frame canvas 160x208 / visible192 / pivot80,200; selected display152. Real-renderer composition/walk inspection available under ../art-direction/production-preview/. Sources remain candidates for playable Review B. Fresh private-venv recovery restores27 sources and rebuilds33 identical renditions; deterministic ZIP/build and audit pass.
 - T03: content contracts and pure dialogue projection implemented. Focused tests: RED 14 failures / 8 existing rejections, then GREEN 22/22. Architecture and content suites pass; full unit suite passes 148 JS + 57 Python tests. No production art/content version change yet.
 - T04: renderer code implemented; focused renderer/lifecycle/display checks pass 9/9, full browser 53/53 and authoring 42/42. A follow-up preview-sampling validator test was RED then GREEN. Final full unit passes 149 JS + 57 Python; current architecture/content pass. Actual G1-art visual checks remain pending Review A/assets.
-- T05–T08: not complete.
+- T05: portraits/UI wired; full browser64/64 and authoring42/42 PASS. T06: content0.0.3 integrated; real old-save focused6/6, original migration chain/two routes3/3, full browser66/66 PASS. Unit153 JS +60 Python pass, bound receipt invalidated by source edit; final CI required. T07/T08 remain.
 
 Built-in image generation has a documented default output location outside the
 project. The user explicitly granted the narrow exception for tool-generated images in

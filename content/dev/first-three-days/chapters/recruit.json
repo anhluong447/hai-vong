@@ -13,17 +13,23 @@
         {
           "id": "van-warning",
           "op": "say",
-          "textKey": "first3.line.van-warning"
+          "textKey": "first3.line.van-warning",
+          "speakerId": "actor.first3.van",
+          "expressionId": "guarded"
         },
         {
           "id": "khue-membership",
           "op": "say",
-          "textKey": "first3.line.khue-membership"
+          "textKey": "first3.line.khue-membership",
+          "speakerId": "actor.first3.khue",
+          "expressionId": "neutral"
         },
         {
           "id": "van-memory",
           "op": "say",
-          "textKey": "first3.line.van-memory"
+          "textKey": "first3.line.van-memory",
+          "speakerId": "actor.first3.van",
+          "expressionId": "neutral"
         },
         {
           "id": "notice",
@@ -61,7 +67,9 @@
         {
           "id": "van-alone",
           "op": "say",
-          "textKey": "first3.line.van-alone"
+          "textKey": "first3.line.van-alone",
+          "speakerId": "actor.first3.van",
+          "expressionId": "sad"
         },
         {
           "id": "khue-recruit",

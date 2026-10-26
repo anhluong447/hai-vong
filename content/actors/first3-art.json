@@ -1,0 +1,28 @@
+[
+  {
+    "id": "actor.first3.khue",
+    "nameKey": "first3.character.khue",
+    "idleClipId": "clip.first3.khue.idle",
+    "walkClipId": "clip.first3.khue.walk",
+    "scale": 0.7916666666666666,
+    "sampling": "pixel",
+    "portraits": {
+      "neutral": "image.first3.khue.portrait.neutral",
+      "thoughtful": "image.first3.khue.portrait.thoughtful",
+      "determined": "image.first3.khue.portrait.determined"
+    }
+  },
+  {
+    "id": "actor.first3.van",
+    "nameKey": "first3.character.van",
+    "idleClipId": "clip.first3.van.idle",
+    "walkClipId": "clip.first3.van.walk",
+    "scale": 0.7283333333333333,
+    "sampling": "pixel",
+    "portraits": {
+      "neutral": "image.first3.van.portrait.neutral",
+      "guarded": "image.first3.van.portrait.guarded",
+      "sad": "image.first3.van.portrait.sad"
+    }
+  }
+]

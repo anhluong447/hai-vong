@@ -1721,5 +1721,13 @@
   "first3.preview.advisor": {
     "value": "Ngày 3 — hồ sơ cố vấn và kết chương",
     "params": []
+  },
+  "first3.character.khue": {
+    "value": "Diệp Khuê",
+    "params": []
+  },
+  "first3.character.van": {
+    "value": "Lục Thanh Vân",
+    "params": []
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "foundation-demo",
   "kind": "development",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "documents": [
     {
       "kind": "flags",
@@ -228,6 +228,14 @@
     {
       "kind": "config",
       "path": "../ui/first3-art.json"
+    },
+    {
+      "kind": "actors",
+      "path": "../actors/first3-art.json"
+    },
+    {
+      "kind": "animations",
+      "path": "../animations/first3-art.json"
     }
   ]
 }

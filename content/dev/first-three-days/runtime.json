@@ -3,11 +3,11 @@
   "kind": "runtime",
   "startSceneId": "scene.first3.gate",
   "startSpawnId": "entry",
-  "playerActorId": "actor.player",
+  "playerActorId": "actor.first3.khue",
   "movementSpeed": 240,
   "maxMovementDelta": 0.1,
   "inputId": "input.default",
-  "uiId": "ui.foundation",
+  "uiId": "ui.first3-art",
   "audioBuses": [
     {
       "id": "bgm",

@@ -63,6 +63,23 @@ focused8/8 and full authoring42/42 PASS. Raw t05-*.json in scoped ledger. Maximu
 text scale1.5/en-XA keyboard layout passes without horizontal clipping or foot overlap.
 T06 genuine old saves and integration/migration, T07 authoring and T08 remain.
 
+
+### T06 integration checkpoint
+
+Managed Khue/Van actors, four clips, Room3 layers and day1 Van are integrated;
+First3 player/theme selected, foundation fixture retained. Four unambiguous recruit
+lines carry speaker/expression metadata. Both projects/pack now content0.0.3;
+RunSnapshot remains3. Genuine exploration/reveal saves captured from d684512 in
+contained private-venv copy, with hashes and capture source in tests/fixtures/g1.
+Explicit0.0.2->0.0.3 policy resets only validated declared fixture animations in
+seven First3 scenes. Unknown clips/keys/corruption reject; domain/reveal/UI preserved.
+Migration RED3 -> GREEN5; integrated focused6/6, old0.0.1 chain and both3day native
+routes3/3 PASS. Full browser66/66 PASS. Unit153 JS +60 Python PASS, but its bound
+receipt rejected a source edit made while suite ran; do not claim valid unit gate.
+Final frozen-source CI must rerun it. Architecture/content shared checks PASS.
+T07 RED2 identifies missing optional speaker selectors and day-preview control.
+T07 implementation and T08 final gates/static/Review B remain. No G1 acceptance.
+
 ### Previous planning handoff
 
 Latest user requests the overall G1-G8 plan and detailed G1 plan only. Created
