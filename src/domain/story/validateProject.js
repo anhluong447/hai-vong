@@ -55,7 +55,7 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  const flags=entries.flags??[];const flagMap=new Map(flags.map(d=>[d.id,d]));
  for(const flag of flags) if(!FlagStore.accepts(flag,flag.default)) add('flag.default.invalid',locations.get(`flags:${flag.id}`),'/default',[flag.id]);
  const catalog=new ContentCatalog(entries);
- errors.push(...validateWorld({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
+ errors.push(...validateWorld({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
  errors.push(...validateNavigation({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateAuthoringUI({catalog,project,locales,schemas,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateDebugUI({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
@@ -108,7 +108,13 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
    if(!STORY_OPCODES.includes(command.op)) add('story.opcode.unknown',doc,p+'/op',[command.op]);
    if(['end','jump','choose'].includes(command.op)&&j!==node.commands.length-1) add('story.command.unreachable',doc,p);
    const target=(id,ptr)=>{ if(!nodes.has(id)) add('story.target.missing',doc,ptr,[id]);else edges.get(node.id).push(id); };
-   if(command.op==='say') text(command.textKey,command.params,doc,p+'/textKey');
+   if(command.op!=='say'&&(Object.hasOwn(command,'speakerId')||Object.hasOwn(command,'expressionId')))add('story.presentation.opcode',doc,p+(Object.hasOwn(command,'speakerId')?'/speakerId':'/expressionId'));
+   if(command.op==='say') {
+    text(command.textKey,command.params,doc,p+'/textKey');
+    const speaker=command.speakerId?catalog.get('actors',command.speakerId):null;
+    if(speaker&&!speaker.ok)add('story.speaker.invalid',doc,p+'/speakerId',[command.speakerId]);
+    if(command.expressionId&&(!speaker?.ok||!Object.hasOwn(speaker.value.portraits??{},command.expressionId)))add('story.expression.invalid',doc,p+'/expressionId',[command.expressionId]);
+   }
    if(command.op==='jump') target(command.target,p+'/target');
    if(command.op==='setFlag') checkFlag(command.flagId,command.value,doc,p+'/flagId');
    if(command.op==='choose') {

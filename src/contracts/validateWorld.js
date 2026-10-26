@@ -1,13 +1,17 @@
 import {diagnostic} from './Diagnostic.js';
 import {INPUT_ACTIONS,INPUT_CONTEXTS} from './InputActions.js';
 /** Shared authoring/runtime semantics for the concrete side-scrolling contract. */
-export function validateWorld({catalog,project,locales,sourceFor}) {
+export function validateWorld({catalog,project,locales,sourceFor,pointerFor=()=>''}) {
  const errors=[],finite=Number.isFinite;
  const add=(kind,id,code,pointer)=>errors.push(diagnostic(code,sourceFor(kind,id),pointer,[id]));
  const has=(kind,id)=>typeof id==='string'&&catalog.get(kind,id).ok;
  const text=(key)=>typeof key==='string'&&!!locales[project.defaultLocale]?.[key];
  for(const actor of catalog.list('actors')){
   if(!text(actor.nameKey)||!has('animations',actor.idleClipId)||!has('animations',actor.walkClipId)||!(actor.scale>0))add('actors',actor.id,'actor.invalid','/');
+  for(const [expression,id]of Object.entries(actor.portraits??{})){
+   const image=catalog.get('assets',id),key=expression.replaceAll('~','~0').replaceAll('/','~1');
+   if(!expression||!image.ok||image.value.kind!=='image')add('actors',actor.id,'actor.portrait.invalid',pointerFor('actors',actor.id)+'/portraits/'+key);
+  }
  }
  for(const scene of catalog.list('scenes')){
   const bad=p=>add('scenes',scene.id,'scene.invalid',p),bounds=scene.walkBounds;
@@ -18,7 +22,11 @@ export function validateWorld({catalog,project,locales,sourceFor}) {
   if(!scene.spawns.some(s=>s.id===scene.defaultSpawnId)||new Set(scene.spawns.map(s=>s.id)).size!==scene.spawns.length)bad('/spawns');
   for(const s of scene.spawns)if(typeof s.id!=='string'||!finite(s.x)||s.x<bounds.min||s.x>bounds.max)bad('/spawns');
   for(const layer of scene.layers??[])if(!has('assets',layer.assetId)||![layer.x,layer.y,layer.width,layer.height,layer.parallax].every(finite)||layer.width<=0||layer.height<=0)bad('/layers');
-  for(const actor of scene.actors??[])if(!has('actors',actor.actorId)||!finite(actor.x))bad('/actors');
+  for(const [index,actor]of (scene.actors??[]).entries()){
+   if(!has('actors',actor.actorId)||!finite(actor.x))bad('/actors');
+   if(actor.visibleDays&&new Set(actor.visibleDays).size!==actor.visibleDays.length)bad(pointerFor('scenes',scene.id)+'/actors/'+index+'/visibleDays');
+  }
+  if(new Set((scene.actors??[]).map(actor=>actor.id)).size!==scene.actors?.length)bad(pointerFor('scenes',scene.id)+'/actors');
   if(new Set((scene.interactions??[]).map(i=>i.id)).size!==scene.interactions?.length)bad('/interactions');
   for(const i of scene.interactions??[]){
    if(!text(i.nameKey)||typeof i.id!=='string'||!finite(i.x)||!finite(i.radius)||i.radius<=0)bad('/interactions');

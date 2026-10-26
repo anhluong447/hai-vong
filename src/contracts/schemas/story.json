@@ -40,6 +40,14 @@
                 "params": {
                   "type": "object"
                 },
+                "speakerId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "expressionId": {
+                  "type": "string",
+                  "minLength": 1
+                },
                 "choices": {
                   "type": "array",
                   "items": {
