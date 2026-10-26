@@ -4,6 +4,51 @@ Updated: 2026-10-26 (Asia/Bangkok).
 
 ## Current task and stopping point
 
+Latest user authorizes committing the plans first, then implementing G1 inline.
+Stay on feat/first3-art-direction in .worktrees/phase-0. Start T01 visual review
+preparation; retain the user's Review A/B choices before mass asset production.
+Independent contracts/tests may proceed while those choices are pending. G2-G8,
+merge, push and publication remain outside this assignment. No G1 task is yet
+complete. The preceding plan handoff is historical; it does not block this newer
+implementation authorization.
+
+### Previous planning handoff
+
+Latest user requests the overall G1-G8 plan and detailed G1 plan only. Created
+docs/superpowers/plans/2026-10-26-first3-art-roadmap.md and
+docs/superpowers/plans/2026-10-26-g1-room3-art-direction.md on
+feat/first3-art-direction, and linked both from docs/README.md. G1 has eight
+future tasks, two user visual reviews, asset/source production, shared contracts,
+pixel/background sampling, portraits/UI, explicit old-save compatibility,
+authoring round-trip/recovery and local/static acceptance. G2-G8 stay roadmap
+level. Sprite dimensions/frame counts are proposals, not approved visual choices.
+No implementation, image generation, dependency installation, commit or push was
+performed this turn. Self-review completed for scope, task/interface consistency,
+save/portrait ownership and the five review-focus cases. Documentation checks
+passed: 25 existing local link targets, no missing new plan/index links, both
+PowerShell blocks parse, focused Python example parses, eight G1 tasks and no
+completed checkboxes, diff/whitespace checks. Six unchanged legacy archive links
+in the existing index are unavailable in this worktree; not repaired or claimed
+available. All 20 protected narrative/gameplay/concept/raw-source hashes match
+before/after. No runtime checks were run. Plans and checkpoint/index edits remain
+uncommitted for review. Stop at this plan handoff, awaiting the next assignment.
+
+### Confirmed art direction
+
+Latest user clarifies the authoritative art concept (2026-10-26): high-resolution
+map backgrounds split into multiple layers, in Nostalgic Coastal Anime style,
+with the character of Vietnam's Central Coast, aged surfaces and nostalgia.
+Characters use detailed pixel sprites with visibly pixel-based rendering and
+restrained stylization; do not exaggerate chibi proportions. Earlier sheet
+sprite samples do not override this instruction. Exact sprite resolution and
+production specifications remain undecided. Directional light through windows/
+rooms belongs to environment presentation; acknowledge it in the concept but
+defer detailed lighting work. This clarification authorizes recording direction,
+not implementation or content expansion. Three-day scope remains unchanged.
+Only root/active checkpoints updated; no runtime changes or tests this turn.
+
+### Completed branch initialization
+
 Latest user authorizes a new branch and an initial commit, then explicitly asks
 to stop and await the next assignment. Created feat/first3-art-direction from
 Phase 0 tip c172652d9ce0deede3b3b9a389c699e2b0c06912, reusing this existing linked

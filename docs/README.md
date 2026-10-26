@@ -1,5 +1,10 @@
 # Retained design sources
 
+[Lộ trình G1–G8: hoàn thiện hình ảnh và trình diễn 3 ngày đầu](superpowers/plans/2026-10-26-first3-art-roadmap.md)
+và [plan chi tiết G1: mẫu chơi tại Phòng số 3](superpowers/plans/2026-10-26-g1-room3-art-direction.md)
+ghi phạm vi mới theo concept Nostalgic Coastal Anime. Đây là plan để review;
+chưa phải kết quả triển khai hoặc nghiệm thu art.
+
 [Coding and post-compaction rules](engineering/CODING-RULES.md) govern future code,
 managed resources and recovery of the current task after context compaction.
 
