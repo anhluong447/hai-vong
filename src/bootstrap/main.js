@@ -13,6 +13,8 @@ import {BrowserLifecycle} from '../infrastructure/browser/BrowserLifecycle.js';
 import {World2D} from '../presentation/world/World2D.js';
 import {resolveInteraction} from '../presentation/world/InteractionResolver.js';
 import {TextView} from '../presentation/ui/TextView.js';
+import {DialoguePresentationView} from '../presentation/ui/DialoguePresentationView.js';
+import {resolveDialoguePresentation} from '../application/DialoguePresentation.js';
 import {FocusRouter} from '../presentation/ui/FocusRouter.js';
 import {SaveService} from '../application/SaveService.js';
 import {SaveCodec} from '../infrastructure/storage/SaveCodec.js';
@@ -47,10 +49,10 @@ export async function createGame(root,{autoStart=true}={}){
  const preferenceContract={bundle,config:navigation,input:inputDefinition,locales:bundle.locales};
  const preferenceRepository=new PreferencesRepository({name:bundle.project.id+'.player-preferences',validate:value=>validateProfile(value,preferenceContract)}),profile=new PlayerProfile({repository:preferenceRepository,...preferenceContract}),profileLoaded=await profile.load();
  let preferences=profile.value.preferences;for(const [id,value]of Object.entries(profile.value.profile.flags)){const initial=structuredClone(session.snapshot());initial.gameplay.flags[id]=value;session.replace(initial);}
- const view=new CanvasAdapter(canvas,ui.viewport),createPorts=()=>({world:new World2D({view,catalog:bundle.catalog,assets,revision:bundle.revision,playerActorId:config.playerActorId,reducedMotion:win.matchMedia('(prefers-reduced-motion: reduce)').matches}),audio:new AudioAdapter({catalog:bundle.catalog,assets,revision:bundle.revision,buses:config.audioBuses}),sequence:new SequencePlayer(bundle.catalog.list('sequences'))});
- let {world,audio,sequence}=createPorts();
+ const view=new CanvasAdapter(canvas,ui.viewport),createPorts=()=>({world:new World2D({view,catalog:bundle.catalog,assets,revision:bundle.revision,playerActorId:config.playerActorId,reducedMotion:win.matchMedia('(prefers-reduced-motion: reduce)').matches}),audio:new AudioAdapter({catalog:bundle.catalog,assets,revision:bundle.revision,buses:config.audioBuses}),sequence:new SequencePlayer(bundle.catalog.list('sequences')),dialogue:new DialoguePresentationView({root:find('dialogue-speaker'),format,assets,revision:bundle.revision})});
+ let {world,audio,sequence,dialogue:dialogueView}=createPorts();
  const line=new TextView(find('line'),{text,speed:ui.textSpeed}),focus=new FocusRouter(win),lifecycle=new BrowserLifecycle({window:win,document:doc,maxDelta:ui.maxDelta});
- const controller=new AbortController(),options={signal:controller.signal};let paused=false,loading=false,disposed=false,error=profileLoaded.ok?null:profileLoaded.errors[0].code,serial=0,dialogueSignature=null,choiceSignature=null,frozen=false,loadEpoch=0,unfreeze=[],shell,playing=false,autoQueued=false;
+ const controller=new AbortController(),options={signal:controller.signal};let paused=false,loading=false,disposed=false,error=profileLoaded.ok?null:profileLoaded.errors[0].code,serial=0,dialogueSignature=null,speakerSignature=null,choiceSignature=null,frozen=false,loadEpoch=0,unfreeze=[],shell,playing=false,autoQueued=false;
  const input=new InputAdapter(win,{...inputDefinition,bindings:preferences.bindings},{onGesture:()=>{if(!paused&&!frozen)void audio.unlock();},onAction:intent=>{if(intent.action==='fullscreen')void view.fullscreen();}});
  const hearing=new HearingPresenter({root:find('hearing'),catalog:bundle.catalog,format,number:(value,options)=>text.number(value,options),focus,dispatch:(action,id)=>run({type:'hearing.command',action,...(action==='defense.respond'?{evidenceId:id}:action==='defense.bailout'?{choiceId:id}:action==='attack.word'?{wordId:id}:action==='attack.question'?{questionId:id}:action==='mini.mode'?{modeId:id}:action==='mini.move'?{laneId:id}:{})}),pause,bindings:()=>preferences.bindings,separator:navigation.bindingSeparator});
  const resize=()=>{const bounds=stage.getBoundingClientRect();view.resize(bounds.width,bounds.height,win.devicePixelRatio);};const observer=new ResizeObserver(resize);observer.observe(stage);win.addEventListener('resize',resize,options);resize();
@@ -63,6 +65,8 @@ export async function createGame(root,{autoStart=true}={}){
   hearing.sync(state,{paused,locale:preferences.locale});find('scene-name').textContent=scene?format(scene.nameKey):format('world.loading');find('dialogue').hidden=!dialogue||!!h;find('exploration').hidden=dialogue||!!h;
   const signature=waiting==='say'?JSON.stringify(state.story.cursor):null;
   if(signature!==dialogueSignature){dialogueSignature=signature;if(signature){line.show(state.presentation.dialogue.textKey,state.presentation.dialogue.params);line.restore({...line.snapshot(),revealed:state.presentation.dialogue.revealed});}}
+  const speakerKey=JSON.stringify([signature,preferences.locale]);
+  if(speakerKey!==speakerSignature){speakerSignature=speakerKey;const model=resolveDialoguePresentation(state,bundle);if(!model.ok)setError(model);else{const owner=dialogueView;void owner.present(model.value).then(result=>{if(!disposed&&owner===dialogueView&&speakerSignature===speakerKey){setError(result);if(!result.ok)sync();}});}}
   button('advance').hidden=waiting!=='say';
   const choiceKey=waiting==='choose'?JSON.stringify(state.story.cursor):null;
   if(choiceKey!==choiceSignature){choiceSignature=choiceKey;find('choices').replaceChildren();if(choiceKey){
@@ -83,7 +87,7 @@ export async function createGame(root,{autoStart=true}={}){
  const validateEnvelope=async envelope=>{const decoded=await SaveCodec.decode(envelope);if(!decoded.ok)return decoded;const migrated=migrations.migrate(decoded.value,envelope.contentVersion);return migrated.ok?session.validate(migrated.value):migrated;};
  const repository=new IndexedSaveRepository({name:bundle.project.id+'.player-saves',manualSlots:navigation.manualSlots,autoSlots:navigation.autoSlots,validate:validateEnvelope,integrity:SaveCodec.decode});
  const runtime=runtimeCheckpoint({
-  read:()=>({world,audio,sequence}),create:createPorts,write:ports=>{({world,audio,sequence}=ports);loadEpoch++;loading=false;},
+  read:()=>({world,audio,sequence,dialogue:dialogueView}),create:createPorts,write:ports=>{({world,audio,sequence,dialogue:dialogueView}=ports);speakerSignature=null;loadEpoch++;loading=false;},
   freeze:({kind})=>{
    const guard={kind,audio,audioPaused:audio.paused,sequence,sequencePaused:sequence.snapshot().paused,focused:doc.activeElement,inert:root.inert};
    frozen=true;audio.pause();sequence.pause();if(kind==='restore'){input.clear();root.inert=true;}return guard;
@@ -94,7 +98,7 @@ export async function createGame(root,{autoStart=true}={}){
    for(const done of unfreeze)done();unfreeze=[];sync();
   },
   captureUI:()=>({paused,...shell?.snapshot()}),prepareUI:state=>shell.prepare(state),restoreUI:(state,savedText,prepared)=>{shell?.close();hearing.release();paused=state.paused;dialogueSignature=null;choiceSignature=null;hearing.invalidate();sync();if(savedText)line.restore(savedText);else line.dispose();shell?.restore(state.screen?state:{screen:paused?'pause':null},prepared);applyPreferences();},
-  line,text,speed:ui.textSpeed,document:doc
+  line,text,speed:ui.textSpeed,document:doc,dialogueModel:state=>resolveDialoguePresentation(state,bundle)
  });
  const saves=new SaveService({session,runtime,repository,codec:SaveCodec,migrations,buildId:bundle.project.contentVersion,contentVersion:bundle.revision});
  function queueAutosave(){if(!playing||autoQueued||disposed)return;autoQueued=true;queueMicrotask(()=>{autoQueued=false;if(!disposed)void saves.autosave().then(setError);});}
@@ -147,10 +151,10 @@ export async function createGame(root,{autoStart=true}={}){
   if(active&&!h)dispatchSequence(sequence.update(elapsed));
   world.render(session.snapshot().world,h?0:elapsed,{day:session.snapshot().gameplay.calendar.day});sync();void loadPending();
  }
- button('pause').addEventListener('click',pause,options);button('advance').addEventListener('click',advance,options);button('interact').addEventListener('click',interact,options);button('retry').addEventListener('click',()=>{error=null;void loadPending();},options);
+ button('pause').addEventListener('click',pause,options);button('advance').addEventListener('click',advance,options);button('interact').addEventListener('click',interact,options);button('retry').addEventListener('click',()=>{error=null;speakerSignature=null;sync();void loadPending();},options);
  for(const mode of ['auto','skip'])button(mode).addEventListener('click',()=>controls.toggle(mode),options);button('stop').addEventListener('click',()=>controls.stop(),options);
  lifecycle.subscribe(active=>{input.clear();if(!active)audio.pause();else if(!paused)void audio.unlock();});
- async function dispose(){if(disposed)return;disposed=true;for(const done of unfreeze)done();unfreeze=[];controller.abort();observer.disconnect();lifecycle.dispose();input.dispose();shell.dispose();hearing.dispose();focus.dispose();line.dispose();sequence.cancel();world.dispose();await audio.dispose();await profile.close();repository.close();assets.dispose();view.dispose();}
+ async function dispose(){if(disposed)return;disposed=true;for(const done of unfreeze)done();unfreeze=[];controller.abort();observer.disconnect();lifecycle.dispose();input.dispose();shell.dispose();hearing.dispose();focus.dispose();line.dispose();dialogueView.dispose();sequence.cancel();world.dispose();await audio.dispose();await profile.close();repository.close();assets.dispose();view.dispose();}
  win.addEventListener('pagehide',()=>void dispose(),options);
  run({type:'scene.request',sceneId:config.startSceneId,spawnId:config.startSpawnId,requestId:String(++serial)});await loadPending();await shell.open('main');if(autoStart)lifecycle.start(step);
  return {session,execute:run,get world(){return world;},assets,get audio(){return audio;},get sequence(){return sequence;},get preferences(){return preferences;},input,saves,step,pause,resume,dispose};

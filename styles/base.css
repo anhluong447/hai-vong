@@ -15,7 +15,15 @@ button:disabled { color:var(--muted); cursor:default; }
 canvas { display:block; }
 [data-role=curtain] { position:absolute; inset:0; pointer-events:none; background:var(--page-bg); }
 [data-role=scene-name] { position:absolute; top:var(--panel-gap); left:var(--panel-gap); padding:calc(var(--panel-gap) / 2); border-radius:var(--panel-radius); background:var(--panel-bg); }
-[data-role=dialogue] { min-height:var(--dialogue-height); }
+[data-role=dialogue] { min-height:var(--dialogue-height); display:grid; grid-template-columns:var(--dialogue-portrait-size,var(--dialogue-height)) minmax(0,1fr); gap:var(--panel-gap); border:var(--dialogue-border,0); }
+[data-role=dialogue-speaker] { display:contents; }
+[data-role=dialogue-portrait] { grid-column:1; grid-row:1 / span 2; width:100%; height:auto; aspect-ratio:1; border:var(--dialogue-border,0); }
+[data-role=dialogue-name] { grid-column:2; grid-row:1; align-self:start; justify-self:start; background:var(--speaker-bg,var(--panel-bg)); color:var(--speaker-ink,var(--ink)); padding:var(--speaker-padding,0); font-weight:bold; overflow-wrap:anywhere; }
+[data-role=dialogue-content] { grid-column:2; grid-row:2; min-width:0; overflow-wrap:anywhere; }
+[data-role=dialogue-speaker][hidden] + [data-role=dialogue-content] { grid-column:1 / -1; grid-row:1; }
+[data-role=dialogue-speaker][data-portrait=false] [data-role=dialogue-name], [data-role=dialogue-speaker][data-portrait=false] + [data-role=dialogue-content] { grid-column:1 / -1; }
+[data-role=dialogue-actions] { display:flex; flex-wrap:wrap; gap:calc(var(--panel-gap) / 2); margin-top:calc(var(--panel-gap) / 2); }
+[data-role=dialogue] button { white-space:normal; overflow-wrap:anywhere; }
 [data-role=choices] { display:flex; flex-wrap:wrap; gap:var(--panel-gap); }
 [data-role=menu] { position:absolute; inset:var(--panel-gap); overflow:auto; padding:var(--panel-padding); background:var(--panel-bg); border:var(--border-size) solid var(--accent); border-radius:var(--panel-radius); }
 [data-role=screen-content] { display:flex; flex-direction:column; align-items:stretch; gap:var(--panel-gap); min-width:0; }

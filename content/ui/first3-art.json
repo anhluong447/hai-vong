@@ -1,0 +1,32 @@
+{
+  "id": "ui.first3-art",
+  "kind": "world-ui",
+  "viewport": {
+    "width": 960,
+    "height": 540
+  },
+  "maxDelta": 0.1,
+  "textSpeed": 36,
+  "tokens": {
+    "--page-bg": "#101b26",
+    "--panel-bg": "#172634",
+    "--ink": "#eee4cd",
+    "--accent": "#bfa16d",
+    "--focus": "#e8bc65",
+    "--muted": "#b8bbae",
+    "--font": "Georgia, \"Times New Roman\", serif",
+    "--text-size": "18px",
+    "--panel-gap": "16px",
+    "--panel-radius": "4px",
+    "--line-height": "1.6",
+    "--border-size": "1px",
+    "--shell-width": "1280px",
+    "--dialogue-height": "174px",
+    "--panel-padding": "18px",
+    "--dialogue-portrait-size": "128px",
+    "--dialogue-border": "1px solid #bfa16d",
+    "--speaker-bg": "#eee4cd",
+    "--speaker-ink": "#172331",
+    "--speaker-padding": "4px 16px"
+  }
+}

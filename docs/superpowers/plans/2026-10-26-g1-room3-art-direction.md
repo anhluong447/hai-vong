@@ -204,7 +204,7 @@ sửa `tests/python/test_asset_pipeline.py` khi cần coverage cho ảnh lớn/a
 - [x] Đăng ký masters/atlas/import/provenance bằng ID; lưu brief/input mới dưới source root để được bundle. Asset mới dùng license/provenance riêng đúng nguồn; không giả gán `LicenseRef-ProjectFixture` hoặc tự ghi production approved.
 - [x] Nếu mở rộng pipeline, viết case trước: ảnh RGBA lớn giữ alpha, atlas có padding và bounds đúng, bundle giữ đủ master/input; xác nhận fail trước khi sửa. Không viết test chỉ đếm file cho một thay đổi data.
 - [x] Chạy build/audit; build lại cùng input xác nhận hashes không đổi. Thử restore trong bản copy rỗng dưới `.cache/tmp/g1-recovery/`, có private venv/contained tool paths theo setup, không import dependency từ venv khác.
-- [ ] Commit source bundle/recipe/inventory/generated manifest cùng nhau: `assets: add recoverable room-three and character art`. Không commit master đang bị ignore mà không có bundle tương ứng.
+- [x] Commit source bundle/recipe/inventory/generated manifest cùng nhau: `assets: add recoverable room-three and character art`. Không commit master đang bị ignore mà không có bundle tương ứng.
 
 ### T03 — Contracts và projection cho portrait, pixel sprites và NPC
 
@@ -264,14 +264,14 @@ tạo `tests/browser/g1-dialogue-view.test.js`.
 **Consumes:** model T03, AssetService leases, TextView/FocusRouter và tokens hiện có.
 **Produces:** name/portrait đổi đúng câu; DOM text/controls giữ hoạt động cũ.
 
-- [ ] Viết RED: present Vân rồi Khuê khi ảnh Vân decode chậm không được hiện lại Vân; narration xóa tên/portrait; dispose giữa acquire không giữ lease; required portrait mất trả lỗi có đường recovery, không dùng mặt người khác.
-- [ ] Viết RED `restore portrait preparation is transactional`: restore có portrait thiếu/decode lỗi không thay session/world/text/name/portrait đang tốt; prepare candidate thành công rồi bước sau fail phải abort đúng lease; commit không await I/O. Nối prepare/commit/abort của view vào RuntimeCheckpoint, giữ rollback/finalize semantics hiện có.
-- [ ] Viết RED UI: Tab/Enter/advance, auto/skip/backlog/menu trở lại đúng context; textScale lớn nhất settings cho phép và locale en-XA không cắt câu/lựa chọn, focus không bị portrait chiếm.
-- [ ] Implement `DialoguePresentationView.present(model)` theo mục 2; canvas portrait hoặc cách vẽ khác phải dùng acquired resource, không tự fetch raw URL bỏ qua hash/lease. Chỉ request lại khi model thay, không acquire mỗi RAF.
-- [ ] Tách UI tokens riêng cho First3: navy/kem, viền vừa đủ cũ, nhãn tên và portrait theo concept; không hardcode palette trong component. Giữ `ui.foundation` cho mechanics pack. Shell chỉ thêm structure/data roles, mọi nhãn qua catalog.
-- [ ] Hộp thoại trên màn chơi phải có vùng an toàn cho chân/điểm tương tác; ở chữ lớn cho phép panel tăng/scroll có keyboard, không ép chữ nhỏ để giống ảnh. G1 chỉ cần tên địa điểm/gợi ý tương tác và thoại; full top HUD/menu art thuộc G6.
-- [ ] Giữ nguyên text/cost và commands recruit trong G1. Prefix người nói còn trong locale được ghi là copy cleanup cho G4/G6, không regex cắt text hay đoán speaker. Narration/hành động trộn thoại chưa tách được vẫn là narration, không gán nhầm người.
-- [ ] Chạy focused module + existing player flow/platform checks; commit `feat: present managed dialogue portraits and room-three UI`.
+- [x] Viết RED: present Vân rồi Khuê khi ảnh Vân decode chậm không được hiện lại Vân; narration xóa tên/portrait; dispose giữa acquire không giữ lease; required portrait mất trả lỗi có đường recovery, không dùng mặt người khác.
+- [x] Viết RED `restore portrait preparation is transactional`: restore có portrait thiếu/decode lỗi không thay session/world/text/name/portrait đang tốt; prepare candidate thành công rồi bước sau fail phải abort đúng lease; commit không await I/O. Nối prepare/commit/abort của view vào RuntimeCheckpoint, giữ rollback/finalize semantics hiện có.
+- [x] Viết RED UI: Tab/Enter/advance, auto/skip/backlog/menu trở lại đúng context; textScale lớn nhất settings cho phép và locale en-XA không cắt câu/lựa chọn, focus không bị portrait chiếm.
+- [x] Implement `DialoguePresentationView.present(model)` theo mục 2; canvas portrait hoặc cách vẽ khác phải dùng acquired resource, không tự fetch raw URL bỏ qua hash/lease. Chỉ request lại khi model thay, không acquire mỗi RAF.
+- [x] Tách UI tokens riêng cho First3: navy/kem, viền vừa đủ cũ, nhãn tên và portrait theo concept; không hardcode palette trong component. Giữ `ui.foundation` cho mechanics pack. Shell chỉ thêm structure/data roles, mọi nhãn qua catalog.
+- [x] Hộp thoại trên màn chơi phải có vùng an toàn cho chân/điểm tương tác; ở chữ lớn cho phép panel tăng/scroll có keyboard, không ép chữ nhỏ để giống ảnh. G1 chỉ cần tên địa điểm/gợi ý tương tác và thoại; full top HUD/menu art thuộc G6.
+- [x] Giữ nguyên text/cost và commands recruit trong G1. Prefix người nói còn trong locale được ghi là copy cleanup cho G4/G6, không regex cắt text hay đoán speaker. Narration/hành động trộn thoại chưa tách được vẫn là narration, không gán nhầm người.
+- [x] Chạy focused module + existing player flow/platform checks; commit `feat: present managed dialogue portraits and room-three UI`.
 
 ### T06 — Ghép cuộc gặp thật và migrate save 0.0.2
 

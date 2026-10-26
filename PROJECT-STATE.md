@@ -13,7 +13,7 @@ Review A is explicit: A2 density 192 px, B3 display height 152; Van is 0.92 of
 Khue. Samples/prompts/selection committed as b76e2eb. Prior plan 3fafb2f, T03
 contracts 8679f4d and T04 renderer c99aad1 remain the earlier code checkpoints.
 
-T02 asset preparation is verified, task commit next. Three independent room
+T02 asset preparation is verified and committed as 871d08b. Three independent room
 layers (exterior, interior with furniture/props, foreground), 16 native sprite
 frames, six 512px portraits and two atlases are imported through managed recipes.
 The five proposed layer groups were merged to three useful groups as permitted
@@ -44,6 +44,24 @@ It is isolated art inspection, not a playable story acceptance. No live scene,
 actor, locale dialogue or content version has changed. Proceed T05 portraits/UI,
 then T06 genuine pre-change saves, integration/migration; T07 authoring and T08
 journeys/gates/Review B remain required. G1 is not complete.
+
+### T05 verified implementation checkpoint
+
+DialoguePresentationView is wired to main.js and RuntimeCheckpoint; cursor/locale
+signatures avoid per-frame acquisitions and ignore stale errors. Prepared portrait
+leases commit synchronously, abort on later failure, and retain previous view on
+failed restore. Live line changes hide the previous face while loading. Narration,
+name-only mode, locale refresh, retry and disposal are covered. No persisted field.
+Structural speaker nodes and token-driven First3 navy/cream theme are registered;
+First3 theme activation and real actor/story metadata remain T06.
+
+Focused new portrait/checkpoint/layout tests RED then GREEN11/11; combined existing
+player/save flows22/22. Full browser64/64 PASS; architecture/content PASS. Authoring
+initial41/42 exposed an old negative test mutating manifest[0], now an unreferenced
+G1 atlas. Targeting the referenced atlas.fixture.actor restores the intended check;
+focused8/8 and full authoring42/42 PASS. Raw t05-*.json in scoped ledger. Maximum
+text scale1.5/en-XA keyboard layout passes without horizontal clipping or foot overlap.
+T06 genuine old saves and integration/migration, T07 authoring and T08 remain.
 
 ### Previous planning handoff
 

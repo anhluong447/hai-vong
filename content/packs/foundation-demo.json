@@ -224,6 +224,10 @@
       "kind": "config",
       "path": "../dev/first-three-days/traversal.json",
       "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "../ui/first3-art.json"
     }
   ]
 }
