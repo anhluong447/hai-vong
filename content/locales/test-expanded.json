@@ -1729,5 +1729,21 @@
   "first3.character.van": {
     "value": "Lục Thanh Vân",
     "params": []
+  },
+  "authoring.speaker": {
+    "value": "[ Người nói / preview ]",
+    "params": []
+  },
+  "authoring.expression": {
+    "value": "[ Biểu cảm / preview ]",
+    "params": []
+  },
+  "authoring.narration": {
+    "value": "[ Lời dẫn / preview ]",
+    "params": []
+  },
+  "authoring.day": {
+    "value": "[ Ngày xem thử / preview ]",
+    "params": []
   }
 }

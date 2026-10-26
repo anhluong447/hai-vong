@@ -316,12 +316,12 @@ nếu contract mới cần hướng dẫn. Sửa `ResourceIndex` chỉ nếu tes
 **Consumes:** cùng data/validator/projection/renderers từ T03–T06.
 **Produces:** tác giả sửa được speaker/expression/NPC visibleDays/sampling bằng tool.
 
-- [ ] RED: chọn speaker trong Story Editor, expression options theo đúng actor; đổi actor/portrait reference có used-by; missing expression/asset bị diagnostic source pointer, giữ working document tốt.
-- [ ] RED: sửa layer, NPC facing/visibleDays và clip pivot → preview đúng runtime → undo/redo → save source group → reopen, vẫn giữ các field. Preview không mở/ghi player save database.
-- [ ] Thêm field selectors/preview còn thiếu; mở rộng references trong `content/ui/authoring.json` theo schema, không làm một cách diễn giải speaker thứ hai trong editor. Expression selector lọc theo speaker ngay cả khi tạo mới optional metadata; sửa field JSON hiện có không đủ chứng minh đường tạo field. ScenePreview có chọn ngày trong isolated preview theo cùng GameSession/playtest contract, không sửa ngày/flags của player.
-- [ ] Với reader thông thường vẫn có export/import/preview; authoring writer cần token/same-origin/allowlist cũ. Source conflict hoặc build lỗi phải giữ source/manifest tốt, không tăng quyền ghi ra project ngoài.
-- [ ] Restore lại bundle G1 trong project-local copy sạch, rebuild và audit. So bytes/hashes nguồn và outputs, kiểm tra absence trước restore. Không dựa vào ignored assets của máy chính.
-- [ ] Chạy authoring module + suite; commit `feat: author and recover room-three presentation assets`.
+- [x] RED: chọn speaker trong Story Editor, expression options theo đúng actor; đổi actor/portrait reference có used-by; missing expression/asset bị diagnostic source pointer, giữ working document tốt.
+- [x] RED: sửa layer, NPC facing/visibleDays và clip pivot → preview đúng runtime → undo/redo → save source group → reopen, vẫn giữ các field. Preview không mở/ghi player save database.
+- [x] Thêm field selectors/preview còn thiếu; mở rộng references trong `content/ui/authoring.json` theo schema, không làm một cách diễn giải speaker thứ hai trong editor. Expression selector lọc theo speaker ngay cả khi tạo mới optional metadata; sửa field JSON hiện có không đủ chứng minh đường tạo field. ScenePreview có chọn ngày trong isolated preview theo cùng GameSession/playtest contract, không sửa ngày/flags của player.
+- [x] Với reader thông thường vẫn có export/import/preview; authoring writer cần token/same-origin/allowlist cũ. Source conflict hoặc build lỗi phải giữ source/manifest tốt, không tăng quyền ghi ra project ngoài.
+- [x] Restore lại bundle G1 trong project-local copy sạch, rebuild và audit. So bytes/hashes nguồn và outputs, kiểm tra absence trước restore. Không dựa vào ignored assets của máy chính.
+- [x] Chạy authoring module + suite; commit `feat: author and recover room-three presentation assets`.
 
 ### T08 — Chơi, review và đóng G1
 

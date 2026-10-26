@@ -100,3 +100,15 @@ revision/signal and returns explicit leases. Shared resources decode once and ar
 at their last lease. Scene ResourceScope cancels pending loads and releases owned leases.
 Missing optional images use a declared placeholder; required resources reject the group.
 Decoded bytes are checked against the manifest hash to reject mixed content revisions.
+
+## G1 presentation authoring
+
+Story Editor exposes a speaker selector even when a say command has no metadata.
+Choosing an actor creates its neutral expression when portraits exist; the expression
+selector lists only that actor's expressions. Narration removes both fields. The
+preview uses the same cursor projection, portrait renderer and managed leases as
+the player. Scene Editor's preview-day control validates a replacement of its own
+isolated preview session; it never opens player saves. NPC visibleDays/facing and
+layer placement remain managed scene fields; actor sampling and clip pivots use
+their resource inspectors. Source edits support grouped undo/redo and validated
+batch save. Conflicts or broken references preserve the last good source bytes.

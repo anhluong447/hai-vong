@@ -60,7 +60,11 @@
     "previewSegment": "authoring.previewSegment",
     "renameNode": "authoring.renameNode",
     "migrationCandidate": "authoring.migrationCandidate",
-    "nodeSource": "authoring.nodeSource"
+    "nodeSource": "authoring.nodeSource",
+    "speaker": "authoring.speaker",
+    "expression": "authoring.expression",
+    "narration": "authoring.narration",
+    "day": "authoring.day"
   },
   "preview": {
     "width": 480,
@@ -159,6 +163,10 @@
     {
       "field": "attackId",
       "kind": "hearings"
+    },
+    {
+      "field": "speakerId",
+      "kind": "actors"
     }
   ],
   "templates": {

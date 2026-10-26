@@ -1,7 +1,23 @@
 import {TypedInspector} from './TypedInspector.js';
 import {PreviewSession} from '../PreviewSession.js';
+import {DialoguePreview} from '../DialoguePreview.js';
 import {diagnostic,failure} from '../../../src/contracts/Diagnostic.js';
 export class StoryEditor extends TypedInspector {
+ setSpeaker(path,speakerId){
+  const command=structuredClone(path.split('/').slice(1).reduce((value,key)=>value?.[key],this.story()));
+  if(command?.op!=='say')return this.notify(failure(diagnostic('authoring.speaker.invalid',this.sourceId,path)));
+  delete command.speakerId;delete command.expressionId;
+  if(speakerId){const actor=this.workspace.bundle.catalog.get('actors',speakerId);if(!actor.ok)return this.notify(actor);command.speakerId=speakerId;if(actor.value.portraits)command.expressionId='neutral';}
+  return this.set(path,command);
+ }
+ renderFields(value,path,doc){
+  if(value?.op!=='say')return super.renderFields(value,path,doc);
+  for(const [field,item]of Object.entries(value))if(!['speakerId','expressionId'].includes(field))super.renderFields(item,path+'/'+field,doc);
+  const speaker=this.selectControl('speaker','speaker',this.references('speakerId')??this.workspace.bundle.catalog.list('actors').map(actor=>actor.id)),empty=this.node('option',{value:''},this.label(this.ui.labels.narration));speaker.control.prepend(empty);speaker.control.value=value.speakerId??'';speaker.control.dataset.field=path+'/speakerId';speaker.control.disabled=doc.readOnly;this.fields.append(speaker.label);
+  speaker.control.addEventListener('change',()=>this.setSpeaker(path,speaker.control.value||null),{signal:this.fieldController.signal});
+  const actor=value.speakerId?this.workspace.bundle.catalog.get('actors',value.speakerId).value:null;
+  if(actor?.portraits){const expression=this.selectControl('expression','expression',Object.keys(actor.portraits));expression.control.value=value.expressionId??'neutral';expression.control.dataset.field=path+'/expressionId';expression.control.disabled=doc.readOnly;this.fields.append(expression.label);expression.control.addEventListener('change',()=>{const command=structuredClone(value);command.expressionId=expression.control.value;this.set(path,command,doc.revision);},{signal:this.fieldController.signal});}
+ }
  constructor(...args){super(...args);this.preview=new PreviewSession();}
  story(){return this.workspace.get(this.sourceId).data;}
  captureUI(){return structuredClone({nodeId:this.nodeId,migrationDraft:this.migrationDraft,flagSourceId:this.flagSourceId});}
@@ -21,7 +37,7 @@ export class StoryEditor extends TypedInspector {
  }
  showNode(id){this.nodeId=id;const story=this.story(),index=story.nodes.findIndex(node=>node.id===id);if(index<0)return false;this.replaceFields(story.nodes[index],'/nodes/'+index,this.workspace.get(this.sourceId));return true;}
  focusPointer(pointer){const index=Number(pointer.split('/')[2]);if(pointer.startsWith('/nodes/')&&this.story().nodes[index])this.showNode(this.story().nodes[index].id);return super.focusPointer(pointer);}
- render(){this.preview?.stop();super.render();const story=this.story(),flow=this.node('nav',{'data-role':'story-flow','aria-label':this.label(this.ui.labels.flow)});this.root.insertBefore(flow,this.fields);
+ render(){this.preview?.stop();this.dialoguePreview?.dispose();this.dialoguePreview=null;super.render();const story=this.story(),flow=this.node('nav',{'data-role':'story-flow','aria-label':this.label(this.ui.labels.flow)});this.root.insertBefore(flow,this.fields);
   for(const node of story.nodes){const button=this.node('button',{'data-story-node':node.id},this.label(this.ui.labels.node,{id:node.id}));button.addEventListener('click',()=>this.showNode(node.id),{signal:this.controller.signal});flow.append(button);}
   for(const edge of this.flow().edges)flow.append(this.node('p',{'data-story-edge':edge.choiceId??edge.commandId},this.label(this.ui.labels.edge,{from:edge.from,to:edge.to})));
   this.showNode(story.nodes.some(node=>node.id===this.nodeId)?this.nodeId:story.entryNodeId);
@@ -35,6 +51,9 @@ export class StoryEditor extends TypedInspector {
  }
  startPreview(){const result=this.preview.start(this.workspace.bundle,{chapterId:this.resourceId});if(!result.ok)this.notify(result);this.renderPreview();return result;}
  stepPreview(intent){const result=this.preview.step(intent);if(!result.ok)this.notify(result);this.renderPreview();return result;}
- renderPreview(){const state=this.preview.snapshot();this.previewOutput.replaceChildren();if(!state)return;this.previewOutput.append(this.node('p',{},state.presentation.dialogue?this.label(state.presentation.dialogue.textKey,state.presentation.dialogue.params):this.label(this.ui.labels.result,{value:state.story.waiting})));if(state.story.waiting==='choose'){const cursor=state.story.cursor,command=this.story().nodes.find(node=>node.id===cursor.nodeId).commands.find(command=>command.id===cursor.commandId);for(const choice of command.choices){const button=this.button(choice.textKey,'story-choice',()=>this.stepPreview({type:'choose',choiceId:choice.id}));button.dataset.choiceId=choice.id;button.disabled=!!choice.condition&&state.gameplay.flags[choice.condition.flag]!==choice.condition.equals;this.previewOutput.append(button);}}}
- dispose(){this.preview.stop();super.dispose();}
+ renderPreview(){const state=this.preview.snapshot();this.previewOutput.replaceChildren();if(!state)return;
+  if(!this.dialoguePreview){this.speakerRoot=this.node('div',{'data-role':'dialogue-speaker'});this.dialoguePreview=new DialoguePreview(this.speakerRoot,{bundle:this.workspace.bundle,format:key=>this.label(key),settings:this.ui.preview});}
+  this.previewOutput.append(this.speakerRoot);this.dialogueReady=this.dialoguePreview.present(state).then(result=>{if(!this.disposed&&!result.ok&&result.errors[0]?.code!=='dialogue.load.stale')this.notify(result);return result;});
+  this.previewOutput.append(this.node('p',{},state.presentation.dialogue?this.label(state.presentation.dialogue.textKey,state.presentation.dialogue.params):this.label(this.ui.labels.result,{value:state.story.waiting})));if(state.story.waiting==='choose'){const cursor=state.story.cursor,command=this.story().nodes.find(node=>node.id===cursor.nodeId).commands.find(command=>command.id===cursor.commandId);for(const choice of command.choices){const button=this.button(choice.textKey,'story-choice',()=>this.stepPreview({type:'choose',choiceId:choice.id}));button.dataset.choiceId=choice.id;button.disabled=!!choice.condition&&state.gameplay.flags[choice.condition.flag]!==choice.condition.equals;this.previewOutput.append(button);}}}
+ dispose(){this.dialoguePreview?.dispose();this.preview.stop();super.dispose();}
 }

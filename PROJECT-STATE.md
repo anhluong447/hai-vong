@@ -80,6 +80,23 @@ Final frozen-source CI must rerun it. Architecture/content shared checks PASS.
 T07 RED2 identifies missing optional speaker selectors and day-preview control.
 T07 implementation and T08 final gates/static/Review B remain. No G1 acceptance.
 
+
+### T07 authoring checkpoint
+
+Story Editor creates/removes optional speaker metadata, filters expression choices
+by actor, and previews through the shared resolver/DialoguePresentationView with
+managed leases. Scene Editor changes validated isolated preview day without touching
+player saves. Speaker reference catalog entry and localized editor labels added.
+RED2 -> GREEN2; missing portrait preview RED1 -> GREEN; actual day-control RED1
+caught preview destruction, fixed without rerendering. Focused story regressions9/9.
+Grouped actor sampling/clip pivot/scene layer-NPC/story metadata export-reopen test
+and real authenticated batch-writer Python test PASS1 (11.4s), including stale hash
+and invalid expression preserving saved bytes. Full authoring45/45 and architecture/
+content PASS. Source bundles/recipes/manifest unchanged since T02 fresh private-venv
+restore27/build33 proof; reuse that unchanged-byte recovery evidence rather than
+claiming a second restore. T08 native/static journey, measurements, final frozen
+source gates and whole-branch review remain; user Review B still pending.
+
 ### Previous planning handoff
 
 Latest user requests the overall G1-G8 plan and detailed G1 plan only. Created
