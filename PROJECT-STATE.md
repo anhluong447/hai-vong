@@ -12,6 +12,20 @@ merge, push and publication remain outside this assignment. No G1 task is yet
 complete. The preceding plan handoff is historical; it does not block this newer
 implementation authorization.
 
+Plans committed as 3fafb2f. T01 visual spec and acceptance record prepared, but
+clean composition/boards and Review A remain pending. Read imagegen skill: its
+documented default output under CODEX_HOME conflicts with containment. Asked the
+user asynchronously for a narrow generated-image exception; no answer or image
+call yet. Continue independent code work while waiting; no mass frames.
+
+T03 optional actor sampling/portrait, say speaker/expression, scene facing/day
+visibility contracts and pure DialoguePresentation resolver implemented. Real
+focused run RED 14 failures/8 pre-existing rejections -> GREEN 22/22; architecture
+and content pass; full unit PASS 148 JS + 57 Python. First sandbox browser attempt
+failed profile cleanup (WinError 5); escalated contained-profile retry succeeded.
+No production art/content version changed. Raw evidence/ledger is scoped to
+.superpowers/sdd/2026-10-26-g1-room3-art-direction/; T03 commit pending.
+
 ### Previous planning handoff
 
 Latest user requests the overall G1-G8 plan and detailed G1 plan only. Created
