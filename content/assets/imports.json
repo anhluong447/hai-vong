@@ -7,6 +7,11 @@
       "provenance": "tools/pipeline/generate_fixtures.py + assets/sources/fixture-inputs.json",
       "usage": "internal-development",
       "productionApproved": false
+    },
+    "LicenseRef-HoiAm-GeneratedArt": {
+      "provenance": "assets/sources/g1/SOURCE-MANIFEST.json; user-provided concepts and built-in image_gen prompts/outputs",
+      "usage": "hoi-am-art-direction-development",
+      "productionApproved": false
     }
   },
   "entries": [
@@ -47,10 +52,544 @@
       "quality": 4,
       "sampleRate": 44100,
       "channels": 1
+    },
+    {
+      "id": "image.first3.room3.exterior",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/room-exterior-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt"
+    },
+    {
+      "id": "image.first3.room3.shell",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/room-interior-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt"
+    },
+    {
+      "id": "image.first3.room3.foreground",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/room-foreground-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt"
+    },
+    {
+      "id": "image.first3.khue.idle.0",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 124,
+        "y": 27,
+        "width": 176,
+        "height": 488
+      },
+      "resize": {
+        "width": 69,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 40,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.idle.1",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 480,
+        "y": 27,
+        "width": 175,
+        "height": 488
+      },
+      "resize": {
+        "width": 69,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 40,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.walk.0",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 831,
+        "y": 29,
+        "width": 290,
+        "height": 486
+      },
+      "resize": {
+        "width": 115,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 31,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.walk.1",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 1223,
+        "y": 37,
+        "width": 231,
+        "height": 478
+      },
+      "resize": {
+        "width": 93,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 32,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.walk.2",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 129,
+        "y": 532,
+        "width": 172,
+        "height": 462
+      },
+      "resize": {
+        "width": 71,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 41,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.walk.3",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 450,
+        "y": 534,
+        "width": 285,
+        "height": 461
+      },
+      "resize": {
+        "width": 119,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 31,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.walk.4",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 833,
+        "y": 536,
+        "width": 243,
+        "height": 458
+      },
+      "resize": {
+        "width": 102,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 25,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.walk.5",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-animation-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 1248,
+        "y": 535,
+        "width": 164,
+        "height": 459
+      },
+      "resize": {
+        "width": 69,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 42,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.idle.0",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 162,
+        "y": 15,
+        "width": 165,
+        "height": 495
+      },
+      "resize": {
+        "width": 64,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 41,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.idle.1",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 496,
+        "y": 14,
+        "width": 160,
+        "height": 495
+      },
+      "resize": {
+        "width": 62,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 43,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.walk.0",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 822,
+        "y": 18,
+        "width": 249,
+        "height": 488
+      },
+      "resize": {
+        "width": 98,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 32,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.walk.1",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 1178,
+        "y": 18,
+        "width": 193,
+        "height": 489
+      },
+      "resize": {
+        "width": 76,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 34,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.walk.2",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 146,
+        "y": 520,
+        "width": 192,
+        "height": 488
+      },
+      "resize": {
+        "width": 76,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 30,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.walk.3",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 472,
+        "y": 520,
+        "width": 256,
+        "height": 486
+      },
+      "resize": {
+        "width": 101,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 35,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.walk.4",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 838,
+        "y": 522,
+        "width": 193,
+        "height": 486
+      },
+      "resize": {
+        "width": 76,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 36,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.van.walk.5",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-animation-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 1174,
+        "y": 520,
+        "width": 188,
+        "height": 487
+      },
+      "resize": {
+        "width": 74,
+        "height": 192,
+        "sampling": "pixel"
+      },
+      "canvas": {
+        "width": 160,
+        "height": 208,
+        "x": 33,
+        "y": 8
+      }
+    },
+    {
+      "id": "image.first3.khue.portrait.neutral",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-portraits-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 724,
+        "height": 724
+      },
+      "resize": {
+        "width": 512,
+        "height": 512,
+        "sampling": "smooth"
+      }
+    },
+    {
+      "id": "image.first3.khue.portrait.thoughtful",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-portraits-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 724,
+        "y": 0,
+        "width": 724,
+        "height": 724
+      },
+      "resize": {
+        "width": 512,
+        "height": 512,
+        "sampling": "smooth"
+      }
+    },
+    {
+      "id": "image.first3.khue.portrait.determined",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/khue-portraits-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 1448,
+        "y": 0,
+        "width": 724,
+        "height": 724
+      },
+      "resize": {
+        "width": 512,
+        "height": 512,
+        "sampling": "smooth"
+      }
+    },
+    {
+      "id": "image.first3.van.portrait.neutral",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-portraits-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 724,
+        "height": 724
+      },
+      "resize": {
+        "width": 512,
+        "height": 512,
+        "sampling": "smooth"
+      }
+    },
+    {
+      "id": "image.first3.van.portrait.guarded",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-portraits-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 724,
+        "y": 0,
+        "width": 724,
+        "height": 724
+      },
+      "resize": {
+        "width": 512,
+        "height": 512,
+        "sampling": "smooth"
+      }
+    },
+    {
+      "id": "image.first3.van.portrait.sad",
+      "kind": "image",
+      "source": "assets/sources/g1/raw/van-portraits-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 1448,
+        "y": 0,
+        "width": 724,
+        "height": 724
+      },
+      "resize": {
+        "width": 512,
+        "height": 512,
+        "sampling": "smooth"
+      }
     }
   ],
   "generationInputs": [
-    "assets/sources/fixture-inputs.json"
+    "assets/sources/fixture-inputs.json",
+    "assets/sources/g1/SOURCE-MANIFEST.json",
+    "assets/sources/g1/inputs/khue-design-reference.png",
+    "assets/sources/g1/inputs/room3-clean-reference.png",
+    "assets/sources/g1/inputs/selected-sprites-reference.png",
+    "assets/sources/g1/inputs/van-design-reference.png",
+    "assets/sources/g1/raw/khue-animation-v1.png",
+    "assets/sources/g1/raw/khue-animation-v1.prompt.json",
+    "assets/sources/g1/raw/khue-animation-v2.png",
+    "assets/sources/g1/raw/khue-animation-v2.prompt.json",
+    "assets/sources/g1/raw/khue-portraits-v1.png",
+    "assets/sources/g1/raw/khue-portraits-v1.prompt.json",
+    "assets/sources/g1/raw/room-exterior-v1.png",
+    "assets/sources/g1/raw/room-exterior-v1.prompt.json",
+    "assets/sources/g1/raw/room-foreground-v1.png",
+    "assets/sources/g1/raw/room-foreground-v1.prompt.json",
+    "assets/sources/g1/raw/room-interior-v1.png",
+    "assets/sources/g1/raw/room-interior-v1.prompt.json",
+    "assets/sources/g1/raw/van-animation-v1.png",
+    "assets/sources/g1/raw/van-animation-v1.prompt.json",
+    "assets/sources/g1/raw/van-portraits-v1.png",
+    "assets/sources/g1/raw/van-portraits-v1.prompt.json"
   ],
   "atlases": [
     {
@@ -61,9 +600,39 @@
       ],
       "padding": 1,
       "maxSize": 256
+    },
+    {
+      "id": "atlas.first3.khue",
+      "members": [
+        "image.first3.khue.idle.0",
+        "image.first3.khue.idle.1",
+        "image.first3.khue.walk.0",
+        "image.first3.khue.walk.1",
+        "image.first3.khue.walk.2",
+        "image.first3.khue.walk.3",
+        "image.first3.khue.walk.4",
+        "image.first3.khue.walk.5"
+      ],
+      "padding": 2,
+      "maxSize": 1024
+    },
+    {
+      "id": "atlas.first3.van",
+      "members": [
+        "image.first3.van.idle.0",
+        "image.first3.van.idle.1",
+        "image.first3.van.walk.0",
+        "image.first3.van.walk.1",
+        "image.first3.van.walk.2",
+        "image.first3.van.walk.3",
+        "image.first3.van.walk.4",
+        "image.first3.van.walk.5"
+      ],
+      "padding": 2,
+      "maxSize": 1024
     }
   ],
-  "bundlePath": "assets/bundles/foundation-v1.zip",
+  "bundlePath": "assets/bundles/first3-art-g1-v1.zip",
   "bundleVersion": 1,
   "id": "asset.imports",
   "kind": "asset-imports",

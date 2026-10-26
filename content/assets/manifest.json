@@ -1,5 +1,143 @@
 [
   {
+    "bytes": 215406,
+    "frames": [
+      {
+        "height": 208,
+        "id": "image.first3.khue.idle.0",
+        "width": 160,
+        "x": 2,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.khue.idle.1",
+        "width": 160,
+        "x": 164,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.khue.walk.0",
+        "width": 160,
+        "x": 326,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.khue.walk.1",
+        "width": 160,
+        "x": 488,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.khue.walk.2",
+        "width": 160,
+        "x": 650,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.khue.walk.3",
+        "width": 160,
+        "x": 812,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.khue.walk.4",
+        "width": 160,
+        "x": 2,
+        "y": 212
+      },
+      {
+        "height": 208,
+        "id": "image.first3.khue.walk.5",
+        "width": 160,
+        "x": 164,
+        "y": 212
+      }
+    ],
+    "hash": "8e76a1da56d357dee004a2c1554f5427c74b53c41344d85e65631fb975357bf9",
+    "height": 422,
+    "id": "atlas.first3.khue",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/atlas.first3.khue.8e76a1da56d357de.png",
+    "required": true,
+    "width": 974
+  },
+  {
+    "bytes": 221555,
+    "frames": [
+      {
+        "height": 208,
+        "id": "image.first3.van.idle.0",
+        "width": 160,
+        "x": 2,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.van.idle.1",
+        "width": 160,
+        "x": 164,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.van.walk.0",
+        "width": 160,
+        "x": 326,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.van.walk.1",
+        "width": 160,
+        "x": 488,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.van.walk.2",
+        "width": 160,
+        "x": 650,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.van.walk.3",
+        "width": 160,
+        "x": 812,
+        "y": 2
+      },
+      {
+        "height": 208,
+        "id": "image.first3.van.walk.4",
+        "width": 160,
+        "x": 2,
+        "y": 212
+      },
+      {
+        "height": 208,
+        "id": "image.first3.van.walk.5",
+        "width": 160,
+        "x": 164,
+        "y": 212
+      }
+    ],
+    "hash": "b3716005046019c19e73ee40aca58c897af81ffc6d03126ab1c5c51a465881f4",
+    "height": 422,
+    "id": "atlas.first3.van",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/atlas.first3.van.b3716005046019c1.png",
+    "required": true,
+    "width": 974
+  },
+  {
     "bytes": 328,
     "frames": [
       {
@@ -37,6 +175,331 @@
     "required": true,
     "source": "assets/sources/tone.wav",
     "sourceHash": "40c77a2c95667783b50a16c25e946c9aca27d1a687e65a7347608ab97d8e0f29"
+  },
+  {
+    "bytes": 24420,
+    "hash": "b0a1640f0eec4ef27313235517c8f2e59e86fb7c7fd96f275bd7d19210a929b9",
+    "height": 208,
+    "id": "image.first3.khue.idle.0",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.idle.0.b0a1640f0eec4ef2.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 25104,
+    "hash": "428ebd0cc3ecf04632d67641adca1f989e87170783ecd40e6e7b134a177da01d",
+    "height": 208,
+    "id": "image.first3.khue.idle.1",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.idle.1.428ebd0cc3ecf046.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 369175,
+    "hash": "54d2f42603927c17660aa788940236c639c3d1ca3373751f0c628d039608d28e",
+    "height": 512,
+    "id": "image.first3.khue.portrait.determined",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.portrait.determined.54d2f42603927c17.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-portraits-v1.png",
+    "sourceHash": "c998e400f825c66a3294c85a63226914294ec5efe3a323e6538bcdeabce3c973",
+    "width": 512
+  },
+  {
+    "bytes": 371824,
+    "hash": "a47f3e54a9737b2ecb2a636fb2426a9281a9b9df9212f64e54e6fb32e10b1c7d",
+    "height": 512,
+    "id": "image.first3.khue.portrait.neutral",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.portrait.neutral.a47f3e54a9737b2e.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-portraits-v1.png",
+    "sourceHash": "c998e400f825c66a3294c85a63226914294ec5efe3a323e6538bcdeabce3c973",
+    "width": 512
+  },
+  {
+    "bytes": 372065,
+    "hash": "700bb30029e5290b5af39b63683bd9281ce24f5e9b1d9fa7172c9c617bb20fe9",
+    "height": 512,
+    "id": "image.first3.khue.portrait.thoughtful",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.portrait.thoughtful.700bb30029e5290b.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-portraits-v1.png",
+    "sourceHash": "c998e400f825c66a3294c85a63226914294ec5efe3a323e6538bcdeabce3c973",
+    "width": 512
+  },
+  {
+    "bytes": 29768,
+    "hash": "d65a9e635c62206c990af96b0860b3fd8c779ad6a99a27c0306fc7fbfd7f31bd",
+    "height": 208,
+    "id": "image.first3.khue.walk.0",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.walk.0.d65a9e635c62206c.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 27730,
+    "hash": "1e53e2fabefc56b728a48b89a7d2ea11ac988e05bdfe4f951d9ea410d66139c4",
+    "height": 208,
+    "id": "image.first3.khue.walk.1",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.walk.1.1e53e2fabefc56b7.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 23717,
+    "hash": "6e3b14f9a09c6d8237ae40bd1114e2a3ca2c824a4ad74ef6d8646f07b8fa914a",
+    "height": 208,
+    "id": "image.first3.khue.walk.2",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.walk.2.6e3b14f9a09c6d82.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 31222,
+    "hash": "2bcff8e5ef95446cfbe337cc6825159533be200be4b0f6dc59c523cb1ed2fd3a",
+    "height": 208,
+    "id": "image.first3.khue.walk.3",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.walk.3.2bcff8e5ef95446c.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 29234,
+    "hash": "b6f511338624a5eb0ad15bdca0f67451036b99882ab226362742fae0405760da",
+    "height": 208,
+    "id": "image.first3.khue.walk.4",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.walk.4.b6f511338624a5eb.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 23614,
+    "hash": "531968db62db6e61f276ce5e0c82108b39dd5a5ad926045549297e7df5ed955f",
+    "height": 208,
+    "id": "image.first3.khue.walk.5",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.khue.walk.5.531968db62db6e61.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/khue-animation-v2.png",
+    "sourceHash": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c",
+    "width": 160
+  },
+  {
+    "bytes": 2723927,
+    "hash": "0c69ab21bbaaebbcc900bd8d02117692eff81656efd271578a4af125cdf2138c",
+    "height": 814,
+    "id": "image.first3.room3.exterior",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.room3.exterior.0c69ab21bbaaebbc.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/room-exterior-v1.png",
+    "sourceHash": "e1bf3a6951e0f58e4a76fd4b65a2bdf41005d13b5659f5f466bca4dab374de11",
+    "width": 1931
+  },
+  {
+    "bytes": 418743,
+    "hash": "b59d5a2ee996398d8481469b7f93085f9b4aa95b0b2f7a50fe2452ae12d4acc0",
+    "height": 815,
+    "id": "image.first3.room3.foreground",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.room3.foreground.b59d5a2ee996398d.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/room-foreground-v1.png",
+    "sourceHash": "32b1cf8e44b26891e251fd592697672a5344c2c44e924c2c568e8774fd1ac9e3",
+    "width": 1930
+  },
+  {
+    "bytes": 2421386,
+    "hash": "eaa546e7326aa4ea5f45f20af3779ed617bf1ebee4139c8a7c3832905b8b5cac",
+    "height": 814,
+    "id": "image.first3.room3.shell",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.room3.shell.eaa546e7326aa4ea.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/room-interior-v1.png",
+    "sourceHash": "cca53ac07f3b5e4eda2b0b671392c2f5b9f48ef7284c80c33c4b0940a01f3d64",
+    "width": 1932
+  },
+  {
+    "bytes": 24600,
+    "hash": "5c901db1c6ee8d39cc838d328e19dc8f52d05db89aec65829d3d287664c646de",
+    "height": 208,
+    "id": "image.first3.van.idle.0",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.idle.0.5c901db1c6ee8d39.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
+  },
+  {
+    "bytes": 24222,
+    "hash": "7e07d4e4c20d1bad1e80aa23923bbddd6f0800a987295548ad43f5e874326231",
+    "height": 208,
+    "id": "image.first3.van.idle.1",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.idle.1.7e07d4e4c20d1bad.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
+  },
+  {
+    "bytes": 429046,
+    "hash": "0d0552aae6741ee2586068d608cc3708de9bc29b09a3b5fdf0566b2278959556",
+    "height": 512,
+    "id": "image.first3.van.portrait.guarded",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.portrait.guarded.0d0552aae6741ee2.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-portraits-v1.png",
+    "sourceHash": "9241208f6bf4104ff913f96bda4f2b5e272ddba1726cf0fd6fd92709f67cea3d",
+    "width": 512
+  },
+  {
+    "bytes": 431247,
+    "hash": "c4c085c92a7919e8d4c08aac5b1b91215ae45d225468c35accac49ca90deca01",
+    "height": 512,
+    "id": "image.first3.van.portrait.neutral",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.portrait.neutral.c4c085c92a7919e8.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-portraits-v1.png",
+    "sourceHash": "9241208f6bf4104ff913f96bda4f2b5e272ddba1726cf0fd6fd92709f67cea3d",
+    "width": 512
+  },
+  {
+    "bytes": 418499,
+    "hash": "a1bd14ada051342e8401f1d68ac2f21160493a1f1fd4c879ef847c70d8365efc",
+    "height": 512,
+    "id": "image.first3.van.portrait.sad",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.portrait.sad.a1bd14ada051342e.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-portraits-v1.png",
+    "sourceHash": "9241208f6bf4104ff913f96bda4f2b5e272ddba1726cf0fd6fd92709f67cea3d",
+    "width": 512
+  },
+  {
+    "bytes": 31026,
+    "hash": "6c5566a9e54349dbfc3a5960c6d251b0751990016d80c6b59f3fef70ed95de38",
+    "height": 208,
+    "id": "image.first3.van.walk.0",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.walk.0.6c5566a9e54349db.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
+  },
+  {
+    "bytes": 29224,
+    "hash": "a81eea062d5b7d575c31ee53f84004c92bff5d324b2977f14f245552027d3a2a",
+    "height": 208,
+    "id": "image.first3.van.walk.1",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.walk.1.a81eea062d5b7d57.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
+  },
+  {
+    "bytes": 27022,
+    "hash": "c5629bc377e998aeccd64d0ec79e7fb1f67383365ba8a944e1facb0a5f91e4ac",
+    "height": 208,
+    "id": "image.first3.van.walk.2",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.walk.2.c5629bc377e998ae.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
+  },
+  {
+    "bytes": 31794,
+    "hash": "00be0aca19b7f190b828719bca810cdf99a947c0aafc1f29d52a3a7290cf5054",
+    "height": 208,
+    "id": "image.first3.van.walk.3",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.walk.3.00be0aca19b7f190.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
+  },
+  {
+    "bytes": 27468,
+    "hash": "791395ceaedb919f25ae8c173348a416ffdc923a96c41bf93f49c58437a4a583",
+    "height": 208,
+    "id": "image.first3.van.walk.4",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.walk.4.791395ceaedb919f.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
+  },
+  {
+    "bytes": 26051,
+    "hash": "01b0ff29fa4253326bdf8ad3070bc1c68831598439cf29060ab8a36af0abf4f8",
+    "height": 208,
+    "id": "image.first3.van.walk.5",
+    "kind": "image",
+    "license": "LicenseRef-HoiAm-GeneratedArt",
+    "path": "/assets/exports/image.first3.van.walk.5.01b0ff29fa425332.png",
+    "required": true,
+    "source": "assets/sources/g1/raw/van-animation-v1.png",
+    "sourceHash": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2",
+    "width": 160
   },
   {
     "bytes": 247,

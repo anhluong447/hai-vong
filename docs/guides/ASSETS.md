@@ -67,6 +67,32 @@ licensing are separate: [Pillow](https://pillow.readthedocs.io/en/12.3.0/) and t
 the packaged FFmpeg executable reports GPL/version3 build flags. Offline executables
 are not included in the player export; final release notices/audit are T13.
 
+## G1 native image recipes
+
+Image entries may declare `crop`, then `resize`, then `canvas`. The pipeline applies
+these technical rendition steps in that order, preserving the source master.
+Crop coordinates are integer source pixels; resize declares positive output dimensions
+and `sampling: "pixel"` (nearest-neighbor) or `"smooth"` (Lanczos). Canvas declares
+positive dimensions and nonnegative placement `x/y`; the rendered image must fit.
+Out-of-bounds recipes reject with the master source path, rather than silently clamp.
+Audio entries cannot declare image recipes. The same fields are schema-validated in
+authoring; source-image bounds are also checked during the file build.
+
+Atlases pack the rendered/padded frames, rather than the original sheet. Their cache
+keys include each member recipe, source hash and the rendition algorithm version.
+Changing a crop or placement rebuilds both the frame and its dependent atlas.
+
+G1 uses a 160×208 native frame canvas with a 192-pixel visible figure and pivot
+`80,200`. Portraits export at 512×512. The three room layers are independent exterior,
+interior (including furniture/props) and foreground images; they are not copies of
+the same flattened room. Original concepts and exact image-generation prompts are
+retained in the bundle alongside the raw generated sheets.
+
+The active recipe now selects `assets/bundles/first3-art-g1-v1.zip`, including the
+existing fixtures. The original `foundation-v1.zip` remains unchanged. G1 samples
+have their own provenance/license record and remain candidates for playable visual
+Review B; do not infer production acceptance from a successful asset build.
+
 ## Runtime lifecycle
 
 AssetCatalog uses shared resource semantics; AssetService acquires scene groups using

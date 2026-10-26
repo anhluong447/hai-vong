@@ -22,3 +22,16 @@ test('animation preview sampling is validated before the editor consumes it',()=
   else assert(checked.ok,JSON.stringify(checked));
  }
 });
+
+test('image crop resize and padded canvas are shared authoring contracts',()=>{
+ const source=structuredClone(sources),spec=source.documents.find(doc=>doc.data?.kind==='asset-imports').data;
+ Object.assign(spec.entries[0],{crop:{x:0,y:0,width:20,height:30},resize:{width:12,height:18,sampling:'pixel'},canvas:{width:20,height:24,x:4,y:3}});
+ assert(validateProject(source).ok,'valid native image recipe was rejected');
+ for(const mutate of [entry=>entry.crop.x=-1,entry=>entry.resize.width=0,entry=>entry.resize.sampling='unknown',entry=>entry.canvas.x=19]){
+  const candidate=structuredClone(source);mutate(candidate.documents.find(doc=>doc.data?.kind==='asset-imports').data.entries[0]);
+  assert(!validateProject(candidate).ok,'invalid rendition recipe was accepted');
+ }
+ const audio=structuredClone(source),entries=audio.documents.find(doc=>doc.data?.kind==='asset-imports').data.entries;
+ entries.find(entry=>entry.kind==='audio').crop={x:0,y:0,width:1,height:1};
+ assert(!validateProject(audio).ok,'image crop must not apply to audio');
+});

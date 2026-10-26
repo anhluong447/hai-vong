@@ -1,0 +1,259 @@
+{
+  "labels": {
+    "title": "G1 · Kiểm tra asset đã chuẩn hóa",
+    "description": "Ba lớp độc lập, sprite native 192 px ở cỡ hiển thị đã chọn 152 và sáu portrait 512×512. Đây là preview asset bằng renderer thật; chưa phải đoạn gameplay Review B.",
+    "idle": "Đứng",
+    "walk": "Đi tại chỗ",
+    "scene": "Phòng số 3 ghép lớp với Khuê và Vân",
+    "ready": "Đã tải asset. Chọn Đứng hoặc Đi tại chỗ để xem vòng animation của Khuê.",
+    "error": "Không tải được preview:",
+    "strips": "Walk cycle / baseline and pivot inspection"
+  },
+  "manifest": "/content/assets/manifest.json",
+  "revision": "g1-asset-preview",
+  "viewport": {
+    "width": 960,
+    "height": 540
+  },
+  "playerActorId": "actor.first3.khue",
+  "playerX": 430,
+  "actors": [
+    {
+      "id": "actor.first3.khue",
+      "nameKey": "world.player",
+      "idleClipId": "clip.first3.khue.idle",
+      "walkClipId": "clip.first3.khue.walk",
+      "scale": 0.7916666666666666,
+      "sampling": "pixel",
+      "portraits": {
+        "neutral": "image.first3.khue.portrait.neutral",
+        "thoughtful": "image.first3.khue.portrait.thoughtful",
+        "determined": "image.first3.khue.portrait.determined"
+      }
+    },
+    {
+      "id": "actor.first3.van",
+      "nameKey": "world.npc",
+      "idleClipId": "clip.first3.van.idle",
+      "walkClipId": "clip.first3.van.walk",
+      "scale": 0.7283333333333333,
+      "sampling": "pixel",
+      "portraits": {
+        "neutral": "image.first3.van.portrait.neutral",
+        "guarded": "image.first3.van.portrait.guarded",
+        "sad": "image.first3.van.portrait.sad"
+      }
+    }
+  ],
+  "animations": [
+    {
+      "id": "clip.first3.khue.idle",
+      "loop": true,
+      "pivot": {
+        "x": 80,
+        "y": 200
+      },
+      "frames": [
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.idle.0",
+          "duration": 1.1
+        },
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.idle.1",
+          "duration": 1.1
+        }
+      ]
+    },
+    {
+      "id": "clip.first3.khue.walk",
+      "loop": true,
+      "pivot": {
+        "x": 80,
+        "y": 200
+      },
+      "frames": [
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.walk.0",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.walk.1",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.walk.2",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.walk.3",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.walk.4",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.khue",
+          "frameId": "image.first3.khue.walk.5",
+          "duration": 0.12
+        }
+      ]
+    },
+    {
+      "id": "clip.first3.van.idle",
+      "loop": true,
+      "pivot": {
+        "x": 80,
+        "y": 200
+      },
+      "frames": [
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.idle.0",
+          "duration": 1.1
+        },
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.idle.1",
+          "duration": 1.1
+        }
+      ]
+    },
+    {
+      "id": "clip.first3.van.walk",
+      "loop": true,
+      "pivot": {
+        "x": 80,
+        "y": 200
+      },
+      "frames": [
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.walk.0",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.walk.1",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.walk.2",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.walk.3",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.walk.4",
+          "duration": 0.12
+        },
+        {
+          "assetId": "atlas.first3.van",
+          "frameId": "image.first3.van.walk.5",
+          "duration": 0.12
+        }
+      ]
+    }
+  ],
+  "scene": {
+    "id": "scene.preview.room3",
+    "nameKey": "world.club",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.first3.room3.exterior",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.25
+      },
+      {
+        "assetId": "image.first3.room3.shell",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 1
+      },
+      {
+        "assetId": "image.first3.room3.foreground",
+        "x": 0,
+        "y": 130,
+        "width": 1280,
+        "height": 540,
+        "parallax": 1.05,
+        "foreground": true
+      }
+    ],
+    "actors": [
+      {
+        "id": "van",
+        "actorId": "actor.first3.van",
+        "x": 620,
+        "facing": -1
+      }
+    ],
+    "interactions": [],
+    "decorations": []
+  },
+  "portraits": [
+    {
+      "id": "image.first3.khue.portrait.neutral",
+      "label": "Khuê · neutral"
+    },
+    {
+      "id": "image.first3.khue.portrait.thoughtful",
+      "label": "Khuê · thoughtful"
+    },
+    {
+      "id": "image.first3.khue.portrait.determined",
+      "label": "Khuê · determined"
+    },
+    {
+      "id": "image.first3.van.portrait.neutral",
+      "label": "Vân · neutral"
+    },
+    {
+      "id": "image.first3.van.portrait.guarded",
+      "label": "Vân · guarded"
+    },
+    {
+      "id": "image.first3.van.portrait.sad",
+      "label": "Vân · sad"
+    }
+  ],
+  "inspection": {
+    "width": 160,
+    "height": 208,
+    "pivotX": 80,
+    "baseline": 200,
+    "background": "#172331",
+    "guide": "#405263"
+  }
+}

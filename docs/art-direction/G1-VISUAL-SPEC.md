@@ -72,6 +72,17 @@ quest effects và trình tự recruit không thay đổi vì asset.
 
 ## Nhật ký lựa chọn
 
+T02 đã có [preview bằng renderer thật](production-preview/README.md). Bộ lớp thực
+gồm exterior, shell kèm furniture/props và foreground; gộp nội thất để giữ khớp
+sàn như lựa chọn gộp lớp trong plan. Master thực khoảng 1930×814, chưa đạt kích
+thước đề xuất 2560×1080; không gọi ảnh upscale là thêm chi tiết nguồn.
+
+Sprite xuất trên canvas native 160×208, hình nhìn thấy cao 192, pivot `80,200`.
+Scale Khuê `152/192`; Vân nhân thêm `0.92`. Mỗi người có 2 frame idle và 6 pha đi;
+idle `1.1 s/frame`, walk `0.12 s/frame` là timing prototype, chờ kiểm tra khi chơi.
+Portrait 3 biểu cảm/người, mỗi ảnh 512×512 RGBA. Sampling, chất animation và màu
+cuối vẫn được đánh giá trong Review B; build thành công không thay cho duyệt art.
+
 | Điểm duyệt | Trạng thái | Lựa chọn |
 | --- | --- | --- |
 | Review A — density/scale/composition | Đã xem board và trả lời rõ; palette/cảnh kiểm chứng tiếp khi chơi | A2 — 192 px; B3 — cao 152; Vân thấp hơn một chút |

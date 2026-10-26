@@ -1,6 +1,6 @@
 {
-  "bundlePath": "assets/bundles/foundation-v1.zip",
-  "bundleSha256": "63f6e1018fbdc464c1c2fb52ab7ca14cdffe936f4f11ea28d0345c26f2742c75",
+  "bundlePath": "assets/bundles/first3-art-g1-v1.zip",
+  "bundleSha256": "9fc33cd4b7f737a43194ee65d271ba0457bdfe03ba57a5f106d20122553d9cdb",
   "bundleVersion": 1,
   "files": [
     {
@@ -17,6 +17,111 @@
       "bytes": 3460,
       "path": "assets/sources/fixture-inputs.json",
       "sha256": "4cda95a3220bb41bffc411839920cf616fc5ced832b4cf39c25f5bd6345faada"
+    },
+    {
+      "bytes": 12626,
+      "path": "assets/sources/g1/SOURCE-MANIFEST.json",
+      "sha256": "61a4573ace81effdbf723915100e8a31faf6f9ea87775d6c7fe86b5ad0b88db1"
+    },
+    {
+      "bytes": 2713151,
+      "path": "assets/sources/g1/inputs/khue-design-reference.png",
+      "sha256": "2a2b74d6981f3696d0c761b58151011d84919d5bef20b06bf05f2faabff29e3b"
+    },
+    {
+      "bytes": 2353155,
+      "path": "assets/sources/g1/inputs/room3-clean-reference.png",
+      "sha256": "585d5d976536e8dfee8dad240665bb419c12815b20d49e75882ec4c5220c7974"
+    },
+    {
+      "bytes": 1413454,
+      "path": "assets/sources/g1/inputs/selected-sprites-reference.png",
+      "sha256": "f109769d9fa6668ed542e9633328eff8c440d583ef78fb8b544afd5b14911771"
+    },
+    {
+      "bytes": 2743939,
+      "path": "assets/sources/g1/inputs/van-design-reference.png",
+      "sha256": "79b8ed3126c31367b98286336fffe3b56f242a67c8da67ee73b024c5e809dc30"
+    },
+    {
+      "bytes": 1879278,
+      "path": "assets/sources/g1/raw/khue-animation-v1.png",
+      "sha256": "56a4a0fed920a2c2a96af77bd71e45dbafdee4abd2271fec1c336ff7744283be"
+    },
+    {
+      "bytes": 2205,
+      "path": "assets/sources/g1/raw/khue-animation-v1.prompt.json",
+      "sha256": "df8577be3d2db75bfc4d8c9a0819cefeeb9071adfa0f2a4b1d796aa9e1ff0470"
+    },
+    {
+      "bytes": 1854909,
+      "path": "assets/sources/g1/raw/khue-animation-v2.png",
+      "sha256": "ba78871aeeae80482634848265afc906a4b34f37adc5d82c7d7107ed3a98620c"
+    },
+    {
+      "bytes": 1916,
+      "path": "assets/sources/g1/raw/khue-animation-v2.prompt.json",
+      "sha256": "e278f3a34f2dba52c3368249028a40006fd1be7111d99ec3b0c0f6ff79526d6d"
+    },
+    {
+      "bytes": 2137982,
+      "path": "assets/sources/g1/raw/khue-portraits-v1.png",
+      "sha256": "c998e400f825c66a3294c85a63226914294ec5efe3a323e6538bcdeabce3c973"
+    },
+    {
+      "bytes": 1934,
+      "path": "assets/sources/g1/raw/khue-portraits-v1.prompt.json",
+      "sha256": "712b107a1405d59a3464a43a6e2f5221daabf058d8533706256dd3df14cabf92"
+    },
+    {
+      "bytes": 2448500,
+      "path": "assets/sources/g1/raw/room-exterior-v1.png",
+      "sha256": "e1bf3a6951e0f58e4a76fd4b65a2bdf41005d13b5659f5f466bca4dab374de11"
+    },
+    {
+      "bytes": 1426,
+      "path": "assets/sources/g1/raw/room-exterior-v1.prompt.json",
+      "sha256": "7a1cd9118e67607a49839fdaaf7ad437963614403624ad1251fadb7491746400"
+    },
+    {
+      "bytes": 449760,
+      "path": "assets/sources/g1/raw/room-foreground-v1.png",
+      "sha256": "32b1cf8e44b26891e251fd592697672a5344c2c44e924c2c568e8774fd1ac9e3"
+    },
+    {
+      "bytes": 1507,
+      "path": "assets/sources/g1/raw/room-foreground-v1.prompt.json",
+      "sha256": "cc5527e8beb551ccef59743e36eec600f5b128eaf0e4aca0f5b9464fe0ef47c6"
+    },
+    {
+      "bytes": 2524581,
+      "path": "assets/sources/g1/raw/room-interior-v1.png",
+      "sha256": "cca53ac07f3b5e4eda2b0b671392c2f5b9f48ef7284c80c33c4b0940a01f3d64"
+    },
+    {
+      "bytes": 1518,
+      "path": "assets/sources/g1/raw/room-interior-v1.prompt.json",
+      "sha256": "61e82531d2f98c60bf82e1571a5c89ee23220a563538dd41fa3f8312b070b26a"
+    },
+    {
+      "bytes": 1955274,
+      "path": "assets/sources/g1/raw/van-animation-v1.png",
+      "sha256": "de3000eeff2b63a18566b141105b7ff4fe3627664537a13d6e4ae47ba8d77fd2"
+    },
+    {
+      "bytes": 2511,
+      "path": "assets/sources/g1/raw/van-animation-v1.prompt.json",
+      "sha256": "bea07b3cf3d077f048421298083483c1d24ca0771b75032de0fc67f9fc790490"
+    },
+    {
+      "bytes": 2451008,
+      "path": "assets/sources/g1/raw/van-portraits-v1.png",
+      "sha256": "9241208f6bf4104ff913f96bda4f2b5e272ddba1726cf0fd6fd92709f67cea3d"
+    },
+    {
+      "bytes": 1952,
+      "path": "assets/sources/g1/raw/van-portraits-v1.prompt.json",
+      "sha256": "a5d81e251b217c545ef310438fda9a3404ab9b447d3e9e0d2d8685a1b8497883"
     },
     {
       "bytes": 192,

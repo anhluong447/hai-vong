@@ -18,6 +18,7 @@ from PIL import Image
 
 CODE_ROOT=Path(__file__).resolve().parents[2]
 ID=re.compile(r'^[a-z0-9][a-z0-9_.:-]{0,79}$')
+IMAGE_RECIPE_VERSION=1
 
 def failure(code,source=''):return {'ok':False,'errors':[{'code':code,'sourceId':source,'pointer':'','relatedIds':[]}]}
 def encoded(value):return (json.dumps(value,ensure_ascii=False,sort_keys=True,indent=2,allow_nan=False)+'\n').encode('utf-8')
@@ -43,6 +44,33 @@ def ffmpeg_tool():
 def png_bytes(image):
     buffer=io.BytesIO();image.convert('RGBA').save(buffer,format='PNG',optimize=True,compress_level=9);return buffer.getvalue()
 
+def image_rendition(source,entry,maximum):
+    """Normalize authored sheet regions into native frames; never change a master."""
+    def box(value,keys):
+        if not isinstance(value,dict) or set(value)!=set(keys):raise ValueError('image recipe shape')
+        for key in keys:
+            if type(value[key]) is not int or value[key]<(1 if key in ('width','height') else 0):raise ValueError('image recipe bounds')
+        if max(value['width'],value['height'])>maximum:raise ValueError('image recipe dimensions')
+    with Image.open(source) as opened:
+        if opened.format!='PNG' or max(opened.size)>maximum:raise ValueError('image format/dimensions')
+        image=opened.convert('RGBA')
+    if 'crop' in entry:
+        crop=entry['crop'];box(crop,('x','y','width','height'))
+        if crop['x']+crop['width']>image.width or crop['y']+crop['height']>image.height:raise ValueError('image crop outside master')
+        image=image.crop((crop['x'],crop['y'],crop['x']+crop['width'],crop['y']+crop['height']))
+    if 'resize' in entry:
+        resize=entry['resize']
+        if not isinstance(resize,dict) or set(resize)!= {'width','height','sampling'}:raise ValueError('image resize shape')
+        box({key:resize[key] for key in ('width','height')},('width','height'))
+        if resize['sampling'] not in ('pixel','smooth'):raise ValueError('image sampling')
+        image=image.resize((resize['width'],resize['height']),Image.Resampling.NEAREST if resize['sampling']=='pixel' else Image.Resampling.LANCZOS)
+    if 'canvas' in entry:
+        canvas=entry['canvas'];box(canvas,('x','y','width','height'))
+        if canvas['x']+image.width>canvas['width'] or canvas['y']+image.height>canvas['height']:raise ValueError('image canvas outside bounds')
+        padded=Image.new('RGBA',(canvas['width'],canvas['height']))
+        padded.alpha_composite(image,(canvas['x'],canvas['y']));image=padded
+    return image
+
 def build(root,spec):
     root=Path(root).resolve()
     try:
@@ -57,6 +85,7 @@ def build(root,spec):
             ids.add(entry['id'])
         for entry in entries:
             if entry.get('license') not in licenses:return failure('asset.license.unknown',entry['id'])
+            if entry['kind']!='image' and any(key in entry for key in ('crop','resize','canvas')):return failure('asset.image_recipe.kind',entry['id'])
             source=local(root,entry['source']);source.relative_to(root/'assets/sources')
             if not source.is_file():return failure('asset.source.missing',entry['source'])
         state_path=root/'.cache/assets/build-state.json'
@@ -77,12 +106,12 @@ def build(root,spec):
         for entry in sorted(entries,key=lambda e:e['id']):
             source=local(root,entry['source']);key=digest(encoded({'entry':entry,'sourceHash':input_hash[entry['id']],'pillow':PIL.__version__}))
             if entry['kind']=='image':
+                key=digest(encoded({'key':key,'imageRecipeVersion':IMAGE_RECIPE_VERSION}))
                 def produce(entry=entry,source=source):
-                    with Image.open(source) as image:
-                        if image.format!='PNG' or max(image.size)>spec.get('maxImageDimension',4096):raise ValueError('image format/dimensions')
-                        image.load()
+                    with image_rendition(source,entry,spec.get('maxImageDimension',4096)) as image:
                         return png_bytes(image),{'width':image.width,'height':image.height,'source':entry['source'],'sourceHash':input_hash[entry['id']]},'png'
-                emit(entry,key,produce)
+                try:emit(entry,key,produce)
+                except ValueError:return failure('asset.image_recipe.invalid',entry['source'])
             elif entry['kind']=='audio':
                 path,wrapper,binary_hash=ffmpeg_tool();pin=pinned.get('imageio-ffmpeg',{})
                 if wrapper!=pin.get('version') or binary_hash!=pin.get('binarySha256'):return failure('tool.ffmpeg.version',entry['id'])
@@ -101,11 +130,11 @@ def build(root,spec):
             if not members or any(m['kind']!='image' for m in members):return failure('asset.atlas.members',atlas['id'])
             if len({m['license'] for m in members})!=1:return failure('asset.atlas.license',atlas['id'])
             entry={**atlas,'kind':'image','license':members[0]['license'],'required':True}
-            key=digest(encoded({'atlas':atlas,'inputs':[input_hash[m['id']] for m in members],'pillow':PIL.__version__}))
+            key=digest(encoded({'atlas':atlas,'members':members,'inputs':[input_hash[m['id']] for m in members],'pillow':PIL.__version__,'imageRecipeVersion':IMAGE_RECIPE_VERSION}))
             def produce(atlas=atlas,members=members):
                 padding=atlas['padding'];maximum=atlas['maxSize'];x=y=padding;row_height=0;width=0;frames=[];images=[]
                 for member in members:
-                    with Image.open(local(root,member['source'])) as source:img=source.convert('RGBA')
+                    img=image_rendition(local(root,member['source']),member,spec.get('maxImageDimension',4096))
                     if img.width+padding*2>maximum or img.height+padding*2>maximum:raise ValueError('atlas bounds')
                     if x+img.width+padding>maximum:x=padding;y+=row_height+padding;row_height=0
                     if y+img.height+padding>maximum:raise ValueError('atlas bounds')

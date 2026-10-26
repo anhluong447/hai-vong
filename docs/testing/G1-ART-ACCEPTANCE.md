@@ -6,7 +6,7 @@ Plan commit: `3fafb2f`. Active branch: `feat/first3-art-direction`.
 ## Current progress
 
 - T01: clean composition, three density drawings and two comparison boards generated. User explicitly selected A2 (192 px) and B3 (height 152). See ../art-direction/review-a/README.md; focused browser captures pass 3/3. Production layers remain T02 work.
-- T02: asset production has not started.
+- T02: assets and recoverable bundle prepared; 3 real layers, 16 sprite frames, 6 portraits, 2 atlases. Native frame canvas 160x208 / visible192 / pivot80,200; selected display152. Real-renderer composition/walk inspection available under ../art-direction/production-preview/. Sources remain candidates for playable Review B. Fresh private-venv recovery restores27 sources and rebuilds33 identical renditions; deterministic ZIP/build and audit pass.
 - T03: content contracts and pure dialogue projection implemented. Focused tests: RED 14 failures / 8 existing rejections, then GREEN 22/22. Architecture and content suites pass; full unit suite passes 148 JS + 57 Python tests. No production art/content version change yet.
 - T04: renderer code implemented; focused renderer/lifecycle/display checks pass 9/9, full browser 53/53 and authoring 42/42. A follow-up preview-sampling validator test was RED then GREEN. Final full unit passes 149 JS + 57 Python; current architecture/content pass. Actual G1-art visual checks remain pending Review A/assets.
 - T05–T08: not complete.
@@ -28,7 +28,7 @@ scale remain proposals in [the visual spec](../art-direction/G1-VISUAL-SPEC.md).
 
 ## Required evidence before closing G1
 
-- [ ] Clean source layers and characters/portraits, independently recoverable.
+- [x] Clean source layers and character/portrait candidates independently recoverable (T02); visual Review B remains pending.
 - [ ] Pixel sprite/background sampling verified in runtime and editor.
 - [ ] Speaker/portrait/narration transitions, stale loads and lifecycle verified.
 - [ ] Native keyboard Room 3 journey, save/reveal resume and existing routes.
@@ -54,3 +54,21 @@ pass; background sampling and preview-setting validation each had an additional
 focused RED→GREEN. The final unit/browser/authoring reports use `t04-final-*`.
 No bot/release/static artifact or visual-art acceptance is claimed for this
 partial implementation checkpoint. G1 remains open.
+
+## T02 verification checkpoint
+
+Final unit: 150 JS + 60 Python PASS; architecture/content/audit PASS. New image-recipe
+checks were RED then GREEN (including alpha/padding, invalid bounds, atlas rebuild
+and source diagnostics). An initial full run found five packaging failures because
+the new provenance ID was absent from the release registry; explicit registration
+and the internal profile entry fixed them, without marking art production-approved.
+
+Fresh `.cache/tmp/g1-recovery-t02` has its own private venv installed offline from
+contained wheels. All 27 masters/inputs were absent before restore; all 33 output
+metadata/hashes match the active manifest. Bundle SHA256 is
+`9fc33cd4b7f737a43194ee65d271ba0457bdfe03ba57a5f106d20122553d9cdb`.
+The original foundation bundle is unchanged. Raw recovery/determinism/unit reports
+are `t02-*.json` in the scoped ledger; copied captures have unique artifact names.
+
+No current full browser/authoring/bot/static or gameplay visual acceptance is
+claimed for this asset-only checkpoint. G1 remains open.

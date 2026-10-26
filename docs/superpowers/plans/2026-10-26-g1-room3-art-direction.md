@@ -185,9 +185,11 @@ log, screenshot đi vào `.cache/` project theo harness; không dùng browser pr
 - [x] Chuẩn bị board 3 mức pixel density ở cùng cỡ hiển thị và 3 mức cỡ hiển thị với cùng density. Cùng góc nhìn/crop và background; không làm 9 phương án độc lập gây nhiễu.
 - [x] Kiểm tra thủ công feet baseline, silhouette, ba lô/nơ/tóc, vùng UI và cửa; gắn nhãn phương án qua tài liệu, chưa đưa copy thử vào player.
 - [x] Cho người dùng xem Review A, ghi lựa chọn cụ thể. Chờ câu trả lời cho các lựa chọn này trước khi nhân bản frames; có thể tiếp tục các contract/test độc lập với lựa chọn.
-- [ ] Commit phạm vi mẫu được chọn và quyết định: `docs: define room-three visual production target`. Không ghi đạt Review A khi mới có board.
+- [x] Commit phạm vi mẫu được chọn và quyết định: `docs: define room-three visual production target`. Không ghi đạt Review A khi mới có board.
 
 ### T02 — Sản xuất bộ asset G1 và chứng minh đường phục hồi
+
+**Verified checkpoint:** 150 JS + 60 Python unit PASS; architecture/content/audit PASS. Fresh private-venv restore27 sources/build33 matching renditions and deterministic bundle PASS. Art/animation remain subject to playable Review B.
 
 **Files:** `assets/sources/g1/`, `content/assets/imports.json`, generated
 `content/assets/manifest.json`, `assets/bundles/first3-art-g1-v1.zip`, inventory;
@@ -196,12 +198,12 @@ sửa `tests/python/test_asset_pipeline.py` khi cần coverage cho ảnh lớn/a
 **Consumes:** lựa chọn Review A, PNG/atlas/bundle pipeline đã có.
 **Produces:** source PNG + imported asset IDs sẵn dùng, hash inventory và bundle.
 
-- [ ] Tạo 5 lớp đề xuất ở cùng hệ tọa độ nguồn, transparency đúng, đủ vùng che sau đồ vật. IDs `image.first3.room3.{exterior|shell|furniture|props|foreground}`; room geometry không đổi. Layer kiến trúc/sàn không được trượt tương đối khi camera đi.
-- [ ] Làm Khuê/Vân đúng tỉ lệ đã chọn: mỗi người idle 2/walk 6 frame theo đề xuất; chân/pivot cùng gốc, khoảng trống atlas không cắt tóc/túi. Kiểm tra walk cycle bằng preview, không gọi một hàng hình minh họa là cycle hoàn chỉnh.
-- [ ] Tạo portrait RGBA riêng: Khuê `neutral/thoughtful/determined`, Vân `neutral/guarded/sad`; IDs `image.first3.{khue|van}.portrait.{expressionId}`; cùng canvas/crop, không viền giấy hoặc tên người nói dính vào ảnh. Biểu cảm chưa xuất hiện trong recruit được xem qua preview, không thêm thoại để dùng hết asset.
-- [ ] Đăng ký masters/atlas/import/provenance bằng ID; lưu brief/input mới dưới source root để được bundle. Asset mới dùng license/provenance riêng đúng nguồn; không giả gán `LicenseRef-ProjectFixture` hoặc tự ghi production approved.
-- [ ] Nếu mở rộng pipeline, viết case trước: ảnh RGBA lớn giữ alpha, atlas có padding và bounds đúng, bundle giữ đủ master/input; xác nhận fail trước khi sửa. Không viết test chỉ đếm file cho một thay đổi data.
-- [ ] Chạy build/audit; build lại cùng input xác nhận hashes không đổi. Thử restore trong bản copy rỗng dưới `.cache/tmp/g1-recovery/`, có private venv/contained tool paths theo setup, không import dependency từ venv khác.
+- [x] Create three useful independent room layers: exterior, shell including furniture/props, foreground. Group merging is permitted in section 1; shell/floor remain aligned. Actual source resolution is about 1930x814. No duplicated flattened PNG layers. IDs: `image.first3.room3.exterior`, `image.first3.room3.shell`, `image.first3.room3.foreground`.
+- [x] Làm Khuê/Vân đúng tỉ lệ đã chọn: mỗi người idle 2/walk 6 frame theo đề xuất; chân/pivot cùng gốc, khoảng trống atlas không cắt tóc/túi. Kiểm tra walk cycle bằng preview, không gọi một hàng hình minh họa là cycle hoàn chỉnh.
+- [x] Tạo portrait RGBA riêng: Khuê `neutral/thoughtful/determined`, Vân `neutral/guarded/sad`; IDs `image.first3.{khue|van}.portrait.{expressionId}`; cùng canvas/crop, không viền giấy hoặc tên người nói dính vào ảnh. Biểu cảm chưa xuất hiện trong recruit được xem qua preview, không thêm thoại để dùng hết asset.
+- [x] Đăng ký masters/atlas/import/provenance bằng ID; lưu brief/input mới dưới source root để được bundle. Asset mới dùng license/provenance riêng đúng nguồn; không giả gán `LicenseRef-ProjectFixture` hoặc tự ghi production approved.
+- [x] Nếu mở rộng pipeline, viết case trước: ảnh RGBA lớn giữ alpha, atlas có padding và bounds đúng, bundle giữ đủ master/input; xác nhận fail trước khi sửa. Không viết test chỉ đếm file cho một thay đổi data.
+- [x] Chạy build/audit; build lại cùng input xác nhận hashes không đổi. Thử restore trong bản copy rỗng dưới `.cache/tmp/g1-recovery/`, có private venv/contained tool paths theo setup, không import dependency từ venv khác.
 - [ ] Commit source bundle/recipe/inventory/generated manifest cùng nhau: `assets: add recoverable room-three and character art`. Không commit master đang bị ignore mà không có bundle tương ứng.
 
 ### T03 — Contracts và projection cho portrait, pixel sprites và NPC

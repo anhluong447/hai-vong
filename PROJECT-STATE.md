@@ -5,29 +5,45 @@ Updated: 2026-10-26 (Asia/Bangkok).
 ## Current task and stopping point
 
 Latest user authorizes G1 implementation inline on feat/first3-art-direction
-in .worktrees/phase-0, and explicitly permits generated-image staging under
-CODEX_HOME/generated_images before copying into project. All other containment
-rules remain. Plans committed as 3fafb2f; T03 contracts as 8679f4d; T04 renderer
-code as c99aad1. No G2-G8, merge, push or publication authorization.
+in .worktrees/phase-0, including the explicit generated-image staging exception
+under CODEX_HOME/generated_images. All project-bound images are copied inside
+this project. No G2-G8, merge, push or publication authorization.
 
-Review A sprite choices are now explicit: A2 density 192 px and B3 displayed
-height 152 logical units. Van is slightly shorter. T01 generated six candidate
-images and three review boards, saved with exact prompts/metadata under active
-docs/art-direction/review-a/. All generated files used by project are copied
-inside it; originals unchanged. A documentation-only Canvas viewer renders three
-independent density drawings on constrained grids. Source images are enlarged
-review candidates, not finished native sprite masters. Background v2 is a clean
-flattened composition with deeper floor for baseline 420; not a layer pack.
+Review A is explicit: A2 density 192 px, B3 display height 152; Van is 0.92 of
+Khue. Samples/prompts/selection committed as b76e2eb. Prior plan 3fafb2f, T03
+contracts 8679f4d and T04 renderer c99aad1 remain the earlier code checkpoints.
 
-Current focused browser capture checks PASS 3/3 and three PNGs exported separately.
-First combined report exceeded existing 4 MB harness body limit; metadata-only
-diagnostic and separate captures pass. Four reference SHA-256 values unchanged.
-Prior T04 checks remain 149 JS + 57 Python unit / 53 browser / 42 authoring, plus
-architecture/content PASS; not rerun for review-only documentation changes.
+T02 asset preparation is verified, task commit next. Three independent room
+layers (exterior, interior with furniture/props, foreground), 16 native sprite
+frames, six 512px portraits and two atlases are imported through managed recipes.
+The five proposed layer groups were merged to three useful groups as permitted
+by the plan. Actual background sources are about 1930x814, not the proposed
+2560x1080. Native frame canvas 160x208, visible height192, pivot80/200; idle1.1s,
+walk0.12s are prototype timing, final motion quality still belongs to Review B.
 
-Proceed to T02 production layers, 192px sprites at scale 152, portraits and bundle
-recovery. T05-T08 still required. Review B still needs the playable encounter;
-G1 is not complete. No current bot/release/static or final whole-G1 review yet.
+All raw sources, reference copies and exact prompts are recoverable in the new
+assets/bundles/first3-art-g1-v1.zip (24,449,500 bytes; SHA256
+9fc33cd4b7f737a43194ee65d271ba0457bdfe03ba57a5f106d20122553d9cdb).
+Fresh contained .cache/tmp/g1-recovery-t02 used its own offline-installed private
+venv; before restore27 sources/exports were absent, then27 restored sources and
+33 rebuilt renditions matched exactly, audit PASS. Repeat build rebuilt none;
+repeat ZIP hash equal. Original foundation-v1.zip Git blob unchanged.
+
+Generic crop/resize/canvas contracts, source-path diagnostics and recipe-sensitive
+atlas cache implemented test-first. Final architecture/content/audit PASS;
+full unit PASS150 JS +60 Python. Initial full unit had5 packaging failures for
+unregistered G1 provenance; added the explicit registry record/development-profile
+entry, preserving productionApproved=false; final full unit passes. Focused
+schema3/3, pipeline3new+6existing, asset preview1/1 per capture pass. Reports in
+.superpowers/sdd/2026-10-26-g1-room3-art-direction/t02-*. Four concept reference
+hashes unchanged. No current full browser/authoring/bot/release/static rerun for
+T02 (prior T04 browser53/authoring42 remain earlier evidence).
+
+Real-renderer asset preview and captures are docs/art-direction/production-preview/.
+It is isolated art inspection, not a playable story acceptance. No live scene,
+actor, locale dialogue or content version has changed. Proceed T05 portraits/UI,
+then T06 genuine pre-change saves, integration/migration; T07 authoring and T08
+journeys/gates/Review B remain required. G1 is not complete.
 
 ### Previous planning handoff
 

@@ -15,16 +15,62 @@
       "usage": "internal-development",
       "productionApproved": false,
       "notice": "Geometric art and synthetic audio are development fixtures, not approved production assets or a public distribution grant."
+    },
+    "LicenseRef-HoiAm-GeneratedArt": {
+      "name": "Hoi Am G1 generated environment, sprite and portrait candidates",
+      "provenance": "User-provided Hoi Am concept sheets; built-in image_gen prompts and source hashes retained in assets/sources/g1/SOURCE-MANIFEST.json and versioned first3-art-g1-v1.zip",
+      "usage": "hoi-am-art-direction-development",
+      "productionApproved": false,
+      "notice": "Art-direction development candidates generated from the project concepts. Sprite density and scale selected in Review A; playable visual Review B remains pending."
     }
   },
   "dependencies": [
-    {"name":"CPython","version":"3.12.10","license":"PSF-2.0","role":"build-only","source":"https://docs.python.org/3.12/license.html"},
-    {"name":"Pillow","version":"12.3.0","license":"MIT-CMU","role":"build-only","source":"https://github.com/python-pillow/Pillow/blob/12.3.0/LICENSE"},
-    {"name":"imageio-ffmpeg","version":"0.6.0","license":"BSD-2-Clause","role":"build-only","source":"https://github.com/imageio/imageio-ffmpeg/blob/v0.6.0/LICENSE"},
-    {"name":"FFmpeg","version":"7.1-essentials_build-www.gyan.dev","license":"GPL-3.0-or-later","role":"build-only","source":"https://ffmpeg.org/legal.html"},
-    {"name":"Chrome for Testing","version":"156.0.8078.47","license":"Google Chrome terms + bundled third-party notices","role":"test-only","source":"https://www.google.com/chrome/terms/"},
-    {"name":"Firefox Nightly","version":"161.0a1","license":"MPL-2.0 + bundled third-party notices","role":"test-only","source":"https://www.mozilla.org/en-US/MPL/2.0/"}
+    {
+      "name": "CPython",
+      "version": "3.12.10",
+      "license": "PSF-2.0",
+      "role": "build-only",
+      "source": "https://docs.python.org/3.12/license.html"
+    },
+    {
+      "name": "Pillow",
+      "version": "12.3.0",
+      "license": "MIT-CMU",
+      "role": "build-only",
+      "source": "https://github.com/python-pillow/Pillow/blob/12.3.0/LICENSE"
+    },
+    {
+      "name": "imageio-ffmpeg",
+      "version": "0.6.0",
+      "license": "BSD-2-Clause",
+      "role": "build-only",
+      "source": "https://github.com/imageio/imageio-ffmpeg/blob/v0.6.0/LICENSE"
+    },
+    {
+      "name": "FFmpeg",
+      "version": "7.1-essentials_build-www.gyan.dev",
+      "license": "GPL-3.0-or-later",
+      "role": "build-only",
+      "source": "https://ffmpeg.org/legal.html"
+    },
+    {
+      "name": "Chrome for Testing",
+      "version": "156.0.8078.47",
+      "license": "Google Chrome terms + bundled third-party notices",
+      "role": "test-only",
+      "source": "https://www.google.com/chrome/terms/"
+    },
+    {
+      "name": "Firefox Nightly",
+      "version": "161.0a1",
+      "license": "MPL-2.0 + bundled third-party notices",
+      "role": "test-only",
+      "source": "https://www.mozilla.org/en-US/MPL/2.0/"
+    }
   ],
-  "fonts": {"policy":"system-only","notice":"System fonts are supplied by the browser platform; no font binary is embedded in this fixture pack."},
+  "fonts": {
+    "policy": "system-only",
+    "notice": "System fonts are supplied by the browser platform; no font binary is embedded in this fixture pack."
+  },
   "runtimeLibraries": []
 }

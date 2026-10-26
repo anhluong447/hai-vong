@@ -25,7 +25,9 @@
     "tools/build.py"
   ],
   "playerEntry": "src/bootstrap/main.js",
-  "additionalProjectFiles": ["content/first-three-days.project.json"],
+  "additionalProjectFiles": [
+    "content/first-three-days.project.json"
+  ],
   "staticFiles": [
     "index.html",
     "content/fallback/load-error.html",
@@ -50,7 +52,8 @@
       ],
       "allowedInternalLicenses": [
         "LicenseRef-ProjectCode",
-        "LicenseRef-ProjectFixture"
+        "LicenseRef-ProjectFixture",
+        "LicenseRef-HoiAm-GeneratedArt"
       ]
     },
     "production": {

@@ -8,6 +8,9 @@ export function validateAssetImports({catalog,sourceFor}){
   for(const [i,entry]of spec.entries.entries()){
    if(!localSource(entry.source,spec.sourceRoot))add(`/entries/${i}/source`);if(!Object.hasOwn(spec.licenses,entry.license))add(`/entries/${i}/license`);
    if(entry.kind==='audio'&&[entry.quality,entry.sampleRate,entry.channels].some(value=>!Number.isFinite(value)))add(`/entries/${i}`);
+   if(entry.kind!=='image'&&['crop','resize','canvas'].some(key=>Object.hasOwn(entry,key)))add(`/entries/${i}`);
+   for(const key of ['crop','resize','canvas'])if(entry[key]&&Math.max(entry[key].width,entry[key].height)>spec.maxImageDimension)add(`/entries/${i}/${key}`);
+   if(entry.canvas){const size=entry.resize??entry.crop;if(size&&(entry.canvas.x+size.width>entry.canvas.width||entry.canvas.y+size.height>entry.canvas.height))add(`/entries/${i}/canvas`);}
    if(!entry.required&&!entry.fallbackId&&!(entry.kind==='audio'&&entry.missingPolicy==='silence'))add(`/entries/${i}/required`);
    for(const id of [...(entry.dependencies??[]),...(entry.fallbackId?[entry.fallbackId]:[])])if(!map.has(id)&&!spec.atlases.some(atlas=>atlas.id===id))add(`/entries/${i}/dependencies`);
    if(entry.fallbackId&&map.get(entry.fallbackId)?.kind!==entry.kind)add(`/entries/${i}/fallbackId`);
