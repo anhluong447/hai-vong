@@ -1,8 +1,72 @@
 # Hoi Am workspace state
 
-Updated: 2026-10-24 (Asia/Bangkok).
+Updated: 2026-10-26 (Asia/Bangkok).
 
 ## Current task and stopping point
+
+Latest user authorizes a new branch and an initial commit, then explicitly asks
+to stop and await the next assignment. Created feat/first3-art-direction from
+Phase 0 tip c172652d9ce0deede3b3b9a389c699e2b0c06912, reusing this existing linked
+worktree at .worktrees/phase-0. The path name does not determine the current branch.
+Copied all 11 supplied concept PNGs (nine character sheets and two location
+concepts) from the original-root docs/design/concept to the same relative paths
+here; all 11 source/copy SHA-256 hashes match. Originals remain in place.
+
+Initial commit scope: these concept references and this checkpoint, including
+the preceding three-day scope/art audit. No gameplay, production asset conversion,
+implementation plan, dependency setup, merge, push or publication is authorized
+by this request. Check staged diff/committed tree and final branch status; runtime
+tests are not needed for this concept/checkpoint-only initialization. Stop after
+the initial commit and report its ID. Phase 0 local acceptance remains historical
+evidence below, not a fresh test run.
+
+### Supplied art direction and character references
+
+Latest user provides existing character designs and a new corridor concept. Viewed
+all nine sheets under original-root docs/design/concept/characters: Khue, Van,
+Long, Nhi, Ngoc, An, Khoa, Linh, Huy. The generically named Hoi Am_ Character
+Design Sheet.png is Ngo Thien An. Sheets supply appearance, turnaround,
+expressions, palettes, props and sample sprites; these are existing design
+sources, not missing design work. Viewed locations/Sunset_Corridor.png; Room 3
+reference now also resides under locations/bao-chi-hoang-hon.png. Both locations
+share painted anime environments, sunset light and navy/ivory UI. References
+exist in original root, not this worktree. No image was copied/generated/edited.
+
+Production gaps remain: clean separate portraits/sprites/frames, consistent sprite
+proportions (sheet samples are more chibi than map characters), background layers
+without baked UI/characters, in-game staging and real audio. Corridor sign says
+12A3 while existing First3Days class is 11A3; concept lettering/biographical copy
+does not silently override protected narrative. Immediate scope remains three
+days. This turn inspected references and updated checkpoints only; no runtime
+changes or tests, and no implementation plan was approved.
+
+### Three-day scope and preceding asset audit
+
+Latest user explicitly keeps the existing three-day scope and rejects expanding
+to two weeks as the immediate next step. They ask which major components/assets
+are missing so these three days become an actual audiovisual game and can settle
+art direction. The earlier two-week recommendation is superseded; Bible section
+15 remains future reference, not authorization to expand content now.
+
+Read-only audit found seven locations sharing one fixture background and the same
+generic NPC; player/NPC share one idle frame and two walk frames. Both BGM/SFX cues
+use the same 0.5-second synthetic tone. No real character/environment/music pack
+is registered. World rendering supports image layers/parallax and idle/walk;
+actor schema has no expression/pose states. Story showActor/setBackdrop update
+snapshot fields, but the audited player rendering does not consume those fields;
+First3 dialogue has no speaker/portrait/expression metadata. Audio buses/fades
+exist, but play currently replaces the active track on each bus, so overlapping
+SFX needs an explicit policy. UI uses system fonts and fixture tokens. Asset
+import/atlas/bundle recovery infrastructure exists.
+
+Recommendation only: first integrate one representative Room 3 encounter with
+distinct characters, layered art, dialogue staging/UI and real music/ambience/SFX,
+then cover the existing three days using the same style. Proposed asset counts
+are planning estimates, not approved requirements. No production assets/code,
+new implementation plan, merge, CI setup or publication were created/authorized.
+Only root/feature PROJECT-STATE.md were updated; no runtime tests were rerun.
+
+### Previous implementation handoff
 
 Phase0 T01–T14 local implementation/acceptance and final independent review fixes
 are complete. Latest user asks to check cleanliness and push any remaining docs
