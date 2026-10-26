@@ -1,0 +1,6 @@
+{
+  "prompt": "Use case: style-transfer. Input is a pair of pixel-art game characters, edit target.\nCreate a COARSER 128-pixel-native-height density variation of these SAME TWO CHARACTERS. Keep both identities, exact pose, costumes, natural non-chibi body proportions, facing directions, relative height, ground baseline and transparent separation unchanged.\nRedraw at a visibly coarser pixel grid with larger square clusters: Khue's entire visible height spans about 128 native pixel rows, Van proportionally shorter. Show the result magnified nearest-neighbor, with consistent hard square steps. Simplify hair highlights, backpack straps, shirt folds and skirt pleats to fit this lower density, preserving recognizable face, ribbon and bags. This must be a newly simplified pixel drawing, not just blur or stretch the input.\nExactly two complete figures, boy left facing right, girl right facing left. Pixel art, no smooth curves, no antialias, no tiny noisy subpixel details, no oversized chibi heads. Transparent RGBA with alpha zero everywhere outside figures, no halo, ground, shadows, text or scenery.",
+  "mode": "built-in image_gen",
+  "reference": "sprites-192-v2.png",
+  "role": "Independent lower-detail redraw; review renderer constrains source height to 128."
+}

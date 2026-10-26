@@ -1,0 +1,32 @@
+{
+  "labels": {
+    "eyebrow": "HỒI ÂM / G1 / REVIEW A",
+    "title": "Phòng số 3 · Tỉ lệ và chất pixel",
+    "description": "Hai bảng dùng cùng nền và cùng vị trí đứng. Chọn mật độ ở bảng A, rồi chọn cỡ hiển thị ở bảng B. Đây là mẫu duyệt art, chưa phải cảnh playable hoặc bộ layer hoàn chỉnh.",
+    "compositionTitle": "Khung nhìn 960×540 · mẫu 192 / 136 để tham khảo",
+    "compositionAlt": "Khuê và Vân đứng trong nền phòng sạch, mẫu tham khảo chưa duyệt",
+    "densityTitle": "A — Mật độ pixel · cùng chiều cao hiển thị 136",
+    "scaleTitle": "B — Cỡ nhân vật · cùng mẫu mật độ 192",
+    "densityLink": "Xem bảng A",
+    "scaleLink": "Xem bảng B",
+    "limitations": "Mỗi mức mật độ có bản vẽ mẫu riêng, được renderer đưa về lưới 128 / 192 / 256 hàng trước khi vẽ nearest-neighbor. Đây là thử nghiệm mật độ; chưa phải master sprite được pixel artist hoàn thiện. Nền đang là một ảnh phẳng, chưa có parallax hoặc UI runtime. Chưa chốt lựa chọn nào.",
+    "loading": "Đang tải mẫu…",
+    "ready": "Mẫu đã tải. Có thể dùng Tab và Enter để chuyển đến từng bảng.",
+    "error": "Không tải được mẫu. Hãy mở trang qua server của project và kiểm tra đường dẫn ảnh.",
+    "densityRow": "Nguồn {density} px · hiển thị 136 · {letter}",
+    "scaleRow": "Mật độ 192 px · hiển thị {height} · {letter}",
+    "densityAlt": "Ba mức mật độ pixel, cùng cỡ hiển thị và cùng nền phòng",
+    "scaleAlt": "Ba cỡ nhân vật, cùng mật độ pixel và cùng nền phòng"
+  },
+  "background": "room3-clean-v2.png",
+  "room": {"width":1280,"height":540,"baseline":420},
+  "viewport": {"width":960,"height":540,"cameraX":160},
+  "actors": [{"x":540,"relativeHeight":1},{"x":730,"relativeHeight":0.92}],
+  "densities": [
+    {"value":128,"image":"sprites-128-v1.png","letter":"A1"},
+    {"value":192,"image":"sprites-192-v2.png","letter":"A2"},
+    {"value":256,"image":"sprites-256-v1.png","letter":"A3"}
+  ],
+  "heights": [{"value":120,"letter":"B1"},{"value":136,"letter":"B2"},{"value":152,"letter":"B3"}],
+  "board": {"width":1280,"rowHeight":312,"headerHeight":40,"cropTop":268,"backgroundColor":"#111c27","labelColor":"#e9e2d1","font":"20px Georgia"}
+}

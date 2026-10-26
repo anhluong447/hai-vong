@@ -1,8 +1,9 @@
 # G1 — Phòng số 3: visual specification
 
-Status: đang chuẩn bị Review A, 2026-10-26. Chưa có lựa chọn cuối về kích thước
-sprite, mật độ pixel, palette hoặc asset sản xuất. Không dùng tài liệu này làm
-bằng chứng đã có background sạch hay animation hoàn chỉnh.
+Status: Review A đã chọn mật độ **A2 — 192 px**, cỡ hiển thị **B3 — 152 logical
+units**, ngày 2026-10-26. [Mẫu và prompts](review-a/README.md) đã có; palette và
+toàn cảnh vẫn kiểm chứng ở Review B. Nền hiện là composition sạch một ảnh phẳng,
+chưa phải bộ layer hay animation hoàn chỉnh.
 
 ## Nguồn và hướng đã chốt
 
@@ -45,7 +46,9 @@ trong concept. UI/name/portrait là các thành phần runtime riêng.
 | Scale | Cùng một mẫu density 192 px, góc nhìn, pivot và nền | Cao 120 / 136 / 152 logical units |
 
 Các kích thước là đề xuất từ plan. Density phải khác ở số chi tiết pixel thực,
-không chỉ nearest-upscale cùng một hình ít pixel. Chưa có board mới được tạo.
+không chỉ nearest-upscale cùng một hình ít pixel. Board đã tạo từ ba bản vẽ riêng;
+renderer đưa từng mẫu lên lưới native-height tương ứng. File AI là bản review
+phóng lớn, chưa phải master native được hoàn thiện thủ công.
 Đặt Khuê/Vân cạnh nhau với chân cùng baseline, nhìn nhau, có khoảng cách hội thoại;
 giữ nhận diện ba lô, tóc, nơ và đồng phục khi xem ở kích thước chơi.
 
@@ -71,5 +74,5 @@ quest effects và trình tự recruit không thay đổi vì asset.
 
 | Điểm duyệt | Trạng thái | Lựa chọn |
 | --- | --- | --- |
-| Review A — density/scale/composition | Chưa có board mới; chưa duyệt | Chưa chọn |
+| Review A — density/scale/composition | Đã xem board và trả lời rõ; palette/cảnh kiểm chứng tiếp khi chơi | A2 — 192 px; B3 — cao 152; Vân thấp hơn một chút |
 | Review B — đoạn chơi thật | Chưa tích hợp | Chưa duyệt |

@@ -4,35 +4,30 @@ Updated: 2026-10-26 (Asia/Bangkok).
 
 ## Current task and stopping point
 
-Latest user authorizes committing the plans first, then implementing G1 inline.
-Stay on feat/first3-art-direction in .worktrees/phase-0. Start T01 visual review
-preparation; retain the user's Review A/B choices before mass asset production.
-Independent contracts/tests may proceed while those choices are pending. G2-G8,
-merge, push and publication remain outside this assignment. T03 is complete;
-G1 overall remains open. The preceding plan handoff is historical; it does not
-block this newer implementation authorization.
+Latest user authorizes G1 implementation inline on feat/first3-art-direction
+in .worktrees/phase-0, and explicitly permits generated-image staging under
+CODEX_HOME/generated_images before copying into project. All other containment
+rules remain. Plans committed as 3fafb2f; T03 contracts as 8679f4d; T04 renderer
+code as c99aad1. No G2-G8, merge, push or publication authorization.
 
-Plans committed as 3fafb2f. T01 visual spec and acceptance record prepared, but
-clean composition/boards and Review A remain pending. Read imagegen skill: its
-documented default output under CODEX_HOME conflicts with containment. Asked the
-user asynchronously for a narrow generated-image exception; no answer or image
-call yet. Continue independent code work while waiting; no mass frames.
+Review A sprite choices are now explicit: A2 density 192 px and B3 displayed
+height 152 logical units. Van is slightly shorter. T01 generated six candidate
+images and three review boards, saved with exact prompts/metadata under active
+docs/art-direction/review-a/. All generated files used by project are copied
+inside it; originals unchanged. A documentation-only Canvas viewer renders three
+independent density drawings on constrained grids. Source images are enlarged
+review candidates, not finished native sprite masters. Background v2 is a clean
+flattened composition with deeper floor for baseline 420; not a layer pack.
 
-T03 optional actor sampling/portrait, say speaker/expression, scene facing/day
-visibility contracts and pure DialoguePresentation resolver implemented. Real
-focused run RED 14 failures/8 pre-existing rejections -> GREEN 22/22; architecture
-and content pass; full unit PASS 148 JS + 57 Python. First sandbox browser attempt
-failed profile cleanup (WinError 5); escalated contained-profile retry succeeded.
-No production art/content version changed. Raw evidence/ledger is scoped to
-.superpowers/sdd/2026-10-26-g1-room3-art-direction/. T03 committed as 8679f4d;
-review/spec preparation as 5db8d55. T04 renderer code is prepared and focused
-checks pass 9/9, full browser 53/53, authoring 42/42; follow-up preview-sampling
-validation RED->GREEN. Final full unit PASS 149 JS + 57 Python; final browser
-53/53, authoring 42/42, architecture/content PASS. T04 visual checks still pending
-actual art/board/Review A and the user's image-output-location decision. G1 is
-not complete. No bot/release/static-build or final independent G1 review claimed.
-Reference SHA-256 records are docs/art-direction/g1-reference-hashes.json; source
-PNGs, protected narrative/gameplay and raw First3Days were not changed.
+Current focused browser capture checks PASS 3/3 and three PNGs exported separately.
+First combined report exceeded existing 4 MB harness body limit; metadata-only
+diagnostic and separate captures pass. Four reference SHA-256 values unchanged.
+Prior T04 checks remain 149 JS + 57 Python unit / 53 browser / 42 authoring, plus
+architecture/content PASS; not rerun for review-only documentation changes.
+
+Proceed to T02 production layers, 192px sprites at scale 152, portraits and bundle
+recovery. T05-T08 still required. Review B still needs the playable encounter;
+G1 is not complete. No current bot/release/static or final whole-G1 review yet.
 
 ### Previous planning handoff
 

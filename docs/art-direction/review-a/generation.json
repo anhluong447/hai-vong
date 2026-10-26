@@ -1,0 +1,133 @@
+{
+  "status": "sprite-density-and-scale-selected; production-not-complete",
+  "mode": "built-in image_gen",
+  "permission": "User explicitly permits tool-generated images under CODEX_HOME/generated_images before copying into project.",
+  "images": [
+    {
+      "id": "room3-clean-v1",
+      "file": "room3-clean-v1.png",
+      "prompt": "Use case: precise-object-edit.\nAsset type: clean 2D side-scrolling game background composition study, landscape 2560 by 1080 if possible.\nInput image 1 is the edit target and authoritative Room 3 composition/style reference.\nRemove ALL game interface overlays, HUD boxes, dialogue panel, portrait, speech bubble, numbers, currency, icons, and BOTH standing students. Reconstruct believable continuous room architecture, furniture and floor behind every removed area, including top ceiling and bottom foreground. Remove all readable lettering on signs, chalkboard, paper, walls; retain their physical boards and paper textures with faint illegible marks only.\nKeep the room identity: weathered teal door at left, aged plaster, ceiling fan and exposed conduits, chalkboard and newspaper notice board, old wooden desks and chairs, filing cabinet, plants, stacks of old newspapers, tall wood louver windows at right overlooking a Central Vietnamese fishing harbor and coastal hills at sunset. Keep existing side-on camera, warm amber sunlight with cool navy/teal shadows, painted nostalgic coastal anime background, fine aged material detail, restrained saturation.\nKeep a continuous walkable floor band in front of desks; do not add people, animals, UI, frames, captions, logos or watermarks. Preserve the original room layout as closely as possible. This is a composition candidate, not a finished separated layer pack.",
+      "references": [
+        "docs/design/concept/locations/bao-chi-hoang-hon.png"
+      ],
+      "role": "Clean composition candidate; flattened, not layer pack.",
+      "assessment": "Clean flattened composition; floor is too low for runtime baseline 420. Retained as input to v2.",
+      "sha256": "4b30679c2c63abeec609724b8fb4128d44fe58d1265b5572e15ac8cb0dab14ea",
+      "bytes": 2118613,
+      "size": [
+        1931,
+        814
+      ],
+      "mode": "RGB"
+    },
+    {
+      "id": "sprites-192-v1",
+      "file": "sprites-192-v1.png",
+      "prompt": "Use case: stylized-concept.\nAsset type: two transparent full-body pixel-art idle sprite samples for a side-scrolling narrative game, one pair only, no animation strip.\nInput image 1: Diep Khue identity reference. Input image 2: Luc Thanh Van identity reference. Use the LARGE natural-proportioned character designs, NOT the tiny chibi sprites along the bottom.\nCreate Khue standing at the LEFT facing RIGHT and Van at the RIGHT facing LEFT, conversational three-quarter side profiles. Entire figures including hair, backpack, satchel and shoe soles must be visible, no overlap, wide transparent gap between them. Exactly two characters, same ground baseline, no props detached from their bodies, no contact shadow, no floor.\nProportions: natural slim Vietnamese high-school teenagers, about 6.5 heads tall, normal-size heads, long limbs, Van slightly shorter. Khue: tousled dark hair, cream-white short-sleeve school shirt, navy trousers, black shoes, worn dark canvas backpack, calm reserved expression. Van: long dark hair loosely tied with muted teal-blue ribbon, rolled-sleeve ivory shirt with navy neck bow, navy knee-length pleated skirt, white socks, black loafers, worn dark satchel, guarded quiet expression.\nStyle: high-detail PIXEL ART with deliberate crisp square pixel clusters, hard stepped silhouettes, restrained hand-pixelled shading and clear clusters in hair, shirt folds, straps and skirt pleats. Intended actual native visible character height around 192 pixels, enlarged cleanly with nearest-neighbor for delivery. Neither smooth anime illustration nor low-detail 32-pixel RPG chibi. Muted navy/ivory/teal palette and gentle warm edge lighting for a nostalgic sunset coastal school environment. One neutral idle pose per character, arms relaxed, hands readable.\nTransparent RGBA background, not checkerboard artwork. No text, labels, framing, watermark, ground, scenery or interface.",
+      "references": [
+        "docs/design/concept/characters/Diệp Khuê Character Design Sheet.png",
+        "docs/design/concept/characters/Lục Thanh Vân Character Design Sheet.png"
+      ],
+      "role": "192px density target sample, actual crop/grid to be measured.",
+      "assessment": "Too fine for the requested visible pixel style. RGBA has zero alpha in sampled exterior; RGB-only viewers can display hidden background color.",
+      "sha256": "3dbf7cba3e4ccbca317b8503a43ec89b79532c32afff779a1f204456c48eb37b",
+      "bytes": 1525304,
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "sprites-192-v2",
+      "file": "sprites-192-v2.png",
+      "mode": "RGBA",
+      "reference": "sprites-192-v1.png",
+      "reason": "Coarsen the drawing to visible pixel clusters. Exterior alpha was verified zero at sampled backdrop points; RGB-only viewers show hidden backdrop color.",
+      "sha256": "f109769d9fa6668ed542e9633328eff8c440d583ef78fb8b544afd5b14911771",
+      "bytes": 1413454,
+      "size": [
+        1536,
+        1024
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "prompt": "Use case: style-transfer and background-extraction.\nEdit target: the supplied two-character sample. Keep BOTH characters' identity, costume, exact standing poses, placement, relative size, and natural 6.5-head body proportions unchanged.\nChange two things only:\n1) Erase the entire smoky gradient, orange halo, bloom, rim-light aura, ground and ALL background pixels. Every pixel outside the two character silhouettes must have alpha ZERO. Clean hard silhouette edges. No light clouds between characters. No checkerboard drawn into the image.\n2) Re-render the TWO FIGURES as unmistakable authentic hand-made 192-pixel-tall game sprites, with visible regular square pixel steps, simplified deliberate color clusters, limited colors, and ZERO soft anti-aliasing. Hair strands become pixel clusters, cloth shading becomes discrete blocky planes. The current source is too fine and illustration-like; make the pixel grid much coarser and consistent across both people. Preserve faces, backpack, blue ribbon, skirt and satchel. Deliver these native 192-pixel figures magnified exactly 4x with nearest-neighbor into a transparent PNG, at a comfortable separation. Entire bodies including shoe soles.\nNo text, labels, UI, watermark, scenery, backdrop color, glow or shadow. True isolated transparent RGBA pixel-art cutouts only."
+    },
+    {
+      "id": "sprites-128-v1",
+      "file": "sprites-128-v1.png",
+      "prompt": "Use case: style-transfer. Input is a pair of pixel-art game characters, edit target.\nCreate a COARSER 128-pixel-native-height density variation of these SAME TWO CHARACTERS. Keep both identities, exact pose, costumes, natural non-chibi body proportions, facing directions, relative height, ground baseline and transparent separation unchanged.\nRedraw at a visibly coarser pixel grid with larger square clusters: Khue's entire visible height spans about 128 native pixel rows, Van proportionally shorter. Show the result magnified nearest-neighbor, with consistent hard square steps. Simplify hair highlights, backpack straps, shirt folds and skirt pleats to fit this lower density, preserving recognizable face, ribbon and bags. This must be a newly simplified pixel drawing, not just blur or stretch the input.\nExactly two complete figures, boy left facing right, girl right facing left. Pixel art, no smooth curves, no antialias, no tiny noisy subpixel details, no oversized chibi heads. Transparent RGBA with alpha zero everywhere outside figures, no halo, ground, shadows, text or scenery.",
+      "mode": "RGBA",
+      "reference": "sprites-192-v2.png",
+      "role": "Independent lower-detail redraw; review renderer constrains source height to 128.",
+      "sha256": "fcfa1b1cee82dd849305bb4012e700ce4e58e83b7887b450a9f0bd7d1703ee85",
+      "bytes": 1285991,
+      "size": [
+        1536,
+        1024
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "sprites-256-v1",
+      "file": "sprites-256-v1.png",
+      "prompt": "Use case: style-transfer. Input is a pair of pixel-art game characters, edit target.\nCreate a FINER 256-pixel-native-height density variation of these SAME TWO CHARACTERS. Keep both identities, exact standing pose, costumes, natural non-chibi body proportions, facing directions, relative height, ground baseline and transparent separation unchanged.\nRedraw with a denser pixel grid: Khue's entire visible height spans about 256 native pixel rows, Van proportionally shorter. Show result magnified nearest-neighbor. Keep visible crisp square pixel clusters, hard stepped silhouette, clean limited palette, and NO anti-aliasing. Add carefully placed smaller clusters of detail to the hair, eye, shirt folds, stitching and worn straps of backpack and satchel, and skirt pleats. This should be noticeably MORE detailed than the input at the same displayed figure height, without becoming smooth anime painting or adding noisy decoration.\nExactly two complete figures including shoe soles, boy at left facing right, girl right facing left. Preserve dark tousled hair/white shirt/navy trousers/black backpack on boy and long tied dark hair/teal ribbon/ivory shirt/blue bow/navy skirt/socks/black satchel on girl. Normal-size heads, slim teenage proportions, same calm expressions.\nTransparent RGBA with alpha zero everywhere outside figures, no backdrop, halo, ground, shadows, text, labels or scenery.",
+      "mode": "RGBA",
+      "reference": "sprites-192-v2.png",
+      "role": "Independent higher-detail redraw; review renderer constrains source height to 256.",
+      "sha256": "accdce7c959224940ca346d95371c0271b716ffe81ffc43e8a7882f24516cd48",
+      "bytes": 1581731,
+      "size": [
+        1536,
+        1024
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "room3-clean-v2",
+      "file": "room3-clean-v2.png",
+      "prompt": "Use case: precise-object-edit.\nEdit target: supplied clean newspaper-club room composition. Preserve this same room and its nostalgic coastal anime painted style, weathered teal door at left, notice board and desks, cabinet, right-hand harbor sunset windows, materials, palette and lighting. Keep no people and no UI or readable words.\nChange ONLY the vertical composition to create a deeper WALKABLE FOREGROUND FLOOR BAND for side-scrolling characters.\nLandscape aspect ratio 2560:1080 (about 2.37:1). The room's back furniture and door soles should end around 72 percent down from the TOP of the image. The lower 28 percent should be continuous old sunlit tiled floor with warm window shadows, then very restrained dark foreground edging at the bottom 5 percent. This requires compressing/reframing the vertical architecture slightly upward and revealing more floor. The open walking baseline for characters is at 78 percent image height, in FRONT of the desks and chairs, not through their legs.\nKeep horizontal room layout the same. Do not crop the image down to just the walls; show the complete room and this larger floor band. Do not introduce any new character, object, interface, text, logo, watermark, frame or divider. Background composition candidate only, a single complete clean image.",
+      "mode": "RGB",
+      "reference": "room3-clean-v1.png",
+      "role": "Reframed clean background candidate with deeper floor band for baseline 420.",
+      "size": [
+        1931,
+        814
+      ],
+      "bytes": 2353155,
+      "sha256": "585d5d976536e8dfee8dad240665bb419c12815b20d49e75882ec4c5220c7974"
+    }
+  ],
+  "selection": {
+    "density": "A2",
+    "nativeHeight": 192,
+    "scale": "B3",
+    "displayHeight": 152,
+    "status": "explicit-user-selection",
+    "date": "2026-10-26",
+    "scope": "G1 sprite density and display scale; playable Review B still pending"
+  },
+  "reviewRenderer": {
+    "source": "review.js",
+    "configuration": "review.json",
+    "outputs": [
+      "board-composition.png",
+      "board-density.png",
+      "board-scale.png"
+    ],
+    "note": "Canvas documentation visualization, not a production asset edit. Composition preview retains comparison height 136; user selected 152 for production."
+  }
+}

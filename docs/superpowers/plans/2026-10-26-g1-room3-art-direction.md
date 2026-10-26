@@ -172,6 +172,7 @@ log, screenshot đi vào `.cache/` project theo harness; không dùng browser pr
 ## 4. Tasks
 
 ### T01 — Chốt bản mẫu bố cục và sprite trước khi làm nhiều frame
+**Review A result (2026-10-26):** User selected A2 = 192 px and B3 = 152 logical units. Tracked samples/prompts are under `docs/art-direction/review-a/`; production sources/bundle remain T02.
 
 **Files:** tạo `docs/art-direction/G1-VISUAL-SPEC.md`,
 `docs/testing/G1-ART-ACCEPTANCE.md`; nguồn/board dưới `assets/sources/g1/`.
@@ -179,11 +180,11 @@ log, screenshot đi vào `.cache/` project theo harness; không dùng browser pr
 **Consumes:** concept, Khuê/Vân sheets, room geometry và thông số thử ở mục 1.
 **Produces:** bản chọn Review A: layer plan, scale/pivot, sprite density và crop.
 
-- [ ] Ghi source paths/hashes; giữ bản gốc. Dùng copy/reference khi tạo layer sạch; nếu dùng AI thì đọc skill tạo ảnh trước, giữ brief/reference/input và output trong project. Chưa tạo asset trong task lập plan hiện tại.
-- [ ] Tạo một composition sạch: không HUD, portrait, nhân vật hoặc chữ lỗi dính vào nền; tái tạo phần bị che cần cho layers. Giữ chất biển miền Trung và phòng báo cũ; không biến cảng thành địa điểm mới trong gameplay.
-- [ ] Chuẩn bị board 3 mức pixel density ở cùng cỡ hiển thị và 3 mức cỡ hiển thị với cùng density. Cùng góc nhìn/crop và background; không làm 9 phương án độc lập gây nhiễu.
-- [ ] Kiểm tra thủ công feet baseline, silhouette, ba lô/nơ/tóc, vùng UI và cửa; gắn nhãn phương án qua tài liệu, chưa đưa copy thử vào player.
-- [ ] Cho người dùng xem Review A, ghi lựa chọn cụ thể. Chờ câu trả lời cho các lựa chọn này trước khi nhân bản frames; có thể tiếp tục các contract/test độc lập với lựa chọn.
+- [x] Ghi source paths/hashes; giữ bản gốc. Dùng copy/reference khi tạo layer sạch; nếu dùng AI thì đọc skill tạo ảnh trước, giữ brief/reference/input và output trong project. Chưa tạo asset trong task lập plan hiện tại.
+- [x] Tạo một composition sạch: không HUD, portrait, nhân vật hoặc chữ lỗi dính vào nền; tái tạo phần bị che cần cho layers. Giữ chất biển miền Trung và phòng báo cũ; không biến cảng thành địa điểm mới trong gameplay.
+- [x] Chuẩn bị board 3 mức pixel density ở cùng cỡ hiển thị và 3 mức cỡ hiển thị với cùng density. Cùng góc nhìn/crop và background; không làm 9 phương án độc lập gây nhiễu.
+- [x] Kiểm tra thủ công feet baseline, silhouette, ba lô/nơ/tóc, vùng UI và cửa; gắn nhãn phương án qua tài liệu, chưa đưa copy thử vào player.
+- [x] Cho người dùng xem Review A, ghi lựa chọn cụ thể. Chờ câu trả lời cho các lựa chọn này trước khi nhân bản frames; có thể tiếp tục các contract/test độc lập với lựa chọn.
 - [ ] Commit phạm vi mẫu được chọn và quyết định: `docs: define room-three visual production target`. Không ghi đạt Review A khi mới có board.
 
 ### T02 — Sản xuất bộ asset G1 và chứng minh đường phục hồi
