@@ -96,7 +96,7 @@ export async function createGame(root,{autoStart=true}={}){
    frozen=true;audio.pause();sequence.pause();if(kind==='restore'){input.clear();root.inert=true;}return guard;
   },
   thaw:guard=>{
-   frozen=false;lifecycle.previous=null;if(!paused){if(guard.sequence===sequence&&!guard.sequencePaused)sequence.resume();if(!(guard.audio===audio?guard.audioPaused:audio.paused)&&lifecycle.active)void audio.unlock();}
+   frozen=false;if(!lifecycle.active)session.execute({type:'world.stop'});lifecycle.previous=null;if(!paused){if(guard.sequence===sequence&&!guard.sequencePaused)sequence.resume();if(!(guard.audio===audio?guard.audioPaused:audio.paused)&&lifecycle.active)void audio.unlock();}
    if(guard.kind==='restore'){root.inert=guard.inert;input.clear();if(guard.focused?.isConnected&&!guard.focused.closest('[hidden]'))guard.focused.focus();else if(paused)focus.items(find('menu'))[0]?.focus();else canvas.focus();}
    for(const done of unfreeze)done();unfreeze=[];sync();
   },
@@ -158,7 +158,7 @@ export async function createGame(root,{autoStart=true}={}){
  }
  button('pause').addEventListener('click',pause,options);button('advance').addEventListener('click',advance,options);button('interact').addEventListener('click',interact,options);button('retry').addEventListener('click',()=>{error=null;speakerSignature=null;sync();void loadPending();},options);
  for(const mode of ['auto','skip'])button(mode).addEventListener('click',()=>controls.toggle(mode),options);button('stop').addEventListener('click',()=>controls.stop(),options);
- lifecycle.subscribe(active=>{input.clear();if(!active)audio.pause();else if(!paused)void audio.unlock();});
+ lifecycle.subscribe(active=>{input.clear();if(!active){session.execute({type:'world.stop'});audio.pause();}else if(!paused)void audio.unlock();});
  async function dispose(){if(disposed)return;disposed=true;for(const done of unfreeze)done();unfreeze=[];controller.abort();observer.disconnect();lifecycle.dispose();input.dispose();shell.dispose();hearing.dispose();focus.dispose();line.dispose();dialogueView.dispose();sequence.cancel();world.dispose();await audio.dispose();await profile.close();repository.close();assets.dispose();view.dispose();}
  win.addEventListener('pagehide',()=>void dispose(),options);
  run({type:'scene.request',sceneId:config.startSceneId,spawnId:config.startSpawnId,requestId:String(++serial)});await loadPending();await shell.open('main');if(autoStart)lifecycle.start(step);

@@ -34,6 +34,7 @@ export function validateScenePresentation({catalog,sourceFor,pointerFor=()=>''})
    }
   }
   if(definition.footstepCueIds!==undefined&&(!Array.isArray(definition.footstepCueIds)||!definition.footstepCueIds.length||definition.footstepCueIds.some(id=>!catalog.get('audio',id).ok)))add('config',id,'/footstepCueIds');
+  if(Array.isArray(definition.footstepCueIds))for(const [index,cueId]of definition.footstepCueIds.entries())if(catalog.get('audio',cueId).value?.loop)add('config',id,pointerFor('config',id)+'/footstepCueIds/'+index,[cueId]);
  }
  for(const d of catalog.list('config')){
   if(d.kind==='locomotion'){

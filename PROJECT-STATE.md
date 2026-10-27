@@ -4,6 +4,69 @@ Updated: 2026-10-27 (Asia/Bangkok).
 
 ## Current task and stopping point
 
+Authorized continuation completed through R07 and technical R08 handoff. Stop
+for actual user ReviewB; no G2/merge/push. Implementationcheckpoint9f00c94 plus
+this finalreviewfix/evidencecheckpoint. Final full tools/ci.py all7gatesPASS:
+176JS+67Python units,82browser,56authoring,8bot+wholepack,release. All6receipts
+match ff3b8c47e3f5615cd038c2a16e0656eb58634abf110840333c6cee4dd624ca05.
+Actualdist/foundation-demo/ff3b8c47e3f5615cd038/ both3dayroutes+Room3proof3/3PASS.
+Onefreshreview,3Important fixed RED5->GREEN14 (eventstop+inactive-restorethaw,
+distance/plantclippreview,loopingcuevalidator). OneMinor deferred: config/animation
+semanticdiagnostic arrayprefixes. Reports docs/testing/G1-R1-{ACCEPTANCE,REVIEW}.md
+and G1-R1-EVIDENCE.json. Workflowguide updated. Ownrawreports/ledger retained.
+Normalentry.4/Gate/morning/originalflags. Snapshot4/Envelope1. V2freshprivateoffline
+recovery64sources/49outputs exactbytes/repeat/auditPASS;20protected/V1unchanged.
+Actualpixel footplant drift1unit, WebM13playedcontacts. HTTP200normalentryandvideo
+onread-only8765. Performance targetFAIL: initialCPU4x p9550.1ms, reset150/166.7ms
+vs33.34budget; variationretained, noFPS/hardware/fullscreen/retainedheapclaim.
+Userart/gamefeelapproval stillopen; tests do notapprove aesthetics. Keepbranch and
+worktree. Rootdocs/fraft.md untouched; do notredo completedwork ordeleteevidence.
+
+
+Final lifecycle refinement DONE: hidden movingrestore RED1 drift -> thawstopif
+inactive, permanenttests/browser/g1-r1-inactive-restore.test.js. CombinedGREEN14
+preservesactivecapturemomentum. Pre-refinementCI all7GREEN,176JS+67Python,
+browser81/authoring56/bot8+pack/release; savedfinal-pre-thaw-ci-green.json.
+CURRENT FINALCI session15847 running; sourcefrozen. Afterfinish, runownledger/
+run-static.py againstcurrentlatest artifact, updateacceptance/review/state and
+commitfixes/docs. Do notredo review orassetsrecovery. SingleMinor remainsdeferred.
+Rootdocs/fraft untouched; performance targetFAIL/userartapproval open. NoG2/merge/push.
+
+
+One more concrete repro within reviewImportant#1: moving save restored whilehidden
+thenvisible withoutinactiveRAF drifts462.8->468.3. REDreport final-inactive-restore-probe.json;
+helper docs/art-direction/review-b-r1/c2/inactive-restore-probe.js. Mustcomplete
+samefixpass: at runtime thaw, iflifecycleinactive dispatchworld.stop; preserve
+activecapturemomentum. Move/copy repro into tests/browser thenGREEN withexisting
+13cases. CurrentCI76060 stillrunning onpre-refinement frozen source; waituntil
+finished/stopped beforemutating inputs. Freshwholecurrentgates requiredafterfinal
+refinement. No newreview. Thisisnotimplementedyet; do not recorddone.
+
+
+Final review checkpoint: singlefreshreview complete (agentg1_r1_whole_review).
+ThreeImportant fixed inONEpass RED4->GREEN13: immediateinactiveeventstop,
+distance/plantselectedclippreview withmanagedspeed160, rejectloopingfootstepcues.
+OneMinor deferred: config/animation semanticdiagnostic arrayprefix (sourcefile
+correct, invalideditsreject). Reviewrecord docs/testing/G1-R1-REVIEW.md.
+CI attempt11020 was superseded/stopped beforefixes; unit176JS passed but67Python
+had1missingbinarybottestfailure. Addeddiagnostic only; directbotPython3/3PASS.
+Current fresh tools/ci.py session76060 running onfrozensrc/content/tests/tools/assets.
+Do notmutate thoseuntilgatesend. Then runownledger/run-static.py onlatestcurrent
+artifact (both3dayroutes+G1props/foley). Commitfixes/docsafterverified; no re-review.
+Userartapproval/performance targetFAIL stillopen; noG1closure/G2/push/merge.
+
+
+Checkpoint9f00c94 now commits C2/R07 implementation and current R08 tests. Review
+agent g1_r1_whole_review is doing the single read-only final review; no second
+reviewer authorized. Full fresh tools/ci.py running session11020; do not mutate
+src/content/tests/tools/assets while bound gates run. Prior fullbrowser79PASS,
+authoring54PASS, bot8+wholepackPASS. Correct WebM captured364034bytes/13played
+contacts, files docs/art-direction/review-b-r1/c2/walk-foley.webm andwalk-contacts.json;
+docs-only changes not yet committed. Reset RAF measurement alsoFAIL: reference
+idle33.4/walk50ms, CPU4x idle166.7/walk150ms p95; retainbothruns/variation, no target
+approval. Staticartifact and finalreviewfixpass pending. Rootdocs/fraft untouched.
+
+
 R07/R08 current checkpoint: normal entry content0.0.4 with original Gate/morning/
 flags; typed authoring, real source-writer roundtrip and fresh private offline
 V2recovery implemented (64sources/49outputs exact bytes). Actual pixel footplant

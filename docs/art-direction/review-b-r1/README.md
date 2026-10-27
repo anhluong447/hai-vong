@@ -5,6 +5,9 @@ User đã cho commit C1 (`af2b30c`) và đi tiếp. [Bản thử C2](c2/README.m
 chuyển động/foley/camera/nắng-bụi riêng; chưa nghiệm thu chân trụ hoặc toàn R1.
 [Plan R1](../../superpowers/plans/2026-10-27-g1-review-b-cohesion.md).
 
+R1 đã tích hợp vào normal entry; xem [kết quả kiểm chứng hiện tại](../../testing/G1-R1-ACCEPTANCE.md).
+Các số đo và ảnh C1 bên dưới là lịch sử composition, không thay báo cáo R1 mới.
+
 Mở `/docs/art-direction/review-b-r1/` trên server project (ví dụ
 http://127.0.0.1:8765/docs/art-direction/review-b-r1/). Nếu server chưa chạy:
 

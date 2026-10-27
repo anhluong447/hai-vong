@@ -57,3 +57,15 @@ test('superseded working reload during required foley fetch cannot adopt or reta
   const second=panel.applyWorking();unblock();const [stale,current]=await Promise.all([first,second]);assert(!stale.ok);assert(current.ok,JSON.stringify(current.errors));assert(panel.current!==previous);equal(panel.current.preview.audio.stats().preparedOneShots,4);equal(panel.current.preview.audio.stats().oneShots,0);equal(oldAssets.stats(),{resources:0,references:0,pending:0});
  }finally{unblock?.();globalThis.fetch=fetcher;await panel.dispose();s.root.remove();}
 });
+test('selected locomotion clip preview uses distance and actual plant pixels',async()=>{
+ const {ResourcePreview}=await import('/tools/workspace/resources/ResourcePreview.js'),s=await setup(),a=new ResourcePreview(s.root,s.workspace.bundle,s.ui.preview),rootB=document.createElement('div');s.root.append(rootB);let b;
+ try{
+  assert((await a.clip('clip.first3.khue.walk')).ok);a.step(.1);a.step(.1);assert(a.actor.stats().buffers===1,'clip preview bypassed plant renderer');
+  const pixels=[...a.view.context.getImageData(0,0,a.canvas.width,a.canvas.height).data],frame=a.actor.animation.frame();
+  b=new ResourcePreview(rootB,s.workspace.bundle,s.ui.preview);assert((await b.clip('clip.first3.khue.walk')).ok);b.step(.2);equal(b.actor.animation.frame(),frame);
+  const doc=s.workspace.list().find(d=>d.kind==='animations'&&d.data.some(c=>c.id==='clip.first3.khue.walk')),index=doc.data.findIndex(c=>c.id==='clip.first3.khue.walk');assert(s.workspace.applyChange(doc.id,{type:'replace',path:`/${index}/locomotion/plant/anchors/0/x`,value:122},doc.revision).ok);await b.dispose();b=new ResourcePreview(rootB,s.workspace.bundle,s.ui.preview);assert((await b.clip('clip.first3.khue.walk')).ok);b.step(.2);const changed=b.view.context.getImageData(0,0,b.canvas.width,b.canvas.height).data;assert(changed.some((value,i)=>value!==pixels[i]),'authored sole anchors did not change preview pixels');
+ }finally{await a.dispose();await b?.dispose();s.root.remove();}
+});
+test('looping footstep cue edit rejects the working document before source save',async()=>{
+ const s=await setup();try{const doc=s.workspace.list().find(d=>d.data?.kind==='scene-presentation'),before=doc.data,result=s.workspace.applyChange(doc.id,{type:'replace',path:'/footstepCueIds',value:['cue.fixture.bgm']},doc.revision);assert(!result.ok,'looping cue accepted as one-shot');assert(result.errors.some(e=>e.sourceId===doc.id&&e.pointer==='/footstepCueIds/0'));equal(s.workspace.get(doc.id).data,before);}finally{s.root.remove();}
+});

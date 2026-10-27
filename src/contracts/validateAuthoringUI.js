@@ -14,6 +14,7 @@ export function validateAuthoringUI({catalog,locales,project,sourceFor,schemas})
   const p=config.preview;if(!record(p)||['width','height','stepSeconds','actorScale'].some(key=>!Number.isFinite(p?.[key])||p[key]<=0)||!Number.isFinite(p?.actorX)||!Number.isFinite(p?.actorY)||p.actorX<0||p.actorX>p.width||p.actorY<0||p.actorY>p.height)add('/preview');
   if(p?.actorSampling!==undefined&&!['smooth','pixel'].includes(p.actorSampling))add('/preview/actorSampling');
   if(typeof p?.reducedMotion!=='boolean')add('/preview/reducedMotion');
+  if(!Number.isFinite(p?.locomotionSpeed)||p.locomotionSpeed<=0)add('/preview/locomotionSpeed');
   if(!Number.isInteger(config.browserPageSize)||config.browserPageSize<=0)add('/browserPageSize');
   const states=['focused','selected','disabled','error'];if(!Array.isArray(config.states)||config.states.length!==states.length||new Set(config.states.map(state=>state?.id)).size!==states.length||config.states.some(state=>!states.includes(state?.id)||locale[state?.labelKey]?.params.length!==0))add('/states');
   if(!record(config.tokens)||Object.entries(config.tokens).some(([key,value])=>!key.startsWith('--')||typeof value!=='string'||!value.length))add('/tokens');

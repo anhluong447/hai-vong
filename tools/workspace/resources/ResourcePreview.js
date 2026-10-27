@@ -20,9 +20,10 @@ export class ResourcePreview {
  }
  async clip(id){
   const clip=this.bundle.catalog.get('animations',id);if(!clip.ok)return clip;this.drawing();const result=await this.acquire([...new Set(clip.value.frames.map(frame=>frame.assetId))]);if(!result.ok)return result;
+  this.clipDefinition=clip.value;this.travelled=0;
   this.actor=new ActorView({idleClipId:id,walkClipId:id,scale:this.settings.actorScale,sampling:this.settings.actorSampling??'smooth'},this.bundle.catalog);this.step(0);return success(id);
  }
- step(delta){if(!this.disposed&&this.actor&&this.lease)this.actor.draw(this.view.begin(),this.lease,{x:this.settings.actorX,y:this.settings.actorY,facing:1,moving:false},delta);}
+ step(delta){if(!this.disposed&&this.actor&&this.lease){const moving=!!this.clipDefinition.locomotion;if(moving)this.travelled+=Math.max(0,delta)*this.settings.locomotionSpeed;this.actor.draw(this.view.begin(),this.lease,{x:this.settings.actorX,y:this.settings.actorY,facing:1,moving,travelled:this.travelled},delta);}}
  async cue(id){
   const config=this.bundle.catalog.get('config',this.bundle.project.runtimeConfigId).value;this.audio=new AudioAdapter({catalog:this.bundle.catalog,assets:this.assets,revision:this.bundle.revision,buses:config.audioBuses});
   const unlocked=await this.audio.unlock();return unlocked.ok?this.audio.play(id):unlocked;

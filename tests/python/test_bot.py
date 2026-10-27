@@ -11,7 +11,7 @@ class BotPipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp)
             for name in ['content','src','tools/workspace','assets/exports']:shutil.copytree(ROOT/name,root/name)
-            path=root/'content/assets/manifest.json';manifest=json.loads(path.read_bytes());next(asset for asset in manifest if asset['id']=='image.fixture.scene')['path']='/assets/exports/absent-required.png';path.write_text(json.dumps(manifest),encoding='utf-8');result=run_bot(root);self.assertFalse(result['ok']);self.assertTrue(any(error['code']=='bot.asset.required' for error in result['errors']));self.assertTrue((root/result['artifact']).is_file())
+            path=root/'content/assets/manifest.json';manifest=json.loads(path.read_bytes());next(asset for asset in manifest if asset['id']=='image.fixture.scene')['path']='/assets/exports/absent-required.png';path.write_text(json.dumps(manifest),encoding='utf-8');result=run_bot(root);self.assertFalse(result['ok']);self.assertTrue(any(error['code']=='bot.asset.required' for error in result['errors']),result);self.assertTrue((root/result['artifact']).is_file())
     def test_unknown_pack_is_an_error_instead_of_silently_traversing_another_pack(self):
         from bot import run_bot
         result=run_bot(ROOT,pack='absent');self.assertFalse(result['ok']);self.assertEqual(result['errors'][0]['code'],'bot.pack.unknown')

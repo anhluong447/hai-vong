@@ -1,0 +1,98 @@
+{
+  "mimeType": "video/webm;codecs=vp8,opus",
+  "bytes": 364034,
+  "contacts": [
+    {
+      "seconds": 0.3482999999523163,
+      "audioTime": 0.312,
+      "travelled": 48.079999999999984,
+      "cueId": "cue.first3.wood.2",
+      "played": true
+    },
+    {
+      "seconds": 0.6480999999046325,
+      "audioTime": 0.6106666666666667,
+      "travelled": 96.06400000000019,
+      "cueId": "cue.first3.wood.3",
+      "played": true
+    },
+    {
+      "seconds": 0.95,
+      "audioTime": 0.912,
+      "travelled": 144.06400000000065,
+      "cueId": "cue.first3.wood.4",
+      "played": true
+    },
+    {
+      "seconds": 1.2477000000476837,
+      "audioTime": 1.2106666666666666,
+      "travelled": 192.06400000000065,
+      "cueId": "cue.first3.wood.1",
+      "played": true
+    },
+    {
+      "seconds": 1.5485999999046325,
+      "audioTime": 1.512,
+      "travelled": 240.06400000000053,
+      "cueId": "cue.first3.wood.2",
+      "played": true
+    },
+    {
+      "seconds": 1.8645999999046325,
+      "audioTime": 1.832,
+      "travelled": 288.5066577777784,
+      "cueId": "cue.first3.wood.3",
+      "played": true
+    },
+    {
+      "seconds": 2.254299999952316,
+      "audioTime": 2.2213333333333334,
+      "travelled": 337.66400000000056,
+      "cueId": "cue.first3.wood.4",
+      "played": true
+    },
+    {
+      "seconds": 2.5510999999046327,
+      "audioTime": 2.512,
+      "travelled": 385.66400000000056,
+      "cueId": "cue.first3.wood.1",
+      "played": true
+    },
+    {
+      "seconds": 2.8660999999046326,
+      "audioTime": 2.832,
+      "travelled": 433.6480000000007,
+      "cueId": "cue.first3.wood.2",
+      "played": true
+    },
+    {
+      "seconds": 3.1653999998569486,
+      "audioTime": 3.1306666666666665,
+      "travelled": 481.64800000000093,
+      "cueId": "cue.first3.wood.3",
+      "played": true
+    },
+    {
+      "seconds": 3.4580999999046327,
+      "audioTime": 3.421333333333333,
+      "travelled": 529.6480000000008,
+      "cueId": "cue.first3.wood.4",
+      "played": true
+    },
+    {
+      "seconds": 3.770399999856949,
+      "audioTime": 3.7306666666666666,
+      "travelled": 580.3200000000008,
+      "cueId": "cue.first3.wood.1",
+      "played": true
+    },
+    {
+      "seconds": 4.047799999952316,
+      "audioTime": 4.010666666666666,
+      "travelled": 624.5324400000009,
+      "cueId": "cue.first3.wood.2",
+      "played": true
+    }
+  ],
+  "method": "30fps canvas recording plus actual AudioAdapter output; real RAF stepping/native keys; review artifact, not a performance benchmark"
+}

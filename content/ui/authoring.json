@@ -89,6 +89,7 @@
     "actorX": 240,
     "actorY": 230,
     "actorScale": 1,
+    "locomotionSpeed": 160,
     "actorSampling": "pixel",
     "reducedMotion": false
   },

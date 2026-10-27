@@ -22,7 +22,8 @@ R07 and required R08 verification. R07 normalentry.4/typedauthoring/freshV2recov
 implemented; current results and outstanding limits in
 [R1 acceptance](../../testing/G1-R1-ACCEPTANCE.md). R04 actualpixel sole drift1unit;
 final art/tuning approval pending. Initial CPU4x p9550.1ms misses33.34ms target.
-Full current CI/static artifact/final independent review still in progress.
+Full current CI/static artifact PASS; one independent review completed, three
+Important fixes verified. Final user art/game-feel and performance acceptance stay open.
 
 ## Global Constraints
 
@@ -297,20 +298,20 @@ locale catalogs, First3scene/runtime/pack/project migrations; tests
 **Consumes:** R01–R06 validated sources/renderers; **Produces:** authoring creation,
 preview, transactional save/reopen và playerentry0.0.4.
 
-- [ ] RED tạo prop mới/pivot/sort/shadowanchor và optional presetref, clone/delete
+- [x] RED tạo prop mới/pivot/sort/shadowanchor và optional presetref, clone/delete
   used-by; tạo locomotion/contacts/beam/dust/camera settings bằng control cólabel
   locale. Invalid type/ref/value giữ workingdoc tốt với pointer chính xác.
-- [ ] Implement PresentationEditor và scene/clip controls còn thiếu; không coi
+- [x] Implement PresentationEditor và scene/clip controls còn thiếu; không coi
   sửa rawJSON field sẵn có là đã có đường tạo property. Resource preview giữpixel,
   sprite/prop đủ bounds; picking theo transformR06. Sửa đồng bộ day khi restart.
-- [ ] RED groupedundo/redo, realdraft recovery, authenticated grouped source save,
+- [x] RED groupedundo/redo, realdraft recovery, authenticated grouped source save,
   stalehash và invalidref không ghi nửa nhóm; reopen giữsort/shadows/cadence/presets.
   Preserve-reload zoom/foley pending abort đúng, restart dùng fixture riêng.
-- [ ] Bật assets/presets/First3runtime trên normalplayerentry; giữ interaction IDs,
+- [x] Bật assets/presets/First3runtime trên normalplayerentry; giữ interaction IDs,
   costs/effects/story order. Sync hai project/pack.4, no fixture rewards injected.
-- [ ] Restore bundleV2 vào project-local clean copy cóprivatevenv riêng; absent
+- [x] Restore bundleV2 vào project-local clean copy cóprivatevenv riêng; absent
   before restore, hashes/source/output equality vàrepeat deterministic build/audit.
-- [ ] Fullauthoring/sharedcontent+architecture PASS; commit resourceworkflow docs.
+- [x] Fullauthoring/sharedcontent+architecture PASS; commit resourceworkflow docs.
 
 ## R08 — Review B lại trên normal entry và artifact
 

@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-27",
+  "fingerprint": "ff3b8c47e3f5615cd038c2a16e0656eb58634abf110840333c6cee4dd624ca05",
+  "ci": {
+    "ok": true,
+    "suites": [
+      {
+        "suite": "architecture",
+        "ok": true,
+        "passed": null,
+        "failed": null
+      },
+      {
+        "suite": "content",
+        "ok": true,
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "suite": "unit",
+        "ok": true,
+        "passed": 176,
+        "failed": 0
+      },
+      {
+        "suite": "browser",
+        "ok": true,
+        "passed": 82,
+        "failed": 0
+      },
+      {
+        "suite": "authoring",
+        "ok": true,
+        "passed": 56,
+        "failed": 0
+      },
+      {
+        "suite": "bot",
+        "ok": true,
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "suite": "release",
+        "ok": true,
+        "passed": null,
+        "failed": null
+      }
+    ]
+  },
+  "python": {
+    "passed": 67,
+    "failed": 0
+  },
+  "receipts": {
+    "architecture": true,
+    "content": true,
+    "unit": true,
+    "browser": true,
+    "authoring": true,
+    "bot": true
+  },
+  "static": {
+    "ok": true,
+    "passed": 3,
+    "fingerprint": "ff3b8c47e3f5615cd038c2a16e0656eb58634abf110840333c6cee4dd624ca05",
+    "directory": "C:\\Users\\anhlh52\\AndroidStudioProjects\\Ask\\.worktrees\\phase-0\\dist\\foundation-demo\\ff3b8c47e3f5615cd038",
+    "tests": [
+      "static First3Days complete native investigate route",
+      "static First3Days complete native defer route",
+      "static G1 native Room3 resolves layered art and portrait after reveal save-load"
+    ]
+  },
+  "recovery": {
+    "sources": 64,
+    "outputs": 49,
+    "privateOfflineVenv": true,
+    "identicalSourcesAndOutputs": true,
+    "repeatRebuilt": []
+  },
+  "protected": {
+    "ok": true,
+    "files": 20
+  },
+  "footplant": {
+    "actualPixels": true,
+    "worstDriftLogicalUnits": 1,
+    "samplesPerPlant": 96,
+    "directions": 2
+  },
+  "review": {
+    "freshReviewers": 1,
+    "importantFixed": 3,
+    "minorDeferred": 1
+  },
+  "openAcceptance": [
+    "user art/game-feel approval",
+    "performance budget33.34ms failed",
+    "physical lower-spec/fullscreen/retained heap unverified"
+  ]
+}

@@ -99,6 +99,40 @@ player preferences or remaps.
 
 ## Recovery and verification
 
+### G1 R1 furniture, gait and presentation
+
+Select Room3 in the scene source. Enter a new technical ID and activate Add prop;
+the new item starts at the scene spawn/baseline with the managed template. Select
+its target to edit asset, pivot, size, sampling and sortY. Clone/Delete/Add shadow
+operate through the same validated history. Shadow anchors are local to the prop;
+actor shadows belong to the scene-presentation preset. Restarting Preview retains
+the selected day in both the field and preview session.
+
+Choose the scene presentation and per-story-interaction encounter preset from
+their selectors. Selecting a presentation config opens its dedicated inspector:
+clone a definition with a fresh ID, then use the creation buttons for missing
+camera, actor shadow, beam, dust or footstep fields. Edit the resulting typed fields.
+Footstep cues must be non-looping; invalid references/values retain the good document.
+
+For a walk clip, Add locomotion creates cycle distance/contact fields; Add plant
+creates one native-frame sole anchor per pose and an integer knee line. Calibrate
+anchors against actual soles, not the frame border. Anchors share a ground row;
+the first contact is phase0. Selected-clip Preview/Step uses cumulative distance
+and the same ActorView plant renderer as the game. Preview speed is managed by
+`ui.authoring.preview.locomotionSpeed`; non-locomotion clips retain time playback.
+The bitmap preview follows the import recipe's pixel/smooth sampling.
+
+Save scene, animation and presentation changes as one coherent dirty group.
+Undo/redo, draft recovery and stale-hash checks preserve that group. Debug Playtest
+Apply working preserves its actual camera/encounter projection and prepares new
+foley before adoption; a superseded load releases its candidate. Restart remains
+an isolated fixture, never player progress.
+
+R1 V2 clean recovery proof and current checks are in
+[G1-R1-ACCEPTANCE](../testing/G1-R1-ACCEPTANCE.md). The bundle restore used a fresh
+project-local private offline venv,64 restored sources and49 byte-identical outputs.
+Do not replace the V1 bundle or infer aesthetic approval from those hashes.
+
 Draft recovery restores the entire dirty source group and checks every base hash.
 A changed base rejects recovery without partially replacing documents. Source
 batches retain before-bytes and a journal under `.cache/authoring-transactions/`.
