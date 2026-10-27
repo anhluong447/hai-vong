@@ -2,7 +2,9 @@
 
 Updated: 2026-10-27. Status: director requested revision; not accepted.
 See [G1 R1 re-plan](../superpowers/plans/2026-10-27-g1-review-b-cohesion.md).
-Evidence below certifies the previous implementation only; no R1 runtime check ran.
+Evidence below certifies the previous implementation only. R1 C1 draft and its
+separate evidence are recorded in [C1 review](../art-direction/review-b-r1/README.md);
+no C1 visual approval or final R1 acceptance is claimed.
 Plan commit: `3fafb2f`. Active branch: `feat/first3-art-direction`.
 
 ## Current progress

@@ -565,6 +565,192 @@
         "height": 512,
         "sampling": "smooth"
       }
+    },
+    {
+      "id": "image.first3.r1.wall",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/wall-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1931,
+        "height": 650
+      }
+    },
+    {
+      "id": "image.first3.r1.wall-blur",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/wall-v2.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 1931,
+        "height": 650
+      },
+      "blur": {
+        "radius": 1.2
+      }
+    },
+    {
+      "id": "image.first3.r1.floor",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/floor-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 0,
+        "y": 516,
+        "width": 1931,
+        "height": 298
+      }
+    },
+    {
+      "id": "image.first3.r1.desk",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/desk-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 70,
+        "y": 198,
+        "width": 1796,
+        "height": 533
+      },
+      "resize": {
+        "width": 342,
+        "height": 81,
+        "sampling": "pixel"
+      }
+    },
+    {
+      "id": "image.first3.r1.chair",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/chair-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 195,
+        "y": 265,
+        "width": 670,
+        "height": 1065
+      },
+      "resize": {
+        "width": 48,
+        "height": 72,
+        "sampling": "pixel"
+      }
+    },
+    {
+      "id": "image.first3.r1.cabinet",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/cabinet-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 170,
+        "y": 178,
+        "width": 720,
+        "height": 1188
+      },
+      "resize": {
+        "width": 96,
+        "height": 140,
+        "sampling": "pixel"
+      }
+    },
+    {
+      "id": "image.first3.r1.door",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/door-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 103,
+        "y": 122,
+        "width": 676,
+        "height": 1590
+      },
+      "resize": {
+        "width": 126,
+        "height": 259,
+        "sampling": "pixel"
+      }
+    },
+    {
+      "id": "image.first3.r1.window",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/window-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 51,
+        "y": 63,
+        "width": 1718,
+        "height": 734
+      },
+      "resize": {
+        "width": 410,
+        "height": 195,
+        "sampling": "pixel"
+      }
+    },
+    {
+      "id": "image.first3.r1.papers",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/papers-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 224,
+        "y": 97,
+        "width": 1378,
+        "height": 731
+      },
+      "resize": {
+        "width": 80,
+        "height": 40,
+        "sampling": "pixel"
+      }
+    },
+    {
+      "id": "image.first3.r1.board",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/board-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 32,
+        "y": 84,
+        "width": 1826,
+        "height": 659
+      },
+      "resize": {
+        "width": 245,
+        "height": 108,
+        "sampling": "pixel"
+      }
+    },
+    {
+      "id": "image.first3.r1.shadow",
+      "kind": "image",
+      "source": "assets/sources/g1-cohesion/raw/shadow-v1.png",
+      "required": true,
+      "license": "LicenseRef-HoiAm-GeneratedArt",
+      "crop": {
+        "x": 256,
+        "y": 300,
+        "width": 1250,
+        "height": 300
+      },
+      "resize": {
+        "width": 128,
+        "height": 32,
+        "sampling": "smooth"
+      }
     }
   ],
   "generationInputs": [
@@ -589,7 +775,33 @@
     "assets/sources/g1/raw/van-animation-v1.png",
     "assets/sources/g1/raw/van-animation-v1.prompt.json",
     "assets/sources/g1/raw/van-portraits-v1.png",
-    "assets/sources/g1/raw/van-portraits-v1.prompt.json"
+    "assets/sources/g1/raw/van-portraits-v1.prompt.json",
+    "assets/sources/g1-cohesion/GENERATION.json",
+    "assets/sources/g1-cohesion/inputs/room-reference.png",
+    "assets/sources/g1-cohesion/inputs/sprite-reference.png",
+    "assets/sources/g1-cohesion/raw/board-v1.png",
+    "assets/sources/g1-cohesion/raw/board-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/cabinet-v1.png",
+    "assets/sources/g1-cohesion/raw/cabinet-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/chair-v1.png",
+    "assets/sources/g1-cohesion/raw/chair-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/desk-v1.png",
+    "assets/sources/g1-cohesion/raw/desk-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/door-v1.png",
+    "assets/sources/g1-cohesion/raw/door-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/floor-v1.png",
+    "assets/sources/g1-cohesion/raw/floor-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/papers-v1.png",
+    "assets/sources/g1-cohesion/raw/papers-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/shadow-v1.png",
+    "assets/sources/g1-cohesion/raw/shadow-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/wall-v1.png",
+    "assets/sources/g1-cohesion/raw/wall-v1.prompt.json",
+    "assets/sources/g1-cohesion/raw/wall-v2.png",
+    "assets/sources/g1-cohesion/raw/wall-v2.prompt.json",
+    "assets/sources/g1-cohesion/raw/window-v1.png",
+    "assets/sources/g1-cohesion/raw/window-v1.prompt.json",
+    "assets/sources/g1-cohesion/SOURCE-MANIFEST.json"
   ],
   "atlases": [
     {
@@ -632,8 +844,8 @@
       "maxSize": 1024
     }
   ],
-  "bundlePath": "assets/bundles/first3-art-g1-v1.zip",
-  "bundleVersion": 1,
+  "bundlePath": "assets/bundles/first3-art-g1-v2.zip",
+  "bundleVersion": 2,
   "id": "asset.imports",
   "kind": "asset-imports",
   "sourceRoot": "assets/sources"

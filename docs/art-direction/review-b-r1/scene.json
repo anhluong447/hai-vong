@@ -1,0 +1,266 @@
+[
+  {
+    "id": "scene.first3.room3.c1",
+    "nameKey": "first3.scene.room3",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 430
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.first3.r1.wall",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 380,
+        "parallax": 1
+      },
+      {
+        "assetId": "image.first3.r1.floor",
+        "x": 0,
+        "y": 380,
+        "width": 1280,
+        "height": 160,
+        "parallax": 1
+      },
+      {
+        "assetId": "image.first3.room3.exterior",
+        "x": 732,
+        "y": 156,
+        "width": 300,
+        "height": 128,
+        "parallax": 1
+      }
+    ],
+    "actors": [
+      {
+        "id": "van",
+        "actorId": "actor.first3.van",
+        "x": 550,
+        "facing": -1,
+        "visibleDays": [
+          1
+        ]
+      }
+    ],
+    "interactions": [],
+    "decorations": [],
+    "props": [
+      {
+        "id": "desk",
+        "assetId": "image.first3.r1.desk",
+        "x": 350,
+        "y": 420,
+        "width": 270,
+        "height": 64,
+        "pivot": {
+          "x": 0,
+          "y": 64
+        },
+        "sortY": 421,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 10,
+            "y": -3,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 31,
+            "y": -19,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 229,
+            "y": -19,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 250,
+            "y": -3,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          }
+        ]
+      },
+      {
+        "id": "chair",
+        "assetId": "image.first3.r1.chair",
+        "x": 566,
+        "y": 410,
+        "width": 38,
+        "height": 57,
+        "pivot": {
+          "x": 19.0,
+          "y": 57
+        },
+        "sortY": 414,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -15,
+            "y": -10,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -2,
+            "y": -2,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 10,
+            "y": -6,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 3,
+            "y": -15,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          }
+        ]
+      },
+      {
+        "id": "cabinet",
+        "assetId": "image.first3.r1.cabinet",
+        "x": 735,
+        "y": 420,
+        "width": 76,
+        "height": 111,
+        "pivot": {
+          "x": 38.0,
+          "y": 111
+        },
+        "sortY": 412,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -29,
+            "y": -2,
+            "width": 14,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 18,
+            "y": -2,
+            "width": 14,
+            "height": 4,
+            "opacity": 0.45
+          }
+        ]
+      },
+      {
+        "id": "door",
+        "assetId": "image.first3.r1.door",
+        "x": 80,
+        "y": 380,
+        "width": 100,
+        "height": 205,
+        "pivot": {
+          "x": 50.0,
+          "y": 205
+        },
+        "sortY": 380,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": []
+      },
+      {
+        "id": "window",
+        "assetId": "image.first3.r1.window",
+        "x": 880,
+        "y": 220,
+        "width": 325,
+        "height": 154,
+        "pivot": {
+          "x": 162.5,
+          "y": 77
+        },
+        "sortY": 300,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": []
+      },
+      {
+        "id": "papers",
+        "assetId": "image.first3.r1.papers",
+        "x": 800,
+        "y": 420,
+        "width": 63,
+        "height": 32,
+        "pivot": {
+          "x": 31.5,
+          "y": 32
+        },
+        "sortY": 422,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -25,
+            "y": -2,
+            "width": 50,
+            "height": 6,
+            "opacity": 0.3
+          }
+        ]
+      },
+      {
+        "id": "board",
+        "assetId": "image.first3.r1.board",
+        "x": 410,
+        "y": 283,
+        "width": 194,
+        "height": 85,
+        "pivot": {
+          "x": 97,
+          "y": 42.5
+        },
+        "sortY": 300,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": []
+      }
+    ],
+    "presentationId": "presentation.first3.room3.c1"
+  }
+]

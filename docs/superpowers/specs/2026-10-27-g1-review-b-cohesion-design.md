@@ -1,6 +1,6 @@
 # G1 Review B — chỉnh chiều sâu, đồng bộ nét và cảm giác điều khiển
 
-Ngày: 2026-10-27. **Trạng thái: bản đề xuất để người dùng review; chưa triển khai.**
+Ngày: 2026-10-27. **Trạng thái: đã giao triển khai; R01/R02 slice đang ở bản nháp C1 chờ review.**
 Nguồn yêu cầu: Director Feedback “Visual Cohesion & Game Feel” ngày 2026-10-27.
 Baseline kỹ thuật: `db7bea8`, nhánh `feat/first3-art-direction`.
 [Plan thực hiện](../plans/2026-10-27-g1-review-b-cohesion.md).

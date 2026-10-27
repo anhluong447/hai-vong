@@ -1,0 +1,67 @@
+{
+  "project": "/content/first-three-days.project.json",
+  "sceneSource": "/docs/art-direction/review-b-r1/scene.json",
+  "presentationSource": "/docs/art-direction/review-b-r1/presentation.json",
+  "sceneId": "scene.first3.room3.c1",
+  "playerActorId": "actor.first3.khue",
+  "themeId": "ui.first3-art",
+  "viewport": {
+    "width": 960,
+    "height": 540
+  },
+  "positions": [
+    48,
+    360,
+    430,
+    500,
+    1232
+  ],
+  "initialX": 430,
+  "day": 1,
+  "guideColor": "#e8bc65",
+  "guideFontSize": 12,
+  "measurements": [
+    {
+      "id": "khue",
+      "height": 152,
+      "key": "review.c1.khue"
+    },
+    {
+      "id": "van",
+      "height": 139.84,
+      "key": "review.c1.van"
+    },
+    {
+      "id": "desk",
+      "height": 64,
+      "key": "review.c1.desk"
+    },
+    {
+      "id": "door",
+      "height": 205,
+      "key": "review.c1.door"
+    },
+    {
+      "id": "board",
+      "height": 85,
+      "key": "review.c1.board"
+    }
+  ],
+  "propLabels": {
+    "desk": "review.c1.desk",
+    "chair": "review.c1.chair",
+    "cabinet": "review.c1.cabinet",
+    "door": "review.c1.door",
+    "window": "review.c1.window",
+    "papers": "review.c1.papers",
+    "board": "review.c1.board"
+  },
+  "guideOffsets": {
+    "khue": -45,
+    "van": 40,
+    "desk": 290,
+    "door": 60,
+    "board": 110
+  },
+  "nativeCharacterHeight": 192
+}

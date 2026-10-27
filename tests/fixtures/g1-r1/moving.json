@@ -1,0 +1,368 @@
+{
+  "provenance": {
+    "runtimeCommit": "db7bea818ac3ef0e964713ba07643393ed56e9ee",
+    "checkoutCommit": "03a53ed62ad54ae6b3768a2ef1cf56c8718f70cd",
+    "runtimeEquivalence": "tracked src/content/styles/assets/tools/tests/index unchanged from db7bea8 before adding capture module; only re-plan docs differ",
+    "captureModule": "tests/fixtures/g1-r1/capture.test.js",
+    "method": "actual createGame and native keyboard progression with controlled correctness steps; SaveService.capture, no fabricated constructor state",
+    "sourceHashes": {
+      "src/bootstrap/main.js": "3077232ca265b151a4664db1b1180b81a4f9d244eaf0235b62d07fb4ba0c8e3a",
+      "src/application/SaveService.js": "c8b566ba3444cf3734ee11c5c1ec0558d4cd29c1030d0892a829db79ea0a13c0",
+      "content/assets/manifest.json": "79b2ab0a609ce03fe0488d573c250add6dce68e31a947935123dd16928c72759",
+      "assets/bundles/first3-art-g1-v1.zip": "9fc33cd4b7f737a43194ee65d271ba0457bdfe03ba57a5f106d20122553d9cdb"
+    }
+  },
+  "envelope": {
+    "schemaVersion": 1,
+    "contentVersion": "0.0.3",
+    "buildId": "0.0.3",
+    "payload": {
+      "schemaVersion": 3,
+      "formatTag": "hoi-am.side-scroll",
+      "contentRevision": "0.0.3",
+      "gameplay": {
+        "flags": {
+          "flag.foundation.visited": false,
+          "flag.fixture.hearingWon": false,
+          "flag.first3.officeDone": true,
+          "flag.first3.classDone": true,
+          "flag.first3.recruit": true,
+          "flag.first3.recruited": false,
+          "flag.first3.rest1": false,
+          "flag.first3.rest2": false,
+          "flag.first3.day2": false,
+          "flag.first3.day3": false,
+          "flag.first3.tape": false,
+          "flag.first3.plan": false,
+          "flag.first3.canteenAccepted": false,
+          "flag.first3.photo": false,
+          "flag.first3.source": false,
+          "flag.first3.canteenComplete": false,
+          "flag.first3.pressure": false,
+          "flag.first3.advisor": false,
+          "flag.first3.complete": false
+        },
+        "calendar": {
+          "day": 1,
+          "period": "afternoon",
+          "pending": null,
+          "finished": false
+        },
+        "energy": 10,
+        "wallet": 1000,
+        "audience": 0,
+        "hearing": null,
+        "members": {
+          "member.fixture.player": {
+            "stats": {
+              "interview": 2,
+              "investigation": 2,
+              "photo": 2,
+              "documents": 2,
+              "empathy": 2,
+              "courage": 2
+            },
+            "skillXP": {
+              "interview": 0,
+              "investigation": 0,
+              "photo": 0,
+              "documents": 0,
+              "empathy": 0,
+              "courage": 0
+            }
+          },
+          "member.fixture.reporter": {
+            "stats": {
+              "interview": 2,
+              "investigation": 1,
+              "photo": 1,
+              "documents": 3,
+              "empathy": 2,
+              "courage": 2
+            },
+            "skillXP": {
+              "interview": 0,
+              "investigation": 0,
+              "photo": 0,
+              "documents": 0,
+              "empathy": 0,
+              "courage": 0
+            }
+          },
+          "member.fixture.photographer": {
+            "stats": {
+              "interview": 1,
+              "investigation": 1,
+              "photo": 5,
+              "documents": 0,
+              "empathy": 1,
+              "courage": 2
+            },
+            "skillXP": {
+              "interview": 0,
+              "investigation": 0,
+              "photo": 0,
+              "documents": 0,
+              "empathy": 0,
+              "courage": 0
+            }
+          }
+        },
+        "quests": {
+          "quest.fixture.main": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          },
+          "quest.fixture.side": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          },
+          "quest.fixture.general": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          },
+          "quest.first3.room3": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          },
+          "quest.first3.canteen": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          },
+          "quest.first3.general": {
+            "status": "available",
+            "performerId": null,
+            "materialIds": [],
+            "proposal": null,
+            "completedDay": null
+          }
+        },
+        "delegation": {
+          "jobs": {},
+          "feedback": []
+        },
+        "publication": {
+          "queued": [],
+          "published": {}
+        },
+        "evidence": {
+          "defense": {},
+          "attack": {}
+        },
+        "progression": {
+          "inventory": {},
+          "equipment": {},
+          "bonds": {
+            "member.fixture.reporter": 0,
+            "member.fixture.photographer": 0
+          },
+          "teamBond": 0
+        }
+      },
+      "story": {
+        "cursor": {
+          "chapterId": "chapter.first3.long",
+          "nodeId": "entry",
+          "commandId": "done",
+          "stepId": "done"
+        },
+        "waiting": "end",
+        "pending": null,
+        "history": [
+          {
+            "anchor": "chapter.first3.arrival/entry/gate",
+            "textKey": "first3.line.gate",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.arrival/entry/map",
+            "textKey": "first3.line.map",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.arrival/entry/tran-file",
+            "textKey": "first3.line.tran-file",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.arrival/entry/tran-grandfather",
+            "textKey": "first3.line.tran-grandfather",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.arrival/entry/khue-grandfather",
+            "textKey": "first3.line.khue-grandfather",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.arrival/entry/tran-warning",
+            "textKey": "first3.line.tran-warning",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.arrival/entry/khue-truth",
+            "textKey": "first3.line.khue-truth",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.arrival/entry/class-direction",
+            "textKey": "first3.line.class-direction",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.long/entry/long-intro",
+            "textKey": "first3.line.long-intro",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.long/entry/long-card",
+            "textKey": "first3.line.long-card",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.long/entry/khue-room",
+            "textKey": "first3.line.khue-room",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.long/entry/long-van",
+            "textKey": "first3.line.long-van",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.long/entry/khue-long",
+            "textKey": "first3.line.khue-long",
+            "params": {}
+          },
+          {
+            "anchor": "chapter.first3.long/entry/after-school",
+            "textKey": "first3.line.after-school",
+            "params": {}
+          }
+        ],
+        "readAnchors": [
+          "chapter.first3.arrival/entry/gate",
+          "chapter.first3.arrival/entry/map",
+          "chapter.first3.arrival/entry/tran-file",
+          "chapter.first3.arrival/entry/tran-grandfather",
+          "chapter.first3.arrival/entry/khue-grandfather",
+          "chapter.first3.arrival/entry/tran-warning",
+          "chapter.first3.arrival/entry/khue-truth",
+          "chapter.first3.arrival/entry/class-direction",
+          "chapter.first3.long/entry/long-intro",
+          "chapter.first3.long/entry/long-card",
+          "chapter.first3.long/entry/khue-room",
+          "chapter.first3.long/entry/long-van",
+          "chapter.first3.long/entry/khue-long",
+          "chapter.first3.long/entry/after-school"
+        ]
+      },
+      "world": {
+        "sceneId": "scene.first3.room3",
+        "position": 132,
+        "facing": 1,
+        "pending": null,
+        "moving": true
+      },
+      "presentation": {
+        "dialogue": null,
+        "view": {
+          "world": {
+            "sceneId": "scene.first3.room3",
+            "elapsed": 0.05,
+            "cameraX": 0,
+            "actors": {
+              "player": {
+                "id": "clip.first3.khue.walk",
+                "elapsed": 0.05,
+                "paused": false,
+                "status": "playing"
+              },
+              "speaker": null,
+              "van": {
+                "id": "clip.first3.van.idle",
+                "elapsed": 0.05,
+                "paused": false,
+                "status": "playing"
+              }
+            }
+          },
+          "text": {
+            "key": "first3.line.after-school",
+            "params": {},
+            "revealed": 76
+          },
+          "ui": {
+            "paused": false,
+            "screen": null,
+            "returnTo": "pause",
+            "mode": "load"
+          }
+        }
+      },
+      "audio": {
+        "paused": false,
+        "buses": {
+          "bgm": {
+            "gain": 0.8,
+            "muted": false
+          },
+          "ambience": {
+            "gain": 0.8,
+            "muted": false
+          },
+          "voice": {
+            "gain": 1,
+            "muted": false
+          },
+          "sfx": {
+            "gain": 0.8,
+            "muted": false
+          }
+        },
+        "tracks": [
+          {
+            "cueId": "cue.fixture.bgm",
+            "offset": 0.08133333333333326
+          },
+          {
+            "cueId": "cue.fixture.sfx",
+            "offset": 0.19999999999999996
+          }
+        ]
+      },
+      "sequence": {
+        "id": "sequence.fixture.enter",
+        "index": 0,
+        "elapsed": 0.05,
+        "values": {
+          "curtainOpacity": 0.525
+        },
+        "paused": false,
+        "status": "playing"
+      },
+      "executionLedger": [
+        "chapter.first3.arrival/entry/flag-officeDone-true",
+        "chapter.first3.long/entry/finish-school",
+        "chapter.first3.long/entry/flag-classDone-true",
+        "chapter.first3.long/entry/flag-recruit-true"
+      ]
+    },
+    "checksum": "ead4e8a7f0a41e7f86bf95eb4b5ee9ffe2e340a5d1236bcf14123999ffb333b0"
+  }
+}

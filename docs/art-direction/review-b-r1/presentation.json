@@ -1,0 +1,12 @@
+{
+  "id": "presentation.first3.room3.c1",
+  "kind": "scene-presentation",
+  "actorShadow": {
+    "assetId": "image.first3.r1.shadow",
+    "x": -15,
+    "y": -2,
+    "width": 30,
+    "height": 7,
+    "opacity": 0.45
+  }
+}

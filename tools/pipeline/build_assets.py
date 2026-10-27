@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import io
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -14,11 +15,11 @@ from local_environment import configure, require_venv_path, require_project_path
 configure()
 import PIL
 require_venv_path(PIL.__file__, 'tool.pillow.outside_venv')
-from PIL import Image
+from PIL import Image,ImageFilter
 
 CODE_ROOT=Path(__file__).resolve().parents[2]
 ID=re.compile(r'^[a-z0-9][a-z0-9_.:-]{0,79}$')
-IMAGE_RECIPE_VERSION=1
+IMAGE_RECIPE_VERSION=2
 
 def failure(code,source=''):return {'ok':False,'errors':[{'code':code,'sourceId':source,'pointer':'','relatedIds':[]}]}
 def encoded(value):return (json.dumps(value,ensure_ascii=False,sort_keys=True,indent=2,allow_nan=False)+'\n').encode('utf-8')
@@ -44,6 +45,14 @@ def ffmpeg_tool():
 def png_bytes(image):
     buffer=io.BytesIO();image.convert('RGBA').save(buffer,format='PNG',optimize=True,compress_level=9);return buffer.getvalue()
 
+def blur_radius(entry):
+    if 'blur' not in entry:return None
+    recipe=entry['blur']
+    if not isinstance(recipe,dict) or set(recipe)!={'radius'}:raise ValueError('image blur shape')
+    radius=recipe['radius']
+    if type(radius) not in (int,float) or not math.isfinite(radius) or not 0<=radius<=16:raise ValueError('image blur radius')
+    return radius
+
 def image_rendition(source,entry,maximum):
     """Normalize authored sheet regions into native frames; never change a master."""
     def box(value,keys):
@@ -51,6 +60,7 @@ def image_rendition(source,entry,maximum):
         for key in keys:
             if type(value[key]) is not int or value[key]<(1 if key in ('width','height') else 0):raise ValueError('image recipe bounds')
         if max(value['width'],value['height'])>maximum:raise ValueError('image recipe dimensions')
+    radius=blur_radius(entry)
     with Image.open(source) as opened:
         if opened.format!='PNG' or max(opened.size)>maximum:raise ValueError('image format/dimensions')
         image=opened.convert('RGBA')
@@ -69,6 +79,8 @@ def image_rendition(source,entry,maximum):
         if canvas['x']+image.width>canvas['width'] or canvas['y']+image.height>canvas['height']:raise ValueError('image canvas outside bounds')
         padded=Image.new('RGBA',(canvas['width'],canvas['height']))
         padded.alpha_composite(image,(canvas['x'],canvas['y']));image=padded
+    if radius:
+        image=image.convert('RGBa').filter(ImageFilter.GaussianBlur(radius)).convert('RGBA')
     return image
 
 def build(root,spec):
@@ -85,9 +97,11 @@ def build(root,spec):
             ids.add(entry['id'])
         for entry in entries:
             if entry.get('license') not in licenses:return failure('asset.license.unknown',entry['id'])
-            if entry['kind']!='image' and any(key in entry for key in ('crop','resize','canvas')):return failure('asset.image_recipe.kind',entry['id'])
+            if entry['kind']!='image' and any(key in entry for key in ('crop','resize','canvas','blur')):return failure('asset.image_recipe.kind',entry['id'])
             source=local(root,entry['source']);source.relative_to(root/'assets/sources')
             if not source.is_file():return failure('asset.source.missing',entry['source'])
+            try:blur_radius(entry)
+            except ValueError:return failure('asset.image_recipe.invalid',entry['source'])
         state_path=root/'.cache/assets/build-state.json'
         previous=json.loads(state_path.read_text(encoding='utf-8')) if state_path.exists() else {}
         next_state={};manifest=[];rebuilt=[];by_id={e['id']:e for e in entries};input_hash={e['id']:digest(local(root,e['source']).read_bytes()) for e in entries}

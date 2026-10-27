@@ -8,7 +8,8 @@ export function validateAssetImports({catalog,sourceFor}){
   for(const [i,entry]of spec.entries.entries()){
    if(!localSource(entry.source,spec.sourceRoot))add(`/entries/${i}/source`);if(!Object.hasOwn(spec.licenses,entry.license))add(`/entries/${i}/license`);
    if(entry.kind==='audio'&&[entry.quality,entry.sampleRate,entry.channels].some(value=>!Number.isFinite(value)))add(`/entries/${i}`);
-   if(entry.kind!=='image'&&['crop','resize','canvas'].some(key=>Object.hasOwn(entry,key)))add(`/entries/${i}`);
+   if(entry.kind!=='image'&&['crop','resize','canvas','blur'].some(key=>Object.hasOwn(entry,key)))add(`/entries/${i}`);
+   if(entry.blur!==undefined&&(!entry.blur||typeof entry.blur.radius!=='number'||!Number.isFinite(entry.blur.radius)||entry.blur.radius<0||entry.blur.radius>16))add(`/entries/${i}/blur`);
    for(const key of ['crop','resize','canvas'])if(entry[key]&&Math.max(entry[key].width,entry[key].height)>spec.maxImageDimension)add(`/entries/${i}/${key}`);
    if(entry.canvas){const size=entry.resize??entry.crop;if(size&&(entry.canvas.x+size.width>entry.canvas.width||entry.canvas.y+size.height>entry.canvas.height))add(`/entries/${i}/canvas`);}
    if(!entry.required&&!entry.fallbackId&&!(entry.kind==='audio'&&entry.missingPolicy==='silence'))add(`/entries/${i}/required`);

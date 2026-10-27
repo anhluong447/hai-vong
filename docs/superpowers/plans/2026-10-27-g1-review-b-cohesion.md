@@ -17,7 +17,8 @@ Python trong private `.venv` hiện có. Không engine/dependency mới.
 
 **Spec:** [Director feedback design](../specs/2026-10-27-g1-review-b-cohesion-design.md).
 Baseline `db7bea8`, `feat/first3-art-direction`, active `.worktrees/phase-0`.
-Status2026-10-27: planning only; không phải continuation tự động của plan cũ.
+Status2026-10-27: đang triển khai R01/R02 slice cho C1 theo giao việc mới của user.
+C1 draft đã có viewer/captures thật; chưa duyệt art, chưa bắt đầu R03–R08.
 
 ## Global Constraints
 
@@ -137,7 +138,7 @@ Live content.3→.4 route/policy và các preset refs chỉ đăng ký/bật ở
 masters/asset recipes/bundle trên file map. Sửa pipeline blur trong
 `tools/pipeline/build_assets.py` và schema nếu dùng rendition blur offline.
 
-- [ ] Trước đổi runtime/content, capture save thật từdb7bea8: Room3 exploration,
+- [x] Trước đổi runtime/content, capture save thật từdb7bea8: Room3 exploration,
   giữa van-warning, đang giữD và foundation. Hash/provenance/capture module đầy đủ.
 - [ ] Tạo shell/floor gỗ sạch, props bàn/ghế/báo/tủ/cửa/bảng, shadow và beam. Không
   sửa nguồn concept hoặc tái dùng archive chưa inventory/hash. Foley sourcing có
@@ -145,7 +146,7 @@ masters/asset recipes/bundle trên file map. Sửa pipeline blur trong
 - [ ] Dùng skill imagegen cho vẽ/sửa raster khi triển khai; exception output staging
   đã được user cho phép vẫn giữ. Exact prompts/references và outputs project-bound
   vào source bundle; không gọi generation ở bước lập plan hiện tại.
-- [ ] RED Python rendition: blur giữ alpha, kích thước đồng nhất clear/blur, hash
+- [x] RED Python rendition: blur giữ alpha, kích thước đồng nhất clear/blur, hash
   thay theo radius, invalid radius reject nguồn; GREEN generic recipe rồi build.
 - [ ] Mẫu đo scale64unitstable/205door/eyeY283, props isolation và shell absence.
   Dùng renderer R02 khi sẵn sàng để C1 thành mẫu live, không tự approve ảnh tĩnh.

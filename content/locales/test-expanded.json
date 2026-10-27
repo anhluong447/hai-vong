@@ -1745,5 +1745,105 @@
   "authoring.day": {
     "value": "[ Ngày xem thử / preview ]",
     "params": []
+  },
+  "review.c1.title": {
+    "value": "[ C1 · Bố cục và chiều sâu Phòng số 3 / preview ]",
+    "params": []
+  },
+  "review.c1.description": {
+    "value": "[ Kiểm tra tỷ lệ, nét pixel, che khuất và bóng tiếp xúc. A/D di chuyển trong bản xem riêng; camera, quán tính và foley mới thuộc C2. Bản xem này không mở save người chơi. / preview ]",
+    "params": []
+  },
+  "review.c1.ready": {
+    "value": "[ Đã tải bản nháp C1; chưa được duyệt mỹ thuật. / preview ]",
+    "params": []
+  },
+  "review.c1.position": {
+    "value": "[ Vị trí Khuê: {value} / preview ]",
+    "params": [
+      "value"
+    ]
+  },
+  "review.c1.at": {
+    "value": "[ Đến x={value} / preview ]",
+    "params": [
+      "value"
+    ]
+  },
+  "review.c1.guides": {
+    "value": "[ Hiện thước đo / preview ]",
+    "params": []
+  },
+  "review.c1.shadows": {
+    "value": "[ Hiện bóng tiếp xúc / preview ]",
+    "params": []
+  },
+  "review.c1.props": {
+    "value": "[ Các vật thể độc lập / preview ]",
+    "params": []
+  },
+  "review.c1.reset": {
+    "value": "[ Đặt lại bản xem / preview ]",
+    "params": []
+  },
+  "review.c1.canvas": {
+    "value": "[ Bản xem Phòng số 3 với đồ đạc tách lớp / preview ]",
+    "params": []
+  },
+  "review.c1.error": {
+    "value": "[ Không tải được bản xem: {code} / preview ]",
+    "params": [
+      "code"
+    ]
+  },
+  "review.c1.stats": {
+    "value": "[ {resources} tài nguyên · {references} tham chiếu / preview ]",
+    "params": [
+      "resources",
+      "references"
+    ]
+  },
+  "review.c1.measure": {
+    "value": "[ {name}: {value} units / preview ]",
+    "params": [
+      "name",
+      "value"
+    ]
+  },
+  "review.c1.khue": {
+    "value": "[ Khuê / preview ]",
+    "params": []
+  },
+  "review.c1.van": {
+    "value": "[ Vân / preview ]",
+    "params": []
+  },
+  "review.c1.desk": {
+    "value": "[ Bàn biên tập / preview ]",
+    "params": []
+  },
+  "review.c1.chair": {
+    "value": "[ Ghế gỗ / preview ]",
+    "params": []
+  },
+  "review.c1.cabinet": {
+    "value": "[ Tủ sắt / preview ]",
+    "params": []
+  },
+  "review.c1.door": {
+    "value": "[ Cửa / preview ]",
+    "params": []
+  },
+  "review.c1.window": {
+    "value": "[ Khung cửa sổ / preview ]",
+    "params": []
+  },
+  "review.c1.papers": {
+    "value": "[ Chồng báo / preview ]",
+    "params": []
+  },
+  "review.c1.board": {
+    "value": "[ Bảng đen / preview ]",
+    "params": []
   }
 }

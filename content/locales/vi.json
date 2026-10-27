@@ -1745,5 +1745,105 @@
   "authoring.day": {
     "value": "Ngày xem thử",
     "params": []
+  },
+  "review.c1.title": {
+    "value": "C1 · Bố cục và chiều sâu Phòng số 3",
+    "params": []
+  },
+  "review.c1.description": {
+    "value": "Kiểm tra tỷ lệ, nét pixel, che khuất và bóng tiếp xúc. A/D di chuyển trong bản xem riêng; camera, quán tính và foley mới thuộc C2. Bản xem này không mở save người chơi.",
+    "params": []
+  },
+  "review.c1.ready": {
+    "value": "Đã tải bản nháp C1; chưa được duyệt mỹ thuật.",
+    "params": []
+  },
+  "review.c1.position": {
+    "value": "Vị trí Khuê: {value}",
+    "params": [
+      "value"
+    ]
+  },
+  "review.c1.at": {
+    "value": "Đến x={value}",
+    "params": [
+      "value"
+    ]
+  },
+  "review.c1.guides": {
+    "value": "Hiện thước đo",
+    "params": []
+  },
+  "review.c1.shadows": {
+    "value": "Hiện bóng tiếp xúc",
+    "params": []
+  },
+  "review.c1.props": {
+    "value": "Các vật thể độc lập",
+    "params": []
+  },
+  "review.c1.reset": {
+    "value": "Đặt lại bản xem",
+    "params": []
+  },
+  "review.c1.canvas": {
+    "value": "Bản xem Phòng số 3 với đồ đạc tách lớp",
+    "params": []
+  },
+  "review.c1.error": {
+    "value": "Không tải được bản xem: {code}",
+    "params": [
+      "code"
+    ]
+  },
+  "review.c1.stats": {
+    "value": "{resources} tài nguyên · {references} tham chiếu",
+    "params": [
+      "resources",
+      "references"
+    ]
+  },
+  "review.c1.measure": {
+    "value": "{name}: {value} units",
+    "params": [
+      "name",
+      "value"
+    ]
+  },
+  "review.c1.khue": {
+    "value": "Khuê",
+    "params": []
+  },
+  "review.c1.van": {
+    "value": "Vân",
+    "params": []
+  },
+  "review.c1.desk": {
+    "value": "Bàn biên tập",
+    "params": []
+  },
+  "review.c1.chair": {
+    "value": "Ghế gỗ",
+    "params": []
+  },
+  "review.c1.cabinet": {
+    "value": "Tủ sắt",
+    "params": []
+  },
+  "review.c1.door": {
+    "value": "Cửa",
+    "params": []
+  },
+  "review.c1.window": {
+    "value": "Khung cửa sổ",
+    "params": []
+  },
+  "review.c1.papers": {
+    "value": "Chồng báo",
+    "params": []
+  },
+  "review.c1.board": {
+    "value": "Bảng đen",
+    "params": []
   }
 }

@@ -6,6 +6,7 @@ import {validateResources} from '../../contracts/validateResources.js';
 import {FlagStore} from './FlagStore.js';
 import {ContentCatalog} from './ContentCatalog.js';
 import {validateWorld} from '../../contracts/validateWorld.js';
+import {validateScenePresentation} from '../../contracts/validateScenePresentation.js';
 import {validTextEntry} from '../../contracts/TextTokens.js';
 import {validateNavigation} from '../../contracts/PlayerNavigation.js';
 import {validateGameplay} from '../../contracts/validateGameplay.js';
@@ -56,6 +57,7 @@ export function validateProject({project,schemas,documents,capabilities=[]}) {
  for(const flag of flags) if(!FlagStore.accepts(flag,flag.default)) add('flag.default.invalid',locations.get(`flags:${flag.id}`),'/default',[flag.id]);
  const catalog=new ContentCatalog(entries);
  errors.push(...validateWorld({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
+ errors.push(...validateScenePresentation({catalog,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project',pointerFor:(kind,id)=>{const doc=locations.get(`${kind}:${id}`);return Array.isArray(doc?.data)?'/'+doc.data.findIndex(def=>def.id===id):'';}}));
  errors.push(...validateNavigation({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateAuthoringUI({catalog,project,locales,schemas,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));
  errors.push(...validateDebugUI({catalog,project,locales,sourceFor:(kind,id)=>locations.get(`${kind}:${id}`)?.sourceId??'project'}));

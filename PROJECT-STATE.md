@@ -4,6 +4,41 @@ Updated: 2026-10-27 (Asia/Bangkok).
 
 ## Current task and stopping point
 
+Latest user: commit C1, then implement through C2. This supersedes the prior
+C1 stopping point below. C1 is the accepted basis for continued work; final R1
+art/game-feel approval remains pending. Commit existing C1 snapshot first, then
+R03-R06 and the remaining R02 contracts needed by C2, inline on this branch.
+Do not begin R07/R08/G2 automatically. Preserve root docs/fraft.md user work.
+
+Latest user now authorizes implementation after03a53ed re-plan and R01/C1
+next-step explanation. Inline existing phase-0 worktree. Current boundary is real
+C1 composition/ergonomics review, not automatic R03-R08/G2 continuation.
+
+R01 captured4 genuine baseline saves (Room3 exploration/moving/partial warning,
+foundation) from runtime byte-equivalent to db7bea8 before mutation. Native capture
+2/2 PASS; fixtures/provenance under tests/fixtures/g1-r1. Built-in imagegen produced
+11 sources/prompts in assets/sources/g1-cohesion/; previous staging exception kept.
+Wall-v1 rejected (baked frames); solid wall-v2 plus separate floor/pixel furniture/
+soft shadow candidates ready. Original192/152 sprites unchanged. C1 window view
+composites after wall and under independent pixel frame.
+BlurRED10 -> GREEN6Python/4JS (incl existing); premultiplied alpha and deterministic
+recipes. R02 props/actorShadow slice RED4 ->GREEN13 incl old sampling/lifecycle.
+Build44+audit PASS; V2candidate bundle41,515,740 bytes. No fresh V2recovery or visual
+approval claimed. Snapshot3/content.3 and current First3 live scene retained.
+C1 viewer/captures now exist at docs/art-direction/review-b-r1/: x48/360/430/500/1232,
+guides and desk-off. Real World2D/AssetService/GameSession, separate session/no saves.
+Native checkbox/slider/preset proof1/1; seven captures1/1 each.13resources/13refs,
+dispose0. Architecture/content PASS; full unit158JS+64Python, browser70/70, authoring47/47
+PASS. All five bound receipts verified against current fingerprintb726dda2a0f18683ec01858e151ef64a834d64ffd9e3e052ad727cdfb5113b26.
+No bot/release/fresh V2recovery or full R1 acceptance claimed.
+19 protected tracked design files plus First3Days raw and V1bundle unchanged against03a53ed.
+Read-only preview http://127.0.0.1:8765/docs/art-direction/review-b-r1/ HTTP200,
+launcherPID10936. Art remains C1candidate; no R03-C2motion/audio/camera implemented.
+Hold final asset/renderer commit and fresh V2recovery until actual C1 feedback.
+Keep own scoped reports/ledger only; leave siblings.
+
+### Previous re-plan handoff
+
 Latest user request2026-10-27: read Director Feedback and carefully re-plan G1
 before the next implementation step. This task is documentation/planning only.
 ReviewB needs revision, not approval of db7bea8. Keep192px/152logical sprites;

@@ -188,6 +188,20 @@
                 "minimum": 0
               }
             }
+          },
+          "blur": {
+            "type": "object",
+            "required": [
+              "radius"
+            ],
+            "properties": {
+              "radius": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 16
+              }
+            },
+            "additionalProperties": false
           }
         }
       }
