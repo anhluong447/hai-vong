@@ -1,5 +1,11 @@
 # G1 — Phòng số 3: visual specification
 
+**Director feedback 2026-10-27:** Review B yêu cầu sửa, chưa được duyệt. Xem
+[design R1](../superpowers/specs/2026-10-27-g1-review-b-cohesion-design.md) và
+[re-plan](../superpowers/plans/2026-10-27-g1-review-b-cohesion.md). Review A192/152
+giữ nguyên; shell gộp furniture, floor và prototype cadence bên dưới là baseline
+cần thay theo feedback, không phải chuẩn sản xuất đã chốt.
+
 Status: Review A đã chọn mật độ **A2 — 192 px**, cỡ hiển thị **B3 — 152 logical
 units**, ngày 2026-10-26. [Mẫu và prompts](review-a/README.md) đã có; palette và
 toàn cảnh vẫn kiểm chứng ở Review B. Ba lớp nền, sprite idle/walk, portrait và UI

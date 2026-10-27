@@ -1,8 +1,39 @@
 # Hoi Am workspace state
 
-Updated: 2026-10-26 (Asia/Bangkok).
+Updated: 2026-10-27 (Asia/Bangkok).
 
 ## Current task and stopping point
+
+Latest user request2026-10-27: read Director Feedback and carefully re-plan G1
+before the next implementation step. This task is documentation/planning only.
+ReviewB needs revision, not approval of db7bea8. Keep192px/152logical sprites;
+require separate coherent furniture/wood floor/depth/contact shadows, acceleration/
+friction/distance cadence+real wood foley, smooth camera/zoom/blur/beams18dust.
+New feedback supersedes old permission to merge furniture into shell and defer all
+foley/lighting to later goals. Remain on feat/first3-art-direction in active worktree.
+
+New design and implementation plan:
+docs/superpowers/specs/2026-10-27-g1-review-b-cohesion-design.md
+docs/superpowers/plans/2026-10-27-g1-review-b-cohesion.md
+Two checkpoints proposed: C1 real-renderer composition/ergonomics/occlusion, C2
+playable motion/cadence/audio/camera. Proposed160speed/.09ramp/.08stop/96cycle and
+camera.07/zoom1.07 are planner calls pending user review; do not claim approved.
+Architecture keeps one horizontal lane and authored depth; no topdown/3D redesign.
+Proposes Snapshot4/content.4, Envelope1; genuine db7bea8 saves before implementation.
+Shared First3 entry sequence and explicit silent pressure cue avoid changing
+foundation fixture or deleting story anchors. Live future refs/version route only
+activate after owners exist. Builder check found two consequential gaps; dependency
+ordering and explicit silence/sequence migration are now specified in the docs.
+
+Updated index/old-roadmap/old-plan/visualspec/ReviewB/acceptance links/status, preserving
+old evidence as baseline. No runtime/content/assets/saves/dependencies changed;
+no image/audio generation or test browser/server started in this planning task.
+Documentation checks:10 new local links resolve;20 protected narrative/gameplay/
+concept/raw files byte-identical to HEAD; production src/content/assets/tools/tests
+unchanged; git diff --check PASS. No runtime tests run for this docs-only task.
+Stop at plan/design handoff for user review; no G2-G8 or runtime implementation yet.
+
+### Previous G1 implementation handoff
 
 Latest user authorizes continuing G1 inline on feat/first3-art-direction in
 .worktrees/phase-0, with the explicit generated-image staging exception under

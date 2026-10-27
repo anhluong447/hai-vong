@@ -1,5 +1,10 @@
 # Hồi Âm — Three-Day Art & Presentation Implementation Roadmap
 
+> **Update 2026-10-27:** Director yêu cầu sửa G1 trước goal tiếp theo; xem
+> [G1 Review B R1](2026-10-27-g1-review-b-cohesion.md). G1 kéo vào phần footstep
+> foley, contact shadows, camera zoom và nắng/bụi hẹp theo feedback mới; G5 vẫn
+> giữ nhạc/ambience/full SFX pack. Không coi bản G1 cũ đã đạt mỹ thuật.
+
 > **For agentic workers:** Khi được người dùng giao triển khai, dùng `superpowers:executing-plans` hoặc `superpowers:subagent-driven-development` theo phương thức đã thống nhất. Các checkbox dưới đây là việc tương lai. Roadmap này không tự cho phép thực thi toàn bộ G1–G8 hoặc tự động phân công agent.
 
 **Goal:** Hoàn thiện hình ảnh, nhân vật, âm thanh và tương tác của **3 ngày đầu hiện có**, đủ để chơi, đánh giá và chốt art direction trong game.

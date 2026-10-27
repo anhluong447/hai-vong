@@ -1,5 +1,9 @@
 # Retained design sources
 
+[G1 Review B R1 — re-plan theo Director Feedback](superpowers/plans/2026-10-27-g1-review-b-cohesion.md)
+và [design chiều sâu / game feel](superpowers/specs/2026-10-27-g1-review-b-cohesion-design.md)
+là bản đề xuất mới ngày 2026-10-27. Review B cũ cần chỉnh lại; chưa triển khai R1.
+
 [Lộ trình G1–G8: hoàn thiện hình ảnh và trình diễn 3 ngày đầu](superpowers/plans/2026-10-26-first3-art-roadmap.md)
 và [plan chi tiết G1: mẫu chơi tại Phòng số 3](superpowers/plans/2026-10-26-g1-room3-art-direction.md)
 ghi phạm vi mới theo concept Nostalgic Coastal Anime. Đây là plan để review;

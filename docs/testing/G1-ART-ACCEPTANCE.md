@@ -1,6 +1,8 @@
 # G1 art acceptance record
 
-Updated: 2026-10-26. Status: awaiting playable visual review; not accepted.
+Updated: 2026-10-27. Status: director requested revision; not accepted.
+See [G1 R1 re-plan](../superpowers/plans/2026-10-27-g1-review-b-cohesion.md).
+Evidence below certifies the previous implementation only; no R1 runtime check ran.
 Plan commit: `3fafb2f`. Active branch: `feat/first3-art-direction`.
 
 ## Current progress

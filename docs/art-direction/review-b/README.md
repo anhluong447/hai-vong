@@ -1,6 +1,8 @@
 # G1 playable Review B
 
-Status: current-source and static checks verified; user visual approval pending.
+Status: previous technical checks verified; director requested visual/game-feel
+revision on 2026-10-27. [Re-plan R1](../../superpowers/plans/2026-10-27-g1-review-b-cohesion.md)
+is awaiting review. Captures below document the old implementation, not R1 acceptance.
 
 Run from the active checkout:
 

@@ -1,5 +1,10 @@
 # Hồi Âm G1 — Room 3 Playable Art Direction Implementation Plan
 
+> **Director revision 2026-10-27:** Review B cần chỉnh chiều sâu/game feel theo
+> [re-plan G1 R1](2026-10-27-g1-review-b-cohesion.md). Quyền gộp furniture vào shell
+> và việc để mọi foley/nắng-bụi sang goal sau không còn áp dụng cho revision mới.
+> Tasks/evidence bên dưới giữ làm lịch sử bản `db7bea8`, không phải acceptance R1.
+
 > **For agentic workers:** Chỉ sau khi người dùng giao triển khai, dùng `superpowers:executing-plans` hoặc `superpowers:subagent-driven-development` theo phương thức đã thống nhất để thực hiện từng task. Checkbox `- [ ]` là việc chưa làm. Plan không cho phép tự triển khai, tự phân công agent hoặc mở rộng sang G2–G8.
 
 **Goal:** Đưa cuộc gặp Khuê–Vân tại Phòng số 3 lên runtime thật với background nhiều lớp, sprite pixel chi tiết, portrait/biểu cảm và UI theo concept; cùng người dùng chọn chuẩn để sản xuất 3 ngày đầu.
