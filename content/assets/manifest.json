@@ -165,6 +165,66 @@
     "width": 67
   },
   {
+    "bytes": 3955,
+    "duration": 0.05,
+    "hash": "0e09ed4cd15bf919dce43e8e51d631ce53fff9ddad77e44e7bc7bb2362b424c8",
+    "id": "audio.first3.silent",
+    "kind": "audio",
+    "license": "LicenseRef-ProjectFixture",
+    "path": "/assets/exports/audio.first3.silent.0e09ed4cd15bf919.ogg",
+    "required": true,
+    "source": "assets/sources/g1-cohesion/foley/silence.wav",
+    "sourceHash": "3420dff87ac71ffb43178590c5cb0608dbd4140615ef5ac90c72f07d0de9df14"
+  },
+  {
+    "bytes": 6971,
+    "duration": 0.28,
+    "hash": "51ba2e1d38a1ae9e80f729a4b68203d71ad383d08094f894ef0282ffe3120aae",
+    "id": "audio.first3.wood.1",
+    "kind": "audio",
+    "license": "CC0-1.0",
+    "path": "/assets/exports/audio.first3.wood.1.51ba2e1d38a1ae9e.ogg",
+    "required": true,
+    "source": "assets/sources/g1-cohesion/foley/wood-step-1.wav",
+    "sourceHash": "a1747961386062c25b05188a40a15bcc8aed3d0e40710a9483941ec42e01c248"
+  },
+  {
+    "bytes": 7146,
+    "duration": 0.28,
+    "hash": "906a2da5d1d8664fec3520bbde18b130a62e4ed394dbada556042c13e9278da9",
+    "id": "audio.first3.wood.2",
+    "kind": "audio",
+    "license": "CC0-1.0",
+    "path": "/assets/exports/audio.first3.wood.2.906a2da5d1d8664f.ogg",
+    "required": true,
+    "source": "assets/sources/g1-cohesion/foley/wood-step-2.wav",
+    "sourceHash": "f9ca73b7368812e239d306609ad71ff13251270fe7abe08a49ac96ebade73473"
+  },
+  {
+    "bytes": 7203,
+    "duration": 0.28,
+    "hash": "be5705cc24b111d1c2a08da6412398d179ed3a8030e6f6c45cf85c85c8937a7a",
+    "id": "audio.first3.wood.3",
+    "kind": "audio",
+    "license": "CC0-1.0",
+    "path": "/assets/exports/audio.first3.wood.3.be5705cc24b111d1.ogg",
+    "required": true,
+    "source": "assets/sources/g1-cohesion/foley/wood-step-3.wav",
+    "sourceHash": "bcf8b99835418d4a88ef4ed024a36fb975868f94dd9c325960c2a36f9b9a7bce"
+  },
+  {
+    "bytes": 7045,
+    "duration": 0.28,
+    "hash": "7cf7e8611b28e8b328805673ae89a19eaba594a7c0c464b1ee3d764588c7f2a6",
+    "id": "audio.first3.wood.4",
+    "kind": "audio",
+    "license": "CC0-1.0",
+    "path": "/assets/exports/audio.first3.wood.4.7cf7e8611b28e8b3.ogg",
+    "required": true,
+    "source": "assets/sources/g1-cohesion/foley/wood-step-4.wav",
+    "sourceHash": "8ffa95ff76aee8b9b2cfd605b77640a1bf981badbd8f609ae555c10fd7f75ae9"
+  },
+  {
     "bytes": 5260,
     "duration": 0.5,
     "hash": "b3c415ce706041ce38f4eb944bbc21793f0441f4dd4b120da57b94c330d4961e",

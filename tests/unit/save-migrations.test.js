@@ -75,15 +75,15 @@ test('anchor migrations preserve history read markers and effect identities to p
  session.execute({type:'story.step',intent:{type:'advance'}});session.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}});session.execute({type:'story.step',intent:{type:'advance'}});session.execute({type:'story.step',intent:{type:'choose',choiceId:'visit'}});equal(session.snapshot().gameplay.flags['flag.count'],1);
 });
 test('current snapshots explicitly upgrade the known v1 side-view layout while preserving progress',async()=>{
- const {schemaStepsFor}=await import('/src/application/SaveMigrationPolicy.js'),bundle=await runtimeBundle(),session=new GameSession({bundle,effects});equal(session.snapshot().schemaVersion,3);
+ const {schemaStepsFor}=await import('/src/application/SaveMigrationPolicy.js'),bundle=await runtimeBundle(),session=new GameSession({bundle,effects});equal(session.snapshot().schemaVersion,4);
  session.execute({type:'story.step',intent:{type:'start',chapterId:'foundation.chapter'}});session.execute({type:'story.step',intent:{type:'reveal',count:3}});
- const old=structuredClone(session.snapshot());old.schemaVersion=1;delete old.formatTag;old.gameplay={flags:{...old.gameplay.flags,'flag.count':1}};
- const registry=new MigrationRegistry({schemaVersion:3,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle)}),upgraded=registry.migrate(old,bundle.revision);assert(upgraded.ok,JSON.stringify(upgraded));assert(session.validate(upgraded.value).ok);equal(upgraded.value.gameplay.flags['flag.count'],1);equal(upgraded.value.presentation.dialogue.revealed,3);equal(upgraded.value.gameplay.energy,10);
+ const old=structuredClone(session.snapshot());old.schemaVersion=1;delete old.world.velocity;delete old.world.travelled;delete old.presentation.encounter;delete old.formatTag;old.gameplay={flags:{...old.gameplay.flags,'flag.count':1}};
+ const registry=new MigrationRegistry({schemaVersion:4,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle),catalog:bundle.catalog}),upgraded=registry.migrate(old,bundle.revision);assert(upgraded.ok,JSON.stringify(upgraded));assert(session.validate(upgraded.value).ok);equal(upgraded.value.gameplay.flags['flag.count'],1);equal(upgraded.value.presentation.dialogue.revealed,3);equal(upgraded.value.gameplay.energy,10);
  const legacy={...old,formatTag:'legacy-3d'};assert(!registry.migrate(legacy,bundle.revision).ok);const coordinates=structuredClone(old);coordinates.world={sceneId:'scene.courtyard',x:10,y:0,z:5};assert(!registry.migrate(coordinates,bundle.revision).ok);
 });
 test('hearing snapshots explicitly upgrade the tagged v2 layout without resetting gameplay',async()=>{
- const bundle=await runtimeBundle(),session=new GameSession({bundle,effects});equal(session.snapshot().schemaVersion,3);
- const old=structuredClone(session.snapshot());old.schemaVersion=2;delete old.gameplay.hearing;old.gameplay.wallet=900;old.gameplay.energy=6;
- const registry=new MigrationRegistry({schemaVersion:3,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle)}),upgraded=registry.migrate(old,bundle.revision);assert(upgraded.ok,JSON.stringify(upgraded));assert(session.validate(upgraded.value).ok);equal(upgraded.value.gameplay.hearing,null);equal(upgraded.value.gameplay.wallet,900);equal(upgraded.value.gameplay.energy,6);
+ const bundle=await runtimeBundle(),session=new GameSession({bundle,effects});equal(session.snapshot().schemaVersion,4);
+ const old=structuredClone(session.snapshot());old.schemaVersion=2;delete old.world.velocity;delete old.world.travelled;delete old.presentation.encounter;delete old.gameplay.hearing;old.gameplay.wallet=900;old.gameplay.energy=6;
+ const registry=new MigrationRegistry({schemaVersion:4,contentVersion:bundle.revision,schemaSteps:schemaStepsFor(bundle),catalog:bundle.catalog}),upgraded=registry.migrate(old,bundle.revision);assert(upgraded.ok,JSON.stringify(upgraded));assert(session.validate(upgraded.value).ok);equal(upgraded.value.gameplay.hearing,null);equal(upgraded.value.gameplay.wallet,900);equal(upgraded.value.gameplay.energy,6);
  const legacy={...old,formatTag:'legacy-3d'};assert(!registry.migrate(legacy,bundle.revision).ok);
 });

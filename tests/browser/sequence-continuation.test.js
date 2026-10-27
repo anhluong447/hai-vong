@@ -8,6 +8,9 @@ async function mount(){const page=new DOMParser().parseFromString(await(await fe
 async function withTimeline(steps,destinationEntry,run){
  const original=globalThis.fetch;globalThis.fetch=async(...args)=>{const response=await original(...args),path=new URL(args[0] instanceof Request?args[0].url:String(args[0]),location.href).pathname;
   if(path==='/content/sequences/foundation.json'){const definitions=await response.json();definitions.find(item=>item.id==='sequence.fixture.enter').steps=steps;return new Response(JSON.stringify(definitions),{status:200,headers:{'Content-Type':'application/json'}});}
+  // This test authors a different foundation timeline; its custom shape is not
+  // the historical First3 timeline targeted by the production migration.
+  if(path==='/content/gameplay/migrations.json'){const data=await response.json();for(const step of data.steps)if(step.presentationPatch)step.presentationPatch.sequenceMap=[];return new Response(JSON.stringify(data),{status:200,headers:{'Content-Type':'application/json'}});}
   if(path==='/content/scenes/foundation.json'&&!destinationEntry){const definitions=await response.json();delete definitions.find(item=>item.id==='scene.club').sequenceId;return new Response(JSON.stringify(definitions),{status:200,headers:{'Content-Type':'application/json'}});}
   return response;
  };try{await run();}finally{globalThis.fetch=original;}

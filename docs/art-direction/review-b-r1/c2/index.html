@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title></title><link rel="stylesheet" href="/styles/base.css"></head>
+<body>
+<main data-game data-project="/docs/art-direction/review-b-r1/c2/project.json" data-failure-page="/content/fallback/load-error.html">
+ <header><div><h1 data-text="world.title"></h1><p data-text="world.fixture"></p></div><button data-action="pause" data-text="world.pause"></button></header>
+ <p data-text="review.c2.description"></p>
+ <section data-role="stage"><canvas tabindex="0" data-label="world.viewport"></canvas><div data-role="curtain" hidden></div><div data-role="scene-name"></div></section>
+ <section data-role="exploration"><p data-role="controls"></p><button data-action="interact" data-text="world.interact"></button></section>
+ <section data-role="dialogue" hidden><div data-role="dialogue-speaker" hidden><canvas data-role="dialogue-portrait" aria-hidden="true" hidden></canvas><span data-role="dialogue-name"></span></div><div data-role="dialogue-content"><div data-role="line" aria-live="polite"></div><div data-role="choices"></div><div data-role="dialogue-actions"><button data-action="advance" data-text="world.continue"></button><button data-action="auto" data-text="player.auto"></button><button data-action="skip" data-text="player.skip"></button><button data-action="stop" data-text="player.stop"></button></div></div></section>
+ <p data-role="status" role="status"></p><button data-action="retry" data-text="world.retry" hidden></button>
+ <section data-role="hearing" role="dialog" aria-modal="true" tabindex="-1" hidden></section>
+ <section data-role="menu" role="dialog" aria-modal="true" tabindex="-1" hidden><h2 data-text="world.paused"></h2><button data-action="resume" data-text="world.resume"></button><button data-action="audio" data-text="world.audio"></button><button data-action="fullscreen" data-text="world.fullscreen"></button></section>
+</main>
+<noscript><meta http-equiv="refresh" content="0;url=/content/fallback/no-javascript.html"></noscript>
+<script type="module" src="/src/bootstrap/main.js"></script>
+</body></html>

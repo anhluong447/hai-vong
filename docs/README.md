@@ -4,6 +4,8 @@
 và [design chiều sâu / game feel](superpowers/specs/2026-10-27-g1-review-b-cohesion-design.md)
 đang được triển khai theo giao việc ngày 2026-10-27. [Bản xem C1](art-direction/review-b-r1/README.md)
 có bố cục, props độc lập và bóng tiếp xúc thật để review; chưa nghiệm thu art/game feel R1.
+[Bản thử C2](art-direction/review-b-r1/c2/README.md) bổ sung chuyển động, foley,
+camera và môi trường; còn review tuning/chân trụ, chưa bật lên normal entry.
 
 [Lộ trình G1–G8: hoàn thiện hình ảnh và trình diễn 3 ngày đầu](superpowers/plans/2026-10-26-first3-art-roadmap.md)
 và [plan chi tiết G1: mẫu chơi tại Phòng số 3](superpowers/plans/2026-10-26-g1-room3-art-direction.md)

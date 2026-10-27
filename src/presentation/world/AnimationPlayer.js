@@ -8,7 +8,8 @@ export class AnimationPlayer {
   const total=this.clip.frames.reduce((sum,f)=>sum+f.duration,0);this.state.elapsed+=delta;
   if(this.clip.loop)this.state.elapsed%=total;else if(this.state.elapsed>=total){this.state.elapsed=total;this.state.status='complete';}
  }
- frame(){if(!this.state)return null;let time=this.state.elapsed;for(const f of this.clip.frames){if(time<f.duration)return f;time-=f.duration;}return this.clip.frames.at(-1);}
+ frame(){if(!this.state)return null;let time=this.state.elapsed;for(const f of this.clip.frames){if(time<f.duration-1e-10)return f;time-=f.duration;}return this.clip.frames.at(-1);}
+ seekDistance(travelled,cycleDistance){if(!this.state||!Number.isFinite(travelled)||travelled<0||!Number.isFinite(cycleDistance)||cycleDistance<=0)return bad();const total=this.clip.frames.reduce((sum,f)=>sum+f.duration,0);this.state.elapsed=(travelled%cycleDistance)/cycleDistance*total;return success(this.snapshot());}
  pause(){if(this.state)this.state.paused=true;}
  resume(){if(this.state)this.state.paused=false;}
  snapshot(){return structuredClone(this.state);}

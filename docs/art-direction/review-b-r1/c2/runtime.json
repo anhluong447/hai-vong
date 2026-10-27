@@ -1,0 +1,35 @@
+{
+  "id": "runtime.first3",
+  "kind": "runtime",
+  "startSceneId": "scene.first3.room3",
+  "startSpawnId": "entry",
+  "playerActorId": "actor.first3.khue",
+  "movementSpeed": 160,
+  "maxMovementDelta": 0.1,
+  "inputId": "input.default",
+  "uiId": "ui.first3-art",
+  "audioBuses": [
+    {
+      "id": "bgm",
+      "gain": 0.8
+    },
+    {
+      "id": "ambience",
+      "gain": 0.8
+    },
+    {
+      "id": "voice",
+      "gain": 1
+    },
+    {
+      "id": "sfx",
+      "gain": 0.8
+    }
+  ],
+  "navigationId": "ui.navigation",
+  "actionLabelsId": "input.actions",
+  "gameplayConfigId": "balance.first3",
+  "hearingBalanceId": "hearing.balance.fixture",
+  "migrationConfigId": "migration.phase0",
+  "locomotionConfigId": "locomotion.first3"
+}

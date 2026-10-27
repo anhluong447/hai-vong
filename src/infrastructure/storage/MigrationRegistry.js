@@ -1,5 +1,5 @@
 import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
-import {validAnimationState} from '../../contracts/PresentationSnapshot.js';
+import {validAnimationState,validWorldView,validAudioState,validSequenceState} from '../../contracts/PresentationSnapshot.js';
 const bad=code=>failure(diagnostic(code,'save','/migration'));
 const object=value=>!!value&&typeof value==='object'&&!Array.isArray(value);
 const missingDefaults=(defaults,state,depth=0)=>{
@@ -9,6 +9,25 @@ const missingDefaults=(defaults,state,depth=0)=>{
 };
 const knownV1=state=>state.formatTag===undefined&&object(state.gameplay)&&Object.keys(state.gameplay).every(key=>key==='flags')&&object(state.gameplay.flags)&&object(state.world)&&Number.isFinite(state.world.position)&&[1,-1].includes(state.world.facing)&&Object.keys(state.world).every(key=>['sceneId','position','facing','pending','moving'].includes(key));
 const knownV2=state=>state.formatTag==='hoi-am.side-scroll'&&object(state.gameplay?.calendar)&&object(state.world)&&Number.isFinite(state.world.position)&&[1,-1].includes(state.world.facing);
+function upgradeV3(state,step,catalog){
+ if(!knownV2(state)||Object.keys(state.world).some(k=>!['sceneId','position','facing','pending','moving'].includes(k))||state.world.moving!==undefined&&typeof state.world.moving!=='boolean'||!object(state.presentation))return false;
+ const view=state.presentation.view?.world;
+ if(view){
+  if(!object(view)||Object.keys(view).some(k=>!['sceneId','elapsed','cameraX','actors'].includes(k))||!Number.isFinite(view.cameraX)||view.cameraX<0||view.sceneId!==state.world.sceneId)return false;
+  const candidate={...view,camera:{x:view.cameraX,y:0,zoom:1}};delete candidate.cameraX;
+  // Older content may still use its declared fixture clips; bounded content policy
+  // validates/resets those later, after the schema conversion.
+  const animations=Object.values(candidate.actors??{});if(animations.some(a=>a!==null&&!validAnimationState(a,catalog)))return false;
+  const shape={...candidate,actors:Object.fromEntries(Object.keys(candidate.actors??{}).map(id=>[id,null]))};
+  if(!validWorldView(shape,{catalog,playerActorId:step.playerActorId,viewport:step.viewport}))return false;
+  state.presentation.view.world=candidate;
+ }
+ if(!object(state.audio)||!object(state.sequence))return false;
+ if(state.audio.intent){if(Object.keys(state.audio).some(k=>k!=='intent')||Object.keys(state.audio.intent).some(k=>!['cueId','offset'].includes(k))||!catalog.get('audio',state.audio.intent.cueId).ok||!Number.isFinite(state.audio.intent.offset)||state.audio.intent.offset<0)return false;}
+ else if(Object.keys(state.audio).length&&!validAudioState(state.audio,{catalog,buses:step.buses}))return false;
+ if(Object.keys(state.sequence).length&&!validSequenceState(state.sequence,catalog.list('sequences')))return false;
+ state.world={...state.world,moving:false,velocity:0,travelled:0};state.presentation.encounter=null;return true;
+}
 /** Bounded, explicit mappings. There is no guessed legacy coordinate conversion. */
 export class MigrationRegistry {
  constructor({schemaVersion,contentVersion,schemaSteps=[],contentSteps=[],catalog}){Object.assign(this,{schemaVersion,contentVersion,schemaSteps,contentSteps,catalog});}
@@ -19,12 +38,19 @@ export class MigrationRegistry {
     if(!Number.isInteger(state.schemaVersion)||state.schemaVersion>this.schemaVersion||schemas.has(state.schemaVersion))return bad('save.version.unsupported');schemas.add(state.schemaVersion);
     const candidates=this.schemaSteps.filter(s=>s.from===state.schemaVersion&&s.tag===state.formatTag);
     if(candidates.length!==1)return bad('save.legacy.exportOnly');const step=candidates[0];
-    if(step.guard&&!(step.guard==='phase0-side-scroll-v1'&&knownV1(state)||step.guard==='phase0-side-scroll-v2'&&knownV2(state)))return bad('save.legacy.exportOnly');
+    if(step.guard&&!(step.guard==='phase0-side-scroll-v1'&&knownV1(state)||step.guard==='phase0-side-scroll-v2'&&knownV2(state)||step.guard==='phase0-side-scroll-v3'&&upgradeV3(state,step,this.catalog)))return bad('save.legacy.exportOnly');
     state={...missingDefaults(step.defaults??{},state),schemaVersion:step.to};
    }
    const seen=new Set();while(state.contentRevision!==this.contentVersion){
     if(seen.has(state.contentRevision))return bad('save.content.cycle');seen.add(state.contentRevision);
     const candidates=this.contentSteps.filter(s=>s.from===state.contentRevision);if(candidates.length!==1)return bad('save.content.unsupported');const step=candidates[0];
+    if(step.presentationPatch?.sceneIds.includes(state.world?.sceneId)){
+     const patch=step.presentationPatch,audio=state.audio,sequence=state.sequence;
+     if(audio.intent){if(Object.keys(audio).some(k=>k!=='intent')||!object(audio.intent)||Object.keys(audio.intent).some(k=>!['cueId','offset'].includes(k))||!this.catalog.get('audio',audio.intent.cueId).ok||!Number.isFinite(audio.intent.offset)||audio.intent.offset<0)return bad('save.migration.audioInvalid');if(patch.dropAudioCueIds.includes(audio.intent.cueId))state.audio={};}
+     else if(Object.keys(audio).length){const buses=Object.fromEntries(this.catalog.list('config').filter(c=>c.kind==='runtime').flatMap(c=>c.audioBuses.map(b=>[b.id,b])));if(!validAudioState(audio,{catalog:this.catalog,buses}))return bad('save.migration.audioInvalid');audio.tracks=audio.tracks.filter(t=>!patch.dropAudioCueIds.includes(t.cueId));}
+     if(Object.keys(sequence).length){if(!validSequenceState(sequence,this.catalog.list('sequences')))return bad('save.migration.sequenceInvalid');const mapping=patch.sequenceMap.find(m=>m.from===sequence.id);if(mapping){sequence.id=mapping.to;if(!validSequenceState(sequence,this.catalog.list('sequences')))return bad('save.migration.sequenceInvalid');}}
+     const rules=patch.legacyEncounterRules.filter(r=>r.sceneId===state.world.sceneId&&r.chapterId===state.story?.cursor?.chapterId);if(['say','choose'].includes(state.story.waiting)&&rules.length===1)state.presentation.encounter={sceneId:rules[0].sceneId,interactionId:rules[0].interactionId};
+    }
     const policy=step.resetActorAnimations,world=state.presentation?.view?.world;
     if(policy&&world&&policy.sceneIds.includes(state.world?.sceneId)){
      const scene=this.catalog?.get('scenes',world.sceneId);if(world.sceneId!==state.world.sceneId||!scene?.ok||!object(world.actors))return bad('save.migration.animationInvalid');

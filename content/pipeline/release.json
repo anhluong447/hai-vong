@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "projectSchemaVersion": 1,
-  "saveSchemaVersion": 3,
+  "saveSchemaVersion": 4,
   "requiredSuites": [
     "architecture",
     "content",

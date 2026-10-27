@@ -1,0 +1,122 @@
+{
+  "id": "chapter.first3.pressure",
+  "entryNodeId": "entry",
+  "nodes": [
+    {
+      "id": "entry",
+      "commands": [
+        {
+          "id": "khoa-entry",
+          "op": "say",
+          "textKey": "first3.line.khoa-entry"
+        },
+        {
+          "id": "van-rights",
+          "op": "say",
+          "textKey": "first3.line.van-rights"
+        },
+        {
+          "id": "khoa-pressure",
+          "op": "say",
+          "textKey": "first3.line.khoa-pressure"
+        },
+        {
+          "id": "confront-route",
+          "op": "choose",
+          "choices": [
+            {
+              "id": "investigate",
+              "textKey": "first3.choice.canteen.investigate",
+              "target": "canteen",
+              "condition": {
+                "flag": "flag.first3.canteenComplete",
+                "equals": true
+              }
+            },
+            {
+              "id": "defer",
+              "textKey": "first3.choice.main.defer",
+              "target": "main"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canteen",
+      "commands": [
+        {
+          "id": "canteen-leverage",
+          "op": "say",
+          "textKey": "first3.line.canteen-leverage"
+        },
+        {
+          "id": "canteen-join-flash",
+          "op": "jump",
+          "target": "flash"
+        }
+      ]
+    },
+    {
+      "id": "main",
+      "commands": [
+        {
+          "id": "main-leverage",
+          "op": "say",
+          "textKey": "first3.line.main-leverage"
+        },
+        {
+          "id": "main-join-flash",
+          "op": "jump",
+          "target": "flash"
+        }
+      ]
+    },
+    {
+      "id": "flash",
+      "commands": [
+        {
+          "id": "camera-bluff",
+          "op": "say",
+          "textKey": "first3.line.camera-bluff"
+        },
+        {
+          "id": "camera-cue",
+          "op": "playCue",
+          "cueId": "cue.first3.silent"
+        },
+        {
+          "id": "long-witness",
+          "op": "say",
+          "textKey": "first3.line.long-witness"
+        },
+        {
+          "id": "khoa-friday",
+          "op": "say",
+          "textKey": "first3.line.khoa-friday"
+        },
+        {
+          "id": "flag-pressure-false",
+          "op": "setFlag",
+          "flagId": "flag.first3.pressure",
+          "value": false
+        },
+        {
+          "id": "flag-advisor-true",
+          "op": "setFlag",
+          "flagId": "flag.first3.advisor",
+          "value": true
+        },
+        {
+          "id": "nguyen-door",
+          "op": "say",
+          "textKey": "first3.line.nguyen-door"
+        },
+        {
+          "id": "done",
+          "op": "end"
+        }
+      ]
+    }
+  ]
+}

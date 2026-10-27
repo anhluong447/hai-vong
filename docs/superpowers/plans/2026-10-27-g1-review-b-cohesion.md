@@ -17,8 +17,12 @@ Python trong private `.venv` hiện có. Không engine/dependency mới.
 
 **Spec:** [Director feedback design](../specs/2026-10-27-g1-review-b-cohesion-design.md).
 Baseline `db7bea8`, `feat/first3-art-direction`, active `.worktrees/phase-0`.
-Status2026-10-27: đang triển khai R01/R02 slice cho C1 theo giao việc mới của user.
-C1 draft đã có viewer/captures thật; chưa duyệt art, chưa bắt đầu R03–R08.
+Status2026-10-27: C1 checkpoint `af2b30c`; latest user authorizes continuing through
+R07 and required R08 verification. R07 normalentry.4/typedauthoring/freshV2recovery
+implemented; current results and outstanding limits in
+[R1 acceptance](../../testing/G1-R1-ACCEPTANCE.md). R04 actualpixel sole drift1unit;
+final art/tuning approval pending. Initial CPU4x p9550.1ms misses33.34ms target.
+Full current CI/static artifact/final independent review still in progress.
 
 ## Global Constraints
 

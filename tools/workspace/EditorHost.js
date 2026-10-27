@@ -13,6 +13,7 @@ import {StoryEditor} from './editors/StoryEditor.js';
 import {QuestEditor} from './editors/QuestEditor.js';
 import {GameplayEditor} from './editors/GameplayEditor.js';
 import {HearingEditor} from './editors/HearingEditor.js';
+import {PresentationEditor} from './editors/PresentationEditor.js';
 /** One source selection, one inspector, and one disposable preview per workspace. */
 export class EditorHost {
  constructor(root,{workspace,text,onSelect,onResult,rebuildAssets}){Object.assign(this,{root,workspace,text,onSelect,onResult,rebuildAssets});this.index=new ResourceIndex(workspace);this.query='';this.offset=0;this.viewStates=new Map();}
@@ -30,7 +31,7 @@ export class EditorHost {
    const rename=this.node('input',{'aria-label':this.label(this.ui.labels.replaceId)});rename.value=selected.id;const renameButton=this.button(this.ui.labels.rename,()=>this.result(this.index.rename(selected.kind,selected.id,rename.value))),remove=this.button(this.ui.labels.remove,()=>this.result(this.index.remove(selected.kind,selected.id)));renameButton.disabled=remove.disabled=selected.readOnly;this.root.append(rename,renameButton,remove);
   }
   const inspector=this.node('div',{'data-role':'resource-inspector'});this.root.append(inspector);const doc=this.workspace.get(sourceId),classes={locale:StringsPanel,assets:AssetsPanel,animations:AnimationPanel,audio:AudioPanel,events:EventsPanel,scenes:SceneEditor,input:BindingsEditor,story:StoryEditor,quests:QuestEditor,balance:GameplayEditor,team:GameplayEditor,schedules:GameplayEditor,publication:GameplayEditor,progression:GameplayEditor,hearingBalance:GameplayEditor,hearings:HearingEditor,flags:GameplayEditor,playtests:GameplayEditor};
-  const Editor=doc.data.kind==='asset-imports'?AssetsPanel:doc.kind==='config'&&['world-ui','hearing-ui','player-navigation'].includes(doc.data.kind)?LayoutEditor:classes[doc.kind]??Inspector;
+  const definitionKind=selected?.value?.kind??doc.data.kind,Editor=definitionKind==='asset-imports'?AssetsPanel:doc.kind==='config'&&['locomotion','scene-presentation','encounter-presentation'].includes(definitionKind)?PresentationEditor:doc.kind==='config'&&['world-ui','hearing-ui','player-navigation'].includes(definitionKind)?LayoutEditor:classes[doc.kind]??Inspector;
   this.editor=new Editor(inspector,{workspace:this.workspace,sourceId,resourceId:this.resourceId,text:this.text,ui:this.ui,onResult:result=>this.result(result),openSource:this.onSelect,rebuildAssets:this.rebuildAssets});this.editor.restoreUI?.(this.viewStates.get(sourceId));this.editor.render();
   if(previousSource===sourceId&&field)[...inspector.querySelectorAll('[data-field]')].find(node=>node.dataset.field===field&&!node.disabled)?.focus();
  }

@@ -29,7 +29,7 @@ test('choice checkpoint resumes the selected branch with no duplicate effect',as
  const other=new GameSession({bundle,effects,initialState:decoded.value});new StoryRunner(other).step({type:'choose',choiceId:'visit'});equal(other.snapshot().gameplay.flags['flag.count'],1);
 });
 test('pending scene and partially progressed sequence survive codec without platform objects',async()=>{
- const {session,checkpoints}=setup();const state=structuredClone(session.snapshot());state.world={sceneId:'scene.courtyard',position:120,facing:1,pending:{sceneId:'scene.club',spawnId:'entry',requestId:'resume'}};state.sequence={id:'sequence.fixture.enter',index:0,elapsed:0.2,values:{curtainOpacity:0.3},paused:true,status:'playing'};state.audio={paused:true,buses:{bgm:{gain:0.5,muted:false}},tracks:[{cueId:'cue.fixture.bgm',offset:0.2}]};
+ const {session,checkpoints}=setup();const state=structuredClone(session.snapshot());state.world={velocity:0,travelled:0,moving:false,sceneId:'scene.courtyard',position:120,facing:1,pending:{sceneId:'scene.club',spawnId:'entry',requestId:'resume'}};state.sequence={id:'sequence.fixture.enter',index:0,elapsed:0.2,values:{curtainOpacity:0.3},paused:true,status:'playing'};state.audio={paused:true,buses:{bgm:{gain:0.5,muted:false}},tracks:[{cueId:'cue.fixture.bgm',offset:0.2}]};
  assert(session.replace(state).ok);
  const envelope=await SaveCodec.encode(checkpoints.capture().value,{buildId:'test',contentVersion:bundle.revision});const decoded=await SaveCodec.decode(envelope.value);assert(decoded.ok);
  equal(decoded.value.world,state.world);equal(decoded.value.sequence.elapsed,0.2);equal(decoded.value.world.pending.sceneId,'scene.club');equal(decoded.value.audio.tracks[0].offset,0.2);

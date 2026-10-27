@@ -13,10 +13,10 @@ export function runtimeCheckpoint({read,write,create,freeze,thaw,captureUI,prepa
   async prepare(state){
    const next=create(),previous=read(),uiBefore=captureUI(),textBefore=line.snapshot();let ready=false;
    try{
-    const saved=state.presentation.view,world=saved?.world??{sceneId:state.world.sceneId,elapsed:0,cameraX:0,actors:{}},ui=saved?.ui??{paused:false};
+    const saved=state.presentation.view,world=saved?.world??{sceneId:state.world.sceneId,elapsed:0,camera:{x:0,y:0,zoom:1},actors:{}},ui=saved?.ui??{paused:false};
     if(!ui||typeof ui.paused!=='boolean'||world.sceneId!==state.world.sceneId)return bad();
-    if(world.sceneId){const loaded=await next.world.restore(world);if(!loaded.ok)return loaded;}
-    else if(world.elapsed!==0||world.cameraX!==0||Object.keys(world.actors??{}).length)return bad();
+    if(world.sceneId){const loaded=await next.world.restore(world);if(!loaded.ok)return loaded;const cues=next.world.current?.presentation?.footstepCueIds??[];if(cues.length){const prepared=await next.audio.prepareOneShots(cues);if(!prepared.ok)return prepared;const adopted=next.audio.commitOneShots(prepared.value);if(!adopted.ok)return adopted;}}
+    else if(world.elapsed!==0||(world.camera.x!==0||world.camera.y!==0||world.camera.zoom!==1)||Object.keys(world.actors??{}).length)return bad();
     const pending=state.world.pending??state.story.pending;
     if(pending){const loaded=await next.world.prepare(pending.sceneId);if(!loaded.ok)return loaded;}
     if(Object.keys(state.sequence).length){const restored=next.sequence.restore(state.sequence);if(!restored.ok)return restored;}

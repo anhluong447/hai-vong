@@ -1,0 +1,921 @@
+[
+  {
+    "id": "scene.first3.gate",
+    "nameKey": "first3.scene.gate",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "school-map",
+        "nameKey": "first3.interact.school-map",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.arrival"
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "sequenceId": "sequence.first3.enter"
+  },
+  {
+    "id": "scene.first3.office",
+    "nameKey": "first3.scene.office",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "class-door",
+        "nameKey": "first3.interact.class-door",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.classroom",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.officeDone",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "sequenceId": "sequence.first3.enter"
+  },
+  {
+    "id": "scene.first3.classroom",
+    "nameKey": "first3.scene.classroom",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "long-class",
+        "nameKey": "first3.interact.long-class",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.long",
+        "condition": {
+          "flag": "flag.first3.classDone",
+          "equals": false
+        }
+      },
+      {
+        "id": "corridor-door",
+        "nameKey": "first3.interact.corridor-door",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.corridor",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.classDone",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "sequenceId": "sequence.first3.enter"
+  },
+  {
+    "id": "scene.first3.corridor",
+    "nameKey": "first3.scene.corridor",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "room3-door",
+        "nameKey": "first3.interact.room3-door",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.room3",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.classDone",
+          "equals": true
+        }
+      },
+      {
+        "id": "canteen-door",
+        "nameKey": "first3.interact.canteen-door",
+        "x": 720,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.canteen",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.canteenAccepted",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "sequenceId": "sequence.first3.enter"
+  },
+  {
+    "id": "scene.first3.room3",
+    "nameKey": "first3.scene.room3",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 430
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.first3.r1.wall",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 380,
+        "parallax": 1,
+        "blurAssetId": "image.first3.r1.wall-blur"
+      },
+      {
+        "assetId": "image.first3.r1.floor",
+        "x": 0,
+        "y": 380,
+        "width": 1280,
+        "height": 160,
+        "parallax": 1
+      },
+      {
+        "assetId": "image.first3.room3.exterior",
+        "x": 732,
+        "y": 156,
+        "width": 300,
+        "height": 128,
+        "parallax": 1
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430,
+        "visibleDays": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "van",
+        "actorId": "actor.first3.van",
+        "x": 550,
+        "facing": -1,
+        "visibleDays": [
+          1
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "id": "van-recruit",
+        "nameKey": "first3.interact.van-recruit",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.recruit",
+        "condition": {
+          "flag": "flag.first3.recruit",
+          "equals": true
+        },
+        "presentationId": "presentation.first3.van-desk"
+      },
+      {
+        "id": "cabinet",
+        "nameKey": "first3.interact.cabinet",
+        "x": 720,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.tape",
+        "condition": {
+          "flag": "flag.first3.tape",
+          "equals": true
+        }
+      },
+      {
+        "id": "long-plan",
+        "nameKey": "first3.interact.long-plan",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.plan",
+        "condition": {
+          "flag": "flag.first3.plan",
+          "equals": true
+        }
+      },
+      {
+        "id": "khoa",
+        "nameKey": "first3.interact.khoa",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.pressure",
+        "condition": {
+          "flag": "flag.first3.pressure",
+          "equals": true
+        }
+      },
+      {
+        "id": "nguyen",
+        "nameKey": "first3.interact.nguyen",
+        "x": 720,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.advisor",
+        "condition": {
+          "flag": "flag.first3.advisor",
+          "equals": true
+        }
+      },
+      {
+        "id": "home-door",
+        "nameKey": "first3.interact.home-door",
+        "x": 80,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.home",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.recruited",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [],
+    "sequenceId": "sequence.first3.enter",
+    "props": [
+      {
+        "id": "desk",
+        "assetId": "image.first3.r1.desk",
+        "x": 350,
+        "y": 420,
+        "width": 270,
+        "height": 64,
+        "pivot": {
+          "x": 0,
+          "y": 64
+        },
+        "sortY": 421,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 10,
+            "y": -3,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 31,
+            "y": -19,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 229,
+            "y": -19,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 250,
+            "y": -3,
+            "width": 10,
+            "height": 4,
+            "opacity": 0.45
+          }
+        ]
+      },
+      {
+        "id": "chair",
+        "assetId": "image.first3.r1.chair",
+        "x": 566,
+        "y": 410,
+        "width": 38,
+        "height": 57,
+        "pivot": {
+          "x": 19.0,
+          "y": 57
+        },
+        "sortY": 414,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -15,
+            "y": -10,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -2,
+            "y": -2,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 10,
+            "y": -6,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 3,
+            "y": -15,
+            "width": 7,
+            "height": 3,
+            "opacity": 0.45
+          }
+        ]
+      },
+      {
+        "id": "cabinet",
+        "assetId": "image.first3.r1.cabinet",
+        "x": 735,
+        "y": 420,
+        "width": 76,
+        "height": 111,
+        "pivot": {
+          "x": 38.0,
+          "y": 111
+        },
+        "sortY": 412,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -29,
+            "y": -2,
+            "width": 14,
+            "height": 4,
+            "opacity": 0.45
+          },
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": 18,
+            "y": -2,
+            "width": 14,
+            "height": 4,
+            "opacity": 0.45
+          }
+        ]
+      },
+      {
+        "id": "door",
+        "assetId": "image.first3.r1.door",
+        "x": 80,
+        "y": 380,
+        "width": 100,
+        "height": 205,
+        "pivot": {
+          "x": 50.0,
+          "y": 205
+        },
+        "sortY": 380,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": []
+      },
+      {
+        "id": "window",
+        "assetId": "image.first3.r1.window",
+        "x": 880,
+        "y": 220,
+        "width": 325,
+        "height": 154,
+        "pivot": {
+          "x": 162.5,
+          "y": 77
+        },
+        "sortY": 300,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": []
+      },
+      {
+        "id": "papers",
+        "assetId": "image.first3.r1.papers",
+        "x": 800,
+        "y": 420,
+        "width": 63,
+        "height": 32,
+        "pivot": {
+          "x": 31.5,
+          "y": 32
+        },
+        "sortY": 422,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": [
+          {
+            "assetId": "image.first3.r1.shadow",
+            "x": -25,
+            "y": -2,
+            "width": 50,
+            "height": 6,
+            "opacity": 0.3
+          }
+        ]
+      },
+      {
+        "id": "board",
+        "assetId": "image.first3.r1.board",
+        "x": 410,
+        "y": 283,
+        "width": 194,
+        "height": 85,
+        "pivot": {
+          "x": 97,
+          "y": 42.5
+        },
+        "sortY": 300,
+        "order": 0,
+        "sampling": "pixel",
+        "shadows": []
+      }
+    ],
+    "presentationId": "presentation.first3.room3"
+  },
+  {
+    "id": "scene.first3.home",
+    "nameKey": "first3.scene.home",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "rest-one",
+        "nameKey": "first3.interact.rest-one",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.rest1",
+        "condition": {
+          "flag": "flag.first3.rest1",
+          "equals": true
+        }
+      },
+      {
+        "id": "rest-two",
+        "nameKey": "first3.interact.rest-two",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.rest2",
+        "condition": {
+          "flag": "flag.first3.rest2",
+          "equals": true
+        }
+      },
+      {
+        "id": "school-day2",
+        "nameKey": "first3.interact.school-day2",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.room3",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.day2",
+          "equals": true
+        }
+      },
+      {
+        "id": "school-day3",
+        "nameKey": "first3.interact.school-day3",
+        "x": 1000,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.corridor",
+        "spawnId": "entry",
+        "condition": {
+          "flag": "flag.first3.day3",
+          "equals": true
+        }
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "sequenceId": "sequence.first3.enter"
+  },
+  {
+    "id": "scene.first3.canteen",
+    "nameKey": "first3.scene.canteen",
+    "width": 1280,
+    "height": 540,
+    "groundY": 420,
+    "walkBounds": {
+      "min": 48,
+      "max": 1232
+    },
+    "defaultSpawnId": "entry",
+    "spawns": [
+      {
+        "id": "entry",
+        "x": 120
+      }
+    ],
+    "layers": [
+      {
+        "assetId": "image.fixture.scene",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 540,
+        "parallax": 0.3,
+        "motion": {
+          "amplitude": 1,
+          "period": 9
+        }
+      },
+      {
+        "assetId": "image.fixture.scene",
+        "x": 500,
+        "y": 80,
+        "width": 960,
+        "height": 540,
+        "parallax": 0.9,
+        "opacity": 0.12
+      }
+    ],
+    "actors": [
+      {
+        "id": "speaker",
+        "actorId": "actor.npc",
+        "x": 430
+      }
+    ],
+    "interactions": [
+      {
+        "id": "tray",
+        "nameKey": "first3.interact.tray",
+        "x": 430,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.side-photo",
+        "condition": {
+          "flag": "flag.first3.photo",
+          "equals": true
+        }
+      },
+      {
+        "id": "kitchen",
+        "nameKey": "first3.interact.kitchen",
+        "x": 850,
+        "radius": 70,
+        "kind": "story",
+        "chapterId": "chapter.first3.side-source",
+        "condition": {
+          "flag": "flag.first3.source",
+          "equals": true
+        }
+      },
+      {
+        "id": "back-corridor",
+        "nameKey": "first3.interact.back-corridor",
+        "x": 80,
+        "radius": 70,
+        "kind": "door",
+        "sceneId": "scene.first3.corridor",
+        "spawnId": "entry"
+      }
+    ],
+    "decorations": [
+      {
+        "x": 965,
+        "y": 270,
+        "width": 75,
+        "height": 150,
+        "fill": "#485b69",
+        "opacity": 0.8
+      },
+      {
+        "x": 650,
+        "y": 340,
+        "width": 150,
+        "height": 70,
+        "fill": "#946c4b",
+        "opacity": 0.75
+      }
+    ],
+    "sequenceId": "sequence.first3.enter"
+  }
+]

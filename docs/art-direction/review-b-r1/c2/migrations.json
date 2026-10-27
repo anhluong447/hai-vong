@@ -1,0 +1,89 @@
+{
+  "id": "migration.phase0",
+  "kind": "save-migrations",
+  "steps": [
+    {
+      "from": "0.0.1",
+      "to": "0.0.2",
+      "addFlags": [
+        "flag.first3.officeDone",
+        "flag.first3.classDone",
+        "flag.first3.recruit",
+        "flag.first3.recruited",
+        "flag.first3.rest1",
+        "flag.first3.rest2",
+        "flag.first3.day2",
+        "flag.first3.day3",
+        "flag.first3.tape",
+        "flag.first3.plan",
+        "flag.first3.canteenAccepted",
+        "flag.first3.photo",
+        "flag.first3.source",
+        "flag.first3.canteenComplete",
+        "flag.first3.pressure",
+        "flag.first3.advisor",
+        "flag.first3.complete"
+      ],
+      "addQuests": [
+        "quest.first3.room3",
+        "quest.first3.canteen",
+        "quest.first3.general"
+      ]
+    },
+    {
+      "from": "0.0.2",
+      "to": "0.0.3",
+      "addFlags": [],
+      "addQuests": [],
+      "resetActorAnimations": {
+        "sceneIds": [
+          "scene.first3.gate",
+          "scene.first3.office",
+          "scene.first3.classroom",
+          "scene.first3.corridor",
+          "scene.first3.room3",
+          "scene.first3.home",
+          "scene.first3.canteen"
+        ],
+        "clipIds": [
+          "clip.fixture.idle",
+          "clip.fixture.walk"
+        ]
+      }
+    },
+    {
+      "from": "0.0.3",
+      "to": "0.0.4",
+      "addFlags": [],
+      "addQuests": [],
+      "presentationPatch": {
+        "sceneIds": [
+          "scene.first3.gate",
+          "scene.first3.office",
+          "scene.first3.classroom",
+          "scene.first3.corridor",
+          "scene.first3.room3",
+          "scene.first3.home",
+          "scene.first3.canteen"
+        ],
+        "dropAudioCueIds": [
+          "cue.fixture.bgm",
+          "cue.fixture.sfx"
+        ],
+        "sequenceMap": [
+          {
+            "from": "sequence.fixture.enter",
+            "to": "sequence.first3.enter"
+          }
+        ],
+        "legacyEncounterRules": [
+          {
+            "sceneId": "scene.first3.room3",
+            "chapterId": "chapter.first3.recruit",
+            "interactionId": "van-recruit"
+          }
+        ]
+      }
+    }
+  ]
+}

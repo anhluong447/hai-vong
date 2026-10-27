@@ -1,0 +1,6 @@
+{
+  "id": "locomotion.first3",
+  "kind": "locomotion",
+  "accelSeconds": 0.09,
+  "stopSeconds": 0.08
+}

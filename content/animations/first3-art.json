@@ -57,7 +57,49 @@
         "frameId": "image.first3.khue.walk.5",
         "duration": 0.12
       }
-    ]
+    ],
+    "locomotion": {
+      "cycleDistance": 96,
+      "contacts": [
+        {
+          "phase": 0,
+          "foot": "left"
+        },
+        {
+          "phase": 0.5,
+          "foot": "right"
+        }
+      ],
+      "plant": {
+        "kneeY": 144,
+        "anchors": [
+          {
+            "x": 118,
+            "y": 199
+          },
+          {
+            "x": 118,
+            "y": 199
+          },
+          {
+            "x": 96,
+            "y": 199
+          },
+          {
+            "x": 123,
+            "y": 199
+          },
+          {
+            "x": 120,
+            "y": 199
+          },
+          {
+            "x": 101,
+            "y": 199
+          }
+        ]
+      }
+    }
   },
   {
     "id": "clip.first3.van.idle",
@@ -117,6 +159,19 @@
         "frameId": "image.first3.van.walk.5",
         "duration": 0.12
       }
-    ]
+    ],
+    "locomotion": {
+      "cycleDistance": 96,
+      "contacts": [
+        {
+          "phase": 0,
+          "foot": "left"
+        },
+        {
+          "phase": 0.5,
+          "foot": "right"
+        }
+      ]
+    }
   }
 ]

@@ -1,3 +1,5 @@
+import {FootstepConductor} from '../presentation/audio/FootstepConductor.js';
+import {resolveEncounterPresentation} from '../application/EncounterPresentation.js';
 import {loadProject} from '../infrastructure/resources/ProjectLoader.js';
 import {validateProject} from '../domain/story/validateProject.js';
 import {TextService} from '../domain/story/TextService.js';
@@ -51,14 +53,14 @@ export async function createGame(root,{autoStart=true}={}){
  const preferenceRepository=new PreferencesRepository({name:bundle.project.id+'.player-preferences',validate:value=>validateProfile(value,preferenceContract)}),profile=new PlayerProfile({repository:preferenceRepository,...preferenceContract}),profileLoaded=await profile.load();
  let preferences=profile.value.preferences;for(const [id,value]of Object.entries(profile.value.profile.flags)){const initial=structuredClone(session.snapshot());initial.gameplay.flags[id]=value;session.replace(initial);}
  const view=new CanvasAdapter(canvas,ui.viewport),createPorts=()=>({world:new World2D({view,catalog:bundle.catalog,assets,revision:bundle.revision,playerActorId:config.playerActorId,reducedMotion:win.matchMedia('(prefers-reduced-motion: reduce)').matches}),audio:new AudioAdapter({catalog:bundle.catalog,assets,revision:bundle.revision,buses:config.audioBuses}),sequence:new SequencePlayer(bundle.catalog.list('sequences')),dialogue:new DialoguePresentationView({root:find('dialogue-speaker'),format,assets,revision:bundle.revision})});
- let {world,audio,sequence,dialogue:dialogueView}=createPorts();
+ let {world,audio,sequence,dialogue:dialogueView}=createPorts();const footsteps=new FootstepConductor();
  const line=new TextView(find('line'),{text,speed:ui.textSpeed}),focus=new FocusRouter(win),lifecycle=new BrowserLifecycle({window:win,document:doc,maxDelta:ui.maxDelta});
  const controller=new AbortController(),options={signal:controller.signal};let paused=false,loading=false,disposed=false,error=profileLoaded.ok?null:profileLoaded.errors[0].code,serial=0,dialogueSignature=null,speakerSignature=null,choiceSignature=null,frozen=false,loadEpoch=0,unfreeze=[],shell,playing=false,autoQueued=false;
  const input=new InputAdapter(win,{...inputDefinition,bindings:preferences.bindings},{onGesture:()=>{if(!paused&&!frozen)void audio.unlock();},onAction:intent=>{if(intent.action==='fullscreen')void view.fullscreen();}});
  const hearing=new HearingPresenter({root:find('hearing'),catalog:bundle.catalog,format,number:(value,options)=>text.number(value,options),focus,dispatch:(action,id)=>run({type:'hearing.command',action,...(action==='defense.respond'?{evidenceId:id}:action==='defense.bailout'?{choiceId:id}:action==='attack.word'?{wordId:id}:action==='attack.question'?{questionId:id}:action==='mini.mode'?{modeId:id}:action==='mini.move'?{laneId:id}:{})}),pause,bindings:()=>preferences.bindings,separator:navigation.bindingSeparator});
  const resize=()=>{const bounds=stage.getBoundingClientRect();view.resize(bounds.width,bounds.height,win.devicePixelRatio);};const observer=new ResizeObserver(resize);observer.observe(stage);win.addEventListener('resize',resize,options);resize();
  const setError=result=>{if(!result.ok)error=result.errors?.[0]?.code??'runtime.failed';return result;};
- function run(command){if(disposed||frozen)return failure(diagnostic(disposed?'runtime.disposed':'runtime.busy','runtime','/command'));const before=session.snapshot(),result=setError(session.execute(command));if(result.ok){for(const outcome of result.value.outcomes)if(outcome.type==='presentation.cue')void audio.play(outcome.cueId);if(command.type==='story.step'&&['advance','choose'].includes(command.intent.type))void profile.remember(session.snapshot()).then(setError);if(before.executionLedger.length!==session.snapshot().executionLedger.length||before.gameplay.calendar?.day!==session.snapshot().gameplay.calendar?.day||command.type==='story.step'&&command.intent.type==='choose'||command.type==='world.interact'&&before.story.waiting!==session.snapshot().story.waiting||command.type==='hearing.command'&&!TRANSIENT_HEARING_ACTIONS.includes(command.action))queueAutosave();}sync();return result;}
+ function run(command){if(disposed||frozen)return failure(diagnostic(disposed?'runtime.disposed':'runtime.busy','runtime','/command'));const before=session.snapshot(),result=setError(session.execute(command));if(result.ok){for(const outcome of result.value.outcomes){if(outcome.type==='presentation.cue')void audio.play(outcome.cueId);else if(outcome.type==='world.moved'){const actor=bundle.catalog.get('actors',config.playerActorId).value,clip=bundle.catalog.get('animations',actor.walkClipId).value;for(const contact of footsteps.consume(outcome,{clip,scenePresentation:world.current?.presentation}))audio.playOneShot(contact.cueId);}}if(command.type==='story.step'&&['advance','choose'].includes(command.intent.type))void profile.remember(session.snapshot()).then(setError);if(before.executionLedger.length!==session.snapshot().executionLedger.length||before.gameplay.calendar?.day!==session.snapshot().gameplay.calendar?.day||command.type==='story.step'&&command.intent.type==='choose'||command.type==='world.interact'&&before.story.waiting!==session.snapshot().story.waiting||command.type==='hearing.command'&&!TRANSIENT_HEARING_ACTIONS.includes(command.action))queueAutosave();}sync();return result;}
  function sync(){
   if(disposed)return;const state=session.snapshot(),waiting=state.story.waiting,dialogue=['say','choose'].includes(waiting),scene=state.world.sceneId?bundle.catalog.get('scenes',state.world.sceneId).value:null;
   const h=state.gameplay.hearing,hearingContext=h?(['minigame','finalShot'].includes(h.stage)?h.stage==='minigame'?'minigame':'final-shot':h.phase):null;
@@ -78,7 +80,7 @@ export async function createGame(root,{autoStart=true}={}){
   find('status').textContent=error?format('world.error',{code:error}):format(loading?'world.loading':paused?'world.paused':'world.ready');button('retry').hidden=!error;root.dataset.ready=String(!!scene&&!loading&&!error);
   const opacity=sequence.snapshot().values.curtainOpacity;find('curtain').hidden=!(opacity>0);if(opacity!==undefined)find('curtain').style.opacity=String(opacity);
  }
- function suspend(){paused=true;controls?.stop();input.cancelCapture();audio.pause();sequence.pause();sync();}
+ function suspend(){if(session.snapshot().world.velocity)session.execute({type:'world.stop'});paused=true;controls?.stop();input.cancelCapture();audio.pause();sequence.pause();sync();}
  function pause(){if(paused)return;suspend();void shell?.open('pause');}
  function resume(){shell?.close();paused=false;find('menu').hidden=true;input.cancelCapture();lifecycle.previous=null;sequence.resume();void audio.unlock();canvas.focus();if(!playing){playing=true;queueAutosave();}sync();}
  function revealState(){const state=session.snapshot();if(state.story.waiting!=='say')return;const count=Math.floor(line.snapshot().revealed)-state.presentation.dialogue.revealed;if(count>0)run({type:'story.step',intent:{type:'reveal',count}});}
@@ -114,7 +116,7 @@ export async function createGame(root,{autoStart=true}={}){
  async function changePreferences(value){const result=await profile.preferences(value);if(result.ok)applyPreferences();return result;}
  async function start(){
   const initial=createRunState(bundle);Object.assign(initial.gameplay.flags,profile.value.profile.flags);initial.world.pending={sceneId:config.startSceneId,spawnId:config.startSpawnId,requestId:String(++serial)};
-  initial.presentation.view={world:{sceneId:null,elapsed:0,cameraX:0,actors:{}},text:null,ui:{paused:true,screen:'main'}};
+  initial.presentation.view={world:{sceneId:null,elapsed:0,camera:{x:0,y:0,zoom:1},actors:{}},text:null,ui:{paused:true,screen:'main'}};
   const envelope=await SaveCodec.encode(initial,{buildId:bundle.project.contentVersion,contentVersion:bundle.revision});if(!envelope.ok)return setError(envelope);const result=await saves.restore(envelope.value);if(result.ok)await loadPending();return setError(result);
  }
  shell=new PlayerShell({root:find('menu'),format,navigation,actions,focus,saves,repository,getPreferences:()=>preferences,
@@ -126,16 +128,17 @@ export async function createGame(root,{autoStart=true}={}){
  function dispatchSequence(signals){for(const signal of signals){if(signal.kind==='cue')void audio.play(signal.cueId);else if(signal.kind==='scene')run({type:'scene.request',sceneId:signal.sceneId,requestId:String(++serial)});}}
  async function loadPending(){
   if(loading||disposed||frozen)return;const state=session.snapshot(),pending=state.world.pending,storyPending=state.story.waiting==='transition'?state.story.pending:null;if(!pending&&!storyPending)return;
-  const owner=world,epoch=++loadEpoch;loading=true;error=null;sync();const prepared=await owner.prepare((pending??storyPending).sceneId);
+  const owner=world,audioOwner=audio,epoch=++loadEpoch;loading=true;error=null;sync();let prepared=await owner.prepare((pending??storyPending).sceneId),preparedAudio;
+  if(prepared.ok){preparedAudio=await audioOwner.prepareOneShots(prepared.value.presentation?.footstepCueIds??[]);if(!preparedAudio.ok){owner.cancelPrepared(prepared.value);prepared=preparedAudio;}}
   if(frozen)await new Promise(resolve=>unfreeze.push(resolve));
-  if(disposed||epoch!==loadEpoch||owner!==world)return;if(prepared.ok){const result=session.execute(pending?{type:'scene.commit',requestId:pending.requestId}:{type:'story.step',intent:{type:'loaded',sceneId:storyPending.sceneId}});
-   if(result.ok){setError(world.commit(prepared.value));const scene=prepared.value.scene;
+  if(disposed||epoch!==loadEpoch||owner!==world){if(preparedAudio?.ok)audioOwner.abortOneShots(preparedAudio.value);return;}if(prepared.ok){const result=session.execute(pending?{type:'scene.commit',requestId:pending.requestId}:{type:'story.step',intent:{type:'loaded',sceneId:storyPending.sceneId}});
+   if(result.ok){setError(audioOwner.commitOneShots(preparedAudio.value));setError(world.commit(prepared.value));const scene=prepared.value.scene;
     const continuation=sequence.waitingScene();
     if(pending&&continuation?.sceneId===pending.sceneId)setError(sequence.ack(continuation.id));
     else if(scene.sequenceId){const played=sequence.play(scene.sequenceId);setError(played);if(played.ok)dispatchSequence(sequence.update(0));}
-    if(scene.cueId&&!audio.snapshot().tracks.some(t=>t.cueId===scene.cueId))setError(await audio.play(scene.cueId));}else setError(result);
+    if(scene.cueId&&!audio.snapshot().tracks.some(t=>t.cueId===scene.cueId))setError(await audio.play(scene.cueId));}else{audioOwner.abortOneShots(preparedAudio.value);owner.cancelPrepared(prepared.value);setError(result);}
   }else setError(prepared);
-  if(disposed||epoch!==loadEpoch)return;loading=false;sync();if(!paused)canvas.focus();world.render(session.snapshot().world,0,{day:session.snapshot().gameplay.calendar.day});queueAutosave();
+  if(disposed||epoch!==loadEpoch)return;loading=false;sync();if(!paused)canvas.focus();world.render(session.snapshot().world,0,{day:session.snapshot().gameplay.calendar.day,encounter:resolveEncounterPresentation(session.snapshot(),bundle).value});queueAutosave();
  }
  function step(delta){
   if(disposed||frozen)return;sync();for(const intent of input.drain()){
@@ -143,6 +146,7 @@ export async function createGame(root,{autoStart=true}={}){
     if(session.snapshot().gameplay.hearing){const current=session.snapshot().gameplay.hearing,action={hearingAdvance:'advance',laneUp:'mini.move',laneDown:'mini.move',deflect:'mini.block',finalTap:'final.tap'}[intent.action];if(action&&!(intent.action==='deflect'&&current.mini?.mode==='easy'))run({type:'hearing.command',action,...(['laneUp','laneDown'].includes(intent.action)?{laneId:hearingBalance.minigame.lanes[intent.action==='laneUp'?0:1]}:{})});}
     else if(intent.action==='interact')interact();else if(intent.action==='advance')advance();}
   }
+  if(!lifecycle.active&&session.snapshot().world.velocity)session.execute({type:'world.stop'});
   const active=lifecycle.active&&!paused&&!loading,elapsed=active?Math.min(delta,ui.maxDelta):0,state=session.snapshot();
   const h=state.gameplay.hearing;
   if(active&&h&&['minigame','finalShot'].includes(h.stage)&&elapsed>0)run({type:'hearing.command',action:'tick',delta:Math.min(elapsed,hearingBalance.minigame.maxDelta)});
@@ -150,7 +154,7 @@ export async function createGame(root,{autoStart=true}={}){
   if(active&&!h&&state.story.waiting==='say'){line.update(elapsed);revealState();}
   if(active&&!h)controls.update(elapsed);
   if(active&&!h)dispatchSequence(sequence.update(elapsed));
-  world.render(resolveWorldPresentation(session.snapshot()),h?0:elapsed,{day:session.snapshot().gameplay.calendar.day});sync();void loadPending();
+  world.render(resolveWorldPresentation(session.snapshot()),h?0:elapsed,{day:session.snapshot().gameplay.calendar.day,encounter:resolveEncounterPresentation(session.snapshot(),bundle).value});sync();void loadPending();
  }
  button('pause').addEventListener('click',pause,options);button('advance').addEventListener('click',advance,options);button('interact').addEventListener('click',interact,options);button('retry').addEventListener('click',()=>{error=null;speakerSignature=null;sync();void loadPending();},options);
  for(const mode of ['auto','skip'])button(mode).addEventListener('click',()=>controls.toggle(mode),options);button('stop').addEventListener('click',()=>controls.stop(),options);

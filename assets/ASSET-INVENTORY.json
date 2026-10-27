@@ -1,6 +1,6 @@
 {
   "bundlePath": "assets/bundles/first3-art-g1-v2.zip",
-  "bundleSha256": "6c055b84fb183b10644b19ebde5a88b49f7891da1a78f3bc0d101eae4fb3427e",
+  "bundleSha256": "ba2f52be0229ca58045d10c2b167b2cfc2ac9cfce9280ab8c78c407ff55b1623",
   "bundleVersion": 2,
   "files": [
     {
@@ -19,14 +19,59 @@
       "sha256": "4cda95a3220bb41bffc411839920cf616fc5ced832b4cf39c25f5bd6345faada"
     },
     {
-      "bytes": 4676,
+      "bytes": 5234,
       "path": "assets/sources/g1-cohesion/GENERATION.json",
-      "sha256": "f0df327127525041aebc6890564e684d4e19fb8850b3591745a0af4aa188624a"
+      "sha256": "ece56e97e41a6700b53003c03d64739b46788b20dced6b0d17a2607db4dfab5b"
     },
     {
-      "bytes": 9724,
+      "bytes": 11994,
       "path": "assets/sources/g1-cohesion/SOURCE-MANIFEST.json",
-      "sha256": "7de28e9201138f126851af1e4e53fca12af0f19908958e239c11057c58186a88"
+      "sha256": "16fcbea79a61a1ac2c21dde4c82f7cb0410926a07f993229cf5548689c85747f"
+    },
+    {
+      "bytes": 1455,
+      "path": "assets/sources/g1-cohesion/foley/CUTS.json",
+      "sha256": "6a65b1f222db90f182d2b714d41d5319f455830ef9f71b34045db00e83a8e053"
+    },
+    {
+      "bytes": 642,
+      "path": "assets/sources/g1-cohesion/foley/PROVENANCE.json",
+      "sha256": "e2af611e6347c0ce12b2492c6739bd62dd989510e07ca9006d7c6eb6f4005d42"
+    },
+    {
+      "bytes": 2074,
+      "path": "assets/sources/g1-cohesion/foley/derive.py",
+      "sha256": "3c2e75e9798c9ed65bce3b7c36b4644d7e22a404a173ee4a966a17e2a79d742d"
+    },
+    {
+      "bytes": 4844,
+      "path": "assets/sources/g1-cohesion/foley/silence.wav",
+      "sha256": "3420dff87ac71ffb43178590c5cb0608dbd4140615ef5ac90c72f07d0de9df14"
+    },
+    {
+      "bytes": 5516784,
+      "path": "assets/sources/g1-cohesion/foley/wood-shoes-1518.wav",
+      "sha256": "accb0552bf3f9762702507bf53dc76036b93d5832f3e349f3191e3ee5d6777ea"
+    },
+    {
+      "bytes": 26924,
+      "path": "assets/sources/g1-cohesion/foley/wood-step-1.wav",
+      "sha256": "a1747961386062c25b05188a40a15bcc8aed3d0e40710a9483941ec42e01c248"
+    },
+    {
+      "bytes": 26924,
+      "path": "assets/sources/g1-cohesion/foley/wood-step-2.wav",
+      "sha256": "f9ca73b7368812e239d306609ad71ff13251270fe7abe08a49ac96ebade73473"
+    },
+    {
+      "bytes": 26924,
+      "path": "assets/sources/g1-cohesion/foley/wood-step-3.wav",
+      "sha256": "bcf8b99835418d4a88ef4ed024a36fb975868f94dd9c325960c2a36f9b9a7bce"
+    },
+    {
+      "bytes": 26924,
+      "path": "assets/sources/g1-cohesion/foley/wood-step-4.wav",
+      "sha256": "8ffa95ff76aee8b9b2cfd605b77640a1bf981badbd8f609ae555c10fd7f75ae9"
     },
     {
       "bytes": 2087502,
@@ -97,6 +142,16 @@
       "bytes": 1247,
       "path": "assets/sources/g1-cohesion/raw/floor-v1.prompt.json",
       "sha256": "6702c7a361eb79447683c30fa942123d6c954278afed634c18df84815bbde87a"
+    },
+    {
+      "bytes": 1740468,
+      "path": "assets/sources/g1-cohesion/raw/khue-gait-c2-v1.png",
+      "sha256": "0cbc00e358067a0d18bccbc978fbba10ff0bc2b9b7da0dd42885f86a6c8e221e"
+    },
+    {
+      "bytes": 1746,
+      "path": "assets/sources/g1-cohesion/raw/khue-gait-c2-v1.prompt.json",
+      "sha256": "4b66c1167d005c39b8a0c7f432c47c8e1967a6b28b839e5a2145ed04b0ac35fc"
     },
     {
       "bytes": 1203251,

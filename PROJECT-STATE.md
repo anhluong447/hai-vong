@@ -4,6 +4,54 @@ Updated: 2026-10-27 (Asia/Bangkok).
 
 ## Current task and stopping point
 
+R07/R08 current checkpoint: normal entry content0.0.4 with original Gate/morning/
+flags; typed authoring, real source-writer roundtrip and fresh private offline
+V2recovery implemented (64sources/49outputs exact bytes). Actual pixel footplant
+worst drift1unit; visual approval pending. Current JSunit176PASS and Python65PASS
+before last transport/testfixture corrections; new transport2PythonRED->GREEN.
+Current fullbrowser79PASS, fullauthoring54PASS before last testfixture corrections,
+bot8PASS +wholepack103states/92steps/49assets/14fixtures. Architecture/contentPASS.
+First CI raw preserved: browser result4.67MB exceeded4MBcollector and timedout;
+collector nowbounded8MB with explicit oversizefailure, tested. Synthetic mechanics
+fixture and customtimeline migration references corrected; productionvalidator
+unchanged. Latest full CI/release/staticartifact/finalreview still pending.
+CPU4x initialp9550.1ms FAIL33.34ms; resetwalking measurement underway. No FPS/art
+approval/G1closure/G2. Preserve rootdocs/fraft.md and ownledger. C2/R07 checkpoint
+commit being prepared; no push/merge. Twenty protected/V1 files byte-identical.
+
+
+Latest user authorizes next implementation now; existing R1plan governs. The
+previous C2stop below is superseded: finish footplant/fetch checks, implementR07
+normalentry+authoring+freshrecovery, then requiredverification/ReviewBhandoff.
+Do not change rootdocs/fraft.md or openG2. CurrentC2dirtywork is ours; do notredo.
+New optionalplantanchors/native lowerlegshear actualpixeltestRED2->GREEN2;
+fullmotion/nativeC2GREEN8. Loader4requestbudget+URLerrorsRED2->GREEN2 plusreal3
+loadstressPASS; no blanket flakiness-fix claim. Ownledger records rulings/costs.
+
+C2 handoff2026-10-27: requested C1commit af2b30c completed. C2 code remains
+uncommitted for tuning/art review; no R07/R08/G2 continuation. Real trial entry:
+http://127.0.0.1:8765/docs/art-direction/review-b-r1/c2/ (read-only server8765).
+R03-R06: RunSnapshot4 with guarded genuine3->4 and scoped contentpatch, actual
+accel/friction/distance gait+foley, realCC0wood-shoe cuts, prepared4oneshots,
+camera lerp/zoom/blur, cachednativeRGBAbeam+18dust. Normal pack stillcontent.3;
+isolatedC2 pack.4/projectIDhoi-am.c2-review starts afternoonRoom3 for trial and
+uses separate saves/profile. New andgenuineoldsave/reveal/zoom/momentum restore,
+missingrequiredfoley rollback/reducedmotion/staleaudio/dispose tested.
+SourcefinalJSunit171PASS; architecture/contentPASS. FullPython64passed before2
+lastJSguardfixes, Python/pipeline/deps unchanged; no currentfullunitreceipt.
+Fullbrowser76PASSbeforeguards; sourcefinal fullruns75/1fetchfailure legacy-import.
+Fullauthoringinstrumented47/47PASS/0networkfailures; normalgates fetch/bootstrap
+flaky, browserinstrumentedTIMEOUT120s. Finalfailedcasesdirect9/9PASS unchanged.
+Rawfailures retained; no speculativeloader/serverfix, no continuousgreenCI or
+all5currentreceipts.49asset+bundlebyteauditPASS;20protected/V1unchangedaf2b30c.
+ActualC2scene19resources19refs0pending,4preparedfoley,1RGBAcache2764800bytes,
+18particles; dispose0. Desktopcaptures1248x702/logical960x540. No FPSclaim.
+Footplant<=2units NOTcertified; generatedgaitcandidate rejected/notactive. Keep
+192/152sprites. C2trial not finalacceptance; R04/C2/R1remainopenpendingtuning+
+artfootplantpass. READMEc2has scopes/evidence/limits. FreshV2recovery, authoring
+newcontrols/normalentry andwhole-change review remain R07/R08. Ownledgeronly;
+root docs/fraft.md untouched. Do not redo baseline capture or C1commit.
+
 Latest user: commit C1, then implement through C2. This supersedes the prior
 C1 stopping point below. C1 is the accepted basis for continued work; final R1
 art/game-feel approval remains pending. Commit existing C1 snapshot first, then

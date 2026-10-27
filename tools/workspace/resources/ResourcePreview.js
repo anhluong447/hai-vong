@@ -13,10 +13,10 @@ export class ResourcePreview {
  drawing(){this.canvas=this.root.ownerDocument.createElement('canvas');this.root.append(this.canvas);this.view=new CanvasAdapter(this.canvas,{width:this.settings.width,height:this.settings.height});
   const resize=()=>{const width=Math.min(this.settings.width,this.root.clientWidth||this.settings.width),dpr=this.root.ownerDocument.defaultView.devicePixelRatio;if(width===this.width&&dpr===this.view.dpr)return;this.width=width;this.view.resize(width,width*this.settings.height/this.settings.width,dpr);this.redraw();};resize();this.observer=new ResizeObserver(resize);this.observer.observe(this.root);
  }
- redraw(){if(this.actor)this.step(0);else if(this.bitmapImage){const bitmap=this.bitmapImage,scale=Math.min(this.settings.width/bitmap.width,this.settings.height/bitmap.height);this.view.begin().drawImage(bitmap,0,0,bitmap.width*scale,bitmap.height*scale);}}
+ redraw(){if(this.actor)this.step(0);else if(this.bitmapImage){const bitmap=this.bitmapImage,scale=Math.min(this.settings.width/bitmap.width,this.settings.height/bitmap.height);const context=this.view.begin();context.save();context.imageSmoothingEnabled=this.bitmapSampling!=='pixel';context.drawImage(bitmap,0,0,bitmap.width*scale,bitmap.height*scale);context.restore();}}
  async acquire(ids){const result=await this.assets.acquire(ids,{revision:this.bundle.revision});if(result.ok){if(this.disposed){result.value.release();return failure(diagnostic('preview.stale','preview','/'));}this.lease=result.value;}return result;}
  async bitmap(id){
-  this.drawing();const result=await this.acquire([id]);if(!result.ok)return result;this.bitmapImage=this.lease.get(id);this.redraw();return success(id);
+  this.drawing();const result=await this.acquire([id]);if(!result.ok)return result;this.bitmapImage=this.lease.get(id);this.bitmapSampling=this.bundle.catalog.list('config').find(config=>config.kind==='asset-imports')?.entries.find(entry=>entry.id===id)?.resize?.sampling??'smooth';this.redraw();return success(id);
  }
  async clip(id){
   const clip=this.bundle.catalog.get('animations',id);if(!clip.ok)return clip;this.drawing();const result=await this.acquire([...new Set(clip.value.frames.map(frame=>frame.assetId))]);if(!result.ok)return result;

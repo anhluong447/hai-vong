@@ -4,7 +4,7 @@
   "startSceneId": "scene.first3.gate",
   "startSpawnId": "entry",
   "playerActorId": "actor.first3.khue",
-  "movementSpeed": 240,
+  "movementSpeed": 160,
   "maxMovementDelta": 0.1,
   "inputId": "input.default",
   "uiId": "ui.first3-art",
@@ -30,5 +30,6 @@
   "actionLabelsId": "input.actions",
   "gameplayConfigId": "balance.first3",
   "hearingBalanceId": "hearing.balance.fixture",
-  "migrationConfigId": "migration.phase0"
+  "migrationConfigId": "migration.phase0",
+  "locomotionConfigId": "locomotion.first3"
 }

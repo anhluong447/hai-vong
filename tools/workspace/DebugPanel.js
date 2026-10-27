@@ -16,7 +16,7 @@ async function fingerprint(sources){return Array.from(new Uint8Array(await crypt
 export class DebugPanel {
  constructor(root,{workspace,text,onResult,readRevision,loadSources,onSourceReload}){
   Object.assign(this,{root,workspace,text,onResult,readRevision,loadSources,onSourceReload});const config=workspace.bundle.catalog.get('config','ui.workspace').value;this.ui=workspace.bundle.catalog.get('config',config.debugId).value;const authoring=workspace.bundle.catalog.get('config',config.authoringId).value;this.settings=authoring.preview;for(const [key,value]of Object.entries(authoring.tokens))root.style.setProperty(key,value);this.controller=new AbortController();this.epoch=0;this.watchEpoch=0;
-  this.reload=new ReloadService({cancellation:()=>new AbortController(),capture:()=>({bundle:this.current.bundle,snapshot:this.session.snapshot()}),migrate:(snapshot,bundle,mapping)=>new MigrationRegistry({schemaVersion:snapshot.schemaVersion,contentVersion:bundle.revision,contentSteps:[mapping]}).migrate(snapshot,snapshot.contentRevision),prepare:({bundle,snapshot,signal})=>this.prepareOwner(bundle,snapshot,signal),commit:(token,meta)=>this.commitReload(token,meta),abort:token=>{token.preview.dispose();token.root.remove();}});
+  this.reload=new ReloadService({cancellation:()=>new AbortController(),capture:()=>this.capture(),migrate:(snapshot,bundle,mapping)=>new MigrationRegistry({schemaVersion:snapshot.schemaVersion,contentVersion:bundle.revision,contentSteps:[mapping]}).migrate(snapshot,snapshot.contentRevision),prepare:({bundle,snapshot,signal})=>this.prepareOwner(bundle,snapshot,signal),commit:(token,meta)=>this.commitReload(token,meta),abort:token=>{token.preview.dispose();token.root.remove();}});
   this.render();this.crashes=new CrashReporter({window:root.ownerDocument.defaultView,limit:this.ui.limits.crashReports,context:()=>({fingerprint:this.fingerprint,snapshot:this.session?.snapshot(),trace:this.current?.debug.exportTrace()}),screenshot:()=>this.canvas?.toDataURL('image/png')});
  }
  label(key,params={}){const result=this.text.format(key,params);if(!result.ok)throw new Error(JSON.stringify(result));return result.value;}
@@ -37,6 +37,11 @@ export class DebugPanel {
  }
  refreshOptions(){const bundle=this.workspace.bundle;this.options(this.fixture,bundle.catalog.list('playtests').map(def=>def.id),this.fixture.value||this.ui.defaultFixtureId);this.options(this.chapter,bundle.catalog.list('story').map(def=>def.id));this.options(this.flag,bundle.catalog.list('flags').map(def=>def.id));this.flagValue.value=JSON.stringify(bundle.catalog.get('flags',this.flag.value).value?.default);this.refreshNodes();}
  refreshNodes(){const chapter=this.workspace.bundle.catalog.get('story',this.chapter.value).value;this.options(this.nodeSelect,chapter?.nodes.map(node=>node.id)??[]);}
+ capture(){
+  const snapshot=structuredClone(this.session.snapshot()),dialogue=snapshot.presentation.dialogue;
+  snapshot.presentation.view={world:this.current.preview.world.snapshot(),text:dialogue?{key:dialogue.textKey,params:dialogue.params,revealed:dialogue.revealed}:null,ui:{paused:false}};
+  return {bundle:this.current.bundle,snapshot,token:JSON.stringify(snapshot)};
+ }
  get session(){return this.current?.debug.session??null;}
  get canvas(){return this.current?.preview.canvas??null;}
  report(result){if(this.disposed)return result;this.message.textContent=result.ok?'':result.errors.map(error=>this.label('workspace.diagnostic',{code:error.code,source:error.sourceId,pointer:error.pointer})).join('\n');if(!result.ok)this.onResult?.(result);return result;}

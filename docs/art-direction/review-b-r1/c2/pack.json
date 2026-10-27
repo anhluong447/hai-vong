@@ -1,0 +1,261 @@
+{
+  "id": "foundation-demo",
+  "kind": "development",
+  "version": "0.0.4",
+  "documents": [
+    {
+      "kind": "flags",
+      "path": "/content/flags/core.json"
+    },
+    {
+      "kind": "events",
+      "path": "/content/events/foundation.json"
+    },
+    {
+      "kind": "locale",
+      "locale": "vi",
+      "path": "/content/locales/vi.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/foundation/chapter.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/ui/workspace.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "assets",
+      "path": "/content/assets/manifest.json",
+      "generated": true
+    },
+    {
+      "kind": "animations",
+      "path": "/content/animations/clips.json"
+    },
+    {
+      "kind": "audio",
+      "path": "/content/audio/cues.json"
+    },
+    {
+      "kind": "scenes",
+      "path": "/content/scenes/foundation.json"
+    },
+    {
+      "kind": "sequences",
+      "path": "/content/sequences/foundation.json"
+    },
+    {
+      "kind": "actors",
+      "path": "/content/actors/foundation.json"
+    },
+    {
+      "kind": "input",
+      "path": "/content/input/defaults.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/gameplay/runtime.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/ui/foundation.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/ui/navigation.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/input/actions.json"
+    },
+    {
+      "kind": "locale",
+      "locale": "en-XA",
+      "path": "/content/locales/test-expanded.json"
+    },
+    {
+      "kind": "balance",
+      "path": "/content/gameplay/balance.json"
+    },
+    {
+      "kind": "team",
+      "path": "/content/gameplay/team.json"
+    },
+    {
+      "kind": "schedules",
+      "path": "/content/gameplay/schedules.json"
+    },
+    {
+      "kind": "publication",
+      "path": "/content/gameplay/publication.json"
+    },
+    {
+      "kind": "progression",
+      "path": "/content/gameplay/progression.json"
+    },
+    {
+      "kind": "quests",
+      "path": "/content/gameplay/quests.json"
+    },
+    {
+      "kind": "hearingBalance",
+      "path": "/content/gameplay/hearings/balance.json"
+    },
+    {
+      "kind": "hearings",
+      "path": "/content/gameplay/hearings/defense-fixture.json"
+    },
+    {
+      "kind": "hearings",
+      "path": "/content/gameplay/hearings/attack-fixture.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/ui/hearing.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/ui/authoring.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "/content/assets/imports.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "playtests",
+      "path": "/content/dev/foundation/playtests.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "/content/ui/debug.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "flags",
+      "path": "/docs/art-direction/review-b-r1/c2/flags.json"
+    },
+    {
+      "kind": "scenes",
+      "path": "/docs/art-direction/review-b-r1/c2/scenes.json"
+    },
+    {
+      "kind": "quests",
+      "path": "/content/dev/first-three-days/quests.json"
+    },
+    {
+      "kind": "schedules",
+      "path": "/content/dev/first-three-days/schedules.json"
+    },
+    {
+      "kind": "config",
+      "path": "/docs/art-direction/review-b-r1/c2/runtime.json"
+    },
+    {
+      "kind": "balance",
+      "path": "/docs/art-direction/review-b-r1/c2/balance.json"
+    },
+    {
+      "kind": "team",
+      "path": "/content/dev/first-three-days/team.json"
+    },
+    {
+      "kind": "events",
+      "path": "/content/dev/first-three-days/events.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/arrival.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/long.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/recruit.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/rest1.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/rest2.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/tape.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/plan.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/side-photo.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/side-source.json"
+    },
+    {
+      "kind": "story",
+      "path": "/docs/art-direction/review-b-r1/c2/pressure.json"
+    },
+    {
+      "kind": "story",
+      "path": "/content/dev/first-three-days/chapters/advisor.json"
+    },
+    {
+      "kind": "config",
+      "path": "/docs/art-direction/review-b-r1/c2/migrations.json"
+    },
+    {
+      "kind": "playtests",
+      "path": "/content/dev/first-three-days/playtests.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "/content/dev/first-three-days/traversal.json",
+      "authoringOnly": true
+    },
+    {
+      "kind": "config",
+      "path": "/content/ui/first3-art.json"
+    },
+    {
+      "kind": "actors",
+      "path": "/content/actors/first3-art.json"
+    },
+    {
+      "kind": "animations",
+      "path": "/docs/art-direction/review-b-r1/c2/first3-art.json"
+    },
+    {
+      "kind": "sequences",
+      "path": "/content/sequences/first3.json"
+    },
+    {
+      "kind": "audio",
+      "path": "/content/audio/first3-foley.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/gameplay/locomotion.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/presentation/room3.json"
+    },
+    {
+      "kind": "config",
+      "path": "/content/presentation/van-desk.json"
+    }
+  ]
+}

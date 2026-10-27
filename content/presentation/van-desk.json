@@ -1,0 +1,12 @@
+{
+  "id": "presentation.first3.van-desk",
+  "kind": "encounter-presentation",
+  "sceneId": "scene.first3.room3",
+  "focusActorIds": [
+    "player",
+    "van"
+  ],
+  "facePartners": true,
+  "zoom": 1.07,
+  "zoomResponse60": 0.12
+}

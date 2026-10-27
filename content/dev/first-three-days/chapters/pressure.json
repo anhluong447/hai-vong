@@ -83,7 +83,7 @@
         {
           "id": "camera-cue",
           "op": "playCue",
-          "cueId": "cue.fixture.sfx"
+          "cueId": "cue.first3.silent"
         },
         {
           "id": "long-witness",

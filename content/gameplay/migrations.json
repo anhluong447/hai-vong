@@ -50,6 +50,40 @@
           "clip.fixture.walk"
         ]
       }
+    },
+    {
+      "from": "0.0.3",
+      "to": "0.0.4",
+      "addFlags": [],
+      "addQuests": [],
+      "presentationPatch": {
+        "sceneIds": [
+          "scene.first3.gate",
+          "scene.first3.office",
+          "scene.first3.classroom",
+          "scene.first3.corridor",
+          "scene.first3.room3",
+          "scene.first3.home",
+          "scene.first3.canteen"
+        ],
+        "dropAudioCueIds": [
+          "cue.fixture.bgm",
+          "cue.fixture.sfx"
+        ],
+        "sequenceMap": [
+          {
+            "from": "sequence.fixture.enter",
+            "to": "sequence.first3.enter"
+          }
+        ],
+        "legacyEncounterRules": [
+          {
+            "sceneId": "scene.first3.room3",
+            "chapterId": "chapter.first3.recruit",
+            "interactionId": "van-recruit"
+          }
+        ]
+      }
     }
   ]
 }

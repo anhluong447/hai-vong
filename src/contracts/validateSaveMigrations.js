@@ -11,8 +11,19 @@ export function validateSaveMigrations({catalog,project,sourceFor}){
   const from=new Map();
   definition.steps.forEach((step,index)=>{
    const path='/steps/'+index;
-   if(!object(step)||typeof step.from!=='string'||!step.from||typeof step.to!=='string'||!step.to||step.from===step.to||step.from===project.contentVersion||from.has(step.from)||Object.keys(step).some(key=>!['from','to','addFlags','addQuests','resetActorAnimations'].includes(key))){add(definition.id,'migration.definition.invalid',path);return;}
+   if(!object(step)||typeof step.from!=='string'||!step.from||typeof step.to!=='string'||!step.to||step.from===step.to||step.from===project.contentVersion||from.has(step.from)||Object.keys(step).some(key=>!['from','to','addFlags','addQuests','resetActorAnimations','presentationPatch'].includes(key))){add(definition.id,'migration.definition.invalid',path);return;}
    from.set(step.from,step.to);
+   if(step.presentationPatch!==undefined){
+    const policy=step.presentationPatch,p=path+'/presentationPatch',bad=field=>add(definition.id,'migration.presentation.invalid',p+'/'+field);
+    if(!object(policy)||Object.keys(policy).some(k=>!['sceneIds','dropAudioCueIds','sequenceMap','legacyEncounterRules'].includes(k)))bad('');
+    else{
+     for(const [field,kind]of [['sceneIds','scenes'],['dropAudioCueIds','audio']]){const ids=policy[field];if(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length||ids.some(id=>!catalog.get(kind,id).ok))bad(field);}
+     if(!Array.isArray(policy.sequenceMap)||new Set(policy.sequenceMap.map(m=>m?.from)).size!==policy.sequenceMap.length)bad('sequenceMap');
+     else for(const map of policy.sequenceMap){const a=catalog.get('sequences',map?.from).value,b=catalog.get('sequences',map?.to).value;if(!object(map)||Object.keys(map).some(k=>!['from','to'].includes(k))||!a||!b||a.id===b.id||JSON.stringify(a.steps.map(s=>s.id))!==JSON.stringify(b.steps.map(s=>s.id)))bad('sequenceMap');}
+     if(!Array.isArray(policy.legacyEncounterRules)||new Set(policy.legacyEncounterRules.map(r=>r?.sceneId+'/'+r?.chapterId)).size!==policy.legacyEncounterRules.length)bad('legacyEncounterRules');
+     else for(const rule of policy.legacyEncounterRules){const scene=catalog.get('scenes',rule?.sceneId).value,interaction=scene?.interactions.find(i=>i.id===rule?.interactionId);if(!object(rule)||Object.keys(rule).some(k=>!['sceneId','chapterId','interactionId'].includes(k))||!policy.sceneIds?.includes(rule.sceneId)||interaction?.kind!=='story'||interaction.chapterId!==rule.chapterId||!catalog.get('story',rule.chapterId).ok||catalog.get('config',interaction.presentationId).value?.kind!=='encounter-presentation')bad('legacyEncounterRules');}
+    }
+   }
    for(const [field,kind]of [['addFlags','flags'],['addQuests','quests']]){
     const ids=step[field];if(!Array.isArray(ids)||new Set(ids).size!==ids.length){add(definition.id,'migration.definition.invalid',path+'/'+field);continue;}
     ids.forEach((id,i)=>{if(typeof id!=='string'||!catalog.get(kind,id).ok)add(definition.id,'migration.reference.invalid',path+'/'+field+'/'+i,[id]);});

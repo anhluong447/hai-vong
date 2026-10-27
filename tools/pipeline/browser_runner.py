@@ -64,10 +64,14 @@ def run_browser(root,modules,params=None,timeout=40,base_url=None,page='/tests/i
                 self.send_error(403); return
             try:
                 length=int(self.headers.get('Content-Length','0'))
-                if length>4_000_000: raise ValueError('result too large')
+                if length>8_000_000:
+                    received.update(ok=False,passed=0,failed=1,errors=[{'code':'test.browser.result.too-large','sourceId':'browser-runner','pointer':'/result','relatedIds':[str(length)]}])
+                    self.send_error(413);event.set();return
                 received.update(json.loads(self.rfile.read(length)))
                 self.send_response(200); self.end_headers(); self.wfile.write(b'{}'); event.set()
-            except (ValueError,TypeError): self.send_error(400)
+            except (ValueError,TypeError):
+                received.update(ok=False,passed=0,failed=1,errors=[{'code':'test.browser.result.invalid','sourceId':'browser-runner','pointer':'/result','relatedIds':[]}])
+                self.send_error(400);event.set()
     server=create_server(root,handler=Handler)
     thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
     origin=f'http://127.0.0.1:{server.server_port}'

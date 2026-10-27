@@ -1,0 +1,83 @@
+{
+  "profiles": [
+    {
+      "cpuRate": 1,
+      "idle": {
+        "samples": 180,
+        "p50": 16.700000000000045,
+        "p95": 33.400000000000546,
+        "max": 50,
+        "movingFrames": 0,
+        "budgetMs": 33.34,
+        "budgetMet": false
+      },
+      "walk": {
+        "samples": 180,
+        "p50": 33.30000000000018,
+        "p95": 50,
+        "max": 66.70000000000073,
+        "movingFrames": 155,
+        "budgetMs": 33.34,
+        "budgetMet": false
+      }
+    },
+    {
+      "cpuRate": 4,
+      "idle": {
+        "samples": 180,
+        "p50": 50.100000000000364,
+        "p95": 166.70000000000073,
+        "max": 233.33400000000074,
+        "movingFrames": 0,
+        "budgetMs": 33.34,
+        "budgetMet": false
+      },
+      "walk": {
+        "samples": 180,
+        "p50": 66.59999999999854,
+        "p95": 150,
+        "max": 183.39999999999782,
+        "movingFrames": 107,
+        "budgetMs": 33.34,
+        "budgetMet": false
+      }
+    }
+  ],
+  "loadMs": 758.5,
+  "imageRGBABytes": 22699952,
+  "plant": [
+    {
+      "buffers": 1,
+      "decodedBytes": 399360
+    },
+    {
+      "buffers": 0,
+      "decodedBytes": 0
+    },
+    {
+      "buffers": 0,
+      "decodedBytes": 0
+    }
+  ],
+  "atmosphere": {
+    "buffers": 1,
+    "decodedBytes": 2764800,
+    "particles": 18
+  },
+  "resources": {
+    "resources": 19,
+    "references": 19,
+    "pending": 0
+  },
+  "postDispose": {
+    "resources": 0,
+    "references": 0,
+    "pending": 0
+  },
+  "canvas": {
+    "width": 1248,
+    "height": 702
+  },
+  "method": "180 actual requestAnimationFrame intervals per case; headless Chromium --disable-gpu, CPU throttle simulation; C2 staging uses same Room3 renderer/assets as normal entry; no physical lower-spec/fullscreen claim",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+}

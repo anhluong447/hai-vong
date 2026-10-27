@@ -1,7 +1,7 @@
 {
   "id": "foundation-demo",
   "kind": "development",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "documents": [
     {
       "kind": "flags",
@@ -236,6 +236,26 @@
     {
       "kind": "animations",
       "path": "../animations/first3-art.json"
+    },
+    {
+      "kind": "sequences",
+      "path": "../sequences/first3.json"
+    },
+    {
+      "kind": "audio",
+      "path": "../audio/first3-foley.json"
+    },
+    {
+      "kind": "config",
+      "path": "../gameplay/locomotion.json"
+    },
+    {
+      "kind": "config",
+      "path": "../presentation/room3.json"
+    },
+    {
+      "kind": "config",
+      "path": "../presentation/van-desk.json"
     }
   ]
 }

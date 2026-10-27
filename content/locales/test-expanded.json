@@ -1,4 +1,8 @@
 {
+  "review.c2.description": {
+    "params": [],
+    "value": "C2 · Bản thử riêng Phòng số 3: A/D đi, E gặp Vân, Enter đọc tiếp, Escape mở menu để lưu/tải. Bắt đầu chiều ngày 1, mở sẵn cuộc gặp để thử; save tách khỏi game chính. Tốc độ 160, lấy đà 0,09s, dừng 0,08s, stride 96, zoom 1,07 — chờ duyệt cảm giác tay."
+  },
   "foundation.begin": {
     "value": "[ Chương thử nghiệm nền tảng. ~~~~~~~~~~~~~~~~ ]",
     "params": []
@@ -1844,6 +1848,72 @@
   },
   "review.c1.board": {
     "value": "[ Bảng đen / preview ]",
+    "params": []
+  },
+  "authoring.newId": {
+    "value": "ID mới",
+    "params": []
+  },
+  "authoring.prop": {
+    "value": "Đồ vật: {id}",
+    "params": [
+      "id"
+    ]
+  },
+  "authoring.addProp": {
+    "value": "Tạo đồ vật",
+    "params": []
+  },
+  "authoring.cloneProp": {
+    "value": "Nhân bản đồ vật",
+    "params": []
+  },
+  "authoring.removeProp": {
+    "value": "Xóa đồ vật",
+    "params": []
+  },
+  "authoring.addShadow": {
+    "value": "Thêm bóng tiếp xúc",
+    "params": []
+  },
+  "authoring.presentation": {
+    "value": "Preset trình diễn",
+    "params": []
+  },
+  "authoring.none": {
+    "value": "Không gắn preset",
+    "params": []
+  },
+  "authoring.clonePreset": {
+    "value": "Nhân bản preset",
+    "params": []
+  },
+  "authoring.addCamera": {
+    "value": "Thêm camera",
+    "params": []
+  },
+  "authoring.addActorShadow": {
+    "value": "Thêm bóng nhân vật",
+    "params": []
+  },
+  "authoring.addBeam": {
+    "value": "Thêm vệt nắng",
+    "params": []
+  },
+  "authoring.addDust": {
+    "value": "Thêm bụi",
+    "params": []
+  },
+  "authoring.addFoley": {
+    "value": "Thêm cue bước chân",
+    "params": []
+  },
+  "authoring.addLocomotion": {
+    "value": "Thêm nhịp bước",
+    "params": []
+  },
+  "authoring.addPlant": {
+    "value": "Thêm mốc chân trụ",
     "params": []
   }
 }

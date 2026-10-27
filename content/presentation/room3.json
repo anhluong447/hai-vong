@@ -1,0 +1,60 @@
+{
+  "id": "presentation.first3.room3",
+  "kind": "scene-presentation",
+  "actorShadow": {
+    "assetId": "image.first3.r1.shadow",
+    "x": -15,
+    "y": -2,
+    "width": 30,
+    "height": 7,
+    "opacity": 0.45
+  },
+  "camera": {
+    "followResponse60": 0.07,
+    "zoomResponse60": 0.12
+  },
+  "footstepCueIds": [
+    "cue.first3.wood.1",
+    "cue.first3.wood.2",
+    "cue.first3.wood.3",
+    "cue.first3.wood.4"
+  ],
+  "atmosphere": {
+    "beam": {
+      "points": [
+        {
+          "x": 750,
+          "y": 190
+        },
+        {
+          "x": 1015,
+          "y": 240
+        },
+        {
+          "x": 740,
+          "y": 530
+        },
+        {
+          "x": 330,
+          "y": 530
+        }
+      ],
+      "color": "#ffba68",
+      "opacity": 0.16,
+      "blend": "screen"
+    },
+    "dust": {
+      "count": 18,
+      "seed": 3907,
+      "x": 430,
+      "y": 245,
+      "width": 520,
+      "height": 235,
+      "color": "#ffe1a8",
+      "size": 1.3,
+      "speed": 0.22,
+      "amplitude": 5
+    }
+  },
+  "blurZoomSpan": 0.07
+}

@@ -1,0 +1,177 @@
+[
+  {
+    "id": "clip.first3.khue.idle",
+    "loop": true,
+    "pivot": {
+      "x": 80,
+      "y": 200
+    },
+    "frames": [
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.idle.0",
+        "duration": 1.1
+      },
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.idle.1",
+        "duration": 1.1
+      }
+    ]
+  },
+  {
+    "id": "clip.first3.khue.walk",
+    "loop": true,
+    "pivot": {
+      "x": 80,
+      "y": 200
+    },
+    "frames": [
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.walk.0",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.walk.1",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.walk.2",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.walk.3",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.walk.4",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.khue",
+        "frameId": "image.first3.khue.walk.5",
+        "duration": 0.12
+      }
+    ],
+    "locomotion": {
+      "cycleDistance": 96,
+      "contacts": [
+        {
+          "phase": 0,
+          "foot": "left"
+        },
+        {
+          "phase": 0.5,
+          "foot": "right"
+        }
+      ],
+      "plant": {
+        "kneeY": 144,
+        "anchors": [
+          {
+            "x": 118,
+            "y": 199
+          },
+          {
+            "x": 118,
+            "y": 199
+          },
+          {
+            "x": 96,
+            "y": 199
+          },
+          {
+            "x": 123,
+            "y": 199
+          },
+          {
+            "x": 120,
+            "y": 199
+          },
+          {
+            "x": 101,
+            "y": 199
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "clip.first3.van.idle",
+    "loop": true,
+    "pivot": {
+      "x": 80,
+      "y": 200
+    },
+    "frames": [
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.idle.0",
+        "duration": 1.1
+      },
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.idle.1",
+        "duration": 1.1
+      }
+    ]
+  },
+  {
+    "id": "clip.first3.van.walk",
+    "loop": true,
+    "pivot": {
+      "x": 80,
+      "y": 200
+    },
+    "frames": [
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.walk.0",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.walk.1",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.walk.2",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.walk.3",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.walk.4",
+        "duration": 0.12
+      },
+      {
+        "assetId": "atlas.first3.van",
+        "frameId": "image.first3.van.walk.5",
+        "duration": 0.12
+      }
+    ],
+    "locomotion": {
+      "cycleDistance": 96,
+      "contacts": [
+        {
+          "phase": 0,
+          "foot": "left"
+        },
+        {
+          "phase": 0.5,
+          "foot": "right"
+        }
+      ]
+    }
+  }
+]

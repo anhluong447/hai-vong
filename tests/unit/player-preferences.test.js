@@ -10,7 +10,7 @@ test('idle timelines restore but impossible timing and missing wait receipts do 
 });
 test('shared save validation blocks unknown browser resource IDs and malformed UI before storage',async()=>{
  const {GameSession}=await import('/src/application/GameSession.js'),bundle=validateProject(await projectSource()).value,session=new GameSession({bundle});
- const state=structuredClone(session.snapshot());state.presentation.view={world:{sceneId:null,elapsed:0,cameraX:0,actors:{}},text:null,ui:{paused:true,screen:'injected-screen'}};
+ const state=structuredClone(session.snapshot());state.presentation.view={world:{sceneId:null,elapsed:0,camera:{x:0,y:0,zoom:1},actors:{}},text:null,ui:{paused:true,screen:'injected-screen'}};
  assert(!session.validate(state).ok);delete state.presentation.view;state.audio={paused:true,buses:{bgm:{gain:.8,muted:false}},tracks:[{cueId:'unknown',offset:0}]};assert(!session.validate(state).ok);
  state.audio={};state.sequence={id:'sequence.fixture.enter',index:0,elapsed:999,values:{},paused:false,status:'playing'};assert(!session.validate(state).ok);
 });

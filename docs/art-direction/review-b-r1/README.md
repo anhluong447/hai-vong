@@ -1,6 +1,8 @@
 # C1 — bố cục, tỷ lệ và chiều sâu Phòng số 3
 
 Trạng thái: **bản nháp chờ người dùng review C1**, chưa duyệt production hoặc Review B.
+User đã cho commit C1 (`af2b30c`) và đi tiếp. [Bản thử C2](c2/README.md) hiện có
+chuyển động/foley/camera/nắng-bụi riêng; chưa nghiệm thu chân trụ hoặc toàn R1.
 [Plan R1](../../superpowers/plans/2026-10-27-g1-review-b-cohesion.md).
 
 Mở `/docs/art-direction/review-b-r1/` trên server project (ví dụ

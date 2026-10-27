@@ -7,7 +7,7 @@ const policy={sceneIds:['scene.first3.room3'],clipIds:['clip.fixture.idle','clip
 const canonical=value=>JSON.parse(JSON.stringify(value,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v));
 async function setup(){
  const source=await projectSource();source.project.contentVersion='0.0.3';for(const pack of source.packs??[])pack.version='0.0.3';
- const migration=source.documents.find(d=>d.data?.kind==='save-migrations');migration.data.steps=migration.data.steps.filter(s=>s.from!=='0.0.2');migration.data.steps.push({from:'0.0.2',to:'0.0.3',addFlags:[],addQuests:[],resetActorAnimations:structuredClone(policy)});
+ const migration=source.documents.find(d=>d.data?.kind==='save-migrations');migration.data.steps=migration.data.steps.filter(s=>!['0.0.2','0.0.3'].includes(s.from));migration.data.steps.push({from:'0.0.2',to:'0.0.3',addFlags:[],addQuests:[],resetActorAnimations:structuredClone(policy)});
  return {source,migration};
 }
 test('managed animation reset policy validates references and compiles without losing its bounded scope',async()=>{

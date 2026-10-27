@@ -10,7 +10,7 @@ async function setup({portraitFails=false,uiFails=false}={}){
  const ports=dialogue=>({dialogue,world:{dispose(){}},sequence:{cancel(){}},audio:{dispose:async()=>{}}});
  const previous=ports(view('old'));assert((await previous.dialogue.present(model('khue'))).ok);let live=previous;const next=ports(view('candidate',portraitFails));
  const runtime=runtimeCheckpoint({read:()=>live,write:value=>live=value,create:()=>next,freeze(){},thaw(){},captureUI:()=>({paused:false}),prepareUI:async()=>uiFails?failed():success(null),restoreUI(){},line:{snapshot:()=>null},text:{},speed:1,document,dialogueModel:()=>success(model('van'))});
- const state={world:{sceneId:null},story:{waiting:'idle'},presentation:{dialogue:null,view:{world:{sceneId:null,elapsed:0,cameraX:0,actors:{}},ui:{paused:false},text:null}},sequence:{},audio:{}};
+ const state={world:{sceneId:null},story:{waiting:'idle'},presentation:{dialogue:null,view:{world:{sceneId:null,elapsed:0,camera:{x:0,y:0,zoom:1},actors:{}},ui:{paused:false},text:null}},sequence:{},audio:{}};
  return {root,previous,next,runtime,state,released,live:()=>live,name:()=>root.querySelector('span').textContent,cleanup(){previous.dialogue.dispose();next.dialogue.dispose();root.remove();}};
 }
 test('restore portrait failure leaves current ports name and portrait unchanged',async()=>{

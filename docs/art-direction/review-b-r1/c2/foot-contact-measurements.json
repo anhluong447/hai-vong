@@ -1,0 +1,49 @@
+{
+  "status": "native renderer measured within tolerance; user visual approval pending",
+  "activeSheet": "assets/sources/g1/raw/khue-animation-v2.png",
+  "visibleHeight": 192,
+  "displayScale": 0.7916666666666666,
+  "cycleDistance": 96,
+  "contacts": [
+    0,
+    0.5
+  ],
+  "rejectedCandidate": "assets/sources/g1-cohesion/raw/khue-gait-c2-v1.png",
+  "candidateReason": "stance continuity unproven; not activated",
+  "verification": "actual atlas-pixel drift and domain distance/contact checks pass; final visual/game-feel review pending",
+  "baselineProxyMeasurement": {
+    "method": "frontmost opaque sole x in exported160x208 frames, rows196..200, alpha>128; diagnostic proxy only, not labelled left/right support feet",
+    "nativeX": [
+      130,
+      124,
+      102,
+      125,
+      126,
+      106
+    ],
+    "phaseWorldPositions": [
+      102.9167,
+      114.1667,
+      112.75,
+      146.9583,
+      163.75,
+      163.9167
+    ],
+    "limitation": "does not establish continuous <=2unit support-foot drift; cannot be used to accept foot sliding"
+  },
+  "measurement": {
+    "method": "actual exported atlas pixels rendered by ActorView; bottom opaque sole edge at groundY-1; native integer row shear below authored knee",
+    "worstDriftLogicalUnits": 1,
+    "samplesPerPlant": 96,
+    "plantsPerDirection": 2,
+    "directions": [
+      1,
+      -1
+    ],
+    "phaseStepUnits": 0.5,
+    "toleranceLogicalUnits": 2,
+    "nativeBufferRGBABytes": 399360,
+    "test": "tests/browser/g1-r1-footplant.test.js",
+    "limitation": "measured sole edge is not an aesthetic approval of lower-leg deformation"
+  }
+}

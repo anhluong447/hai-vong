@@ -10,6 +10,8 @@ export class Inspector {
  selected(){const doc=this.workspace.get(this.sourceId),index=Array.isArray(doc.data)?doc.data.findIndex(value=>value.id===this.resourceId):-1;return {doc,path:index<0?'':'/'+index,data:index<0?doc.data:doc.data[index]};}
  notify(result){if(this.disposed)return result;if(this.onResult)this.onResult(result);else if(result.ok)this.render();else this.message.textContent=result.errors.map(error=>this.label('workspace.diagnostic',{code:error.code,source:error.sourceId,pointer:error.pointer})).join('\n');return result;}
  set(path,value,revision=this.workspace.get(this.sourceId).revision){return this.notify(this.workspace.applyChange(this.sourceId,{type:'replace',path,value},revision));}
+ updateSelected(update){const {path,data}=this.selected(),next=structuredClone(data);update(next);return this.set(path,next);}
+ idControl(role){const label=this.node('label',{},this.label(this.ui.labels.newId)),input=this.node('input',{'data-role':role});label.append(input);return {label,input};}
  render(){
   if(this.disposed)return;this.controller.abort();this.controller=new AbortController();const previous=this.root.ownerDocument.activeElement?.dataset.field,{doc,path,data}=this.selected();this.root.replaceChildren();for(const [key,value]of Object.entries(this.ui.tokens))this.root.style.setProperty(key,value);
   this.message=this.node('p',{role:'status','data-role':'editor-message'});this.root.append(this.message);if(doc.readOnly)this.root.append(this.node('p',{},this.label(this.ui.labels.readonly)));

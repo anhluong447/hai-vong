@@ -51,6 +51,81 @@
           "y"
         ],
         "additionalProperties": false
+      },
+      "locomotion": {
+        "type": "object",
+        "properties": {
+          "cycleDistance": {
+            "type": "number",
+            "minimum": 0.001
+          },
+          "contacts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "phase": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 0.999999999
+                },
+                "foot": {
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                }
+              },
+              "required": [
+                "phase",
+                "foot"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "plant": {
+            "type": "object",
+            "properties": {
+              "kneeY": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "anchors": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "y": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "kneeY",
+              "anchors"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "cycleDistance",
+          "contacts"
+        ],
+        "additionalProperties": false
       }
     },
     "required": [

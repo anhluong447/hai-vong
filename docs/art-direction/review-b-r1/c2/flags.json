@@ -1,0 +1,104 @@
+[
+  {
+    "id": "flag.first3.officeDone",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.classDone",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.recruit",
+    "type": "boolean",
+    "scope": "run",
+    "default": true
+  },
+  {
+    "id": "flag.first3.recruited",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.rest1",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.rest2",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.day2",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.day3",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.tape",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.plan",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.canteenAccepted",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.photo",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.source",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.canteenComplete",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.pressure",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.advisor",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  },
+  {
+    "id": "flag.first3.complete",
+    "type": "boolean",
+    "scope": "run",
+    "default": false
+  }
+]

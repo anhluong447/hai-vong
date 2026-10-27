@@ -18,7 +18,7 @@ test('real canvas depth occludes only opaque furniture pixels independently of s
  for(const offset of [0,100])for(const reverse of [false,true]){const f=fixture(offset,reverse);try{
   const prepared=await f.world.prepare(f.scene.id);assert(prepared.ok);assert(f.world.commit(prepared.value).ok);f.world.render(f.state,0);
   equal(pixel(f.view.context,50,45),[0,170,0,255]);equal(pixel(f.view.context,50,70),[0,0,255,255]);equal(pixel(f.view.context,35,70),[0,170,0,255]);
-  f.world.render(f.state,0,{hiddenPropIds:['desk']});equal(pixel(f.view.context,50,45),[0,0,255,255]);equal(f.world.snapshot().cameraX,offset);
+  f.world.render(f.state,0,{hiddenPropIds:['desk']});equal(pixel(f.view.context,50,45),[0,0,255,255]);equal(f.world.snapshot().camera.x,offset);
  }finally{f.world.dispose();f.view.dispose();}equal(f.leases(),0);}
 });
 test('four furniture contacts and actor shadow are owned scene resources and can be hidden without touching world state',async()=>{

@@ -1,3 +1,4 @@
+import {resolveEncounterPresentation} from '../world/EncounterPresentation.js';
 import {RUN_SCHEMA_VERSION} from '../../contracts/RunSnapshot.js';
 import {diagnostic,failure,success} from '../../contracts/Diagnostic.js';
 import {FlagStore} from './FlagStore.js';
@@ -7,7 +8,7 @@ import {validSavedPresentation} from '../../contracts/PresentationSnapshot.js';
 import {createGameplayState,validateGameplayState} from '../gameplay/state.js';
 import {validateHearingState} from '../hearings/validateState.js';
 export function createRunState(bundle) {
- return {schemaVersion:RUN_SCHEMA_VERSION,formatTag:'hoi-am.side-scroll',contentRevision:bundle.revision,gameplay:{flags:FlagStore.defaults(bundle.catalog.list('flags')),...createGameplayState(bundle)},story:{cursor:null,waiting:'idle',pending:null},world:{sceneId:null,position:0,facing:1},presentation:{dialogue:null},audio:{},sequence:{},executionLedger:[]};
+ return {schemaVersion:RUN_SCHEMA_VERSION,formatTag:'hoi-am.side-scroll',contentRevision:bundle.revision,gameplay:{flags:FlagStore.defaults(bundle.catalog.list('flags')),...createGameplayState(bundle)},story:{cursor:null,waiting:'idle',pending:null},world:{sceneId:null,position:0,facing:1,moving:false,velocity:0,travelled:0},presentation:{dialogue:null,encounter:null},audio:{},sequence:{},executionLedger:[]};
 }
 export function validateRunState(state,bundle) {
  const errors=[]; const add=(code,pointer)=>errors.push(diagnostic(code,'snapshot',pointer));
@@ -19,6 +20,7 @@ export function validateRunState(state,bundle) {
  if(!Array.isArray(state.executionLedger)||state.executionLedger.some(k=>typeof k!=='string')||new Set(state.executionLedger).size!==state.executionLedger.length) add('state.ledger.invalid','/executionLedger');
  if(errors.length)return failure(errors);
  errors.push(...validateWorldState(state.world,bundle));
+ if(!resolveEncounterPresentation(state,bundle).ok)add('state.encounter.invalid','/presentation/encounter');
  errors.push(...validateGameplayState(state,bundle));
  const flags=FlagStore.validate(bundle.catalog.list('flags'),state.gameplay.flags??{},'snapshot','/gameplay/flags');if(!flags.ok)errors.push(...flags.errors);
  const defs=bundle.catalog.list('flags');for(const def of defs)if(!Object.hasOwn(state.gameplay.flags??{},def.id))add('state.flag.missing','/gameplay/flags/'+def.id);
